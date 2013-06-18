@@ -8,8 +8,10 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,16 +38,25 @@ public class extractFeatures {
 	String 	   baseURL = "jdbc:mysql://localhost:3306/";
 	String	   userName = "root";
 	String     password = "";
+	ArrayList  stopWords = new ArrayList();
 	
 	
 	//-----------------CONSTRUCTOR---------------------------------
 	public extractFeatures(String inDirectory,String databaseName,String subTime,String outputDirectory){
+		Statement databaseStatement = null;
+		ResultSet resultSet;
 		outDirectory = outputDirectory;
 		inputDirectory = inDirectory;
 		submissionTimeFile = subTime;
 		databaseURL = baseURL+databaseName;
 		try {
 			databaseConnection = DriverManager.getConnection(databaseURL,userName,password);
+			databaseStatement = databaseConnection.createStatement();
+			resultSet = databaseStatement.executeQuery("select * from stopWordDB");
+			resultSet.next();
+			while(resultSet.next()){
+				stopWords.add((String)resultSet.getString(1));
+			}
 		} catch (SQLException e) {
 			try {
 				databaseConnection = DriverManager.getConnection(baseURL,userName,password);
@@ -61,6 +72,7 @@ public class extractFeatures {
 		extractImages();
 		extractSubmissionTime();
 		extractTotalWord();
+		extractWords();
 	}
 	
 	
@@ -222,6 +234,96 @@ public class extractFeatures {
 		 }
 		 
 		 System.out.println("Done.....");
+	}
+	
+	
+	public void extractWords(){
+		System.out.println("Extracting Intrinsic Parameters.. this may take several hours");
+		Statement databaseStatement = null;
+		ResultSet resultSet;
+		String regex = "[a-zA-z0-9]+@?+[\\.]?";
+		String content = null;
+		FileInputStream fileInput;
+		FileChannel fileChannel; 
+		ByteBuffer contentsBuffer;
+		Pattern stringChecker = Pattern.compile(regex);
+		Matcher match;
+		
+		int marks = 0;
+		int wordLength = 0;
+		int totalWordCount;
+		String correctSpelling;
+		String fileName;
+		String word;
+		
+		File[] textFiles = new File(outDirectory).listFiles();
+		
+		try {
+			databaseStatement = databaseConnection.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		for(int i=0;i<textFiles.length;i++){
+			totalWordCount = 1;
+			int tmpWordCount = 0;
+			if(textFiles[i].getName().contains(".DS_Store")==false){
+				System.out.println("Processing File "+ textFiles[i].getName());
+				String[] tmp = textFiles[i].getName().split("\\_");
+				
+				marks = Integer.parseInt(tmp[1].substring(0,2));
+				fileName = textFiles[i].getName();
+				
+				
+				try {
+					fileInput = new FileInputStream(textFiles[i]);
+					fileChannel = fileInput.getChannel();
+					contentsBuffer = ByteBuffer.allocate((int)fileChannel.size());
+					fileChannel.read(contentsBuffer);
+					fileChannel.close();
+					
+					content = new String(contentsBuffer.array());
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				match = stringChecker.matcher(content);
+				
+				while(match.find()){
+					if(match.group().length()!=0){
+						String tmpWord = match.group().trim().replace(".", "");
+						if(tmpWord.length()>=2 && !stopWords.contains(tmpWord)){
+						 try {
+							word = tmpWord;
+							wordLength = word.length();
+						   
+							resultSet = databaseStatement.executeQuery("select * from wordList where word = '"+word+"'");
+						    if(!resultSet.next()){
+						    	correctSpelling = "No";
+						    }else{
+						    	correctSpelling = "Yes";
+						    }
+							//and marks="+marks+" and marks ="+marks+"
+							resultSet = databaseStatement.executeQuery("select * from wordDB where word ='"+word+"' and filename='"+fileName+"'");
+							if(!resultSet.next()){
+								databaseStatement.executeUpdate("insert into wordDB values('"+word+"','"+correctSpelling+"',"+totalWordCount+","+wordLength+","+marks+",'"+fileName+"')");
+							}else{
+								tmpWordCount = resultSet.getInt(3);
+								tmpWordCount++;
+								databaseStatement.executeUpdate("Update wordDB set wordCount = "+tmpWordCount+" where word = '"+word+"' and filename= '"+fileName+"'");
+							}
+						 } catch (SQLException e) {
+							e.printStackTrace();
+						}
+						}
+					}
+				}
+			}
+		}
+		System.out.println("Done .... woohoooo!!!");
 	}
 	
 }

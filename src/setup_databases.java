@@ -63,7 +63,7 @@ public class setup_databases {
 			
 			databaseStatement.executeUpdate("CREATE TABLE `submissionTime` (`date` varchar(255) NOT NULL DEFAULT '',`time` varchar(255) NOT NULL DEFAULT '',`marks` int(11) NOT NULL,`extendedDeadline` varchar(255) NOT NULL DEFAULT '') ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 			
-			databaseStatement.executeUpdate("CREATE TABLE `wordDB` (`word` varchar(255) NOT NULL DEFAULT '',`correctGrammar` varchar(255) NOT NULL DEFAULT '',`wordCount` int(11) NOT NULL DEFAULT '0',`wordLength` int(11) NOT NULL DEFAULT '0',`marks` int(11) NOT NULL DEFAULT '0') ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+			databaseStatement.executeUpdate("CREATE TABLE `wordDB` (`word` varchar(255) NOT NULL DEFAULT '',`correctGrammar` varchar(255) NOT NULL DEFAULT '',`wordCount` int(11) NOT NULL DEFAULT '0',`wordLength` int(11) NOT NULL DEFAULT '0',`marks` int(11) NOT NULL DEFAULT '0',`filename` varchar(255) NOT NULL DEFAULT '') ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 		    
 			databaseStatement.executeUpdate("CREATE TABLE `wordList` (`word` varchar(255) NOT NULL DEFAULT '',UNIQUE KEY `word` (`word`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 		
