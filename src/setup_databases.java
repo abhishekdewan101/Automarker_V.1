@@ -67,6 +67,7 @@ public class setup_databases {
 		    
 			databaseStatement.executeUpdate("CREATE TABLE `wordList` (`word` varchar(255) NOT NULL DEFAULT '',UNIQUE KEY `word` (`word`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 		
+			databaseStatement.executeUpdate("CREATE TABLE `totalWords` (`wordCount` int(11) NOT NULL,`marks` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

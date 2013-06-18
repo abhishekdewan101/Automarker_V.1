@@ -60,6 +60,7 @@ public class extractFeatures {
 	public void startExtraction(){
 		extractImages();
 		extractSubmissionTime();
+		extractTotalWord();
 	}
 	
 	
@@ -171,9 +172,16 @@ public class extractFeatures {
 	
 	public void extractTotalWord(){
 		 System.out.println("Extracting Total Words ........");
+		 Statement databaseStatement = null;
+		try {
+			databaseStatement = databaseConnection.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 		 File[] thesisFiles = new File(outDirectory).listFiles();
 		 String regex = "[a-zA-z0-9]+@?+[\\.]?";
-		 int totalCountOfWords = 0 ;
+		 String contents;
+		 int totalCountOfWords;
 		 int marks = 0;
 		 FileInputStream fileInput;
 		 FileChannel fileChannel; 
@@ -182,9 +190,34 @@ public class extractFeatures {
 		 Matcher match;
 		 
 		 for(int i = 0;i<thesisFiles.length;i++){
-		  System.out.println("Processing "+thesisFiles[i].getName()+".....");	
+		   totalCountOfWords = 0;	 
 		  if(thesisFiles[i].getName().contains(".DS_Store")==false){
-			  String
+			  System.out.println("Processing "+thesisFiles[i].getName()+".....");	
+			  String [] tmp = thesisFiles[i].getName().split("\\_");
+			  marks = Integer.parseInt(tmp[1].substring(0,2));
+			  try {
+				fileInput = new FileInputStream(thesisFiles[i]);
+				fileChannel = fileInput.getChannel();
+				contentsBuffer = ByteBuffer.allocate((int)fileChannel.size());
+				fileChannel.read(contentsBuffer);
+				fileChannel.close();
+				contents = new String(contentsBuffer.array());
+				
+				match = stringChecker.matcher(contents);
+				
+				while(match.find()){
+					if(match.group().length()!=0){
+						totalCountOfWords++;
+					}
+				}
+				databaseStatement.executeUpdate("insert into totalWords values("+totalCountOfWords+","+marks+")");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		  }
 		 }
 		 
