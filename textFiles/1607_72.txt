@@ -1,0 +1,3272 @@
+Abstract
+In October 2000, Rijndael defeated all the other candidates and was an-
+nounced as the winner of the contest of the new Advanced Encryption
+Standard (AES) by the National Institute for Standards and Technology
+(NIST). Since it was standardized, this encryption algorithm has become
+the most widely-used cryptosystem in the world due to its elegant, e?-
+cient and simpledesign with higher security features. On the other hand,
+it also becomes the focus of intensive research into e?cient implementa-
+tion techniques and associated techniques. In 2002, Barkan and Biham
+proposedtheconceptofdualciphersofRijndaelandindicatedseveralin-
+teresting applications of dual ciphers, and one of them was whether the
+dualcipherswouldenjoyabetterperformanceduringencryptionandde-
+cryption. This resulted in a range of variants, which so far have not been
+studied from a practical perspective. Since Rijndael is widely applied in
+manyapplications,suchassmartcard,networksoftwareandsoforth,pro-
+videdthattherearevariantsretainingthesimilarsecuritypropertieswith
+higher performances, it could help dramatically improve the e?ciency of
+alltheapplicationsusingthealgorithm.
+In this thesis, we will follow the proposal of Barkan and Biham and in-
+vestigate the variants of Rijndael with a focus on the performance. To be
+speciÞc, we will review and implement Rijndael algorithms using several
+mainstreammethods. Afterthat,sincethereare240dualciphersofRijndael
+in total, before implementing the corresponding dual ciphers, we need to
+Þndtheoneswithrelativelyhigherperformance. Finally,aftercomparing
+andevaluatingtheoriginalRijndaelcipherswiththeircorrespondingdual
+oneswithsuitablebenchmarkmethods,wedrawconclusionswithregards
+tothedesignofRijndael.
+¥ Iimplemented5mainstreamRijndaelalgorithms.
+¥ I found certain dual ciphers with relatively higher performance and
+implementedthem
+¥ Theresearchcarriedoutandreportedinthisthesisconsistsofacom-
+parisonandevaluationoftheperformanceofabove10Rijndaelimple-
+mentationmethods,whichresultsinaconclusionthatthedualciphers
+retaining similar security properties could improve the performance
+ofRijndaelalgorithm.Contents
+Contents iii
+ListofFigures v
+ListofTables vi
+Nomenclature vi
+1 Introduction 1
+1.1 GeneralBackground . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+1.2 ResearchMotivation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+1.3 ObjectsandAims . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+1.4 ThesisOutline . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+2 TechnicalBasis 5
+2.1 FormalDescriptionofOriginalRijndael . . . . . . . . . . . . . . . . . . . 6
+2.1.1 OverviewofRijndael . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+2.1.2 TheSubBytesTransformation . . . . . . . . . . . . . . . . . . . . . 7
+2.1.3 TheShiftRowsandMixColumnsTransformation . . . . . . . . . 8
+2.1.3.1 TheShiftRowsTransformation . . . . . . . . . . . . . . . 8
+2.1.3.2 TheMixColumnsTransformation . . . . . . . . . . . . . 8
+2.1.4 TheAddRoundKeyTransformationandKeySchedule . . . . . . 8
+2.1.4.1 TheAddRoundKeyTransformation . . . . . . . . . . . . 8
+2.1.4.2 KeySchedule . . . . . . . . . . . . . . . . . . . . . . . . . 9
+2.1.5 Decryption. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+2.1.6 FurtherDiscussionandAnalysis . . . . . . . . . . . . . . . . . . . 9
+2.2 VariantsofRijndael . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+2.2.1 SquareDualCiphers . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+2.2.2 IrreduciblePolynomials . . . . . . . . . . . . . . . . . . . . . . . . 13
+2.3 SomeBasicConcepts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+2.3.1 CacheMemoryandRegister . . . . . . . . . . . . . . . . . . . . . 14
+2.3.2 ScalarProcessorandVectorProcessor . . . . . . . . . . . . . . . . 17
+2.4 MainstreamTechniquesforImplementingRijndael . . . . . . . . . . . . 19
+2.4.1 OptimizationforStandardProcessors . . . . . . . . . . . . . . . . 19
+iiiCONTENTS
+2.4.1.1 Implementationon8-BitPlatforms . . . . . . . . . . . . 19
+2.4.1.2 Implementationon32-BitPlatforms . . . . . . . . . . . . 19
+2.4.2 ImplementationwithBit-SlicingTechnique . . . . . . . . . . . . . 21
+2.5 Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+3 ImplementationofRijndaelanditsVariants 25
+3.1 ImplementationDetailsofRijndaelVariants . . . . . . . . . . . . . . . . . 25
+3.2 Onthe8-bitPlatform . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+3.2.1 8-bitwithS-Box . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+3.2.2 8-bitwithoutS-Box . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+3.3 Onthe32-bitPlatform . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+3.3.1 32-bitwithT-table . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+3.3.2 32-bitwithoutT-table . . . . . . . . . . . . . . . . . . . . . . . . . 29
+3.4 Bit-slicing. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+3.4.1 TheOriginalRijndael . . . . . . . . . . . . . . . . . . . . . . . . . 30
+3.4.1.1 TheBit-slicedSubBytesTransformation . . . . . . . . . 31
+3.4.1.2 TheBit-slicedShiftRowsTransformation . . . . . . . . . 35
+3.4.1.3 TheBit-slicedMixColumnsTransformation . . . . . . . 35
+3.4.1.4 TheBit-slicedAddRoundKeyTransformation . . . . . . 36
+3.4.2 TheDualCipher . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+3.4.2.1 TheMixColumnsTransformation . . . . . . . . . . . . . 38
+3.4.2.2 TheSubBytesTransformation . . . . . . . . . . . . . . . 39
+3.5 Summary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44
+4 ImplementationResultsAnalysisandEvaluation 45
+4.1 TheCostofRijndaelandItsVariantson8-bitPlatform . . . . . . . . . . . 45
+4.1.1 ImplementationwithS-Box . . . . . . . . . . . . . . . . . . . . . . 45
+4.1.2 ImplementationwithoutS-Box . . . . . . . . . . . . . . . . . . . . 46
+4.2 TheCostofRijndaelandItsVariantson32-bitPlatform . . . . . . . . . . 47
+4.2.1 ImplementationwithT-table . . . . . . . . . . . . . . . . . . . . . 47
+4.2.2 ImplementationwithoutT-table . . . . . . . . . . . . . . . . . . . 47
+4.3 TheCostofRijndaelandItsVariantswithBit-slicing . . . . . . . . . . . . 47
+4.3.1 TheCostofSubBytesinBit-slicing . . . . . . . . . . . . . . . . . . 47
+4.3.2 TheCostofMixColumninBit-slicing . . . . . . . . . . . . . . . . 49
+4.3.3 TheCostofShiftRowsandAddRoundKeyTransformation . . . . 49
+4.4 SummaryandEvaluation . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+5 ConclusionsandFurtherWork 53
+References 55
+Appendix 58
+ivListofFigures
+2.1 BlockCipher. (From[29]) . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+2.2 AlltheDualCipher. (From[32]). . . . . . . . . . . . . . . . . . . . . . . . 15
+2.3 RegistersandMainMemory. (From[30]) . . . . . . . . . . . . . . . . . . 16
+2.4 CacheOperation. (From[22]) . . . . . . . . . . . . . . . . . . . . . . . . . 17
+2.5 SISDandSIMD.(From[30]) . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+2.6 Intra-elementArithmeticandIntra-elementNon-arithmeticOperation.
+(From[30]) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+2.7 Inter-elementArithmeticOperation. (From[30]) . . . . . . . . . . . . . . 18
+2.8 Inter-elementNon-arithmeticOperation. (From[30]) . . . . . . . . . . . 19
+2.9 Thebasicconceptofbit-slicing. (From[15]) . . . . . . . . . . . . . . . . . 22
+3.1 TheRelationBetweenRijndaelandItsDualCipher. (From[32]) . . . . . 26
+3.2 OperationsinBit-slicedSubBytesTransformation. (From[31]) . . . . . . 34
+vListofTables
+2.1 ThecomparisonofAEScandidates. (From[18]) . . . . . . . . . . . . . . 10
+2.2 Thebitstoredin64-bitCPUstandardformat. (From[24]) . . . . . . . . . 23
+2.3 Thebitstoredin64-bitCPUbit-slicedformat. (From[24]) . . . . . . . . . 24
+3.1 ThewordsinstatebeforeShiftRows transformation. . . . . . . . . . . . 35
+3.2 ThewordsinstateafterShiftRows transformation. . . . . . . . . . . . . 35
+3.3 Multiplicationby02and03onbitlevel. (From[13]) . . . . . . . . . . . . 35
+3.4 TheInßuenceofEachVariableonSubBytesTransformation. . . . . . . . 41
+4.1 TheNumberofXORGatesinEachTransformationforEachRound. . . . 50
+4.2 TheBit-slicingImplementationResultsinOtherPapers. . . . . . . . . . . 50
+4.3 TheimplementationResultsonSnowyofEachTechnique. . . . . . . . . 50
+viChapter1
+Introduction
+1.1 GeneralBackground
+The Data Encryption Standard (DES), which was developed in 1970s, was the previ-
+ously predominant algorithm for encryption of electronic data. However, with the
+development of computer hardware which accelerates attacks based on brute force
+search,itisnolongerregardedasasecureencryptionalgorithmmainlybecauseofthe
+size of secret key. Thus, the National Institute for Standards and Technology (NIST)
+announcedtoacontestdevelopanewencryptionstandard,theAdvancedEncryption
+Standard(AES),toreplacetheoutdatedandinsecureDES.
+In October 2000, after careful selection, Rijndael defeated all the other candidates
+andwasannouncedasthewinnerandthecontestofthenewAESbytheNIST.Inthe
+reportofAESselection[9],itsays,
+ÓRijndael appears to be consistently a very good performer in both hardware and software
+across a wide range of computing environments regardless of its use in feedback or non-
+feedback modes. Its key setup time is excellent, and its key agility is good. RijndaelÕs
+verylowmemoryrequirementsmakeitverywellsuitedforrestrictedspaceenvironments,
+in which it also demonstrates excellent performance. RijndaelÕs operations are among the
+easiest to defend against power and timing attacks. Additionally, it appears that some
+defense can be provided against such attacks without signiÞcantly impacting RijndaelÕs
+performance.
+Finally, RijndaelÕs internal round structure appears to have good potential to beneÞt from
+instruction-levelparallelism.Ó
+Since it was published, Rijndael has become the most widely-used cryptosystem
+intheworldduetoitselegant,e?cientandsimpledesignwithhighsecurityfeatures
+[9]. Accordingtothecryptanalysisin[9],Rijndaelissecureagainstallknownattacks.
+Meanwhile, its elegant algebraic structure Þts various platforms well. Therefore, the
+encryption algorithm of Rijndael is now not only adapted for civil use, such as smart
+cards, but also for military or government use. In June 2003, the U.S. Government
+announcedthatAESmaybeusedtoprotectclassiÞedinformation.
+11.2 ResearchMotivation
+As a fairly new encryption algorithm, Rijndael, it becomes the focus of intensive
+research into e?cient implementation techniques and attach techniques.In [1] that
+appearedatASIACRYPT2002,BarkanandBihamaskedaninterestingquestion: what
+if the constants, including the irreducible polynomial, the matrix in MixColumns
+operation and so on, applied in Rijndael are replaced by other parameters. They
+cametotheconclusionthatiftheparameterswerealteredcarefullyaccordingtosome
+principles, the replacement would produce the new dual ciphers which would have
+thesimilarsecurityproperties. Meanwhile,theyalsoputforwardthehypothesisthat
+suchnewdualciphersmighthavesomeadditionalproperties. Oneofthemisthatthe
+dual ciphers might allow optimization of the cipher, which means in some case the
+dualciphersmightactuallybefastertocomputethantheoriginalone.
+ItisknowntoallthatRijndaelplaysincreasinglysigniÞcantrolesintelecommuni-
+cation,Þnancialtransactionsandsooninourday-to-daylife. Consideringthemajority
+oftheseapplicationsarebaseon8-bitplatforms, e.g., bankcards, SIMcards, wireless
+sensors and so forth, and 32-bit or more platforms, say PC, Xbox360 or servers, it is
+quitenecessarytoinvestigatetheperformancesofRijndaelontheseplatforms. Thus,
+if the performance of it is improved, all of its applications could beneÞt from it. A
+good example is that we may not need to su?er from the time costing conÞrmation
+ofonlinetransactions. WhatÕsmore,inordertopreventtheDi?erentialPowerAttack
+(DPA), we usually insert some dummy operations or do some masking operations
+which come at the cost of performance. In other words, sometimes for the sake of
+security, we have to su?er the ine?ciency and dual ciphers with high performance
+couldminimizeitse?ects. Besides,thebeneÞtofthedualcipherscouldbecombined
+with other optimizations, say AES-NI, which could improve the performance even
+more.
+In addition, due to the fact that ordinary optimizations of Rijndael are neither
+e?cient enough nor secure to satisfy present needs, bit-slicing, a more secure and
+e?cienttechnique,willbeappliedinthisproject. Asamatteroffact,bit-slicingisnot
+anewencryptionoptimizingtechnique. Earlyin1997beforeRijndaelappeared,in[5],
+BihamputforwardthisfastmethodtoacceleratetheDESimplementationinsoftware.
+In [5], the author showed that by applying this technique the speed of encryption
+would be almost three times faster than the fastest implementation at that time. He
+alsosuggestedthatbit-slicingcouldbeappliedinanycipher. Duetothesefactors,just
+afterRijndaelwasselectedasAEStotaketheplaceofDES,alargeamountofresearch
+wasconductedtoapplybit-slicingtoRijndael. In[3,12,16,24],howtousebit-slicing
+inRijndaelondi?erentplatformsarediscussed.
+ThisprojectwillbefocusedonimplementationsofRijndaelanditsdualcipherson
+8-bitand32-bitplatforms. Atthesametime,wewillalsostudytheperformanceofthem
+withthebit-slicingtechniquefromapracticalperspective. Thenoveltyofthisproject
+lies in implementing Rijndael variants which have not been studied from a practical
+stand-point. Moreover,theconclusionofitwouldbereusedinthefutureblockcipher
+2designs so as to make them better. Now that Rijndael algorithm is nowadays widely
+applied in many applications, such as smart cards, network software and so forth,
+providedthatthereareRijndaelvariantsretainingthesimilarsecuritypropertieswith
+highencryptionperformances,itcouldhelpdramaticallyimprovethee?ciencyofall
+theapplicationsusingRijndaelalgorithm.
+1.3 ObjectsandAims
+TheoverallaimofthisprojectistoanswerthequestionwhetheranyvariantofRijndael
+providesanadvantageintermsofnon-securitymetrics,inparticularperformance. In
+ordertoachievethisaim,ithasthefollowingobjectives:
+¥ Tosurveystate-of-the-artofRijndaelimplementation.
+¥ To implement the original Rijndael using variety of technologies, such as bit-
+slicing,accordingtocurrentRijndaelalgorithm.
+¥ To develop a precise approach to benchmarking the implementation results
+above.
+¥ ToimplementRijndaelvariantswithtechniquesusedinthesecondbulletpoint.
+¥ Toevaluateandcomparethecomprehensiveperformancesofdi?erentRijndael
+variantsviathemethodsmentionedabove.
+¥ TodrawconclusionswithregardstodesignofRijndael.
+1.4 ThesisOutline
+Thestructureofthethesisisorganizedasfollows,
+Chapter2willgiveanoverviewofthebackgroundandcontextoftheprojectand
+itsrelationtoworkalreadydoneinthearea. WewillintroducetheRijndaelencryption
+algorithm, which is mainly composed of four steps, then we will show the concepts
+of Rindael dual ciphers mentioned in [1]. Finally, more emphasis will be focused
+on describing the state-of-the-art techniques used to implement Rijndael on di?erent
+platforms.
+Chapter3willexclusivelydescribetheimplementationsofRijndaelanditsvariants.
+Followingthemethodsmentionedinlastchapter,wearegoingtoinjecttheconceptof
+dualciphersintothesemethodsduringimplementation. Intermsofeachtechniqueon
+theplatformsaswellasthepropertiesofdualciphers,someperformanceanalysiswill
+be conducted roughly so that certain potential higher performance are put forward
+in theory. In this chapter, more attention would be paid to the bit-slicing technique
+sincecomparedwithothermethods,itseemstobeinßuencedmuchmorebythedual
+cipher.
+3Chapter4willanalyzethedualcipherswefoundinChapter3frombothpractical
+andtheoreticalaspectspreciselysoastotestandverifytheanalysiswemadeinterms
+ofthee?ciency.
+TheconclusionandfurtherworkwillbedescribedinChapter5.
+4Chapter2
+TechnicalBasis
+In this chapter, we will Þrst discuss the Rijndael algorithm which will be the core
+of the whole thesis. After that, the concept of dual ciphers will be introduced so
+that the discussion about Rijndael variants in the following chapters will be easy to
+understand. Finally, we will go through the state-of-the-art techniques applied to
+implement Rijndael, including the methods on 8-bit platforms and 32-bit platforms
+andbit-slicingtechnique.
+Before introducing Rijndael algorithm, we would like to look at some concepts of
+block cipher Þrst since it is a kind of block cipher. A block cipher is a deterministic
+algorithm operating on Þxed-length groups of bits, which are called blocks. Usually
+blockciphersoperateblocksofplaintextwithablockofsecretkeyandproduceblocks
+ofciphertextaccordingly. Belowistheoperationofablockcipher[29],
+Figure2.1: BlockCipher. (From[29])
+The modern design of block cipher is based on the concept of an iterated product
+cipherwhichwassuggestedandanalyzedbyClaudeShannon[28]. Theblockcipher
+obtainsthesecuritybyrunasimplefunctionmultipleroundsbytakingtheoutputof
+lastroundastheinputofthisroundandeachroundwilluseanewroundkeywhich
+is generated by key schedule. DES and all the Þnal Þve candidates of AES apply the
+technique. Obviously,themoreroundsare,themoresecuritythecipherobtains.
+52.1 FormalDescriptionofOriginalRijndael
+Asmentionedabove,RijndaelwasselectedastheAESbytheNIST.Hence,sometimes
+Rijndael is considered as the AES. Actually, Rijndael is a block cipher with variable
+keylengthandblocklength. SpeciÞcally,bothkeylengthandblocklengthcanbe128,
+192 or 256 bits. On the other hand, the AES only supports key lengths of 128, 192 or
+256bits with the Þxed block lengthwhichis 128bits. Inthefollowing discussion, for
+simplicitysake,weonlyconsidertheRijndaelwhoseblocklengthandkeylengthare
+128bitswith10roundsiteration.
+2.1.1 OverviewofRijndael
+There are four main transformations in the whole Rijndael algorithm. They are
+SubBytes, ShiftRows, MixColumns andAddRoundKey. Allthetransformationsop-
+erate on an intermediate result which is called the state. The Rijndale algorithm (Al-
+gorithm1)isasfollows[9],
+Algorithm1RijndaelEncryptionPseudo-code
+Input: A128-bitplaintextP;An11-elementsequenceof128-bitroundkeysK;
+Output: A128-bitciphertextC;
+1: S= P;
+2: S= AddRoundKey(S;K );
+0
+3: fori= 1to9do
+4: S= SubBytes(S);
+5: S= ShiftRows(S);
+6: S= MixColumns(S);
+7: S= AddRoundKey(S;K);
+i
+8: endfor
+9: S= SubBytes(S);
+10: S= ShiftRows(S);
+11: C= AddRoundKey(S;K );
+10
+12: returnC;
+Theplaintextandroundkeyscanberegardedasa4by4elementtwo-dimensional
+bytearray(whichis128bitsintotal),suchas
+0 1
+S ; S ; S ; S ;
+B 0 0 0 0 2 0 3 C
+1
+B C
+B C
+B C
+B S ; S ; S ; S ; C
+1 0 1 1 1 2 1 3
+B C
+B C
+B C
+B C
+S ; S ; S ; S ;
+B C
+2 0 2 1 2 2 2 3
+B C
+@ A
+S ; S ; S ; S ;
+3 0 3 1 3 2 3 3
+62.1.2 TheSubBytesTransformation
+This transformation, actually, is combined with two parts, linear operation and non-
+linear operation. The linear operation is an a?ne transformation which is deÞned as
+follows,
+0 1 0 1 0 1 0 1
+b 1 0 0 0 1 1 1 1 a 1
+B 0 C B C B 0 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 1 1 0 0 0 1 1 1 C B a C B 1 C
+1 1
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 1 1 1 0 0 0 1 1 a 0
+B 2 C B C B 2 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 1 1 1 1 0 0 0 1 C B a C B 0 C
+3 3
+B C B C B C B C
+B C B C B C B C
+= ? ? (2.1)
+B C B C B C B C
+B C B C B C B C
+b 1 1 1 1 1 0 0 0 a 0
+B 4 C B C B 4 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 0 1 1 1 1 1 0 0 C B a C B 1 C
+5 5
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 0 1 1 1 1 1 0 a 1
+B 6 C B C B 6 C B C
+B C B C B C B C
+@ A @ A @ A @ A
+b 0 0 0 1 1 1 1 1 a 0
+7 7
+Note that b ... b is the outcome of SubBytes transformation and a ... a is the
+0 7 0 7
+intermediatevaluewhichiscomputedinthenon-linearoperation.
+The non-linear operation is to compute the multiplicative inverse of an element
+8
+whoselengthis8bitsoverGF(2 )viatheirreduciblepolynomial
+8 4 3
+P(x)= x +x +x +x+1 (2.2)
+?1 8
+Thatistosay,givenanelementa,itsmultiplicativeinverseelementa overGF(2 )is
+deÞnedas,
+?1
+a?a = 1 mod P(x) (2.3)
+Obviously, the calculating the multiplicative inverse over deÞnite Þeld is not as easy
+as that in real number Þeld. There are a few options. They are either quite ine?cient
+orrelativelyhardtoconduct.
+¥ GoingthroughalltheelementintheÞeldtogetthemultiplicativeinverse.
+¥ Using Extended Euclidean Algorithm (XGCD) to computer the multiplicative
+inverse.
+254 ?1
+¥ Computinga whichisequaltoa accordingtoFermatslittletheorem.
+8
+¥ Decomposing GF(2 ) into smaller Þelds which is isomorphic to each other for
+computingthemultiplicativeinverseoversmallerÞeldswillbeeasier.
+On the other hand, because of the complexity of calculating the multiplicative
+inverse,usuallyitisdoneo?-lineratherthanonlineandalltheoutcomesstoredinthe
+tablecalledS-Box. Thetransformationisasfollows,whereb =S-Box(a )
+i;j i;j
+0 1 0 1
+a ; a ; a ; a ; b ; b ; b ; b ;
+B 0 0 0 1 0 2 0 3 C B 0 0 0 1 0 2 0 3 C
+B C B C
+B C B C
+B C B C
+B a ; a ; a ; a ; C B b ; b ; b ; b ; C
+1 0 1 1 1 2 1 3 1 0 1 1 1 2 1 3
+B C B C
+B C B C
+?? (2.4)
+B C B C
+B C B C
+a ; a ; a ; a ; b ; b ; b ; b ;
+B 2 0 2 1 2 2 2 3 C B 2 0 2 1 2 2 2 3 C
+B C B C
+@ A @ A
+a ; a ; a ; a ; b ; b ; b ; b ;
+3 0 3 1 3 2 3 3 3 0 3 1 3 2 3 3
+72.1.3 TheShiftRowsandMixColumnsTransformation
+2.1.3.1 TheShiftRowsTransformation
+This transformation is quite simple. The Þrst row is not shifted, the second row is
+shifted 1 byte from right to left, the third and fourth row are shifted 2 and 3 bytes
+respectively.
+0 1 0 1
+b ; b ; b ; b ; b ; b ; b ; b ;
+B 0 0 0 0 2 0 3 C B C
+1 0 0 0 1 0 2 0 3
+B C B C
+B C B C
+B C B C
+B b ; b ; b ; b ; C B b ; b ; b ; b ; C
+1 0 1 1 1 2 1 3 1 1 1 2 1 3 1 0
+B C B C
+B C B C
+?? (2.5)
+B C B C
+B C B C
+b ; b ; b ; b ; b ; b ; b ; b ;
+B C B C
+2 0 2 1 2 2 2 3 2 2 2 3 2 0 2 1
+B C B C
+@ A @ A
+b ; b ; b ; b ; b ; b ; b ; b ;
+3 0 3 1 3 2 3 3 3 3 3 0 3 1 3 2
+2.1.3.2 TheMixColumnsTransformation
+IntheMixColumns transformation,eachcolumnismultipliedbyaÞxed4by4matrix
+8
+inGF(2 )andthepolynomialis
+4
+x +1 (2.6)
+Theoutcomeiscomputedbytheequationasfollows,
+0 1 0 1 0 1
+?
+b ; 02 03 01 01 b ;
+B j C B C B 0 j C
+0
+B C B C B C
+B C B C B C
+?
+B C B C B C
+B b ; C B 01 02 03 01 C B b ; C
+j
+1 j
+B C B C B C
+1
+B C B C B C
+= ? (2.7)
+B ? C B C B C
+B C B C B C
+b ; 01 01 02 03 b ;
+B j C B C B 2 j C
+2
+B C B C B C
+@ A @ A @ A
+?
+b ; 03 01 01 02 b ;
+j 3 j
+3
+Notethatthistransformationisonlyinvolvedwithmultiplicationby02and03,which
+means only two operations (shift and XOR) are needed (multiplication by 02 or dou-
+blingincomputermeansashiftoperation). Themultiplicationby02couldbeimple-
+mented with a shift operation and a conditional XOR operation, which depends on
+whetherthemostsigniÞcantbitisoneornot. Asforthe03,whenwegettheresultof
+multiplicationby02,wecouldjustconducttheXORoperation.
+2.1.4 TheAddRoundKeyTransformationandKeySchedule
+2.1.4.1 TheAddRoundKeyTransformation
+The operation in AddRoundKey transformation is fairly easy since it is only involved
+inXORoperation. WhatweneedtodoistoXORthestatevalueswiththeroundkeys
+bytebybyte. Thetransformationisasfollows,
+0 1 0 1 0 1
+b ; b ; b ; b ; a ; a ; a ; a ; k k k k
+B 0 0 0 1 0 2 0 3 C B 0 0 0 1 0 2 0 3 C B 0;4k 0;4k+1 0;4k+2 0;4k+3 C
+B C B C B C
+B C B C B C
+B C B C B C
+B b ; b ; b ; b ; C B a ; a ; a ; a ; C B k k k k C
+1 0 1 1 1 2 1 3 1 0 1 1 1 2 1 3 1;4k 1;4k+1 1;4k+2 1;4k+3
+B C B C B C
+B C B C B C
+= ?
+B C B C B C
+B C B C B C
+b ; b ; b ; b ; a ; a ; a ; a ; k k k k
+B 2 0 2 1 2 2 2 3 C B 2 0 2 1 2 2 2 3 C B C
+2;4k 2;4k+1 2;4k+2 2;4k+3
+B C B C B C
+@ A @ A @ A
+b ; b ; b ; b ; a ; a ; a ; a ; k k k k
+3 0 3 1 3 2 3 3 3 0 3 1 3 2 3 3 3;4k 3;4k+1 3;4k+2 3;4k+3
+(2.8)
+wherekistheroundnumberwhichisfrom0to10.
+82.1.4.2 KeySchedule
+Now the only thing left is to compute the 11-element sequence of 128-bit round keys
+fromtheoriginalsecretkey. Thekeygenerationalgorithm(Algorithm2)isasfollows
+[29],whereK ,...K isthe11roundkeysandeachofthemis128bits. RotBytes isthe
+0 11
+function which rotates a word to the left by a single byte and SubBytes is one of the
+transformationinRijndael. RC areasequenceofroundconstants.
+i
+Algorithm2RijndaelKeyGenerationPseudo-code
+Input: A128-bitsecretkeyK;
+Output: An11-elementsequenceof128-bitroundkeysK;
+1: W = K ;W = K ;W = K ;W = K ;
+0 0 1 1 2 2 3 3
+2: fori= 1to10do
+3: T= RotBytes(W );
+4i?1
+4: T= SubBytes(T);
+5: T= T?RC;
+i
+6: W = W ?T;
+4i 4i?4
+7: W = W ?W ;
+4i+1 4i?3 4i
+8: W = W ?W ;
+4i+2 4i?2 4i+1
+9: W = W ?W ;
+4i+3 4i?1 4i+2
+10: endfor
+2.1.5 Decryption
+The decryption algorithm is quite similar to the encryption algorithm. What we
+need to do is just to perform all the operations reversely. The decryption algo-
+rithm (Algorithm 3)is as follows, where InverseSubBytes, InverseShiftRows and
+InverseMixColumns aretheinverseoperationsaccordingly.
+2.1.6 FurtherDiscussionandAnalysis
+Rijndael, as an excellent symmetric key encryption algorithm, has many advantages
+compared with other block ciphers, say DES and the other four candidates of AES in
+theÞnalround.
+First of all, we will compare Rijndael with DES. In terms of security, Rijndael has
+absolute advantages over DES. The key size and block size of DES is 56 bits and
+64 bits respectively. However, Rijndael has at least 128-bit key size and block size,
+which means it will be more di?cult to analyze Rijndael. In addition, as discussed
+above,Rijndaelconsistsofthreeparts,non-lineartransformation,lineartransformation
+and key generation, where non-linear transformation prevent the linear analysis and
+di?erential analysis which are successfully applied to the DES; linear transformation
+di?usesthedatadistribution;keygenerationgenerateanewkeyeveryround. WhatÕs
+more, Rijndael works more e?ciently than DES does. While implementing DES,
+9Algorithm3RijndaelDecryptionPseudo-code
+Input: A128-bitciphertextC;An11-elementsequenceof128-bitroundkeysK;
+Output: A128-bitplaintextP;
+1: S= C;
+2: AddRoundKey(S;K );
+10
+3: InverseShiftRows(S);
+4: InverseSubBytes(S);
+5: fori= 9to1do
+6: S= AddRoundKey(S;K);
+i
+7: S= InverseMixColumns(S);
+8: S= InverseShiftRows(S);
+9: S= InverseSubBytes(S);
+10: endfor
+11: P= AddRoundKey(S;K );
+0
+12: returnP;
+we need 16 rounds to iterate with 8 S-Boxes. On the other hand, only 10 rounds
+with 1 S-Box are needed in Rijndael. Besides, the structure of Rijndael enables it
+easilytobeimplementedonvariousplatformse?cientlycomparedwithDES.While
+implementing DES, even with various optimizations, it is still not very e?cient in
+software in that the majority operations in DES are involved in permutations which
+areeasytorewriteinhardwarebutleadtoamajorperformancebottleneckinsoftware.
+However,Rijndaeldoesnotinvolvepermutations.
+NowletusmoveontotheothercandidatesofAESintheÞnalroundaccordingto
+[18].
+Table2.1: ThecomparisonofAEScandidates. (From[18])
+keysize blocksize rounds mainoperations
+Serpent 128,192,256bits 128bits 32 Substitution-permutationnetwork
+TwoÞsh 128,192,256bits 128bits 16 Feistelnetwork
+RC6 128,192,256bits 128bits 20 Feistelnetwork
+MARS 128,192,256bits 128bits 32 Type-3Feistelnetwork
+Rijndael 128,192,256bits 128bits 10,12or14 Substitution-permutationnetwork
+1.Serpent
+Ithasablocksizeof128bitsandsupportsakeysizeof128,192or256bitswith32
+rounds. AndEachroundappliesoneofeight4-bitto4-bitS-Boxes32timesinparallel
+[23]. So actually, Serpent is more securer than Rijndael. However, the evaluation
+criteria of AES are not just according to security aspect. Obviously, Serpent needs
+moreS-Boxeseachroundandthenumberofroundsaremorethan3timesofRijndael.
+SoitwillworksmuchslowerthanRijndaeldoes.
+2.TwoÞsh
+10Its block size and key size are the same as Serpent but with 16 rounds. But it is
+vulnerable to Key-dependent S-Boxes complicate analysis. Meanwhile, its design is
+toocomplicated.
+3. RC6andMARS
+ThedisadvantagesofRC6isitslowersecuritymargin.Besides,whileimplemented
+on 8-bit platform, it needs pre-computing operation, which will be a big problem for
+many low-end smart cards. As for MARS, its problems are also obvious. Its design
+is too complex and it is not suitable for 8-bit platform, say smart cards, if without
+modiÞcation.
+2.2 VariantsofRijndael
+In [1], Barkan and Biham presented the concept of dual ciphers which are equivalent
+to the original in all aspects in terms of security properties. The deÞnition of a dual
+cipherisasfollows:
+DeÞnition1[1]TwociphersEandEÕarecalledDualCiphers,iftheyareisomorphic,i.e.,
+ifthereexistinvertibletransformationsf,gandhsuchthat
+?
+?P;Kf(E (P))= E (h(P)); (2.9)
+K
+g(K)
+wherePandKrefertotheplaintextandsecretkeyrespectively.
+Note: itisobviousthatiftwociphersareisomorphicordual,theplaintext,secret
+keyandciphertextallhavecertaintransformation.
+In[1],theyalsodeÞnealltheoperationsofRijndaelasfollows:
+DeÞnition2[1]
+8
+-OperationsinGF(2 ):
+1. Addition
+2. XORwithaconstant
+3. Multiplication
+4. Multiplybyaconstant
+?1
+5. Raisetoanypower. Thisincludestheinverseofx: x
+6. Anyreplacementoftheorderofelements
+8
+-Non-GF(2 )operations:
+7. LineartransformationsL(x)=Ax,foranybooleanmatrixA.
+8
+8. AnyunaryoperationoverelementsinGF(2 ).
+112.2.1 SquareDualCiphers
+2
+In terms of DeÞnition 1, if we set transformation as f(x)= g(x)= h(x)= x , then the
+equationbecome
+2 2 2
+(E (P)) = E (P ); (2.10)
+K 2
+K
+2
+So E is the square dual cipher of E.Note that all the square computations are imple-
+8
+mentedinGF(2 ).
+2
+Meanwhileaccordingto[1],E isdeÞnedbymodifyingtheconstantsofE.Soexcept
+the operations which are involved in constants, all the operations remain the same.
+That is to say, only the second, the fourth, the seventh and the last operations above
+require to be modiÞed (raised to square). As discussed above, it is obvious that the
+constants which are involved in these operations in Rijndael are just constant matrix
+in Equation (2.7) and the matrix and vector in Equation (2.1) and the round constant
+RC in key schedule. The transformation is square, so for polynomials, vectors and
+i
+?1
+roundconstantRC,justsquarethem,andformatrixA,theyareconvertedtoQAQ
+i
+?1
+,whereQandQ aredeÞnedin[1]asfollows,
+0 1 0 1
+0 0 0 0 0 0 1 1 1 0 0 1 0 1 0 1
+B C B C
+B C B C
+B C B C
+B C B C
+B 0 0 0 1 0 1 0 0 C B 0 1 1 1 0 0 0 0 C
+B C B C
+B C B C
+B C B C
+B C B C
+0 0 0 0 0 1 1 0 0 0 0 1 1 1 0 0
+B C B C
+B C B C
+B C B C
+B C B C
+B 0 0 1 0 1 0 0 1 C B 0 1 0 1 0 0 1 0 C
+B C ?1 B C
+B C B C
+Q= ;Q = (2.11)
+B C B C
+B C B C
+0 0 0 0 1 1 1 1 0 1 0 0 0 0 0 1
+B C B C
+B C B C
+B C B C
+B C B C
+B 0 1 0 0 0 1 0 0 C B 0 1 0 1 0 0 0 0 C
+B C B C
+B C B C
+B C B C
+B C B C
+0 0 0 0 1 0 1 1 0 1 0 1 0 1 0 0
+B C B C
+B C B C
+@ A @ A
+1 0 0 0 1 0 1 0 0 1 0 1 0 1 0 1
+SpeciÞcally,theEquation(2.7)isconvertedtothepolynomial
+0 1 0 1 0 1
+?
+b ; 04 05 01 01 b ;
+B j C B C B 0 j C
+0
+B C B C B C
+B C B C B C
+?
+B C B C B C
+B b ; C B 01 04 05 01 C B b ; C
+j
+1 j
+B C B C B C
+1
+B C B C B C
+= ? (2.12)
+B ? C B C B C
+B C B C B C
+b ; 01 01 04 05 b ;
+B j C B C B 2 j C
+B 2 C B C B C
+@ A @ A @ A
+?
+b ; 05 01 01 04 b ;
+j 3 j
+3
+Similarly, the a?ne transformation (2.2) can be regarded as Ax+b now becomes
+?1 2
+QAQ x+b ,andweÞnallygetthenewtransformationis,
+0 1 0 1 0 1 0 1
+b 0 1 1 0 0 1 0 0 a 0
+B 0 C B C B 0 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 1 0 1 0 0 0 1 1 C B a C B 1 C
+1 1
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 1 0 0 1 1 0 1 1 a 0
+B 2 C B C B 2 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 1 0 0 0 1 1 0 0 C B a C B 0 C
+3 3
+B C B C B C B C
+B C B C B C B C
+= ? ? (2.13)
+B C B C B C B C
+B C B C B C B C
+b 0 1 0 1 0 0 0 0 a 0
+B 4 C B C B 4 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 0 0 1 0 0 1 0 0 C B a C B 0 C
+5 5
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 1 1 0 1 0 0 0 1 a 1
+B C B C B C B C
+6 6
+B C B C B C B C
+@ A @ A @ A @ A
+b 0 1 0 0 1 0 0 1 a 1
+7 7
+12i?1 i?1
+AsforRoundConstantRC whichwas(02 ),itnowcanbereplacedby(03 ).
+i
+?1
+Thus, the only problem needs to be solved is how to compute matrix Q and Q .
+0 2 4 6 8 10 12 14
+Actually, Q=(x ),(x ),(x ),(x ),(x ),(x ),(x ),(x )mod the polynomial (2.2), and x is
+vector.
+2 4
+SoaboveisallthetransformationfromEtoE ,andsimilarlywecouldproduceE
+2 8 16 32 64 128
+fromE . Furthermore, E ,E ,E ,E andE arealldualciphers,andtotallythereare
+8squaredualciphers.
+2.2.2 IrreduciblePolynomials
+Inthelastsubsection,mostoftheconstantssuchasthevectorandthematrixin(2.1),
+theconstantmatrixinEquation(2.7)andtheroundconstant RC havebeenreplaced.
+i
+However,whatabouttheothers,saytheirreduciblepolynomialswhichareusedtodo
+modular arithmetic? In [1], the authors claim ÓThere are 30 irreducible polynomials
+of degree 8Ó and conclude Óthe choice of the irreducible polynomial of Rijndael is
+arbitraryÓ.
+The deÞnition of irreducible polynomial dual cipher is quite similar to that in the
+last subsection. According to the DeÞnition 1, if we set the transformation as f(x) =
+g(x)=h(x)=Rx,thentheequationbecomes
+R
+E (P)R= E (PR); (2.14)
+K
+KR
+whereRisabinarymatrixwhichtransformstheoriginpolynomialtothenewone.
+Sincethereare30irreduciblepolynomialsofdegree8andeachofthemhas8square
+dual ciphers, the total number of dual cipher will be 240. In [32], the authors gave
+a more general way to represent these 240 dual ciphers. SpeciÞcally, the irreducible
+polynomialsareregardedasthetwonumberswithbinaryorhexadecimalformat. For
+example,forthepolynomial
+8 4 3
+P(x)= x +x +x +x+1 (2.15)
+it can be perceived as{00011011} or{1B}. As for the squaredual ciphers, they use the
+di?erent generators to replace. (The generator should be a primitive element and for
+theoriginalRijndael,itischosenas{03}.)Thus,allofthedualcipherscanberepresented
+as the format {R(x), b}, where R(x) is the polynomial in hexadecimal format and b is
+thegenerator.
+Accordingtoalgorithmin[32],themappingmatrixofdualcipherisformedfrom
+0 25 50 75 100 125 150 175
+generator b, such as T = [b , b , b , b , b , b , b , b ]. Therefore, if the dual
+cipheris{R(x),b},theneachtransformationwillbeasfollows.
+As mentioned above, the AddRoundKey and the ShiftRows transformations are
+notinßuencedbydualciphers. Soaretheirinverseoperations. AsfortheMixColumns
+25 0 0
+transformation,thefourelementsinthematrixwillbereplacedby[b ,b ,b ,b]andthe
+223 199 228 104
+fourelementsinitsinverseoperationwillbe[b ,b ,b ,b ]. Finally,theSubByes
+?1
+transformationwillbecomeT(const)+(T*A*T )*a,whereTisthemappingmatrix
+13mentionedabove,Aisthea?netransformationinEquation(2.1)andtheconstisthe
+constant(63).
+Now we will take {{11d}, {02}} as an example. Both AddRoundKey and ShiftRows
+transformations keep the same operations as the original. However, after multiplied
+withmappingmatrix,theEquation(2.1)becomes
+0 1 0 1 0 1 0 1
+b 1 0 0 0 0 0 0 0 a 0
+B 0 C B C B 0 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 0 1 0 0 0 0 0 0 C B a C B 0 C
+1 1
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 0 1 0 0 0 0 0 a 1
+B 2 C B C B 2 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 1 0 0 1 0 0 0 0 C B a C B 0 C
+3 3
+B C B C B C B C
+B C B C B C B C
+= ? ? (2.16)
+B C B C B C B C
+B C B C B C B C
+b 1 1 0 0 1 0 0 0 a 0
+B 4 C B C B 4 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 0 1 1 0 0 1 0 0 C B a C B 1 C
+5 5
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 0 1 1 0 0 1 0 a 1
+B 6 C B C B 6 C B C
+B C B C B C B C
+@ A @ A @ A @ A
+b 0 0 0 1 1 0 0 1 a 0
+7 7
+Similarly,theMixColumns transformationbecomes,
+0 1 0 1 0 1
+?
+b ; 03 02 01 01 b ;
+B C B C B C
+j 0 j
+B 0 C B C B C
+B C B C B C
+B ? C B C B C
+B b ; C B C B C
+01 03 02 01 b ;
+j 1 j
+B C B C B C
+1
+B C B C B C
+= ? (2.17)
+B C B C B C
+?
+B C B C B C
+b ; 01 01 03 02 b ;
+B C B C B C
+j 2 j
+B 2 C B C B C
+@ A @ A @ A
+?
+b ; 02 01 01 03 b ;
+3 j
+j
+3
+Now the only question left is how to get all the corresponding generators. The full
+descriptionofthedualcipherscouldbefoundin[2]. Below(Figure2.2)isallthedual
+ciphersintheformatsuchas{R(x), b}from[32]. ThesolutiontoÞndallthegenerator
+bhasbeengivenin[32].
+2.3 SomeBasicConcepts
+Since most of the optimization techniques for Rijndael, to some extent, are usually
+relevant to or based on the computer architecture. Therefore, it is necessary to give
+a rough description of the computer architecture so that the following optimization
+implementationswouldnotbesoobscuretounderstand.
+2.3.1 CacheMemoryandRegister
+Inmoderncomputerarchitecture,theheartofacomputeristhemicroprocessor,which
+is also commonly called the Central Processing Unit (CPU). CPU which is a single
+silicon chip consists of the Arithmetic Logic Unit(ALU) and the Control Unit(CU),
+whileALUisusedtohandlewitharithmeticoperation,CUisusedtocontroltheßow
+of data through the processor. Before conducting the arithmetic operation, we must
+fetch the data from storage as fast as possible so that the operations can be carried
+outquickly[30]. SinceALUistheunitwhichhandlewitharithmeticoperation,ifthe
+data storage is as close as possible to the ALU, the operations would be carried out
+14Figure2.2: AlltheDualCipher. (From[32])
+instantaneously. Thus, the data storage called register is introduced. Usually it only
+haslimitednumbers,sayfouroreightandonlyasmallsetofdatatobeprocessedwill
+bestoredinit.
+It is apparent that four or eight registers absolutely impossible to satisfy the
+throughput of PCs or servers. This is where the computerÕs main memory comes
+in. Generallyalargesetofdatawillbestoredinmainmemoryandonlyasmallpor-
+tionofthemwillbesenttoregistersandprocessedbyALU(asshowedinFigure2.3).
+However, the main memory, to some extent, is a completely separated component of
+computersystem,whichmeansitismuchfartherawayfromtheALU.Inotherwords,
+if there were no register and the ALU would have to read data from main memory
+directly,thecomputerswouldrunveryslowly[30].
+Althoughtheintroductionofregistersandmainmemoryatleastpartlyimproves
+theperformanceofacomputer,thespeedgapbetweenthemainmemoryandregisters
+is still a bottleneck, which costs a signiÞcant amount of time and will kill most of the
+15Figure2.3: RegistersandMainMemory. (From[30])
+performance. Thus, the cache memory is introduced to Þll the speed gap. A cache
+is a memory area which is placed between main memory and processor [22], but it is
+muchfasterandhassmallermemoryspacecomparedwithmainmemory(asshowed
+inFigure2.4). Sousuallyitcouldberegardedasabu?er. Thatistosay,someofdata
+which may be accessed frequently would be stored in cache. As a result, once these
+dataarerequired,CPUwouldaccessthecachetogetthemdirectlyinsteadofaccessing
+themainmemory,whichwillsigniÞcantlyimprovetheprocessinge?ciency.
+Note if the required data are in the cache, this is called cache-hit and processor
+could get the data quickly. But if the required data are not in the cache, this is called
+cached-missed and CPU will have to get the data from the main memory. So caches
+behave in a data-dependent manner and this result in execution time to vary. Thus,
+some attackers will make use of this kind of properties of cache to attack encryption
+devices,whichcalledcacheattack.
+16Figure2.4: CacheOperation. (From[22])
+2.3.2 ScalarProcessorandVectorProcessor
+Scalar processor is the simplest computer processor. It processes each datum with
+each instruction, therefore it is also classiÞed as a Single Instruction stream, Single
+DataStream(SISD)processor. Onetheotherhand,vectorprocessor,alsocalledSingle
+Instruction stream, Multiple Data Stream (SIMD) processor [30], could handle a mul-
+tiplestreamsofdatawithsingleinstruction. TheÞgurebelow(Figure2.5)istheSISD
+andSIMD,
+Figure2.5: SISDandSIMD.(From[30])
+Vectors, actually, are nothing more than a group of data or scalar and all of them
+arethesametype. Forasimplisticexample,ifascalarprocessorprocessesavariablein
+theprogram,thenavectorprocessordoesanarrayofthiskindofvariableinparallel.
+Since vector processors usually handle with a group of data once a time, the vector
+operationsaredi?erentfromthoseinscalarprocessors. Herearesomebasicoperations
+invectorprocessors[30],
+¥ intra-elementarithmetic
+¥ intra-elementnon-arithmetic
+¥ inter-elementarithmetic
+17¥ inter-elementnon-arithmetic
+The intra-element arithmetic and intra-element non-arithmetic are the vector oper-
+ations that happen between vectors and vectors (as showed in Figure 2.6) and the
+only di?erence between them is that the Þrst one dealing with arithmetic operations
+say addition, multiplication etc, while the latter is involved in logical operations,
+suchasAND,NOTandXOR.Asforinter-elementarithmeticandinter-elementnon-
+Figure 2.6: Intra-element Arithmetic and Intra-element Non-arithmetic Operation.
+(From[30])
+arithmetic,theyareoperationswhichhappenbetweentheelementsinasinglevector
+(asdisplayedinÞgure2.7and2.8)andtheinter-elementnon-arithmeticoneareoper-
+ationslikevectorpermute,whichrearrangetheorderoftheelementsinanindividual
+vector.
+Figure2.7: Inter-elementArithmeticOperation. (From[30])
+18Figure2.8: Inter-elementNon-arithmeticOperation. (From[30])
+2.4 MainstreamTechniquesforImplementingRijndael
+Asdiscussedabove,duetotheelegantdesignstructure,Rijndaelcanbeimplemented
+e?ciently in terms of not only software optimization but also hardware optimiza-
+tion [3, 4, 5, 9, 12, 15, 16, 24, 26, 27, 31] in di?erent platforms. Therefore, whole
+spectrum cryptographic devices, from high-end machines, such as dedicated crypto-
+graphic servers, to some widely applied smart cards, such as SIM cards, take it as
+encryption standard [20]. In this section, some mainstream software implementation
+techniquesofRijndaelwillbediscussed.
+2.4.1 OptimizationforStandardProcessors
+2.4.1.1 Implementationon8-BitPlatforms
+FromthedescriptionofRijndaelalgorithmgivenabove,itisobviousthatthisalgorithm
+iswell suited 8-bit processors such as smart cardsinherently, for all the operations of
+Rijndael algorithm are conducted on individual byte. Thus, on 8-bit platforms, no
+extraspaceintheregisteriswastedwhileprocessing1bytewithperinstruction. Since
+all the operations of Rijndael involved in the algorithm on 8-bit platform are very
+simpleandthestructureofthealgorithmisstraightforward,herewearenotgoingto
+talkmoredetailsabouttheimplementationon8-bitplatform.
+2.4.1.2 Implementationon32-BitPlatforms
+Because of the fact that all the operations of Rijndael algorithm are conducted on in-
+dividual byte, it is not particularly e?cient on unconstrained platforms. Thus, while
+designing Rijndael, Daemen and Rijmen meanwhile put forward another implemen-
+tationwhichwillworkmuchmoree?cientlyon32-bitorgreaterplatforms,whichare
+themainplatformsintodayÕsPCorcryptographicserversorworkstations.
+Theideaofthismethodisquitesimple. WecouldcombinetheSubBytes, ShiftRows
+andMixColumns intoonestep. Inotherwords,wemergethetheintermediateresults
+ofthemintofourtables,eachofwhichiscomposedof256elementsandeachelement
+19is 32 bits. Since each element in these tables is 32 bits which are equal to the size of
+theregister,everytime32bitsdatacouldbeprocessedwithperinstructionsimultane-
+ously. SpeciÞcally,,theequationsofSubBytes, ShiftRows and MixCloumns become
+[9],
+0 1 0 1 0 1
+b ; 02 03 01 01 S?box(a )
+B C B C B C
+0 j 0;j+c
+0
+B C B C B C
+B C B C B C
+B C B C B C
+B b ; C B 01 02 03 01 C B S?box(a ) C
+1 j 1;j+c
+B C B C B C
+1
+B C B C B C
+= ? (2.18)
+B C B C B C
+B C B C B C
+b ; 01 01 02 03 S?box(a )
+B C B C B C
+2 j 2;j+c
+2
+B C B C B C
+@ A @ A @ A
+b ; 03 01 01 02 S?box(a )
+3 j 3;j+c
+3
+where S-Box is the result of a?ne transformation (2.1) which is stored in a 256 bytes
+lookup table accordingly and c denotes the bytes shifted from right to left. Further-
+i
+more,thisequationcouldberegardedasthis,
+0 1 0 1 0 1 0 1 0 1
+b ; 02 03 01 01
+B 0 j C B C B C B C B C
+B C B C B C B C B C
+B C B C B C B C B C
+B C B C B C B C B C
+B b ; C B 01 C B 02 C B 03 C B 01 C
+1 j
+B C B C B C B C B C
+B C B C B C B C B C
+= Sbox(a ; j+c )? Sbox(a )? Sbox(a )? Sbox(a )
+B C B C 0 0 B C 1;j+c B C 2;j+c B C 3;j+c
+1 2 3
+B C B C B C B C B C
+b ; 01 01 02 03
+B 2 j C B C B C B C B C
+B C B C B C B C B C
+@ A @ A @ A @ A @ A
+b ; 03 01 01 02
+3 j
+(2.19)
+Andthenitcouldbetranslatedinto,
+0 1
+b ;
+B 0 C
+j
+B C
+B C
+B C
+B b ; C
+1 j
+B C
+B C
+= T (a )?T (a )?T (a )?T (a ) (2.20)
+B C 0 0;j+c 1 1;j+c 2 2;j+c 3 3;j+c
+0 2 3
+1
+B C
+b ;
+B C
+2 j
+B C
+@ A
+b ;
+3 j
+Thus, 4 new lookup tables (each of T(a ) presenting as a new lookup table) are
+i i;j+c
+i
+introduced to take the place of S-Box. The advantage of this method is that we could
+avoidthea?netransformationinSubBytes, rotationsinShiftRows andmultiplica-
+8
+tioninGF(2 )inMixColumns sinceallofthemarereplacedbylookuptable. Nowthe
+onlyquestionishowtoobtainthefourlookuptables. Thiswillnotbeaproblemsince
+theyarecomposedoftheelementsinS-Boxwhichiscomputedinadvanceaswell.
+Althoughthismethodsavesquiteafewoperationstepsduringtheimplementation,
+we cannot ignore the fact it requires much more memory. Each table requires 1 KB
+andthereare5tablesintotally. So5KBmemoryisneededwhiletheimplementation,
+which is unacceptable for some embedded platforms. WhatÕs more, it is more likely
+tosu?erfromcacheattack. Thus,in[4],Bertonietal. gaveanapproachtoimplement
+Rijndael with high-performance and low-footprint. The core idea of this approach is
+to compute the 4 byte data in parallel. In order to process the 32 bits data once, we
+needtotransposethewholestatematrix. Ofcourse,sometransformationsofRijndael
+wouldneedtobemodiÞedaccordingly.
+SubBytes In this transformation, no modiÞcation is required since the operation
+isindependentofthepositionsofbytes.
+ShiftRows Inthistransformation,theonlymodiÞcationisthatwenolongershift
+rowsofstatematrix;instead,thecolumnsareshiftedbecauseofthetransposition.
+AddRoundKey As for this transformation, the operation is invariant because it is
+20onlyinvolvedinbitwiseXORoperationswhichisalsoindependentofthepositionsof
+bytes.
+MixColumns After the transposition, the whole operations in this transformation
+willbecompletelyreconstructedandthenewtransformationisconsiderablysped-up.
+Beforetheoptimization,wecouldcomputeeachofcolumnaccordingtheEquation
+(2.7). Afterfurthertransformation,itcouldbecome,
+0 1 0 1 0 1 0 1 0 1
+?
+b ;
+b ; b ; b ; b ;
+B j C B 0 j C B 3 j C B 2 j C B 1 j C
+0
+B C B C B C B C B C
+B C B C B C B C B C
+?
+B C B C B C B C B C
+B b ; C B b ; C B b ; C B b ; C B b ; C
+j 1 j 0 j 3 j 2 j
+B C B C B C B C B C
+1
+B C B C B C B C B C
+= 02 ?03 ? ? (2.21)
+B C B C B C B C B C
+?
+B C B C B C B C B C
+b ; b ; b ; b ; b ;
+B C B 2 C B 1 C B 0 C B 3 C
+j j j j j
+B 2 C B C B C B C B C
+@ A @ A @ A @ A @ A
+?
+b ; b ; b ; b ; b ;
+j 3 j 2 j 1 j 0 j
+3
+Theequationabovecouldalsoberegardedasthefollowing,
+y = 02x ?03x ?x ?x (2.22)
+0 0 1 2 3
+wherebothxandyare32-bitswords. Afterthestatematrixistransposed,the4bytes
+word(x)couldbeprocessedinparallel. Herearetherestoftheequations,
+i
+y = x ?02x ?03x ?x (2.23)
+1 0 1 2 3
+y = x ?x ?02x ?03x (2.24)
+2 0 1 2 3
+y = 03x ?x ?x ?02x (2.25)
+3 0 1 2 3
+Thesefourequationsabovecouldbecalculatedbythreesteps[4].
+y = x ?x ?x
+0 1 2 3
+y = x ?x ?x
+1 0 2 3
+y = x ?x ?x
+2 0 1 3
+y = x ?x ?x
+3 0 1 2
+y = 02x;
+i i
+y = y +x +x ; (2.26)
+i i i ((i+1) mod 4)
+Inthisway,fewerXORgatesanddoublingoperationsareinvolved,whichmeansthe
+timeperformanceisimproved.
+2.4.2 ImplementationwithBit-SlicingTechnique
+Theideaofbit-slicingtechniquewasÞrstintroducedin[5]byBihamin1997tospeed
+uptheDESimplementationinsoftware. Asdisplayedin[5],usingbit-slicingtechnique
+21enablestheimplementationapproximatelyÞvetimesfaster. TobespeciÞc,supposewe
+haveaCPUwitha64-bitregisterwidth,theninbit-slicingimplementation,the64bits
+in the register would act as 64 one-bit processors handling di?erent data encryption.
+In other words, we simulate the way of vector processors (SIMD processors) dealing
+withdatasothatthealgorithmcouldbeimplementedinparallel. Therefore,intuitively
+thistechniquecouldimprovetheperformanceNtimes,providedthatwehaveaCPU
+with a N-bit register width. Here is a Þgure of bit-slicing technique, As showed in
+Figure2.9: Thebasicconceptofbit-slicing. (From[15])
+Figure 2.9, all the Þrst bits in each cipher block areoperated in the register1 with the
+sameinstructionsimultaneously. Andallthesecondbitsareoperatedintheregister2,
+and so on. Obviously, the more bits a register contains, the more cipher blocks could
+be handled. That is to say, a bigger register could work more e?ciently. Besides,
+fromwhatwehavediscussedabove,itisapparentthatbit-slicingtechniquecouldbe
+implementedregardlesstheencryptionalgorithms. SonotjustDES,itisalsoapplied
+toRijndaelorotherblockcipher.
+Another advantage of bit-slicing technique is to avoid looking up tables. As dis-
+cussed above, most of the implementations of SubBytes transformation depends on
+tablelookupsbeforebit-slicingisintroducedsincecomparedwithcalculatingthecom-
+plicated permutation and substitution of each element, it is fairly e?cient. However,
+as a matter of fact, table lookup is not a good technique while dealing with transfor-
+mation in S-Box. First of all, it requires both additional space to store the table and
+extratimetolookupit. Andweknowthatthespaceofregistersislimited,sousually
+the tables would be stored in cache or even main memory, which means more time
+is wasted in data transferring. Even worse, it is vulnerable to cache-timing attacks.
+Lookinguptablewouldalwaysrequiredi?erentextratimedependingontheelements
+looked up in the S-Box. SpeciÞcally, the attackers usually could guess whether some
+particulardataareinthecacheornot(cachehitorcachemiss)dependingonthesetime
+information and Þnally recover the secret keys. However, bit-slicing is independent
+22oftablelookup,whichmeanssuchattackswillneverhappen. Hence,bit-slicingcould
+not only improve the e?ciency of implementation but also be immune to the attack
+basedoncache-timinganalysis.
+On the other hand, in spite of the fact that bit-slicing technique has considerable
+advantages over ordinary techniques, we could not implement it directly since this
+implementation uses a non-standard representation. Therefore, the conversion from
+standarddomaintobit-sliceddomainisinevitableifbothofinputandoutputdataare
+requiredinstandardformat.
+Assumingthatwehavea64-bitCPUand64blockciphers(eachofthemcontains128
+bits)needstobe handled. Thus, ifweimplementthemwithoutbit-slicingtechnique,
+theywouldbetreatedlikeTable2.2,
+Table2.2: Thebitstoredin64-bitCPUstandardformat. (From[24])
+b0,64 .. b0,4 b0,3 b0,2 b0,1 b0,0
+b0,127 .. b0,68 b0,67 b0,66 b0,65 b0,64
+b1,64 .. b1,4 b1,3 b1,2 b1,1 b1,0
+b1,127 .. b1,68 b1,67 b1,66 b1,65 b1,64
+b2,64 .. b2,4 b2,3 b2,2 b2,1 b2,0
+b2,127 .. b2,68 b2,67 b2,66 b2,65 b2,64
+b3,64 .. b3,4 b3,3 b3,2 b3,1 b3,0
+b3,127 .. b3,68 b3,67 b3,66 b3,65 b3,64
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+b63,64 .. b63,4 b63,3 b63,2 b63,1 b63,0
+b63,127 .. b63,68 b63,67 b63,66 b63,65 b63,64
+whereb meantheythbitinthexthblockcipher.
+x;y
+In order to convert these data into bit-slicing domain, we need to rearrange the
+wholetableasfollowingTable2.3,theÞrstbitofeachblockcipherneedstobeextracted
+andputintotheÞrstlineandthesecondbitofeachblockcipherneedstobeputinto
+thesecondline,andsoon.
+To some extent, this conversion is kind of similar to the transposition of matrix.
+And it has been discussed in [10, 15, 24]. On the other hand, while implementing
+bit-slicing in closed environment, it is not necessary to convert the input and output
+data.
+2.5 Summary
+In this chapter, we have talked about each steps of Rijndael encryption, SubBytes,
+ShiftRows, MixColumns, AddRoundKey and round key generation. And according
+23Table2.3: Thebitstoredin64-bitCPUbit-slicedformat. (From[24])
+b63,0 .. b4,0 b3,0 b2,0 b1,0 b0,0
+b63,1 .. b4,1 b3,1 b2,1 b1,1 b0,1
+b63,2 .. b4,2 b3,2 b2,2 b1,2 b0,2
+b63,3 .. b4,3 b3,3 b2,3 b1,3 b0,3
+b63,4 .. b4,4 b3,4 b2,4 b1,4 b0,4
+b63,5 .. b4,5 b3,5 b2,5 b1,5 b0,5
+b63,6 .. b4,6 b3,6 b2,6 b1,6 b0,6
+b63,7 .. b4,7 b3,7 b2,7 b1,7 b0,7
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+b63,126 .. b4,126 b3,126 b2,126 b1,126 b0,126
+b63,127 .. b4,127 b3,127 b2,127 b1,127 b0,127
+tothedescription,wecompareRijndaelwithotherblockcipher,sayDESandtheother
+candidatesintheÞnalroundofAESandanalysistheiradvantagesanddisadvantages
+according to their security properties, algorithm complexity, feasibility on various
+platforms and so on. After that, we introduce the concept of dual ciphers which are
+putforwardbyBarkanandBihamandillustratesomeexamplesofRijndaelvariants. If
+justconsideringthesquaredualciphersandirreduciblepolynomials,therearetotally
+240 dual ciphers in Rijndael and all of them have the same security properties as the
+originalone. Then,somestate-of-the-artRijndaelimplementationswhichwillbeused
+in the next chapter are talked so that the work we have done will not be so hard to
+understand.
+24Chapter3
+ImplementationofRijndaelandits
+Variants
+In this chapter, we are going to discuss the Rijndael and its variants from a more
+practical stand-point. Following the Rijndael implementation techniques illustrated
+in last chapter, we will introduce and use the concept of dual ciphers in terms of
+implementation. Foreachmethod,accordingtoitspropertyofimplementation,certain
+dual ciphers with optimal design will be implemented. WhatÕs more, in this chapter,
+more attention will be paid to the bit-slicing technique since it is more likely to be
+inßuencedbythedualcipherscomparedwithotherimplementationtechniques.
+3.1 ImplementationDetailsofRijndaelVariants
+Before discussing the di?erent kinds of implementations, we will review and discuss
+thedualciphersofRijndael. Asdescribedinlastchapter,dualcipherswillonlyhave
+inßuence on those operations that are involved in constants. That is to say, only
+SubBytes, MixColumns and the round constants in the key schedule will need to be
+investigatedwhileweimplementvariantsofRijndael.
+In last chapter, we introduce the relation between Rijndael and its dual cipher. It
+can be described as following Þgure 3.1, where P, C and K are plain text, cipher text
+0 25 50
+andsecretkeyrespectively. Tisamappingmatrixcouldberepresentedas[b ,b ,b ,
+75 100 125 150 175
+b ,b ,b ,b ,b ]andallthegeneratorvaluesbhavebeenlistedin[32].
+TheSubBytes transformationnowbecomes
+?1
+f(y)= (T?A?T )y+T(C) (3.1)
+where T is the mapping matrix mentioned above and A is the original a?ne trans-
+formation matrix and the C is the constant which is (01100011) in binary format (in
+Equation 2.1) in the original Rijndael. As for the constant matrix in MixColumns, it
+25Figure3.1: TheRelationBetweenRijndaelandItsDualCipher. (From[32])
+nowisregardedasfollowingmatrix,
+0 1
+25 0 0
+b b b b
+B C
+B C
+B C
+0 25 0
+B C
+B b b b b C
+B C
+B C
+B C
+0 0 25
+B C
+b b b b
+B C
+B C
+@ A
+0 0 25
+b b b b
+andbisthegeneratorabove.
+In this thesis we are not going to discuss the round constants used in the key
+scheduleoperationfortworeasons. Firstofall,theroundconstantswillnotinßuence
+theperformancesofRijndaelonbytelevelimplementation(non-bit-slicingtechnique)
+sinceeachtimeitwillalwayscostaXORgatenomatterwhattheroundconstantsare.
+Besides, even for the bit-slicing technique, they still will not a?ect the e?ciency too
+much compared with other two transformations (SubBytes and MixColumns). Sec-
+ondly,whilewemeasuringtheperformanceofeachmethod,thecostofkeyschedule
+will not be taken into account since the round keys are only dependent on the secret
+keyandusuallywewillnotchangethesecretkeyforeachblockencryption. Therefore,
+there are only two transformations which need to be modiÞed we will discuss in the
+followingsections,SubBytes andMixColumns.
+3.2 Onthe8-bitPlatform
+3.2.1 8-bitwithS-Box
+Inthismethod,wewillonlydiscusstheMixColumns transformationsincetheSubBytes
+operationisdonebytablelookup,whichmeansnomatterwhatdualcipherswechoose,
+thee?ciencyofSubBytes willnotimproveordegrade.
+26IntheoriginalRijndael,theMixColumns transformationworksas,
+0 1 0 1 0 1
+?
+a ;
+02 03 01 01 a ;
+B j C B C B 0 j C
+0
+B C B C B C
+B C B C B C
+?
+B C B C B C
+B a ; C B 01 02 03 01 C B a ; C
+j 1 j
+B C B C B C
+1
+B C B C B C
+= ? (3.2)
+B C B C B C
+?
+B C B C B C
+a ; 01 01 02 03 a ;
+B C B C B 2 j C
+j
+B 2 C B C B C
+@ A @ A @ A
+?
+a ; 03 01 01 02 a ;
+j 3 j
+3
+The multiplication by 02 is usually denoted as xtime and is implemented by a shift
+operation and a conditional XOR operation. We need to check whether its most
+signiÞcantbitis1ornot. Ifitisone,thenweneedtodoaleftshiftoperationfollowed
+byaXORoperationtodealwiththeoverßowin. Otherwise, wejustdotheleftshift
+operation. Here is an example, assume that we want to calculate the 02 * x, where
+x is {95} in hexadecimal format or {10010101} in binary format. Now that the most
+signiÞcant bit is one, we Þrst shift 1 bit to left and get {00101010} in binary format.
+8
+ThensincealltheoperationsareareimplementedinGF(2 ),wedotheXORoperation
+with{1B}or{00011011}whichstandsforthepolynomial
+8 4 3
+P(x)= x +x +x +x+1 (3.3)
+Finally,wegettheoutcome{00110001}or{31}inhexadecimalformat.
+As for the multiplication by 03, we simply do a XOR operation with the outcome
+ofmultiplicationby02. Take{95}asanexampleagain,itsresultsis{10100100}or{A4}
+8
+in hexadecimal format. Similarly, we could write all elements of GF(2 ) as a sum of
+powers of 02. For example, 09 * x could be written as 08 * x ? x, where 08 * x can be
+viewedas02*02*02*x. Intuitively,thebiggertheconstantis,thelongertimeitwill
+costsincemoreXORoperationsandshiftoperationsareinvolved.
+ConsideringtheMixColumns transformationindualciphersnowbecomes
+0 1 0 1 0 1
+?
+25 0 0
+a ; b b b b a ;
+B j C B C B 0 j C
+0
+B C B C B C
+B C B C B C
+? 0 25 0
+B C B C B C
+B a ; C B b b b b C B a ; C
+j 1 j
+B C B C B C
+1
+B C B C B C
+= ? (3.4)
+B C B C B C
+? 0 0 25
+B C B C B C
+a ; b b b b a ;
+B j C B C B 2 j C
+B 2 C B C B C
+@ A @ A @ A
+? 0 0 25
+a ; b b b b a ;
+j 3 j
+3
+8
+anditstillworksinGF(2 ),themultiplicationcouldalsobeimplementedbyarepeated
+useofXORasequenceofshiftandXORoperations.
+Since the performance of this method depends on the constants in the matrix, we
+havegonethroughallthe240dualciphersin[2]andfoundthatthereisnodualciphers
+withfeweroperations. Inotherwords,allconstantsareequaltoorgreatthan02and
+03. Thereisonedualcipherhavingthesameperformanceastheoriginalone,anditis
+{{11d},{02}}ingeneralrepresentation. Itsconstantmatrixisasfollows,
+0 1
+03 02 01 01
+B C
+B C
+B C
+B C
+B 01 03 02 01 C
+B C
+B C
+B C
+B C
+01 01 03 02
+B C
+B C
+@ A
+02 01 01 03
+273.2.2 8-bitwithoutS-Box
+In this subsection, the MixColumns operation and its cost are the same as last subsec-
+tion. Therefore,wearegoingtoinvestigatehowtoimplementtheSubBytes without
+tablelookupanditsimpactontheperformanceofdualciphers. Theimplementation
+ofSubByte,actually,couldberegardedastwopartsasintheequation(2.1). Thea?ne
+transformation is operated over GF(2), which is not hard to deal with. However, as
+discussedinlastchapter,thereisnoquiteidealmethodtocomputethethemultiplica-
+254
+tiveinverse. Here,wecalculatea tohandletheinverseoperationsinceitisequalto
+?1 8
+a overGF(2 )accordingtoFermatÕslittletheorem.
+As for the exponentiation calculation, it is not as hard as the inverse calculation.
+We do it with the left-to-right binary exponentiation algorithm in [17]: Since the
+Algorithm4Left-to-rightbinaryexponentiation
+Input: goverÞeldG;apositiveintegere=e ... e e ;
+t 1 0
+e
+Output: g ;
+1: A= 1;
+2: fori= tto0do
+3: A= A?A;
+4: ife = 1then
+i
+5: A= A? g;
+6: endif
+7: endfor
+8: returnA;
+8
+multiplication is easy to compute in GF(2 )(it could be implemented by a repeated
+useofasequenceofshiftandXORoperations),theexponentiationcalculationiseasy
+as well. Besides, as we can see that the cost of exponentiation is independent of the
+irreduciblepolynomialintheencryptionalgorithm.
+Nowletuslookatthea?netransformation
+y= A?x?c
+wesearchedthoughthe240dualciphers,andfoundthatthereisnodualcipherwith
+value c is 0, which means this XOR gate is always inevitable. As for the constant
+matrix A, usually we need to do the multiplication bit by bit and then add them up.
+Here we calculate it in byte level instead of bit level. In the following equation, all
+theelementsinmatrixandvectorareeither0or1. Accordingtothisequation,ifonly
+a and a are 1, then the Þrst column x x x x x x x x and the Þfth column
+0 4 0;0 0;1 0;2 0;3 0;4 0;5 0;6 0;7
+28x x x x x x x x willbeaddedup.
+4;0 4;1 4;2 4;3 4;4 4;5 4;6 4;7
+0 1 0 1 0 1
+b x x x x x x x x a
+B 0 C B 0;0 1;0 2;0 3;0 4;0 5;0 6;0 7;0 C B 0 C
+B C B C B C
+B C B C B C
+B C B C B C
+B b C B x x x x x x x x C B a C
+1 0;1 1;1 2;1 3;1 4;1 5;1 6;1 7;1 1
+B C B C B C
+B C B C B C
+B C B C B C
+B C B C B C
+b x x x x x x x x a
+B 2 C B 0;2 1;2 2;2 3;2 4;2 5;2 6;2 7;2 C B 2 C
+B C B C B C
+B C B C B C
+B C B C B C
+B b C B x x x x x x x x C B a C
+3 0;3 1;3 2;3 3;3 4;3 5;3 6;3 7;3 3
+B C B C B C
+B C B C B C
+= ?
+B C B C B C
+B C B C B C
+b x x x x x x x x a
+B 4 C B 0;4 1;4 2;4 3;4 4;4 5;4 6;4 7;4 C B 4 C
+B C B C B C
+B C B C B C
+B C B C B C
+B b C B x x x x x x x x C B a C
+5 0;5 1;5 2;5 3;5 4;5 5;5 6;5 7;5 5
+B C B C B C
+B C B C B C
+B C B C B C
+B C B C B C
+b x x x x x x x x a
+B 6 C B 0;6 1;6 2;6 3;6 4;6 5;6 6;6 7;6 C B 6 C
+B C B C B C
+@ A @ A @ A
+b x x x x x x x x a
+7 0;7 1;7 2;7 3;7 4;7 5;7 6;7 7;7 7
+0 1
+x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a
+B 0;0 0 1;0 1 2;0 2 3;0 3 4;0 4 5;0 5 6;0 6 7;0 7 C
+B C
+B C
+B C
+B x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a C
+0;1 0 1;1 1 2;1 2 3;1 3 4;1 4 5;1 5 6;1 6 7;1 7
+B C
+B C
+B C
+B C
+x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a
+B 0;2 0 2;2 2 3;2 3 5;2 5 6;2 6 7;2 7 C
+1;2 1 4;2 4
+B C
+B C
+B C
+B x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a C
+0;3 0 1;3 1 2;3 2 3;3 3 4;3 4 5;3 5 6;3 6 7;3 7
+B C
+B C
+=
+B C
+B C
+x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a
+B C
+0;4 0 1;4 1 2;4 2 3;4 3 4;4 4 5;4 5 6;4 6 7;4 7
+B C
+B C
+B C
+B x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a C
+0;5 0 1;5 1 2;5 2 3;5 3 4;5 4 5;5 5 6;5 6 7;5 7
+B C
+B C
+B C
+B C
+x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a
+B C
+0;6 0 1;6 1 2;6 2 3;6 3 4;6 4 5;6 5 6;6 6 7;6 7
+B C
+@ A
+x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a
+0;7 0 1;7 1 2;7 2 3;7 3 4;7 4 5;7 5 6;7 6 7;7 7
+Therefore, the number of XOR gates is dependent on the variable a a a a a a a a
+0 1 2 3 4 5 6 7
+and the constant matrix. If there is 3 columns in the constant matrix is all 0, then at
+most 3 XOR gates could be reduced. However, there is no such matrix whose whole
+column is all 0 in all 240 dual ciphers. In other words, neither a?ne transformation
+normultiplicationinversetransformationwillhelpimprovethee?ciencyintermsof
+dualciphersifweusethismethodtoimplementthem.
+3.3 Onthe32-bitPlatform
+3.3.1 32-bitwithT-table
+Asdiscussedinlastchapter,thismethodcombinesdi?erentstepsoftheroundtrans-
+formation, SubBytes, ShiftRows and MixColumns, in a single set of lookup tables.
+On the other hand, the two operations will be modiÞed in dual ciphers are SubBytes
+andMixColumns.ThatÕstosay,nomatterhowtheconstantsaremodiÞedinthesetwo
+transformations, there will be no performance impact since both of them Þnally will
+be implemented by table lookup whose cost actually only depends on the plain text
+andsecretkey.
+3.3.2 32-bitwithoutT-table
+Theimplementationon32-bitplatformdescribedaboveisacceleratedbypre-computing
+partof roundtransformations andstoring theresultsintothetable. However, there-
+quirement of the memory is an issue to be considered. Considering an embedded
+processor without much memory but with a 32-bit data-path may not be suitable
+29for this approach, it makes sense to implement Rijndael with a mix of possible high
+performanceandlow-footprintmethods.
+Thus, Bertoni et.al put forward an approach without T-table on 32-bit platform in
+[4]. Theprincipleofthistechniqueistoimprovetheperformancebypackedoperations
+so as to overcome the bottleneck of MixColumns transformation. To be speciÞc, we
+make use of the bit length of the platform and could regard the four-byte elements
+as a unit and compute xtime of the packed vector in parallel. Compared with the
+standard implementation on 32-bit platform, it could save much more instructions.
+InthestandardimplementationofMixColumns, foreachcolumn,itwillcostasingle
+doubling (xtime), four XOR gates and 3 rotations. As for this method, no rotation is
+required. Therefore,foreachblock,wecouldsave12rotationinstructionssincethere
+arefourcolumnsforoneeachblock.
+Now that the MixColumns transformation of this technique is just to compute the
+the four-byte elements in parallel, the cost of it still depends on the constants in the
+matrix. And as discussed in previous section, there is no dual cipher with fewer
+operations to complete the MixColumns transformation. Hence, there is still no dual
+ciphers with higher performance compared with the original one. The one with the
+same e?ciency is the dual cipher {{11d}, {02}} in general representation explained in
+lastchapter.
+3.4 Bit-slicing
+Theideaofbit-slicingtechniqueappearedin1997,Bihamputforwardthisfastmethod
+toacceleratetheDESimplementation. In[5],healsomentionedthatitcouldbeapplied
+inanycipher. Thus, justafterRijndaelwasannouncedasthewinnerofAES,alarger
+number of results [3, 12, 13, 15, 16, 20, 24] tried to apply bit-slicing to Rijndael. Most
+of them implement it in assembly language using SSE instructions. In this thesis,
+we implement Rijndael in C language so as to compare its performance with other
+approaches.
+Asanalyzedbefore,bit-slicedciphersuseanon-standardformattorepresentdata.
+Sometimes,itsinputandoutputneedtobeconverted. In[10,24],theauthorsgavean
+algorithmtodealwiththeconversionbetweennormaldomainandbit-slicingdomain.
+However, it seems that this algorithm does not work while transposing the matrix.
+Hence, we assume that all the implementation is completed in a closed environment
+sothatthedatacanbekeptinbit-slicedrepresentationandmatrixtranspositioncould
+beomitted.
+3.4.1 TheOriginalRijndael
+Bit-slicingtechniqueistoimplementtheencryptionalgorithmonbitlevelratherthan
+byte level. Therefore, certain transformations in Rijndael would be totally di?erent
+from that in normal ones. It is fairly necessary to give a speciÞc description of these
+transformations. Before that, it makes sense to introduce the platform we implement
+30on since the data representation depends on the bit length of the processor. The
+platform is Snowy (Intel(R) Xeon(R) CPU X5460 @3.16GHz) whose instruction set is
+64-bit long. So we could view the input data as that in Table 2.3. The Þrst row stores
+the Þrst bit of all the 64 blocks, the second row stores the second bit of all 64 blocks
+andsoon.
+3.4.1.1 TheBit-slicedSubBytesTransformation
+The SubBytes transformation in bit-sliced domain also could be perceived as two
+parts,thelineara?netransformationandthenon-linearmultiplicativeinversetrans-
+formation. As a matter of fact, there is no di?erence between normal domain and
+bit-sliced domain in terms of the a?ne transformation in SubBytes transformation.
+As showed in previous chapter, the Equation (2.1) is calculated over bit level. That
+is to say, we could adapt this a?ne transformation in bit-sliced domain without any
+modiÞcation.
+TheNon-linearMultiplicativeInverseTransformationinBit-slicedDomain Now
+the only problem needs to be solved is the non-linear multiplicative inverse trans-
+formation. It is true that the method we mentioned in Section 3.2 could be applied
+to calculate the inverse since it can be operated ÓbitÓ by ÓbitÓ. However, we must
+noticethatthecostofthismethodwouldbeunacceptable. Asfortherestofmethods
+listedinChapter1,wefoundneitherXGCDnorexhaustivesearchwouldbethegood
+approach. Therefore,theonlywaytocomputethemultiplicativeinverseiscomposite
+Þeld.
+TheideaofcompositeÞeldtocomputethemultiplicativeinverseisÞrstintroduced
+by Rijmen in [25]. After that, some researchers followed this idea and came up with
+a few optimizing approach [6, 7, 8, 19, 31]. Here we use the method proposed by
+Oswald et.al in [31] to implement the multiplicative inverse. Directly computing the
+inverseofaseventh-degreepolynomialisnoteasy,butthecalculationoftheinverseof
+afourth-degreeorlesspolynomialisrelativelyeasy,aspointedoutbyRijmenin[25].
+8
+So the idea is to decompose the bigger Þeld GF(2 ) into the smaller but isomorphic
+4
+ÞeldGF(2 )sothatthedegreeofmodularpolynomialcouldbedecreasedwhichcould
+helpcalculatetheinversealittleeasier.
+8 4
+In this case, the elements in GF(2 ) need to be represented as those in GF(2 ).
+8
+According to [31], the element a in GF(2 ) could be regarded as a linear polynomial
+4
+withcoe?cientsinGF(2 ),
+a= a ?x+a (3.5)
+h l
+8 4
+whereaisinGF(2 ),a anda aretheelementswithfourbitsinGF(2 ).
+h l
+Similarly, this new Polynomial (3.5) requires an irreducible modular polynomial
+as well so that the results of its calculation will always be a two-term polynomial.
+Therefore,theirreduciblemodularpolynomialisgivenin[31]asfollows,
+2
+P(x)= x +x+e (3.6)
+31whereallthecoe?cientsareinhexadecimalformat. Ontheotherhand,thecoe?cients
+4
+inPolynomial(3.5)areinGF(2 )whichalsorequiretheirreduciblemodularpolynomial
+todothecalculation. Itisgivenin[31]aswell,
+4
+Q(x)= x +x+1; (3.7)
+Now that the two irreducible modular polynomials and the representation poly-
+4
+nomial are available, we could conduct the calculations in GF(2 ) and its results are
+8
+isomorphic to that in GF(2 ). From [31], we Þnd the principle of basic calculations in
+4
+inGF(2 ),suchasmultiplication,squareandmultiplicationinverse,aresimilartobyte
+computation.
+1. Themultiplicationisgivenby
+q(x)= a(x)?b(x) mod Q(x)
+4
+wherea(x),b(x)andq(x)areinGF(2 ).
+q = a b ?a b ?a b ?a b ;
+0 0 0 3 1 2 2 1 3
+q = a b ?(a ?a )b ?(a ?a )b ?(a ?a )b ;
+1 1 0 0 3 1 2 3 2 1 2 3
+(3.8)
+q = a b ?a b ?(a ?a )b ?(a ?a )b ;
+2 2 0 1 1 0 3 2 2 3 3
+q = a b ?a b ?a b ?(a ?a )b
+3 3 0 2 a 2 0 3 3
+1
+2. Thesquareisgivenby
+2
+q(x)= a(x) modQ(x)
+4
+wherea(x)andq(x)areinGF(2 ).
+q = a ?a ;
+0 0 2
+q = a ;
+1 2
+(3.9)
+q = a ?a ;
+2 3
+1
+q = a
+3 3
+3. Theinverseoperationisgivenby,
+?1
+q(x)= a(x) mod Q(x)
+4
+wherea(x)andq(x)areinGF(2 ).
+q = a ?a ?a ?a a a ?a ?a a ?a a ?a a a ;
+0 2 3 2 3 0 0 2 2 0 2
+1 1 1 1
+q = a a ?a a ?a a ?a ?a a ?a a a ;
+1 0 1 0 2 1 2 3 1 3 0 1 3
+(3.10)
+q = a a ?a ?a a ?a ?a a ?a a a ;
+2 0 2 0 2 3 0 3 0 2 3
+1
+q = a ?a ?a ?a a a ?a a ?a a ?a a
+3 1 2 3 1 2 3 0 3 1 3 2 3
+32Noteab standsforanANDoperationbetweenbita andbitb .
+i j i j
+4
+NowthatwehaveknownhowtoconductthebasiccalculationinGF(2 ),wecould
+compute the multiplication inverse of the Polynomial (3.5). Similar to deÞnition of
+8
+inverseinGF(2 ),itisdeÞnedasfollows,
+? ?
+(a ?x+a)?(a ?x+a )= 1 mod P(x)
+h l
+h l
+? ? 4
+wherea ,a,a anda areinGF(2 ). Hence,theinversecanbederived[31],
+h l
+h l
+?1 ? ?
+(a ?x+a) = a ?x+a = (a ?d)?x+(a ?a)?d (3.11)
+h l h h l
+h l
+wheredisasfollows,
+2 2 ?1
+d= ((a ?e)?(a ?a)?a ) (3.12)
+h l
+h l
+where{e}isthecoe?cientinPolynomial(3.6).
+4
+Up to now, we have discussed the multiplication inverse calculation in GF(2 ).
+8
+However, we still cannot get the multiplication inverse in GF(2 ). According to [31],
+4 8
+thereneedsometransitionbetweenGF(2 )andGF(2 ). Beforecomputingtheinverse
+4 8 4
+inGF(2 ),wemusttransformGF(2 )toGF(2 )sinceallthecalculationsareconducted
+4 8 4
+inGF(2 )now. ThemappingfunctionfromGF(2 )toGF(2 )isasfollows,
+0 1 0 1 0 1
+a 1 0 0 0 1 1 1 0 a
+B l0 C B C B 0 C
+B C B C B C
+B C B C B C
+B C B C B C
+B a C B 0 1 1 0 0 0 0 0 C B a C
+l1 1
+B C B C B C
+B C B C B C
+B C B C B C
+B C B C B C
+a 0 1 0 0 0 0 0 1 a
+B l2 C B C B 2 C
+B C B C B C
+B C B C B C
+B C B C B C
+B a C B 0 0 1 0 1 0 0 0 C B a C
+l3 3
+B C B C B C
+B C B C B C
+= ? (3.13)
+B C B C B C
+B C B C B C
+a 0 0 0 0 1 1 1 0 a
+B C B C B 4 C
+h0
+B C B C B C
+B C B C B C
+B C B C B C
+B a C B 0 1 0 0 1 0 1 1 C B a C
+h1 5
+B C B C B C
+B C B C B C
+B C B C B C
+B C B C B C
+a 0 0 1 1 0 1 0 1 a
+B C B C B 6 C
+h2
+B C B C B C
+@ A @ A @ A
+a 0 0 0 0 0 1 0 1 a
+h3 7
+4 8
+wherea ...a anda ...a areinGF(2 ),a ...a isinGF(2 ).
+0 7
+l0 l3 h0 h3
+4
+After completing the inverse calculation in GF(2 ), we need the inverse mapping
+8
+function so as to go back to GF(2 ) since all the rest of Rijndael transformations are
+8
+operated in GF(2 ). The mapping matrix, as a matter of fact, is the inverse matrix of
+matrixinEquation(3.13). ItisshowedasfollowingEquation(3.14)
+0 1 0 1 0 1
+a 1 0 0 0 1 0 0 0 a
+B 0 C B C B C
+l0
+B C B C B C
+B C B C B C
+B C B C B C
+B a C B 0 0 0 0 1 1 0 1 C B a C
+1 l1
+B C B C B C
+B C B C B C
+B C B C B C
+B C B C B C
+a 0 1 0 0 1 1 0 1 a
+B 2 C B C B C
+l2
+B C B C B C
+B C B C B C
+B C B C B C
+B a C B 0 1 0 0 1 1 1 0 C B a C
+3 l3
+B C B C B C
+B C B C B C
+= ? (3.14)
+B C B C B C
+B C B C B C
+a 0 1 0 1 1 1 0 1 a
+B 4 C B C B C
+h0
+B C B C B C
+B C B C B C
+B C B C B C
+B a C B 0 0 1 0 1 1 0 0 C B a C
+5 h1
+B C B C B C
+B C B C B C
+B C B C B C
+B C B C B C
+a 0 1 1 1 1 0 0 1 a
+B 6 C B C B C
+h2
+B C B C B C
+@ A @ A @ A
+a 0 0 1 0 1 1 0 1 a
+7 h3
+334 8
+wherea ...a anda ...a areinGF(2 ),a ...a isinGF(2 ).
+0 7
+l0 l3 h0 h3
+To sum up, the whole operations in bit-sliced SubByte transformation in the en-
+cryptionalgorithmcouldbedescribedwithfourstepsasshowedinFigure3.2below
+from[31],
+8 4
+¥ mappingtheelementinGF(2 )toelementsinGF(2 ).
+4
+¥ calculatethemultiplicationinverseinGF(2 ).
+4 8
+¥ mappingtheelementsinGF(2 )backtoelementGF(2 ).
+¥ conductthea?netransformationwiththeinversevalueobtained.
+Figure3.2: OperationsinBit-slicedSubBytesTransformation. (From[31])
+343.4.1.2 TheBit-slicedShiftRowsTransformation
+Wheninbit-sliceddomain,theShiftRows transformationjustneedssomeslightmod-
+iÞcationscomparedwiththeSubBytes transformation. SpeciÞcally,nowwejustneed
+toshifttheÓwordÓinsteadofbyte. ThewordinstateareasfollowingTable3.1,
+Table3.1: ThewordsinstatebeforeShiftRows transformation.
+b0..b7 b32..b39 b64..b71 b96..b103
+b8..b15 b40..b47 b72..b79 b104..b111
+b16..b23 b48..b55 b80..b87 b112..b119
+b24..b31 b56..b63 b88..b95 b120..b127
+Thus,accordingtotheprincipleoftheShiftRows transformation,itwilllooklike
+asfollowingTable3.2aftertheoperation,
+Table3.2: ThewordsinstateafterShiftRows transformation.
+b0..b7 b32..b39 b64..b71 b96..b103
+b40..b47 b72..b79 b104..b111 b8..b15
+b80..b87 b112..b119 b16..b23 b48..b55
+b120..b127 b24..b31 b56..b63 b88..b95
+Note: TheÓwordÓherestandsforasequenceofbitswhoselengthare64-bit.
+3.4.1.3 TheBit-slicedMixColumnsTransformation
+The principle of the multiplication with constants in the MixColumns transformation
+in bit-sliced domain is the same as that in normal implementation. However, while
+implementing this transformation on bit level, we need more operations. In [13], the
+authorgavetheresultsofthemultiplicationby02and03asfollowTable3.3,
+Table3.3: Multiplicationby02and03onbitlevel. (From[13])
+bit x 02*x 03*x
+0 x0 x7 x0+x7
+1 x1 x0+x7 x0+x1+x7
+2 x2 x1 x1+x2
+3 x3 x2+x7 x2+x3+x7
+4 x4 x3+x7 x3+x4+x7
+5 x5 x4 x4+x5
+6 x6 x5 x5+x6
+7 x7 x6 x6+x7
+Note: thistableisnotentirelythesameasthatin[13]sincewehavecorrectedsome
+mistakesinthattableinthepaper.
+35Theprincipleofthismultiplicationisthesame. Themultiplicationby02isinvolved
+in shift and XOR operations. In normal implementation, supposed that we multiply
+b b b b b b b b with 02, if b , the most signiÞcant bit is 1, then the shift operation
+7 6 5 4 3 2 1 0 7
+wouldbefollowedbyaXORoperation. Otherwise,noXORoperationfollows. Then
+wecouldnoticethattheresultsinabovetablearealwaysappliedtothisprinciple. Ifb
+7
+is0,thenweonlyneedtoconducttheshiftoperationandtheresultsisb b b b b b b 0
+6 5 4 3 2 1 0
+which is equal to b b b (b + b )(b + b )b (b + b )b . On the other hand, if b is 1,
+6 5 4 3 7 2 7 1 0 7 7 7
+thenweneedtodoaXORoperationwith0x1baftertheshiftoperationandtheresult
+is b b b (b + 1)(b + 1)b (b + 1)1 which is still equal to b b b (b + b )(b + b )b (b +
+6 5 4 3 2 1 0 6 5 4 3 7 2 7 1 0
+b )b .
+7 7
+Furthermore, accordingtotheresultsinTable3.1, wecouldcalculateeachbytein
+theEquation(3.15)inbitlevelliketheEquations(3.16).
+0 1
+? ? ? ? 0 1 0 1
+b b b b
+B C
+02 03 01 01 b b b b
+B 0;0 0;2 0;3 C B C B C
+0;1 0;0 0;1 0;2 0;3
+B C B C B C
+B C B C B C
+? ? ? ?
+B C B C B C
+b b b b
+B C B C B C
+01 02 03 01 b b b b
+1;0 1;1 1;2 1;3
+B 1;0 1;1 1;2 1;3 C B C B C
+B C B C B C
+= ? (3.15)
+B C B C B C
+? ? ? ?
+B C B C B C
+b b b b 01 01 02 03 b b b b
+B C B C B C
+2;0 2;1 2;2 2;3
+B 2;0 2;1 2;2 2;3 C B C B C
+B C @ A @ A
+@ A
+? ? ? ?
+03 01 01 02 b b b b
+b b b b 3;0 3;1 3;2 3;3
+3;0 3;1 3;2 3;3
+?
+b [0]= b [7]?b [0]?b [7]?b [0]?b [0]
+(i) mod 4;j (i+1) mod 4;j (i+1) mod 4;j (i+2)mod4;j (i+3) mod 4;j
+i;j
+?
+b [1]=b [0]?b [7]?b [0]?b [1]?b [7]
+(i) mod 4;j (i) mod 4;j (i+1) mod 4;j (i+1) mod 4;j (i+1) mod 4;j
+i;j
+?b [1]?b [1]
+(i+2) mod 4;j (i+3) mod 4;j
+?
+b [2]= b [1]?b [1]?b [2]?b [2]?b [2]
+(i) mod 4;j (i+1) mod 4;j (i+1) mod 4;j (i+2) mod 4;j (i+3) mod 4;j
+i;j
+?
+b [3]=b [2]?b [7]?b [2]?b [3]?b [7]
+(i) mod 4;j (i) mod 4;j (i+1) mod 4;j (i+1) mod 4;j (i+1) mod 4;j
+i;j
+?b [3]?b [3]
+(i+2) mod 4;j (i+3) mod 4;j
+?
+b [4]=b [3]?b [7]?b [3]?b [4]?b [7]
+(i) mod 4;j (i) mod 4;j (i+1) mod 4;j (i+1) mod 4;j (i+1) mod 4;j
+i;j
+?b [4]?b [4]
+(i+2) mod 4;j (i+3) mod 4;j
+?
+b [5]= b [4]?b [4]?b [5]?b [5]?b [5]
+(i) mod 4;j (i+1) mod 4;j (i+1) mod 4;j (i+2) mod 4;j (i+3) mod 4;j
+i;j
+?
+b [6]= b [5]?b [5]?b [6]?b [6]?b [6]
+(i) mod 4;j (i+1) mod 4;j (i+1) mod 4;j (i+2) mod 4;j (i+3) mod 4;j
+i;j
+?
+b [7]= b [6]?b [6]?b [7]?b [7]?b [7]
+(i) mod 4;j (i+1) mod 4;j (i+1) mod 4;j (i+2) mod 4;j (i+3) mod 4;j
+i;j
+(3.16)
+whereb [x]standsforthexthbitinbyteb .
+i;j i;j
+3.4.1.4 TheBit-slicedAddRoundKeyTransformation
+This transformation is almost the same as that in the normal ones. It is just simply
+implemented by XOR the bit-sliced round keys with the bit-sliced state ÓwordÓ by
+ÓwordÓ. HereÓwordÓstandsforasequenceofbitswhoselengthare64-bit.
+363.4.2 TheDualCipher
+Up to now, we have analyzed the all the original Rijndael transformation in bit level.
+Due to the fact that in Rijndael dual ciphers, only SubBytes and MixColumns trans-
+formationswillbemodiÞed,inthissubsection,justthesetwotransformationswillbe
+discussed.
+Beforediscussingthebit-sliceddualcipher,wewouldliketointroducetheconcept
+oftheHammingweightsothatfurtheranalysiswouldbeeasytounderstand. (In[1],
+the authors claimed that the Hamming weight had implications on implementation
+e?ciency.) According to the deÞnition of it, the Hamming weight of a string is the
+numberofsymbolsthataredi?erentfromthezero-symbolofthealphabetused. Inthis
+thesis, the Hamming weight stands for the number of 1 in the 0-1 matrix and vector.
+Nowletuslookatthefollowingequation,
+0 1 0 1 0 1 0 1
+b x x x x x x x x a c
+B 0 C B 0;0 1;0 2;0 3;0 4;0 5;0 6;0 7;0 C B 0 C B 0 C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B x x x x x x x x C B a C B c C
+1 0;1 1;1 2;1 3;1 4;1 5;1 6;1 7;1 1 1
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b x x x x x x x x a c
+B 2 C B 0;2 1;2 2;2 3;2 4;2 5;2 6;2 7;2 C B 2 C B 2 C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b x x x x x x x x a c
+3 0;3 1;3 2;3 3;3 4;3 5;3 6;3 7;3 3 3
+B C B C B C B C
+B C B C B C B C
+= ? ?
+B C B C B C B C
+B C B C B C B C
+b x x x x x x x x a c
+B C B C B C B C
+4 0;4 1;4 2;4 3;4 4;4 5;4 6;4 7;4 4 4
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b x x x x x x x x a c
+5 0;5 2;5 3;5 5;5 6;5 7;5 5 5
+B C B 1;5 4;5 C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b x x x x x x x x a c
+B C B C B C B C
+6 0;6 1;6 2;6 3;6 4;6 5;6 6;6 7;6 6 6
+B C B C B C B C
+@ A @ A @ A @ A
+b x x x x x x x x a c
+7 0;7 1;7 2;7 3;7 4;7 5;7 6;7 7;7 7 7
+(3.17)
+0 1
+x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a ?c
+B 0;0 0 1;0 1 2;0 2 3;0 3 4;0 4 5;0 5 6;0 6 7;0 7 0 C
+B C
+B C
+B C
+B x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a ?c C
+0;1 0 1;1 1 2;1 2 3;1 3 4;1 4 5;1 5 6;1 6 7;1 7 1
+B C
+B C
+B C
+B C
+x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a ?c
+B 0;2 0 1;2 1 2;2 2 3;2 3 4;2 4 5;2 5 6;2 6 7;2 7 2 C
+B C
+B C
+B C
+B x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a ?c C
+0;3 0 1;3 1 2;3 2 3;3 3 4;3 4 5;3 5 6;3 6 7;3 7 3
+B C
+B C
+=
+B C
+B C
+x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a ?c
+B 0;4 0 1;4 1 2;4 2 3;4 3 4;4 4 5;4 5 6;4 6 7;4 7 4 C
+B C
+B C
+B C
+B x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a ?c C
+0;5 0 1;5 1 2;5 2 3;5 3 4;5 4 5;5 5 6;5 6 7;5 7 5
+B C
+B C
+B C
+B C
+x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a ?c
+B 0;6 0 1;6 1 2;6 2 3;6 3 4;6 4 5;6 5 6;6 6 7;6 7 6 C
+B C
+@ A
+x a ?x a ?x a ?x a ?x a ?x a ?x a ?x a ?c
+0;7 0 1;7 1 2;7 2 3;7 3 4;7 4 5;7 5 6;7 6 7;7 7 7
+thisisabasicmatrixa?netransformationandalltheelementsinthematrixandvector
+areeither0or1.
+We notice that the fewer the number of 1 in the multiplier matrix and vector is,
+the fewer XOR gates are needed to compute the Þnal result (matrix). In other words,
+the Hamming weight of the multiplier matrix and the vector determines how long it
+will cost to get the Þnal result. Therefore, intuitively if the matrix and vector in the
+a?netransformationinEquation(2.1)havelowerHammingweight,thentheSubByte
+transformation in bit-sliced format will work more e?ciently. We searched through
+[2]andfoundthatthedualcipher{{11d},{02}}hasthelowestHammingweightwhich
+is20. (TheHammingweightofthematrixis17andtheHammingweightofvectoris
+3. Belowisitsa?netransformation.)
+370 1 0 1 0 1 0 1
+b 1 0 0 0 0 0 0 0 a 0
+B 0 C B C B 0 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 0 1 0 0 0 0 0 0 C B a C B 0 C
+1 1
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 0 1 0 0 0 0 0 a 1
+B 2 C B C B 2 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 1 0 0 1 0 0 0 0 C B a C B 0 C
+3 3
+B C B C B C B C
+B C B C B C B C
+= ? ?
+B C B C B C B C
+B C B C B C B C
+b 1 1 0 0 1 0 0 0 a 0
+B 4 C B C B 4 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 0 1 1 0 0 1 0 0 C B a C B 1 C
+5 5
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 0 1 1 0 0 1 0 a 1
+B 6 C B C B 6 C B C
+B C B C B C B C
+@ A @ A @ A @ A
+b 0 0 0 1 1 0 0 1 a 0
+7 7
+Note, in dual cipher, the a?ne transformation is usually involved in three steps such
+as Equation (3.1). First, we need to multiply the a?ne matrix A with the mapping
+?1
+matrix T. After that, the result needs to be multiplied with the inverse matrix T .
+Finally, we need to do the XOR operation with the vector. Here we regarded the Þrst
+?1
+twosteps(T *A*T )asthea?netransformation.
+3.4.2.1 TheMixColumnsTransformation
+8
+In previous section, we have showed that the multiplication by a constant in GF(2 )
+could be represented by a repeated XOR and shift operation and described how to
+conduct the multiplications by a constant in bit-sliced domain. For example, if the
+8 4 3
+irreduciblepolynomialisx +x +x +x+1andtheconstantisa a a a a a a a ,after
+7 6 5 3 2 0
+4 1
+multiplyingwith02,theresultwillbeb b b (b +b )(b +b )b (b +b )b .
+6 5 4 3 7 2 7 1 0 7 7
+Wenoticethattherearefourcoe?cientsintheirreduciblepolynomialarenon-zero,
+and in order to get the result b b b (b + b )(b + b )b (b + b )b , totally we need to
+6 5 4 3 7 2 7 1 0 7 7
+conduct four XOR operations. ThatÕs to say, when the number of shift operation is
+Þxed, the more the non-zero coe?cients in the irreducible polynomial are, the more
+instructions are required. Besides, when the number of non-zero coe?cients in the
+irreduciblepolynomialisÞxed,thebiggertheconstantwemultiplyis(thismeansmore
+XOR operations are required), the more time it will cost. Therefore, to Þnd the dual
+cipher with most e?cient performance in MixColumns transformation is to Þnd the
+one with the fewest non-zero coe?cients in the irreducible polynomial and smallest
+constantsinthematrix(3.4).
+After searching the irreducible polynomial whose non-zero coe?cients is the
+fewest, we found that {11b}, {1b1}, {171}, {11d}, {1a9}, {11b}, {12d}, {169}, {139}, {1a3},
+{18b},{165},{11b},{14d},{163},{187}and{1c3}wereallpolynomialswithfournon-zero
+coe?cients excluding the most signiÞcant bit. As for the smallest constants in the
+matrix (3.4), we found 02, 03 is the smallest constant pair. Their corresponding dual
+ciphers could be represented as{{11d}, {02}} and{{11b}, {03}}, the latter is the original
+Rijndael. Luckily, both of them are ones with the fewest non-zero coe?cients in the
+irreduciblepolynomial.
+However,onethingwecannotignoreisthatundersomecircumstance,multiplied
+with a bigger constant will result in fewer XOR gates for some of XOR gates are
+eliminated. Therefore,whatwefoundisjustrelativelymoree?cientciphersinterms
+38ofMixColumns transformation.
+3.4.2.2 TheSubBytesTransformation
+Up to now, it seems that we could come up with a conclusion about a Ódesign for
+performanceÓ approach since now we know how to conduct each transformation in
+bit-sliced domain and found the dual cipher with relatively better performance in
+a?netransformationinSubBytes andinMixColumns transformation.
+However,therearestilltwoissueswehavenotdiscussed: whyweusePolynomials
+(3.7)and(3.6)asthemodularpolynomialandhowwegetthemappingmatrixandits
+inversematrixinEquations(3.13)and(3.14).
+TotheÞrstissue,actually,themodularpolynomialsarenotlimitedto(3.7)and(3.6)
+and any irreducible polynomials with fourth-degree and its corresponding second-
+degree polynomials could take the place of Polynomial (3.7) and (3.6) respectively
+4
+[14]. In GF(2 ), we know that there are merely three polynomials with fourth-degree
+4 4 3
+satisfying the standard (irreducible polynomial). They are y + y + 1, y + y + 1
+4 3 2
+and y + y + y + y+ 1. So for Polynomial (3.7), there will be three options. Once
+thepolynomialswithfourth-degreearedecided,wecouldchoosethecoe?cientinthe
+7 14 13
+polynomialP(z)(3.6). FortheÞrstpolynomial,thecoe?cientcouldbew ,w ,w and
+11 2 4 8
+w . Forthesecondoneandthirdone,itcouldbew,w ,w andw [14]. So,intotalwe
+have12optionstochoosethepolynomialswhileconductingtheinversecalculation.
+4
+1. Q(y)= y + y+1anditscorrespondingpolynomialwithsecond-degree,
+2
+P(z)= z +z+9 (3.18)
+2
+P(z)= z +z+b (3.19)
+2
+P(z)= z +z+d (3.20)
+2
+P(z)= z +z+e (3.21)
+4 3
+2. Q(y)= y + y +1anditscorrespondingpolynomialwithsecond-degree,
+2
+P(z)= z +z+2 (3.22)
+2
+P(z)= z +z+4 (3.23)
+2
+P(z)= z +z+9 (3.24)
+2
+P(z)= z +z+e (3.25)
+394 3 2
+3. Q(y)=y +y +y +y+1anditscorrespondingpolynomialwithsecond-degree,
+2
+P(z)= z +z+3 (3.26)
+2
+P(z)= z +z+5 (3.27)
+2
+P(z)= z +z+9 (3.28)
+2
+P(z)= z +z+e (3.29)
+Asforthesecondissue,itisquitecomplicated. Herewewilljustgiveaverybrief
+description of the algorithm about how to Þnd the mapping matrix and much more
+detailsaboutithasbeenanalyzedin[14,21,26]. Thealgorithmcouldbedemonstrate
+insubsequence,
+¥ ComputearootasuchthatP(a)=0.
+t
+¥ FindtsuchthatresultofR(a )(modQ(y),P(z))iszero,whereR(x)istheirreducible
+polynomialwitheighth-degree,suchasPolynomial(2.2). Oncewegotthevalue
+2t 4t 8t 16t 32t 64t 128t
+t,theitsconjugaterootscouldbea ,a ,a ,a ,a ,a ,a .
+t
+¥ Set each the roots, such as a , we found as b, then the mapping matrix could be
+0 1 2 3 4 5 6 7
+represented as M= [b , b , b , b , b , b , b , b ]. The inverse mapping matrix MÕ
+satisfyingM*MÕ=1.
+8 4 3 4
+Here is an example, assume R(x)= x + x + x + x+ 1, Q(y)= y + y+ 1 and P(z)=
+2
+z +z+  . IntheÞrststep,weÞndtheroot(10)inhexadecimalformat. Inthesecond
+5 10 20 40 80 160 65 130
+step,tisequalto5,thusalltherootswouldbea ,a ,a ,a ,a ,a ,a anda . We
+5 5
+take a as an instance in the third step. Since the root is a , then the mapping matrix
+5 10 15 20 25 30 35
+could be viewed as M = [1, a , a , a , a , a , a , a ] and we calculate the value
+of each element. Consequently, the mapping matrix is [1, 59, 2c, 23, 4d, 95, 47, d0]
+in hexadecimal format. (All the elements need to be perceived as a 0-1 matrix while
+conductingthemappingtransformation.)
+According to the above analysis, there are three di?erent Q(y) to choose and for
+each Q(y), there are four options for us to choose P(z). Totally, while computing the
+8
+multiplication inverse in GF(2 ), we have 12 polynomials to choose from Equation
+(3.18)toEquation(3.29). WhatÕsmore,foreachgroupofQ(y),P(z)andR(x),wecould
+generate8mappingmatrixduetotheconjugateroots. Therefore, totallythereare3*
+4*8=96mappingmatrixwhichcouldbechosenwhilecomputingthemultiplication
+inverse. Ifwetake8squaredualciphersand30irreduciblepolynomialsintoaccount,
+there will be 2880 * 8 * 30= 23040 di?erent SubBytes transformations in all. In other
+words, we are still far way from the conclusion about a Ódesign for performanceÓ
+approach.
+40Before conducting the further analysis about the dual cipher with better perfor-
+mance, we would like to discuss and sum up the implication of each variable on the
+performancesothatitwouldhelpusÞndthedualciphereasier. Firstofall,according
+to analysis in last chapter, it seems that the square dual cipher would only a?ect the
+?1
+mapping matrix T and its corresponding inverse matrix T in Equation (3.1). Sim-
+ilarly, the di?erent irreducible polynomials R(x) will generate di?erent the mapping
+matricesaswell. WhatÕsmore,intermsofaboveanalysis,theywillalsoa?ectthemap-
+8 4
+ping matrix for transformation from GF(2 ) to GF(2 ) and its corresponding inverse
+matrix. As for the polynomials Q(y) and P(z), the choice of Q(y) will inßuence the
+8 4
+choice of P(z). Besides, the mapping matrix for transformation from GF(2 ) to GF(2 )
+willbealsoinßuencedbybothofthem. Finally, consideringtheEquations(3.11)and
+(3.12),webelievethepolynomialP(z)willhaveinßuenceontheinverseoperation.(The
+valueecouldvarydependingonthechoiceofP(z).) InthesubsequenceTable3.4,we
+summarizeaboveanalysis.
+Table3.4: TheInßuenceofEachVariableonSubBytesTransformation.
+mappingmatrix1 mappingmatrix2 inverseoperation
+squaredualcipher Yes No No
+R(x) Yes Yes No
+Q(y) No Yes Yes
+P(z) No Yes Yes
+wheremappingmatrix1denotesthematrixina?netransformationandmapping
+matrix2denotesthematrixininversetransformation.
+Now that we have already 240 dual ciphers, we now need to choose a pair of
+Q(y) and P(z) from the 12 options. Remembering the Equation (3.11) and Equation
+4
+(3.12), the coe?cient of P(z) is a parameter of the inverse transformation in GF(2 ).
+2
+From Equation (3.12), we know that the multiplication with a varies depending on
+h
+thevalueofexponentofw.
+4
+Here we take Q(y) = y + y + 1 as an example. The parameter of the inverse
+transformation could 9, b, d and e and all of them are in hexadecimal format. The
+operationsofmultiplicationwiththesefournumberareasfollows,
+1. r=a*9modQ(y),
+r = a ?a ;
+0 0 1
+r = a ;
+1 2
+(3.30)
+r = a ;
+2 3
+r = a
+3 0
+412. r=a*bmodQ(y),
+r = a ?a ?a ;
+0 0 1 2
+r = a ;
+3
+1
+(3.31)
+r = a ;
+2 0
+r = a ?a
+3 0 2
+3. r=a*dmodQ(y),
+r = a ?a ;
+0 0 3
+r = a ?a ?a ;
+1 0 1 3
+(3.32)
+r = a ?a ;
+2 2
+1
+r = a ?a
+3 2 3
+4. r=a*emodQ(y),
+r = a ?a ?a ;
+0 1 2 3
+r = a ?a ;
+1 0 1
+(3.33)
+r = a ?a ?a ;
+2 0 1 3
+r = a ?a ?a ?a
+3 0 1 2 3
+2
+Asshowedinaboveequations,wecouldnoticethatifwechoosez +z+9asP(z)while
+conducting the inverse operation only one XOR gate is involved, which is the fewest
+2 2 2
+XOR gate needed compared with z + z+ b, z + z+ d and z + z+ e which require
+3, 5 and 8 respectively. Although there are some optimizations to reduce the number
+2
+of XOR gates, the Þnal winner is still z + z+ 9. Similarly, we checked the number of
+XOR gates in other two polynomials and found there is no pair of polynomials with
+4 2
+fewerXORgate. Therefore,wechoose y + y+1andz +z+9asthepotentialbetter
+dualciper.
+Now we could come up with a locally optimal solution. According to the dis-
+cussion above, among the 240 dual ciphers, {{11d},{02}} is the relatively better one in
+termsofthea?netransformationinSubBytes stepandMixColumns step. (Thea?ne
+?1 4
+transformation here denotes (T * A * T )). In addition, we choose y + y+ 1 as Q(y)
+2
+and due to the number of XOR gates in multiplication, z + z+ 9 is selected as P(z).
+FollowingiscomparisonofthemappingmatrixbetweenoriginalRijndaelandthatof
+thedualcipherwechoose.
+4 2
+{{11d},{02}}, y + y+1andP(z)=z +z+9mappingmatrixininverseoperation,
+0 1 0 1
+1 1 0 1 0 0 0 0 1 0 1 0 1 0 0 0
+B C B C
+B C B C
+B C B C
+B C B C
+B 0 1 0 0 0 1 0 0 C B 0 1 0 0 0 0 0 1 C
+B C B C
+B C B C
+B C B C
+B C B C
+0 1 0 1 1 0 0 1 0 1 0 1 0 0 0 0
+B C B C
+B C B C
+B C B C
+B C B C
+B 0 1 1 0 0 1 0 0 C B 0 1 1 0 1 0 0 1 C
+?1
+B C B C
+B C B C
+M= ;M = (3.34)
+B C B C
+B C B C
+0 0 0 0 1 0 0 1 0 0 1 0 1 1 0 0
+B C B C
+B C B C
+B C B C
+B C B C
+B C B C
+0 1 0 1 1 0 0 0 0 0 0 0 0 0 0 1
+B C B C
+B C B C
+B C B C
+B C B C
+0 0 1 0 0 1 1 0 0 1 0 1 0 0 1 1
+B C B C
+B C B C
+@ A @ A
+1 0 0 0 0 1 0 0 0 0 1 0 0 1 0 0
+424 2
+{{11b},{03}}, y + y+1andP(z)=z +z+emappingmatrixininverseoperation,
+0 1 0 1
+1 0 0 0 1 1 1 0 1 0 0 0 1 0 0 0
+B C B C
+B C B C
+B C B C
+B C B C
+B 0 1 1 0 0 0 0 0 C B 0 0 0 0 1 1 0 1 C
+B C B C
+B C B C
+B C B C
+B C B C
+0 1 0 0 0 0 0 1 0 1 0 0 1 1 0 1
+B C B C
+B C B C
+B C B C
+B C B C
+B 0 0 1 0 1 0 0 0 C B 0 1 0 0 1 1 1 0 C
+?1
+B C B C
+B C B C
+M= ;M = (3.35)
+B C B C
+B C B C
+0 0 0 0 1 1 1 0 0 1 0 1 1 1 0 1
+B C B C
+B C B C
+B C B C
+B C B C
+B 0 1 0 0 1 0 1 1 C B 0 0 1 0 1 1 0 0 C
+B C B C
+B C B C
+B C B C
+B C B C
+0 0 1 1 0 1 0 1 0 1 1 1 1 0 0 1
+B C B C
+B C B C
+@ A @ A
+0 0 0 0 0 1 0 1 0 0 1 0 1 1 0 1
+Following the comparison of a?ne transformation between original Rijndael and
+thatofthedualcipherwechoose.
+4 2
+{{11d}, {02}}, y + y + 1 and P(z) = z + z + 9 a?ne transformation in SubBytes
+transformation,
+0 1 0 1 0 1 0 1
+b 1 0 0 0 0 0 0 0 a 0
+B 0 C B C B 0 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 0 1 0 0 0 0 0 0 C B a C B 0 C
+1 1
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 0 1 0 0 0 0 0 a 1
+B C B C B C B C
+2 2
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 1 0 0 1 0 0 0 0 C B a C B 0 C
+3 3
+B C B C B C B C
+B C B C B C B C
+= ? ? (3.36)
+B C B C B C B C
+B C B C B C B C
+b 1 1 0 0 1 0 0 0 a 0
+B C B C B C B C
+4 4
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 1 1 0 0 1 0 0 a 1
+5 5
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 0 1 1 0 0 1 0 a 1
+B C B C B C B C
+6 6
+B C B C B C B C
+@ A @ A @ A @ A
+b 0 0 0 1 1 0 0 1 a 0
+7 7
+4 2
+{{11b}, {03}}, y + y + 1 and P(z) = z + z + e a?ne transformation in SubBytes
+transformation,
+0 1 0 1 0 1 0 1
+b 1 0 0 0 1 1 1 1 a 1
+B
+0 C B C B 0 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 1 1 0 0 0 1 1 1 C B a C B 1 C
+1 1
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 1 1 1 0 0 0 1 1 a 0
+B C B C B C B C
+2 2
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 1 1 1 1 0 0 0 1 a 0
+3 3
+B C B C B C B C
+B C B C B C B C
+= ? ? (3.37)
+B C B C B C B C
+B C B C B C B C
+b 1 1 1 1 1 0 0 0 a 0
+B C B C B C B C
+4 4
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 1 1 1 1 1 0 0 a 1
+5 5
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 0 1 1 1 1 1 0 a 1
+B C B C B C B C
+6 6
+B C B C B C B C
+@ A @ A @ A @ A
+b 0 0 0 1 1 1 1 1 a 0
+7 7
+Asshowedabove,wenoticethatthea?netransformation,theinverseoperations
+and the inverse mappings are all better than those in the original Rijndael in terms
+of the Hamming weight and numbers of XOR gate, which means in theory, this dual
+ciphershouldbeapotentialcandidatewithhigherperformance.
+433.5 Summary
+Inthischapter,wehavediscussedandanalyzedtheimplementationoriginalRijndael
+anditsvariantondi?erentplatformsanddi?erenttechniques. Onthe8-bitplatform,
+ifweapplyS-BoxtoimplementtheSubBytes transformation,thentheonlypartwill
+bemodiÞedindualcipheristheMixColumns transformationandwefoundtherewas
+nodualcipherwithbetterperformancecomparedwiththeoriginalone. Ifweperform
+thetheSubBytes transformationon8-bitplatformwithFermatslittletheorem,westill
+didnotÞndabetterdualcipher. Onthe32-bitplatform,whenweimplementRijndael
+withtheT-tablelookup,nomatterwhatdualcipherweapply,performancewillalways
+keepthesame. AsfortheimplementationwithoutT-tableonthe32-bitplatform, the
+result seems to be the same as that on 8-bit platform with S-Box since all we need to
+modify is MixColumns transformation. Consequently, there is no dual ciphers with
+betterperformancecomparedwithoriginalRijndaelwithnormaltechnique.
+In addition, while implementing Rijndael variants with bit-slicing technique, we
+found that there are totally 23040 options for us to choose. In this thesis, in terms of
+theanalysis,wechoosethedualcipherwhichislocaloptimumandintheoryitseems
+tobemoree?cientthantheoriginalRijndael.
+44Chapter4
+ImplementationResultsAnalysis
+andEvaluation
+In the last chapter, we analyzed the properties of each implementation technique.
+According to the analysis, the implications of dual ciphers on the implementation
+performance are roughly discussed in theory only. Therefore, it is now necessary to
+investigate whether the analysis we made holds in practice. In this chapter, we will
+considerthecostofalltheRijndaeltransformationsofeachimplementationtechnique,
+and evaluate the results of them so as to answer the question we proposed in the
+Chapter1.
+Before conducing the analysis and evaluation, it is necessary to mention some
+details about the methods. First of all, in order to consistent with the analysis in
+Chapter 3, we will not take the cost of key schedule into account. Secondly, we will
+usethenumberofXORgatestomeasurethetimecomplexitysincemostoptimizations
+are involved in reducing the number of XOR gates. Thirdly, as showed in Figure 3.1,
+toimplementthedualciphers,usuallyweneedtoconverttheplaintextandthesecret
+keyÞrstbeforeencryptionalgorithmconductedandaftertheciphertextisproduced,
+itneedstobeconvertedagain. However,itisobviousthattheseoperationsarefairly
+time-consuming and will a?ect the performance of dual ciphers, thereby now we do
+notconvertplaintext,secretkeyandciphertextbeforeandafterencryption; instead,
+we view the dual ciphers as a totally new cipher. Finally, all the implementations
+areconductedandtestedonSnowy(Intel(R)Xeon(R)CPUX5460@3.16GHz)soasto
+maketheresultscomparabletoeachother.
+4.1 TheCostofRijndaelandItsVariantson8-bitPlatform
+4.1.1 ImplementationwithS-Box
+In terms of this method, neither the SubByes nor ShiftRows transformations is in-
+volved in XOR gates. For the AddRoundKey transformation, its operation is indepen-
+dentofdualcipherandalwaysrequires16XORtoconducteachtime.
+45As analyzed above, the MixColumns will a?ect the implementation performance.
+Inourimplementation,thedoublingorxtimecalculationwillalwaystake1XORgate.
+ConsideringtheconstantmatrixintheEquation3.2,foreachbyte,intuitivelywewill
+need 6 XOR gates, where one gate for doubling operation, two for tripling and three
+for adding them up. Here we optimize this operation and reduce one XOR gate for
+eachbyte. UsuallywewillconductthistransformationasEquation4.1,
+?
+b = 02?b ?02?b ?b ?b ?b (4.1)
+0 1 1 2 3
+butnowweoperateitasEquation4.2.
+?
+b = 02?(b ?b )?b ?b ?b (4.2)
+0 1 1 2 3
+Therefore,totallyinthistransformation,80XORgatesarerequired.
+On the other hand, we notice that the elements 02 and 03 in the constant matrix
+among all the dual ciphers are the smallest one. And we implement the dual cipher
+{{11d}, {02}} whose coe?cients are the smallest for comparison. Now in terms of the
+number of XOR gates, both of them require 96 in total. We tested them on Snowy
+and found that they are 609.8125 and 611.5625 CPU cycles per byte respectively. The
+resultsarealmostinaccordwiththeanalysiswemade.
+4.1.2 ImplementationwithoutS-Box
+ThismethodisexactlythesameastheoneweanalyzedaboveexceptfortheSubBytes
+steps. Asdiscussedinlastchapter,thistransformationcouldbeviewedastwoparts,
+linear a?ne transformation and non-linear multiplicative inverse. For the Þrst part,
+the number of XOR gates in the multiplication is dependent on the result of inverse
+and the constant matrix. Since there is no matrix whose whole column is 0 and the
+result of inverse is variable, we choose the average value 4 as the number of XOR
+gates. Fortheaddition,wejustneedoneXORgatetoconduct. Ontheotherhand,in
+ordertomaketheprogramfeasibletodualcipher,somemodiÞcationsaremadesothat
+extra transformation is required before the XOR operation is conducted and totally 9
+XOR gates are used for each byte. The non-linear part of the SubBytes steps is the
+exponentialoperation. Andaveragelyitrequires132gatesforeachbyte. (Thereare11
+multiplications and each one need 12 XOR gates average.) Therefore, just in terms of
+thistransformation,itrequires2256XORgatesaveragely,whichisveryine?cient. For
+the rest of operations, they are completely the same as above and we still implement
+the dual cipher {{11d}, {02}}. The implementation results on Snowy show 41227.3125
+CPUcyclesrequiredtoencrypteachbytefortheoriginalRijndaeland41205.375cycles
+forthedualcipher.
+464.2 TheCostofRijndaelandItsVariantson32-bitPlatform
+4.2.1 ImplementationwithT-table
+Asforthisapproach,itismainlydependentuponthetablelookup. Theonlyoperations
+we need to conduct is the AddRoundKey and part of MixColumns transformations. In
+theAddRoundKey transformation,wedidoneXORoperationforfourbytessincethey
+are packed as a unit now. For the MixColumns step, the multiplication with constant
+couldbecompletedbytablelookupandwejustneedtoadduptheintermediateresults,
+whichwillcost3XORforfourbytes. Therefore,foreachround,itrequires16XORgates
+totally. Here we still implement the dual cipher {{11d}, {02}} for comparison. After
+implementingthem,wediscoverthatthisapproachisquitee?cientandoutcomesare
+43.0625and43.5625CPUcyclesperbyte.
+4.2.2 ImplementationwithoutT-table
+Asexplainedbefore,beforeencryptingthedata,thestatematrixusuallyneedstrans-
+position. However,hereforsimplicity,wewillregardthatthestatematrixwearegoing
+toencrypthasalreadybeentransposedandwillnotconsiderthecostofthisoperation.
+TheSubBytes transformationinthismethodisimplementedbytablelookupandonly
+MixColumns transformationrequirestobemodiÞedreviseddeeply. Similarly,westill
+packedthefourbytesasaunitandconductthistransformationastheÞrstapproach.
+Soforeachunit, itwillcost5XORgates. Inotherwords, in MixColumns transforma-
+tion,only20XORgatesareneeded. Inaddition, inthe AddRoundKey transformation,
+four XOR gates are required. Since the bottleneck of this approach is MixColumns as
+wellintermsofthedualciphers,westillchoose{{11d},{02}}toimplement. Theresults
+are368.125and365.125CPUcyclesperbyte.
+4.3 TheCostofRijndaelandItsVariantswithBit-slicing
+Unlikethemethodsdiscussedabove,owningtothespecialpropertyofbit-slicing,the
+total cost of XOR gates will be always the same on di?erent platforms as long as the
+8 4
+mappingbetweenGF(2 )andGF(2 )maintainsthesame. Sothelongertheregisterof
+aCPU,themoredatawouldbeencrypted,thusthemoree?cientitwillbe. Therefore,
+after obtaining the processor cycle clock, we will always divide it by the length of
+register. Nowletuslookatthecostofeachpartoftransformation.
+4.3.1 TheCostofSubBytesinBit-slicing
+In this step, as usual we are going to divide it into two parts. In the linear a?ne
+transformation of the original Rijndael, we notice the Equation (2.1) and there will
+be 44 XOR gates totally for each byte, which is equal to the Hamming weight of the
+matrixandvector. Inthenon-linearmultiplicationinversecalculation,itiscomposed
+8 4 4
+of two parts, mapping between GF(2 )and GF(2 ) and inverse calculation in GF(2 ).
+474 2
+For example, if Q(y) = y + y + 1 and P(z) = z + z + e, then according to Matrices
+(3.35),theHammingweightwillbe53inall. Inotherwords,53XORgatesareneeded
+8 4
+for mapping between between GF(2 )and GF(2 ). As for the inverse calculation, we
+noticethatitconsistsof2squarecalculations,3additions,3multiplications,1constant
+4
+multiplicationand1inverseoperationonGF(2 ). TheadditionisjusttoconductXOR
+operation word by word and requires 4 XOR gates. For the rest of them, they have
+beenlistedinEquations(3.8),(3.9),(3.10)and(3.33). Soforeachbyte,therewillbe101
+XORgatesrequiredintotal.
+4
+Inourimplementation, fortheoriginalRijndael, wechooseQ(y)= y + y+1and
+2
+P(z)=z +z+9soastocomparethedualcipher. Itscorrespondingmappingmatrices
+areasfollows,
+0 1 0 1
+1 0 1 1 1 0 1 1 1 0 0 0 1 0 1 0
+B C B C
+B C B C
+B C B C
+B C B C
+B 0 1 0 1 0 0 0 0 C B 0 0 0 0 1 1 0 1 C
+B C B C
+B C B C
+B C B C
+B C B C
+0 1 0 0 1 0 1 0 0 1 0 0 1 1 1 0
+B C B C
+B C B C
+B C B C
+B C B C
+B 0 1 1 0 0 0 1 1 C B 0 1 0 0 1 1 0 1 C
+B C ?1 B C
+B C B C
+M= ;M = (4.3)
+B C B C
+B C B C
+0 0 0 0 1 1 1 0 0 1 0 1 1 0 1 0
+B C B C
+B C B C
+B C B C
+B C B C
+B 0 1 0 0 1 0 1 1 C B 0 0 1 0 0 1 0 1 C
+B C B C
+B C B C
+B C B C
+B C B C
+0 0 1 1 0 1 0 1 0 1 1 1 0 1 1 1
+B C B C
+B C B C
+@ A @ A
+0 0 0 0 0 1 0 1 0 0 1 0 0 1 0 0
+TheHammingweightofthesetwomatricesis57,whichisslightlylargerthanprevious
+one, 53. Its inverse operations are the same as described above except that the the
+Equation (3.33) is replaced by Equation (3.30). Therefore, for each byte, there will be
+94XORgatesrequiredintotal.
+As for the dual cipher, reviewing the Equation (3.36), for dual cipher{{11d},{02}},
+the linear a?ne transformation will cost 20 XOR gates. Furthermore, the matrices
+8 4
+(3.34) showed that the mapping between GF(2 )and GF(2 ) will take 43 XOR gates in
+4
+all. TheinversecalculationonGF(2 )isstill94XORgatessincealltheoperationsare
+thesame.
+Furthermore,wenoticethatthea?netransformationandmappingtransformation
+4 8
+from GF(2 )to GF(2 ) in the SubBytes transformation could be merged into one op-
+eration without extra cost if we multiply these two matrices in advance, which could
+reduce one multiplication between matrices and save a few XOR gates. Thus, after
+the multiplication the a?ne transformation in both the original Rijndael and its dual
+48cipher{{11d},{02}}become,
+0 1 0 1 0 1 0 1
+b 1 0 1 0 0 1 1 0 a 1
+B 0 C B C B 0 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 1 1 1 1 0 0 0 1 C B a C B 1 C
+1 1
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 1 0 0 1 1 0 1 0 a 0
+B 2 C B C B 2 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 1 0 1 0 0 0 0 0 C B a C B 0 C
+3 3
+B C B C B C B C
+B C B C B C B C
+= ? ? (4.4)
+B C B C B C B C
+B C B C B C B C
+b 1 1 0 1 1 1 1 0 a 0
+B 4 C B C B 4 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 0 1 1 1 0 0 0 1 C B a C B 1 C
+5 5
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 0 0 0 1 0 1 1 a 1
+B 6 C B C B 6 C B C
+B C B C B C B C
+@ A @ A @ A @ A
+b 0 1 1 0 0 0 0 1 a 0
+7 7
+0 1 0 1 0 1 0 1
+b 1 0 1 0 1 0 0 0 a 0
+B 0 C B C B 0 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 0 1 0 0 0 0 0 1 C B a C B 0 C
+1 1
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 1 0 1 0 0 0 0 a 1
+B 2 C B C B 2 C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 1 1 0 0 0 0 0 1 C B a C B 0 C
+3 3
+B C B C B C B C
+B C B C B C B C
+= ? ? (4.5)
+B C B C B C B C
+B C B C B C B C
+b 1 1 0 0 0 1 0 1 a 0
+B C B C B C B C
+4 4
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B b C B 0 0 0 1 0 0 0 0 C B a C B 1 C
+5 5
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+B C B C B C B C
+b 0 1 1 0 1 0 1 0 a 1
+B C B C B C B C
+6 6
+B C B C B C B C
+@ A @ A @ A @ A
+b 0 1 1 0 0 0 0 1 a 0
+7 7
+Now the Hamming weight of the original Rijndael is reduced from 73 to 35 in terms
+ofthese two operations. And indual cipher{{11d},{02}}, the number of XORgates is
+decreased by 16 , from 41 to 25. Accordingly, we implemented them on Snowy and
+obtainedthetestingresultsthat251.94cyclesperbytefortheoriginalRijndaeland208
+cyclesfordualcipher{{11d},{02}}.
+4.3.2 TheCostofMixColumninBit-slicing
+AccordingtotheTable3.3,weknowthat,inMixColumn transformation,foreachbyte,
+itwillcostthreeXORgatestoconductthedoublingoperationandanothereightXOR
+gatestoperformthetriplingone. Inaddition,inordertocomputeonebyteinthisstep,
+there will be a doubling operation, a tripling one and three addition (XOR). Thereby,
+totallyitwillrequire38XORgatesinthistransformationforeachbyte. Theoperation
+ofdualcipher{{11d},{02}}isthesameasthatoftheoriginalone.
+4.3.3 TheCostofShiftRowsandAddRoundKeyTransformation
+AsanalyzedinChapter2,thesetwotransformationwillnotbea?ectedbydualciphers.
+TheShiftRows transformationwillnotbeinvolvedinXORoperationasusual. Now
+that the operations are performed on bit level, we will conduct the AddRoundKey
+transformation word by word and totally 128 XOR gates are needed (the length of
+eachblockare128-bit.)
+494.4 SummaryandEvaluation
+To sum up, in this chapter, we reviewed all the Rijndael implementation and deeply
+analyzedthetheirperformanceinboththeoreticalandpracticalaspect. Intheory,we
+count the number of gates in each steps of di?erent implementation approach. The
+Table4.1belowsummarizealltheanalysisresults,
+Table4.1: TheNumberofXORGatesinEachTransformationforEachRound.
+TechniquesandPlatform SubBytes ShiftRows MixColumns AddRoundKey
+8-bitwiths-box - - 80 16
+8-bitwithouts-box 2256 - 80 16
+32-bitwitht-table - - 12 4
+32-bitwithoutt-table - - 20 4
+bit-slicing 2512 - 608 128
+Asforthedualcipher,theonlydi?erenceliesinthecostofSubBytes transforma-
+tionanditis2240.
+Before illustrating the results of our implementation, we would like to mention
+some consequence implemented in other papers. The performance varies from pro-
+Table4.2: TheBit-slicingImplementationResultsinOtherPapers.
+Author Performance
+Konighofer[13] 347,317,303cycles/block
+Rebeiroet.al[24] 446,280,135cycles/block
+Matsui[15] 250,418cycles/block
+Matsuiet.al[16] 418,491cycles/block
+Bernsteinet.al[3] 167cycles/block
+Schwabeet.al[12] 150,121,112cycles/block
+cessortoprocessor,soevenforthesametechnique,itstillhasdi?erentperformances.
+TheimplementationresultsonSnowyareasfollowingTable4.3,andthecode(rdtsc.h)
+Table4.3: TheimplementationResultsonSnowyofEachTechnique.
+TechniquesandPlatform OriginalCipher DualCipher
+8-bitwiths-box 609.8125cycles/byte 611.5625cycles/byte
+8-bitwithouts-box 41227.3125cycles/byte 41205.375cycles/byte
+32-bitwitht-table 43.0625cycles/byte 43.5625cycles/byte
+32-bitwithoutt-table 368.125cycles/byte 365.125cycles/byte
+bit-slicing 251.94cycles/byte 208cycles/byte
+usedtotesttheperformanceofeachtechniqueisfromhttp://www.mcs.anl.gov/kazu-
+tomo/rdtsc.h
+50FromTable4.1,wecouldnoticethatbit-slicingwillcostthemostXORgatesinall
+the transformations. And this is quite easy to understand since it is operated on bit
+level. However, all these transformations are operated on 64 blocks in parallel (the
+lengthofregisterinCPUis64bit)andthealloftheseneedtobedivided64. Thus,all
+of these would be very e?cient. Furthermore, we notice that the processor (Intel(R)
+Xeon(R) X5460) supports StreamingSIMD Extensions (SSE),which means thereare 8
+registers whose length are 128-bit in the processor. That is to say, we could pack the
+128 bits data rather than 64 bits data as a word and process them in parallel, and the
+performancewouldbeimprovedfurther. Notetheperformancewouldnotbedoubled
+since there are 8 128-bit registers, which results in poor latency and throughput. In
+addition,8-bitwithouts-boxisfairlyine?cientintermsofperformancesinceitneeds
+to conduct exponential operations. As for 32-bit with t-table, it need the fewest XOR
+gates, only 16 for each round, which should be the most e?cient. And the results in
+Table4.3showtheanalysisiscorrect. However,whatwecannotignoreisitse?ciency
+is at the cost of storage. Almost of all the transformations are conducted by table
+lookupandallthetablescovers5KB.Thisisappliedtobit-slicingaswell. Althoughit
+doesnotrequiretablelookup,sinceitneedstoprocessdatainparallel,agreatamount
+ofdataisinputonce,whichalsorequireslotsofspacewhilecomputersprocessingthe
+data.
+In Table 4.3, we see that the di?erence between the original Rijndael and its dual
+cipherintheÞrstfourrowsisquitesmall. Theonlyexceptionperhapsis8-bitwithout
+s-box, which may be a?ected by other programs while running. Therefore, if we
+implement the encryption on byte level or more, the performance cannot be beneÞt
+from the dual ciphers. Furthermore, we notice that the number of XOR gates in 8-bit
+withs-boxquadruplesthatin32-bitwithoutt-table,however,theratioofclockcycles
+betweenthemislessthanhalf. Thismayresultfromextrashift,AND,ORoperationsin
+32-bitwithoutt-table. Forthelastrow,weseethatthedi?erencebetweentheoriginal
+Rijndael and its dual cipher is quite large, which is approximate 40 clock cycles per
+byte, which shows the performance could be improved by dual ciphers when we
+implementing them on bit level. Note we have tested all the programs for several
+times to get the results, however since the performance is always dependent on CPU
+loadingandtherealwaysareotherprogramsrunningonSnowy,wecannotmakesure
+theseresultsareveryprecise. Allofthemarethebestperformancewehaveobtained.
+If we compare the implementation results in Table 4.2 with our results in Table
+4.3, we will Þnd that ours are relatively worse. On the other hand, it is pointless to
+comparetheseperformanceforthreereasons. Firstofall, despitethesametechnique
+(bit-slicing), the way we process and store the data in the register is di?erent, which
+resultsinthedi?erentdatathroughput. WhatÕsmore, theplatformsaredi?erent; the
+processorsusedtotestaretotallydi?erentandoursareevena?ectedbyotherrunning
+programs. Last but not the least, the programming languages are di?erent. Most of
+themethodsmentionedinTable4.2arecodedviaassemblylanguage. (Evenforthose
+whoarecodedinClanguage,theywouldbeconvertedintoassemblylanguagebefore
+performance measurement.) And usually assembly language works more e?ciently
+51thanClanguagedoes. So,itwouldbefairtotestthedualcipherswiththeirmethods
+whicharecodedinassemblylanguageontheplatformssuggestedbythem. Although
+limitedbytimeandexperimentcondition,weareunabletoperformtheseexperiments,
+wearestillabletosaythattheresultsinTable4.2wouldbebeneÞtfromdualciphers
+duetothebitleveloperation.
+52Chapter5
+ConclusionsandFurtherWork
+In this thesis, we follow the proposals suggested in [1] that the dual cipher might be
+anoptimizationofthespeedofthecipherforRijndaelandattempttodiscusswhether
+this suggestion is true or not. According to this idea, we investigate the Rijndael and
+itsvariantsdeeplyinboththeoreticalandpracticalway. Sincethedi?erencebetween
+the original cipher and dual ones is just the constants, we paid more attention on the
+transformationsrelatedtoconstants,suchasSubBytes andMixColumns steps.
+In theory, according to our analysis, on one hand, we found that with normal im-
+plementationmethods(implementedonthebytelevel),thereisnobetterdualciphers
+in terms of the performance compared with the original one since the less Hamming
+weightcouldnotbeneÞttheseimplementationsonthebytelevelandthereisnosmaller
+constantsinMixColumns steps. Ontheotherhand,whileimplementingRijndaelwith
+bit-slicing technique, we found out that due to properties of this approach, the dual
+ciphersbeneÞtfromtheadvantageofthelessHammingweight,andthetotalnumbers
+ofXORgatesrequiredintheimplementationisfewercomparedwiththeoriginalone,
+whichmeansfewerinstructionsareused.
+In practice, we implement the original Rijndael with various techniques and test
+each of them performance (their processor clock cycles). After that, the dual ciphers
+withpotentialhigherperformanceareimplementedaccordingly. Comparingtheper-
+formanceofthem,wediscoveredthatitisalmostthesameaswhatwehadanalyzed.
+The dual cipher implemented with the bit-slicing technique consumes fewer process
+cycle clocks compared with the original one. As for the normal implementation, we
+found that di?erence between the original cipher and the dual ones is quite small.
+Therefore, we believe that if the Rijndael variants are implemented in bit level, the
+e?ciencyofthealgorithmcouldbebeneÞtfromcertaindualciphers.
+On the other hand, there are still many issues to be investigated in the future. In
+this thesis, we just come up with a dual cipher with local optimization in terms of
+the bit-slicing technique due to the time limitation. Thereby, it would be necessary
+to Þnd the dual cipher with the best performance among the 23040 ciphers. WhatÕs
+more, in this thesis, we applied the methods proposed by Oswald et.al to implement
+8 4
+the SubBytes transformation, which is involved in decomposing GF(2 ) into GF(2 ).
+538 2
+However,in[7,8],CanrightputforwardthemethodtodecomposeGF(2 )intoGF(2 )
+andtherewillbe432waystoimplementtheSubBytes transformationjustintermsof
+the original Rijndael. Therefore, considering all the 240 dual ciphers, there would be
+103680cipherstobeinvestigatedintotal.
+Another interesting research direction would be what if the Rijndael variants are
+implemented via the vectorization technique mentioned in [11]. Intuitively, the per-
+8
+formance would be improved as well since it is also necessary to decompose GF(2 )
+4 8
+into GF(2 ) while conducting the calculation in GF(2 ), which means some bit level
+operationswillbeinvolved. Hence,itisquitenecessarytoimplementthedualciphers
+tocheckwhetherthisistrue.
+54References
+[1] Elad Barkan and Eli Biham. In How Many Ways Can You Write Rijndael? In
+ASIACRYPT,pages160Ð175,2002. 2,3,11,12,13,37,53
+[2] EladBarkanandEliBiham.TheBookofRijndaels.IACRCryptologyePrintArchive,
+2002:158,2002. 14,27,37
+[3] Daniel J. Bernstein and Peter Schwabe. New AES Software Speed Records. In
+Proceedings of the 9th International Conference on Cryptology in India: Progress in
+Cryptology, INDOCRYPT Õ08, pages 322Ð336, Berlin, Heidelberg, 2008. Springer-
+Verlag. 2,19,30,50
+[4] GuidoBertoni,LucaBreveglieri,PasqualinaFragneto,MarcoMacchetti,andSte-
+fano Marchesin. E?cient Software Implementation of AES on 32-Bit Platforms.
+InRevisedPapersfromthe4thInternationalWorkshoponCryptographicHardwareand
+Embedded Systems, CHES Õ02, pages 159Ð171, London, UK, UK, 2003. Springer-
+Verlag. 19,20,21,30
+[5] EliBiham. AFastNewDESImplementationinSoftware. InProceedingsofthe4th
+InternationalWorkshoponFastSoftwareEncryption,FSEÕ97,pages260Ð272,London,
+UK,UK,1997.Springer-Verlag. 2,19,21,30
+[6] Joan Boyar and Rene« Peralta. A depth-16 circuit for the AES S-box. IACR Cryp-
+tologyePrintArchive,2011:332,2011. 31
+[7] DavidCanright. AVeryCompactS-BoxforAES. In CHES,pages441Ð455,2005.
+31,54
+[8] DavidCanrightandDagArneOsvik. AMoreCompactAES. InSelectedAreasin
+Cryptography,pages157Ð169,2009. 31,54
+[9] Joan Daemen and Vincent Rijmen. The Design of Rijndael: AES - The Advanced
+Encryption Standard. Springer Verlag, Berlin, Heidelberg, New York, 2002. 1, 6,
+19,20
+[10] GunnarGaubatzandBerkSunar. LeveragingtheMultiprocessingCapabilitiesof
+ModernNetworkProcessorsforCryptographicAcceleration. InProceedingsofthe
+FourthIEEEInternationalSymposiumonNetworkComputingandApplications,NCA
+Õ05,pages235Ð238,Washington,DC,USA,2005.IEEEComputerSociety. 23,30
+55REFERENCES
+[11] Mike Hamburg. Accelerating aes with vector permute instructions. In CHES,
+pages18Ð32,2009. 54
+[12] Emilia Kasper ¬ and Peter Schwabe. Faster and Timing-Attack Resistant AES-
+GCM. In Proceedings of the 11th International Workshop on Cryptographic Hardware
+and Embedded Systems, CHES Õ09, pages 1Ð17, Berlin, Heidelberg, 2009. Springer-
+Verlag. 2,19,30,50
+[13] RobertKonighofer ¬ . Afastandcache-timingresistantimplementationoftheAES.
+InProceedingsofthe2008TheCryptopgraphersÕTrackattheRSAconferenceonTopicsin
+cryptology, CT-RSAÕ08, pages 187Ð202, Berlin, Heidelberg, 2008. Springer-Verlag.
+vi,30,35,50
+[14] Jyun-WeiLyu. DesignandImplementationofComposite-DualCipherBasedon
+AES. MasterÕsthesis,NationalChengKungUniversity,2006. 39,40
+[15] Mitsuru Matsui. How far can we go on the x64 processors? In Proceedings of
+the13thinternationalconferenceonFastSoftwareEncryption,FSEÕ06,pages341Ð358,
+Berlin,Heidelberg,2006.Springer-Verlag. v,19,22,23,30,50
+[16] Mitsuru Matsui and Junko Nakajima. On the Power of Bitslice Implementa-
+tion on Intel Core2 Processor. In Proceedings of the 9th international workshop on
+Cryptographic Hardware and Embedded Systems, CHES Õ07, pages 121Ð134, Berlin,
+Heidelberg,2007.Springer-Verlag. 2,19,30,50
+[17] Alfred J. Menezes, Scott A. Vanstone, and Paul C. Van Oorschot. Handbook of
+AppliedCryptography. CRCPress,Inc.,BocaRaton,FL,USA,1stedition,1996. 28
+[18] JamesNechvatal,ElaineBarker,DonnaDodson,MorrisDworkin,JamesFoti,and
+EdwardRoback. StatusReportOnTheFirstRoundOfTheDevelopmentOfThe
+Advanced Encryption Standard. In Journal of Research of the National Institute of
+Standardsand Technology104.URL: http://nvl.nist.gov/pub/ nistpubs/jres/104/5/cnt104-
+5.htm.Citationsinthisdocument: 3,pages435Ð459,1999. vi,10
+[19] NavalPostgraduateSchoolMontereyCADeptofMathematicsandD.Canright.
+AVeryCompactRijndaelS-Box. StormingMedia,2004. 31
+[20] DagArneOsvik,JoppeW.Bos,DeianStefan,andDavidCanright. Fastsoftware
+AES encryption. In Proceedings of the 17th international conference on Fast software
+encryption,FSEÕ10,pages75Ð93,Berlin,Heidelberg,2010.Springer-Verlag. 19,30
+[21] Christof Paar and Verein Deutscher Ingenieure. E?cient VLSI Architecture for Bit
+ParallelComputationinGalios[Galois]Fields. Fortschritt-BerichteVDI.VDI-Verlag,
+1994. 40
+[22] Dan Page. A Practical Introduction to Computer Architecture. Texts in Computer
+Science.Springer,2009. v,16,17
+56REFERENCES
+[23] BartPreneel,AntoonBosselaers,B.Preneel,A.Bosselaers,VincentRijmen,Jacques
+Stern, Sean Murphy, B. Van Rompay, Louis Granboulan, Eli Biham, Orr Dunkel-
+man, V. Furman, Fran?ois Koeune, J. Stern, Jean-Jacques Quisquater, S. Murphy,
+Markus Dichtl, Pascale Serf, E. Biham, O. Dunkelman, V. Furman F. Koeune,
+Gilles Piret, J j. Quisquater, Lars Knudsen, and H. Raddum. Comments by the
+NESSIEProjectontheAESFinalists,2000. 10
+[24] Chester Rebeiro, David Selvakumar, and A. S. L. Devi. Bitslice implementation
+of AES. In Proceedings of the 5th international conference on Cryptology and Network
+Security, CANSÕ06, pages 203Ð212, Berlin, Heidelberg, 2006. Springer-Verlag. vi,
+2,19,23,24,30,50
+[25] VincentRijmen. E?cientImplementationoftheRijndaelS-box. 31
+[26] AtriRudra,PradeepK.Dubey,CharanjitS.Jutla,VijayKumar,JosyulaR.Rao,and
+Pankaj Rohatgi. E?cient Rijndael Encryption Implementation with Composite
+FieldArithmetic. InProceedingsoftheThirdInternationalWorkshoponCryptographic
+HardwareandEmbeddedSystems,CHESÕ01,pages171Ð184,London,UK,UK,2001.
+Springer-Verlag. 19,40
+[27] Akashi Satoh, Sumio Morioka, Kohji Takano, and Seiji Munetoh. A Compact
+RijndaelHardwareArchitecturewithS-BoxOptimization. InProceedingsofthe7th
+International Conference on the Theory and Application of Cryptology and Information
+Security: Advances in Cryptology, ASIACRYPT Õ01, pages 239Ð254, London, UK,
+UK,2001.Springer-Verlag. 19
+[28] ClaudeShannon.CommunicationTheoryofSecrecySystems.BellSystemTechnical
+Journal,Vol28,pp.656C715,Oktober1949. 5
+[29] NigelSmart. Cryptography: anintroduction. Mcgraw-hilleducation.McGraw-Hill,
+2003. v,5,9
+[30] Jon Stokes. Inside the machine: an illustrated introduction to microprocessors and
+computer architecture. No Starch Press Series. No Starch Press, 2007. v, 14, 15, 16,
+17,18,19
+[31] Johannes Wolkerstorfer, Elisabeth Oswald, and Mario Lamberger. An ASIC Im-
+plementationoftheAESSBoxes. In Proceedings of the The CryptographerÕs Track at
+theRSAConferenceonTopicsinCryptology,CT-RSAÕ02,pages67Ð78,London,UK,
+UK,2002.Springer-Verlag. v,19,31,32,33,34
+[32] Shee-YauWu,Shih-ChuanLu,andChi-SungLaih. DesignofAESBasedonDual
+Cipher and Composite Field. In Tatsuaki Okamoto, editor, Topics in Cryptology
+- CT-RSA 2004, The Cryptographers Track at the RSA Conference 2004, San Fran-
+cisco, CA, USA, February 23-27, 2004, Proceedings, volume 2964 of Lecture Notes in
+ComputerScience,pages25Ð38.Springer,2004. v,13,14,15,25,26
+57Appendix
+Now that except for bit-slicing technique, all the implementations are quite straight-
+forward,herewejustlistsomemaintransformationfunctionsinbit-slicingimplemen-
+tation.
+The following source code is the basic calculations in GF(2ö4).
+void multiplication ( uint64 t? a, uint64 t? b, uint64 t? q)
+{
+q[0] = (a[0] & b[0]) ö (a[3] & b[1]) ö (a[2] & b[2]) ö (a[1] & b[3]);
+q[1] = (a[1] & b[0]) ö ((a[0] ö a[3]) & b[1]) ö ((a[2] ö a[3]) & b[2]) ö ((a[1] ö a[2]) & b[3]);
+q[2] = (a[2] & b[0]) ö (a[1] & b[1]) ö ((a[0] ö a[3]) & b[2]) ö ((a[2] ö a[3]) & b[3]);
+q[3] = (a[3] & b[0]) ö (a[2] & b[1]) ö (a[1] & b[2]) ö ((a[0] ö a[3]) & b[3]);
+}
+void square( uint64 t? a, uint64 t? q)
+{
+q[0] = a[0] ö a[2];
+q[1] = a[2];
+q[2] = a[1] ö a[3];
+q[3] = a[3];
+}
+void inverse( uint64 t? a, uint64 t? q)
+{
+q[0] = a[0] ö a[1] ö a[2] ö (a[0] & a[2]) ö (a[1] & a[2]) ö (a[0] & a[1] & a[2]) ö a[3] ö (a[1] & a[2] & a[3]);
+q[1] = (a[0] & a[1]) ö (a[0] & a[2]) ö (a[1] & a[2]) ö a[3] ö (a[1] & a[3]) ö (a[0] & a[1] & a[3]);
+q[2] = (a[0] & a[1]) ö a[2] ö (a[0] & a[2]) ö a[3] ö (a[0] & a[3]) ö (a[0] & a[2] & a[3]);
+q[3] = a[1] ö a[2] ö a[3] ö (a[0] & a[3]) ö (a[1] & a[3]) ö (a[2] & a[3]) ö (a[1] & a[2] & a[3]);
+}
+void addition( uint64 t? a, uint64 t? b, uint64 t? q)
+{
+q[0] = a[0] ö b[0];
+q[1] = a[1] ö b[1];
+q[2] = a[2] ö b[2];
+q[3] = a[3] ö b[3];
+}
+void constantMultiplication( uint64 t? a, uint64 t? q)
+{
+q[0] = a[0] ö a[1];
+q[1] = a[2];
+q[2] = a[3];
+q[3] = a[0];
+}
+This function illustrates how the multiplicative inverse is conducted based on the basic calculation above.
+void G256 inv( uint64 t? bit8 )
+{
+uint64 t ah[4];
+uint64 t al [4];
+ah[3] = bit8 [7];
+ah[2] = bit8 [6];
+ah[1] = bit8 [5];
+ah[0] = bit8 [4];
+al [3] = bit8 [3];
+al [2] = bit8 [2];
+al [1] = bit8 [1];
+al [0] = bit8 [0];
+58uint64 t d[4] , ahSquare[4] , t0 [4] , t1 [4] , alSquare[4] , t2 [4] , t3 [4] , t4 [4] , t5 [4] , t6 [4];
+// t0 = A ? ah2
+square(ah, ahSquare );
+constantMultiplication(ahSquare , t0 );
+// t1 = ah ? al
+multiplication (ah, al , t1 );
+// alSquare = al2
+square(al , alSquare );
+addition(t0 , t1 , t2 );
+// t3 = t0 + t1 + alSquare
+addition(t2 , alSquare , t3 );
+//d = t3(?1)
+inverse(t3 , d);
+multiplication (ah, d, t4 );
+addition(ah, al , t5 );
+multiplication (t5 , d, t6 );
+bit8 [7] = t4 [3];
+bit8 [6] = t4 [2];
+bit8 [5] = t4 [1];
+bit8 [4] = t4 [0];
+bit8 [3] = t6 [3];
+bit8 [2] = t6 [2];
+bit8 [1] = t6 [1];
+bit8 [0] = t6 [0];
+}
+The SubBytes transformation is illustrated as following functions .
+void sbox( uint64 t? a)
+{
+uint64 t x[8];
+uint64 t y[8];
+x[0] = a[0] ö a[1] ö a[3];
+x[1] = a[1] ö a[5];
+x[2] = a[1] ö a[3] ö a[4] ö a[7];
+x[3] = a[1] ö a[2] ö a[5];
+x[4] = a[4] ö a[7];
+x[5] = a[1] ö a[3] ö a[4];
+x[6] = a[2] ö a[5] ö a[6];
+x[7] = a[5];
+G256 inv(x);
+a[0] = x[0] ö x[2] ö x[4] ö 0x0000000000000000;
+a[1] = x[1] ö x[7] ö 0x0000000000000000;
+a[2] = x[1] ö x[3] ö 0 xffffffffffffffff ;
+a[3] = x[0] ö x[1] ö x[7] ö 0x0000000000000000;
+a[4] = x[0] ö x[1] ö x[5] ö x[7] ö 0x0000000000000000;
+a[5] = x[3] ö 0 xffffffffffffffff ;
+a[6] = x[1] ö x[2] ö x[4] ö x[6] ö 0 xffffffffffffffff ;
+a[7] = x[1] ö x[2] ö x[7] ö 0x0000000000000000;
+}
+void subBytes( uint64 t? r)
+{
+uint64 t t [8];
+for( int i = 0; i < 128; i += 8)
+{
+t [0] = r[ i ];
+t [1] = r[ i + 1];
+t [2] = r[ i + 2];
+t [3] = r[ i + 3];
+t [4] = r[ i + 4];
+t [5] = r[ i + 5];
+t [6] = r[ i + 6];
+t [7] = r[ i + 7];
+sbox(t );
+r[ i ] = t [0];
+r[ i + 1] = t [1];
+r[ i + 2] = t [2];
+r[ i + 3] = t [3];
+r[ i + 4] = t [4];
+r[ i + 5] = t [5];
+r[ i + 6] = t [6];
+r[ i + 7] = t [7];
+}
+}
+59The ShiftRows transformation is illustrated as following function .
+void shiftRows( uint64 t? r)
+{
+uint64 t t0 [8];
+uint64 t t1 [8];
+for( int i = 0; i < 8; i++)
+{
+t0[ i ] = r[ i + 8];
+r[ i + 8] = r[ i + 40];
+r[ i + 40] = r[ i + 72];
+r[ i + 72] = r[ i + 104];
+r[ i + 104] = t0[ i ];
+t0[ i ] = r[ i + 16];
+t1[ i ] = r[ i + 48];
+r[ i + 16] = r[ i + 80];
+r[ i + 48] = r[ i + 112];
+r[ i + 80] = t0[ i ];
+r[ i + 112] = t1[ i ];
+t0[ i ] = r[ i + 120];
+r[ i + 120] = r[ i + 88];
+r[ i + 88] = r[ i + 56];
+r[ i + 56] = r[ i + 24];
+r[ i + 24] = t0[ i ];
+}
+}
+The MixColumns transformation is illustrated as following function .
+void mixColumns( uint64 t? r)
+{
+uint64 t t [128];
+for( int i = 0; i < 128; i += 8)
+{
+t[ i ] = r[ i % 32 + i / 32 ? 32] ö r [( i + 7) % 32 + i / 32 ? 32] ö r [( i + 15) % 32 + i / 32 ? 32]
+ö r [( i + 16) % 32 + i / 32 ? 32] ö r [( i + 24) % 32 + i / 32 ? 32];
+t[ i + 1] = r[ i % 32 + i / 32 ? 32] ö r [( i + 1) % 32 + i / 32 ? 32] ö r [( i + 8) % 32 + i / 32 ? 32]
+ö r [( i + 17) % 32 + i / 32 ? 32] ö r [( i + 25) % 32 + i / 32 ? 32];
+t[ i + 2] = r [( i + 1) % 32 + i / 32 ? 32] ö r [( i + 2) % 32 + i / 32 ? 32] ö r [( i + 7) % 32 + i / 32 ? 32]
+ö r [( i + 9) % 32 + i / 32 ? 32] ö r [( i + 15) % 32 + i / 32 ? 32] ö r [( i + 18) % 32 + i / 32 ? 32]
+ö r [( i + 26) % 32 + i / 32 ? 32];
+t[ i + 3] = r [( i + 2) % 32 + i / 32 ? 32] ö r [( i + 3) % 32 + i / 32 ? 32] ö r [( i + 7) % 32 + i / 32 ? 32]
+ö r [( i + 10) % 32 + i / 32 ? 32] ö r [( i + 15) % 32 + i / 32 ? 32]ö r [( i + 19) % 32 + i / 32 ? 32]
+ö r [( i + 27) % 32 + i / 32 ? 32];
+t[ i + 4] = r [( i + 3) % 32 + i / 32 ? 32] ö r [( i + 4) % 32 + i / 32 ? 32] ö r [( i + 7) % 32 + i / 32 ? 32]
+ö r [( i + 11) % 32 + i / 32 ? 32] ö r [( i + 15) % 32 + i / 32 ? 32] ö r [( i + 20) % 32 + i / 32 ? 32]
+ö r [( i + 28) % 32 + i / 32 ? 32];
+t[ i + 5] = r [( i + 4) % 32 + i / 32 ? 32] ö r [( i + 5) % 32 + i / 32 ? 32] ö r [( i + 12) % 32 + i / 32 ? 32]
+ö r [( i + 21) % 32 + i / 32 ? 32] ö r [( i + 29) % 32 + i / 32 ? 32];
+t[ i + 6] = r [( i + 5) % 32 + i / 32 ? 32] ö r [( i + 6) % 32 + i / 32 ? 32] ö r [( i + 13) % 32 + i / 32 ? 32]
+ö r [( i + 22) % 32 + i / 32 ? 32] ö r [( i + 30) % 32 + i / 32 ? 32];
+t[ i + 7] = r [( i + 6) % 32 + i / 32 ? 32] ö r [( i + 7) % 32 + i / 32 ? 32] ö r [( i + 14) % 32 + i / 32 ? 32]
+ö r [( i + 23) % 32 + i / 32 ? 32] ö r [( i + 31) % 32 + i / 32 ? 32];
+}
+for( int i = 0; i < 128; i++)
+{
+r[ i ] = t[ i ];
+}
+}
+The AddRoundKey transformation is illustrated as following function .
+void addRoundKey( uint64 t? r , uint64 t? key)
+{
+for( int i = 0; i < 128; i++)
+{
+r[ i ] = r[ i ] ö key[ i ];
+}
+}
+60

@@ -1,0 +1,2466 @@
+1
+Abstract
+Agroupissaidtobe pseudo-free if an adversary who is allowed to see group descrip-
+tion, is unable to solve non-trivial equations. Non-trivial equations are the equations
+that have no solution in a free group. The notion of pseudo-freeness was introduced by
+Rivest, who left as a open problems whether such groups exists in cryptography or not.
+Rivest’s conjecture that the RSA group is pseudo-free has been settled by Micciancio
+for case of static adversary who is given only the group description and his goal is to
+come up with an equation and solution.
+Later on the notion of pseudo-freeness has been extended to adaptive adversary for
+case of univariate equations by Dario.C, Dario.F and warinschi.B. In case of adaptive
+pseudo-free groups, the adversary learns solutions of some non-trivial equations before
+producing a new equation.
+In this project we make extension to the notion of pseudo-free groups from univari-
+ate to multivariate equations and system of equations in face of adaptive adversary.
+In our setting along with the group description the adversary is allowed to see some
+non-trivial equations with their solutions and ﬁnally his goal is to come up with new
+non-trivial equation and solution.
+First of all we show triviality for case of adaptive pseudo-free groups[page 30] and
+then craft deﬁnitions with respect to multivariate equations[page 32] and system of
+equations[page 42]. Therefore in this project we provide
+• Formal deﬁnition of adaptive pseudo-free groups with multivariate equations and
+system of equations
+• Proof that the ”The RSA group is adaptive pseudo-free with respect to multivari-
+ate equations”[page 32].2
+Acknowledgements
+I would like to thank
+• My Project Supervisor, Dr Bogdan Warinschi for introducing me to this fascinat-
+ing area of Cryptography and for his guidance throughout the project.
+• My Project coordinator, Dr Oliver Ray for his help and guidance throughout the
+Masters Course, and particularly for his help and advice on my dissertation.
+• My family for their constant support and encouragement.3  
+  
+Contents 
+1- Introduction           5 
+1.1- Aims and Objectives         6 
+1.2- Structure           7  
+2 - Preliminaries           8 
+2.1- The RSA Group          8 
+2.2- Mathematical Background        8 
+2.2.1- Groups          8 
+2.2.2- Computational Groups        9 
+2.2.3- Black Box Groups        9 
+2.3- Division Intractable Functions        10 
+2.4 - Shamir's Trick          11 
+3 - F ree G roups           12 
+3.1 - Free Abelian Groups         12 
+3.2 - Equations in Free Groups        13 
+3.3- The correspondence         14 
+3.4 - Pseudo-free Groups         15 
+3.4.1- Types of Pseudo-free Groups       15 
+3.5- Cryptographic assumptions on Pseudo-free groups     15 
+3.6- Diffie Hellman assumption        17 
+4 - Static Pseudo-free groups         19 
+4.1 - Formal definition of static Pseudo-free Groups     19 
+4.2- The RSA is Static Pseudo-free        20 
+5 - Adaptive Pseudo-free groups         22 
+5.1- Equation setup in Pseudo-free groups       22 
+5.2- Non-trivial multivariate equations       23 4  
+  
+5.3- Applications of Adaptive Pseudo-free groups      24 
+5.3.1 Signatures from Adaptive pseudo-free groups     24 
+5.3.2- Linear Network Coding       25 
+5.3.3- Network Coding Signatures       26 
+5.3.4- Homomorphic Network Coding Signatures     26 
+5.3.5- Network Coding Signatures from Adaptive Pseudo-free Groups  27 
+5.4- Trivial Multivariate Equations        29 
+5.5- The RSA is Adaptive Pseudo-free       32 
+6 - Adaptive Pseudo-free groups for system of equations     40 
+6.1- Non-Trivial System of Equations       40 
+6.2- Definition for system of equations       41 
+7- Conclusion           43 
+8 - Future Work           44 
+9 - References          45 
+  5
+1 Introduction
+Most of the modern cryptography relies on di?culty of solving non trivial equations
+over computational ﬁnite groups. Cryptography speculates pseudo-free groups as a
+very strong and interesting notion. The notion of pseudo-free groups was ﬁrst intro-
+duced by Hohenberger[18]. She presented an informal deﬁnition of such groups. She
+used them to identify transitive signature schemes along with their variants and found
+that the adversary cannot e?ciently compute their inversion[18]. After Hohenberger,
+Rivest[31] polished this notion and extended it by deﬁning it formally. He considered
+pseudo-free groups to be a strong notion and assumed that many other computational
+assumptions[26] typically used in cryptography, like the hardness of computing discrete
+logarithms, the RSA assumption and the strong RSA assumption holds the property of
+pseudo-free groups. Subsequently D.Miccianico[26] proved the pseudo-freeness of the
+RSA group under the strong RSA assumption for static adversary. He proved pseudo-
+?
+freenessofRSAgroup(Z )atleastwhenN =PQandistheproductoftwosafeprimes
+N
+such that P =2p+1and Q=2q +1. Here P,Q are safe (odd) primes and p,q are
+known as Sophie German primes. Safe prime is a special type of prime numbers used in
+cryptography. In his static setting[26], the adversary is allowed to see the description
+of the group and ﬁnally his goal is to come up with some equation and solution to that
+equation.
+Informally, a computational group is considered to be pseudo-free if an adversary who
+is allowed to see description of the group cannot e?ciently compute solutions for non-
+trivial equations, whereasnon-trivial equationmeanstheequation whosesolution does
+not exist in a free group. We give the formal description of pseudo-free groups in sec-
+tion[3.4]. Free groups[26] are used in Dolev-Yao model for symbolic analysis of public
+key cryptographic protocols. From past few years, a lot of study[26] have been carried
+out to cover the gap between the symbolic Dolev- Yao model and standard computa-
+tional model used in cryptography in order to achieve computational soundness results
+for symbolic analysis methods. An important motivation to study pseudo-free groups
+is to see whether it can be used to extend Dolev-Yao security model with cryptographic
+functions that make use of such groups in cryptography and lead to many new appli-
+cations. Other reasons for studying pseudo-free groups are as follows [31]:
+- Proofs perhaps might be made easier with the use of stronger assumptions that in
+turn incorporates many other common cryptographic assumptions like the hardness of
+computing discrete logarithms and the strong RSA assumption
+-Ifweassumethatagroupispseudo-freethenitmaypossiblyallowanevenwider
+range of applications, as the strong RSA assumption has been very serviceable in the
+construction of many cryptographic functions which are not acknowledged to be secure
+under the standard version of the RSA assumption6
+- There is no prevailing solution for speciﬁc cryptographic primitives, like directed
+transitive signature schemes whose construction has been linked to Pseudo-freeness
+In cryptography[9], Pseudo-free groups so far do not have so many applications and
+the reason for this is that in most of the cases of RSA group, not only group’s de-
+scription is provided to adversary but also he is given some equations and solutions.
+Thus after learning solutions to some equations his goal is to output a new equation
+along with its solution. For example as deﬁned in [9] such cases holds true for signa-
+ture schemes based on RSA where adversary can output signature to solve equation
+whose solution does not exist in a free group. Here the adversary can gain access to
+an oracle through chosen message attack and generates forgery as a solution to new
+non trivial equation. This problem was noticed by Rivest[31] who left the notion of
+pseudo-freeness as an open problem and also mentioned, whether pseudo-free groups
+exist in cryptography?.
+1.1 Aims and Objectives
+The main aim of the project is to explore the notion of pseudo-free groups with mul-
+tivariate equations and system of equations to adaptive adversary. Pseudo-free groups
+so far has been deﬁned for univariate and multivariate equations for static adversary
+and univariate equations for adaptive adversary. In this project we extend this study
+and identify pseudo-freeness with respect to an adversary who may learn solutions to
+other non-trivial equations before solving a new non-trivial equation.
+This project has follwing objectives:
+• To deﬁne adaptive pseudo-freeness with respect to multivariate equations and
+system of equations.
+• To provide constructions that will show how RSA group satisﬁes our deﬁnitions.
+The current deﬁnitions of pseudo-free groups are not su?cient to make use of such
+groups in cryptography[26]. The reason is that an adversary[9] that interacts with
+some cryptographic primitive built on top of a group may obtain additional informa-
+tionnotavailabletohiminthegamethatdeﬁnespseudo-freeness. Thereforeweexplore
+this notion with the intuition of getting much stronger version of pseudo-free groups..
+Adaptive pseudo-freeness[9]: Informally in adaptive pseudo-free groups, the ad-
+versary along with the group description is allowed to see some equations (that have
+no solution in a free group) together with its solutions. Finally aim of adversary is to
+come up with new non-trivial equation and solution.
+In this project we explore the notion of adaptive pseudo-free groups and prove that
+the RSA is adaptive pseudo-free. Our results in [5.5] holds for multivariate equations
+but can easily extend to system of equations. The deﬁnition of pseudo-free groups in7
+adaptive setting consists of two design decisions. The ﬁrst issue with the design is to
+set equations for which an adversary can see solutions and the second issue is to deﬁne
+what do we actually mean by non-trivial multivariate equations in adaptive setting of
+pseudo-free groups. We ﬁrst deﬁne triviality[5.4,6.1] of equations and then craft a def-
+inition of adaptive pseudo-free groups for case of multivariate equations[Deﬁnition 11]
+and system of equations [Deﬁnition 13]. We detail our results next.
+1.2 Structure
+This report consist of six main sections. The ﬁrst section is devoted to introduce the
+basic concept of pseudo-free groups with the motivation of why there is a need to study
+such groups. Section two presents some preliminaries and mathematical background
+which is necessary to understand the notion of pseudo-freeness. Section three describes
+the formal deﬁnition of free groups and pseudo-free groups with the implication of such
+groups to other strong cryptographic assumptions. Section four presents the formal
+deﬁnition of static pseudo-free groups and shows that how RSA group satisﬁes this
+deﬁnition in case of static adversary. Section ﬁve presents adaptive pseudo-free groups
+and their applications. In this section we introduce our concept of adaptive pseudo-free
+groupswithmultivariateequations. Firstofallweshowtrivialityincaseofmultivariate
+equations and then craft deﬁnition out of them. Later in this section we prove that the
+RSA is adaptive pseudo-free with multivariate equations. In Section six we extend the
+notionofadaptivepseudo-freegroupsfrommultivariatetosystemofequations. Finally
+in last two sections we discuss some open problems that have been investigated in the
+notion of pseudo-freeness and as a future scope we show an idea of extracting a more
+e?cient application out of these groups.8
+2 Preliminaries
+2.1 The RSA Group[31]-ThesecurityoftheRSAencryptionschemedependson
+?
+RSA assumption which works with multiplicative group Z such that N is the product
+N
+of two large primes.
+RSA assumption-
+This assumption states that it is hard for an PPT adversary given an interger ’N’, e
+?
+such that e>1andarandom y selected from Z to ﬁnd x that satisﬁes
+N
+e
+x =y(modN)
+with non-negligible probability.
+Where ’N’ is the product of two randomly chosen large primes.
+Strong RSA assumption-
+This assumption states that it is hard for an PPT adversary given an interger ’N’,and
+?
+arandom y selected from Z to ﬁnd x and an integer e>1thatsatisﬁes
+N
+e
+x =y(modN)
+with non-negligible probability.
+2.2 Mathematical Background
+Before we describe in detail the concept of pseudo-free Groups, we present some math-
+ematic background which is closely related to notion of pseudo-free groups.
+2.2.1 Deﬁnition 1 Group[31]-Amathematicalgroup G is deﬁned as a pair of
+(S,o) where S is the set of elements and ’o’isanoperatoron S that satisﬁes the fol-
+lowing properties.
+• Closure-Thispropertystatesthatifthereexiststwoelements i,j that belongs
+to set S and deﬁned by some binary relation o then the resultant (ioj)? S.
+• Identity -Thispropertystatesthatifthereexistsanidentityelement e ? S
+such that for all i in S, i o e = e o i = i .
+• Associativity -Itstatesthatforsomeelementssay a,b,c that belongs to set S
+and deﬁned by some binary operator o then
+io(jok)=(ioj)ok.
+• Inverses - It states that for some element i ? S,there exists some other element
+j ? S such that the following condition holds:
+(ioj)=(ioj).9
+? ?1 n
+The notation xy is same as x o y and as inverse is denoted by a .Thenotation x
+?n ?1 ?1 ?1
+means that the word (x,x,x,...,x)isoflength n and x is the word (x ,x ,...,x )
+of length n.
+2.2.2 Computational Groups
+Informally, a mathematical group G has some representation [G]andsuchrepresen-
+tations [G] are known as computational groups[31]. In cryptography these groups are
+widely used and many other groups are based on the notion of such groups. For in-
+stance if we deﬁne set G as a group then we can consider G as a computational group
+[G]withidentity1.
+Formally such groups are deﬁned as:
+Deﬁnition 2[31]: A group is said to be computational group if it represents an under-
+lying mathematical groupG=(S,o) and provides e?cient (polynomial time) algorithms
+for each of the operations given below:
+• Composition- It states that giving a representation of elements say [i],[j]that
+belongs to computational group [G], compute representation of [i]o[j]
+• Identity- Find representation of identity element e that belongs to [G]
+?1
+• Inverses-Given some element [i]thatbelongsto[G],ﬁnd [i ].
+• Equality Testing-Itstatesthatongivingrepresentationoftwoelements[i][j]
+that belongs to computational group[G],determine if i = j
+• Sampling-(onlyifG is ﬁnite) returns representation [i]thatischosenuniformly
+at random from [G]orinamannerthatissimilarfromuniformlyatrandom
+to a probabilistic polynomial time adversary. Such a procedure is denoted as
+[i]? [G].
+R
+2.2.3 Black Box Groups
+Babai and Szemeredi introduced a notion- Black Box. This notion may be used by the
+parties in cryptographic protocol to access the group. According to black box assump-
+tion [31], each element of the computational group G is a bit string of some common
+length N,andBlackBoxsubroutinesareavailableforthegroupoperations.
+Only with the help of given implementations group operations can be performed. This
+is Black Box assumption, in which the representation of group elements is opaque: op-
+erations on them other than through the black box routines are forbidden.10
+Naturally, one may be curious to enquire the possibility for having black box algo-
+rithm for various group-theoretic problems. As the selections of the operations to be
+performed during algorithm design is restricted, Black Box assumption results in self
+imposed restrictions or conventions which are in turn favorable for algorithm design.
+Various techniques are not required for ﬁnding an algorithm if we use black box as-
+sumption as it itself gives satisfying result.
+For example A probabilistic black box algorithm given by Tonelli nad shanks for ﬁnding
+?
+the square roots of Z .Thisalgorithmisusedtoﬁndrepresentationofanelement[x]
+P
+having value x on giving [a]and P such that:
+2
+x = a mod P
+The black box assumption becomes restrictive if there does not exist any e?cient al-
+gorithm to compute this. For example shoup has proved lower bounds for discrete
+algorithm and other problems in discrete model.
+However our priority for studying is cryptographic security not algorithmic e?ciency.
+An adversary may check the code that implements group operations or test the bits of
+any representation as it is likely for typical adversary to violate any black box assump-
+tion willfully.
+?
+As an example likeZ where the adversary is allowed to seeN and a code for composi-
+N
+tion. Therefore the attacker can see the code or bit-level representation of elements by
+usingtechniqueslikeindexmethodcalculuswhichisnotthereinblackboxassumption.
+Thus, we do not consider black box assumptions. We assume by default that ad-
+versary can access any obtainable information and also may use techniques which are
+dependentonimplementationorrepresentationdetails. Non-black-boxadmissionofthe
+adversary to the group implementation is thus considered universally. A representation
+of a Computational groups allows one to decide whether a group is pseudo-free or not.
+Therefore one can think like that if an equation has a solution in computational group
+,thenonlythereexistsasolutionofthecorrespondingequationinamathematical
+group.
+2.3 Division intractable functions
+Afunction H is said to be division intractable[9] if it is not possible for an adversary
+to compute ({p ,...,p },q)suchthat q?=p for all (i=1ton)and H(q)divides H(p ).
+1 n i i
+The notion of division intractable functions was introduced by Gennaro et al. Any
+function that maps input to prime numbers clearly satisﬁes the property of division
+intractable functions.11
+Deﬁnition 3 [9] - Division intractable functions
+Let H denotes family of hashes having poly(h)-bit input and h-bit output. A func-
+tion H is said to be division intractable if it is not possible for an adversary to compute
+1) H is randomly chosen from H
+2) Adversary produces ({p ,...,p },q) such that q?=p? (i = 1 to n) and H(q) divides
+1 n i
+H(p ).
+i
+2.4 Shamir’s Trick
+a b
+Assume x =y modN for all a,b > 0.Let z =gcd(a,b), Then there exists an algorithm
+a z
+that computes f such that f =y modN.
+Proof:-UsingExtendedeuclideanalgorithmwecanﬁndu,v?Z suchthatau+bv =z.
+? bv =z?au.
+av bv z?au
+Thus x =y =y
+z av au v u a a
+? y =x y =(x y ) =(f)12
+3 Free Groups
+Free groups are inﬁnite groups that are constructed from a given set of generators such
+that there do not exist any non trivial relationship between them.
+The formal deﬁnition of Free group[31] is as follows:
+Deﬁnition 4: Let A = {a ,....,a } represents a non-empty set of distinct symbols
+1 m
+such that {a ,....,a } are known as generators of the free group. Let the inverse of
+1 m
+?1
+?1
+each symbol say a is given by a such that then A represents the non-empty set
+i
+i
+?
+?1 ?1 ?1
+ˆ ˆ
+{a ,....,a }. Let A denotes A A where as A is the set of symbols for the free
+1 m
+group .
+Let the free group is denoted by F(A), it can also be written as F(a ,....,a )if A=
+1 m
+{a ,....,a }.Elementsinfreegroupscanbewrittenaswords.
+1 m
+For example the word below:
+?1 ?1 ?1
+a a a a a a a
+1 3 3 4
+1 2 3
+is representing elements of F(a ,a ,a ,a )
+1 2 3 4
+Awordinafreegroupcanbereducedbyeliminatingtheadjacentinversesymbols.
+?1
+Therefore the word in the given above example can be reduced and written as a a .
+4
+2
+Awordissaidtobeinreducedorcanonicalformifitcannotbereducedfurther. Thus
+we can say that the words in canonical form are the elements of the free group.
+The binary operation o in a free group is a concatenation followed by simpliﬁcation.
+For example
+?1 ?1 ?1 ?1 ?1
+a a oa a = a a a a = a a .
+1 2 1 2 2
+3 1 3 1 3
+An empty word is the identity of a free group. Two words in a free group represent the
+same element if their canonical forms after simpliﬁcation are exactly same. The reverse
+of the word is known as the inverse of the word.
+3.1 Free Abelian Groups
+A group is said to be free abelian group [31,19]if it is deﬁned in a same manner as a free
+group. These groups are denoted asFA{a ,....,a } such that {a ,....,a } are known
+1 m 1 m
+as generators.
+The reduced form of a word in free abelian group FA{a ,....,a } to a word of the
+1 m
+form :
+s s s
+1 2 3 s
+n
+a a a ....a
+1 2 3 m13
+is deﬁned by commutativity whereas s ,s ,s ,...,s are integers.
+1 2 3 n
+? ? ?
+AfreeabeliangroupFA{a ,....,a }isisomorphictothem-folddirectsumZ Z ... Z.
+1 m
+s s s s
+1 2 3 n
+Thuswecanrepresentanelementa a a ....a ofFA{a ,....,a }withvector(s ,s ,s ....,s )
+1 m 1 2 3 n
+1 2 3 m
+and implement o with the vector addition.
+3.2 Equations in Free Groups
+The equations in free groups[31] are as follows:
+Let ’F’ be a free group having a set of generators a ,a ,a ,...,a .Let x ,x ,x ,...,x
+1 2 3 m 1 2 3 n
+be variables in F.Thusanequationinfreegroup F can be written as:
+w =w
+1 2
+where w and w represents the words formed from variables of F i.e. x ,x ,x ,...,x
+1 2 1 2 3 n
+and set of generators a ,a ,a ,...,a.Wecanalsowritetheseequationsinreduced
+1 2 3 n
+(canonical) form for some w.
+For example an equation in F (a ,a )
+1 2
+?1
+a x =x a
+1 2 2
+1
+In free groups the equations that have solutions are known as satisﬁable equations
+and the equations that do not have any solution are known as unsatisﬁable equations.
+Makanin in 1982[24] showed that it is possible to ﬁnd whether an equation is satisﬁable
+or unsatisﬁable in a free group. More recently Gutierrez in 2000[16] showed that the
+above problem is possible in PSPACE.
+When the free group is abelian groupFA(a ,a ,a ,...,a ), then one can ﬁnd whether
+1 2 3 n
+the equation has solution or not. The equation is always rewritten as:
+e e e s s s
+1 2 n 1 2 m
+x x ...x =a a ...a
+1 2 n 1 2 m
+for integers e ,e ,,e and s ,s ,...,s .Theseequationsaresatisﬁableonlyif?i,1≤
+1 2 n 1 2 m
+j≤m we have
+gcd(e ,e ,...,e )|s
+1 2 n j
+AnequationwhichhassolutioninF(A)hasalsosolutioninFA(A)buttheconverse
+is not always true. This is beneﬁcial because it gives an easy way to show that an
+equation has no solution in a F(A)andmerelyprovethatithasnosolutioninFA(A).14
+3.3 The correspondence
+Pseudo-free groups considered to be a strong notion from cryptographic perspective
+and many other cryptographic assumptions holds on to the notion of pseudo-freeness.
+In each and every case one can ﬁnd its formulation interesting.
+For example[31], for the below quadratic equation
+2
+x =a
+there does not exist any solution in a free group because the canonical form ofx always
+has even length where x is variable and a is the generator.
+Thus the above equation has no solution in a free group, what does it mean for the
+same equation in group G?
+Incomputationalgroupstheremayexistsolutionsofnon-trivialequations. Forexample
+?
+there exist a solution of the above mentioned equation in Z such that.
+N
+2
+x =a
+has a trivial solution if one is given a = 4 then we can ﬁnd a clear solution as x=2.
+The above problem can be solved if each of the generators say a must correspond
+i
+independently to a randomly generated element of G. As in [31], an adversary can
+distinguish a group G from a free group if
+(1)AnadversaryoutputsanequationE withvariablesx ,...,x andconstantsa ,...,a
+1 n 1 m
+that has no solution in a fre e group.
+(2)An adversary come up with randomly chosen values a ,...,a and use them as con-
+1 m
+stants for the equation.
+(3)An adversary suceessfully produce variables x ,...,x that satisﬁies the equation.
+1 n
+As per deﬁnition of pseudo-free groups, the adverary can selects equation by his own
+as long as the equation has no solution in a free group. This generalize the situation
+for the strong RSA assumption where the adversary can select the exponent.15
+3.4 Pseudo-free Gropus
+Morespeciﬁcally, acomputationalgroupissaidtobepseudo-freegroupifitisnotpos-
+sible for an adversary who is given only the group description to produce an equation
+E and solution S to that equation. For example in pseudo-free groups, if an adversary
+is given randomly a then it is not possible for him to e?ciently compute solution of an
+e 3 4 5 2 2 5
+equation x = a where e?=1, or for x x = a,butcansolveanequation x x = a
+1 2 1
+2
+because this equation is trivial and has solution over the free group if we put x = a
+1
+and x =a.
+2
+Deﬁnition 5[31,26].:- A family of computational groups G = G for N≥ 0 is said to
+N
+pseudo-free if all operations in G is performed in polynomial time in k. and for every
+N
+probabilistic polynomial time adversary A following holds. Let N? N be a randomly
+k
+chosen group index and deﬁne ?:A?G by choosing ?(a) at random in G for each
+N N
+a? A. Then the probability on giving (N,?) as input, the adversary outputs an equation
+’E’ and solution ’S’ is almost negligible in k.
+This deﬁnition belongs to the family of computational groups but we can apply this
+deﬁnition to mathematical groups by understanding that the implementation of such
+groups in some standard way as computational groups.
+3.4.1 Types of pseudo-free groups
+There are two types od pseudo-free groups which are as follows
+(1) Static pseudo-free groups
+(2) Adaptive pseudo-free groups
+Static pseudo-free groups:-
+Agroupissaidtobestaticpseudo-freeifanadversarywhoisallowedtoseedescription
+of the group can not solve new nontrivial equation and solution.
+Adaptive pseudo-free groups:-
+In adaptive pseudo-free groups, along with group description an adversary is allowed
+to see some non-trivial equations and solutions and ﬁnally his goal is to come up with
+new non-trivial equation and solution.
+3.5 Cryptographic assumptions holds on pseudo-free groups
+There are six cryptographic assumptions[31] considered by Lipschutz and Miller that
+are as follows:
+• The order problem
+• The power problem
+• The root problem16
+• The proper power problem
+• The generalized power problem
+• The intersection problem
+LipschutzandMillerhasshownthattheabovementionedsixfundamentalproblemsare
+independent i.e. for each pair of problems there exists a group such that one problem
+has solution in a group where as other problem has no solution.
+Rivest[31] has shown that the above six fundamental problems are intractable in
+pseudo-freegroupssuchthatnoprobabilisticpolynomialtimeadversarycansolvethese
+problems with non-negligible probability. On the other side, Rivest also left a very in-
+teresting question whether or not the computational Di?e-Hellman problem (CDH)
+holds true by pseudo-free groups.
+Order problem
+The order problem states the following: Given an input x ? G to ﬁnd an integer n
+which satisﬁes
+e
+x =1
+where e is a positive integer and 1 is the identity of group. Thus it means that solving
+e
+x =1forpositiveinteger n.Theorderoftheelement x is the least positive value of
+x in G.
+Theorem 1 ([31]): In a pseudo-free group G, it is hard for an adversary to state
+the order of an element p that is chosen randomly.
+Power problem
+The power problem states the following:
+Given elements x and y such that x,y?G to ﬁnd an integern> 1
+n
+x =y
+such that the value of n is the discrete logarithm of y to the base x in G.Thepower
+problem is often considered to be hard for some groups G.ForexampleDi?eand
+?
+Hellmann determined that the power problem was hard in Z where e is a large prime.
+e
+Theorem 2([31]) In a pseudo-free groups, it is hard for an adversary given some
+random values x and y to compute the discrete logarithm problem.
+Root problem(RSA assumption)
+The RSA problem states the following:
+Given input y?G and an integer e greater than 1 to ﬁnd x that satisﬁes17
+e
+x =y
+Theorem 3:([31])In a pseudo-free groups, the RSA assumption holds.
+Proper power problem(strong RSA assumption)
+The RSA problem states the following:
+Given input y?G to ﬁnd an integer e greater than 1 and x that satisﬁes
+e
+x =y
+Theorem 4:([31]) In pseudo-free groups, the strong RSA assumption holds.
+In this case the adversary by himself selects an exponente> 1. The adversary cannot
+solve the above equation even if he comes up with an integere>1onhisown.
+Generalized Power problem
+The generalized problem is deﬁned as:
+Given inputs p,q?G to get integers x,y that satisﬁes
+x y
+p =q
+Theorem 5:([31])In pseudo-free groups, it is hard for an adversary to compute the
+generalized power problem.
+Intersection Power problem
+The intersection problem is deﬁned as:
+Given inputs p,q?G to get integers x,y that satisﬁes
+x y
+p =q ?=1
+Theorem 6:([31])In pseudo-free groups, it is not possible for an adversary to compute
+the intersection problem for cyclic subgroups.
+3.6 Di?e Hellman assumption
+Fascinatingly, the(computational) Di?e-Hellman problem is unsuitable for our formal-
+ism. Di?e-Hellman assumption[31] is implied by pseudo-freeness is a very appealing
+open problem. More speciﬁcally it is left as an open problem by Rivest whether Di?e
+Hellman assumption holds the property of pseudo-freeness or not.
+The computational Di?e-Hellman problem(CDH)[31] considers the following
+Given some value g and two other values x and y such that18
+i
+x =g
+j
+y =g
+for integers i and j that are chosen randomly to ﬁnd
+ij
+a =g
+With the provided x and y,anadversarywillhaveslightchanceforcomputing a,
+this is CDH assumption. The most obvious way to prove that the CDH assumption
+is implied by pseudo-freeness is via above equations, wherei and j are integer-valued
+variables, and a is a group valued variable. However, this argument does not succeed
+as an adversary who violates CDH to deduce a need not be able to ﬁnd i and j (this
+is DLP). It appears that any equation in variable a alone, for checking the correctness
+of computed a is unavailable. In other words the decisional Di?e-Hellman problem is
+not satisﬁable by checking a set of equations that involves a single element x.19
+4 Static pseudo-free groups
+Thenotionofpseudo-freegroupstostaticadversaryhasbeenextendedbyD.Micciancio[26].
+Informally static pseudo-free groups are the computational groups where the adversary
+is given only randomly chosen generators of the equation and his goal is to come up
+with both equation and solution. More specially, in these groups the adversary is static
+i.e. allowed to see only description of the group without any other information. If
+the order of the group is known then it is very easy to compute solution for nontrivial
+equation Thus in static pseudo-free group, order of the group is hidden from adversary.
+The deﬁnition given by Micciancio was similar to that one deﬁned by Rivest in [31].
+Micciancio proved that RSA groups holds much stronger version of pseudo-freeness. He
+has shown that it is infeasible for an adversary to compute unsolvable equations along
+with their solutions in a given computational group. His proof that RSA is pseudo-free
+in[26]isbasedonfollowingpropertieswiththeassumptionthatstartingfromarbitrary
+equations yields simpler and simpler equations.
+• In a free group unsolvable equations are mapped to unsolvable equations.
+• Over the computational group, one can map solution of original equations to
+solution of resulting equations
+4.1 Formal Deﬁnition
+Deﬁnition 6 [26]- A family of computational groups G = G for N≥ 0 is said to be
+N
+static pseudo-free if all operations in G is performed in polynomial time in k. and
+N
+for every probabilistic polynomial time adversary A following holds. Let N? N be a
+k
+randomly chosen group index and deﬁne ?:A? G by choosing ?(a) at random in
+N
+G for each a? A. Then the probability on giving (N,?) as input, the adversary outputs
+N
+an equation ’E’ and solution ’S’ is almost negligible in k.
+The deﬁnition of pseudo-free groups given by Rivest was for the single equation which
+has no solution in a free group but has solution in computational group. Micciancio
+made extension to the deﬁnition of pseudo-free groups that they consist of single equa-
+tion to a system of equations by transforming system of equations to a single equation
+which is equivalent to the system. Any system of equation in this transformation can
+map to single equation whose solution set is a superset of the solutions to the system.
+Deﬁnition 7 [26]- A family of computational groups G = G for N ≥ 0 is said
+N
+i
+to be static pseudo-free if the the probability on giving (N,?)= (E ,?) as input to
+{i?I}
+i
+an adversary, the adversary outputs an system of equations E with their solutions
+{i?I}
+? :X?G is almost negligible in k.
+N20
+4.2 The RSA is static pseudo-free
+Lemma 1[26]:- For a family of computational groupsG there exists an PPT algorithm
+that on input an equation ? (which is a pair of {X,A} such that ’X’ is set of variables
+an ’A’ is set of constants), a group G and an assignment ?:X ?G, outputs a single
+? ?
+variable equation ?and solution ? ? G that satisﬁes the following properties:
+?
+(1) If an equation ? does not have a solution in a free group, then ? also has no
+solution in a free group.
+?
+(2) For any assignment a:A ? G, if ? is a solution to ? , then ? is a solution to
+a
+?
+?
+Proof:- Let
+e e s s
+e s
+1 2 n 1 2 m
+?={x x ....x =a a ....a }
+1 2 n 1 2 m
+be an input equation and ?:X?Gbeanvariableassignment.
+Thus by using extended euclidean algorithm one can ﬁnde = gcd(e : x ? X)and
+x
+?
+integers e (x?X) such that
+x
+?
+?
+e e =e
+x
+x
+x
+Thereforethealgorithmoninputtheaboveequationoutputsansinglevariableequation
+which is of the form:
+? e s s s
+1 2 m
+? ={x =a a ....a }
+1 2 m
+?
+? e /e
+x
+along with its solution ? = ?(x) .Thuswehavetoprovethattheoutput
+x?X
+equation satisfy the above properties
+In order to prove ﬁrst property,for sake of contradiction we assume that there exists a
+? ?
+solution of the the output equation? in a free group. Let ? be a such solution. then
+we have
+?e s s s
+1 2 m
+? =a a ....a
+1 2 m
+e /e ?
+x
+Thus for any x?X we have ?(x) =(? )
+?
+1/e ?
+x
+??(x) =(? )
+?
+? e
+x
+??(x)=(? )
+We can clearly see that ? is a solution of equation? because
+?
+?
+?
+ex ? e e
+x
+x
+x
+?(x) =?
+x?X21
+s s
+?e 1 2 s
+m
+?? =a a ....a
+1 2 m
+?
+This proves the ﬁrst property which means that the output equation ? also has a solu-
+tion in a free group.
+To prove second property, ﬁrst of all set an assignment a : A? G and let ? : X? G
+be asolution to? which means that
+a
+?
+s s
+e 1 2 s
+x m
+?(x) =a a ...a
+1 2 m
+x?X
+Therefore
+? ?
+s s
+?e e /e e e 1 2 s
+x x m
+? =( ?(x) ) = ?(x) =a a ....a
+x?X x?X 1 2 m
+Thus we can see that ? is a solution to? a over G.22
+5 Adaptive pseudo-free groups
+In adaptive pseudo-free groups[9] an adversary is permitted to look at some nontrivial
+equations and solutions along with the group description and ﬁnally his goal is to come
+upwithnewnon-trivialequationandsolution. Asdiscussedabovethatincaseofstatic
+pseudo-free groups the adversary is given only the randomly chosen generators used in
+equation and he has to come up with new nontrivial equation and solution. Therefore
+in our adaptive setting the adversary knows additional information which may help
+him in solving other equations which do not have a solution in a free group. In case
+of adaptive pseudo-free groups the game between challenger and adversary works as
+follows[9]:
+Set up:- In this case the challanger randomly selects an instance of compuational
+group,sets an assignment and then gives assignments and group description to adver-
+sary.
+Equation queries:- In this phase the adversary can see some equations and solu-
+tions
+Challenge:- In this stage the adversary is given a chllenge that he has to produce
+anewnon-trivialequationwithitssolution.
+The deﬁnition of pseudo-free groups in adaptive setting[9] consists of two design deci-
+sions. The ﬁrst issue with the design is to set equations for which an adversary can
+see solutions and the second issue is to deﬁne what do we actually mean by non-trivial
+multivariate equations in adaptive setting of pseudo-free groups.
+As discussed above the ﬁrst issue is to ﬁx the type of equations but the important
+thing which is to be considered here is how the equations can be produced for which
+adversary can see solution because if we give too much freedom to adversary then it
+can violate the security. Even keeping more restrictions here won’t allow us to deﬁne
+adaptivesettingforanadversary. Thereforeﬁrstissuewiththedesignhasbeenresolved
+by considering some parametric distribution over the set of equations.
+5.1 Equation setup in adaptive pseudo-free groups
+Insecondstageofadaptivepseudo-freegroups,theadversaryisallowedtoseesomenon-
+trivial equations and solutions. Therefore the equations are controlled by parametric
+distribution[9]. More speciﬁcally, equations are selected according to some parametric
+distribution where the distribution depends on the parameter of an adversary. The
+parameter supplied by adversary may lead to di?erent variety of adversaries ranging
+from weak one to a strong one.
+In case of weak adversary, we consider weak deﬁnition of adaptive pseudo-free groups23
+where the adversary has no control over the equations. This means that the challenger
+chooses an equation , sets an assignment, computes the solution of an equation and ﬁ-
+nallygivesequationanditssolutiontoanadversary. Henceinthiscasetheadversaryis
+notthatmuchadaptive,sohecangetallequationstogetherwiththeirsolutionsatonce.
+In strongest form of adversary, the case is not the same as we saw in weakest form. In
+this case the adversary is really adaptive and can select equations by his own choice.
+The adversary can choose equations in an adaptive manner such that the adversary
+ﬁrst choose an equation, get back its solutions, then choose another equation, get back
+solution and so on. This deﬁnition of pseudo-freeness is known as strong adaptive
+pseudo-freeness.
+In static pseudo-free groups where the adversary is given only randomly chosen gen-
+erators of the equation and his goal is to come up with solution to that equation. In
+contrast, thenotionofpseudo-freenessinadaptivesetting[9]hasbeenextendedtomore
+general level. In case of adaptive adversary,we have done a new kind of setting where
+the adversary has limited control over the set of equations. This limitation is controlled
+by parametric distribution ?.Theadversarysuppliedaparameter M of some length
+which is required for sampling from distribution. The distribution then provides m+1
+integers which is written as (e,s)whereas e and s are integers. Once the parameter
+M is ﬁxed, then ?(M) is the distribution from which e and s are drawn.
+5.2 Non-trivial Multivariate Equations
+Rivest in [31] deﬁned non trivial equations in a way that they do not have any solution
+in a free group. We deﬁne non-trivial equations in some other way because in our case
+theadversaryisallowedtoseesomeadditionalinformationalsowhichmaybeusefulfor
+himtosolveothernon-trivialequations. Thereforewedeﬁnenon-trivialitybyanalysing
+equations over quotients of free groups.
+we describe a framework that deﬁnes the non-triviality for multivariate equations.
+Let [9] FA(a ...a )denotesafreeabeliangroupsuchthat {a ...a } are the gener-
+1 m 1 m
+ators of the group and there exists some binary relation??FA?FA on free abelian
+group that makes equalities in words. As mentioned earlier, we would now hence aim
+to characterize the set of all equalities that can be derived from? . Recollect the fact
+that ultimately these equalities are construed over computational groups, thus there
+are two ways for an adversary to formulate new equalities?. The ﬁrst way is by using
+group operations and their properties over computational groups.
+2 2 2 3 2
+For example let ? = a a =a a then one can also ﬁnd a a =a a a =a a .Thus we
+1 2 4 1 4 2
+1 2 1 1 4
+have computed ﬁrst equality just by multiplying a to both sides in the equation and
+2
+second we have derived from the property of computational group. For instance if one
+b
+can derive the equality in the form w = w b in computational group, then can also
+2
+1
+? ?
+ﬁnd equality of the form w = w provided b should be prime. Moreover,we have to
+1 224
+take into account the above possibility for any q as we search for an abstraction which
+is not dependent on the order of the group.
+Deﬁnition 8[9]- Let FA{a .....a } be a free abelian group deﬁned by some binary
+1 m
+relation ??FA?FA onFA{a ....a }. Let? be the smallest congruence onFA.
+1 m ?
+-???
+?
+b b
+?p?N,?w ,w ?FA,w ? w ?w ? W .
+1 2 ? 1 ? 2
+1 2
+then w andw are trivially equal w.r.t?isw ? w .
+1 2 1 ? 2
+Therefore description for? is as follows.
+?
+Let ? = {(w ,1,w ,1),(w ,2,w ,2),....,(w ,t,w ,t)}.Considerabinaryrelation R
+1 2 1 2 1 2 ?
+on free abelian group deﬁned by:(w ,w )?R if?l ,l ...l ?Q such that
+1 2 ? 1 2 t
+?
+t ?1
+l
+i
+w =w . (w .w )
+1 2 2,i
+1,i
+i=1
+s
+1 s
+m
+Thus we can say that exponentiation of the word w =a .....a with rational number
+1 m
+l =a/b is deﬁned if and only if b divides gcd a.s .
+1≤i≤n i
+5.3 Applications of adaptive pseudo-free groups
+Adaptive pseudo-free groups[9] has an application to signatures and network coding
+signatures. These applications has been deﬁned for univariate equations.
+5.3.1 Signatures from Adaptive pseudo-free Groups
+Construction of signature scheme
+A signature scheme for family of adaptive pseudo-free groups with univariate equa-
+tions[9] works as follows:
+?
+Let ? denotes a parametric distribution that belongs to a speciﬁc class of parametric
+?
+distribution ? and G be a family of adaptive pseudo-free groups with respect to ? .
+n
+Thus the signature scheme works as :
+k
+(1) Key Generation (1 ,N)
+Let A = {a ,a ....a } and X = {x} be a set of constants and variables. In this
+1 2 m
+phase ﬁrst of all the key generation algorithm randomly choose an instance of compu-
+tational group G from a family of computational groups G then sets an assignment
+N
+? :A?G .
+N
+?
+Finally it sets veriﬁcaion key(public key)vk ={X,A,?,G ,? } and signing key(secret
+N
+key) as sk =order{G }.
+N25
+(2) Signing (sk,M)
+?
+In this phase, ? gives (e,s,r)asoutputandthesigningalgorithmusesecretkey
+which is equal to order of G to compute solution of the univariate equation which is
+N
+in the form of
+s
+e 1 s
+m
+x =a .....a
+1 m
+If ? be a solution of the equation then the signing algorithm ﬁnally gives signature as
+?=(e,s,r,?)for M.
+(3) veriﬁcation(vk,M,?)
+In this phase the veriﬁcation algorithm performs the veriﬁcation of signature on mes-
+sage M by checking two conditions.
+?
+1)It veriﬁes whether ver (e,s,r,M)=1.
+?
+s
+e 1 s
+m
+2)It checks if ? is a solution of the equation x =a .....a .
+1 m
+If both the conditions are satisﬁed than it gives 1 as output ,otherwise 0.
+5.3.2 Linear Network Coding
+Network coding is technique of transmitting information in which the nodes of the net-
+work combines several packets they receive and then transmits them in order to achieve
+maximuminformationﬂowinthenetwork. Thetransmittedinformation[9]isexpressed
+in a vector form as (v ,...,v ). Before transmitting any information, a sequence of m-
+1 m
+augmented vectors(p ,...,p )aregeneratedbythesourcecodebyprepending u to v .
+1 m i i
+Each u has 1 in i-th position and 0 in other positions. The source in the network
+i
+sends the augmented vectors as packets in the network. The nodes in the network after
+receivingp ,p ,....,p processthesepacketsbyperforminglinearcombinationandthen
+1 2 m
+sends them as a resultant vector to its outgoing edges.
+Anodemustreceive m valid vectors pi of the form p1,p2,...,pm to get original in-
+formation and for which us are linearly dependent. Thus the original message M is
+i
+retrieved as
+?1
+M =U V
+Where U and V are the matrix with rows u ,u ,....,u and v ,v ,....,v .
+1 2 m 1 2 m
+The malicious nodes in the network makes the retrieval of the original information
+impossible by injecting invalid vectors. The above mentioned idea is susceptible to
+these kind of attacks. A solution to overcome this problem is to use network coding
+signatures that checks whether a given vector is valid or not just by checking condition
+whether it has been generated by linear combination of valid vectors.26
+5.3.3 Network Coding Signatures
+Deﬁnition 9[9] : A network coding signature is deﬁned by a triple of algorithms
+(NetKG, Sign, Ver) such that:
+k
+(1) NetKG(1 ,N)
+In this phase the algorithm takes input as k and N and produces output vk and sk.
+Where k is the security parameter
+N is the parameter that deﬁnes the size of signed vectors
+vk is the public veriﬁcation key
+sk is the secret signing key.
+(2) sign(sk,V)
+The signing algorithm in this phase produces signature ? for message M on input
+sk, fid and m dimensional subspace V ?FN.
+Where fid is a random ﬁle identiﬁer.
+(3) ver(vk,V,?)
+The veriﬁcation algorithm on input (vk,fid,V ? FN,)givesoutputas1(accept)
+or 0 (reject). This algorithm checks one condition that if ? is valid signature produced
+by signing algorithm for all honestly generated key pairs (vk,sk), all fid (random ﬁle
+identiﬁer) and for all V ? FN.Iftheconditionissatisﬁedthenthealgorithmgives
+output as 1 for all v?V otherwise 0.
+5.3.4 Homomorphic Network Coding Signatures
+Deﬁnition 10[9]:- : Homomorphic network coding signatures are special type of net-
+work coding signatures that are deﬁned by a 4-tuple of algorithms ( NetKG, Sign, Ver,
+Combine)such that:
+(1) NetKG(1k, N)
+In this phase the algorithm takes input as k and N and produces output vk and sk.
+Where k is the security parameter
+N is the parameter that deﬁnes the size of signed vectors
+vk is the public veriﬁcation key
+sk is the secret signing key.27
+(2) Sign (sk, V, ﬁd)
+The signing algorithm in this phase produces signature ? for message M on input
+sk, fid and m dimensional subspace V ?FN.
+Where fid is a random ﬁle identiﬁer.
+l
+(3) Combine (vk, ﬁd,(w,? ) )
+i i
+i=1
+On input vk,fid (random ﬁle identiﬁer), set of tuples (w,? ), this algorithm produce
+i i
+anewsignature ? as output such that if each ? is a valid signature on v then ? is a
+i i
+?
+l
+valid signature for v which is obtained from linear combination wv .
+i i
+(i=1)
+(4) Ver (vk, V, ﬁd) -
+The veriﬁcation algorithm on input (vk,fid,V ? FN,?), gives output as 1 means
+accept or 0 means reject. This algorithm checks one condition that if sigma is valid
+signature produced by signing algorithm for all honestly generated key pairs (vk,sk),
+?
+all fids (random ﬁle identiﬁer) and for all V ? FN . If the condition is satisﬁed the
+algorithm gives ouput as 1 for all v?V otherwise 0.
+5.3.5 Network Coding Signatures from Adaptive pseudo-free groups
+Aswehavediscussedabovein[9]networkcodingsignaturescheme,aﬁletobetransmit-
+ted is expressed as an ordered sequence of set of vectors (v ,v ,.v ) of n components.
+1 2 m
+These vectors will be prepended with a vector u of m components. Let w be the set
+i i
+of resulting vectors.
+LetR ={0,...,r?1}denotesthesetofcoe?cientsfromwheretheyarerandomlysam-
+pled. LetU denotesanupperboundonthepathlengthfromsourcetodestination.Thus
+U
+from the above positions B = mr .Thisdenotesthelargestvalueofu-coordinatesin
+vectors. Moreover denoting an upper bound with M on the magnitude of the coordi-
+?
+nates of the initial vectors {v1,v2,....,vm},weset B =MB.
+?
+Let ? denotes the parametric distribution that takes input as (fid,V,B ).Let l de-
+n s
+l
+notes a security parameter and l represents an integer such that 2 >B,compute
+i i i
+H(fid)where H is an division intractable function. For each v =(v ,v ,...,v )? V.
+i
+1 2 n
+First of all it uniformly samples al+l bit random integers s and then gives output as
+s i
+i i (i) (i) m
+(s,u,v ). Thus ? gives output as (e,{s,u ,v }
+i n i
+i=1
+?
+Let? denotes a parametric distribution belongs to a speciﬁc class of parametric distri-
+?
+bution ? and G be a family of adaptive pseudo-free groups with respect to ?.Thus
+n
+the signature scheme works as :28
+k
+(1) NetKG(1 ,N)
+Let A = p ,...,p ,q ,...,q and X = x be a set of constants and variables. In this
+1 n 1 2
+phase ﬁrst of all the key generation algorithm randomly choose an instance of compu-
+tational group G from a family of computational groups G,then sets an assignment
+N
+? :A?G .
+N
+?
+Finally it sets veriﬁcaion key(public key)vk ={X,A,?,G ,? } and signing key(secret
+N
+key) as sk =order{G }.
+N
+(2) sign(sk,V)
+In this phase, ﬁrst of all the signing algorithm choose a random indentiﬁer fid for
+(i) (i) m
+V and then runs ? to obtain (e,{s,u ,v } Finally it uses secret key which is
+n i
+i=1
+equal to order of G to compute solution of the univariate equation which is in the
+N
+form of
+i i i i
+v v u u
+e s 1 n 1 m
+i
+x =p p ...p q ...q
+n
+1 1 2
+If ? be an solution of the equation then the signing algorithm ﬁnally gives signature as
+(i) (i) m
+?=(e,{s,u ,v } ,?)for M.
+i
+i=1
+(3) ver(vk,V,?):
+In this phase the veriﬁcation algorithm performs the veriﬁcation of signature on mes-
+sage M by checking two conditions.
+(i) (i) m
+1)It veriﬁes whether ver (e,{s,u ,v } ,?)=1.
+? i
+n
+i=1
+i i i i
+v v u u
+e s 1 n 1 m
+i
+2)It checks if ? is a solution of the equation x =p p ...p q ...q .
+n
+1 1 2
+If both the conditions are satisﬁed than it gives 1 as ouput ,otherwise 0.
+(4) combine(vk,ﬁd,? ,...,?):
+1 l
+This algorithm works as follows:
+First of all it removes w that have u co-ordinates negative or larger than B/(mq)or
+i
+?
+have v coordinates negative or larger than B /(mq). Thus the remaining vectors are
+w ,w ,..,w .
+1 2 n
+?
+n
+Finally this algorithm randomly choose a ,a ,...,a ?Q then set w = aw and
+1 2 n i i
+i=1
+produce signature as output ?=(e,s,w,fid,?)on w by computing
+?
+n a
+i
+? = ?
+i=1 i
+?
+n
+s
+i
+s = a
+i
+i=129
+5.4 Trivial Multivariate Equations
+Let
+k k k k
+k k
+e e s s
+e s t
+1 2 1 2
+n m
+?={x x ...x =a a ...a }
+1 2 n 1 2 m k=1
+beasetofmultivariateequationsoverthefreeabeliangroup’F’andlet{? ,? ,...,? |
+1,k 2,k n,k
+?=1.....t} be a solutions for these equations. Assume the free abelian group ’F’ is
+generated by {? ,? ,...,? ,? ,? ,......,? }.
+1 2 n 1 2 n
+? ? ? ?
+? ?
+e e s s
+e s
+1 2 1 2
+n m
+Deﬁnition 10 :Equation ={x x .....x =a a ...a }
+1 2 n 1 2 m
+is trivial with respect to ? if there exists solution of the given equation over F/? .
+?
+Let
+? ? ? ?
+? ?
+e e s s
+e s
+1 2 1 2
+n m
+{x x ...x =a a ...a } (1)
+1 2 n 1 2 m
+be an equation
+Assume that
+m n t
+? ? ?
+i
+i
+v k
+y l,y
+?
+? = a ?
+y
+i y,l
+y=1 y=1
+l=1
+i i
+is a solution for the equation for some v ,k for (1≤y≤m,1≤l≤n,1≤i≤n)and
+y l,y
+rationales l ,l ....l for some Q such that:
+1 2 t
+t n m
+? ? ?
+i i
+1 1 k ? ?
+t
+? 1 t 1 k ? ? ?e s
+k k v v s s
+y y
+1 n 1 1 e k k v v e 1 2 s l
+i
+1 1 n m m n m
+{(? ,....,? ,a ...a ) ....(? ,....,? ,a ...a ) } =a a .....a ( ? a )
+y
+1 1 1 1 n n m m 1 2 m
+y,i
+i=1 y=1 y=1
+n t n m
+? ? ? ?
+y i
+? ?
+? ?
+?e s
+s s
+? e s y l
+1 2 i i
+m
+i
+( ? ) =a a .....a ( ? a ) (2)
+y
+i 1 2 m y,i
+i=1 i=1 y=1 y=1
+Thus by replacing the expressions in the above relation and matching exponents of
+di?erent symbols we have an equation:
+? ? ? ?
+? ?
+e e s s
+e s
+1 2 1 2
+n m
+{x x ....x =a a ....a } (3)
+1 2 n 1 2 m
+i i
+is trivial with respect? to if there exists v ,k for (1≤ y≤ m,1≤ l≤ n,1≤ i≤ n)
+y l,y
+and rationals l ,l ....l for some Q such that
+1 2 t
+?
+n
+i ? u
+1) k e =e l for (1≤u≤t,1≤y≤n)
+u
+i=1 u,y i y
+? ?
+m t
+i ? ? u
+2) v e =s ? s l for (1≤y≤m)
+u
+i=1 y i y u=1 y
+i i
+The converse of the above statement also true if there exists if there exists v ,k
+y
+l,y30
+for (1≤ y ≤ m,1≤ l ≤ n,1≤ i≤ n)andrationals l ,l ....l for some Q such that
+1 2 t
+equation (2) holds then
+m n t
+? ? ? i
+i
+k
+v
+? y l,y
+? = a ?
+y
+i y,l
+y=1 y=1 l=1
+is a solution for the equation (1) over F/?
+?
+Given the set of equations
+k k k k
+k k
+e e s s
+e s
+1 2 1 2
+n m
+?={x x ....x =a a ....a }
+1 2 n 1 2 m
+we deﬁne the following quantities in a matrix form such that these quantities are de-
+pendent on?
+? ?
+1 t
+s ··· s
+1 1
+?
+? ?
+. .
+. .
+=
+? ?
+. .
+1 t
+s ··· s
+m m
+? ?
+1 t
+1/e ··· 1/e
+1 1
+? ?
+. .
+. .
+E =
+? ?
+. .
+1 t
+1/e ··· 1/e
+n n
+We write the given condition in matrix form as
+? ?
+?
+e
+1
+? ? ? ?
+? ?
+.
+1 n ? 1 t
+.
+v ··· v =s ? s ··· s (l )
+? ?
+. u
+y y y y y
+?
+e
+n
+? ? ? ?
+? ?
+e e
+1 1
+? ? ? ?? ?
+? ? ? ?
+. ? .
+1 n 1 t 1 u n u
+. .
+? v ··· v =s ? s ··· s k /e ··· k /e
+? ? ? ?
+y y . y y y u,y y u,y y .
+? ?
+e e
+n n
+? ? ? ?
+? ?
+e e s s
+e s
+1 2 1 2
+n m
+Proposition 1: Equation{x x ....x =a a ....a }
+1 2 n 1 2 m
+is trivial with respect to ? if and only if
+?
+t m ? ?
+(1)?k?Z,V ?Z :e ( EK +V)=s
+i
+n n
+? ?
+? ?
+e e
+i i i i
+(2)?m? (1...t),?x,y? (1...n),?l : k ( )= k ( )
+m
+m,x m,y
+m m
+e e
+x y
+i=1 i=1
+? ? ? ? T
+where e =[e ,e .........e ]
+i 1 2 n
+? ? ? ? T
+s =[s ,s .........s ]
+1 2 m31
+Proof: The proof for above proposition can be done by setting
+n
+?
+?
+e
+i i
+l = k
+u
+u,y
+u
+e
+y
+i=1
+For example if we put ( u=1and y=1)inaboveconditionthen
+n
+?
+?
+e
+i i
+l = k ( )
+1
+1,1
+1
+e
+1
+i=1
+Now let ( u=1and y=2)then
+n
+?
+?
+e
+i
+i
+l = k ( )
+1
+1,2
+1
+e
+2
+i=1
+Thus we can say that
+n n
+? ?
+? ?
+e e
+i i i i
+?m? (1...t),?x,y? (1...n),?l : k ( )= k ( )
+m
+m,x m,y
+m m
+e e
+x y
+i=1 i=1
+We write the above condition
+?
+? ?
+e ( EK +V)=s
+i
+in matrix form as:
+? ?? ? ? ? ? ?
+1 t 1 1 n t 1 n ?
+k /e ··· k /e
+s ··· s v ··· v s
+1,1 1 1,1 1
+1 1 1 1 1
+? ?? ? ? ? ? ?
+. . . . . . .
+?
+. . . . . . .
+e ( + )=
+? ?? ? ? ? ? ?
+. . . . . . .
+i
+1 t 1 1 n t 1 n ?
+s ··· s k /e ··· k /e v ··· v s
+m m t,n n t,n n m m m
+? ?? ? ? ? ? ?? ?? ?
+1 1 n t
+1 n ? ? 1 t ?
+v ··· v e s s ··· v k /e ··· k /e e
+1 1 1 1 1 1 1,1 1 1,1 1 1
+? ?? ? ? ? ? ?? ?? ?
+. . . . . . . . .
+. . . . . . . . .
+= ?
+? ?? ? ? ? ? ?? ?? ?
+. . . . . . . . .
+1 n ? ? 1 t 1 1 n t ?
+v ··· v e s s ··· v k /e ··· k /e e
+m m n m m m t,n n t,n n n
+Thus for (1≤u≤t,1≤y≤n)and(1≤y≤m)wehave,
+? ? ? ?
+? ?
+e e
+1 1
+? ? ? ?? ?
+? ? ? ?
+. .
+1 n ? 1 t 1 u n u
+. .
+? v ··· v =s ? s ··· s k /e ··· k /e
+? ? ? ?
+. .
+y y y y y u,y y u,y y
+? ?
+e e
+n n
+? ?
+?
+e
+1
+? ? ? ?
+? ?
+. ?
+1 n 1 t
+.
+? v ··· v =s ? s ··· s (l )
+? ?
+u
+y y . y y y
+?
+e
+n32
+m t
+? ?
+i ? ? u
+? v e =s ? s l
+u
+y i y y
+i=1 u=1
+Adaptive Pseudo-free Groups
+Informally, adaptive-pseudo-free groups[9] are the computational groups in which the
+adversary is permittef to look at several equations along with their solutions and his
+goal is to solve a new non-trivial equation where non-trivial equations means the equa-
+tions that do not have solutions in a free group.
+The formal deﬁnition of adaptive pseudo-free groups[9] given below is for a set ’A’ of
+?generators, acomputationalgroup{G } andadistribution?oversetofequations.
+N N
+Setup
+Inthisphaseﬁrstofallthechallengerrandomlyselectsinstanceofcomputationalgroup
+{G } that belongs to a family ofG whereG ={G } and then sets an assignment
+N N N?Nk
+n: A?{G } for set A of generators and parametric distribution ?.Atlasttheinput
+N
+to the assignment n: A?{G },description of the computational Group {G } and
+N N
+parametric distribution ? is given to the Adversary A.
+Equation queries
+In this phase the adversary is permitted to look at the equations along with their
+solutions. The queried equations are controlled by the adversary through paramet-
+ric distribution ?.Thustheadversary A selects M for each query and gives it to
+k
+k k
+challenger. Then the challenger runs (e ,s )? ?ˆ(M ), computes the solution ? for
+k i
+i j
+k k
+equation ? and gives back (? ,(e ,s )) to adversary A.
+i i
+i j
+Challenge
+After the adversary is acquaimted with equations and their solutions then he tries to
+? ?
+produce an equation ? with a solution ? .The adversary succeeds in the game if he
+successfully produces a non trivial equation.
+Deﬁnition11[9]Adaptivepseudo-freeGroups:- AfamilyofcomputationalGroup
+G is said to be adaptive Pesudo-free with respect to some distribution ?, if for any set
+’A’ of polynomial size, any probabilistic time adversary A succeeds in the game above
+with at most negligible probability.
+5.5 The RSA group is Adaptive Pseudo-free
+?
+Theorem 7 :- If the strong RSA assumption holds, then Z is adaptive pseudo-free
+N
+with respect to ?ˆ
+Proof:- For the sake of contraction, we assume that RSA is not adaptive Pseudo-free33
+with respect to multivariate equations. As per our deﬁnition of Adaptive pseudo-free
+groups with respect to multivariate equations there exists a probabilistic polynomial
+time adversary A with non-negligible probability that is supposed to produce an equa-
+? ? ?
+tion ? together with a solution ? in such a way that ? is non-trivial with respect to
+previous queried equations.
+?
+For proof we construct an adversaryB from an adversaryA such thatBs main goal is
+to break strong RSA assumption. More speciﬁcally, adversary B is constructed in such
+a manner that if adversary A can break the adaptive pseuco-freeness of RSA group
+with respect to multivariate equations, then B can break strong RSA assumption
+k k k
+Let ?ˆ(M )? (e ,s ,r )forall k ? (1...t),i? (1...n),j? (1...m).
+k
+i j i
+where ’k’ is the number of queries done by adversary A.
+?
+In order to prove the theorem we show two types of adverseries if we consider e from
+i
+k
+the equation( the adversary is supposed to produce) ande (already queried equations)
+i
+for all k ? (1...t),i? (1...n).
+TYPE 1-
+? ?
+n t
+? ? k
+Adversary produce e such that e doesnot divide e .
+i i i
+i=1 k=1
+TYPE 2-
+? ?
+n t
+? ? k
+Adversary produce e such that e divides e .
+i i i
+i=1 k=1
+Type 1 -
+In this case we construct Adversary B that can break strong RSA assumption. As per
+Strong RSA assumption, it is not possible for an adversary given y and N to ﬁnd x
+and e such that
+e
+x =ymodN
+? ?
+where N is the product of two safe primes p and q and ’y’ has been taken from QR .
+N
+Thus Adversary B has input y and N and his aim is to compute e-th root x of y for
+some e of his own choice.
+The following scenario consist of three stages as follows.
+(1) Setup -
+1 t 1 t
+In this phase Adversary B randomly selects {r ,.......,r } and computes {e ,.......,e }
+1 n 1 n
+as follows
+k k
+e =H(r )forall(i=1,......n)and(k=1,......,t).
+i i
+2
+Then B randomly selects {z ,z ,z ,.......,z } from {1,.....,N } in order to set assign-
+1 2 3 m34
+ment ? for constant symbols.
+? ?
+n t
+k
+Let E = e .
+i
+i=1 k=1
+Thus B sets assignments as follows.
+Ez
+1
+?(a)=y
+1
+z
+2
+?(a)=?(a )
+2 1
+z
+j
+Thus ?(a)=?(a ) .forall(j =2,.....,.m).
+j 1
+2
+B also randomly selects {z ,z ,z ,.......,z } from {1,.....,N } and sets the constant
+1 2 3 n
+variable symbols as follows :
+Ez
+2
+x =y
+2
+Z
+i
+Thus x =(x ) for i=3to n.
+i 2
+Finally Adversary B send assignments ? and description of the computational group
+to adversary A.
+? ? 2
+Let Z =bpq +c.isselectedrandmolyfrom {1,2,....,N } and distribution of each
+i i i
+and every (zmodp’q’)isindistinguishablefromuniformdistributionover {Z ? ?}.
+i p q
+(2) Equation Queries -
+1 t
+InthisphaseadversaryAadaptivelyqueryequationsbysupplyingparameters{M ,....,M }
+for ?ˆ.Thusadversary B is allowed to compute solutions of equations ( for k = 1 to
+t) for adversary A and ﬁnally provides equations and their solutions to A.Inorderto
+solve each equation B selects exponents according to parametric distribution ?ˆ(M)(
+k
+k k k
+for all k = 1 to t) from {s ,s ,.......,s }.
+2 3 m
+Therefore B solve equations as
+k k k
+k k
+e e e s s
+1 2 n 2 m t
+? ?{x x .....x =a a .....a }
+i n 1 m
+1 2 2
+k=1
+? ?
+n t j
+Let E = e where j ?= k.
+i
+i
+i=1 j=1
+The above equations can be also written as
+k k
+s s
+2 m
+k
+a a ....a
+e 1 m
+2
+1
+x =
+1 k
+k
+e e
+2 n
+x ....x
+n
+2
+Thus by substituting the values of {a ,a ,....,a }and{x ,x ,.....,x } we have
+1 2 m 2 3 n
+?
+m k
+Z + s Z
+E 1 j
+i
+j=2 j
+(y )
+? (x)= ?
+k 1 n
+k k
+E Z e + e Z
+2 j
+i 2 i=3
+i
+(y )
+? ?
+m n
+k k
+Z + s Z ? e Z
+E
+i 1 j j
+j=2 j i=2 i
+=(y )35
+k k k
+Finally B gives (e ,s ,r ,?(x )) to A.
+i
+i j i
+(3) Challange -
+Once the adversary A has seen equations along with their solutions in the previous
+? ?
+phase, then in this stage he tries to produce an equation ? along with its solution ?
+?
+such that ? is non-trivial to previously queried equations.
+? ? ? ?
+Hence (e ,s ,r)isdistributedwithrespectto ?ˆ(M )
+i j i
+? ? ?
+? ?
+e e s
+e s
+?
+1 2 n 2 m
+Thus ? ?{x x ....x =a a ....a }
+n m
+1
+1 2 2
+?
+m
+?
+Z + s Z
+E 1
+j
+j=2 j
+(y )
+?
+?
+? (x)=
+1 n
+? ?
+Z e + e Z
+2 j
+E
+2 j=3 i
+(y )
+? ?
+m n
+? ?
+Z + s Z ? e Z
+E
+1 j j
+j=2 j j=2 i
+=(y )
+? ?
+m n
+? ? ? ?
+ˆ ˆ
+LetE= E(Z + s Z ? e Z)and u=GCD(e , E). Provided e does not
+1 j j
+j=2 j j=2 j i i
+?
+ˆ
+divide E. Therefore adversary B can use shamir’s trick to get (e /u)-th root of x of y
+i
+?
+for e of his own choice and thus give (e /u,x)tobreakstrongRSAassumption.
+i
+?
+ˆ
+Finally we need to show that (e)doesnotdivideEwithnon-negligibleprobabil-
+i
+?
+ity. If we consider some prime r that divides (e ). As we are in Type 1 adversary
+i
+such that r does not divide E. Therefore we have to show that r does not divide
+? ?
+m n
+? ? ? ?
+Z + s Z ? e Z . As we know that Z =bpq +c .Since b is not known
+1 j j i i i i
+j j
+j=2 j=2
+to adversary and r depends on c.Thus r does not divide p’q’ and the probability
+i
+? ?
+m n
+? ?
+with which Z + s Z ? e Z =0mod r is 1/r.Thuswecansaythatthe
+1 j j
+j j
+j=2 j=2
+? ?
+ˆ
+probability with which (e)doesnotdivideEis(1-1/r)forsmallprimefactorrof(e ).
+i i
+Type 2 -
+? ?
+n t
+? ? k
+In this case adversary outputs e such that e divides e.Thuswehave
+i i i=1 k=1 i
+two sub-cases as follows:
+? k
+1) In this case for all k =1to t and i =1to n ,(r ?= r ). Therefore our assumption
+i i
+on ?ˆ is not satisﬁed as we would be able to break division intractability of the function
+1 t ? k
+H. As we have (r ,.....r )and(r ?= r)forall k =1to t and i =1to n such that
+1 n i i
+? ?
+n t
+? ? k k k
+H(r)= e | e where H(r )=(e).
+i i i i i
+i=1 k=1
+j
+?
+2) In this case for some j =1to t and i =1to n ,(r = r ) where j?= k.There-
+i i
+j
+?
+fore we have (e = e ). Now we give simulation for the given case below. First of all
+i i
+we describe how to construct an adversary B whose main goal is to break strong RSA
+assumption.36
+Before proceeding towards simulation we provide some details that will be usefull for
+reader to understand this approach.
+k k ? ?
+Let (e ,s)betheexponentsof ? for all k = 1 to t and (e ,s)betheexponents
+k
+i j i j
+? ?
+of ? .sincetheequation ? is non-trivial, thus
+?
+t m ? ?
+?k?Z,V ?Z suchthat :e ( E k+V )?=s
+r r
+.
+We show the above condition in matrix form as:
+? ? ? ? ? ?
+1 n
+? ?
+1 ··· 1 v ··· v 1
+1 1 n t 1 1
+k /e ··· k /e
+? 1 t? 1,1 1 1,1 1 ? 1 n? ? ??
+s ··· s v ··· v s
+? 2 2?? ? ? 2 2? ? 2?
+? . .
+. .
+e ( + )?=
+? ?? ? ? ? ? ?
+. . . . . . .
+i
+. . . . .
+? ? ? ? ? ?
+. . . . .
+1 1 n t
+k /e ··· k /e
+1 t t,n n t,n n 1 n ?
+s ··· s v ··· v s
+m m m m m
+t m
+Thus the above comdition is true for all k ? Z,V ? Z ,thenitmustbetruefor
+j
+?
+ˆ ˆ
+some k and V. As we are in the case where (e = e ). It is easy to see that the ﬁrst
+i i
+j ?
+ˆ
+ˆ
+equation is always true for k and V.Thenitwillalsobetruefor(s ?=s)forsomev
+v v
+=2to m. Adversary B can randomly select j from ( 1 to t) and v from (2 to m)and
+then perform the simulation as follows:
+(1) Setup -
+1 t 1 t
+In this phase Adversary B randomly selects {r ,.......,r } and computes {e ,.......,e }
+1 n 1 n
+as follows
+k k
+e =H(r )forall(i=1to n)and(k=1to t).
+i i
+2
+ThenB randomly selects (g ,g ,....,g )fromQR andZ ,? from{1,2....,N } and set
+1 2 m N v
+assignments as:
+? ?
+n t
+k
+Let E = e .
+i
+i=1 k=1
+Thus B sets assignments as follows.
+E
+?(a)=y
+2
+z
+v
+Thus ?(a )=?(a ) .forall(v=2,......,m).
+v 2
+?? E
+?(a)=?(a ) g
+1 2
+1
+E
+l
+Thus ?(a)=(g ) from i = (3,...,m) and i ?= v.
+i i
+? ?
+n t
+l
+where E = e
+l
+i
+i=1 l=137
+2
+B also randomly selects{z ,z ,z ,.......,z } from{1,.....,N } and set the constant vari-
+1 2 3 n
+able symbols as follows :
+Ez
+2
+x =y
+2
+Z
+i
+Thus x =(x ) for x =3to n.
+i 2
+Finally Adversary B sends assignments ? and description of the computational Group
+to adversary A.
+(2) Equation Queries -
+1 t
+InthisphaseadversaryAadaptivelyqueryequationsbysupplyingparameters{M ,....,M }
+for ?ˆ.Thusadversary B is allowed to compute solutions of equations (fork=1tot)
+for adversary A and ﬁnally provides equations and their solutions to A.Inorderto
+solve each equation B selects exponents according to parametric distribution ?ˆ(M )
+k
+k k k
+(forallk=1tot)from {s ,s ,.......,s }.
+2 3 m
+Therefore B solve equations as
+k k k k k
+e e s
+e s
+1 2 n 2 m t
+? ?{x x .......x =a a .......a }
+n m
+i 1
+1 2 2 k=1
+The above equations can be also written as
+k k
+s
+s
+2 m
+k
+a a .......a
+e m
+1
+2
+1
+x =
+1 k
+k
+e e
+2 n
+x ........x
+n
+2
+Thus by substituting the values of {a ,a ,....,a }and{x ,x ,.....,x } we have
+1 2 m 2 3 n
+j
+? s
+m
+k k E
+l
+1+Z s ??( u )
+E v
+l v j=1,j?=2,v
+j
+(y )
+? (x)= ?
+k 1 n
+k k
+E Z e + e Z
+2 j
+l 2 i=3 i
+(y )
+k
+? s ?
+j
+m E n
+k k
+1+Z s ??( u ) l? e Z
+E v
+l v j
+j=1,j?=2,v j i=2 i
+? (x)=(y )
+k 1
+Thus for solving j-th equation adversary B adopt a di?erent technique as follows:
+j
+Let M be the queried parameter.In order to solve each equation B selects exponents
+j j
+j j
+according to parametric distribution ?ˆ(M )(forallj=1tot)from {s ,s ,.......,s }.
+2 3 m
+j j j
+j j
+Then B ﬁx s =??Z s mode and compute ? in such a way that ??Z s = s +
+v v
+2 v i v 2
+j
+?e .Then B then ﬁnd
+i
+j
+?
+s
+m
+?? E
+i
+l
+(y )( u )
+i=1,i?=2,v i
+? (x)= ?
+j 1
+k n k
+Z e + e Z
+E 2 j
+l
+2 i=3 i
+(y )
+m
+?
+? i
+n
+k s
+j
+???E ( e Z
+l j
+i=2 i
+=? (x)=(y )( u )
+j 1
+i
+i=1,i?=2,v38
+? j j
+j j
+j
+s ?e
+e s ?e
+2 m 2 n
+i
+= (a a ..........a x ..........x )
+1
+2 m 2 n
+k k k
+Finally B gives (e ,s ,r ,?(x )) to A after solving each equation.
+i
+i j i
+(3) Challange -
+Once the adversary A has seen equations together with their solutions in the previ-
+?
+ous phase, then in this stage he tries to produce an equation ? along with its solution
+? ?
+? such that ? is non-trivial to previously queried equations.
+Therefore B will ﬁnd root of y as follows:
+We can write
+? ?
+? ?
+s ?e
+s ?e
+?
+2 m 2 n
+? (x ) ? a a .....a x ....x
+1 1 m n
+e 2 2
+i
+( ) =
+j j
+j j
+s ?e
+? (x ) s ?e
+2 m 2 n
+j 1
+a a .....a x .....x
+m n
+1
+2 2
+m n
+? j ?
+j j ? j
+? ? ?
+(s ?s )
+(s ?s )+z (s ?s ) ?(e +e )
+v v j i
+2 2 v i i
+=a ( a )( x )
+2
+i i
+i=2
+i=1,i?=v
+m n
+? j ? j
+? ?
+j j j
+? ?
+(s ?s ) ?(e +e )
+E (s ?s )+z (s ?s ) (E )e
+l v v i i l i i
+v
+2 2 i
+=(y ) ( u ) ( x )
+i i
+i=1,i?=v i=2
+where (l?= j).
+j
+?
+Hence we have a case where e =e , therefore by substituting the value of x for all (i
+i
+i
+i
+=2to n)weget
+m
+?
+?
+j ? ?
+?
+e j j n j
+? (x ) ? ? ?
+1 (s ?s )
+i
+i (E )] E (s ?s )+z (s ?s )?( ?(e +e )Z
+i l l v v j
+2 2 v i=2 i i
+[( )( u )) =(y ) )
+i
+? (x )
+j 1
+i=1,i?=v
+?
+j n j
+? ? j ?
+ˆ
+Let E = E((s ?s )+z (s ?s )?( ?(e +e )Z )).Finally we need to show
+l v j
+2 2 v v i=2 i i
+? ? ?
+ˆ
+that(e )doesnotdivideEwithnon-negligibleprobability. AsweknowthatZ =bpq +c .Since
+i i i
+i
+? ? j
+b is not known to adversary. we can see that (e ) | E and also s ?s ?=0,wehave
+i l
+i v v
+that
+?
+j n j
+? ? ? j ?
+(e )| (s ?s )+z (s ?s )?( ?(e +e )Z)withnegligibleprobability. There-
+v j
+i 2 2 v v i=2 i i
+?
+fore adversary B can use shamir’s trick to get (e /u)-th root of x of y to break strong
+i
+?
+ˆ
+RSA assumption where u=GCD(e , E).
+i
+The theorm RSA is adaptive pseudo-free with respect to multivariate equations can
+be proved by means of corollary using two new parametric distributions (?ˆ ,?ˆ ?=ˆ ?)
+S CH
+such that ?ˆ is a variant of ?ˆ
+S39
+?
+Corollary1[9] :-If the strong RSA assumption holds, then Z is adaptive pseudo-free
+N
+with multivariate equations with respect to ?ˆ .
+S
+The proof for the given corollary follows from that of theorem 1. The main idea here is
+that one can guess s in advance with non-negligible probability when they are small.
+i
+As we have deﬁned above that ?ˆ is a variant of ?ˆ such that s is equal to 0 and
+S 2
+s?(i=3tom)? Z is the output of chameleon hash function CH(M,R)deﬁnedover
+i e
+parameter M and randomness R.
+Corollary 2[9] :- If the strong RSA assumption holds and CH is a chameleon hash
+?
+function, then Z is adaptive pseudo-free with multivariate equations with respect to
+N
+?ˆ .
+CH
+The corollary has same proof as deﬁned in corollary 1. The main idea here is that
+one can use the property of chameleon hash functions during simulation in order to
+choose s in advance.
+i
+Weak Adaptive Pseudo-freeness of the RSA Group:-
+In weakest form of adaptive pseudo-free groups, the adversary at the start is allowed
+1 t
+to select parameters M ,...,M before giving any group description.If one can think of
+such a notion of adaptive pseudo-freeness then we can prove theorem 1 in more general
+way with respect to much general distribution than ?ˆ where (e,s ,...,s )needstobe
+2 m
+?
+bound to M.Thuswecanseeonecancomputeall rs in advance at the start because
+i
+1 t
+the simulator knows M ,....,M .40
+6 Pseudo-free Groups with System of Equations
+6.1 Non-Trivial System of Equations
+Inthissectionweextendthenotionofadaptivepseudo-freegroupsfrommultivariateto
+system of equations. The intuition behind this is to allow adversary to come up with a
+new set of equations. In deﬁnition [11] the adversary is allowed to see some non-trivial
+equations along with solutions and ﬁnally he has to come up with a new non-trivial
+equation and solution. Therefore in this case the game is same as the adversary is
+given a set of non-trivial multivariate equations but here he also has to come up with
+anewsetofequationsthatarenon-trivialtothegivenset. Formallywedeﬁneasbelow:
+Let
+k k k k
+k k
+e e s s
+1 2 e 1 2 s t
+n m
+?={x x .....x =a a .....a }
+1 2 n 1 2 m k=1
+beasetofmultivariateequationsoverthefreeabeliangroup’F’andlet{? ,? ,...,? |
+1,k 2,k n,k
+?=1.....t} be a solutions for these equations. Assume the free abelian group ’F’ is
+generated by {? ,? ,.......,? ,? ,? ,......,? }
+1 2 n 1 2 n
+j j j j
+j j
+e e s s
+? 1 2 e 1 2 s t
+n m
+Deﬁnition 12 : Set of Equations ? ={x x .......x =a a ......a }
+1 2 n 1 2 m j=1
+is trivial with respect to ? if there exists solution of the such system of equations over
+F/?
+?
+Let
+j j j j
+j j
+e e s s
+e s t
+1 2 1 2
+n m
+{x x .....x =a a ....a } (4)
+1 2 n 1 2 m j=1
+be a system of equations
+Assume that
+m n t
+? ? ?
+i
+i
+v k
+j y l,y
+? = a ?
+y
+i y,l
+y=1 y=1
+l=1
+i i
+is a solution for the equation for some v ,k for (1≤y≤m,1≤j≤k,1≤l≤n,1≤
+y l,y
+i≤n)andrationals l ,l ....l for some Q such that:
+1 2 t
+t n m
+? ? ?
+j j i i
+1 1 k
+t j j j
+1 t 1 k ?e s
+k k v v s s
+y y
+1 n 1 1 e k k v v e 1 2 s l
+n m i
+1 1 n m m
+{(? ,....,? ,a ...a ) ....(? ,....,? ,a ...a ) } =a a .....a ( ? a )
+y
+1 1 1 1 n n m m 1 2 m
+y,i
+i=1 y=1 y=1
+n t n m
+? ? ? ?
+j j j i i
+j
+?e s
+e s s
+j s y y l
+i 1 2
+m i
+( ? ) =a a .....a ( ? a ) (5)
+y
+i 1 2 m y,i
+(j=1..t)
+i=1 i=1 y=1 y=1
+j
+Thus by replacing the expressions in the above relation for ? and matching exponents
+i
+of di?erent symbols we have an equations:
+j j j j
+j j
+e e s s
+1 2 e 1 2 s t
+n m
+{x x .....x =a a ......a } (6)
+1 2 n 1 2 m j=141
+i i
+is trivial with respect? to if there exists v ,k for (1≤ y≤ m,1≤ l≤ n,1≤ i≤ n)
+y
+l,y
+and rationals l ,l ....l for some Q such that
+1 2 t
+?
+n j
+i u
+1) k e =e l for (1≤u≤t,1≤y≤n)
+u
+i=1 u,y i y
+? ?
+m j t
+i j u
+2) v e =s ? s l for (1≤y≤m)
+u
+i=1 y i y u=1 y
+i i
+The converse of the above statement also true if there exists if there exists v ,k
+y l,y
+for (1≤ y≤ m,1≤ l≤ n,1≤ i≤ n)andrationals l ,l ,....,l for some Q such that
+1 2 t
+equation (2) holds then
+m n t
+? ? ? i
+i
+k
+v
+j y l,y
+? = a ?
+y
+i
+y,l
+y=1 y=1 l=1
+is a solution for the equation (1) over F/?
+?
+6.2 Adaptive Pseudo-free Groups With System of Equations
+The formal deﬁnition of adaptive pseudo-free groups[9] given below is for a set ’A’ of
+?generators, acomputationalgroup{G } andadistribution?oversetofequations.
+N N
+Setup
+In this phase ﬁrst of all the challenger randomly selects instance of computational
+group {G } that belongs to a family of G where G = {G } and then sets an
+N N N?Nk
+assignment n: A?{G } for set A of generators and parametric distribution ?.At
+N
+last the input to the assignment n: A?{G },description of the computational Group
+N
+{G } and parametric distribution ? is given to the Adversary A.
+N
+Equation queries
+In this phase the adversary is permitted to look at equations together with their solu-
+tions. The queried equations are controlled by the adversary through parametric distri-
+bution ?.Thustheadversary A chooses M for each query and gives it to challenger.
+k
+k k
+Then the challenger runs (e ,s )? ?ˆ(M ), computes the solution ? of equation ?
+k i i
+i j
+k k
+and gives back (? ,(e ,s )) to adversary A.
+i
+i j
+Challenge
+After the adversary is acquaimted with equations and their solutions, then he tries
+to produce set of equations ? with a solution ? for( j=1..t).The adversary succeeds
+j j
+in the game if he successfully produces a non trivial equation.42
+Deﬁnition13[9]AdaptivePseudo-freeGroupswithSystemofEquations:- A
+family of computational GroupG is said to be adaptive Pseudo-free with respect to some
+distribution ?, if for any set ’A’ of polynomial size, any probabilistic time adversary A
+succeeds in the game above with at most negligible probability.43
+7 Conclusion
+In this project we have seen that the concept of pseudo-freeness seems to be a strong,
+natural and quite plausible in commonly used groups in cryptography. We have ex-
+plored the notion of adaptive pseudo-free groups from univariate to multivariate and
+system of equations. We have studied and identiﬁed pseudo-free group with respect to
+adaptive adversaries who aim to solve non trivial equations along with their solutions.
+Firstofallwehaveshowntrivialityforthecaseofadaptivepseudo-freegroupsandthen
+introduced formal deﬁnition of such groups for multivariate and system of equations.
+There are many open problems left by Rivest[31]. As one of the open problem is
+to ﬁnd groups in cryptography that satisﬁes the notion of pseudo-free groups. Thus
+?
+for a case we have proved the adaptive pseudo-freeness of the RSA group (Z )with
+N
+multivarite equations under reasonable conditions such that N is the product of two
+safe primes. Another problem in [31]is to prove the pseudo-freeness of Di?e-Hellman
+assumption as we have seen that the Di?e-Hellman assumption(either computational
+or decisional) does not satisﬁes the property of pseudo-free groups. In this project we
+have not addressed this problem but in future it would be interesting to see whether
+Di?e-Hellman assumption holds our deﬁnition of adaptive pseudo-free groups.
+Another open research in this direction is to to ﬁnd crytographic applications[26] that
+provides the usefullness of such groups in cryptography. In next section we have just
+provide an idea of extracting an application out of adaptive pseudo-free groups with
+respecttomultivariteequations. Itwouldbeinterestingtoseewhetherthatapplication
+really holds our deﬁnition and can capture use of pseudo-free groups in cryptography.44
+8 Future Work
+The study of pseudo-free groups carried out so far did not allow us to extract appli-
+cations out of them because of prime generation. As an ﬁrst application of adaptive
+pseudo-free groups (a signature scheme) for univariate equations deﬁned in [9], is more
+e?cient than the current RSA based signature schemes but it requires a longer public
+key. It may be a case that we can resolve this issue by constructing a signature scheme
+out of adaptive pseudo-free groups with multivariate equations. One way to construct
+amoree?cientsignatureschemeistoconsiderequationsthatdonothaveprimeex-
+ponents as prime generation is the bottleneck.
+The cryptographic assumptions such as discrete logarithm problem and the Di?e-
+Hellman problem[26] are considered at least as hard as factoring and currently there
+is no relation between pseudo-free groups and these assumptions. An interesting work
+is to see that whether such cryptographic assumptions in pseudo-free groups are com-
+putationally hard. Finally it would be interesting to ﬁnd relationship between pseudo-
+freeness and other cryptographic assumptions with the intuition of using such groups
+in cryptography.45
+9 References
+[1] M.Abadi and P.Rogaway, Reconciling two views of cryptography(the computational
+soundness of formal encryption). Journel of Cryptology, 20(3):395, July 2007.
+[2] L.Babai. Randomization in group algorithms:conceptual questions. In L.Finkelstein
+andW.M.Kantor,editors,GroupsandComputation2. Proc1995DIMACSWorkshop,volume
+28 of DIAMS Ser.in Discr.Math and Theor.Comp.Sci.,pages 1-16.AMS,1997.
+[3] E.Bach, Discrete logrithms and factoring.Technical Report CSD-84-186,University
+of Californiaat Berkley(1984).
+[4] Niko Baric and Birgit Pﬁtzmann. Collision-free accumlators and fail stop signa-
+ture schemes without trees. In Proc EUROCRYPT ’97,volume1233of Lecture notes
+in Computer Science,pages480-494. Springer-Verlag,1997.
+[5] Mihir Bellare and Phillip Rogway. Random oracles are practical: A paradigm
+for desiging e?cient protocols. First ACM Conference on Computer and Communi-
+cations Security, pages62-73, Fairfax, Virginia, USA,November3-5, 1993. ACMPress.
+[6] Dan Boneh and Richard J.Lipton. Algorithms for black box ﬁelds and their ap-
+plication to cryptography. Advances in Cryptology:283-297, 1996.
+[7] Christian Cachin,Silvio Micali and Markus Stadler. Computationally private in-
+formation retrival with polylogarithmic communication. In Jacques Stern, editor, EU-
+ROCRYPT’99, VOLUME 1592 OF LNCS,pages402-414,Prague,CzechRepublic,
+May 2-6, 1999. Springer, Berlin, Germany.
+[8] Jan Camenisch and Anna Lysyanskaya. A signature scheme with e?cient protocols.
+In stelvio Cimato, Clemente Galdi and Giuseppe Persiano,editors, SCN 02,volume
+2576 of LNCS, pages 268-289, Amalﬁ, Italy, September 12-13, 2002. Springer,Berlin,
+Germany.
+[9] Dario Catano, Dario Fiore and Bogdan Warinschi, Adaptive Pseudo-Free Groups
+and Applications. Advances in cryptology,pages207-223,May2011.
+[10] Henri Cohen. A course in Computational Algebraic Number theory.Springer,
+1993
+[11] Leo P.Comerford,Jr and Charles C.Edmunds. Quadratic parametric equations
+over free groups. In K.I.Appel,J.G.Ratcli?e, and P.E Schupp, editors, Contributions to
+Group theory, volume 33 of Contemparary Mathematics, pages 159-196 AMS, 1984.46
+[12] R. Cramer and V.shoup, Signature schemes based on the strong RSA assump-
+tion. ACM Trans.Inf.Syst.Secur.3(3), 161-185 (2000). Preliminary version in CCS’99.
+[13] W.Di?e and M.E.Hellman. Multiuser cryptographic techniques. In Proc.AFIPS
+1976 National Computer Conference, pages 109-112, Montvale, N.J., 1976. AFIPS.
+[14] W.Di?e and M.E.Hellman. New directions in cryptography. IEEE Trans.Inform.
+Theory,IT-22:644-654,November1976.
+[15] D.Dolev and A.C.Yao. On the security of public key protocols. In Proceedings
+of the 22nd Annual Symposium on Foundations of Computer Science,pages350-357,
+1981.
+[16] Claudio Gutierrez. Satisﬁability of equations in free groups is in PSPACE. In
+Proc.32nd ACM STOC,pages21-27,ACMPress,2000.
+[17] Susan Hohenberger, David Molnar and Ronald L.Rivest. Special signatures need
+special algebra, May 2003.Submitted.
+[18] Susan Hohenberger. The cryptographic impact of groups with infeasible inver-
+sion. Master’s thesis, EECS Dept., MIT,Cambridge, MA June 2003.
+[19] Takato Hrano and Keisuke Tanaka. Variations on Pseudo-free groups. A research
+report. In department of mathematical and computing science in Tokyo institute of
+technology, Japan 2007.
+[20] Olga Kharalampovich and Alexei Myasnikov. Implicit function theorem over free
+groups. Available at www.math.mcgill.ca/olga/publications.html.
+[21] Olga Kharalampovich and Alexei Myasnikov. Tarski’s problem about the elemen-
+try theory of free groups has a positive solution. Electronic Research Announcements
+of the American Mathematical Society,4:101-108,December14,1998.
+[22] Seymour Lipschutz and Charles F.Miller. Groups with certain Solvable and un-
+solvable Decision problems. Communications on Pure and Applied Mathematics,7-15,
+1971.
+[23] R.C.Lyndon Equations in Free groups. Trans. Amer. math.Soc.,96:445-457, 1960.
+[24] G.S.Makanin. Equations in a free group. IZvestiya NA SSSR,46:1199-1273,1982.
+English translation in Math USSR Izvestiya, 21 (1983),483-556.
+[25]Ueli.MaurerandStefanWolf. TherelationshipbetweenbreakingtheDi?e-Hellman47
+protocol and computing discrete logrithms. SIAM journel on Computing 28(5): 1689-
+1721,1999.
+[26] D. Micciancio. The RSA group is Pseudo-free. In Ronald Cramer,editor, EU-
+ROCRYPT 2005,volume3494of LNCS, pages 387-403, Aarhus, Denmark, May 22-
+26,2005. Springer, Berlin, Germany.
+[27] D.Micciancio.,S.Goldwasser.Complexity of lattice Problems: a Cryptographic Per-
+spective,TheKluwerInternationalseriesinEngineeringandComputerScience,Volume
+691. (Kluwer Academic,Bosten, 2002).
+[28] D. Micciancio and S.Panjiwani, Adaptive security of Symbolic Encryption. In.
+Theory of Cryptographic Conference-Proceedings of TCC. LNCS, vol.3378, pp. 169-
+187(2005).
+[29] D. Micciancio and Bogdan Warinschi, Soundness of formal encryption in pres-
+ence of adaptive adversaries. In: Theory of Cryptographic Conference- Proceedings of
+TCC’04. LNCS, vol.2951 pp.133-151 (2004).
+[30]A.A.Razborov. Onsystemofequationsinafreegroups.IZvestiyaNASSSR,48:779-
+832 (In Russian), 1984.English translation in Math. USSR IZvestiya 25,1(1985) 115-
+162.
+[31] R.L.Rivest. On the notion of pseudo-free groups. In: Theory of Cryptographic
+Conference- Proceedings of TCC’04. LNCS,vol. 2951,pp. 505-521(2004).
+[32] Joseph H.Silverman and joe Suzuki. Elliptic curve discrete logarithms and the
+?
+index calcus. In Proc.Asiacrypt98,volume 1514 of LectureNotesinComputerScience,
+Pages 110-125.Springer-verlag,1998.
+[33] Hasegawa Shingo, Isobe Shuji, Shizuva Hiroki and Tashiro Katsuhiro. On the
+Pseudo-freeness and CDH assumption. Springer Verlag, 2009.
+[34] Joseph H.Silverman and Joe Suzuki. Elliptic curve discrete logrithms and the
+?
+index calcus. In Proc.Asiacrypt98, volume 1514 of lecturenotesIncomputerscience,
+pages 110-125, Springer-Verlag, 1998.
+[35] Huafei Zhu. New digital signature scheme attaining immunity to adaptive chosen-
+message attack. ChinesejournalofElectronics,10(4): 484-486,October2001.
+[36] Huafei Zhu. A formal proof of Zhu’s signature scheme. Cryptlogy ePrint Archieve.
+Report 2003/155,2003.http://eprint.iacr.org/.
