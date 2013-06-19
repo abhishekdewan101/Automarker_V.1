@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="/Users/abhishekdewan/Documents/workspace/ExternalLibraries/mysql-connector-java-5.1.25-bin.jar"/>
 	<classpathentry kind="lib" path="/Users/abhishekdewan/Documents/workspace/ExternalLibraries/itext-5/itextpdf-5.4.2.jar"/>
+	<classpathentry kind="lib" path="/Users/abhishekdewan/Documents/workspace/ExternalLibraries/commons-math3-3.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

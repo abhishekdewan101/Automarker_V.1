@@ -8,12 +8,14 @@ public class automark_start {
 		
 		
 		//create objects for different classes
-	    pdf_to_text ptt = new pdf_to_text(inDirectory,outDirectory,false);
-        setup_databases sd = new setup_databases(databaseName);
-	    extractFeatures ef = new extractFeatures(inDirectory,databaseName,submissionTimeFile,outDirectory);
+	    //pdf_to_text ptt = new pdf_to_text(inDirectory,outDirectory,false);
+        //setup_databases sd = new setup_databases(databaseName);
+	    //extractFeatures ef = new extractFeatures(inDirectory,databaseName,submissionTimeFile,outDirectory);
+	    start_learning sl = new start_learning(databaseName);
 	    
 		//call the different methods
-	    ptt.convertToText();
-		ef.startExtraction();
+	    //ptt.convertToText();
+		//ef.startExtraction();
+		sl.execute_steps();
 	}
 }

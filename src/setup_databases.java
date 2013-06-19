@@ -27,7 +27,7 @@ public class setup_databases {
 			databaseConnection = DriverManager.getConnection(databaseURL,userName,password);
 		} catch (SQLException e) {
 			try {
-				databaseConnection = DriverManager.getConnection(baseURL,userName,password);
+				databaseConnection = DriverManager.getConnection(baseURL,userName,password); // if the database name given is not present then log into any database and run the create database query.
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -57,17 +57,17 @@ public class setup_databases {
 			Statement databaseStatement = databaseConnection.createStatement();
 			databaseStatement.executeUpdate("use "+database);
 			
-			databaseStatement.executeUpdate("CREATE TABLE `imageDB` (`noOfImages` int(11) NOT NULL,`marks` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+			databaseStatement.executeUpdate("CREATE TABLE `imageDB` (`noOfImages` int(11) NOT NULL,`marks` int(11) NOT NULL,`filename` varchar(255) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 			
 			databaseStatement.executeUpdate("CREATE TABLE `stopWordDB` (`word` varchar(255) NOT NULL DEFAULT '',UNIQUE KEY `word` (`word`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 			
-			databaseStatement.executeUpdate("CREATE TABLE `submissionTime` (`date` varchar(255) NOT NULL DEFAULT '',`time` varchar(255) NOT NULL DEFAULT '',`marks` int(11) NOT NULL,`extendedDeadline` varchar(255) NOT NULL DEFAULT '') ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+			databaseStatement.executeUpdate("CREATE TABLE `submissionTime` (`filename` varchar(255) NOT NULL,`date` varchar(255) NOT NULL DEFAULT '',`time` varchar(255) NOT NULL DEFAULT '',`marks` int(11) NOT NULL,`extendedDeadline` varchar(255) NOT NULL DEFAULT '') ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 			
 			databaseStatement.executeUpdate("CREATE TABLE `wordDB` (`word` varchar(255) NOT NULL DEFAULT '',`correctGrammar` varchar(255) NOT NULL DEFAULT '',`wordCount` int(11) NOT NULL DEFAULT '0',`wordLength` int(11) NOT NULL DEFAULT '0',`marks` int(11) NOT NULL DEFAULT '0',`filename` varchar(255) NOT NULL DEFAULT '') ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 		    
 			databaseStatement.executeUpdate("CREATE TABLE `wordList` (`word` varchar(255) NOT NULL DEFAULT '',UNIQUE KEY `word` (`word`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 		
-			databaseStatement.executeUpdate("CREATE TABLE `totalWords` (`wordCount` int(11) NOT NULL,`marks` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+			databaseStatement.executeUpdate("CREATE TABLE `totalWords` (`wordCount` int(11) NOT NULL,`marks` int(11) NOT NULL,`filename` varchar(255) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

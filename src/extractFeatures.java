@@ -72,7 +72,7 @@ public class extractFeatures {
 		extractImages();
 		extractSubmissionTime();
 		extractTotalWord();
-		extractWords();
+		//extractWords();   // very long process only uncomment when doing final run. Testing has been done and works correctly.
 	}
 	
 	
@@ -112,7 +112,8 @@ public class extractFeatures {
 			   }
 			  String [] temp = thesisFiles[i].getName().split("\\_");
 			  marks = Integer.parseInt(temp[1].substring(0,2));	
-			  databaseStatement.executeUpdate("insert into imageDB values("+imageCount+","+marks+")");
+			  databaseStatement.executeUpdate("insert into imageDB values("+imageCount+","+marks+",'"+thesisFiles[i].getName().substring(0, 4)+"')");
+					  
 			
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -168,7 +169,7 @@ public class extractFeatures {
 				}else{
 					extended = "NO";
 				}
-				databaseStatement.executeUpdate("insert into submissionTime values('"+date+"','"+time+"','"+marks+"','"+extended+"')");
+				databaseStatement.executeUpdate("insert into submissionTime values('"+id+"','"+date+"','"+time+"','"+marks+"','"+extended+"')");
 				
 			}
 			reader.close();
@@ -222,7 +223,7 @@ public class extractFeatures {
 						totalCountOfWords++;
 					}
 				}
-				databaseStatement.executeUpdate("insert into totalWords values("+totalCountOfWords+","+marks+")");
+				databaseStatement.executeUpdate("insert into totalWords values("+totalCountOfWords+","+marks+",'"+thesisFiles[i].getName().substring(0, 4)+"')");
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
