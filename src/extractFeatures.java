@@ -15,11 +15,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.itextpdf.text.pdf.PdfName;
-import com.itextpdf.text.pdf.PdfObject;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStream;
-
 /*This class would be responsible for extracting the different features from the text files and
  * putting them in the database tables.
  * The main features being currently extracted from the text files are
@@ -69,16 +64,16 @@ public class extractFeatures {
 	
 	//-----------------METHODS---------------------------------
 	public void startExtraction(){
-		extractImages();
-		extractSubmissionTime();
+	//	extractImages();
+	//	extractSubmissionTime();
 		extractTotalWord();
-		//extractWords();   // very long process only uncomment when doing final run. Testing has been done and works correctly.
+	//	extractWords();   // very long process only uncomment when doing final run. Testing has been done and works correctly.
 	}
 	
 	
 	
 	// Extract the images of the PDF files and store them in the mysql database along with the marks awarded.
-	public void extractImages(){
+	/*public void extractImages(){
 		System.out.println("Extracting Images and populating the database");
 		File[] thesisFiles = new File(inputDirectory).listFiles();
 		PdfReader reader;
@@ -123,7 +118,70 @@ public class extractFeatures {
 		}
 	}
 		System.out.println("Done......");
-  }
+  }*/
+	
+	public void extractImages(){
+		System.out.println("Extracting Images and populating the databse");
+		
+		File[] textFiles = new File(outDirectory).listFiles();
+		int imageCount;
+		ArrayList images  ;
+		int marks;
+		FileInputStream fileInput;
+		FileChannel fileChannel; 
+		ByteBuffer contentsBuffer;
+		Matcher match;
+		String regex="(?i)(Figure [0-9]*[?.][?.0-9]* |Figure\\s[0-9]*[?-][0-9]*|Figure [0-9]*|Figure[0-9]*|Fig. [0-9][a-zA-Z]|Image [0-9]|Diagram [0-9])";
+		Pattern stringChecker = Pattern.compile(regex);
+		Statement databaseStatement = null;
+		try {
+			 databaseStatement = databaseConnection.createStatement();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		
+		for(int i=0;i<textFiles.length;i++){
+			images = new ArrayList();
+			if(textFiles[i].getName().contains(".DS_Store")==false){
+				String [] tmp = textFiles[i].getName().split("\\_");
+				  marks = Integer.parseInt(tmp[1].substring(0,2));
+				  try {
+					fileInput = new FileInputStream(textFiles[i]);
+					fileChannel = fileInput.getChannel();
+					contentsBuffer = ByteBuffer.allocate((int)fileChannel.size());
+					fileChannel.read(contentsBuffer);
+					fileChannel.close();
+					String contents = new String(contentsBuffer.array());
+					
+					match = stringChecker.matcher(contents);
+					
+					while(match.find()){
+						if(match.group().length()!=0){
+							
+							if(images.contains(match.group())==false){
+							images.add(match.group());
+							}
+						}
+					}
+					
+				try {
+					databaseStatement.executeUpdate("insert into imageDB values("+images.size()+","+marks+",'"+textFiles[i].getName().substring(0, 4)+"')");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+					
+				  } catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+			}
+		}
+		
+	}
+	
 	
 	public void extractSubmissionTime(){
 		System.out.println("Extracting Submission time and populating the database");
@@ -192,7 +250,7 @@ public class extractFeatures {
 			e1.printStackTrace();
 		}
 		 File[] thesisFiles = new File(outDirectory).listFiles();
-		 String regex = "[a-zA-z0-9]+@?+[\\.]?";
+		 String regex = "[%]?+[a-zA-z0-9]+[\\.%]?";
 		 String contents;
 		 int totalCountOfWords;
 		 int marks = 0;
@@ -242,7 +300,7 @@ public class extractFeatures {
 		System.out.println("Extracting Intrinsic Parameters.. this may take several hours");
 		Statement databaseStatement = null;
 		ResultSet resultSet;
-		String regex = "[a-zA-z0-9]+@?+[\\.]?";
+		String regex = "(?<=[ \"'\r\n^])[a-zA-Z][a-zA-Z']*(-?[a-zA-Z]+)*(?=[ :,.\"'\r\n$])";
 		String content = null;
 		FileInputStream fileInput;
 		FileChannel fileChannel; 
