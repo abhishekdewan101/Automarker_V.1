@@ -11,11 +11,13 @@ public class automark_start {
 	    //pdf_to_text ptt = new pdf_to_text(inDirectory,outDirectory,false);
         //setup_databases sd = new setup_databases(databaseName);
 	    //extractFeatures ef = new extractFeatures(inDirectory,databaseName,submissionTimeFile,outDirectory);
-	    start_learning sl = new start_learning(databaseName);
-	    
+	   // summary_parameter_regression spr = new summary_parameter_regression(databaseName);
+	    intrinsic_parameters_regression ipr = new intrinsic_parameters_regression(databaseName,outDirectory);
+		
 		//call the different methods
 	    //ptt.convertToText();
 		//ef.startExtraction();
-		sl.execute_steps();
+		//spr.execute_steps();
+	    ipr.executeSteps();
 	}
 }

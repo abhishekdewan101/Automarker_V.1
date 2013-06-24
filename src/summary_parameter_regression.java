@@ -5,12 +5,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
-import org.apache.commons.math3.linear.RealMatrix;
-import org.apache.commons.math3.stat.correlation.Covariance;
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 
+import plotting.plot_summary_parameters;
+
 /*Class that starts the learning process for the system.*/
-public class start_learning {
+public class summary_parameter_regression {
 
 	Connection databaseConnection = null;
 	String databaseName;
@@ -21,7 +21,7 @@ public class start_learning {
 	Statement databaseStatement;
 	Statement databaseStatement1;
 	
-	public start_learning(String database){
+	public summary_parameter_regression(String database){
 		databaseName = database;
 		databaseURL = baseURL + databaseName;
 		try {
@@ -35,7 +35,7 @@ public class start_learning {
 	
 	public void execute_steps(){
 		multi_linear_regression_summrary_parameters();
-		multi_linear_regression_word();
+		//multi_linear_regression_word();
 	}
 	
 	// this is the regression method for the word parameters
@@ -151,6 +151,11 @@ public class start_learning {
 	  int totalRowsInDB = 0;
 	  String[] months = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 	  
+	  int []actualMarks;
+	  int []totalWords;
+	  int []image;
+	  float[] submissionTime;
+	  
 	  String id;
 	  Date deadLine = new Date(2012,9,30,23,59,59);
 	  Date submittedDate;
@@ -165,6 +170,10 @@ public class start_learning {
 		marksDataSet = new double[totalRowsInDB+1];
 	    parametersDataSet = new double[totalRowsInDB+1][];
 	   
+	    actualMarks = new int[totalRowsInDB];
+	    totalWords = new int[totalRowsInDB];
+	    image = new int[totalRowsInDB];
+	    submissionTime = new float[totalRowsInDB];
 	    
 		while(resultSet.next()){
 			id = resultSet.getString(1);
@@ -182,7 +191,7 @@ public class start_learning {
 			int seconds = Integer.parseInt(resultSet.getString(3).substring(6,8));
 			
 			submittedDate = new Date(year,month,day,hrs,mins,seconds);
-			submissionTimeLeft = (deadLine.getTime() - submittedDate.getTime())/(1000*60*60*24); // value in minutes
+			submissionTimeLeft = (deadLine.getTime() - submittedDate.getTime())/(1000*60); // value in minutes
 			
 			if(resultSet.getString(5).contains("YES")){
 				extendedDeadline = 1;
@@ -205,6 +214,12 @@ public class start_learning {
 			marksDataSet[counter] = marks;
 			parametersDataSet[counter] = new double[]{totalWordCount,imageCount,submissionTimeLeft};
 			
+			actualMarks[counter] = marks;
+			totalWords[counter] = totalWordCount;
+			image[counter] = imageCount;
+			submissionTime[counter] = 
+			
+			//System.out.format("%d,%f\n",marks,submissionTimeLeft);
 			//parametersDataSet[counter] = new double[]{totalWordCount};
 			counter++;
 		}
@@ -244,6 +259,12 @@ public class start_learning {
 			}
 			System.out.println();
 		}
+		
+		// Ploting actual mark v/s mark from regression equation.
+		
+		plot_summary_parameters psp = new plot_summary_parameters(regressionCoefficients,actualMarks,image,totalWords,submissionTime);
+		//-----------------------------
+		
 		
 	/*	Covariance cov = new Covariance(parameterVariance);
 		RealMatrix covData = cov.getCovarianceMatrix();
