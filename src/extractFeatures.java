@@ -300,7 +300,8 @@ public class extractFeatures {
 		System.out.println("Extracting Intrinsic Parameters.. this may take several hours");
 		Statement databaseStatement = null;
 		ResultSet resultSet;
-		String regex = "(?<=[ \"'\r\n^])[a-zA-Z][a-zA-Z']*(-?[a-zA-Z]+)*(?=[ :,.\"'\r\n$])";
+		//String regex = "(?<=[ \"'\r\n^])[a-zA-Z][a-zA-Z']*(-?[a-zA-Z]+)*(?=[ :,.\"'\r\n$])";
+		String regex = "\\w+";
 		String content = null;
 		FileInputStream fileInput;
 		FileChannel fileChannel; 

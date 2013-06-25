@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
+import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 
 import plotting.scatter_plot;
 
@@ -25,6 +26,8 @@ public class intrinsic_parameters_regression {
 	ArrayList differentWords = new ArrayList();
 	ArrayList dictionaryWords = new ArrayList();
 	ArrayList ids = new ArrayList();
+	ArrayList bestWord = new ArrayList();
+	double [] mark_list;
 	
 	public intrinsic_parameters_regression(String database,String inputDirectory){
 		textFileDirectory = inputDirectory; 
@@ -42,16 +45,83 @@ public class intrinsic_parameters_regression {
 		get_ids();
 		get_different_words();		
 		calculate_correlation();
+		calculate_bestwords();
+		calculate_regression();
 	}
 	
+	
+	
+	private void calculate_regression() {
+	   System.out.println("Starting the regresion this may take some time");
+	   try{
+		  double[] tmp_marks = mark_list;
+		  double[][] parameterData = new double[tmp_marks.length][];
+		  Statement databaseStatement = databaseConnection.createStatement();
+		  for(int i =0;i<tmp_marks.length;i++){
+			  double [] tmp_parameters = new double[bestWord.size()];
+			  for(int y=0;y<bestWord.size();y++){
+				//  System.out.println(i+"	"+y);
+				  resultSet = databaseStatement.executeQuery("select * from wordDB where marks ='"+tmp_marks[i]+"' and word ='"+bestWord.get(y).toString()+"'");
+				  while(resultSet.next()){
+					 tmp_parameters[y] = resultSet.getInt(3);
+				  }
+			  }
+			  parameterData[i] = tmp_parameters;
+		  }
+		  
+		  OLSMultipleLinearRegression regression = new OLSMultipleLinearRegression();
+		  regression.newSampleData(tmp_marks, parameterData);
+		  System.out.println("Regression started");
+		  double[] regressionCoeff = regression.estimateRegressionParameters();
+		  System.out.println("Regression ended");
+		  System.out.print("mark obtained = "+regressionCoeff[0]);
+		  for(int i=1;i<regressionCoeff.length;i++){
+			  System.out.print(" + "+regressionCoeff[i]+"*"+bestWord.get(i-1).toString());
+		  }
+	  }catch(SQLException e){
+	  }
+	}
+
+	private void calculate_bestwords() {
+		System.out.println("Finding the words with the highest correlation data.");
+		try {
+			double averageCount = 0;
+			double average;
+			double count = 0;
+			
+			Statement databaseStatment = databaseConnection.createStatement();
+			resultSet = databaseStatment.executeQuery("select count(*) from correlationDB");
+			while(resultSet.next()){
+				averageCount = resultSet.getInt(1);
+			}
+			resultSet = databaseStatment.executeQuery("select * from correlationDB");
+			
+			while(resultSet.next()){
+				count += Math.abs(resultSet.getDouble(1));
+			}
+			average = count/averageCount;
+		    
+			resultSet = databaseStatment.executeQuery("select * from correlationDB");
+			while(resultSet.next()){
+				if(Math.abs(resultSet.getDouble(1))>average){
+					bestWord.add(resultSet.getString(2));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 	private void calculate_correlation(){
+		System.out.println("Calculating the correlation for th diff");
 		try {
 			Statement databaseStatment = databaseConnection.createStatement();
-			double[] tmp_marks;
+			double[] tmp_marks = null;
 			double[] tmp_wordCount;
 			int wordCount; 
 			int marks;
-			double correlationFactor;
+			Double correlationFactor;
 			
 			for(int i=0;i<differentWords.size();i++){
 				tmp_marks = new double[ids.size()];
@@ -74,11 +144,15 @@ public class intrinsic_parameters_regression {
 				sp.pack();
 				sp.setVisible(true);*/
 				
-				correlationFactor = new PearsonsCorrelation().correlation(tmp_marks, tmp_wordCount);
-				System.out.println("Word "+differentWords.get(i).toString()+" has a correlation factor of "+correlationFactor);
+				correlationFactor = new PearsonsCorrelation().correlation(tmp_wordCount, tmp_marks);
+			    if(correlationFactor.isNaN()){
+			    	correlationFactor = 0.0;
+			    }
+				System.out.println(differentWords.get(i).toString()+" has a correlation factor of "+ correlationFactor);	
+				databaseStatment.executeUpdate("insert into correlationDB values("+correlationFactor+",'"+differentWords.get(i).toString()+"')");
 			}
+			mark_list = tmp_marks;
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 	}
 	

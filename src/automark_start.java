@@ -11,7 +11,7 @@ public class automark_start {
 	    //pdf_to_text ptt = new pdf_to_text(inDirectory,outDirectory,false);
         //setup_databases sd = new setup_databases(databaseName);
 	    //extractFeatures ef = new extractFeatures(inDirectory,databaseName,submissionTimeFile,outDirectory);
-	   // summary_parameter_regression spr = new summary_parameter_regression(databaseName);
+	    //summary_parameter_regression spr = new summary_parameter_regression(databaseName);
 	    intrinsic_parameters_regression ipr = new intrinsic_parameters_regression(databaseName,outDirectory);
 		
 		//call the different methods
