@@ -27,7 +27,6 @@ public class intrinsic_parameters_regression {
 	ArrayList dictionaryWords = new ArrayList();
 	ArrayList ids = new ArrayList();
 	ArrayList bestWord = new ArrayList();
-	double [] mark_list;
 	
 	public intrinsic_parameters_regression(String database,String inputDirectory){
 		textFileDirectory = inputDirectory; 
@@ -42,9 +41,9 @@ public class intrinsic_parameters_regression {
 	
 	public void executeSteps(){
 	//	set_dicitionary_word(); //can be uncommented if the checking of words is deemed necessary
-		get_ids();
-		get_different_words();		
-		calculate_correlation();
+		//get_ids();
+		//get_different_words();		
+		//calculate_correlation();
 		calculate_bestwords();
 		calculate_regression();
 	}
@@ -54,13 +53,29 @@ public class intrinsic_parameters_regression {
 	private void calculate_regression() {
 	   System.out.println("Starting the regresion this may take some time");
 	   try{
-		  double[] tmp_marks = mark_list;
-		  double[][] parameterData = new double[tmp_marks.length][];
-		  Statement databaseStatement = databaseConnection.createStatement();
+		  Statement databaseStatement = databaseConnection.createStatement();  
+		  double[] tmp_marks;
+		  double[][] parameterData;
+		  int rowCount = 0;
+		  int counter =0;
+		  
+		  resultSet = databaseStatement.executeQuery("select count(marks) from imageDB");
+		  while(resultSet.next()){
+			 rowCount = resultSet.getInt(1);
+		  }
+		  tmp_marks = new double[rowCount];
+		  parameterData = new double[rowCount][];
+		 
+		  resultSet = databaseStatement.executeQuery("select marks from imageDB");
+		  while(resultSet.next()){
+			 tmp_marks[counter] = resultSet.getInt(1);
+			 counter++;
+		  }
+		
 		  for(int i =0;i<tmp_marks.length;i++){
 			  double [] tmp_parameters = new double[bestWord.size()];
 			  for(int y=0;y<bestWord.size();y++){
-				//  System.out.println(i+"	"+y);
+				  System.out.println(i+"	"+y);
 				  resultSet = databaseStatement.executeQuery("select * from wordDB where marks ='"+tmp_marks[i]+"' and word ='"+bestWord.get(y).toString()+"'");
 				  while(resultSet.next()){
 					 tmp_parameters[y] = resultSet.getInt(3);
@@ -151,7 +166,6 @@ public class intrinsic_parameters_regression {
 				System.out.println(differentWords.get(i).toString()+" has a correlation factor of "+ correlationFactor);	
 				databaseStatment.executeUpdate("insert into correlationDB values("+correlationFactor+",'"+differentWords.get(i).toString()+"')");
 			}
-			mark_list = tmp_marks;
 		} catch (SQLException e) {
 		}
 	}

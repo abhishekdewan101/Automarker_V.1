@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,7 +35,7 @@ public class extractFeatures {
 	String 	   baseURL = "jdbc:mysql://localhost:3306/";
 	String	   userName = "root";
 	String     password = "";
-	ArrayList  stopWords = new ArrayList();
+	//ArrayList  stopWords = new ArrayList();
 	
 	
 	//-----------------CONSTRUCTOR---------------------------------
@@ -46,12 +48,12 @@ public class extractFeatures {
 		databaseURL = baseURL+databaseName;
 		try {
 			databaseConnection = DriverManager.getConnection(databaseURL,userName,password);
-			databaseStatement = databaseConnection.createStatement();
-			resultSet = databaseStatement.executeQuery("select * from stopWordDB");
-			resultSet.next();
-			while(resultSet.next()){
-				stopWords.add((String)resultSet.getString(1));
-			}
+//			databaseStatement = databaseConnection.createStatement();
+//			resultSet = databaseStatement.executeQuery("select * from stopWordDB");
+//			resultSet.next();
+//			while(resultSet.next()){
+//				stopWords.add((String)resultSet.getString(1));
+//			}
 		} catch (SQLException e) {
 			try {
 				databaseConnection = DriverManager.getConnection(baseURL,userName,password);
@@ -66,60 +68,109 @@ public class extractFeatures {
 	public void startExtraction(){
 	//	extractImages();
 	//	extractSubmissionTime();
-		extractTotalWord();
+	    extractWordFeatures();
+	//------DEPRECIATED METHODS AND REPLACED WITH ABOVE METHOD
+	//	extractTotalWord();
 	//	extractWords();   // very long process only uncomment when doing final run. Testing has been done and works correctly.
 	}
 	
-	
-	
-	// Extract the images of the PDF files and store them in the mysql database along with the marks awarded.
-	/*public void extractImages(){
-		System.out.println("Extracting Images and populating the database");
-		File[] thesisFiles = new File(inputDirectory).listFiles();
-		PdfReader reader;
-		int imageCount;
-		int marks;
-		Statement databaseStatement = null;
+	private void extractWordFeatures() {
+		System.out.println("Extracting word features and populating the databases");
 		
-		try{
-			databaseStatement = databaseConnection.createStatement();
-		}catch(SQLException e){
+		ArrayList dictionaryWords = new ArrayList();
+		ArrayList unRefinedWords = new ArrayList();
+		ArrayList uniqueWords =new ArrayList();
+		ArrayList stopWordList = new ArrayList();
+		String baseURL = "/Users/abhishekdewan/Documents/workspace/Automarker_V.1/";
+		String [] fileNames = {"brit-a-z.txt","wordList","britcaps.txt","csWords","stopWordList"};
+		HashMap<String,Integer> refinedWords;
+		Statement databaseStatement;
+		FileInputStream fileInput;
+		FileChannel fileChannel;
+		ByteBuffer contentsBuffer;
+		int refinedWordCounter =0;
+		int unRefinedWordCounter =0;
+		int uniqueWordsCounter = 0;
+		try {
+			 databaseStatement = databaseConnection.createStatement();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		for(int i=0;i<thesisFiles.length;i++){
-			if(thesisFiles[i].getName().contains(".DS_Store")==false){
-			System.out.println("Processing "+thesisFiles[i].getName()+"....");	
-			imageCount = 0;
+		try{
+		for(int i=0;i<fileNames.length;i++){
+			File tmpFile = new File(baseURL+fileNames[i]);
+			fileInput = new FileInputStream(tmpFile);
+			fileChannel = fileInput.getChannel();
+			contentsBuffer = ByteBuffer.allocate((int)fileChannel.size());
+			fileChannel.read(contentsBuffer);
+			fileChannel.close();
+			String contents = new String(contentsBuffer.array());
+			StringTokenizer st = new StringTokenizer(contents);
+			if(i!=(fileNames.length-1)){
+				while(st.hasMoreTokens()){
+					String tempString = st.nextToken();
+					if(!dictionaryWords.contains(tempString)){
+						dictionaryWords.add(tempString);
+					}
+				}
+			}else{
+				while(st.hasMoreTokens()){
+					String tempString = st.nextToken();
+						stopWordList.add(tempString);
+				}
+			}
+		  }
+		System.out.println(dictionaryWords.size());
+		System.out.println(stopWordList.size());
 		
-			try {
-				reader = new PdfReader(thesisFiles[i].getAbsolutePath());
-				for (int y = 0; y < reader.getXrefSize(); y++) {
-			        PdfObject pdfobj = reader.getPdfObject(y);
-			        if (pdfobj == null || !pdfobj.isStream()) {
-			            continue;
-			        }
-			        PdfStream stream = (PdfStream) pdfobj;
-			        PdfObject pdfsubtype = stream.get(PdfName.SUBTYPE);
-			        if (pdfsubtype != null && pdfsubtype.toString().equals(PdfName.IMAGE.toString())) {
-			         imageCount++;
-			        }
-			   }
-			  String [] temp = thesisFiles[i].getName().split("\\_");
-			  marks = Integer.parseInt(temp[1].substring(0,2));	
-			  databaseStatement.executeUpdate("insert into imageDB values("+imageCount+","+marks+",'"+thesisFiles[i].getName().substring(0, 4)+"')");
-					  
+		File[] textFiles = new File(baseURL+"textFiles").listFiles();
+		for(int i=0;i<textFiles.length;i++){
+			if(!textFiles[i].getName().contains(".DS_Store")){
+			refinedWords = new HashMap<String,Integer>();
+			refinedWordCounter = 0;
+			unRefinedWordCounter =0;
+			uniqueWordsCounter = 0;
+			System.out.println("Processing ......"+textFiles[i].getName());
 			
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			int marks = 0;
+			String [] tmp = textFiles[i].getName().split("\\_");
+			marks = Integer.parseInt(tmp[1].substring(0,2));
+			
+			fileInput = new FileInputStream(textFiles[i]);
+			fileChannel = fileInput.getChannel();
+			contentsBuffer = ByteBuffer.allocate((int)fileChannel.size());
+			fileChannel.read(contentsBuffer);
+			fileChannel.close();
+			String contents = new String(contentsBuffer.array());
+			StringTokenizer st = new StringTokenizer(contents);
+			while(st.hasMoreTokens()){
+				String tempString = st.nextToken();
+				unRefinedWordCounter++;
+				if(dictionaryWords.contains(tempString) && !stopWordList.contains(tempString)){
+					if(refinedWords.containsKey(tempString)){
+						refinedWords.put(tempString, (refinedWords.get(tempString)+1));
+					}else{
+						refinedWords.put(tempString, 1);
+					}
+				}
+			}
+			System.out.println("For file "+textFiles[i].getName()+" has total words "+ refinedWords.size());
+			for(String key: refinedWords.keySet()){
+				System.out.println(key+" "+"YES"+"	"+refinedWords.get(key)+"	"+key.length()+"	"+marks+"	"+textFiles[i].getName());
 			}
 		}
+			}
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 	}
-		System.out.println("Done......");
-  }*/
-	
+
+
 	public void extractImages(){
 		System.out.println("Extracting Images and populating the databse");
 		
@@ -241,7 +292,56 @@ public class extractFeatures {
 		System.out.println("Done......");
 	}
 	
-	public void extractTotalWord(){
+
+	// Extract the images of the PDF files and store them in the mysql database along with the marks awarded.
+	/*public void extractImages(){
+		System.out.println("Extracting Images and populating the database");
+		File[] thesisFiles = new File(inputDirectory).listFiles();
+		PdfReader reader;
+		int imageCount;
+		int marks;
+		Statement databaseStatement = null;
+		
+		try{
+			databaseStatement = databaseConnection.createStatement();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		for(int i=0;i<thesisFiles.length;i++){
+			if(thesisFiles[i].getName().contains(".DS_Store")==false){
+			System.out.println("Processing "+thesisFiles[i].getName()+"....");	
+			imageCount = 0;
+		
+			try {
+				reader = new PdfReader(thesisFiles[i].getAbsolutePath());
+				for (int y = 0; y < reader.getXrefSize(); y++) {
+			        PdfObject pdfobj = reader.getPdfObject(y);
+			        if (pdfobj == null || !pdfobj.isStream()) {
+			            continue;
+			        }
+			        PdfStream stream = (PdfStream) pdfobj;
+			        PdfObject pdfsubtype = stream.get(PdfName.SUBTYPE);
+			        if (pdfsubtype != null && pdfsubtype.toString().equals(PdfName.IMAGE.toString())) {
+			         imageCount++;
+			        }
+			   }
+			  String [] temp = thesisFiles[i].getName().split("\\_");
+			  marks = Integer.parseInt(temp[1].substring(0,2));	
+			  databaseStatement.executeUpdate("insert into imageDB values("+imageCount+","+marks+",'"+thesisFiles[i].getName().substring(0, 4)+"')");
+					  
+			
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+		System.out.println("Done......");
+  }*/
+	
+	/*public void extractTotalWord(){
 		 System.out.println("Extracting Total Words ........");
 		 Statement databaseStatement = null;
 		try {
@@ -385,5 +485,5 @@ public class extractFeatures {
 		}
 		System.out.println("Done .... woohoooo!!!");
 	}
-	
+	*/
 }
