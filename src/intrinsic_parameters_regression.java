@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
@@ -27,6 +28,8 @@ public class intrinsic_parameters_regression {
 	ArrayList dictionaryWords = new ArrayList();
 	ArrayList ids = new ArrayList();
 	ArrayList bestWord = new ArrayList();
+	HashMap<String,Double> equationParams = new HashMap<String,Double>();
+	 double[] regressionCoeff;
 	
 	public intrinsic_parameters_regression(String database,String inputDirectory){
 		textFileDirectory = inputDirectory; 
@@ -41,15 +44,64 @@ public class intrinsic_parameters_regression {
 	
 	public void executeSteps(){
 	//	set_dicitionary_word(); //can be uncommented if the checking of words is deemed necessary
-		//get_ids();
-		//get_different_words();		
+		get_ids();
+		get_differentWords();
 		//calculate_correlation();
 		calculate_bestwords();
 		calculate_regression();
+		plot_marks();
 	}
 	
 	
 	
+	
+	private void plot_marks() {
+		File [] textFiles = new File(textFileDirectory).listFiles();
+		Statement databaseStatement;
+		double[] actualMarks = new double[textFiles.length];
+		double[] predictedMarks = new double[textFiles.length];
+		
+		try {
+			databaseStatement = databaseConnection.createStatement();
+			for(int i=0;i<textFiles.length;i++){
+				double predictedMark = regressionCoeff[0];
+				resultSet = databaseStatement.executeQuery("select * from wordDB where filename='"+textFiles[i].getName()+"'");
+				while(resultSet.next()){
+					if(equationParams.containsKey((resultSet.getString(1)))){
+						actualMarks[i] = resultSet.getInt(5);
+						predictedMark += (resultSet.getInt(3)*equationParams.get(resultSet.getString(1)));
+					}
+				}
+				predictedMarks[i] = predictedMark;
+			}			
+			
+			System.out.println("\n\n\n");
+			for(int i =0;i<predictedMarks.length;i++){
+				System.out.println(actualMarks[i]+"		"+predictedMarks[i]);
+			}
+			
+			
+			scatter_plot plot = new scatter_plot("Actual Mark v/s Predicted Mark", "Actual Mark", "Predicted Mark", actualMarks, predictedMarks);
+			plot.pack();
+			plot.setVisible(true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+
+	private void get_differentWords() {
+		System.out.println("Getting the different words");
+		try {
+			Statement databaseStatement = databaseConnection.createStatement();
+			resultSet = databaseStatement.executeQuery("select * from uniqueWords");
+			while(resultSet.next()){
+				differentWords.add(resultSet.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+
 	private void calculate_regression() {
 	   System.out.println("Starting the regresion this may take some time");
 	   try{
@@ -63,8 +115,8 @@ public class intrinsic_parameters_regression {
 		  while(resultSet.next()){
 			 rowCount = resultSet.getInt(1);
 		  }
-		  tmp_marks = new double[rowCount];
-		  parameterData = new double[rowCount][];
+		  tmp_marks = new double[rowCount+1];
+		  parameterData = new double[rowCount+1][];
 		 
 		  resultSet = databaseStatement.executeQuery("select marks from imageDB");
 		  while(resultSet.next()){
@@ -75,7 +127,6 @@ public class intrinsic_parameters_regression {
 		  for(int i =0;i<tmp_marks.length;i++){
 			  double [] tmp_parameters = new double[bestWord.size()];
 			  for(int y=0;y<bestWord.size();y++){
-				  System.out.println(i+"	"+y);
 				  resultSet = databaseStatement.executeQuery("select * from wordDB where marks ='"+tmp_marks[i]+"' and word ='"+bestWord.get(y).toString()+"'");
 				  while(resultSet.next()){
 					 tmp_parameters[y] = resultSet.getInt(3);
@@ -83,16 +134,31 @@ public class intrinsic_parameters_regression {
 			  }
 			  parameterData[i] = tmp_parameters;
 		  }
+		  tmp_marks[(tmp_marks.length)-1]=0;
+		  double[]tmp_parameters = new double[bestWord.size()];
+		  for(int i=0;i<bestWord.size();i++){
+			  tmp_parameters[i]=0;
+		  }
+		  parameterData[(parameterData.length-1)]= tmp_parameters;
 		  
 		  OLSMultipleLinearRegression regression = new OLSMultipleLinearRegression();
 		  regression.newSampleData(tmp_marks, parameterData);
 		  System.out.println("Regression started");
-		  double[] regressionCoeff = regression.estimateRegressionParameters();
+		  regressionCoeff = regression.estimateRegressionParameters();
 		  System.out.println("Regression ended");
 		  System.out.print("mark obtained = "+regressionCoeff[0]);
 		  for(int i=1;i<regressionCoeff.length;i++){
 			  System.out.print(" + "+regressionCoeff[i]+"*"+bestWord.get(i-1).toString());
+			  equationParams.put(bestWord.get(i-1).toString(), regressionCoeff[i]);
 		  }
+		  
+		  double[] errors = regression.estimateResiduals();
+		  System.out.println("Error");
+		  for(int i=1;i<regressionCoeff.length;i++){
+			  System.out.println(bestWord.get(i-1).toString()+" - "+regressionCoeff[i]);
+		  }
+		  System.out.println("Standard Error = "+ regression.estimateRegressionStandardError());
+		  System.out.println("R-Square = "+regression.calculateRSquared()+"\n");
 	  }catch(SQLException e){
 	  }
 	}
@@ -119,7 +185,9 @@ public class intrinsic_parameters_regression {
 			resultSet = databaseStatment.executeQuery("select * from correlationDB");
 			while(resultSet.next()){
 				if(Math.abs(resultSet.getDouble(1))>average){
+					if(bestWord.size()<=63){
 					bestWord.add(resultSet.getString(2));
+					}
 				}
 			}
 		} catch (SQLException e) {
@@ -129,7 +197,7 @@ public class intrinsic_parameters_regression {
 	}
 
 	private void calculate_correlation(){
-		System.out.println("Calculating the correlation for th diff");
+		System.out.println("Calculating the correlation for the different words");
 		try {
 			Statement databaseStatment = databaseConnection.createStatement();
 			double[] tmp_marks = null;
@@ -178,48 +246,5 @@ public class intrinsic_parameters_regression {
 			}
 		}
 		
-	}
-
-	private void set_dicitionary_word() {
-		System.out.println("Grabbing the dictionary. Please wait.....");
-		try {
-			Statement databaseStatement = databaseConnection.createStatement();
-			resultSet = databaseStatement.executeQuery("select word from wordList");
-			while(resultSet.next()){
-				if(!dictionaryWords.contains(resultSet.getString(1))){
-					dictionaryWords.add(resultSet.getString(1));
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NullPointerException e){
-			try {
-				dictionaryWords.add(resultSet.getString(1));
-			} catch (SQLException e1){
-				e1.printStackTrace();
-			}
-		}
-	}
-
-	public void get_different_words(){
-		System.out.println("Finding the different words that make sense");
-		try {
-			Statement databaseStatement = databaseConnection.createStatement();
-			resultSet = databaseStatement.executeQuery("select word from wordDB");
-			while(resultSet.next()){
-				if(!differentWords.contains(resultSet.getString(1))){
-					differentWords.add(resultSet.getString(1));
-					
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NullPointerException e){
-			try {
-				differentWords.add(resultSet.getString(1));
-			} catch (SQLException e1){
-				e1.printStackTrace();
-			}
-		}
 	}
 }

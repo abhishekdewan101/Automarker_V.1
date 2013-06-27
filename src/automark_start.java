@@ -10,14 +10,14 @@ public class automark_start {
 		//create objects for different classes
 	    //pdf_to_text ptt = new pdf_to_text(inDirectory,outDirectory,false);
         //setup_databases sd = new setup_databases(databaseName);
-	    extractFeatures ef = new extractFeatures(inDirectory,databaseName,submissionTimeFile,outDirectory);
+	    //extractFeatures ef = new extractFeatures(inDirectory,databaseName,submissionTimeFile,outDirectory);
 	    //summary_parameter_regression spr = new summary_parameter_regression(databaseName);
-	    //intrinsic_parameters_regression ipr = new intrinsic_parameters_regression(databaseName,outDirectory);
+	    intrinsic_parameters_regression ipr = new intrinsic_parameters_regression(databaseName,outDirectory);
 		
 		//call the different methods
 	    //ptt.convertToText();
-		ef.startExtraction();
+		//ef.startExtraction();
 		//spr.execute_steps();
-	    //ipr.executeSteps();
+	    ipr.executeSteps();
 	}
 }

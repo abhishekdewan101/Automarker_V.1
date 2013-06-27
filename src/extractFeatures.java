@@ -84,7 +84,7 @@ public class extractFeatures {
 		String baseURL = "/Users/abhishekdewan/Documents/workspace/Automarker_V.1/";
 		String [] fileNames = {"brit-a-z.txt","wordList","britcaps.txt","csWords","stopWordList"};
 		HashMap<String,Integer> refinedWords;
-		Statement databaseStatement;
+		Statement databaseStatement = null;
 		FileInputStream fileInput;
 		FileChannel fileChannel;
 		ByteBuffer contentsBuffer;
@@ -130,7 +130,6 @@ public class extractFeatures {
 			refinedWords = new HashMap<String,Integer>();
 			refinedWordCounter = 0;
 			unRefinedWordCounter =0;
-			uniqueWordsCounter = 0;
 			System.out.println("Processing ......"+textFiles[i].getName());
 			
 			int marks = 0;
@@ -155,19 +154,33 @@ public class extractFeatures {
 					}
 				}
 			}
-			System.out.println("For file "+textFiles[i].getName()+" has total words "+ refinedWords.size());
+			uniqueWordsCounter += refinedWords.size();
 			for(String key: refinedWords.keySet()){
-				System.out.println(key+" "+"YES"+"	"+refinedWords.get(key)+"	"+key.length()+"	"+marks+"	"+textFiles[i].getName());
+				if(!key.contains("'")){
+					//System.out.println("insert into wordDB values('"+key+"','YES',"+refinedWords.get(key)+","+key.length()+","+marks+",'"+textFiles[i].getName()+"')");
+					databaseStatement.executeUpdate("insert into wordDB values('"+key+"','YES',"+refinedWords.get(key)+","+key.length()+","+marks+",'"+textFiles[i].getName()+"')");
+				}else{
+				//System.out.println("insert into wordDB values('"+key+"','YES',"+refinedWords.get(key)+","+key.length()+","+marks+",'"+textFiles[i].getName()+"')");
+				databaseStatement.executeUpdate("insert into wordDB values(\""+key+"\",'YES',"+refinedWords.get(key)+","+key.length()+","+marks+",'"+textFiles[i].getName()+"')");
+				}
+				
+				if(!uniqueWords.contains(key)){
+					uniqueWords.add(key);
+					if(key.contains("'")){
+					databaseStatement.executeUpdate("insert into uniqueWords values(\""+key+"\")");	
+					}else{
+					databaseStatement.executeUpdate("insert into uniqueWords values('"+key+"')");
+					}
+				}
 			}
 		}
 			}
+		System.out.println("The total number of words is "+uniqueWordsCounter);
 		}catch(IOException e){
 			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		
-		
-		
 	}
 
 
