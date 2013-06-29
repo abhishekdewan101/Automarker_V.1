@@ -23,6 +23,7 @@ public class intrinsic_parameters_regression {
 	String baseURL = "jdbc:mysql://localhost:3306/";
 	String userName = "root";
 	String password ="";
+	int totalExamples;
 	
 	ArrayList differentWords = new ArrayList();
 	ArrayList dictionaryWords = new ArrayList();
@@ -74,8 +75,8 @@ public class intrinsic_parameters_regression {
 				}
 				predictedMarks[i] = predictedMark;
 			}			
+
 			
-			System.out.println("\n\n\n");
 			for(int i =0;i<predictedMarks.length;i++){
 				System.out.println(actualMarks[i]+"		"+predictedMarks[i]);
 			}
@@ -129,7 +130,7 @@ public class intrinsic_parameters_regression {
 			  for(int y=0;y<bestWord.size();y++){
 				  resultSet = databaseStatement.executeQuery("select * from wordDB where marks ='"+tmp_marks[i]+"' and word ='"+bestWord.get(y).toString()+"'");
 				  while(resultSet.next()){
-					 tmp_parameters[y] = resultSet.getInt(3);
+					 tmp_parameters[y] = 10*resultSet.getInt(3);
 				  }
 			  }
 			  parameterData[i] = tmp_parameters;
@@ -164,7 +165,61 @@ public class intrinsic_parameters_regression {
 	}
 
 	private void calculate_bestwords() {
-		System.out.println("Finding the words with the highest correlation data.");
+		System.out.println("Finding the words with the highest correlation");
+		
+		double averageCount = 0;
+		double count = 0;
+		double average;
+		
+		int negativeLimit;
+		
+		totalExamples -= 1;
+		if(totalExamples%2==0){
+			negativeLimit = totalExamples/2;
+		}else{
+			negativeLimit = (int) Math.floor(totalExamples/2);
+		}
+		
+		
+		try {
+			Statement databaseStatement = databaseConnection.createStatement();
+			
+			resultSet = databaseStatement.executeQuery("select count(*) from correlationDB");
+			while(resultSet.next()){
+				count = resultSet.getInt(1);
+			}
+			
+			resultSet = databaseStatement.executeQuery("select correlation from correlationDB");
+			while(resultSet.next()){
+				averageCount += Math.abs(resultSet.getInt(1));
+			}
+			
+			average = averageCount/count ;
+			
+			resultSet = databaseStatement.executeQuery("select * from correlationDB order by correlation ASC");
+			while(resultSet.next()){
+				if(Math.abs(resultSet.getDouble(1))>average){
+					if(bestWord.size()<=negativeLimit){
+						bestWord.add(resultSet.getString(2));
+					}
+				}
+			}
+			
+			resultSet = databaseStatement.executeQuery("select * from correlationDB order by correlation DESC");
+			while(resultSet.next()){
+				if(Math.abs(resultSet.getDouble(1))>average){
+					if(bestWord.size()<=totalExamples){
+						bestWord.add(resultSet.getString(2));
+					}
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		/*System.out.println("Finding the words with the highest correlation data.");
 		try {
 			double averageCount = 0;
 			double average;
@@ -192,7 +247,7 @@ public class intrinsic_parameters_regression {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 	}
 
@@ -242,6 +297,7 @@ public class intrinsic_parameters_regression {
 		File [] thesisFiles = new File(textFileDirectory).listFiles();
 		for(int i=0;i<thesisFiles.length;i++){
 			if(thesisFiles[i].getName().contains(".DS_Store")==false){
+				totalExamples += 1;
 				ids.add(thesisFiles[i].getName());
 			}
 		}
