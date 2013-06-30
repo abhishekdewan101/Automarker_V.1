@@ -12,12 +12,14 @@ public class automark_start {
         //setup_databases sd = new setup_databases(databaseName);
 	    //extractFeatures ef = new extractFeatures(inDirectory,databaseName,submissionTimeFile,outDirectory);
 	    //summary_parameter_regression spr = new summary_parameter_regression(databaseName);
-	    intrinsic_parameters_regression ipr = new intrinsic_parameters_regression(databaseName,outDirectory);
+	    //intrinsic_parameters_regression ipr = new intrinsic_parameters_regression(databaseName,outDirectory);
+		combined_regression cr = new combined_regression(outDirectory, databaseName);
 		
 		//call the different methods
 	    //ptt.convertToText();
 		//ef.startExtraction();
 		//spr.execute_steps();
-	    ipr.executeSteps();
+	    //ipr.executeSteps();
+		cr.execute_steps();
 	}
 }
