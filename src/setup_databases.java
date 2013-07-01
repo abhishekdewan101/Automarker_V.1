@@ -72,6 +72,8 @@ public class setup_databases {
 			databaseStatement.executeUpdate("CREATE TABLE `correlationDB` (`correlation` double NOT NULL,`word` varchar(255) NOT NULL DEFAULT '') ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 			
 			databaseStatement.executeUpdate("CREATE TABLE `uniqueWords` (`word` varchar(255) NOT NULL DEFAULT '') ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+			
+			databaseStatement.executeUpdate("CREATE TABLE `tableInfo` (`tableCount` int(11) NOT NULL,`filename` varchar(255) NOT NULL DEFAULT '' ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -68,12 +68,59 @@ public class extractFeatures {
 	public void startExtraction(){
 	//	extractImages();
 	//	extractSubmissionTime();
-	    extractWordFeatures();
+	//  extractWordFeatures();
+		extractTables();
 	//------DEPRECIATED METHODS AND REPLACED WITH ABOVE METHOD
 	//	extractTotalWord();
 	//	extractWords();   // very long process only uncomment when doing final run. Testing has been done and works correctly.
 	}
 	
+	private void extractTables() {
+		System.out.println("Extracting Tables from theses");
+		try{
+			Statement databaseStatement = databaseConnection.createStatement();
+			ArrayList foundTableNames;
+			String regex = "\\bTable [0-9]*-[0-9]*\\b|\\bTable ?[a-zA-Z][0-9]*?\\.|\\bTable [0-9]*?\\.[0-9]*?\\.?[0-9]*\\b|\\bTable [0-9]*\\b";
+			Pattern stringChecker = Pattern.compile(regex);
+			File [] textFiles = new File(outDirectory).listFiles();
+			
+
+			for(int i=0;i<textFiles.length;i++){
+				String tmp[] = textFiles[i].getName().split("_");
+				foundTableNames =  new ArrayList();
+				if(!textFiles[i].getName().contains(".DS_Store")){
+				FileInputStream fileInput = new FileInputStream(textFiles[i]);
+				FileChannel fileChannel = fileInput.getChannel();
+				ByteBuffer contentsBuffer = ByteBuffer.allocate((int)fileChannel.size());
+				fileChannel.read(contentsBuffer);
+				fileChannel.close();
+				String contents = new String(contentsBuffer.array());
+				Matcher match = stringChecker.matcher(contents);
+				while(match.find()){
+					if(match.group().length()!=0){
+						    if(!foundTableNames.contains(match.group())&& !match.group().trim().equalsIgnoreCase("Table") && !match.group().trim().equalsIgnoreCase("Tables.")){
+						    	foundTableNames.add(match.group());
+						    	}
+							}
+						}
+						
+						/*for(int j =0;j<foundTableNames.size();j++){
+							System.out.println(foundTableNames.get(j).toString());
+						}*/
+//						System.out.println(textFiles[i].getName()+"	"+foundTableNames.size());
+//						System.out.println("\n");
+				
+				      	databaseStatement.executeUpdate("insert into tableInfo values("+foundTableNames.size()+",'"+tmp[0]+"')");
+					}
+				}
+			} catch(IOException e){
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+
+
 	private void extractWordFeatures() {
 		System.out.println("Extracting word features and populating the databases");
 		
