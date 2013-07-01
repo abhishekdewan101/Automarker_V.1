@@ -75,7 +75,7 @@ public class combined_regression {
 					predictedMark += regressionCoeff[2]*resultSet.getInt(1);
 				}
 				
-			/*	resultSet = databaseStatement.executeQuery("select * from submissionTime where filename='"+id+"'");
+				resultSet = databaseStatement.executeQuery("select * from submissionTime where filename='"+id+"'");
 				while(resultSet.next()){
 					int day = Integer.parseInt(resultSet.getString(2).substring(0,2));
 					int month = 0;
@@ -94,7 +94,7 @@ public class combined_regression {
 					}
 					submissionTimeLeft = (deadLine.getTime() - submittedDate.getTime())/(1000*60); // value in minutes
 					predictedMark += regressionCoeff[3]*submissionTimeLeft;
-					*/
+					
 					
 				resultSet = databaseStatement.executeQuery("select * from wordDB where filename='"+textFiles[i].getName()+"'");
 				while(resultSet.next()){
@@ -104,12 +104,23 @@ public class combined_regression {
 						predictedMark += (resultSet.getInt(3)*equationParams.get(resultSet.getString(1)));
 					}
 				}
+				if(predictedMark>100){
+					predictedMark = 100;
+				}
+				
+				if(predictedMark<0){
+					predictedMark =0;
+				}
+				
 				
 				predictedMarks[i] = predictedMark;
 				System.out.println(actualMarks[i]+"		"+predictedMarks[i]);
 				System.out.println("\n\n\n");
 			}			
 			
+			for(int y =0;y<predictedMarks.length;y++){
+				System.out.println(actualMarks[y]+"			"+ predictedMarks[y]);
+			}
 			System.out.println("Corrleation Factor "+ new PearsonsCorrelation().correlation(actualMarks, predictedMarks));
 			scatter_plot plot = new scatter_plot("Actual Mark v/s Predicted Mark", "Actual Mark", "Predicted Mark", actualMarks, predictedMarks);
 			plot.pack();
@@ -135,7 +146,7 @@ public class combined_regression {
 		
 		for(int i=0;i<textFiles.length;i++){
 			if(!textFiles[i].getName().contains(".DS_Store")){
-			double[] tmp_parameters = new double[bestWord.size()+2];
+			double[] tmp_parameters = new double[bestWord.size()+3];
 			String [] tmp = textFiles[i].getName().split("_");
 			id = tmp[0];
 			marks = Integer.parseInt(tmp[1].substring(0,2));
@@ -151,7 +162,7 @@ public class combined_regression {
 					totalWords = resultSet.getInt(1);
 				}
 				
-				/*resultSet = databaseStatement.executeQuery("select * from submissionTime where filename='"+id+"'");
+				resultSet = databaseStatement.executeQuery("select * from submissionTime where filename='"+id+"'");
 				while(resultSet.next()){
 				int day = Integer.parseInt(resultSet.getString(2).substring(0,2));
 				int month = 0;
@@ -169,11 +180,11 @@ public class combined_regression {
 				submittedDate = new Date(year,month,day,hrs,mins,seconds);
 				}
 				submissionTimeLeft = (deadLine.getTime() - submittedDate.getTime())/(1000*60); // value in minutes
-				*/
+				
 				
 				tmp_parameters[0] = imageCount;
 				tmp_parameters[1] = totalWords;
-				//tmp_parameters[2] = submissionTimeLeft;
+				tmp_parameters[2] = submissionTimeLeft;
 				
 			    for(int j=0;j<bestWord.size();j++){
 			    	double wordCount =0.0;
@@ -181,7 +192,7 @@ public class combined_regression {
 			    	 while(resultSet.next()){
 						  wordCount = resultSet.getInt(3);
 					  }
-			    	 tmp_parameters[j+2]= wordCount;
+			    	 tmp_parameters[j+3]= wordCount;
 			    }
 			    tmp_marks[i] = marks;
 				parameterData[i] = tmp_parameters;	
@@ -193,7 +204,7 @@ public class combined_regression {
 		
 		//Set the zero coordinate for the system
 		 tmp_marks[(tmp_marks.length)-1]=0;
-		  double[]tmp_parameters = new double[bestWord.size()+2];
+		  double[]tmp_parameters = new double[bestWord.size()+3];
 		  for(int i=0;i<bestWord.size();i++){
 			  tmp_parameters[i]=0;
 		  }
@@ -215,12 +226,12 @@ public class combined_regression {
               if(i==2){
             	  System.out.print(regressionCoeff[i]+"*totalWordCount +");
               }
-             /* if(i==3){
+              if(i==3){
             	  System.out.print(regressionCoeff[i]+"*submissionTimeLeft +");
-              }*/
-              if(i>2){
-			  System.out.print(" + "+regressionCoeff[i]+"*"+bestWord.get(i-3).toString());
-			  equationParams.put(bestWord.get(i-3).toString(), regressionCoeff[i]);
+              }
+              if(i>3){
+			  System.out.print(" + "+regressionCoeff[i]+"*"+bestWord.get(i-4).toString());
+			  equationParams.put(bestWord.get(i-4).toString(), regressionCoeff[i]);
               }
 		  }
 		  
@@ -229,9 +240,9 @@ public class combined_regression {
 		  System.out.println("Intercept - "+regressionCoeff[0]);
 		  System.out.println("ImageCount - "+regressionCoeff[1]);
 		  System.out.println("TotalWords - "+regressionCoeff[2]);
-		  //System.out.println("SubmissionTimeLeft - "+regressionCoeff[3]);
-		  for(int i=3;i<regressionCoeff.length;i++){
-			  System.out.println(bestWord.get(i-3).toString()+" - "+regressionCoeff[i]);
+		  System.out.println("SubmissionTimeLeft - "+regressionCoeff[3]);
+		  for(int i=4;i<regressionCoeff.length;i++){
+			  System.out.println(bestWord.get(i-4).toString()+" - "+regressionCoeff[i]);
 		  }
 		  System.out.println("Standard Error = "+ regression.estimateRegressionStandardError());
 		  System.out.println("R-Square = "+regression.calculateRSquared()+"\n");
@@ -261,7 +272,7 @@ public class combined_regression {
 			resultSet = databaseStatement.executeQuery("select * from correlationDB order by correlation DESC");
 			while(resultSet.next()){
 				if(Math.abs(resultSet.getDouble(1))>average){
-					if(bestWord.size()<=(totalExamples-3)){
+					if(bestWord.size()<=(totalExamples-4)){
 						bestWord.add(resultSet.getString(2));
 					}
 				}

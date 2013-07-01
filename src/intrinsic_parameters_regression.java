@@ -1,4 +1,8 @@
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -6,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
@@ -21,6 +26,7 @@ public class intrinsic_parameters_regression {
 	String textFileDirectory;
 	String databaseURL = null;
 	String baseURL = "jdbc:mysql://localhost:3306/";
+	String fileBaseURL = "/Users/abhishekdewan/Documents/workspace/Automarker_V.1/";
 	String userName = "root";
 	String password ="";
 	int totalExamples;
@@ -44,7 +50,7 @@ public class intrinsic_parameters_regression {
 	}
 	
 	public void executeSteps(){
-	//	set_dicitionary_word(); //can be uncommented if the checking of words is deemed necessary
+		set_dicitionary_word(); //can be uncommented if the checking of words is deemed necessary
 		get_ids();
 		get_differentWords();
 		//calculate_correlation();
@@ -56,6 +62,31 @@ public class intrinsic_parameters_regression {
 	
 	
 	
+	private void set_dicitionary_word() {
+		System.out.println("Setting dictionary words");
+		String [] fileNames = {"brit-a-z.txt","wordList","britcaps.txt","csWords"};
+		try{
+		for(int i=0;i<fileNames.length;i++){
+			File tmpFile = new File(fileBaseURL+fileNames[i]);
+			FileInputStream fileInput = new FileInputStream(tmpFile);
+			FileChannel fileChannel = fileInput.getChannel();
+			ByteBuffer contentsBuffer = ByteBuffer.allocate((int)fileChannel.size());
+			fileChannel.read(contentsBuffer);
+			fileChannel.close();
+			String contents = new String(contentsBuffer.array());
+			StringTokenizer st = new StringTokenizer(contents);
+				while(st.hasMoreTokens()){
+					String tempString = st.nextToken();
+					if(!dictionaryWords.contains(tempString)){
+						dictionaryWords.add(tempString);
+					}
+				}
+		  }
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+
 	private void plot_marks() {
 		File [] textFiles = new File(textFileDirectory).listFiles();
 		Statement databaseStatement;
@@ -242,6 +273,7 @@ public class intrinsic_parameters_regression {
 			Double correlationFactor;
 			
 			for(int i=0;i<differentWords.size();i++){
+				if(dictionaryWords.contains(differentWords.get(i).toString()) && differentWords.get(i).toString().length()>1){
 				tmp_marks = new double[ids.size()];
 				tmp_wordCount = new double[ids.size()];
 				for(int y=0;y<ids.size();y++){
@@ -277,6 +309,7 @@ public class intrinsic_parameters_regression {
 				databaseStatment.executeUpdate("insert into correlationDB values("+correlationFactor+",'"+differentWords.get(i).toString()+"')");
 				}
 			}
+		}
 		} catch (SQLException e) {
 		}
 	}
