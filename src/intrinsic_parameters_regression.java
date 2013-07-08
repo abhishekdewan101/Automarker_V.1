@@ -49,6 +49,13 @@ public class intrinsic_parameters_regression {
 		}
 	}
 	
+	/*Important the perfect regression may be because of the fact that we are only
+	 * taking into consideration the words that are present in the correlation database 
+	 * that is not the way to go about it.
+	 * 
+	 * Because if we are looking for the words that have the highest correlation then 
+	 * we are not probably doing the right thing.
+	 * */
 	public void executeSteps(){
 		set_dicitionary_word(); //can be uncommented if the checking of words is deemed necessary
 		get_ids();
@@ -261,6 +268,65 @@ public class intrinsic_parameters_regression {
 		}
 			
 	}
+	
+	private void calculate_bestwords(int limit) {
+		System.out.println("Finding the words with the highest correlation");
+		
+		double averageCount = 0;
+		double count = 0;
+		double average;
+		
+		int negativeLimit;
+		
+		totalExamples -= 1;
+		if(totalExamples%2==0){
+			negativeLimit = totalExamples/2;
+		}else{
+			negativeLimit = (int) Math.floor(totalExamples/2);
+		}
+		
+		
+		try {
+			Statement databaseStatement = databaseConnection.createStatement();
+			
+			resultSet = databaseStatement.executeQuery("select count(*) from correlationDB");
+			while(resultSet.next()){
+				count = resultSet.getInt(1);
+			}
+			
+			resultSet = databaseStatement.executeQuery("select correlation from correlationDB");
+			while(resultSet.next()){
+				averageCount += Math.abs(resultSet.getInt(1));
+			}
+			
+			average = averageCount/count ;
+			
+		/*	resultSet = databaseStatement.executeQuery("select * from correlationDB order by correlation ASC");
+			while(resultSet.next()){
+				if(Math.abs(resultSet.getDouble(1))>average){
+					if(bestWord.size()<=negativeLimit){
+						bestWord.add(resultSet.getString(2));
+					}
+				}
+			}*/
+			
+			resultSet = databaseStatement.executeQuery("select * from correlationDB order by correlation DESC");
+			while(resultSet.next()){
+				if(Math.abs(resultSet.getDouble(1))>average){
+					if(bestWord.size()<=limit){
+						bestWord.add(resultSet.getString(2));
+					}
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
+	}
+
+
 
 	private void calculate_correlation(){
 		System.out.println("Calculating the correlation for the different words");

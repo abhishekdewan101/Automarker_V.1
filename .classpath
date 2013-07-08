@@ -9,5 +9,7 @@
 	<classpathentry kind="lib" path="/Users/abhishekdewan/Documents/workspace/ExternalLibraries/jcommon-1.0.18/jcommon-1.0.18.jar"/>
 	<classpathentry kind="lib" path="/Users/abhishekdewan/Documents/workspace/ExternalLibraries/jfreechart-1.0.14/lib/jfreechart-1.0.14.jar"/>
 	<classpathentry kind="lib" path="/Users/abhishekdewan/Desktop/test/Jama-1.0.3.jar"/>
+	<classpathentry kind="lib" path="/Users/abhishekdewan/Downloads/lingpipe-4.1.0/lingpipe-4.1.0.jar"/>
+	<classpathentry kind="lib" path="/Users/abhishekdewan/Downloads/la4j-master/target/la4j-0.4.5.jar" sourcepath="/Users/abhishekdewan/Downloads/la4j-master/target/la4j-0.4.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
