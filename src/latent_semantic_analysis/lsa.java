@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
+import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
+
 import Jama.Matrix;
 import Jama.SingularValueDecomposition;
 
@@ -38,7 +40,10 @@ public class lsa {
 		getDictionaryWords();
 	}
 	
-	private void testQuery(File[] testingFiles){
+	private double testQuery(File[] testingFiles){
+		double[] actualMarks = new double[testingFiles.length];
+		double[] predictedMarks = new double[testingFiles.length];
+		int counter =0;
 		for(int i =0;i<testingFiles.length;i++){
 			try{
 				FileInputStream fileInput = new FileInputStream(testingFiles[i]);
@@ -96,12 +101,55 @@ public class lsa {
 				}
 				System.out.println("\n\n");
 				
+				HashMap<String,Double> bestResults = returnBestMatches(documentsList,similarity);
+				
+				double predicted =0.0;
+				for(String key:bestResults.keySet()){
+					String[] tmp = key.split("_");
+					predicted += Integer.parseInt(tmp[1].substring(0,2));
+				}
+				String [] tmp = testingFiles[i].getName().split("_");
+				double actualMark = Integer.parseInt(tmp[1].substring(0,2));
+				
+				actualMarks[counter] = actualMark;
+				predictedMarks[counter] = predicted;
+				counter++;
 				}catch(IOException e){
 				e.printStackTrace();
 			}
 		}
+		double[] difference = new double[actualMarks.length];
+		for(int i=0;i<actualMarks.length;i++){
+			difference[i] = actualMarks[i] - predictedMarks[i];
+			System.out.println(actualMarks[i]+"		"+predictedMarks[i]);
+		}
+		System.out.println("Correlation"+ new PearsonsCorrelation().correlation(actualMarks, predictedMarks));
+		double averageDifference = 0;
+		for(int i=0;i<difference.length;i++){
+			averageDifference += difference[i];
+		}
+		
+		return (double)(averageDifference/difference.length);
 	}
 	
+	private HashMap<String, Double> returnBestMatches(ArrayList<String> documentsList2, double[] similarity) {
+		HashMap<String,Double> temp = new HashMap<String,Double>();
+		while(temp.size()<1){
+			double best =0.0;
+			int indexOfBest =0;
+			System.out.println(temp.size());
+			for(int i=0;i<similarity.length;i++){
+				if(best<similarity[i] && !temp.containsKey(documentsList2.get(i).toString())){
+					best = similarity[i];
+					indexOfBest = i;
+				}
+			}
+			System.out.println(best+"	"+ indexOfBest);
+			temp.put(documentsList2.get(indexOfBest).toString(), best);
+		}
+		return temp;
+	}
+
 	private double calcSim(double[][] queryArray, double[] documentVector) {
 		double similarity =0.0;
 		// calculate numerator
@@ -201,9 +249,10 @@ public class lsa {
 				String tempString = st.nextToken().toLowerCase();
 				if(refinedWords.contains(tempString)){
 				 int index = refinedWords.indexOf(tempString);
-				 countMatrix[index][i] += 1;
+				 countMatrix[index][i] += 1; 
 				}
 			}
+			
 			}catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -211,6 +260,14 @@ public class lsa {
 			}
 		}
 		
+		//calculating the TDIF matrix from count Matrix
+		/*double[][] tdif = new double[refinedWords.size()][trainingFiles.length];
+		for(int i=0;i<countMatrix.length;i++){
+			for(int j=0;j<countMatrix[i].length;j++){
+				tdif[i][j]= (double) (((double)countMatrix[i][j]*columnAdd(countMatrix,j)))/(((double)countMatrix[i].length * nonZero(countMatrix,i)));
+			}
+		}*/
+			
 		System.out.println("SVD Started");
 		Matrix A = new Matrix(countMatrix);
 		SingularValueDecomposition s = A.svd();
@@ -221,7 +278,7 @@ public class lsa {
 	      
 	    vTranspose = V.transpose();
 	      
-	      
+	    
 	      
 	      
 		/*Matrix a = new Basic2DMatrix(countMatrix);
@@ -265,6 +322,24 @@ public class lsa {
 //		 
 	}
 
+	private double nonZero(double[][] countMatrix, int i) {
+		double count =0;
+		for(int j=0;j<countMatrix[i].length;j++){
+			if(countMatrix[i][j]>0){
+				count++;
+			}
+		}
+		return count;
+	}
+
+	private double columnAdd(double[][] countMatrix, int j) {
+		double count = 0 ;
+		for(int i=0;i<countMatrix.length;i++){
+			count += countMatrix[i][j];
+		}
+		return count;
+	}
+
 	public void execute(){
 		File[][] foldFiles = gtff.getFoldFiles();
 		int [] index = gtff.getIndex();
@@ -272,7 +347,8 @@ public class lsa {
 		File[] testingFiles;
 		int trainingCounter =0;
 		int testingCounter =0;
-		for(int i=0;i<1;i++){
+		double[] correlation = new double[10];
+		for(int i=0;i<10;i++){
 			int trainingFold =i;
 			trainingCounter =0;
 			testingCounter = 0;
@@ -291,8 +367,15 @@ public class lsa {
 				}
 			}
 			calculateVectors(trainingFiles);
-			testQuery(testingFiles);
+			correlation[i]=testQuery(testingFiles);
 		}
+		
+		double avgCorrelation = 0.0;
+		for(int i=0;i<correlation.length;i++){
+			avgCorrelation += correlation[i];
+		}
+		
+		System.out.println("Average Correlation for 10 fold test is " + avgCorrelation);
 	}
 
 	public void getDictionaryWords(){

@@ -1,4 +1,4 @@
-/*Extract_Features class provides methods for extracting
+ /*Extract_Features class provides methods for extracting
  * the following features
  * 1. Image Count - No: of images in a particular file
  * 2. Table Count - No: of tables present in a particular file
@@ -21,9 +21,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import latent_semantic_analysis.get_ten_fold_files;
+
+import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 
 public class Extract_Summary_Parameters {
 	ArrayList<String> stopWords = new ArrayList<String>();
@@ -170,5 +176,111 @@ public class Extract_Summary_Parameters {
 			e.printStackTrace();
 		}
 		return submissionTimeLeft;
+	}
+	
+	public ArrayList<String> trainingWords(String textFileDirectory,int testingFold){
+		ArrayList<String> bestWords = new ArrayList<String>();
+		try{
+			get_ten_fold_files gttf = new get_ten_fold_files(textFileDirectory);
+			File[][] foldFiles = gttf.getFoldFiles();
+			int [] index = gttf.getIndex();
+			
+			HashMap<String,HashMap<String,Integer>> outerHash = new HashMap<String,HashMap<String,Integer>>();
+			for(int i=0;i<foldFiles.length;i++){
+				for(int j=0;j<index[i];j++){
+					if(i!=testingFold){
+						System.out.println("First "+foldFiles[i][j]);
+						FileChannel fileChannel;
+						fileChannel = new FileInputStream(foldFiles[i][j]).getChannel();
+						ByteBuffer contentsBuffer = ByteBuffer.allocate((int)fileChannel.size()); 
+					    fileChannel.read(contentsBuffer);
+						fileChannel.close();
+						String contents = new String(contentsBuffer.array());
+						StringTokenizer st = new StringTokenizer(contents);
+						
+						while(st.hasMoreTokens()){
+							String tempString = st.nextToken().toLowerCase();
+							if(tempString.length()>2){
+								if(dictionaryWords.contains(tempString) && !stopWords.contains(tempString)){
+									if(outerHash.containsKey(tempString)){
+										HashMap<String,Integer> innerHash = outerHash.get(tempString);
+										if(innerHash.containsKey(foldFiles[i][j].getName())){
+											innerHash.put(foldFiles[i][j].getName(),innerHash.get(foldFiles[i][j].getName())+1);
+											outerHash.put(tempString, innerHash);
+										}else{
+											innerHash.put(foldFiles[i][j].getName(),1);
+											outerHash.put(tempString, innerHash);
+										}
+									}else{
+										HashMap<String,Integer> innerHash = new HashMap<String,Integer>();
+										innerHash.put(foldFiles[i][j].getName(), 1);
+										outerHash.put(tempString, innerHash);
+									}
+								}
+							}
+						}
+					}
+				}	
+			}
+			System.out.println(outerHash);
+			
+			HashMap<String,Double> correlationHash = new HashMap<String,Double>();
+			
+			int totalCount =0;
+			for(int i =0;i<foldFiles.length;i++){
+				for(int j=0;j<index[i];j++){
+					totalCount++;
+				}
+			}
+			
+			int counter =0;
+			for(String key:outerHash.keySet()){
+				counter =0;
+				HashMap<String,Integer> innerHash = (HashMap<String,Integer>)outerHash.get(key);
+				System.out.println(innerHash);
+					if(innerHash.size()>30){
+					double[] marks = new double[totalCount];
+					double[] wordCount = new double[totalCount];
+					for(int i=0;i<foldFiles.length;i++){
+						for(int j=0;j<index[i];j++){
+							if(i!= testingFold){
+								System.out.println(foldFiles[i][j]);
+							if(innerHash.containsKey(foldFiles[i][j].getName())){
+									System.out.println(innerHash.size());
+									String [] tmp = foldFiles[i][j].getName().split("_");
+									marks[counter] = Integer.parseInt(tmp[1].substring(0,2));
+									wordCount[counter] = innerHash.get(foldFiles[i][j].getName());
+									counter++;
+							}else{
+								String [] tmp = foldFiles[i][j].getName().split("_");
+								marks[counter] = Integer.parseInt(tmp[1].substring(0,2));
+								wordCount[counter] = 0;
+								counter++;
+								}
+							}
+						}
+					  }
+					correlationHash.put(key,new PearsonsCorrelation().correlation(marks, wordCount));
+				   }
+				}
+				
+			
+			while(bestWords.size()<=25){
+				double bestValue = 0;
+				String word = null;
+				for(String key:correlationHash.keySet()){
+					if(bestValue<correlationHash.get(key) && !bestWords.contains(key)){
+						bestValue = correlationHash.get(key);
+						word = key;
+					}
+				}
+				bestWords.add(word);
+			}
+			
+			System.out.println(bestWords);
+		}catch(IOException e){
+		e.printStackTrace();
+		}
+		return bestWords;
 	}
 }

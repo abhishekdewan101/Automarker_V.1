@@ -1,0 +1,22 @@
+	BestWordCount  AverageCorrelation
+
+1.  	    50  	   0.30
+2.          45		   0.3148
+3.	    40 		   0.26
+4.	    35		   0.2848
+5.	    30		   0.3643
+6.	    25		   0.4064 	    
+7.	    20 		   0.3983
+8.	    15		   0.40523
+
+
+LSA Implementation
+
+Average of 10 fold cross validation tests show a average of -7.309 marks variation in the predicted and the actual marks of the thesis. 
+
+
+Average correlation for the lsa implementation is 0.13. (without TDIF)
+
+Average correlation for the lsa implementation is 0.:      (with TDIF)
+
+
