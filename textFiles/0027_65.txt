@@ -1,5 +1,7 @@
 Yeast recognition and tracking for cell biology 
  
+University of Bristol | Abstract 1 
+ 
 Abstract 
  
 The task of Yeast cell tracking is very important for biologists because it allows them to 
@@ -32,8 +34,9 @@ could be used as a basis for later pedigree tree extraction.
  
  
  
-University of Bristol | Abstract 1 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol |  3 
  
 Table of Contents 
 Abstract ............................................................................................................................................ 1 
@@ -69,8 +72,9 @@ Particle filter Enhancement.....................................................
 4. Results ......................................................................................................................................... 47 
 4.1 Cell ends detection ............................................................................................................ 47 
 4.2 Model tracking ................................................................................................................... 48 
-University of Bristol |  3 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol |  4 
  
 4.3 Yeast cell trajectories and PF improvement ........................................................................ 50 
 4.4 Local features tracking ....................................................................................................... 52 
@@ -83,8 +87,9 @@ University of Bristol |  3
 6. References .................................................................................................................................. 57 
  
   
-University of Bristol |  4 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 1. Introduction 5 
  
 1. Introduction 
  
@@ -119,8 +124,9 @@ themselves by the fact that they possess a nucleus. Yeast cells, apart from bein
 importance for the food industry (i.e. fermentation of beverages or baking), play a 
 paramount role as a model organism in modern cell biology [4]. Scientists have been 
 using them to learn more about eukaryotes and ultimately human biology.  
-University of Bristol | 1. Introduction 5 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 1. Introduction 6 
  
  
 Figure 1. Diagram of a Yeast cell [43]. 
@@ -140,8 +146,9 @@ because biologists have to manually manipulate the Yeast cells every 90 minutes 
 long as 150 hours (i.e. more than 6 days). Therefore devising a system that 
 automatically do this could speed up the experiments that would have taken a biologist 
 a life time to do[40].  
-University of Bristol | 1. Introduction 6 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 1. Introduction 7 
  
  
 Figure 2. Example pedigree analysis on Human- Scientists look for a disease gene by studying  over 
@@ -163,8 +170,9 @@ techniques could be applied to the tracking of Yeast cells. This will help to in
 throughput of biological experiments and to remove the complexity in tracking. Thus, 
 we aim to research and build during our project a software tool that could be used to 
 successfully track Yeast cells both in static images and in real-time conditions. The latter 
-University of Bristol | 1. Introduction 7 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 1. Introduction 8 
  
 could help in automating the constructing of the Yeast cells’ pedigree trees and also in 
 learning their behaviour. 
@@ -185,15 +193,19 @@ artificially generate samples which will be used for testing – the figures 3 & 4
 samples taken from our data. 
  
  
-  
-Figure 3. Yeast cells recording at the Figure 4. Yeast cells recording after few 
-beginning of the experiment. frames. 
+ 
+Figure 3. Yeast cells recording at the 
+beginning of the experiment. 
+ 
+Figure 4. Yeast cells recording after few 
+frames. 
  
  
  
  
-University of Bristol | 1. Introduction 8 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 1. Introduction 9 
  
 1.4 Thesis outline 
  
@@ -228,8 +240,9 @@ possible further work.
  
  
  
-University of Bristol | 1. Introduction 9 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 10 
  
 2. Theoretical background 
  
@@ -261,20 +274,18 @@ Figure 5. Examples of Haar-like features [32].
     The Haar-features can be calculated quickly by using an image representation called 
 integral of image. This concept was introduced by Crow 1984[31],[32] and it is mostly 
 used in computer graphics. 
-University of Bristol | 2. Theoretical background 10 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
  
-  
-( ) ( )
-      ∑                  ( ) 
-  
-         
+University of Bristol | 2. Theoretical background 11 
+ 
+  (   )  ∑  (     )  
+          
+            ( ) 
 Where ii(x,y) is the integral image and i(x,y) is the original image intensity. However, the 
 image integral can be easily calculated using the following recurrence: 
  
- (   )  (     )  (   )          ( ) 
-( ) ( ) ( )
-                         ( ) 
+ (   )   (     )   (   )          ( ) 
+  (   )    (     )   (   )       ( ) 
  Where s(s,y) is the cumulative row sum and we have the following base cases: 
 s(x,-1)=0 and ii(-1,y)=0 
  
@@ -293,8 +304,9 @@ sub-window, the weak classifiers are designed to select the feature rectangles t
 separate the positive from the negative examples. That is, for each of the feature the 
 weak classifier learns the optimal classification threshold such that the minimal number 
 of examples are misclassified [31],[32]. 
-University of Bristol | 2. Theoretical background 11 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 12 
  
 The Adaboost algorithm 
  
@@ -310,62 +322,55 @@ increased and its weight is decreased if the instance is correctly classified- t
 the algorithm to focus on the misclassified samples (i.e. the one with the biggest 
 weights)[36]. The Adaboost algorithm can be implemented as follow:  
  
-{( ) }
-1. Input:  N labelled  samples        (   ) 
-    
+1. Input:  N labelled  samples  {(     )   (     )} 
  Distribution D over N samples 
  Weak learning algorithm WeakLearn 
  Integer T of number of iterations 
- 
-()
-2. Initialise the weight vector:                      
- 
-3. Do for  t= 1,…, T 
- 
- 
- 
+2. Initialise the weight vector:  
+   ( )                
+3. Do for  t= 1,, T 
  
 ? Set       
   
-∑
+∑   
+  
+   
  
-    
   
 ? Call WeakLearn providing it  with the probability 
-t
-[ ]
-distribution p and getting back an hypothesis           
+distribution pt and getting back an hypothesis       [   ]  
  
- 
+? Calculate the error of          ∑   
   
-∑ | ( ) |
-? Calculate the error of             . 
-        
+   | (  )    |. 
  
-? Set      (   ) . 
-     
+? Set         (     ). 
  
-| ( )  )|
-  
+? Set the new weight vector to be :  
       
-? Set the new weight vector to be :     . 
    
+  | (  )   )|. 
  
 4. Output the hypothesis: 
  
-  
+   ( )  {
+                                    ∑     (    
  
-                                    ∑    (   )  ( )  ∑    (   ) 
    
-()
-    { 
-  
-      
-                                                                                                           
+)   ( )  
  
  
-University of Bristol | 2. Theoretical background 12 
- Yeast recognition and tracking for cell biology 
+ ∑    (    
+ 
+   
+) 
+                                                                                                          
+ 
+ 
+ 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 13 
  
 -classification/ the attentional cascade 
     The VJ also used a cascade of classifiers in order to achieve high detection rate while 
@@ -389,15 +394,14 @@ Figure 8. Haar-like (volumetric) filters used for mistosis feature extraction [1
 extracted both positive and negative examples from the image frames and adopted a 
 feature detection called Integral Volume; which is based on the work of Ke et al [27]- 
 see Fig 8. 
-   
-( ) ( )
-       ∑           ( ) 
-  
-            
+ (     )  ∑  (        )     ( )
+              
+ 
 Where V is the integral volume at pixel location (x, y) and at time t; I (.) represent the 
 pixel at the original image at time t. 
-University of Bristol | 2. Theoretical background 13 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 14 
  
 In addition, the features were calculated using the local variance of the image 
 because using the pixel intensities of the original image would give a poor performance- 
@@ -406,13 +410,17 @@ Wu et al. [38] and it has the advantage to be less computationally expensive tha
 original Adaboost; which requires substantial amount of time for training. 
 Furthermore, the cell detection was improved using a bilateral filter. The latter is a 
 non-linear filter that smoothes out a signal but preserves its strong edges. 
-  
+   (   )  
  
-( ) ( )
-       ∑ [      ]    ∑ (   )   ( ) 
-| | | |
-( ) ( )
-          
+| |
+∑ [ (   )   ] 
+(  )  
+    
+ 
+| |
+∑  (   )
+(  )  
+   ( ) 
 Where N is the local neighbourhood of size |N|. 
  
 Finally, a roll back filter was applied to extract non mitotic cells (i.e dividing cells). 
@@ -436,82 +444,69 @@ is to solve p(x|Z). That is to predict the state x of the object given the obser
 principle we can use the Bayes theorem to solve this. However, in practice this cannot 
 be solved. Therefore, the factor sampling algorithm generate a random variate that 
 approximate p(x|Z) [45]. 
-( | ) ( ) ( | )
-              ( ) 
+ ( | )    ( ) ( | )    ( ) 
 Where k is a normalisation term. 
-University of Bristol | 2. Theoretical background 14 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 15 
  
  
-Figure 9. PF illustration [30]- state p(z |X ) demonstrates the resample process (i.e. the bigger 
-n+1 n
-the weight of the particle the more new particles are generated around it), at state p(x |z ) a 
-n+1 n+1
+Figure 9. PF illustration [30]- state p(zn+1|Xn) demonstrates the resample process (i.e. the bigger 
+the weight of the particle the more new particles are generated around it), at state p(xn+1|zn+1) a 
 new likelihood is computed given the new observation and the bigger the likelihood the bigger the 
-update weight of the particles at state p(z |X ). 
-n+1 n+1
+update weight of the particles at state p(zn+1|Xn+1). 
   
-   With the PF, the posterior probability distribution p(x |X ) has to be evaluated at each 
-k k
+   With the PF, the posterior probability distribution p(xk|Xk) has to be evaluated at each 
 step. However, the latter can be calculated, in the case of sequential Bayesian filtering 
 by using the following two steps [34]: 
  
 -Prediction step 
-( | ) ( | ) ( | )
-    ∫             ( ) 
-                    
+ (   |    )  ∫ (   |    ) (     |    )           ( ) 
  
 -Filtering step 
- ( | )  ( | ) ( | )        ( ) 
-           
+ (   |  )   (   |  ) (   |    )        ( ) 
  
     The prediction step (Eq. 7) is followed by a marginalisation and a new distribution is 
 obtained using the Bayes rule. In addition, the PF requires a model that describes the 
-( | )
-dynamic evolution/movement of the particles        as well as a model to 
-     
-( | )
-compute the likelihood of each particle against the current observation     . 
-   
+dynamic evolution/movement of the particles    (   |    )  as well as a model to 
+compute the likelihood of each particle against the current observation   (   |  ). 
 Therefore we can see that the idea behind the particle filter is quite simple and the 
 algorithm can be summarised as follow [37]: 
  
-University of Bristol | 2. Theoretical background 15 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 16 
  
  
 ? Initialisation: 
-   
-{ }
-At state t=0, generate N particles with an initial state        with n= 1, …, 
-      
-  
-N and where       are the position  and weight vectors respectively. 
-    
+At state t=0, generate N particles with an initial state     
+  {   
+     
+ } with n= 1, , 
+N and where     
+     
+   are the position  and weight vectors respectively. 
  
 ? State transition 
-( | )
-For n=1,…,N update the particles using the state transition model       of 
-     
+For n=1,,N update the particles using the state transition model   (   |    )  of 
 your choice. 
  
 ? Weighting and normalisation 
 Compute the new weights of the particles and normalise them 
-( ) ( ) ( )
   
-|
-   (  )   ( ) 
-   
-( ) ( )
-Where   ( | ) is the likelihood based on the observation model. 
-  
+( )
+  (  
+( )|  
+( ))   ( ) 
+Where   (  
+( )|  
+( )) is the likelihood based on the observation model. 
  
  
 ? Resampling 
+Resample and replace the particle according to ( )   
 (   )
-( )
-Resample and replace the particle according to    . The number of 
- 
+. The number of 
 particles should remain the same. This is called importance sampling but there 
 are also some other resampling methods. 
  
@@ -527,38 +522,33 @@ comparable to manual tracking. However, they failed to test their approach again
 benchmark. Their solution, involved the modelling of the state of the cell using a defined 
 vector s. The vector s was composed of the position of the contour, the orientation of 
 the contour and the contour measurement. The variables of s were extracted on each 
-image frame. The aim was to estimate the posterior density P(s |z ) as well as the 
-k 1:k
-associate expectation of the integral function g (s ). 
-k k
+image frame. The aim was to estimate the posterior density P(sk|z1:k) as well as the 
+associate expectation of the integral function gk(sk). 
  
- ( ( )) ∫ ( ) ( | )      (  ) 
-         
+ (  (  ))  ∫  (  ) (  |    )       (  ) 
  
-University of Bristol | 2. Theoretical background 16 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 17 
  
 However, in the PF the above equation is approximated using the following equation: 
  
+ ( ( )) 
  
-( )
-( ( ))
-     ( )
-( )
-( )
- ∑           (  ) 
-( )
-  ( )
+ ∑ ( ( ))
+ 
    
+ ( ( ))
+ ( ( ))
+         (  ) 
  
 With 
+ ( )  {
        
- ( ) {          (  ) 
-        
-       
-   
-Where ? is a positive constant and ? is the area inside the curve and ? represents the 
-in out 
+                
+          
+  (  ) 
+Where ? is a positive constant and ?in is the area inside the curve and ?out represents the 
 area outside the curve. 
  
 2.2.2 Multi-target tracking and data association problem 
@@ -577,17 +567,16 @@ we believe that it is suitable for our data.
 presented a NN-based cell tracking methods. They define a distance and a size based 
 matching similarity measure which they then stored inside a distance matrix. The latter 
 contained all nuclei positions at time t and time t+1. And the distance between adjacent 
-x (t) and x (t+1) was denoted d (t). Then, the authors matched the cell by scanning all 
-i j ij
+xi (t) and xj(t+1) was denoted dij(t). Then, the authors matched the cell by scanning all 
 adjacent matrices to find the successive candidates at frame t+1; these candidates were 
 added up in ascending order of their distance size.  
    Furthermore, they used a 10% threshold; that is, when the sum of the distances 
-exceed by 10% the size of the cell at time  x (t), the algorithm is stopped and the last 
-i 
+exceed by 10% the size of the cell at time  xi (t), the algorithm is stopped and the last 
 added distance is removed. The rational of the 10% threshold was based on 
 experiments they did; they noted that the size of the nuclei would not exceed 10% of its 
-University of Bristol | 2. Theoretical background 17 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 18 
  
 size at time t. Therefore, using this tracking method Wong 
 et al. managed to detect cell migration, division and death 
@@ -598,10 +587,7 @@ of the sample size. In addition, this technique in the
 context of Computer Vision is known to perform poorly in 
 the case of multiple targets tracking with crossing paths 
 [17]. This is reason we have used here in conjunction with 
-Figure 10. Observation model 
 PF so that the performance of our system will not be affected. 
-constructed with a canny edge 
-detector [1]. 
  
 2.3 Related work/Literature review 
 2.3.1 Cell detection 
@@ -618,29 +604,29 @@ Active Contour (AC) or snakes were introduced by Kass et
 al. they are used to represent deformable models where 
 contours are deformed in order to minimize an energy function 
 (Eq. 13) [1]. 
-  
+      
+  ∫       
  
-() () ()
-   (  )   {[ (  )] [ (  )] 
-∫ ∫
-             
-     
-  
-()
-[ (  )]}    (  ) 
-   
-Where E is the internal energy of the spline; E represents 
-int image
-Figure 11. Body contours extracted 
-using AC [42]. 
-the image forces and E is the external forces. 
-con
+ 
+( ( ))   ∫ {[    
+ 
+ 
+( ( ))]  [      ( ( ))]  
+[    ( ( ))]}    (  ) 
+Where Eint is the internal energy of the spline; Eimage represents 
+the image forces and Econ is the external forces. 
 Although, AC are popular they have some drawbacks for instance they are 
 computationally expensive; they can get stuck in local minima.  
 Standard AC approach 
  
-University of Bristol | 2. Theoretical background 18 
- Yeast recognition and tracking for cell biology 
+Figure 11. Body contours extracted 
+using AC [42]. 
+Figure 10. Observation model 
+constructed with a canny edge 
+detector [1]. 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 19 
  
 In 2005, Shen at al. [1] demonstrated that AC contours could be used for biological 
 cell detection. They accomplished it by having 3 models of the biological cell. One that 
@@ -648,19 +634,17 @@ represents its shape, another that mimics its dynamics and a last model they cal
 observation which is used to calculate the fitness/likelihood of the detected cell. The 
 latter was built using a simple canny edge detector. And the probability of correctness 
 of an edge was given by:  
- 
-( )
      
  
+√    
+∑  
  
-  
-  
-     ∑      (  ) 
+ (   )
     
-√
+ 
    
-   
-Where  (    )     (    ) ; dm is the distance between the contour and the edge 
+     (  ) 
+Where  (    )      (       ); dm is the distance between the contour and the edge 
 and µ is the maximum distance between the contour and the edge point under 
 consideration. 
 Also, in the following year they produced a software tool called CellTraker which is 
@@ -681,17 +665,16 @@ Level sets
 Level sets are an improvement of the original snake contours. The main idea here is 
 to represent the evolving contours (?) using a signed function where its actual contour 
 corresponds to its zero levels. 
+ ( )  {
        
-( )        
-   {  (  ) 
-        
-       
-   
-Where ? is a positive constant and ? is the area inside the curve and ? represents the 
-in out 
+                
+          
+  (  ) 
+Where ? is a positive constant and ?in is the area inside the curve and ?out represents the 
 area outside the curve. 
-University of Bristol | 2. Theoretical background 19 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 20 
  
 Then according to the motion/ evolution equation (usually the Geodesic AC Eq. 16) 
 of the AC one can then easily derive a similar flow for the implicit surface that when 
@@ -700,32 +683,26 @@ Degerman et al.  [5] investigated the performance of a level sets approach to
 biological cells detection. They introduced a pre-processing step that uses Laplacian of 
 Gaussian (LoG) filtering. The latter, significantly increased the cells detection rate in low 
 contrast images. These results were obtained by combining a Geodesic AC energy 
-formulation with the Chan and Vese method [36].
+formulation with the Chan and Vese method [36]. 
  
+   =µ.Length(C) +?1+∫ | (   )    |
  
-  
-( ) ( )
- =µ.Length(C) +? + |       | dxdy + ? + |       | dxdy (16) 
-1 ∫ 2 ∫
-  
-              
+       
+dxdy + ?2+∫ | (   )    |        dxdy (16) 
  
-Where µ, ? and ? are just constants and c1 and c2 represent the average u inside and 
-1 2
+Where µ, ?1 and ?2 are just constants and c1 and c2 represent the average u inside and 
 outside the zero level set iso-contour respectively. 
 The background pixels were ignored and the contrast was enhanced using eq5. 
  
-     (   )   
-(( )) ( )
-         (       )(  ) 
+ ( (   ))     (      (
+     (   )    
   
  
+) )(  ) 
  
-Where G? is a Gaussian and ? and ? are constants which are set so that the dark 
-1 2
+Where G? is a Gaussian and ?1 and ?2 are constants which are set so that the dark 
 border of the cell are amplified, and so that the brightness differences inside the image 
-are reduced. (Here ? and ? are all set to 100) 
-1 2 
+are reduced. (Here ?1 and ?2 are all set to 100) 
 Furthermore, the team managed to speed up the level set function by only 
 considering pixels that belong to the background. The approach managed to achieve an 
 accuracy of 76% on a very difficult data set. This approach is relevant to our project 
@@ -740,8 +717,9 @@ technique would perform with overlapping or touching cells which is one of the
 challenges we are facing with our dataset. Also, we think that 76% accuracy is quite low 
 and it would not really justify the replacement of the human expertise by a real-time 
 tracking system. 
-University of Bristol | 2. Theoretical background 20 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 21 
  
 Threshold based segmentation 
  
@@ -749,10 +727,10 @@ Thresholding works by separating images into dark and light regions. The techniq
 exploits the regions’ pixel intensities. For instance if g(x,y) is the thresholded version of 
 f(x,y) at some global threshold  T; this can be translated  using the following equation: 
  
-( )
-           
- (   ) {    (  ) 
+ (   )  {
+      (   )   
                   
+    (  ) 
  
 Chen et al. [7] investigated the use of threshold based segmentation in biological cell 
 images. They used the Otsu segmentation algorithm which applied a global threshold to 
@@ -783,8 +761,9 @@ inconsistencies that occur during the process. The only caution is the fact that
 and cell fragments are discarded. We do not know whether such discarded information 
 would not have any impact in the cell behaviour analysis. Another issue to point out is 
 the fact that thresholding does not consider relationship between pixels and it does not 
-University of Bristol | 2. Theoretical background 21 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 22 
  
 guarantee that the identified pixels are continuous. In addition, this technique would 
 not perform well near the region boundaries and the threshold is heuristically set. 
@@ -810,17 +789,18 @@ which each pixel could lie. And to overcome the irregularity of the shape of the
 they assumed that the nuclei have some large convex structure- the edged of the cell 
 were detected using a Sobel mask.  
  
+   ( )  ∫   (   )    (  )
       
-( ) ( )
-     ∫         (  ) 
       
+ 
  
 Where r is the radial parameter in the circular HT. 
 The team managed with some optimization to successfully approximate as much of 
 95% of their image database. Also they algorithm perform well in dividing nuclei in to 
 likely substructure. 
-University of Bristol | 2. Theoretical background 22 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 23 
  
 Although this approach gave encouraging results we do not think that the HT is 
 appropriate for our project. That is not to say the HT will not do the job as Ulrich et al. 
@@ -844,12 +824,11 @@ separates the planes in the features space
 between different classes (i.e. cell and non-cell 
 regions).  
  
-Figure 12. SVM hyperplane separating example [13]. 
  
+ ( )      [∑     (    )   
  
-( ) ( )
-       [∑           ] (  ) 
    
+] (  ) 
  
 f(x) is the SVM decision function, where x is the data point to be classified, xi is the 
 support vector, N is the number of support vectors, b is a constant and yi is the class 
@@ -861,8 +840,10 @@ noted that the SVM approach on average correctly classified 90% of the cells- th
 of the cell were detected using a Laplace detector. They also pointed out that the success 
 of the technique is highly reliant to the feature vector-so they combine the gradient 
 edge and the row pixel value to build a strong feature vector. 
-University of Bristol | 2. Theoretical background 23 
- Yeast recognition and tracking for cell biology 
+Figure 12. SVM hyperplane separating example [13]. 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 24 
  
 Furthermore, in another publication by Triggs and Dalal [14], SVM were used along 
 Histogram of Oriented Gradients (HoG) to detect Humans. Although, this is not a 
@@ -891,11 +872,10 @@ and by calculating the distances between the seed regions according to a metric.
 used a Riemannian metric defined in term of the image I and the regularisation 
 parameter ?: 
  
- 
-() ()
-         
-     (  ) 
+  
+  ( )   ( )    
    
+   (  ) 
  
 Where I is a 2x2 identity matrix and g is a radius blur. 
 Then each image pixel is assigned to a cell according to its distance from the cells’ 
@@ -903,8 +883,9 @@ nuclei. The authors found that this approach is very similar to the one of the G
 AC with only a reverse behaviour of the algorithm around the edges. Therefore, because 
 of this similarity and the limitation of the AC discussed earlier in this chapter, we do not 
 think that this approach would be used in our project. In addition, although Voronoi 
-University of Bristol | 2. Theoretical background 24 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 25 
  
 segmentation has the advantage of detecting thin edges in contrast it totally ignores 
 local image structure [6]. 
@@ -929,8 +910,9 @@ detection evaluation approach which we think could be applied to our project; th
 measure the performance of the cell detection algorithm by computing the false 
 acceptance rate (FAR) and false rejection rate (FRR).  
  
-University of Bristol | 2. Theoretical background 25 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 26 
  
 2.3.2 Cell Tracking 
  
@@ -957,20 +939,45 @@ biological cells because the motions of the pixels were limited to non-linear el
 motion. That is, even if the morphology of the cells within the image changes we would 
 be able to register them.  
  
-   
-Figure 14. Segmented image Figure 15. Final segmentation Figure 16. First tracking 
-with removed background [16]. with each cell represented by detected [16]. 
+ 
+Figure 14. Segmented image 
+with removed background [16]. 
+ 
+Figure 15. Final segmentation 
+with each cell represented by 
 different colour[15]. 
+ 
+Figure 16. First tracking 
+detected [16]. 
  
 The relationship between the difference in pixel intensities and the mapping ?x and ?y 
 of the two images was obtained using eq. 6. 
-University of Bristol | 2. Theoretical background 26 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
  
-              
-( )
-    ( )  ( )           (  ) 
-           
+University of Bristol | 2. Theoretical background 27 
+ 
+    
+  
+ 
+(
+  
+  
+ 
+  
+  
+)   
+  
+ 
+(
+  
+  
+ 
+  
+  
+)  
+  
+ 
+(   )        (  ) 
 Where f and m are matrices that contain the pixel intensities in the target and source 
 images respectively; ?? and ?? are included to compensate the overall intensity 
 difference of the 2 images. 
@@ -989,56 +996,52 @@ section talks about their application in cell tracking.
 Degerman et al. [5] solved a tracking problem using a contour based approach. They 
 solved the problem by associating segmented regions in subsequent image frames by 
 solving the asymmetric problem using the next equation. 
-  
-   ∑∑      (   )             (  ) 
-     
-      
-Where a represents a weight  that indicates the befit of matching region I to region j in 
-ij
-the next time sequence; ? is the set of  pairs (i, j) which can be matched and X is  
-ij
+   ∑∑       
+ 
+   
+ 
+   
+    (   )              (  ) 
+Where aij represents a weight  that indicates the befit of matching region I to region j in 
+the next time sequence; ? is the set of  pairs (i, j) which can be matched and Xij is  
 determined by: 
+    {
                             
-  { (  ) 
-  
                                                                           
+(  ) 
  
 Degerman and his [5] team solved the asymmetric problem using the auction 
 algorithm. That is, they matched the object region j at time t+1 and the track region I at 
 time t. Also, when i=j=0 they called the two regions dummy object and dummy track 
 respectively. And except for the dummy regions all the assignments are 1 to 1 
 assignments and each of these assignments was weighted using: 
-  (      )       (  ) 
-        
-University of Bristol | 2. Theoretical background 27 
- Yeast recognition and tracking for cell biology 
+    (           )        (  ) 
+Yeast recognition and tracking for cell biology 
  
- Where w is the weight for track I, d and f are calculated by Eq. 26 and Eq. 27 
-i ij ij 
-respectively; c is the relative weight between 2 terms. 
-d
+University of Bristol | 2. Theoretical background 28 
+ 
+ Where wi is the weight for track I, dij and fij are calculated by Eq. 26 and Eq. 27 
+respectively; cd is the relative weight between 2 terms. 
+ 
+          (
  
   
+ √(  ( )    (   ))
  
-√
-        ( ( ( )  (   )) ( ( )  (   )) )    (  ) 
-      
+ (  ( )    (   ))
  
+)    (  ) 
  
- 
-d calculates the distance between centroid j at time t+1 and the centroid belonging to I; 
-ij
-f measure the size difference between object j and  its previous size i. 
-ij
-() ( ) () ( )
-|        | |        |
-    
-     ( ( ) ( ))   (  ) 
-  
-   ( )   ( )
-    
-Where f is an empirical value set depending on the segmentation method.  
-0 
+dij calculates the distance between centroid j at time t+1 and the centroid belonging to I; 
+fij measure the size difference between object j and  its previous size i. 
+       ( (
+|  ( )     (   )|
+     ( )
+)  (
+|  ( )     (   )|
+     ( )
+))   (  ) 
+Where f0 is an empirical value set depending on the segmentation method.  
 However, they found that this approach if used on its own provided poor results- the 
 accuracy was in the range of 66-76%. The accuracy here also was affected by the 
 segmentation approach. 
@@ -1049,73 +1052,63 @@ although not tested on any data helped to retrieve features that are not covered
 PF- such as sharp corner. 
  
  
-Figure 17. Standard GVF drift away from the cell (a) and the improved 
-(version with Dirichlet) capture the leukocyte [15]. 
  
 Ray and Acton [15] also investigated the use of AC for cell tracking. They developed a 
 tracking algorithm that combined a Partial Differential Equation (PDF) and GVF, 
 together with a shape size and an implicit resampling constraint. They approach 
 suggested that the use of GCF constructed with a Dirichlet type boundary condition, 
 provide an AC tracker that is robust for a wide range of conditions (see figure 11). 
-University of Bristol | 2. Theoretical background 28 
- Yeast recognition and tracking for cell biology 
+Figure 17. Standard GVF drift away from the cell (a) and the improved 
+(version with Dirichlet) capture the leukocyte [15]. 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 29 
  
 Li et al. [16] use AC for a multi-target tracking system that can simultaneously follow 
 hundreds of thousands of cells in the most challenging environments. In 2006, the team 
 adopted a Level-Sets (eq. 28) tracking approach which consisted of keeping track of 
 certain regions of the cells such as the background. 
  
-                     (           )
- 
- 
-   
- ( ) {           (        )         (  ) 
-           (          )
- 
+  ( )  {
+                      (           )
+              (        )      
+            (          )
+   (  ) 
  
 They also used an auxiliary region labelling function to monitor the cell regions in 
 order to match the motion pattern of the cells; the objective of this approach was to 
 minimize the following energy function which is a combination of 3 terms. 
  
-              (  ) 
-                
+                              (  ) 
  
-Where E draw the contour to the high gradient magnitude, E attracts the 
-edge motion
-contour to the predicted mode of the cell’s centroid while E matches the image 
-region
+Where Eedge draw the contour to the high gradient magnitude, Emotion attracts the 
+contour to the predicted mode of the cell’s centroid while Eregion matches the image 
 appearances. 
-  ∑ ∫     ( ( )|       (  ) 
-       
+        ∑ ∫      ( ( )|      
+    { }  
    
-  { }  
+  (  ) 
  
+        ∑ ∫  ( ) ( 
  
- 
-  
-∫ ( ) ( ) ( )
-  ∑   (  ) |       (  ) 
-      
+    { }  
    
-{ }
-      
+( )) |    ( )   (  ) 
  
- 
+        ∑ ∫(      ( ( )  |  
  |   
-( )
-  ∑ ∫(      (    | ))       (  ) 
-       
+))
+    { }  
    
-  { }  
- 
- 
-Where u, v, g are real coefficient, ?( .) is the Dirac delta function and g(.) is an edge 
+       (  ) 
+Where u, v, g are real coefficient, ?(.) is the Dirac delta function and g(.) is an edge 
 indicator. The probability distribution in Eq. 31 represents the pixel intensity 
 distribution in each region and the one in Eq. 32 matches the pixel intensity to the 
 predicted motion filter. Moreover, they devised a method to prevent cell merge during 
 tracking while still allowing cell splitting. 
-University of Bristol | 2. Theoretical background 29 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 30 
  
 In 2008, Li et al. [16] improved their work by adding an interacting multiple models 
 which will be discuss more in details later in this chapter. This second approach 
@@ -1144,25 +1137,24 @@ probability distribution. After that, the team computed a validation gate in ord
 determine the distance of each cell centre at time t-1 based on its Euclidean distance 
 from time t. During the process the cells were assumed to be doing a random walk 
 modelled by: 
- 
-  
- 
-( )
-             ( )         (  ) 
-  
- 
+    (   )  
  
 √  
-Here, D is a validation variable based on the distance between the identified cell centre 
-e
+     ( 
+  
+ 
+  
+)         (  ) 
+Here, De is a validation variable based on the distance between the identified cell centre 
 at time t-1 to the cell centre candidate at time 1. 
 However, this method seems to be very limited just as pointed out by the authors 
 themselves. The method may suffer from the fact that association of the cell centre 
 could be ambiguous. In other words, the method could fail if we have some close-by, 
 dividing or overlapping cells. Also, the method has not been tested on any data so this 
 method as it is presented in this paper we think is not appropriate for our project. 
-University of Bristol | 2. Theoretical background 30 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 31 
  
 Kalman Filters (KF) 
  
@@ -1171,31 +1163,22 @@ a linear system where the state is assumed to possess a linear Gaussian distribu
 [22].  Just like the PF, the KF is a Bayesian estimation technique that is used to track 
 stochastic systems that are observed using noisy sensors [45]. The KF is composed of 3 
 probabilistic models: 
-? The system model describes the evolution in time of the current state vector u ; 
-t
+? The system model describes the evolution in time of the current state vector ut; 
 the transition between states is modelled as the known transition matrix T plus 
-some Gaussian noise with covariance Q . 
-t
+some Gaussian noise with covariance Qt. 
  
-             (   ) (  ) 
-          
+                      (    ) (  ) 
  
-? The measurement model which relates the measurement vector d to the 
-t
-present state using a measurement matrix H to which some Gaussian noise is 
-t
+? The measurement model which relates the measurement vector dt to the 
+present state using a measurement matrix Ht to which some Gaussian noise is 
 also added . 
  
-             (   )  (  ) 
-      
+                  (    )  (  ) 
  
 ? The prior model which describes the prior knowledge about the state of the 
-system at   ??? and its covariance P before any measurement is taken. 
- 0
+system at    ?? ?  and its covariance P0 before any measurement is taken. 
  
- 
- [ ] ? ??     [ ]     (  ) 
-    
+ [  ]    ?? ?     [  ]       (  ) 
  
 Tang et al. [20] investigated the use of Kalman Filters in active cell tracking. They 
 argued that they can be used to successfully track biological cells. However, they tested 
@@ -1213,8 +1196,9 @@ from some problems such as they are computationally expensive- the latter is
 proportional to the number of particles; it is difficult to determine how many particles 
 are actually needed and selecting the best resampling methods is always a challenge but 
 we think that their advantages outweigh their limitations.  
-University of Bristol | 2. Theoretical background 31 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 32 
  
  Mean-Shift 
  
@@ -1223,14 +1207,11 @@ dataset using the principle of kernel.
 Debeir et al. [21] investigated adaptive mean-shift kernels for cell tracking; in this 
 particular work, the authors used a unique set of kernels with adaptive sizes but they 
 introduced a variation in their weights to determine their combination. Therefore, a 
-T
-given state of weight W= (W , W ,…,W ) is associated a specific grey level pattern. And 
-1 2 n
+given state of weight W= (W1, W2,,Wn)T is associated a specific grey level pattern. And 
 a variation in their grey level would indicate an object being detected. Hence, the team 
 proposed an adaptive combination that enabled them to pass from one combination to 
 the other. 
-*
-W =?W + (1-?) W’ (37) 
+W*=?W + (1-?) W’ (37) 
 ?: function of object current size 
  
 Finally, they merged the cell trajectories in order to deal with cell duplications that 
@@ -1254,21 +1235,19 @@ determined the backward and forward overlaps which are the ratios between the
 intersection and the area of the cell mask in subsequent image frames. 
  
  
-University of Bristol | 2. Theoretical background 32 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 33 
  
  
-( )
-   
+                
+(       )
     
-                    (  ) 
- 
-   
-(   )
-    
-And,                                                                    (  ) 
- 
- 
+    (  ) 
+And,                                                                  
+(       )
+  
+  (  ) 
 Where A is the cell area. 
 In addition, the cell pair with the largest overlap was selected to be the unique 
 successor of the cell-provided that both overlaps exceed a certain threshold. In addition, 
@@ -1291,8 +1270,9 @@ respectively. This type of error correction would be infeasible in our project b
 its expensiveness in term of human resources. Therefore, the one think that we would 
 be using in our project is the idea of having a validation algorithm to correct the errors 
 that could occur when we build the cell trajectories. Hence, the technique they used to 
-University of Bristol | 2. Theoretical background 33 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 2. Theoretical background 34 
  
 evaluate their algorithm could be applied to our project. The team computed what they 
 called the “Complete Path Detection rate”; that is the number of correct complete paths 
@@ -1331,8 +1311,9 @@ more flexible and robust system as it will help us to implement validation metho
 each step. This means that the performance of the system would improve progressively 
 because at each step as the unwanted data will be discarded leaving only the good one. 
   
-University of Bristol | 2. Theoretical background 34 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 3. Methods 35 
  
 3. Methods 
  
@@ -1340,29 +1321,35 @@ University of Bristol | 2. Theoretical background 34
 Also, it describes our approach for model establishment and validation. Moreover, it 
 explains the techniques we have investigated in order to improve both the detection 
 and the tracking of the cells. 
-START
+DETECT CELL 
+ENDS WITH 
+VIOLA-JONES 
+METHODS
+LOAD VIDEO 
+FRAME
+BUILD CELL 
+MODEL BY 
+COMBINING 
+OPPOSED CELL 
+ENDS
+TRACK CELL 
+USING PARTICLE 
+FILTERS
 Do some pre-
 processing: Gaussian 
 smoothing and 
 Histogram 
 equalization
-DETECT CELL 
-LOAD VIDEO ENDS WITH 
-FRAME VIOLA-JONES 
-METHODS
 Rotate image ( 20 
 degrees steps), 
 detect and store the 
 ends of the cells. 
-BUILD CELL 
-TRACK CELL MODEL BY 
-USING PARTICLE COMBINING 
-FILTERS OPPOSED CELL 
-ENDS
+START
  
 Figure 19. System overview. 
-University of Bristol | 3. Methods 35 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 3. Methods 36 
  
 3.1 Pre-processing: 
  
@@ -1376,11 +1363,14 @@ distribution of the pixel intensities around the image-this is illustrated in th
 images Fig. 21-23. 
  
  
-  
 Figure 21. Original sample 
-Figure 22. Gaussian Denoised Figure 23. Histogram 
 image. 
-image. Equalised image. 
+ 
+Figure 22. Gaussian Denoised 
+image. 
+ 
+Figure 23. Histogram 
+Equalised image. 
  
     We noticed that when the histogram equalisation is applied to the image the Yeast 
 cell’s edges are sharper-i.e. we can easily identify the cell’s boundaries. In addition, we 
@@ -1393,8 +1383,9 @@ the VJ training because VJ is sensitive to differences in pixels intensities.
 combination of template matching and manual collection. The collected samples were 
 all facing relatively the sample direction (see Fig 21). In addition, we constructed the 
 negative samples that are required for the VJ training from our video frames. These 
-University of Bristol | 3. Methods 36 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 3. Methods 37 
  
 negative samples were constructed by removing the Yeast Cells’ ends from each of the 
 image frame using a Gaussian Blur- the latter was done in order to prevent the addition 
@@ -1413,15 +1404,37 @@ was conducted on the University of Bristol’s supercomputer which is equipped wit
 OpenCV module. After, running several experiments, the following training parameter 
 were selected. And we will discuss the tried settings in a later chapter. 
  
-Positive Negativ Minimu Maximu Numbe Sampl Sampl Weight 
-Sample e  m Hit m False r of e e Trimmin
-s Samples rate alarm Stages Width Height g 
+Positive 
+Sample
+s 
+Negativ
+e  
+Samples 
+Minimu
+m Hit 
 rate 
+Maximu
+m False 
+alarm 
+rate 
+Numbe
+r of 
+Stages 
+Sampl
+e 
+Width 
+Sampl
+e 
+Height 
+Weight 
+Trimmin
+g 
 186 500 0.99 0.4 20 20 20 0.95 
 Table 1. VJ training settings. 
  
-University of Bristol | 3. Methods 37 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 3. Methods 38 
  
 Minimum hit rate: is the minimum desired hit rate for each stage classifier. 
 Maximum false alarm rate: maximum desired false alarm for each stage of the 
@@ -1436,10 +1449,7 @@ Yeast cells’ ends can be detected directly by the VJ classifier,
 the task of building a model of the cell that can be used by 
 the PF is not trivial. That is because the VJ classifier was 
 only trained to detect one end of the cell (Fig. 25) and each of 
-Figure 25. Every detected 
 the detected cell’s end is modelled as a circle. So during the 
-cell end is modelled as a 
-circle. 
 detection process, to detect the corresponding opposite end, 
 we rotated each video frame 8 times in 20 degrees steps-Fig. 
 39.  
@@ -1450,9 +1460,13 @@ achieve this, we used a naïve approach which consist of greedily combining the c
 opposite ends (i.e. A(i) and B(i)). 
  
  
+Figure 25. Every detected 
+cell end is modelled as a 
+circle. 
 Figure 26. Greedy model establishment search space. 
-University of Bristol | 3. Methods 38 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 3. Methods 39 
  
  
 Figure 27. Yeast cell model- The cell ends A and B are combined together to form our model.  
@@ -1469,8 +1483,9 @@ cell and  the last cell is formed by joining detection at 60 degree and 240 degr
 the image that are not connected by a red line represent detected cell end that have not been 
 validate or that cannot be combined to form a model. 
  
-University of Bristol | 3. Methods 39 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 3. Methods 40 
  
     However, before applying the greedy model establishment, we had to 
 convert/translate the pixels’ coordinates of the detected cell ends at different 
@@ -1478,17 +1493,12 @@ orientations of the image frame to the standard orientation (i.e. 0 degrees to 1
 degrees). This was achieved by applying the following transform which maps the centre 
 of the image to itself. 
  
+{
+                (      )         
+                        (      )  
+     (  ) 
  
-( )
-                            
-  
-{     (  ) 
- 
-                      (      ) 
-  
- 
-    Where (x’,y’) are the translated pixel coordinates, (C ,C ) are the coordinates of the 
-x y
+    Where (x’,y’) are the translated pixel coordinates, (Cx,Cy) are the coordinates of the 
 centre of the image; (x,y) are the coordinates of the detected cell end at a specific 
 orientation and   is the angle at which the detection was done (i.e. the orientation). 
     However, this greedy approach is very inefficient when used on its own because it 
@@ -1497,8 +1507,9 @@ this reason we devised a validation strategy which is discussed in the next sect
  
  
 Figure 29. Examples of badly formed cell models. 
-University of Bristol | 3. Methods 40 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 3. Methods 41 
  
 Model establishment enhancement/Validation 
  
@@ -1517,8 +1528,9 @@ Figure 30. Canny edge detection output.
 model to accepted or to be valid, it has to be located at (0.5 * radius) of any of the 
 previously validate cells. We remarked that using this simple heuristic we were able to 
 eliminate many of the wrongly formed models. 
-University of Bristol | 3. Methods 41 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 3. Methods 42 
  
  
 Figure 31. Model validation Heuristic. 
@@ -1549,28 +1561,21 @@ evaluate its performance more easily.
 observed model (or the newly validated model) with their weights set to zero. 
 Furthermore, the motion model/dynamic of the system is devised using the Box-Muller 
 transform.  
-University of Bristol | 3. Methods 42 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 3. Methods 43 
  
     The Box-Muller transform is used to generate a pair of independent and uniformly 
 distributed random numbers with mean µ=0 and standard deviation ?=1, given a 
 source of randomly distributed random numbers [33]. The transform is expressed as 
 follow: 
-( )
-  √                   (  ) 
-   
-            (     )  (  ) 
-√
-   
-Where x and x are uniformly and independently distributed between 0 and 1. 
-1 2  
+   √           (      )    (  ) 
+   √           (      )  (  ) 
+Where x1 and x2  are uniformly and independently distributed between 0 and 1. 
 Consequently, the extremities (i.e. A and B) were move according to the following 
 equation/dynamic: 
-( ) ( )
-                    (  ) 
- 
- (   )  ( )             (  ) 
- 
+ (   )   ( )               (  ) 
+ (   )   ( )               (  ) 
 Where the step refers to the expected distance travelled by the cell from frame to frame; 
 in this project we used step=10 and std is the standard deviation (i.e. the spread of the 
 particles around the observation)- the latter was set a 0.5. 
@@ -1584,22 +1589,27 @@ observation/detection. And the weight of each particle is updated as the product
 weights of the two ends -the more a particle is closer to the observation the more its 
 weight will be close to 1 (see Eq. 45). 
  
-University of Bristol | 3. Methods 43 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
  
-( ) ( )
-           (  ) 
+University of Bristol | 3. Methods 44 
  
+    (  )   (  ) (  ) 
+ 
+Where         ( )     ( 
  (      )(      ) (      )(      )
-()
-Where              ( )  (  ) 
+ 
+)  (  ) 
  
  
-  
-Figure 33. Detected/Observed Yeast cells- the Figure 34. Tracked cells- the dark blue lines 
-number that are not linked together represents represent the spread of the particles around 
-the orientation of the models that have not the new observation and the Yellow line is the 
-been approved by the validation heuristic. estimated position by the PF. 
+Figure 33. Detected/Observed Yeast cells- the 
+number that are not linked together represents 
+the orientation of the models that have not 
+been approved by the validation heuristic. 
+ 
+Figure 34. Tracked cells- the dark blue lines 
+represent the spread of the particles around 
+the new observation and the Yellow line is the 
+estimated position by the PF. 
  
     Furthermore, the multi-target tracking data association problem was dealt with using 
 the Nearest Neighbour approach. That is the new observations is associated or 
@@ -1612,8 +1622,7 @@ approaches:
 small value to the weight of each particle when updating it. This will allow more 
 particles to survive during the resampling process. 
  
-           (  ) 
-  
+             (  ) 
 Where c is the damping factor. 
  
 ? Local features tracking: The idea behind this approach is to improve the PF by 
@@ -1625,8 +1634,9 @@ is independent of the VJ detection/prediction of new observation. This mean we
 would only detect a cell once and it subsequent likely locations/observations will 
 be computed by this approach. 
  
-University of Bristol | 3. Methods 44 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 3. Methods 45 
  
 In order to achieve this, we used the “Good features to track” method proposed 
 by Shi and Tomasi [48]. The latter is one of the most popular techniques to such 
@@ -1640,54 +1650,42 @@ the rate of change of the z component is large are the best features for trackin
 This rate is calculated by the equation below which is an operator of feature 
 extraction [35]. 
  
-( )
-                 (  ) 
-  
+            (     )  (  ) 
  
+                                (
+  (  
+ )          (    )
+  (    )        (   )             
+)  (  ) 
  
-( )
-           (  )
-     
-                                ( )  (  ) 
- 
- (  )       ( )             
-     
- 
-Where           are the eigenvalues of the matrix C; f is the input image. f and f are x 
-x y
-  
-component and y component of differential coefﬁcient, respectively, and   means 
- 
+Where             are the eigenvalues of the matrix C; f is the input image. fx and fy are x 
+component and y component of differential coefficient, respectively, and    means 
 Gaussian smoothing with standard deviation ?. 
 Furthermore, the Optical Flow tracking is based on the principle that the luminance 
 remain constant along the motion trajectories which mean that the total derivative of 
 the image is zero [47] The Optical flow is express as follow: 
  
-          (  ) 
-     
+               (  ) 
  
-Where           the spatial and temporal derivatives of the image are function and 
-   
-        are the components of the underlying optical flow. 
-  
+Where              the spatial and temporal derivatives of the image are function and 
+          are the components of the underlying optical flow. 
  
-    However, because the Optical Flow contains two unknowns (       ) , it is 
-  
+    However, because the Optical Flow contains two unknowns (         ), it is 
 impossible to compute the estimate of the optical flow field. But Lucas and Kanade 
 introduces a method that can solve the previous problem by assuming that the motion 
-ﬁeld within a small window is constant and this constraint is used with the Optical Flow 
+field within a small window is constant and this constraint is used with the Optical Flow 
 Equation to construct a least squares problem and hence estimates of the vector 
-(    ) [47]; this is the method used in this project to track the local features. 
-   
-University of Bristol | 3. Methods 45 
- Yeast recognition and tracking for cell biology 
+(       ) [47]; this is the method used in this project to track the local features. 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 3. Methods 46 
  
  
+Figure 35. Detected good feature points on 
+frame  at time t. 
  
 Figure 36. Tracked good feature points (i.e. in 
-Figure 35. Detected good feature points on 
 red) in subsequent image frame (t+1) using 
-frame  at time t. 
 Optical Flow. 
  
 3.4 Summary 
@@ -1718,8 +1716,9 @@ model(s) of interest. Hence, by doing this the PF will be independent of the per
 of the VJ in detecting new observations/models. The intuition here was to make the PF 
 more performant and (almost) independent of the VJ detection. 
  
-University of Bristol | 3. Methods 46 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 4. Results 47 
  
 4. Results  
  
@@ -1743,8 +1742,9 @@ negative samples using the artificially generated data.
  
 Figure 37. ROC plot of the VJ classifier (tested on artificial generated examples). The plot shows 
 how the classifier performs on randomly generated Yeast cells’ data. 
-University of Bristol | 4. Results 47 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 4. Results 48 
  
     Moreover, we investigated how the performance of the VJ classifier would change 
 after pruning its decision tree. That is by reducing the thresholds of the stages of the 
@@ -1769,8 +1769,9 @@ out by the validation heuristic.
     We spotted that during the tracking of the established models, the PF outperformed 
 both the basic model and the basic model (without validation) with the validation 
 heuristic, after running it over our data set-see Fig 39.  
-University of Bristol | 4. Results 48 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 4. Results 49 
  
  
 Figure 39. Model detection performance. 
@@ -1785,18 +1786,22 @@ when they do so the distance travelled is not very distant from their previous l
 this is illustrated in Fig. 40-42. 
  
  
-  
-Figure 42. Although the models 
-Figure 40. Validated models at Figure 41. PF prediction in 
-are not detected (t+2) the PF 
-time t. subsequent frame (t+1_- the 
-predictions are still valid. 
+Figure 40. Validated models at 
+time t. 
+ 
+Figure 41. PF prediction in 
+subsequent frame (t+1_- the 
 blue plot represents the 
 spread of the particles around 
 the new observation. 
  
-University of Bristol | 4. Results 49 
- Yeast recognition and tracking for cell biology 
+Figure 42. Although the models 
+are not detected (t+2) the PF 
+predictions are still valid. 
+ 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 4. Results 50 
  
  
     Furthermore, in order to check statistical significance of our findings, we did some 
@@ -1807,13 +1812,14 @@ test is used to check the following null hypothesis- that is how likely that the
 between the precision/recall of the methods has a mean of 0.  
  
  T-test on precision T-test on recall 
-PF detection vs. Basic 0.000198401 0.0001642 
+PF detection vs. Basic 
 model detector (without 
 validation) 
--10 -5 
-PF detection vs. Basic 1.43265 x 10 2.92362 x 10
+0.000198401 0.0001642 
+PF detection vs. Basic 
 model detector with 
 validation 
+1.43265 x 10-10 2.92362 x 10-5 
 Table 2. T-test results. 
  
     We found that (see Table 2) that the probabilities of all the t-tests we did are inferior 
@@ -1830,8 +1836,9 @@ that, when we add a dumping factor to the PF, when one cell is detected it does 
 move; this is due to the fact that, during the resampling process of the PF, many 
 particles survive. So, when a model is established it will stay on almost forever at the 
 same position if no new observation is not matched to it (i.e. it is not updated).  
-University of Bristol | 4. Results 50 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 4. Results 51 
  
  
 Figure 43. Yeast cell trajectories when using PF with damping factor; we notice here that the 
@@ -1845,8 +1852,9 @@ accepted. Thus, we did not use the damping factor in the project and this explai
 when the latter is remove the trajectories built by the PF follow better the dynamic the 
 Yeast cells as more new observation/models are validated- this is illustrated in figure 
 44. 
-University of Bristol | 4. Results 51 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 4. Results 52 
  
  
 Figure 44. Yeast cell trajectories when using PF without damping factor. 
@@ -1863,16 +1871,21 @@ approximately 1.05%.
     In addition, we remarked that the combination of the “good features to track” and the 
 Optical flow provided descent results only in the first couples of frames. As the Yeast 
 cells divide and the environment become more complex, the Optical flow tracking 
-University of Bristol | 4. Results 52 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 4. Results 53 
  
 returned very poor results (i.e. it was unable to track  detected in the previous frames)- 
 this is illustrated in figures 45 & 46. 
  
-  
-Figure 45. Detected good feature to track at Figure 46. The Optical Flow fails to track the 
-time t- the tracked points at time t+1 are features from the previous video frame (i.e. 
-highlighted in light pink. frame X). 
+ 
+Figure 45. Detected good feature to track at 
+time t- the tracked points at time t+1 are 
+highlighted in light pink. 
+ 
+Figure 46. The Optical Flow fails to track the 
+features from the previous video frame (i.e. 
+frame X). 
  
  
 4.5 Summary  
@@ -1895,8 +1908,9 @@ it almost doubled the precision obtained by the basic model combined with the
 validation heuristic. And we confirmed the statistical significance of our results using 
 the Student’s t-test method; we found that in all cases the probability of the t-test is less 
 that our p-value (i.e. 5%). 
-University of Bristol | 4. Results 53 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 4. Results 54 
  
     Also, we have realised that the  both the damping factor and the local feature tracking 
 ( using good features to track and Optical flow) are not suitable for our project as they 
@@ -1924,8 +1938,9 @@ did not produce satisfactory results.
  
  
  
-University of Bristol | 4. Results 54 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 5. Concluding remarks, evaluation and Further work 55 
  
 5. Concluding remarks, evaluation and Further work 
  
@@ -1964,8 +1979,9 @@ mechanism behind the PF. In addition we found the implementation of the PF in th
 OpenCV library very complex to set up and we were not sure how it would perform in 
 the case of multi-target tracking. We found that the choice of the PF was a good choice 
 as it significantly improved the performance of our system. And, also we concluded, 
-University of Bristol | 5. Concluding remarks, evaluation and Further work 55 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 5. Concluding remarks, evaluation and Further work 56 
  
 after analysing the performance of the PF (see Fig. 39), that it could be used as a basis 
 for later pedigree tree extraction. 
@@ -2003,8 +2019,9 @@ models for Yeast cell establishment and validation (without a need for image
 segmentation).  
  
  
-University of Bristol | 5. Concluding remarks, evaluation and Further work 56 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 6. References 57 
  
 6. References 
  
@@ -2042,8 +2059,9 @@ Schmid, S. Soatto, & C. Tomasi, eds. 2005 IEEE Computer Society Conference on Co
 Vision and Pattern Recognition CVPR05, 1(3), p.886-893. 
 15. Ray, N. & Acton, S.T., 2002. Active contours for cell tracking. Proceedings Fifth IEEE 
 Southwest Symposium on Image Analysis and Interpretation, p.274-278.  
-University of Bristol | 6. References 57 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 6. References 58 
  
 16. Li, K. et al., 2006. Online Tracking of Migrating and Proliferating Cells Imaged with Phase-
 Contrast Microscopy. 2006 Conference on Computer Vision and Pattern Recognition Workshop 
@@ -2081,8 +2099,9 @@ manifolds. Computer Vision for Biomedical Image Applications, 3765, p.535-543.
 29. Yilmaz, A., Javed, O. & Shah, M., 2006. Object tracking: A survey. ACM Computing Surveys, 
 38(4), p.13. 
 30. Bishop, C. (2007) Pattern Recognition and Machine Learning, Springer. 
-University of Bristol | 6. References 58 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 6. References 59 
  
 31. Viola,P.,Jones,M. (2001)Rapid object detection using a boosted cascade of simple features. 
 Proceedings of the 2001 IEEE Computer Society Conference on Computer Vision and Pattern 
@@ -2120,8 +2139,9 @@ se2.shtml. [Accessed 26 September 12].
 http://www.accessexcellence.org/AE/AEPC/NIH/gene14.php. [Accessed 26 September 12]. 
 45. Isard, M. & Blake, A., 1998. CONDENSATION - Conditional Density Propagation for Visual 
 Tracking. International Journal of Computer Vision, 29(1), p.5-28. 
-University of Bristol | 6. References 59 
- Yeast recognition and tracking for cell biology 
+Yeast recognition and tracking for cell biology 
+ 
+University of Bristol | 6. References 60 
  
 46. Matthies, L., Kanade, T. & Szeliski, R., 1989. Kalman filter-based algorithms for estimating 
 depth from image sequences. International Journal of Computer Vision, 3(3), p.209-238. 
@@ -2151,6 +2171,4 @@ Computer Vision and Pattern Recognition CVPR94, 94(June), p.593-600.
  
  
  
- 
-University of Bristol | 6. References 60 
  

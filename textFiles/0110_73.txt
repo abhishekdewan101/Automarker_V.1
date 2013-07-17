@@ -1,0 +1,7322 @@
+ABSTRACT 
+This project focuses on the implementation of an inexpensive autonomous Unmanned 
+Aerial Vehicle (UAV) system. By its nature, it requires two fundamental elements to 
+operate, the aerial vehicle itself and a Ground Control Station (GCS) software. 
+For the aerial vehicle, a quad rotor helicopter is built based on a design named 
+Aeroquad [1]. It is a remote controlled quad copter with an embedded microcontroller 
+and several sensors. Its software is open source making it cheap and flexible to modify. 
+For the completion of this project, the open source software is integrated to a UAV 
+featuring: 
+? Autonomous navigation between different positions defined by the user 
+? Communication link establishment with the GCS using an Internet  connection 
+? Uninterruptable flight on communication link error events 
+? Amendment of missions during flight 
+On the other hand, GCS software is developed for the control and configuration of the 
+UAV. This software successfully provides the user options to: 
+? Calibrate the vehicle sensors 
+? Configure the communication link 
+? Plan the UAV’s mission, 
+? Track the vehicle on the globe in real time 
+? View the current state of the UAV’s orientation 
+  
+NOMENCLATURE 
+ADC  Analogue to Digital Converter 
+DCM  Direction Cosine Matrix 
+DOF  Degrees Of Freedom 
+ESC  Electronic Speed Controller 
+GCS   Ground Control Station 
+GIS  Geographic Information System 
+GPRS  General Packet Radio Service 
+GPS   Global Positioning System 
+GSM   Global System for Mobile 
+HUD  Head-Up Display 
+I2C  Inter-Integrated Circuit 
+IMU  Inertial Measurement Unit 
+MEMS   Micro Electro Mechanical Systems 
+NMEA   National Marine Electronics Association 
+PCB  Printed Circuit Board 
+PID  Proportional Integral Derivative 
+PWM  Pulse Width Modulation 
+RC  Remote Controlled 
+TCP/IP  Transmission Control Protocol / Internet Protocol 
+UAV  Unmanned Aerial Vehicle 
+UCS  Universal Character Set 
+UART  Universal Asynchronous Receive Transmit 
+UTF-8   UCS Transformation Format — 8-bit 
+VTOL  Vertical Take Off and Landing  
+WGS84  World Geodetic System (revised in 2004)  
+ACKNOWLEDGEMENTS 
+ 
+I would like to thank my project advisor Dr. Paul Warr for his valuable advice and 
+guidance and inspiration during my studies at University of Bristol and specifically for 
+the advice towards the completion of this project. Also, I would like to thank all of the 
+academic staff for the knowledge I earned during this year. I would also like to thank my 
+friend Yiannis helping me with proof reading. Last but not least, I would like to express 
+my gratitude to my family for their support during my studies. 
+ 
+  
+ 
+Tabl
+1.
+1.
+2.
+2.
+2.
+2.
+2.
+2.
+3.
+3.
+3.
+3.
+4.
+4.
+4.
+4.
+e of Contents
+INTRODUC
+1. Aim an
+ Unm1.1.1
+ Gro1.1.2
+THEORETIC
+1. Unman
+2. Quad R
+ How2.2.1
+3. PID Co
+ The2.3.1
+4. UAV’s
+ Iner2.4.1
+ Flig2.4.2
+ Posi2.4.3
+ Mag2.4.4
+ Coll2.4.5
+ Baro2.4.6
+ Elec2.4.7
+ Sen2.4.8
+5. Wirele
+THEORETIC
+1 Tasks a
+2 Missio
+3 Comm
+IMPLEMEN
+1. UAV D
+ Fram4.1.1
+ Har4.1.2
+ The4.1.3
+2 The UA
+ Aut4.2.1
+ Seri4.2.2
+ Com4.2.3
+3 GCS S
+ Com4.3.1
+ The4.3.2
+ The4.3.3
+ The4.3.4
+ .....................
+TION ............
+d Objectives 
+anned Aerial
+und Control S
+AL BACKG
+ned Aerial V
+otor Helicop
+ a Quad Roto
+ntroller ........
+ three parame
+ sensors and 
+tial Measurem
+ht Control an
+tioning Syste
+netometers ...
+ision/Obstacl
+meters .........
+tronic Speed 
+sor Interfacing
+ss Communic
+AL BACKG
+nd Instrumen
+n planning an
+unication ......
+TATION ......
+esign - Hard
+e design ......
+dware/PCB de
+ UAV Assem
+V Software .
+opilot Algorit
+al communica
+munication L
+olution appro
+munication l
+ Configuratio
+ Mission Plan
+ Flight Data V
+TABL
+.....................
+.....................
+.....................
+ Vehicle Obje
+tation Object
+ROUND ON
+ehicles (UAV
+ters ...............
+r Works .......
+.....................
+ters P, I and D
+orientation de
+ent Units .....
+d DCM Relati
+m ..................
+.....................
+e Avoidance .
+.....................
+Controllers an
+ ...................
+ation .............
+ROUND ON
+tation of a Gr
+d navigation 
+.....................
+.....................
+ware .............
+.....................
+sign .............
+bled ..............
+.....................
+hm Approach
+tion ..............
+ink Establish
+ach ...............
+ink handler ...
+n View ..........
+ner View ......
+iew ..............
+E OF CO
+.....................
+.....................
+.....................
+ctives ..........
+ives ..............
+ UAVs .........
+s) .................
+.....................
+.....................
+.....................
+ ...................
+termination ..
+.....................
+on ................
+.....................
+.....................
+.....................
+.....................
+d Motors .....
+.....................
+.....................
+ GCS ............
+ound Contro
+overview ......
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+ ....................
+.....................
+ment ............
+.....................
+.....................
+.....................
+.....................
+.....................
+NTENTS
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+l Station ........
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+ 
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+.....................
+............. 4
+............. 6
+............. 7
+............. 7
+............. 9
+........... 11
+........... 11
+........... 12
+........... 12
+........... 13
+........... 14
+........... 16
+........... 16
+........... 17
+........... 21
+........... 23
+........... 23
+........... 23
+........... 24
+........... 24
+........... 26
+........... 27
+........... 28
+........... 29
+........... 29
+........... 31
+........... 31
+........... 31
+........... 31
+........... 35
+........... 36
+........... 38
+........... 42
+........... 42
+........... 45
+........... 45
+........... 46
+........... 48
+........... 49
+5. RESULTS ............................................................................................................................................. 50
+5.1. Testing the Control loop rate ....................................................................................................... 50
+5.2. Autonomous Navigation Algorithm Test..................................................................................... 51
+5.3. Communication Link Tests .......................................................................................................... 53
+5.4. GCS Functionality Tests .............................................................................................................. 53
+6. EVALUATION ..................................................................................................................................... 54
+7. FUTURE WORK .................................................................................................................................. 55
+8. BIBLIOGRAPHY ................................................................................................................................. 56
+9. APPENDICES ...................................................................................................................................... 58
+9.1. UAV System User Manual .............................................................................................................. 58 
+9.2. PCB Hardware Design - Interface .................................................................................................... 60
+ 
+List of Figures 
+ 
+Figure 1: Pitch, roll and Yaw flight dynamics .............................................................................................. 11
+Figure 2:  a) Motor structure of quad rotor helicopter      b) 6 Degrees Of Freedom ................................. 13
+Figure 3: a) Abstract view of a PID Controller       b) The Block diagram of the Controller [6] ............... 14
+Figure 4: The “P” parameter effect ............................................................................................................... 14
+Figure 5: The “I” parameter effect ................................................................................................................ 15
+Figure 6: a) Aircraft - earth coordinate systems b) Illustrated rotation ...................................................... 17
+Figure 7: Orientation calculation procedure .................................................................................................. 20
+Figure 8: PWM operation .............................................................................................................................. 25
+Figure 9: I2C bus with 2 devices ................................................................................................................... 25
+Figure 10: structured components approach of a GCS software [18]. .......................................................... 27
+Figure 11: A sample HUD for visualization of flight data [19] .................................................................... 28
+Figure 12: Sample packet format .................................................................................................................. 29
+Figure 13: Control Block diagram ................................................................................................................ 32
+Figure 14: Microcontroller board used as computational unit [21]. .............................................................. 32
+Figure 15: Sensors used ................................................................................................................................ 33
+Figure 16: The new PCB designed ................................................................................................................ 34
+Figure 17: The UAV assembled .................................................................................................................... 35
+Figure 18: The Block diagram of the open source software already exists [1] ............................................. 36
+Figure 19: The block diagram of the flight software after integration .......................................................... 37
+Figure 20: Block diagram of solution approach ............................................................................................ 38
+Figure 21: Illustration of the PID’s “set point” ............................................................................................. 39
+Figure 22: Autonomous navigation PID controller effect ............................................................................. 41
+Figure 23: The Configuration View of the GCS ........................................................................................... 47
+Figure 24: Mission planner view of the GCS ................................................................................................ 48
+Figure 25: Flight data view of the GCS ........................................................................................................ 49
+Figure 26: The Control loop rate before and after the UAV software integration ........................................ 50
+Figure 27: The GPS Navigation algorithm is disabled .................................................................................. 51
+Figure 28: The GPS Navigation algorithm is enabled ................................................................................... 52
+ 
+List of tables 
+Table 1: Synopsis of PID parameters effects ................................................................................................ 16
+Table 2: Sample NMEA sentence [11].......................................................................................................... 22
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   6 
+ 
+1. INTRODUCTION 
+ 
+UAVs were firstly and still being developed for military purposes such as covert 
+reconnaissance, security and post disaster analysis. Over the past decade, UAVs demand 
+have been grown exponentially when such a system stopped serving just military, but 
+also civilian needs. They are nowadays found in a variety of fields. Geographic 
+Information System (GIS) services are using UAVs for maps updating. They are also 
+being used by environmental analysts for various observations and predictions. Some 
+movie scenes were also taken by such vehicles. 
+What it makes these systems more and more popular, is the reduced complexity of 
+their flight control which can be achieved by a non-expert pilot. All the difficulties of 
+controlling commands are now done by software enabling a user to fly them easily and 
+securely.  Furthermore, vertical take-off and landing (VTOL) UAVs have a big advantage 
+over the other types as they are commonly used in areas consisting of abrupt altitude 
+changes such as inhabitant areas. Hence, rapid vertical climb or vertical decent is crucial. 
+This project focuses on the implementation of a complete UAV system. It includes both 
+the aerial vehicle software and hardware needs as well as the GCS platform. 
+For the aerial vehicle, a low-cost remote controlled quad-rotor helicopter was 
+used as it features stable flights [1]. The control software is open source and the 
+computational unit is a microcontroller which can be programmed to meet the flight 
+autonomy requirements. This also reduces its cost, which is a main constraint of the 
+project.  
+Within this project, a low cost remote controlled model is transformed into an 
+efficient UAV able to navigate autonomously. Furthermore, the aircraft is able to 
+navigate safely to its station in case of a communication link error. The communication 
+between the aircraft and the ground control station is long ranged as the General Packet 
+Radio Service (GPRS) was used.  
+Consequently, a GCS application was developed. This application is responsible 
+to initialize the aircraft by performing several pre-flight tasks. It also provides a user 
+friendly environment for mission planning and is programmed to receive real-time 
+information that is coming from the UAV. Last but not least, it visually tracks the 
+aircraft’s route on map while keep logs of the flight data for further analysis or 
+simulation. 
+ For the development of this project several areas were studied. These areas cover 
+both software and hardware implementation needs. Sensor interfaces, communication 
+link protocols and different technology availabilities were studied. Furthermore, 
+mathematical models regarding the aircraft orientation have been analysed. Finally, the 
+components should exist on a state-of-the-art ground control system application and the 
+role of each was discovered and implemented in a way providing a user friendly 
+interface.   
+Stef
+ 
+1.1
+ 
+Alth
+thei
+ 
+con
+imp
+inte
+auto
+ 
+Con
+Fur
+defi
+mak
+ 
+1.1
+ 
+? 
+? 
+? 
+ 
+? 
+? 
+? 
+? 
+? 
+ 
+1.1.
+ 
+Des
+ 
+The
+roto
+win
+ 
+ 
+anos Constan
+. Aim a
+ough UAV
+r high cost 
+The aim
+trolled qua
+lementation
+rfacing the
+pilot.   
+The sec
+trol Statio
+thermore fo
+ned that m
+ing the sys
+ Unman.1
+Design
+Design
+Integra
+Genera
+Integra
+Integra
+Integra
+Integra
+Integra
+ UAV 1.1
+ign of the a
+ frame of t
+r helicopte
+d, further p
+tinou, Advanc
+nd Object
+s are very
+on research
+ of the pr
+d rotor hel
+ of the 
+ required s
+ond main p
+n (GCS) s
+r the comm
+akes use 
+tem web ba
+ned Aeria
+ of the aircr
+ of a PCB in
+tion of the s
+l Packet Ra
+tion of the s
+tion of the s
+tion of the s
+tion of the s
+tion of the s
+Objectives
+ircraft’s fr
+he UAV is
+r [1]. Its s
+ayload cap
+ed Microelec
+ives 
+ popular, th
+ and electro
+oject is the
+icopter to a
+aircraft’s f
+ensors, as w
+art of the 
+oftware ab
+unication 
+of the Tran
+sed. 
+l Vehicle O
+aft’s frame
+terfacing t
+oftware ab
+dio Service
+oftware to 
+oftware to 
+oftware to 
+oftware to 
+oftware to 
+ Analysis
+ame:  
+ designed b
+etup is sele
+abilities and
+ 
+tronic System
+ey are not 
+nic compo
+ integration
+n efficient
+rame, the 
+ell as the 
+project is f
+le to intera
+of the two s
+sport Con
+bjectives
+  
+he required
+le to receiv
+ (GPRS) 
+hold its alti
+hold it posi
+travel betw
+navigate se
+perform au
+y followin
+cted to be 
+ long fligh
+s Engineering
+found in c
+nents requi
+ of an inex
+ UAV. Thi
+Printed C
+integration
+ocused on t
+ct in real 
+ystems, an
+trol Protoc
+ sensors wi
+e and transm
+tude set by
+tion at a wa
+een two wa
+curely on c
+to take-off 
+g the guide
+medium si
+ts. 
+, 2011 
+ivilian appl
+red for thei
+pensive, op
+s includes 
+ircuit Boa
+ of the curr
+he implem
+time with 
+ application
+ol/Internet 
+th a microc
+it data in r
+the user du
+ypoint 
+ypoints 
+ommunicat
+and auto lan
+lines of the
+zed as it o
+ 
+ications ye
+r developm
+en source
+the design 
+rd (PCB)
+ent softwa
+entation of 
+the aerial 
+ protocol h
+Protocol (
+ontroller 
+eal time us
+ring flight 
+ion link fai
+ding 
+ open sour
+ffers stabil
+7 
+t due to 
+ent. 
+, remote 
+and the 
+design 
+re to an 
+Ground 
+vehicle. 
+as been 
+TCP/IP) 
+ing 
+lures 
+ce quad 
+ity over 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   8 
+ 
+Design of a PCB interfacing sensors with the microcontroller: 
+ 
+The PCB design and implementation was a result of studying the sensors of the quad 
+rotor’s architecture [1]. It was then amended to a new design featuring all the required 
+sensors to provide an autonomous flight such as: 
+? 3 axis gyroscope for attitude calculations 
+? 3 axis accelerometer for roll-pitch drift corrections 
+? 3 axis magnetometer for autonomous navigation complementing Global 
+Positioning System’s (GPS). 
+? GPS for autonomous navigation and yaw corrections 
+? GPRS for communication 
+ 
+Integration of the software able to receive and transmit data using GPRS service: 
+ 
+The communication link between the microcontroller and the GPRS module has been 
+implemented. The system is able to manipulate sockets for data transmission and 
+reception. Furthermore, an application layer protocol between the aircraft and the GCS 
+has been defined. A sample of such a protocol is presented in the “Theoretical 
+Background on GCS”, found in chapter 3. The UAV is able to have a real time 
+bidirectional communication link with the GCS over the Internet. The communication 
+link is used for the real time amendment of the UAV’s mission, as well as for the 
+generation of the artificial instrumentation and tracking on the GCS. 
+ 
+Integration of the software able to hold its altitude set by user: 
+  
+The aircraft makes use of the barometer to hold a user set altitude during navigation. As 
+there is no low cost sensor to calculate altitude over ground, but both GPS and barometer 
+measures altitude over sea level, it is left to the user to set a safe altitude for navigation. 
+ 
+ 
+Integration of the software able to hold its position: 
+ 
+Position hold is the ability of the aircraft to hover at the destination point by utilizing 
+GPS. For the achievement of that objective an algorithm has been developed taking into 
+account the inaccuracy of the positioning system as it is usually about a radius of 10-20 
+meters. The algorithm stabilises the aircraft regardless any external force (such as wind) 
+applied on the aircraft. The aircraft is designed to hold its position on the last position 
+that exists in the mission list. However, a user can use the GCS-UAV communication to 
+set any position he or she decides as last position. 
+ 
+Stef
+ 
+Inte
+ 
+The
+soft
+ 
+Inte
+ 
+Com
+Sys
+trav
+reac
+of a
+hold
+ 
+Inte
+ 
+The
+perf
+. 
+1.1
+ 
+? 
+? 
+ 
+ 
+1.1.
+ 
+ 
+Des
+GC
+The
+prot
+The
+the 
+anos Constan
+gration of 
+ 
+ UAV vehi
+ware imple
+gration of 
+municatio
+tem for M
+el through 
+hed. For th
+ communic
+ing its pos
+gration of
+ 
+ UAV sho
+orm autom
+ Groun.2
+Implem
+Design
+contain
+o 
+o 
+o 
+ GCS 2.1
+ign and im
+S 
+ TCP/IP tr
+ocol was d
+ application
+“Theoretica
+tinou, Advanc
+the softwar
+cle is able t
+menting th
+the softwar
+n links are 
+obiles (GSM
+some activ
+is reason th
+ation link f
+ition until t
+ the softwa
+uld utilize 
+atic take-of
+d Control S
+entation of
+ of a GCS
+ing: 
+Mission pla
+Flight data
+Configurat
+Objectives
+plementati
+ansport pro
+efined imp
+ protocol i
+l backgrou
+ed Microelec
+e able to tr
+o travel bet
+is feature is
+e to return
+vulnerable
+) service 
+e network e
+e UAV is 
+ailure. Afte
+he operator
+re to perfo
+the capabil
+fs and land
+tation Ob
+ an applicat
+ modulariz
+nning mod
+– instrume
+ion module
+ Analysis
+on of a com
+tocol was 
+lementing t
+s a similar 
+nd on GCS
+tronic System
+avel betwee
+ween diffe
+ analysed in
+ to base on
+, especially
+and the In
+quipment 
+designed to
+r the last po
+ takes the m
+rm auto ta
+ities of the
+ings contro
+jectives 
+ion layer p
+ed as obse
+ule 
+ntation visu
+ 
+municatio
+used. On 
+he commu
+message w
+”. 
+s Engineering
+n two coor
+rent coordin
+ chapter 4.
+ a commun
+ when it is 
+ternet whe
+(switches, r
+ accomplis
+sition is re
+anual cont
+ke-off and
+ barometer
+lled by the 
+rotocol betw
+rved in the
+alizer mod
+n protocol 
+top of it, a
+nication be
+ith the one 
+, 2011 
+dinate posi
+ate points 
+2.1. 
+ication link
+built on the
+re each pac
+outers) unt
+h its missio
+ached (base
+rol to land i
+ landing:  
+ and a rang
+GCS. 
+een the UA
+ GCS bac
+ule 
+between the
+ telnet-typ
+tween the U
+covered by
+ 
+tions: 
+autonomou
+ failure: 
+ unreliable
+ket of data
+il the destin
+ns even in 
+), the UAV
+t. 
+e finder s
+V and the
+kground ch
+ UAV and
+e applicatio
+AV and th
+ sub-chapte
+9 
+sly. The 
+ Global 
+ has to 
+ation is 
+the case 
+ hovers 
+ensor to 
+ GCS. 
+apter 3 
+ the 
+n layer 
+e GCS. 
+r 3.3 in 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   10 
+ 
+Design of a ground control station modularized as observed in the theoretical 
+background chapter 3 
+The GCS software was developed in a visual object-oriented language. The software has 
+mainly three views (modules), each one performing a role. These views are: 
+? Mission planning 
+? Flight Data 
+? Configuration 
+The GCS makes use of open source Google Earth’s libraries for the virtual globe 
+presentation. Asynchronous socket programming algorithms written for the 
+communication link establishment and Serial Port programming were used for the wired 
+communication with the vehicle for its configuration, initialization and calibration of pre-
+flight procedures. 
+Implementation of mission planning module: 
+The mission planning view is user friendly environment where a user can design the 
+desired missions for the aircraft to travel. The GCS makes use of open source Google 
+Earth’s libraries for the virtual globe presentation. The positions are placed by the user as 
+‘clicks’, are then converted to missions and are sent to the UAV.  
+Implementation of flight data view of the UAV: 
+The GCS tracks the position of the aircraft in real time. This is done by analysing the data 
+sent from the UAV to the GCS. The data is visualised on the map not just as a dot, but as 
+a moving arrow clarifying the UAV’s orientation with respect to North. 
+Implementation of artificial instrumentation of the UAV: 
+The user, despite the tracking information is able to observe the current state of the 
+vehicle in terms of its orientation. It is provided with information such as: number of 
+satellites the GPS is listening from, the speed over ground and inertial information like 
+pitch and roll angles with respect to level position. Last but not least, the user can view 
+the azimuth of the aircraft. 
+  
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   11 
+ 
+2. THEORETICAL BACKGROUND ON UAVS 
+ 
+Despite that the project can be characterised as an implementation project, several areas 
+were studied for the implementation of each objective. This chapter is dedicated to the 
+research made on the UAVs and especially the VTOL ones. It analyses the different 
+approaches used to control the aircraft’s orientation and stabilisation which are then used 
+to develop the autopilot and the communication system. 
+ 
+2.1.  Unmanned Aerial Vehicles (UAVs) 
+ 
+Unmanned Aerial Vehicles are characterised by small size and light weight [2]. They are 
+also defined as unmanned (non-pilot) systems. Therefore, they make use of a wide 
+variety of sensors to fill this absence in order to have stable and accurate flights. Due to 
+their small size, multiple sensors and minimal space, they usually have some limitations, 
+as most embedded systems do. These features and limitations in payload, size, power 
+resources and computation power is what it needs to be balanced during the design of 
+such a system. 
+ Two main types of UAVs are available [3]; the rotary wing and fixed wing. Both 
+of them have their advantages as well as some disadvantages. Fixed wing models feature 
+less power consumption than rotary wing. On the other hand, they require enough 
+distance for take-off and landing. Rotary wing models are also divided in two categories; 
+the helicopters and multi-rotor helicopters (same axis – reverse rotation) with latter 
+featuring simplified design but what’s more, stable flights.  
+ Each aircraft (fixed-wing or rotary-wing) has three flight dynamic parameters 
+known as pitch, roll and yaw as shown in Figure 1. These are basically three angles 
+which are used to describe the orientation of the UAV at any given time. 
+ 
+  
+Figure 1: Pitch, roll and yaw flight dynamics 
+ 
+ 
+  
+Stef
+ 
+2.2
+ 
+Qua
+aero
+mak
+sma
+pitc
+dep
+airc
+cov
+The
+ 
+two
+othe
+mot
+use
+both
+from
+2.2
+ 
+For
+incr
+requ
+veh
+Thi
+whi
+on “
+ 
+mot
+to a
+ 
+answ
+con
+The
+sets
+The
+by r
+PID
+anos Constan
+. Quad 
+d rotor he
+dynamics, 
+es them ve
+Anothe
+ll quad ro
+h. The firs
+ends on the
+raft achieve
+ert reconna
+se are nam
+A quad
+ sets of m
+r set clock
+or on the tr
+d for balanc
+ achieved 
+ the instal
+ How a .1
+ the quad c
+eases its s
+ired angle
+icle to avo
+s is achieve
+ch are rotat
+Front – Re
+For the
+ors is incre
+chieve cloc
+One ma
+er to this
+troller has 
+ input of th
+ to its quad
+ PID contr
+eading the
+ controller
+tinou, Advanc
+Rotor Hel
+licopters ar
+thus the e
+ry stable V
+r key featur
+tor aircrafts
+t has to do
+ size and t
+s by 360o r
+issance, pr
+ed “slow-fl
+ rotor mod
+otor-propel
+wise (moto
+aditional h
+ing the air
+by control
+led sensors
+Quad Roto
+opters to a
+peed while
+. At the sa
+id yaw ang
+d due to th
+ing counter
+ar” motors 
+ adjustmen
+ases in spe
+kwise angl
+y wonder h
+ is the Pro
+an input, th
+e controlle
+ rotor by p
+oller is resp
+ Inertial M
+ are three 
+ed Microelec
+icopters 
+e naturally
+ase of thei
+TOL aircra
+e of such m
+ consist o
+ with the r
+he weight 
+otation. For
+opellers w
+y” propeller
+el, as show
+lers. One s
+rs 1, 3). Th
+elicopter m
+craft, and p
+ling the spe
+. 
+r Works
+chieve roll
+ the ‘Left
+me time, t
+les by incre
+e “left-righ
+ clockwise
+and “left-ri
+t of the ya
+ed while th
+es. The opp
+ow much e
+portional-I
+ree gain p
+r is the “se
+ushing/pull
+onsible to 
+easurement
+constant va
+tronic System
+ very unst
+r design. H
+fts.  
+odel is its 
+f two main
+equired thr
+of the UAV
+ a stable m
+ith large di
+s. 
+n in the Fi
+et rotates c
+is characte
+odels. This
+roviding th
+ed of each
+ angles, th
+’ motor de
+he other s
+asing or d
+t” rotors ro
+. Similarly,
+ght” as bala
+w angles, 
+e set of cou
+osite is app
+ach motor 
+ntegral-De
+arameters a
+t point”. A
+ing the yok
+adjust the m
+ Unit (IMU
+lues which
+s Engineering
+able aircraf
+owever, th
+propellers.
+ physical p
+ust for the 
+. The seco
+odel to be u
+ameter and
+gure 2, is c
+ounter clo
+ristic simpl
+ model stru
+e required a
+ rotor indi
+e ‘Right’ m
+creases or 
+et of rotors
+ecreasing s
+tating clock
+ for pitch an
+ncers. 
+the whole 
+nter clockw
+lied for cou
+has to incre
+rivative (P
+nd an outp
+n example 
+e (transmit
+otor speed
+) (feedback
+ are used 
+, 2011 
+ts as they 
+e variety o
+In summar
+roperties, 
+model to h
+nd is the v
+sed in aeri
+ small pitc
+ross structu
+ckwise (mo
+y performs
+cture has tw
+ngles durin
+vidually an
+otor (refer
+vice-versa 
+ (“Front-R
+peed to can
+wise, oppo
+gles the sa
+set (“left-ri
+ise motors
+nter clockw
+ase or decr
+ID) control
+ut in a clo
+can be the 
+ter stick) to
+s (output) t
+). The gain
+to define t
+ 
+have no n
+f installed 
+y, the prop
+their diame
+over, whic
+ertical dista
+al photogra
+h should b
+red [4]. It 
+tors 2, 4) 
+ the role of
+o main ro
+g flight. T
+d getting f
+ring to Fig
+depending
+ear”) balan
+cel out the
+site to “fro
+me concept
+ght”) of cl
+ decreases 
+ise angles
+ease its spe
+ler. Rough
+sed-loop st
+pitch angle
+ a specifie
+o match th
+ parameter
+he respons
+12 
+otion of 
+sensors 
+ellers of 
+ter and 
+h again 
+nce the 
+phy and 
+e used. 
+features 
+and the 
+ the tail 
+les. It is 
+hese are 
+eedback 
+ure 2a) 
+ on the 
+ces the 
+ torque. 
+nt-rear” 
+ applies 
+ockwise 
+in speed 
+. 
+ed. The 
+ly, PID 
+ructure. 
+ a pilot 
+d value. 
+at angle 
+s of the 
+e of the 
+Stef
+ 
+con
+dep
+ 
+acc
+feed
+attit
+com
+the 
+gyr
+ 
+ 
+Figu
+ 
+2.3
+ 
+PID
+app
+erro
+is: 
+ ? ?
+ 
+Sign
+gen
+and
+atte
+to in
+ 
+des
+calc
+anos Constan
+troller in te
+th analysis 
+As sho
+ording to it
+back of its
+ude. For th
+mands to t
+triaxial acc
+oscope can 
+ 
+re 2:  a) Mot
+. PID C
+ controller
+lied to con
+r. It is actu
+??? ? ?
+al ‘u’ is 
+erated. It is
+ its integra
+mpts to ma
+crease or d
+A comm
+irable temp
+ulates the 
+tinou, Advanc
+rms of ris
+of how PID
+wn in Figu
+s structure 
+ current mo
+is reason, th
+he rotors. T
+elerometer
+be used. 
+or structure
+ontroller 
+ is a closed
+trol any pr
+ally the dif
+? ? ??? ? ?
+adjusting t
+ fed back t
+l at the sa
+ke ‘u’ equa
+ecrease.  
+on examp
+erature (‘s
+error e (=
+ed Microelec
+e time, ove
+ controllers
+re 2b, the
+and therefo
+tion state c
+e appropri
+he approp
+. For the d
+ of quad roto
+ loop syst
+ocess with
+ference bet
+?
+??
+?? 
+he process
+o the contro
+me time.
+l to the ‘set
+le for a PID
+et point’). T
+’set point’
+tronic System
+rshoot, set
+ work can 
+ aircraft h
+re, the com
+ontinuously
+ate sensors
+riate sensor
+eterminatio
+  
+r helicopter
+em as show
+ measurab
+ween a ‘se
+ 
+ (‘plant’) 
+ller to reca
+This proce
+ point R’ b
+ controlle
+he PID co
+– ‘current 
+s Engineering
+tling time 
+be found in
+as six deg
+putational 
+ for balanc
+should be i
+ for X, Y 
+n of ?x, ?
+ 
+n in Figur
+le output. 
+t point R’ a
+and conseq
+lculate the 
+ss runs inf
+y giving th
+r is the cen
+ntroller re
+temperatur
+, 2011 
+and steady-
+ sub-chapte
+rees of fre
+unit should
+ing the qua
+nterfaced to
+and Z vecto
+y and ?z a
+   b) 6 Degre
+e 3a [5]. I
+The e varia
+nd ‘output
+ 
+uently a n
+error e and
+initely. Ea
+e required s
+tral heating
+ads a temp
+e’). The P
+ 
+state error
+r 2.3.  
+edom (6 D
+ be able to
+d and to up
+ generate r
+r measurem
+ngles, a th
+es Of Freedo
+n theory, it
+ble repres
+ Y’. The si
+Equatio
+ew ‘outpu
+ then its de
+ch loop’s 
+ignal to the
+: The user 
+erature sen
+ID control
+13 
+. An in-
+OF) of 
+ receive 
+date its 
+eal time 
+ents is 
+ree-axis 
+ 
+m 
+ can be 
+ents the 
+gnal ‘u’ 
+n 1 
+t Y’ is 
+rivative 
+iteration 
+ ‘plant’ 
+sets the 
+sor and 
+ler then 
+Stef
+ 
+calc
+dec
+ 
+be s
+to in
+by t
+ 
+Figu
+ 
+2.3
+ 
+A P
+to m
+ 
+ 
+As 
+poin
+If th
+not 
+anos Constan
+ulates the s
+rease powe
+The sam
+et by mov
+crease or d
+he installed
+re 3: a) Abst
+ The th.1
+ID controll
+ake the PI
+? Kp (pr
+state er
+P = Kp
+illustrated 
+t’, howeve
+e Kp is set
+reached (st
+tinou, Advanc
+ignal u. Th
+r or stop.  
+e concept 
+ing the tran
+ecrease the
+ sensors (IM
+ract view of 
+ree parame
+er has three
+D controlle
+oportional g
+ror. Howev
+ ? e and ha
+in Figure 4
+r it also pro
+ to a low v
+abilization 
+ed Microelec
+at signal is 
+applies on 
+smitter’s st
+ir speeds. T
+U). 
+a PID Contr
+ters P, I a
+ gain param
+r as fast, ac
+ain parame
+er it canno
+s the follow
+Figure 4
+, a high K
+duces an u
+alue, the sy
+below or ab
+tronic System
+enough to 
+small UAV
+ick. The P
+he ‘curren
+oller      
+nd D 
+eters. The
+curate and 
+ter) is used
+t eliminate 
+ing effect:
+ 
+: The “P” pa
+p results to
+nstable syst
+stem will b
+ove the set
+s Engineering
+inform the h
+s. The ‘set 
+ID controll
+t data’ for 
+b) The Block
+se are const
+stable as po
+ to decreas
+it. The term
+rameter effec
+ a faster at
+em with os
+e stable bu
+ point). 
+, 2011 
+eating unit
+point’ is a r
+er generate
+error calcul
+ diagram of t
+ant parame
+ssible.  
+e the rise tim
+ is given in
+ 
+t 
+tainment o
+cillations a
+t the exact 
+ 
+ to increase
+eference v
+s motor com
+ation is ma
+he Controlle
+ters which 
+e and the 
+ the form o
+f the syste
+round the s
+‘set point’ 
+14 
+ power, 
+alue can 
+mands 
+intained 
+ 
+r [6]  
+are used 
+steady-
+f: 
+m’s ‘set 
+et point. 
+value is 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   15 
+ 
+? Ki (integral gain parameter) is used to eliminate the steady-state error but results 
+in overshoot (signal oscillation around the ‘set point’). The term is given in the 
+form of: 
+   ? ? ?? ??        Equation 2 
+ and is effect is shown in Figure 5: 
+ 
+ 
+ 
+Figure 5: The “I” parameter effect 
+ 
+In a system with low Kp values (stable), the way Ki is affected is shown in Figure 5. The 
+red line shows the response in the case the Ki gain selected is high. The system response 
+is fast but also causes a large overshoot. Despite the large overshoot, the system 
+stabilises on the ‘set point’ value. While the Ki gain decreases, the system response is 
+slower but the stabilization is faster. 
+ 
+? Kd (derivative parameter) is used to stabilise the system. This is the last term and 
+its given by the formula: 
+    ? ? ????? ? ?????      
+ Equation 3 
+ This term is used to calculate the rate of change error. If the rate of change of the 
+ error is slow, the derivative gain term must be increased for the PID controller to 
+ achieve a faster response. If the rate of change of the error is fast, then the 
+ derivative gain term is decreased for the system to be stable. 
+ 
+  
+Stef
+ 
+A s
+ 
+Pa
+The
+ 
+??
+ 
+2.4
+ 
+Usu
+all 
+com
+com
+mea
+ 
+to 
+mea
+resp
+elem
+and
+ 
+2.4
+ 
+IMU
+airc
+Me
+How
+sev
+accu
+stab
+Acc
+by 
+anos Constan
+ynoptic vie
+rameter 
+Kp 
+Ki 
+Kd M
+ mathemati
+???? ? ? ?
+. UAV’s
+ally the sen
+aircrafts re
+munication
+bination o
+sure chang
+For the
+be calcula
+surements.
+ect to eart
+ents can b
+ the magne
+ Inertia.1
+s are resp
+raft’s body
+chanical Sy
+ever, due
+eral sensor
+rate data t
+ility and at
+eleration in
+three-axis 
+tinou, Advanc
+w of the eff
+T
+Rise time
+Decrease
+Decrease
+inor decre
+cal model o
+? ? ? ?
+ sensors a
+sors are in
+quire som
+ media a
+f the sensor
+es in rotatio
+ navigation
+ted, rotati
+ Hence, the
+h [7]. That
+e maintain
+tometers. 
+l Measurem
+onsible to p
+ coordinat
+stems (ME
+ to these a
+s were com
+o the contr
+titude contr
+ 3D space 
+gyroscopes
+ed Microelec
+ects of each
+able 1: Syno
+ O
+ I
+ I
+ase Min
+f a PID con
+??? ? ?? ?
+nd orient
+stalled on a
+e basic se
+nd a proc
+s required 
+n.   
+ and contro
+on group 
+ orientatio
+’s the role 
+ed by the 
+ent Units
+rovide mea
+es [7]. Th
+MS) techn
+dvantages, 
+bined, ea
+ol system. 
+ol are the a
+can be mea
+. Attitude 
+tronic System
+ gain term 
+psis of PID 
+vershoot 
+ncrease 
+ncrease 
+or decrease
+ 
+troller’s ou
+???? ? ?
+ation dete
+ UAV are s
+nsors to o
+essing uni
+to measure
+l of the air
+theories m
+n of the air
+of the Dire
+gyroscopes
+ 
+surements 
+ese sensor
+ology, he
+they suffe
+ch comple
+The most im
+cceleration
+sured by tri
+in simple 
+s Engineering
+is shown b
+parameters e
+Settlin
+Minor d
+Incr
+ Decr
+tput is ther
+?
+??
+??
+rmination
+ubject to it
+perate. Th
+t. The IM
+ acceleratio
+craft, orien
+ust be a
+craft can b
+ction Cosin
+, accelerom
+to the proc
+s are usua
+nce are ve
+r from ina
+menting th
+portant m
+ and the an
+axial accele
+models us
+, 2011 
+y Table 1 fo
+ffects 
+g time 
+ecrease 
+ease 
+ease 
+efore:  
+ 
+s mission a
+ese are: IM
+U is noth
+n and the 
+tation is th
+pplied on 
+e represent
+e Matrix (
+eters, the 
+essing unit 
+lly based 
+ry small, l
+ccuracy [8
+e other, in
+easurement
+gular veloci
+rometers a
+ed to be c
+ 
+llows. 
+Steady-stat
+Decrea
+Eliminat
+Minor dec
+Equatio
+ctivities. H
+U, the G
+ing else 
+sensors req
+e key role. 
+the IMU
+ed as rotati
+DCM). The
+positioning
+with respe
+on Micro-
+ight and lo
+]. For this 
+ order to 
+s of an air
+ty in all 3 a
+nd angular 
+alculated 
+16 
+e error 
+se 
+ion 
+rease 
+n 4 
+owever, 
+PS, the 
+but the 
+uired to 
+For this 
+ sensor 
+on with 
+ matrix 
+ system 
+ct to the 
+Electro-
+w-cost. 
+reason, 
+provide 
+craft for 
+xes [4]. 
+velocity 
+only by 
+Stef
+ 
+gyr
+mag
+Ref
+mag
+ 
+????
+Effe
+with
+ 
+R=?
+The
+ 
+Ref
+unit
+calc
+the 
+ 
+cos
+eart
+syst
+ 
+2.4
+ 
+ 
+anos Constan
+oscopes. H
+netometers
+erring to Fi
+netic north
+The cen
+?????????
+ctively, R 
+ respect to
+????????
+????????
+?????
+ three angle
+Fi
+erring to F
+ vectors w
+ulating the
+angle can b
+Similar
+ine of the ro
+h’s coordin
+em implies
+ Flight .2
+tinou, Advanc
+owever, f
+ are require
+gure 2a , L
+ and e3 is th
+tre of its b
+???????? 
+matrix is t
+ ground.  
+????????
+?????????
+?
+s are there
+gure 6: a) Ai
+igure 6b, ‘a
+ere used in
+ dot produc
+e calculate
+ly, ‘b’ is th
+tation angl
+ate system
+ that the air
+Control an
+ed Microelec
+or a fully
+d to correc
+et I = {e1, e
+e vertical d
+ody frame c
+Equation
+he required
+????	– 	????
+???	 ? 	????
+???????
+fore roll (?)
+rcraft - earth
+’ is the pro
+ the rotatio
+t of aircraf
+d by taking 
+e projectio
+e as soon a
+ is assum
+craft has ro
+d DCM Re
+tronic System
+ stabilize
+t the gyrosc
+2, e3} be the
+irection. 
+an be deno
+ 5 represen
+ data for 
+???? ???
+???? ??
+, pitch (?), 
+ coordinate s
+jection of 
+n matrix, ‘
+t’s ‘x’ with
+the arccosi
+n of aircra
+s unit vecto
+ed fixed, a
+tated. 
+lation 
+s Engineering
+d flight, 
+ope errors.
+ earth’s ine
+ted as B = 
+ts the relati
+expressing 
+?????????
+??????????
+?????
+yaw (?).  
+ystems b)
+aircraft’s ‘x
+a’ is the co
+ earth’s ‘x
+ne of ‘a’. 
+ft’s ‘y’ on
+rs are used 
+ny rotation
+, 2011 
+accelerome
+ 
+rtial frame
+{eb1, eb2, eb
+on of DCM
+the orienta
+	 ? 	???????
+	– 	????????
+???
+ Illustrated r
+’ down on
+sine of the
+’, ‘a’ can b
+ earth’s ‘y’
+in the rotat
+ of the ai
+ 
+ters, GPS 
+, where e1 p
+3}. A rotati
+ and Euler
+tion of the
+?
+? Equatio
+otation 
+ earth’s ‘x
+ rotation an
+e observed
+. Again, ‘b
+ion matrix. 
+rcraft’s co
+17 
+and/or 
+oints to 
+on of R: 
+ angles. 
+ aircraft 
+n 5 
+ 
+’. While 
+gle. By 
+. Hence, 
+’ is the 
+As the 
+ordinate 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   18 
+ 
+If the R=?
+???????? ????????????	– 	???????? ????????????	 ? 	????????
+???????? ????????????	 ? 	???????? ????????????	– 	????????
+????? ???????? ????????
+? is 
+rewritten as R ? ?
+r?? r?? r??r?? r?? r??r?? r?? r??
+? for simplicity, then the way the  
+  
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   19 
+ 
+DCM is applied on the aircraft as observed from [9] is described below: 
+? For the pitch control of the aircraft, the current pitch angle must be known. This 
+can be determined by calculating the dot product of the aircraft’s roll axis with the 
+earth’s ‘y’. The direction cosine rzx is the dot product of the roll axis with the 
+earth’s ‘y’. However,  rzx is zero when the aircraft is in level position. 
+? Similarly for the roll control, the current pitch must be known. This can be found 
+by calculating the dot product of pitch axis with the earth’s ‘y’. Furthermore, rzy 
+can be found with the dot product of the pitch axis with earth’s ‘y’. Again, rzy is 
+zero when the aircraft is in level position. 
+? The direction for navigation can be determined by the GPS course. Hence the yaw 
+attitude is given by calculating the cross product of roll axis of the UAV with the 
+desired direction vector. A test however must be made firstly to observe if the 
+vehicle is not oriented opposite to its destination. That information is determined 
+by calculating the dot product of the roll axis with the vector of the desired 
+direction. That will give the course and if that is negative, the aircraft must rotate 
+(yaw axis) more than 90 degrees to recover its correct orientation. 
+ As the interest is focused on the horizontal components only, the z are set to zero, 
+ therefore the vector is	???? ??? 0?. The cross product of this vector with the 
+ direction wanted, gives the sine of the angle the aircraft is off course. 
+? The vehicle is in reverse (upside down) if the dot product of yaw axis of the 
+vehicle with vertical axis is negative. The dot product of the aircraft’s yaw axis 
+with the earth’s ‘y’, will give the rzz of the matrix. If the aircraft is directed 
+opposite it destination, a zero is obtained.  
+? The rate of turning around the earth’s ‘y’ axis can be determined by the dot 
+product of vertical axis with the gyroscope rotation vector. Therefore the rate of 
+the rotation of the aircraft around the earth’s y can be obtained by calculating 
+?xrzx + ?yrzy + ?z rzz. 
+ 
+In other words, assuming the DCM is updated by the gyroscope, accelerometer and 
+magnetometer sensors correctly, the following matrix is computed: 
+ 
+?? ? ?
+???????? ????????? ???????
+???????????????????????? ??????????????????? ????????????????????
+??????? ????????????? ?????????????
+?Equation 6  
+ 
+Hence, the current orientation angles can be determined as: 
+ 
+? ROLL =  atan2(?????????????, ?????????????); 
+? PITCH =  -asin(Gravity); 
+? YAW =  atan2(????????????????????????,	????????); 
+Stef
+ 
+2.4.
+ 
+Gyr
+mea
+hen
+prob
+mov
+rate
+calc
+data
+the 
+solu
+the 
+inte
+feed
+Figu
+pro
+2.4.
+ 
+Acc
+of g
+gyr
+acc
+mea
+ 
+and
+con
+or p
+anos Constan
+ Gyro2.1
+oscopes ar
+surements.
+ce an inte
+lem which
+ing parts a
+, hence th
+ulation of 
+ to the DC
+As men
+required in
+tion to this
+DCM is co
+gral) contr
+back to a 
+re 7. The
+cessing unit
+ 
+ Triax2.2
+elerometer
+ravity can
+oscopes w
+eleration m
+surement i
+As a re
+ pitch erro
+stant forwa
+itch is mea
+tinou, Advanc
+scopes 
+e required 
+ However, 
+gration on 
+ arises is t
+s traditiona
+ere is no 
+the sequen
+M. 
+tioned bef
+tegration, a
+ is the reco
+nstructed. T
+oller and th
+drift adjust
+ most com
+ are the Int
+F
+ial Acceler
+s provide m
+ be determ
+hich provid
+easuremen
+s not affect
+sult, the ro
+r correction
+rd speed an
+sured. Acc
+ed Microelec
+for the att
+the require
+the measu
+hat MEMS
+l gyroscop
+change on 
+ce of rotati
+ore, these s
+n error mig
+gnition of t
+hese adjus
+e use of r
+ment unit 
+mon tech
+er-Integrate
+igure 7: Ori
+ometers 
+easuremen
+ined.  Thu
+e the cha
+ts is not 
+ed by the pr
+le of the ac
+s of the gy
+d does not 
+elerometers
+tronic System
+itude calcu
+d paramete
+red angula
+ IMUs are
+es) and pro
+the rotatio
+ons. Thus,
+ensors are 
+ht grow to
+hese errors 
+tments can 
+eference v
+ensuring th
+nologies a
+d Circuit (I
+entation calc
+ts of inertia
+s, it provid
+nge to or
+as crucia
+evious one
+celeromete
+roscopes d
+accelerate f
+ provide th
+s Engineering
+lation as t
+rs are the t
+r velocitie
+following 
+duce signa
+n. The sol
+ the gyrosc
+not accurat
+ infinity. T
+and the app
+be made by
+ectors. This
+e DCM w
+re used to
+2C) and the
+ulation proc
+l forces an
+es orientati
+ientation. T
+l as in th
+. 
+rs on such 
+rift [8]. Th
+requently, h
+e reference
+, 2011 
+hey provid
+hree angles
+s must be 
+the vehicle
+ls proportio
+ution to th
+opes can p
+e in readin
+hat is know
+lication of 
+ the use of
+ controller
+ould be acc
+ connect 
+ analogue i
+edure 
+d gravity. H
+on measur
+hankfully,
+e gyrosco
+vehicles is 
+at is becau
+owever, an
+ vector Z f
+ 
+e angular 
+ (roll, pitch
+performed
+ (they do n
+nal to the 
+is problem
+rovide the
+gs and con
+n as drift 
+adjustment
+ a PI (propo
+ provides n
+urate as sh
+gyroscopes
+nterfaces. 
+ence, the d
+ements con
+ any error
+pes becau
+to provide
+se the airc
+y instabilit
+or the gyro
+20 
+velocity 
+, yaw), 
+ [7]. A 
+ot have 
+rotation 
+ is the 
+ desired 
+sidering 
+[7] .The 
+s before 
+rtional-
+egative 
+own in 
+ to the 
+ 
+irection 
+trary to 
+ in the 
+se each 
+ the roll 
+raft has 
+y in roll 
+scope’s 
+Stef
+ 
+drif
+com
+2.4
+ 
+The
+sate
+3m 
+vec
+the 
+its l
+upd
+star
+cou
+ang
+ 
+[10
+(“,”
+. 
+2.4.
+ 
+NM
+com
+info
+cha
+of a
+Ret
+not 
+Use
+pos
+leve
+from
+spe
+sent
+ 
+anos Constan
+t correction
+putational 
+ Positio.3
+ most pop
+llite-based 
+deviation) 
+tor for yaw
+gyroscope 
+ow update 
+ate rate we
+ted)The GP
+rse over gr
+le from nor
+The wa
+]. This form
+). The inter
+ NME3.1
+EA is the 
+munication
+rmation. T
+racterised b
+ ‘*’ (star) a
+urn and a L
+There a
+all of them
+ful sentenc
+itioning inf
+l, speed ov
+Unfortu
+ two. The
+ed and cour
+ence is ana
+tinou, Advanc
+. Again, co
+unit are the
+ning System
+ular positio
+system tha
+positioning
+. Hence, th
+drift. The r
+rate which
+re released
+S receiver
+ound and 
+th to direct
+y to obtain
+at is a hu
+face of con
+A 0183 
+abbreviatio
+ serial pr
+his exchan
+y the ‘$’(d
+nd two hex
+ine Feed). 
+re several t
+ are provid
+es for aut
+ormation, 
+er ground a
+nately, thi
+se are the 
+se over gro
+lysed in Ta
+ed Microelec
+mmon inte
+ I2C and th
+ 
+ning system
+t makes use
+ informati
+e yaw orien
+eason the G
+ is normally
+ in the ma
+s provide 
+altitude. Th
+ion vector. 
+ informatio
+man reada
+necting suc
+n word of N
+otocol tha
+ge is don
+ollar sign) 
+adecimal n
+ypes of NM
+ing the requ
+onomous n
+fix quality,
+nd course o
+s informati
+GPGGA w
+und. Such d
+ble 2. 
+ 
+tronic System
+rfaces for 
+e analogue
+ is the G
+ of 24 sate
+on. This in
+tation of th
+PS cannot 
+ at about 
+rket for civ
+information
+e course o
+  
+n from a G
+ble standar
+h a device t
+ational M
+t GPS de
+e via wel
+at the start 
+umbers (ex
+EA senten
+ired inform
+avigation 
+ number of
+ver ground
+on cannot 
+hich provid
+ata are ava
+s Engineering
+connecting 
+ interfaces.
+lobal Posit
+llites in or
+formation 
+e model is
+be the only
+1-4Hz (upd
+ilian needs
+ such as l
+ver ground
+PS receive
+d ASCII e
+o a process
+arine Elect
+vices are 
+l-formed s
+of the sente
+. *4F) follo
+ces availab
+ation for U
+are usually
+ satellites 
+. 
+be extracte
+es all the 
+ilable in th
+, 2011 
+MEMS acc
+ioning Sys
+der to prov
+can be use
+enhanced w
+ sensor for 
+ate: GPS re
+ at low cos
+ongitude, l
+ is defined
+r is the NM
+ncodes del
+ing unit is u
+ronic Asso
+using to 
+entences. T
+nce and en
+wed by <C
+le on GPS 
+AVs auton
+ those the
+connected, 
+d from a s
+above infor
+e GPRMC 
+ 
+elerometer
+tem (GPS)
+ide accurat
+d as the re
+hile it can
+yaw calcul
+ceivers wi
+t after this
+atitude, sp
+ as the cl
+EA (0183
+imited by 
+sually the 
+ciation [10
+exchange 
+he senten
+d with a ch
+R><LF> (C
+receivers, h
+omous nav
+y provide 
+altitude ab
+ingle sente
+mation apa
+sentence. A
+21 
+s to the 
+. It is a 
+e (about 
+ference 
+cels out 
+ations is 
+th 10Hz 
+ project 
+eed and 
+ockwise 
+) format 
+commas 
+UART. 
+]. It is a 
+position 
+ces are 
+ecksum 
+arriage 
+owever 
+igation. 
+at first 
+ove sea 
+nce but 
+rt from 
+ sample 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   22 
+ 
+ 
+Table 2: Sample NMEA sentence [11] 
+Sentence sample $GPGGA, 170834, 4124.8963, N, 08151.6838, W,1,5,1.5, 280.2, M, -34.0, M,, *75 
+Name  Example Data  Description 
+Sentence Identifier  $GPGGA  Global Positioning System Fix Data 
+Time  170834 17:08:34 Z 
+Latitude  4124.8963, N  41d 24.8963' N or 41d 24' 54" N 
+Longitude  08151.6838, W  81d 51.6838' W or 81d 51' 41" W 
+Fix Quality: 
+1 
+Data is from a GPS fix. Fix term is 
+assures that the positioning 
+information are correct (accurate 
+enough for navigation).  
+0 = Invalid 
+1 = GPS fix 
+2 = DGPS fix 
+Number of Satellites  5 5 Satellites are in view 
+Horizontal Dilution of Precision (HDOP) 1.5 
+Relative accuracy of horizontal 
+position 
+Altitude  280.2, M  280.2 meters above mean sea level 
+Height of geoid above WGS84 ellipsoid  -34.0, M  -34.0 meters 
+Time since last DGPS update  blank  No last update 
+DGPS reference station id  blank  No station id 
+Checksum *75 
+Used by program to check for 
+transmission errors 
+ 
+2.4.3.1.1 NMEA Checksum Calculation/Validation 
+ 
+The way the NMEA sentences are checked against corruptions is the checksum value at 
+the end of each sentence. The algorithm for validating the sentences is by performing an 
+XOR between all bytes which exist between the ‘$’ sign and the ‘*’ sign. 
+ 
+A sample C code for calculating the checksum is: 
+ 
+int CheckSum(char *sentence) { 
+int i; 
+int res=0; 
+int c; 
+ for (i = 0; i < strlen(string); i++) { 
+  c = (unsigned char)string[i]; 
+  if (c == '*') break; 
+  if (c != '$') res ^= c; 
+ } 
+return res; 
+} 
+  
+Stef
+ 
+2.4
+ 
+Ma
+mag
+info
+yaw
+airc
+airc
+ 
+2.4
+ 
+In 
+coll
+com
+solu
+Con
+auto
+they
+are 
+Tw
+infr
+wei
+outp
+con
+ 
+2.4
+ 
+Bar
+is f
+Alti
+stat
+altit
+foll
+ 
+anos Constan
+ Magne.4
+gnetometer
+netic field
+rmation re
+ angle, wh
+raft. In ad
+raft until th
+ Collisio.5
+the field 
+ision/obsta
+puter visio
+Althoug
+tion increa
+sequently 
+nomous ve
+ work is by
+measuring 
+Anothe
+o common 
+ared range-
+ght and th
+ut for obs
+nected on a
+ Barom.6
+ometers are
+or altitude
+tude measu
+ion for mis
+ude. In ad
+owing form
+p = 1013
+Where  
+p = air 
+h = alti
+tinou, Advanc
+tometers 
+s can sense
+ isolators, 
+quired for 
+ich can be 
+dition, afte
+e signal is r
+n/Obstacl
+of autono
+cle avoidan
+n and imag
+h it is an 
+ses dramat
+the flight ti
+hicles to bu
+ using ster
+distances b
+r solution f
+types of t
+finders. Th
+eir low cos
+erving the 
+ microcont
+eters 
+ sensors fo
+ calculation
+rement on
+sion plannin
+dition, a b
+ula should 
+25 (1 - 2
+pressure 
+tude abov
+ed Microelec
+ the earth
+their measu
+the attitude
+determined
+r a GPS si
+ecovered.
+e Avoidanc
+mous UA
+ce. The mo
+e processin
+accurate so
+ically the w
+me is redu
+ild a routin
+eo vision o
+y analysing
+or obstacle
+hese senso
+eir advanta
+t. Furtherm
+distance be
+roller via th
+r sensing th
+, which i
+ an aircraft
+g. Furtherm
+arometer p
+be applied 
+.25577 10
+(in Pa) 
+e sea lev
+tronic System
+’s magneti
+res are ac
+ calculatio
+ by measur
+gnal failur
+e 
+Vs, sever
+st accurate
+g technique
+lution for o
+eight and 
+ced by a lo
+g map or o
+r 3D camer
+ video fram
+ avoidance
+rs which c
+ge over vis
+ore they d
+tween them
+e I2C or an
+e atmosph
+s much mo
+ is required
+ore, it is r
+rovides me
+for altitude
+-5 h) 5.2558
+el (m) 
+s Engineering
+c field. Wh
+curate enou
+n while the
+ing the ma
+e, magneto
+al technol
+ approach 
+s [12].  
+bstacles de
+the size of
+t. This app
+n medium 
+as to detect
+es. 
+ is the use
+an be used
+ion obstacl
+o not requ
+ and the o
+alogue inpu
+eric pressu
+re accurat
+ to be tran
+equired for 
+asurement
+ calculation
+ 
+, 2011 
+ile they ar
+gh to prov
+ craft is ho
+gnetic field
+meters can
+ogies hav
+is the obsta
+tection and
+ the UAV 
+roach is oft
+to large siz
+ near objec
+ of range-f
+ are sonar
+e detection
+ire any co
+bstacle. Su
+t interface. 
+re. Their m
+e than the
+sferred to 
+the aircraft
+s in Pascal
+ in meters: 
+ 
+e not plac
+ide the las
+vering. Th
+ in the bod
+ still navi
+e been u
+cle detectio
+ avoidance
+as well as 
+en used fo
+ed UAVs. T
+ts. Both tec
+inder senso
+ range-find
+ is their sm
+mputation 
+ch devices
+ 
+ain role on
+ GPS estim
+the ground
+ in order to
+ units. He
+23 
+ed near 
+t bit of 
+at’s the 
+y of the 
+gate the 
+sed for 
+n using 
+, such a 
+its cost. 
+r indoor 
+he way 
+hniques 
+rs [13]. 
+ers and 
+all size, 
+on their 
+ can be 
+ a UAV 
+ations. 
+ control 
+ hold its 
+nce, the 
+Stef
+ 
+2.4
+ 
+Mo
+mot
+the 
+for 
+perm
+eros
+ 
+high
+tran
+inpu
+low
+ 
+2.4
+ 
+Fou
+The
+and
+find
+ 
+ 
+2.4.
+ 
+PW
+mic
+way
+any
+swi
+in d
+and
+mic
+4.5V
+emb
+ 
+anos Constan
+ Electro.7
+tors are com
+ors. Contra
+coils. An e
+the genera
+anently a
+ion. 
+The ter
+ power so
+sfers from 
+t. That str
+ powered c
+ Sensor.8
+r main type
+se are the 
+ I2C protoc
+ers. 
+ Pulse8.1
+M is a 
+rocontrolle
+ it works is
+ time of t
+tching spee
+evice is se
+ 90% out
+rocontrolle
+ for the 
+edded syst
+tinou, Advanc
+nic Speed 
+monly us
+ry to the tr
+lectronic ci
+tion of the
+ttached on 
+m ESC sta
+urce as inp
+the input s
+ucture is u
+ircuit such 
+ Interfacin
+s of interfa
+PWM for t
+ol for the g
+-Width Mo
+digital me
+rs and DSP
+ by splittin
+he output 
+d, the overa
+emed as an
+put of the
+r is 5V, the
+third. The 
+em is in use
+ed Microelec
+Controller
+ed on small
+aditional m
+rcuit called
+ magnetic 
+the drum, 
+nds for Ele
+ut and the 
+ource to the
+sed for con
+as a microc
+g 
+cing are av
+he DC roto
+yroscopes, 
+dulation	
+thod of c
+s feature th
+g the duty 
+signal a di
+ll output v
+alogue. Fig
+ DC supp
+ output of 
+resolution 
+. 
+tronic System
+s and Mot
+ aerial mod
+otors, the 
+ ESC is re
+field. As 
+the whole 
+ctronic Spe
+brushless m
+ motors is
+trolling hig
+ontroller or
+ailable for 
+rs, UART 
+accelerome
+ontrolling 
+is technolo
+cycle of a s
+gital value
+oltage sign
+ure 8 illus
+ly. For in
+the PWM 
+of the out
+s Engineering
+ors 
+els, are us
+power is no
+sponsible t
+soon as th
+drum is rot
+ed Control
+otors as o
+ controlled 
+h power c
+ a micropro
+connecting 
+for GPS si
+ters, magne
+analogue
+gy making 
+quare wave
+ is observe
+al forwarde
+trates the P
+stance, if 
+would be 0
+put depend
+, 2011 
+ually the br
+t applied o
+o apply the
+e magnets 
+ating elimi
+ler. It is a c
+utput. The
+by a Pulse-
+onsumption
+cessor. 
+sensors to t
+gnal receiv
+tometers a
+circuits [1
+the implem
+ into desire
+d, howeve
+d to the inp
+WM metho
+the opera
+.5V, 2.5V 
+s on the a
+ 
+ushless ou
+n the shaft
+ power to t
+and the s
+nating frict
+ircuit that 
+ amount of
+Width Mo
+ motors th
+he process
+ers, analogu
+nd ultrason
+4]. Most 
+entation ea
+d-size mod
+r due to t
+ut of the an
+d for a 10
+ting voltag
+for the sec
+rchitecture
+24 
+t runner 
+, but on 
+he coils 
+haft are 
+ion and 
+has as a 
+ energy 
+dulation 
+rough a 
+ing unit. 
+e input 
+ic range 
+of the 
+sy. The 
+ules. At 
+he high 
+alogue-
+%, 50% 
+e of a 
+ond and 
+ of the 
+Stef
+ 
+ 
+2.4.
+ 
+I2C 
+has 
+line
+the 
+inte
+dest
+eith
+com
+the 
+Com
+anos Constan
+ I2C (I8.2
+bus offers 
+7 bits of ad
+s, the SCL
+analogue i
+rfacing dev
+ination. Ev
+er as a rece
+municate w
+devices. 
+ 
+municatio
+? The ma
+? The ma
+tinou, Advanc
+nter-Integ
+the opportu
+dress spac
+ (serial clo
+nput is tha
+ices that a
+ery device
+iver or a tr
+ith anothe
+n procedure
+ster ensure
+ster sets the
+ed Microelec
+Figu
+rated Circ
+nity of inte
+e (27=128)
+ck) and SD
+t it deliver
+ccuracy m
+ connected
+ansmitter. 
+r device. F
+Figure 
+: 
+s the bus is 
+ SDA line 
+tronic System
+re 8: PWM o
+uit) 
+rfacing up t
+where 16 o
+A (serial d
+s analogue
+atters. I2C 
+ on the bu
+That addres
+igure 9 illu
+9: I2C bus w
+ 
+free (Both 
+to low and 
+s Engineering
+peration 
+o 112 devi
+f them are 
+ata line). T
+ informatio
+ensures a n
+s has a un
+s has to be
+strates the
+ith 2 devices
+lines are hi
+then sends 
+, 2011 
+ 
+ces. Accord
+reserved. It
+he advanta
+n in a dig
+oise-free t
+ique addres
+ used in or
+ required c
+gh) 
+the receiver
+ 
+ing to [15]
+ has 2 bidir
+ge of I2C b
+ital manner
+ransmission
+s and can 
+der to a dev
+onnection b
+ 
+ address 
+25 
+, the I2C 
+ectional 
+us over 
+, hence 
+ to the 
+operate 
+ice can 
+etween 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   26 
+ 
+? The Read/Write request bit is sent after the 7 bit address 
+? Slave recognizes its address and acknowledges by setting SDA low at the 9th SCL 
+cycle. 
+? The data is sent 
+? Acknowledgement is sent 
+? When SCL is high and SDA has a rising edge the stop condition is indicated. 
+ 
+2.5.  Wireless Communication 
+ 
+Most common types of communication media found on small UAVs are the wireless 
+802.11x and RF technologies [16]. These types of communication provide a high rate of 
+data transfer as well as reliability in terms of successful transmit/receive of data. As the 
+payload of the UAVs is limited, the communication equipment they can carry has to be 
+limited in weight; as a result the effective range of communication between the ground 
+control stations is restricted to several miles.  
+ The communication between the UAV and the ground control station has to be 
+bidirectional. The ground station is sending navigation orders while the vehicle is sending 
+flight data back to the ground station. For this reason wireless communication media are 
+used such as Wi-Fi which features the reliable TCP/IP protocol [16]. 
+Another wireless communication media is the GPRS/3G which is a GSM service 
+[17]. It uses the GSM cellular network to exchange reliable data using TCP/IP transport 
+layer protocol. All well-known application layer protocols such as HTTP, POP3, FTP etc. 
+are working on top of it. 
+  
+Stef
+ 
+3. 
+ 
+As 
+con
+auto
+air v
+ 
+The
+pro
+airc
+trac
+con
+UA
+com
+ 
+anos Constan
+ THEO
+UAVs are b
+trol comma
+nomous fl
+ehicles as 
+? Configu
+? Real tim
+? Monito
+? FPV (fi
+? Mission
+? Aircraf
+ software 
+cessed by 
+raft’s state
+king and o
+verted to an
+V. Apart fr
+ponents fo
+tinou, Advanc
+RETICA
+uilt to exe
+nds on flig
+ights, the G
+well as an i
+ration of th
+e tracking
+ring instrum
+rst person v
+ alteration
+t initialisati
+Figure 10: st
+system con
+different un
+. The raw p
+rientation. 
+ artificial h
+om that, th
+r any failur
+ed Microelec
+L BACK
+cute missio
+ht directio
+CS should 
+nterface for
+e UAV’s m
+ of the vehi
+entation an
+iew) live v
+s and correc
+on procedu
+ructured com
+tinuously 
+its on the
+ositioning 
+Furthermo
+orizon whe
+e graphical
+e avoidance
+ 
+tronic System
+GROUN
+ns, a groun
+ns and on 
+provide all
+: 
+issions 
+cle over the
+d status of
+ideo stream
+tions 
+res 
+ 
+ponents app
+ 
+receives ra
+ system to
+data are ad
+re, the me
+re the oper
+ interface p
+ via the art
+s Engineering
+D ON G
+d control s
+camera rot
+ the inform
+ globe 
+ flight 
+ing 
+roach of a G
+w data fro
+ generate a
+apted in a w
+asurements
+ator has a n
+rovides mo
+ificial instru
+, 2011 
+CS 
+tation is req
+ations. As t
+ation can b
+CS software
+m the air
+ visual rep
+ay to prov
+ of the air
+otion of th
+nitoring of
+mentation
+ 
+uired for r
+he UAVs 
+e found in 
+ 
+ [18]. 
+craft. This 
+resentation
+ide real tim
+craft’s sen
+e flying sta
+ the aircraf
+. 
+27 
+eal time 
+offering 
+manned 
+data is 
+ of the 
+e route 
+sors are 
+te of the 
+t’s vital 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   28 
+ 
+3.1 Tasks and Instrumentation of a Ground Control Station 
+ 
+The user should be able to plan a mission by specifying the coordinates of each 
+destination as well as the priority of each. The system is also responsible to perform the 
+pre-flight checks before proceeding to the take-off action [18]. During the flight the user 
+is monitoring the aircraft’s orientation as well as the mission progress. That is achieved 
+soon as the GCS is continuously transforms the data are coming from the UAV to 
+artificial instruments. This instrumentation helps a user to have notion of the flight status.  
+The main instruments should exist on a ground control station are: 
+? Real time GPS Information 
+? Altimeter 
+? Artificial horizon / Head-Up Display (HUD) is shown in Figure 11 
+? Battery/Fuel status 
+? Speed over ground 
+? Air speed 
+ 
+Figure 11: A sample HUD for visualization of flight data [19] 
+The GPS information are available within a GCS is used for the determination of the 
+current position of the aircraft with respect to its destination. Hence, the UAV can be 
+tracked on a map. The HUD displayed in Figure 11 is used for the determination of 
+aircraft’s orientation. This information combined with the current positioning information 
+Stef
+ 
+help
+altit
+3.2
+ 
+The
+user
+dest
+tim
+curr
+ 
+ 
+3.3
+ 
+A c
+stat
+info
+The
+mod
+form
+ 
+anos Constan
+ the user t
+ude, speed 
+ Missio
+ GCS is re
+ with a v
+inations of
+e. Through
+ent position
+ Comm
+ommunica
+ion. The in
+rmation. A
+ data acqu
+ularized to
+ed messag
+tinou, Advanc
+o inspect th
+and fuel ar
+n plannin
+sponsible f
+irtual glob
+ interest, th
+ the flight 
+ of the airc
+unication
+tion protoc
+formation t
+ dedicated 
+isition un
+ the respe
+e is shown
+ed Microelec
+e trajectory
+e shown 
+g and nav
+or the miss
+e to plan 
+e software
+the user ca
+raft is know
+ 
+ol must be
+o be sent c
+mechanism
+it is respo
+ctive units 
+in Figure 1
+Figure 1
+tronic System
+ of the UA
+igation ov
+ion monito
+the desire
+ should ca
+n amend a
+n. 
+ agreed be
+onsists of t
+ receives a
+nsible to p
+to perform
+2 [18]. 
+2: Sample p
+s Engineering
+V. Further
+erview 
+ring and p
+d missions
+lculate the 
+ny mission
+tween the 
+wo types, 
+nd handles
+rocess the
+ the visual 
+acket format
+, 2011 
+more, infor
+lanning. It 
+. After th
+routes and 
+ or directio
+UAV and 
+the main an
+ that inform
+ informati
+presentatio
+ 
+ 
+mation suc
+should pro
+e user sel
+estimate th
+n deviation
+the ground
+d secondar
+ation in re
+on and tra
+n. A samp
+ 
+29 
+h as the 
+vide the 
+ects the 
+e flight 
+ as the 
+ control 
+y flight 
+al time. 
+nsfer it 
+le well-
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   30 
+ 
+The information sent from the aircraft has to be encoded in a packet. This packet should 
+have an overhead containing a ‘start-of-message’ field, ‘the packet length’ and ‘type’. 
+Then the significant information follows depending on type: 
+ 
+? Main flight information: 
+ 
+a. GPS position 
+b. Speed over ground 
+c. Course over ground 
+d. Altitude 
+e. Compass measurement 
+f. Horizon information 
+ 
+? Secondary flight information 
+ 
+g. Battery level 
+h. Number of GPS satellites connected to 
+i. GPS signal lock indication (GPS fix) 
+ 
+Apart from that, the GCS provides video streaming for surveillance. The streaming 
+information might be sent either through the communication link or by a dedicated 
+remote long-distance surveillance unit. In both cases, the GCS is responsible to combine 
+the video information with artificial instrumentation discussed in chapter 3.1 Tasks 
+and Instrumentation of a Ground Control Station. 
+  
+Stef
+ 
+4. 
+ 
+As 
+and
+imp
+ 
+4.1
+ 
+The
+airc
+proj
+elec
+qua
+ 
+4.1
+ 
+qua
+win
+flig
+and
+4.1
+ 
+com
+of 
+nav
+anos Constan
+IMPL
+stated abov
+ the creatio
+lementation
+. UAV D
+ UAV des
+raft and th
+ect. For t
+tronic com
+d copter int
+ Frame.1
+The fra
+d rotor heli
+d, further p
+ht time is b
+ the wind a
+ 
+ Hardw.2
+The PCB d
+putational 
+new electr
+igation, the
+ 
+? 8-b
+? Fla
+? Clo
+? I/O
+? I2C
+? UA
+? AD
+? SRA
+? EEP
+? PW
+tinou, Advanc
+EMENT
+e, the work
+n of the GC
+ of the UA
+esign - H
+ign is furth
+e software 
+he hardwar
+ponents req
+egrated to m
+ design 
+me of the U
+copter [1]. 
+ayload cap
+etween 17
+s both varia
+are/PCB d
+esign and 
+unit of the 
+onic comp
+ following 
+it AVR RIS
+sh memory
+ck: 16MHz
+ pins: 86 
+ protocol  
+RTs: 4 
+C channels
+M: 8Kb 
+ROM: 4K
+M pins: 15
+ed Microelec
+ATION 
+ made is d
+S software
+V while su
+ardware
+er divided
+integration
+e part, a 
+uired. Ther
+eet the ob
+AV is desi
+Its setup se
+abilities an
+-25 minute
+bles affect 
+esign 
+implement
+quad rotor’
+onents to 
+microcontro
+C-based 
+: 256Kb 
+ 
+: 16 (10 bit
+b 
+ (8bit resolu
+tronic System
+ivided into
+. The sub c
+b chapter 4
+ into two 
+ of the cu
+PCB desig
+efore, the e
+jectives of 
+gned by fo
+lected to b
+d long fligh
+s. The time
+the power c
+ation was 
+s architectu
+enable the
+ller specifi
+s resolution
+tion) 
+s Engineering
+ two parts.
+hapter 4.1
+.2 to the de
+main parts
+rrent code 
+ned to int
+xisting sof
+the project 
+llowing the
+e medium 
+t times. Its
+ variation 
+onsumptio
+a result of 
+re mention
+ internet c
+cations wer
+) 
+, 2011 
+ The work 
+is dedicate
+velopment o
+: the hardw
+to meet the
+erface all 
+tware of the
+listed in sub
+ guidelines
+sized as it o
+ final weig
+depends on
+n of the mo
+studying th
+ed before. F
+onnectivity
+e considere
+ 
+made on th
+d to the des
+f the GCS
+are design
+ objective
+the electri
+ remote co
+ chapter 1.
+ of the open
+ffers stabil
+ht is 1.8 kg
+ the flying 
+tors.  
+e sensors 
+or the intro
+ and auto
+d [20]: 
+31 
+e UAV 
+ign and 
+. 
+ of the 
+s of the 
+cal and 
+ntrolled 
+1.1.  
+ source 
+ity over 
+ and its 
+altitude 
+and the 
+duction 
+nomous 
+Stef
+ 
+Figu
+and
+are 
+prot
+2.4.
+ 
+all 
+GPS
+com
+sho
+mic
+spe
+anos Constan
+re 13 show
+ RC receiv
+its output.
+ocol. Thes
+7.  
+ 
+Based on t
+the sensor
+/GPRS mo
+munication
+ws the eva
+rocontrolle
+cifications m
+tinou, Advanc
+s the block
+er are the i
+ The ESC
+e are respon
+hese specif
+s were alr
+dule. This
+ as well as
+luation bo
+r chip as 
+entioned a
+Figure 14: M
+ed Microelec
+ diagram o
+nputs to the
+s are conn
+sible to dri
+Figure 1
+ications, a
+eady supp
+ adds to th
+ positionin
+ard used a
+well as 
+bove are a
+icrocontrol
+tronic System
+f the PCB 
+ system w
+ected with
+ve the high
+3: Control B
+new PCB w
+orted by t
+e system th
+g informati
+s computa
+circuits fo
+lso visible o
+ler board use
+s Engineering
+design. Th
+hile the ES
+ the micro
+ power mot
+lock diagram
+as design
+he softwar
+e required
+on for auto
+tional unit
+r wired c
+n the figur
+d as comput
+, 2011 
+e sensors, G
+Cs and som
+controller 
+ors as desc
+ 
+ed and imp
+e but wha
+ resources 
+nomous na
+. As show
+ommunicat
+e.  
+ational unit [
+ 
+PS/GPRS
+e indicatin
+through th
+ribed in the
+lemented f
+t is more,
+for the UA
+vigation. Fi
+n, it inclu
+ion. Most 
+ 
+21]. 
+32 
+module 
+g LEDs 
+e PWM 
+ chapter 
+ 
+eaturing 
+ a new 
+V-GCS 
+gure 14 
+des the 
+of the 
+Stef
+ 
+4.1.
+ 
+Figu
+com
+ach
+mic
+com
+anos Constan
+ Senso2.1
+re 15 sho
+munication
+ieved. All 
+rocontrolle
+munication
+? Gyrosc
+o 
+o 
+o 
+o 
+o 
+o 
+? Acceler
+o 
+o 
+o 
+o 
+o 
+o 
+? Magnet
+o 
+o 
+o 
+o 
+? Barome
+o 
+o 
+o 
+Gyrosc
+tinou, Advanc
+rs Overvie
+ws all the
+ link. By 
+the sensors
+r using the
+ protocol w
+ope specific
+3 axis mea
+16 bit resol
+Low Pass f
+Low curren
+Power supp
+I2C interfac
+ 
+ometer spe
+3 axis mea
+Measure ra
+14-bit reso
+I2C interfac
+Power supp
+Low curren
+ometer spe
+3 axis mea
+I2C interfac
+12-bit reso
+Power supp
+ 
+ter specific
+Measuring 
+I2C interfac
+Power supp
+ope Acc
+ed Microelec
+w 
+ sensors u
+using thes
+ apart from
+ I2C protoc
+as used.  
+Fig
+ations: 
+sures (X, Y
+ution 
+ilter 
+t consumpt
+ly range: 2
+e (400KHz
+cifications:
+sures (X, Y
+nges: ±1g, 
+lution 
+e  
+ly range: 1
+t consumpt
+cifications:
+sures (X, Y
+e  
+lution 
+ly range: 2
+ations: 
+range of 30
+e  
+ly range: 1
+elerometer
+tronic System
+sed for th
+e sensors, 
+ the GPS/
+ol. For the
+ure 15: Sens
+ and Z) 
+ion (6.5mA
+.1V – 3.6V
+) 
+ 
+ and Z) 
+1.5g, 2g, 3g
+.2V - 3.6V
+ion (0.65m
+ 
+ and Z) 
+.5V - 3.3V
+0 to 1100 h
+.8V - 3.6V
+Magneto
+s Engineering
+e impleme
+the first ta
+GPRS mod
+ GPS/GPR
+ors used 
+) 
+ 
+, 4g, 8g, 16
+A) 
+Pa 
+meter Bar
+, 2011 
+ntation of 
+sk to keep
+ule were i
+S module 
+g 
+ometer 
+ 
+the IMU 
+ the price
+nterfaced w
+interfacing
+GPS/GPR
+33 
+and the 
+ low is 
+ith the 
+, UART 
+ 
+S 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   34 
+ 
+o Pressure resolution readings: 19-bit 
+o Temperature resolution readings: 16-bit 
+ 
+? GPS/GPRS module specifications: 
+o SiRF III High Sensitivity GPS Receiver 
+o Embedded TCP/IP Stack 
+o GPRS Class 10 
+o AT commands for control 
+o UART line for AT commands 
+o UART line for NMEA data (dedicated GPS UART)  
+ 
+ 
+Figure 16: The new PCB designed 
+The layout of the new PCB (Appendix chapter 9.2) is shown in Figure 16. It fits on top 
+(orange rectangles) of the microcontroller shown in Figure 14 interconnecting all the 
+sensors shown by different colour rectangles with the microcontroller. The cyan shape 
+shows the power supply designed for powering the GPS/GPRS module which works on 
+different voltage levels compared to the sensors and the microcontroller. 
+ All the remaining sensors (barometer, accelerometer, gyroscope, magnetometer), 
+are connected to the microcontroller using the I2C interface. The way the protocol works 
+Stef
+ 
+is d
+con
+con
+hard
+rect
+driv
+4.1
+ 
+ 
+ 
+Figu
+com
+able
+anos Constan
+escribed in
+nected with
+versions ap
+ware PCB
+ The RC
+angle whil
+e the moto
+ 
+ The UA.3
+re 17 is a
+ponents ar
+ to provide
+tinou, Advanc
+ the theoret
+ microcont
+plied. The 
+ design is in
+ receiver 
+e the ESCs
+rs. 
+V Assemb
+n image o
+e interconn
+ up to 100
+ed Microelec
+ical backgr
+roller using
+schematic 
+cluded as a
+is connecte
+ are conne
+led 
+Figure 
+f the UAV
+ected. The
+A current t
+tronic System
+ound 2.4.8.
+ UART in
+of the PCB
+ppendix. 
+d through
+cted on the
+17: The UAV
+ model im
+ battery ins
+o the moto
+s Engineering
+2 [15]. The
+terface afte
+ design de
+ the analog
+ PWM pin
+ assembled
+plemented
+talled is a 
+rs. It voltag
+, 2011 
+ GPS/GPR
+r the approp
+tailing all t
+ue pins sh
+s shown in
+. It shows 
+5Ah Lithiu
+e is 11.1V
+ 
+S (red recta
+riate volta
+he work do
+own in de
+ black rect
+how the h
+m Polymer
+. It also po
+35 
+ngle) is 
+ge level 
+ne with 
+ep blue 
+angle to 
+ 
+ardware 
+ battery 
+wers up 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   36 
+ 
+the control circuit. The ESCs inputs are the battery and the PWM outputs of the 
+microcontroller. Their outputs are connected to the motors as shown in the Figure 13 
+block diagram. The Control circuit is divided into two levels. The microcontroller 
+evaluation board is installed at the bottom while the PCB with the required sensors is 
+attached on top of it. The GPS antenna is installed on the top of the cover as it requires 
+light-of-sight view with the sky for better signal reception. The GSM antenna is mounted 
+as far as possible form the electronic components because various tests showed that 
+interferes with a sensor. Last but not least, the USB port mentioned provides access to the 
+microcontroller for programming, debugging but what is more, wired connectivity with 
+the GCS for pre-flight configuration and wireless communication initialisation. 
+4.2 The UAV Software 
+ 
+The software of the UAV developed performs two tasks. At first, it enables the vehicle to 
+navigate itself (autopilot) while the same time enables wireless connectivity with the 
+GCS platform through internet.  
+ 
+ 
+Figure 18: The Block diagram of the open source software already exists [1] 
+Figure 18 represents the structure of the software the quad rotor vehicle use for the RC 
+navigation [1]. After the study of the software, several observations were made about the 
+navigation control lead to the solution approach: 
+ 
+? There is a DCM filled with data of all sensors as described in “Theoretical 
+background on UAVs” chapter 2.4.2. 
+? There is a PID controller for each angle of the aircraft dynamics (pitch, roll and 
+yaw).  
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   37 
+ 
+? A PID controller update function exists which takes three parameters to update 
+the aircraft’s orientation: the “set point”, the “current data” and a pointer to the 
+object describing each angle (this object contains information such as P, I, and D 
+gain parameters described in chapter 2.3.1). 
+? The “set point” of each PID controller is the transmitter’s input. 
+? The “current data” of each PID controller can be maintained by the DCM: 
+o For the ROLL =  atan2(?????????????, ?????????????); 
+o For the PITCH =  -asin(Gravity); 
+o For the YAW =  atan2(????????????????????????,	????????); 
+? There is a function takes the PID controllers’ output and generates motor 
+commands. 
+? The control loop runs at 100Hz (10ms update rate). 
+ 
+The following statement is an abstract approach of what made for the autonomous 
+navigation of the aircraft: 
+ 
+The ideal algorithm for autonomous navigation should use the GPS data and the 
+magnetometer readings in a way imitating the transmitter inputs which are currently 
+assumed by the software as “set points” for the three PID controllers already exist. 
+ 
+Hence, an abstract block diagram of the modified flight software is presented in Figure 
+19. The data are sent to the internet, as shown will be delivered to the GCS for 
+processing. The procedure is discussed in chapter 4.3. 
+ 
+Figure 19: The block diagram of the flight software after integration 
+Stef
+ 
+4.2
+ 
+  
+As 
+con
+con
+solu
+ 
+ 
+ 
+As 
+imp
+inac
+wor
+ 
+auto
+the 
+by t
+be o
+mag
+upd
+ 
+of t
+ded
+poin
+reas
+tran
+mag
+orie
+the 
+ove
+anos Constan
+ Autopi.1
+soon as t
+trollers we
+trollers alr
+tion approa
+stated in t
+ossible to 
+curacy of 
+se.  
+For thi
+nomous na
+current pos
+he user and
+bserved. A
+netometer.
+ated to con
+The fir
+wo new PI
+icated to th
+t’ of the P
+ons, the tw
+smitter is 
+netometer.
+ntation as 
+autonomo
+rcome the
+tinou, Advanc
+lot Algorit
+he GPS h
+re applied 
+eady used 
+ch is illust
+Fi
+he chapter 
+navigate t
+the position
+s reason the
+vigation. I
+ition to the
+ the curren
+nother par
+ Once the 
+vert the req
+st integratio
+D controlle
+e autonom
+ID control
+o outputs a
+not used 
+ Furthermo
+soon as the
+us navigat
+ algorithm
+ed Microelec
+hm Appro
+as measura
+in a way t
+by the cu
+rated in Fig
+gure 20: Bloc
+2.4.3, the 
+he UAV b
+ing data it 
+ autopilot
+n summary
+destination
+t position is
+ameter is th
+required an
+uired angle
+n made on
+rs, one for 
+ous naviga
+lers used to
+re summed
+(idle), the 
+re, this app
+ transmitte
+ion algorit
+’s comma
+tronic System
+ach 
+ble output
+heir output
+rrent softw
+ure 20. 
+k diagram o
+GPS lacks
+y itself, e
+provides w
+algorithm u
+, the way i
+ using the c
+ refreshed 
+e azimuth,
+gles are c
+s to motor 
+ the current
+the pitch a
+tion. The o
+ navigate t
+ up with th
+aircraft w
+roach gives
+r command
+hm. To e
+nds for 
+s Engineering
+ (position 
+ being the 
+are (trans
+f solution ap
+ of low u
+specially w
+hich is abo
+ses the ma
+t works is 
+urrent GPS
+every secon
+ which can
+alculated, t
+commands.
+ open sour
+xis and the
+utput of th
+he vehicle 
+e transmitt
+ill be nav
+ immediate
+s overcom
+nsure that 
+safety reas
+, 2011 
+coordinate
+“set point”
+mitter nav
+proach 
+pdate rate. 
+hen taking
+ut 3-4 met
+gnetometer
+by calculat
+ data. As th
+d, the angl
+ be also de
+he native P
+ 
+ce software
+ other for t
+ese two con
+by the tran
+er’s comma
+igated by 
+ manual co
+e the comm
+the transm
+ons, the 
+ 
+s), two ne
+ of the th
+igation) [2
+Thus, the 
+ into acco
+ers of devi
+ (compass)
+ing the ang
+e destinati
+e to destina
+termined u
+ID contro
+ is the intro
+he roll axi
+trollers is 
+smitter. Fo
+nd. As soo
+the GPS 
+ntrol to the
+ands gener
+itter can 
+algorithm’
+38 
+w PID 
+ree PID 
+2]. The 
+GPS is 
+unt the 
+ation or 
+ for the 
+le from 
+on is set 
+tion can 
+sing the 
+llers are 
+duction 
+s angles 
+the ‘set 
+r safety 
+n as the 
+and the 
+ UAV’s 
+ated by 
+always 
+s value 
+ 
+Stef
+ 
+gen
+tran
+Con
+para
+che
+are 
+21. 
+proj
+from
+“fro
+21. 
+nort
+dest
+Trig
+anos Constan
+erations are
+smitter can
+sequently, 
+meters for
+ck if the de
+required. T
+That is ba
+ection to t
+ the magn
+nt”). The s
+That is the
+h. That vec
+ination coo
+onometry 
+? Subtrac
+Longitu
+multipl
+centime
+enablin
+? Subtrac
+Latitud
+multipl
+tinou, Advanc
+ constraine
+ navigate it
+Fi
+the flight c
+ the PID c
+stination is
+he first par
+sically a nu
+he Earth’s 
+etometer (w
+econd param
+ clockwise
+tor is defin
+rdinates. 
+applies for 
+tion of the
+de (Destin
+ied by the 
+ters as the
+g the trigon
+tion of the
+e (Destina
+ied by the 
+Destina
+ed Microelec
+d to naviga
+ at about 30
+gure 21: Illu
+ontrol algo
+ontrollers u
+ reached. F
+ameter obs
+meric valu
+North. Thi
+hich the m
+eter requi
+ angle betw
+ed as ???????? w
+the determi
+ last Longi
+ationLongit
+constant 0
+ earth is 
+ometry fun
+ last Latitu
+tionLatitud
+constant 1
+tion 
+tronic System
+te the vehic
+-35 km/h.
+stration of th
+ 
+rithm has 
+pdate (‘set
+or the calc
+erved is th
+e in degree
+s can be ea
+agnetomet
+red is the G
+een the di
+here A is 
+nation of th
+tude data t
+ude - Curr
+.649876. T
+an ellipsoi
+ctions to be
+de data th
+e - Curren
+.113195. T
+?
+s Engineering
+le very slo
+e PID’s “set
+two roles. 
+ point’ and
+ulation of t
+e azimuth, 
+s of the de
+sily mainta
+er chip’s ‘f
+PS course, 
+rection vec
+the current
+is angle as 
+he GPS ha
+entLongitu
+he multipl
+d object (W
+ applied. 
+e GPS has
+tLatitude).
+he multipl
+?
+, 2011 
+wly (about 
+point” 
+It has to pr
+ ‘current d
+he ‘set poin
+which is th
+viation of 
+ined by re
+ront’ is ma
+which is th
+tor of the a
+ position co
+follows: 
+s provided 
+de). The re
+ication con
+GS84 ell
+ provided 
+ The resu
+ication con
+NOR
+ 
+11 km/h) w
+ 
+ovide the r
+ata’) as we
+t’, two par
+e ? angle in
+the aircraf
+questing a 
+tched the a
+e ? angle in
+ircraft and
+ordinates a
+from desti
+sult should 
+verts the r
+ipsoid para
+from desti
+lt should 
+verts the r
+TH 
+39 
+hile the 
+equired 
+ll as to 
+ameters 
+ Figure 
+t’s front 
+reading 
+ircraft’s 
+ Figure 
+ Earth’s 
+nd B is 
+nation’s 
+be then 
+esult in 
+meters) 
+nation’s 
+be then 
+esult in 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   40 
+ 
+centimeters as the earth is an ellipsoid object (WGS84 ellipsoid parameters) 
+enabling the trigonometry functions to be applied. 
+? The inverse tangent of the two differences results the angle to destination (? 
+angle): ?=atan2(LongitudeDiff,LatitudeDiff). 
+ 
+The subtraction ?-? gives the “target angle” which will be used as the “set point” for the 
+PID controller updates (both pitch and roll) such as: 
+ The sine of the target angle is the “set point” for the roll’s PID controller while 
+the cosine of the target angle is the “set point” of the pitch’s PID controller.  
+During the calculation of the “set point”, another variable calculated is the distance to 
+destination. This is easily maintained by the use of the differences already calculated. The 
+Pythagorean Theorem is applied for the distance calculation. c2 = a2 + b2 where ‘a’ is the 
+LongitudeDiff and ‘b’ is the LatitudeDiff. 
+As the “set points” are determined, the “current data” is the second parameter the PID 
+controller requires. For the determination of this, two consecutive samples from the GPS 
+data are required. This is the previous coordinate position (longitude, latitude) and the 
+current position. A similar procedure is applied for the calculation as before: 
+? Subtraction of the current Longitude read by GPS from the very previous 
+Longitude read depending on the GPS rate (PreviousLongitude - 
+CurrentLongitude). Note: for the “current data” calculation the Previous 
+Longitude is used instead of the destination’s Longitude.  
+? Subtraction of the current Latitude read of GPS from the very previous Latitude 
+read depending on the GPS rate (PreviousLatitude - CurrentLatitude). Note: for 
+the “current data” calculation the Previous Latitude is used instead of the 
+destination’s Latitude.  
+? The inverse tangent of the two differences is the trajectory deviation angle (? 
+angle) which is effectively the error parameter of the PID controller: 
+?=atan2(LongitudeDiff,LatitudeDiff) 
+The subtraction ?-? gives the “target angle” will be used as the “current data” for the PID 
+controller updates (both pitch and roll). 
+ What effectively is achieved here is the correction of the GPS deviation affecting 
+the trajectory of the aircraft to the destination. This attempts to correct these errors 
+because the calculation of the “target angle” is a result of both GPS and magnetometer 
+readings (?-?, where ? is the azimuth obtained by the magnetometer). As the 
+magnetometer’s update rate is really high compared to the GPS’s (100Hz versus 1Hz) the 
+GPS errors are “smoothed” by the PID controller because the magnetometer provides fast 
+and accurate corrections.  
+Stef
+ 
+Tha
+traj
+repr
+line
+ 
+reac
+with
+user
+com
+reac
+(po
+ 
+pos
+are 
+met
+root
+ 
+soft
+the 
+anos Constan
+t procedur
+ectory the 
+esents the 
+ is the actu
+The fin
+hed. The 
+in a radius
+. For the c
+pared to a
+hed then 
+sitions). If t
+Anothe
+ition hold. 
+set to zero
+ers of dest
+ of 300 and
+Last bu
+ware is ind
+position li
+Destinatio
+tinou, Advanc
+Figure
+e is visual
+aircraft wo
+correction b
+al trajectory
+al check w
+destination 
+ of about 2
+alculation 
+ value of t
+the algorit
+here is, the
+r objective
+Once there 
+. Due to th
+ination dev
+ then the a
+t not least
+ependent o
+st (mission
+n 
+ed Microelec
+ 22: Autonom
+ized in Fig
+uld follow
+y the PID 
+ the aircraf
+hich the 
+is assumed
+0 meters a
+of this, the
+he square r
+hm checks
+n the same 
+ achieved w
+are no mor
+e inaccura
+iation. The
+lgorithm is 
+, one mor
+f the comm
+s) before 
+?’
+tronic System
+ous navigat
+ure 22 wh
+ if there 
+controller u
+t follows. 
+algorithm 
+ as reache
+way from 
+ parameter 
+oot of 300
+ if there 
+procedure a
+hich is re
+e positions
+cy of the G
+ distance w
+enabled aga
+e objective
+unication l
+flight, the 
+?
+s Engineering
+ion PID cont
+ere the bl
+were not a
+sing the m
+performs is
+d if the cu
+the actual d
+is checked
+(about 17.3
+is another 
+pplies unti
+lated to th
+ in the list, 
+PS, the ai
+ill then be
+in to bring
+ achieved 
+ink. Once th
+algorithm 
+’
+?
+, 2011 
+roller effect 
+ue dotted 
+ny correcti
+agnetomete
+ if the de
+rrent posit
+estination 
+ is the dist
+ meters). I
+position in
+l all the pos
+e navigatio
+the roll and
+rcraft migh
+come great
+ it back to t
+is that the
+e user has 
+ensures tha
+?
+ 
+line repres
+ons. The 
+r readings. 
+stination h
+ion of the 
+position se
+ance to des
+f the destin
+ the miss
+itions are r
+n algorithm
+ pitch “set
+t move ou
+er than the
+he destinati
+ autonomo
+correctly u
+t the aircr
+NO
+41 
+ 
+ents the 
+red line 
+The red 
+as been 
+GPS is 
+t by the 
+tination 
+ation is 
+ion list 
+eached. 
+, is the 
+ points” 
+t the 20 
+ square 
+on. 
+us fight 
+ploaded 
+aft will 
+RTH 
+Stef
+ 
+trav
+The
+4.2
+ 
+The
+port
+resp
+read
+tran
+curr
+con
+tran
+ 
+inte
+For
+the 
+com
+is th
+mor
+4.2.
+ 
+4.2
+ 
+Ano
+con
+first
+GPS
+The
+and
+freq
+flig
+affe
+ 
+und
+end
+is th
+ 
+ 
+anos Constan
+erse all the
+ last positio
+ Serial c.2
+ open sour
+. A comm
+onses. Suc
+ings et cet
+smitter flig
+ent motion
+figure the P
+smitter and
+This co
+rnet link in
+ the interne
+domain of
+munication
+e introduc
+e, to report
+1. 
+ Comm.3
+ther integ
+nectivity. F
+, an interfa
+/GPRS m
+n, a commu
+ informatio
+uency than
+ht data and
+cting the st
+Howev
+erstanding.
+s to the inte
+e lowest le
+tinou, Advanc
+ positions. 
+n should b
+ommunica
+ce software
+and set ex
+h response
+era. These 
+hts. It als
+ state of th
+, I and D 
+ the sensor
+mmand se
+itialization
+t link initia
+ the GCS 
+ handler. T
+tion of new
+ PID contr
+unication L
+ration mad
+or the achi
+ce was dev
+odule. Thi
+nication o
+n exchang
+ the main l
+ receive an
+ability of th
+er the exp
+ It starts fr
+rface devel
+vel. 
+ed Microelec
+It will also
+e the base.
+tion 
+ of the qua
+ists which
+s are curren
+commands 
+o provides
+e model. 
+parameters
+s.  
+t has been
+ and the d
+lization, the
+and the po
+he extensi
+ command
+ollers outpu
+ink Estab
+e on the 
+evement of
+eloped ena
+s also prov
+bject settled
+e. Last bu
+oop runs w
+y available
+e flight and
+lanation fo
+om the mo
+oped for th
+ 
+tronic System
+ perform a 
+d copter fe
+ the micro
+t PWM mo
+are used fo
+ responses
+Through th
+ of the PID
+ extended.
+ebugging o
+ command
+rt listens o
+on made fo
+s for prese
+t and their
+lishment 
+current sof
+ this object
+bling the m
+ides the r
+, providing
+t not leas
+as develope
+ instruction
+ makes use
+llows of e
+st abstract 
+e microcon
+s Engineering
+position ho
+atures seria
+controller 
+tor values
+r the config
+ for debug
+e serial co
+ controller
+Further co
+f the auton
+ set extend
+n. That in
+r the auton
+nting the G
+effect on m
+tware was
+ive, three m
+icrocontro
+equired ini
+ functions 
+t, a new f
+d. Its respo
+s coming 
+ of the com
+ach part, i
+part which
+troller-GPS
+, 2011 
+ld (hoverin
+l communi
+can under
+, sensor rea
+uration of 
+ging and 
+mmunicatio
+s as well a
+mmands w
+omous nav
+ed to allow
+formation 
+omous nav
+PS receive
+otors, as d
+the introd
+ain parts w
+ller to com
+tialisation 
+for internet
+rame loop 
+nsibility is 
+from GCS.
+munication
+s in revers
+ is the low
+/GPRS com
+ 
+g) on last p
+cation via t
+stand and 
+dings, RC 
+the vehicle
+observation
+n, the use
+s calibrate
+ere added
+igation alg
+ the system
+is required
+igation deb
+r’s data bu
+escribed in
+uction of 
+ere develo
+municate w
+and status 
+ link establ
+running a
+to send the
+ That runs 
+ object. 
+e order fo
+ frame loo
+municatio
+42 
+osition. 
+he USB 
+provide 
+receiver 
+ for RC 
+ of the 
+r is can 
+ the RC 
+for the 
+orithm. 
+ to read 
+ for the 
+ugging, 
+t what’s 
+ chapter 
+internet 
+ped. At 
+ith the 
+checks. 
+ishment 
+t lower 
+ current 
+without 
+r better 
+p while 
+n which 
+Stef
+ 
+4.2.
+ 
+A o
+rate
+be d
+GPS
+ava
+Fur
+loop
+ 
+soft
+vari
+ 
+read
+all t
+han
+3.3.
+Tha
+  
+The
+buf
+ 
+4.2.
+ 
+The
+com
+perf
+The
+anos Constan
+ Embe3.1
+ne-hertz lo
+ than the co
+one on hig
+/GPRS mo
+ilable ever
+thermore, t
+ runs at.  
+The in
+ware was a
+ous calcula
+The lo
+ings are re
+he sensor r
+dler. The e
+  
+t message h
+? Start o
+? Curren
+? Curren
+? Curren
+? Curren
+? Numbe
+? GPS fi
+? GPS sp
+? Battery
+? Magne
+? Altitud
+? End of
+ second tas
+fer. In that c
+ Comm3.2
+ communi
+munication
+orm the lin
+ responsibi
+tinou, Advanc
+dding com
+op frame in
+ntrol loop.
+her frequen
+dule. The o
+y second, 
+he less pro
+troduction 
+lready usin
+tions such 
+op frame d
+cent by the
+eadings in 
+ncoding pr
+as the follo
+f message i
+t roll angle
+t pitch angl
+t GPS Latit
+t GPS Long
+r of satellit
+x 
+eed over g
+ monitor (f
+tic heading
+e above/be
+ message in
+k it perform
+ase, it requ
+unication
+cation han
+ between t
+k establishm
+lities of the
+ed Microelec
+municatio
+troduced t
+ There was
+cy. The fir
+ther reason
+there wou
+cessing spe
+of the fram
+g a time v
+as the PID c
+eveloped w
+ time is exe
+a message a
+ocess produ
+wing fields
+ndicator 
+ 
+e 
+ude 
+itude 
+es in view
+round 
+uel) 
+ (compass)
+low take-of
+dicator 
+s is a chec
+ests decodi
+ Handler
+dler develo
+he UAV an
+ent and th
+ communic
+tronic System
+n feature i
+o handle da
+ two reason
+st reason w
+ was the G
+ld be dupl
+nt on data 
+e loop w
+ariable for
+ontrollers.
+as placed
+cuted. It th
+nd request
+ces a mes
+ in order:
+ 
+f position i
+k whether t
+ng from th
+ped is the
+d the GCS
+e exchange
+ation handl
+s Engineering
+n the main
+ta transmis
+s for which
+as to avoid
+PS update r
+icates by 
+transmissio
+as quite e
+ time notat
+  
+ in a posi
+en perform
+s a transmi
+sage simila
+n meters 
+here are an
+e communic
+ most fun
+. It makes 
+ of informa
+er are: 
+, 2011 
+ loop 
+sion and re
+ the commu
+overloads o
+ate. As soo
+transmitting
+n, the faste
+asy proced
+ion which 
+tion ensuri
+s two tasks
+ssion from 
+r to the on
+y pending d
+ation hand
+damental c
+use of a GP
+tion.  
+ 
+ception at 
+nication c
+n the buffe
+n as new da
+ at a fast
+r the main
+ure as the 
+is also req
+ng that the
+. At first it 
+the commu
+e found in
+ata on the 
+ler. 
+omponent 
+S/GPRS o
+43 
+a lower 
+ould not 
+r of the 
+ta were 
+er rate. 
+ control 
+current 
+uired in 
+ sensor 
+encodes 
+nication 
+chapter 
+receiver 
+for the 
+bject to 
+Stef
+ 
+For
+the 
+com
+as t
+obje
+ 
+bidi
+com
+rece
+com
+are 
+app
+pos
+com
+pos
+suc
+4.2.
+ 
+The
+serv
+ava
+com
+them
+GPS
+mic
+The
+repo
+The
+anos Constan
+? Initiali
+? Comm
+? Recept
+? Data d
+? Missio
+ 
+ the initiali
+communic
+munication
+he port is l
+ct the requ
+Anothe
+rectional I
+munication
+ption is r
+plex. At fi
+a “mission 
+ends it to 
+itions to fl
+munication
+ition just re
+cessfully re
+ The C3.3
+ GPS/GPR
+ice and th
+ilable to t
+mands [23
+, decodes
+/GPRS mo
+rocontrolle
+se method
+rting them
+ interface d
+? Togglin
+? Initializ
+o 
+o 
+o 
+o 
+tinou, Advanc
+sation of G
+unication li
+ion/Transm
+ecoding/pa
+n updating
+zation of th
+ation obje
+ by using 
+istening on
+ired inform
+r main tas
+nternet dat
+ loop disc
+equested fr
+rst perform
+plan” or a 
+the missio
+y to one b
+ handler im
+ceived from
+ceived the m
+ommunica
+S module p
+e TCP/IP 
+he microc
+]. These co
+ them and 
+dule was c
+r requests t
+s are also 
+ back to the
+eveloped p
+g on/off th
+ation of the
+Configurat
+Configurat
+Sets PIN co
+Enabling/d
+ed Microelec
+PS/GSM m
+nk initialis
+ission of d
+rsing. 
+. 
+e GPS/GP
+ct. The co
+its capabilit
+. By using
+ation to ini
+k of the c
+a link. It 
+ussed in c
+om the m
+s the appro
+“mission am
+n list wher
+y one. If 
+mediately 
+ the GCS.
+ission me
+tion Obje
+rovides th
+stack; as a
+ontroller. 
+mmands a
+finally exe
+reated. Th
+o AT com
+responsibl
+ microcont
+rovides the
+e GPS/GPR
+ module: 
+ion of the U
+ion of the N
+de of the S
+isabling NM
+tronic System
+odule. 
+ation. 
+ata. 
+RS module
+mmunicati
+ies of read
+ that inform
+tialize the i
+ommunica
+accepts re
+hapter 0 a
+ain loop, 
+priate che
+endment”
+e the auto
+a “mission
+replaces th
+ The handl
+ssage sent.
+ct 
+e media of
+ result the 
+The GPS/G
+re sent to 
+cutes them
+en, some m
+mands as w
+e for hand
+roller. 
+ following 
+S module
+ART comm
+MEA UAR
+IM card. 
+EA senten
+s Engineering
+, the comm
+on handler
+ing the GC
+ation, it p
+nternet com
+tion handle
+quests for
+nd execute
+the handle
+cks to deci
+. If a missio
+nomous na
+ amendme
+e position t
+er finally ac
+ Internet co
+first step 
+PRS mod
+the UART 
+. Hence an
+ethods we
+ell as tran
+ling the r
+functionalit
+unication 
+T commun
+ces for aut
+, 2011 
+unication h
+ cooperate
+S domain i
+rovides to t
+munication
+r is the m
+data trans
+s them. In
+r’s respons
+de whether
+n plan mes
+vigation a
+nt” messag
+he UAV is 
+knowledge
+nnectivity 
+was to ma
+ule is co
+line and th
+ object (cl
+re construc
+sfer them 
+esponses o
+ies to the m
+baud rate. 
+ication bau
+onomous na
+ 
+andler inst
+s with th
+nformation
+he commu
+ link. 
+anagement
+mission fr
+ the case 
+ibilities ar
+ the incom
+sage is rec
+lgorithm re
+e is receiv
+travelling t
+s the GCS 
+through th
+ke these re
+ntrollable 
+e module 
+ass) describ
+ted to trans
+to the UAR
+f the mod
+icrocontrol
+d rate. 
+vigation. 
+44 
+antiates 
+e serial 
+ as well 
+nication 
+ of the 
+om the 
+of data 
+e more 
+ing data 
+eived, it 
+ads the 
+ed, the 
+o, to the 
+that has 
+e GPRS 
+sources 
+via AT 
+receives 
+ing the 
+late the 
+T line. 
+ule and 
+ler: 
+Stef
+ 
+ 
+Alm
+con
+sele
+con
+com
+as s
+ 
+with
+mic
+a re
+the 
+rese
+ 
+4.3
+ 
+Sin
+inte
+mis
+the 
+cha
+mes
+dec
+mod
+ 
+plan
+con
+plan
+the 
+ 
+4.3
+ 
+The
+and
+with
+ 
+anos Constan
+? Perform
+? Perform
+? Openin
+ost every 
+structor is 
+ction of the
+nection, w
+munication
+oon as the d
+Using t
+ the flight
+rocontrolle
+sponse, bu
+microcontr
+t.  
+ GCS So
+ce the UA
+rnet conne
+sions. Henc
+flights. Th
+pter 3. The
+sages and 
+odes the d
+ules for vi
+The so
+ner and th
+nection an
+ning the fl
+vehicle’s in
+ Comm.1
+re are essen
+ one for th
+ the UAV 
+tinou, Advanc
+ GSM con
+ GPRS ini
+g Internet c
+class in pro
+responsible
+ NMEA se
+hich is re
+ object is r
+omain nam
+his approac
+ loop (whi
+r instructs t
+t the respon
+oller receiv
+lution app
+V assembl
+ctivity, an 
+e, a GCS w
+e software
+ way it wor
+then transm
+ata coming
+sual represe
+ftware has 
+e flight da
+d vehicle i
+ights of the
+struments a
+unication l
+tially two 
+e wireless 
+while the la
+ed Microelec
+nection. 
+tialization.
+onnection (
+gramming 
+ to define 
+ntences wil
+quired befo
+esponsible 
+e and port 
+h, what is 
+ch is the m
+he module 
+se waits to
+es no resp
+roach 
+ed, progra
+interface r
+as develop
+’s structur
+ks is by en
+its them u
+ back from
+ntation.  
+three main
+ta. The co
+nitialisation
+ UAV and
+s well as it
+ink handle
+communica
+connectivit
+tter uses th
+tronic System
+socket dial
+contains a 
+the baud r
+l flow on th
+re the GP
+to open the
+is given.  
+achieved is
+ost vital co
+to perform 
+ be read. If
+onse after 
+mmed to f
+equired fo
+ed which p
+e is simila
+coding the
+sing the co
+ the UAV
+ modes. T
+nfiguration
+s. The mi
+ the flight 
+ track on th
+r 
+tion handle
+y. The firs
+e Internet.
+s Engineering
+) to a speci
+constructor
+ates of bot
+e GPS UA
+RS servic
+ network s
+ the indepe
+mponent). 
+a task. The
+ there is a 
+certain tim
+ly autonom
+r the user 
+rovides to 
+r to the m
+ visual info
+mmunicati
+ and alloc
+hese are th
+ mode pro
+ssion plan
+data mode 
+e globe. 
+rs in the GC
+t it uses se
+, 2011 
+fied host. 
+. The comm
+h UART p
+RT. It also 
+e can be 
+ocket (conn
+ndence of 
+That is ach
+ control loo
+failure with
+e has elap
+ously and
+to configu
+a user an in
+odularized 
+rmation pro
+on link. On
+ates them 
+e configur
+vides the t
+ner mode 
+is the visua
+S software
+rial protoc
+ 
+unication’
+orts as wel
+performs th
+used. Fina
+ection to th
+connectivit
+ieved beca
+p does not 
+in the mod
+sed, the m
+ able to e
+re it and p
+terface to o
+model app
+vided by u
+ the other 
+to the resp
+ation, the 
+ools for th
+is an inter
+l represent
+, one for th
+ol to comm
+45 
+s object 
+l as the 
+e GSM 
+lly, the 
+e GCS) 
+y errors 
+use the 
+wait for 
+ule and 
+odule is 
+stablish 
+lan the 
+rganize 
+ears in 
+ser into 
+hand, it 
+onsible 
+mission 
+e wired 
+face for 
+ation of 
+e wired 
+unicate 
+Stef
+ 
+4.3.
+ 
+The
+the 
+bee
+ava
+obje
+cali
+seri
+the 
+ 
+4.3.
+ 
+Wh
+inte
+han
+on 
+com
+ 
+clie
+inte
+thre
+cha
+mad
+reco
+view
+4.3
+ 
+The
+two
+com
+des
+Wit
+anos Constan
+ Seria1.1
+ serial com
+serial port 
+n develope
+ilable libra
+cts are the
+bration and
+al commun
+serial comm
+ The I1.2
+ile the seri
+rnet comm
+dler, the da
+the serial p
+munication
+For thi
+nt (UAV) 
+rrupt) is cr
+ad each tim
+racter set, 
+e which d
+gnized, the
+s for visua
+ The Co.2
+ configurat
+ sub view
+munication
+cribed in ch
+hin the con
+? Commu
+? Initialis
+o 
+o 
+tinou, Advanc
+l communi
+munication
+(USB) form
+d in an o
+ries to dec
+ HUD an
+ internet co
+ication han
+unication 
+nternet Co
+al commun
+unication h
+ta coming 
+ort there is
+.  
+s reason, a
+gets conne
+eated. The
+e a new 
+and then ap
+ecides whe
+n the usefu
+l represent
+nfiguratio
+ion view of
+s: the vis
+ handler t
+apter 4.2.2
+figuration v
+nication w
+ation of the
+The GCS a
+It supplies 
+detected by
+application
+ed Microelec
+cation han
+ handler is
+ the vehic
+bject-orien
+ode the me
+d motor sp
+mmunicati
+dler, just a
+4.2.2 of the
+mmunicat
+ication han
+andler has 
+from the U
+ a hardwar
+n asynchro
+cted, an as
+ way it ha
+byte is rec
+pended to 
+ther the byt
+l informat
+ation. The b
+n View 
+ the GCS p
+ual view a
+o exchange
+.  
+iew, the fo
+ith the UAV
+ GPS/GPR
+t first instru
+the domain
+ software i
+ runs) 
+tronic System
+dler 
+ responsibl
+le and the d
+ted progra
+ssages and
+eed indica
+on initializ
+fter they ar
+ vehicle un
+ion handle
+dler is man
+a hardest ro
+AV via the
+e buffer, s
+nous socke
+ynchronou
+ndles the a
+eived. The
+a byte list
+e list conta
+ion are extr
+yte list is t
+rovides the
+nd a com
+ informati
+llowing can
+ using the
+S module 
+cts the UA
+ and the po
+f there is in
+s Engineering
+e for the m
+ata are sen
+mming lan
+ transform 
+tors. The c
+ations are a
+e formed a
+derstands.
+r 
+ipulating t
+le. Contrar
+ internet ar
+omething d
+t listener s
+s call back
+synchrono
+ new byte 
+. Every tim
+ins a comp
+acted and a
+hen reset to
+ tools for t
+mand line
+on with th
+ be achieve
+ USB cable
+V to enable
+rt is listenin
+ternet conn
+, 2011 
+anaging the
+t out to the
+guage, it 
+them to vi
+onfiguratio
+lso sent to 
+ccording to
+he wired c
+y to the ser
+e asynchro
+oes not ex
+erver was 
+ worker (s
+us data is 
+is decoded
+e a byte is
+lete messa
+llocated to
+ handle the 
+he aircraft i
+ console. 
+e UAV via
+d: 
+ 
+ the modul
+g informati
+ectivity by 
+ 
+ data comi
+ vehicle. A
+makes use
+sual objec
+n tools for
+the vehicle
+ the comm
+ommunicat
+ial commu
+nous. Furth
+ist for the 
+developed. 
+imilar to s
+by creating
+ using the
+ added, a c
+ge. If a me
+ the corres
+next messa
+nitializatio
+It uses th
+ the comm
+e 
+on (automa
+the time the
+46 
+ng from 
+s it has 
+ of the 
+ts. Such 
+ sensor 
+ via the 
+and set 
+ion, the 
+nication 
+ermore, 
+internet 
+Once a 
+oftware 
+ a new 
+ UTF-8 
+heck is 
+ssage is 
+ponding 
+ge.  
+n. It has 
+e serial 
+and set 
+tically 
+ 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   47 
+ 
+o Instructs the connection to the GSM service. 
+o Instructs the Vehicle to connect via Internet 
+? Observation of the mission plan is currently in the UAV’s memory 
+? Calibration at the level position (sensor calibration) 
+? Clear the mission from memory 
+? Read the data coming from GPS receiver 
+? Read the pitch and roll values generated by the autonomous navigation algorithm  
+? Read the P, I and D parameters of the autonomous navigation PID controllers 
+? Set new P, I and D parameters for the autonomous navigation PID controllers 
+ 
+There are of course many parameters one may configure using the serial communication, 
+all the native commands of the quad rotor helicopter can be found in [1].  
+ 
+Figure 23 is a screen capture of the configuration mode of the GCS in the visual view. It 
+illustrates how the raw sensor data are converted to visual objects for better user 
+interface. Furthermore, all the data flowing on the serial line can be viewed as logs in the 
+“data console” tab of the configurator. 
+Figure 23: The Configuration View of the GCS 
+  
+Stef
+ 
+4.3
+ 
+The
+the 
+surv
+side
+wir
+mis
+ 
+as i
+prov
+The
+han
+ 
+sear
+The
+mis
+use
+foun
+  
+anos Constan
+ The M.3
+ Mission p
+UAV. As s
+eillance. T
+. The user 
+ed or wirele
+sion repeat
+For the
+t features u
+ides functi
+ mission 
+dlers to exc
+Last bu
+ch a count
+ altitude m
+sion planne
+d for future
+d in chapt
+tinou, Advanc
+ission Plan
+lanner view
+hown in Fi
+hese positi
+has therefo
+ss commun
+.  
+ developme
+seful func
+ons for con
+planner us
+hange data
+t not least
+ry, a town 
+ode, which
+r to receiv
+ work on t
+er 7. 
+F
+ed Microelec
+ner View
+ of the GC
+gure 24, the
+ons are app
+re the oppo
+ication. Th
+nt of missi
+tions for ex
+verting mo
+es both in
+ with the U
+, “find loc
+or even a s
+ is shown
+e altitude i
+he project 
+igure 24: M
+tronic System
+S is the en
+ user can e
+ended to t
+rtunity to u
+e mission l
+on planner,
+tracting an
+use position
+ternet com
+AV. 
+ation” fun
+treet addre
+ as disable
+nformation
+for altitude
+ission planne
+s Engineering
+vironment 
+asily select
+he mission
+pload them
+ist can also
+ the Google
+d importin
+ to WGS84
+municatio
+ctionality a
+ss for easie
+d in Figure
+ provided b
+ prediction
+r view of the
+, 2011 
+the user ca
+ the positio
+ list appear
+ to the UA
+ be saved f
+ Maps .NE
+g informati
+ coordinat
+n and seri
+dded. This
+r mission p
+ 24, is a f
+y Google 
+. More det
+ GCS 
+ 
+n plan the 
+ns on the g
+ on the rig
+V either u
+or future up
+T library u
+on to map
+es and vice 
+al commu
+ helps the 
+lanning pro
+unctionality
+Maps. This
+ails on this
+48 
+flight of 
+lobe for 
+ht hand 
+sing the 
+load or 
+sed [24] 
+. It also 
+versa. 
+nication 
+user to 
+cedure. 
+ of the 
+ can be 
+ can be 
+ 
+Stef
+ 
+4.3
+ 
+Thi
+rece
+25 t
+GPS
+the 
+ 
+user
+gen
+logs
+sav
+ 
+ 
+anos Constan
+ The Fl.4
+s is the virt
+nt flight in
+he vehicle 
+ details bo
+current roll
+Further
+ by right 
+erated instr
+ of the fli
+ed for furth
+tinou, Advanc
+ight Data V
+ual cockpit
+formation c
+is tracked 
+x placed on
+ and pitch a
+more, thro
+clicks a po
+ucting the U
+ght in the “
+er analysis.
+ed Microelec
+iew 
+of the user
+oming from
+on the map
+ the left ha
+ngles as we
+ugh this vi
+sition on th
+AV to cha
+Remote da
+  
+Figure 25: 
+ 
+tronic System
+. It uses the
+ the UAV
+. The curre
+nd. The inf
+ll as the al
+ew, the mi
+e map an
+nge it traje
+ta” tab sh
+Flight data v
+ 
+s Engineering
+ internet co
+ and illustra
+nt flight da
+ormation sh
+titude and m
+ssion amen
+d then pres
+ctory. Fina
+own under 
+iew of the G
+, 2011 
+nnection ha
+tes them. A
+ta are show
+own are th
+agnetic he
+d objectiv
+ses “Fly h
+lly, the flig
+the HUD. 
+CS 
+ 
+ndler to ob
+s shown in
+n in the H
+e GPS infor
+ading. 
+e is achiev
+ere”, a me
+ht data vie
+These data
+49 
+tain the 
+ Figure 
+UD and 
+mation, 
+ed. The 
+ssage is 
+w keeps 
+ can be 
+ 
+Stef
+ 
+5. 
+ 
+Thi
+syst
+ 
+5.1
+ 
+One
+intr
+ther
+pro
+How
+noti
+tim
+ther
+bec
+flig
+anos Constan
+RESU
+s chapter is
+em functio
+? Main lo
+? Autono
+? Commu
+? GCS fu
+.  Testin
+ of the ver
+oducing th
+e was a ris
+cessing pow
+ever, as s
+ceable effe
+e was incre
+e was data
+ause such t
+ht when a m
+Figur
+tinou, Advanc
+LTS 
+ dedicated t
+nality. The 
+op executi
+mous navig
+nication lin
+nctionality
+g the Con
+y first test
+e new featu
+k that the s
+er requirem
+hown in F
+ct on the lo
+ased by jus
+ transmissi
+ransmission
+ission is am
+e 26: The Co
+ed Microelec
+o the result
+following c
+on time of t
+ation algor
+k (both UA
+trol loop r
+s were mad
+res describ
+mall – 16M
+ents. 
+igure 26 t
+op rate in 
+t 20 micros
+on from G
+s are perfo
+ended.  
+ntrol loop ra
+tronic System
+s obtained 
+omponents
+he UAV 
+ithm  
+V and GC
+ate 
+e was the 
+ed in the 
+Hz microc
+he results
+a way to af
+econds wit
+CS to the U
+rmed befor
+te before and
+s Engineering
+during the v
+ were tested
+S) 
+observation
+“UAV Sof
+ontroller m
+obtained p
+fect the ma
+h some pea
+AV. Neve
+e the aircr
+ after the UA
+, 2011 
+erification 
+: 
+ of the co
+tware”, fou
+ight not be
+rove that t
+in loop. On
+ks of 300 m
+rtheless, th
+aft takes-of
+V software i
+ 
+of the UAV
+ntrol loop 
+nd in chap
+ able to ha
+here was 
+ average, 
+icrosecon
+at is not w
+f and rarely
+ntegration 
+50 
+’s 
+rate. By 
+ter 4.2, 
+ndle the 
+not any 
+the loop 
+ds when 
+orrying 
+ during 
+ 
+Stef
+ 
+5.2
+ 
+Thi
+nav
+reas
+gen
+veh
+fron
+befo
+thro
+sho
+the 
+prop
+ 
+Figu
+as e
+incr
+that
+sho
+dest
+anos Constan
+.  Auton
+s chapter a
+igation alg
+ons. The f
+erate the c
+icle’s front
+t) was loa
+re it can 
+ttle value w
+ws that all 
+throttle att
+ellers were
+re 28 was 
+astern des
+eased whil
+ the algori
+wn in the f
+ination.  
+tinou, Advanc
+omous Na
+nalyses the
+orithm veri
+irst test ma
+orrect mot
+ projection
+ded as mis
+start its au
+as set.  Fig
+the motors 
+empts to g
+ taken off, 
+Figur
+captured ju
+tination wa
+e the “front
+thm has co
+igure, attem
+ed Microelec
+vigation A
+ results of 
+fication, ho
+de was to 
+or comma
+. Using the 
+sion. As m
+tonomous n
+ure 27 was 
+are spinnin
+ive the ve
+what is sho
+e 27: The GP
+st after the
+s set, the 
+-right” and
+rrectly calc
+pt to prov
+tronic System
+lgorithm
+real tests m
+wever the
+check if th
+nds. For s
+GCS, a po
+entioned be
+avigation
+captured ju
+g at the sa
+hicle only 
+wn is that t
+S Navigatio
+ autonomou
+motor spee
+ “back-righ
+ulated the 
+ide a clock
+s Engineering
+ Test 
+ade in an 
+ propellers
+e autonom
+implicity, 
+sition to th
+fore, the U
+process. H
+st after the
+me speed. T
+the vertica
+he vehicle
+n algorithm i
+s navigatio
+ds of “fro
+t” speeds w
+roll and pi
+wise roll an
+, 2011 
+open area f
+were not i
+ous naviga
+the north i
+e east (with
+AV requir
+ence, using
+ throttle val
+his is wha
+l movemen
+hovers at le
+s disabled 
+n algorithm
+nt-left” and
+ere decrea
+tch angles. 
+gle to the 
+ 
+or the auto
+nstalled fo
+tion algorit
+s assumed
+ respect to
+es manual 
+ the transm
+ue was adj
+t expected 
+t. As soon
+vel position
+ 
+ enabled. 
+ “back-lef
+sed. That i
+The motor
+vehicle to r
+51 
+nomous 
+r safety 
+hm can 
+ as the 
+ vehicle 
+take-off 
+itter, a 
+usted. It 
+because 
+ as the 
+. 
+As soon 
+t” were 
+ndicates 
+ speeds 
+each its 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   52 
+ 
+ 
+Figure 28: The GPS Navigation algorithm is enabled 
+Thus, the next test made was to bring the vehicle to the destination position and observe 
+its response. This test was made to verify the position hold functionality of the algorithm 
+as well as the determination of a reached position. When the vehicle placed to the 
+destination, the response on the motors was remarkable. The motors “front-left” and 
+“back-left” decreased their speeds. However, all the motors were not spinning at the same 
+speed. That is because the inaccuracy of the GPS. For the confirmation that the GPS 
+inaccuracy has resulted this response, the vehicle moved eastern than the destination 
+position. The results obtained were as expected. The “front-left” and “back-left” motors 
+decreased their speeds while the “front-right” and ”back-right” motor speeds were 
+increased to bring it back to the destination. A drawback recognised is the low GPS rate. 
+As soon as the navigation between positions operates correctly (which includes the 
+magnetometer readings for the trajectory following), the main reason the destination is 
+delayed to marked as reached is the GPS rate. 
+ 
+Autonomous navigation algorithm result synopsis: 
+? The autonomous navigation algorithm has proven to function correct as soon as it 
+calculates the required roll and pitch angles 
+? The position hold feature proven to work as it can hold the vehicle in a radius of 
+about 15 meters to destination 
+? There is lag of the algorithm for detecting immediately that the destination is 
+reached. That is due to the low GPS refresh rate.    
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   53 
+ 
+5.3.  Communication Link Tests 
+ 
+The way the communication link verified was by testing each side individually for both 
+inbound and outbound data transfer. At first, an infinite loop was created on the 
+microcontroller board that was generating random data. The data was in the form of 
+messages the GCS understands and presents. At the same time, the microcontroller was 
+connected to the computer via the serial port (USB). The messages were sent through the 
+internet (outbound network socket) connection were repeated on the serial 
+communication link. A telnet client as well a serial line client was used to log both 
+incoming transmissions. After certain time has elapsed, both log files were compared for 
+any data misses or corrupts assuming as valid data the data received through the wired 
+transmission. The results showed that every byte was sent over the internet were received 
+correctly and in order. 
+ For the inbound transmission verification, a similar concept applied. The 
+difference was that the infinite loop on the microcontroller used to read from the internet 
+link (network socket) and then repeat them to the serial line. The data received from the 
+serial line were compared with the original data was sent from the computer’s outbound 
+internet connection. Again there were not any corruptions or data misses. Identical 
+procedure applied to verify the GCS communication link. 
+ After the individual verification tests were completed, the communication link 
+was tested while the autonomous navigation algorithm was running. The serial 
+communication kept active to validate the transferred mission plans and mission 
+amendments. Succeed transmission of data was resulted. 
+ However, tests showed that the GSM antenna interferes with a component is 
+installed on the PCB. For this reason the antenna moved as far as possible from the 
+electronics. 
+  
+5.4. GCS Functionality Tests 
+ 
+Once the GCS developed the functionality tests taken place was through the internet and 
+serial communication lines the software relies on. A telnet client was used to imitate the 
+UAV in terms of data transmission through internet. Random data were sent and the 
+transmission rate was faster than the GPRS usually handles. That ensured the memory 
+allocated successful as there was not failures after certain time has elapsed. That also 
+ensures that the GCS can be used with a UAV transmits over a faster communication 
+link. 
+ Furthermore, the GCS tested for any possible failures on invalid data 
+transmissions. The GCS proven to reject any messages are not formatted as it could. 
+Finally the GCS verified that generates messages which the UAV can understand and 
+decode as discussed in sub-chapter 0.  
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   54 
+ 
+6. EVALUATION 
+ 
+The project had three main objectives. These were the integration of the remote 
+controlled quad rotor helicopter to an autonomous vehicle, the generation of the GCS 
+software as well as the communication link between them. 
+ The integration of the software to a UAV objective was achieved, as soon as the 
+UAV can travel through different positions and hold its position (hovers) for surveillance. 
+However, automatic take-off and landing procedures are not yet functional and a RC 
+transmitter is still required. There were two main reasons affected this objective. The first 
+was the minimal time remained for software developing after the hardware assembly of 
+the aircraft. Apart from that, the PCB was defective. A lot of time spent for the 
+determination of whether was a PCB design error or due to a hardware component 
+failure. Finally, the problem proven to be a manufacture error as there was resistance in 
+the thru-hole vias. 
+ On the other hand, the GCS application developed achieved all of its objectives. 
+These are the three operational views have been described in chapter 4.3 (configuration, 
+mission planning and flight data representation).  
+ Furthermore, the communication link objective achieved as there is a bidirectional 
+communication between the UAV and the GCS. The drawback of the communication 
+link is its speed, but it was the only available solution featured long-range 
+communication with minimal size and weight. In addition, GSM, which the GPRS relies 
+on, is widely available in inhabitant areas where the project targets on as application 
+environment. 
+  
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   55 
+ 
+7. FUTURE WORK 
+ 
+Regarding the improvements would be made on the current project; the GPS receiver 
+could be replaced with one that offering better update rates. Such receivers are now 
+available at low cost. Thus, the issue of delayed determination of a reached position will 
+be solved.  
+ Furthermore, a new version of the remote controlled quad rotor software has been 
+released. According to the description, the “altitude hold” algorithm became reliable. 
+Hence, the modifications have been made on this project can be transferred to the new 
+version of the software. As a result, the automatic take-off and landing functionality can 
+be integrated there.  
+ On the other hand, the GCS software can be improved by an algorithm predicts 
+the trajectory of the UAV on the globe. As soon as the GCS software already obtains 
+altitude information for a specified position, the trajectory prediction algorithm can be 
+used to inform the UAV to change its altitude to avoid obstacles. 
+ A worthy improvement of the project could be the replacement of the 16MHz 
+microcontroller with a faster microprocessor or a digital signal processor. Such 
+improvement will increase the stability of flight. Moreover, new functions that require 
+further processing resources can be implemented.  
+  
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   56 
+ 
+8. BIBLIOGRAPHY 
+
+[1]  “Aeroquad, The Open Source Quadcopter,” [Online]. Available: http://www.aeroquad.com. 
+[2]  E. Pastor, J. Lopez and P. Royo, “UAV Payload and Mission Control Hardware/Software 
+Architecture,” Aerospace and Electronic Systems Magazine, IEEE, vol. 22, pp. 3-8, June 2007.  
+[3]  S. Park, D. Won, M. Kang, T. Kim, H. Lee and S. Kwon, “RIC (robust internal-loop compensator) 
+based flight control of a quad-rotor type UAV,” IEEE/RSJ International Conference onIntelligent 
+Robots and Systems, 2005. (IROS 2005)., pp. 3542- 3547, 2005.  
+[4]  A. Tayebi and S. McGilvray, “Attitude stabilization of a VTOL quadrotor aircraft,” IEEE Trans. 
+Control Systems Technology, vol. 14, no. 3, pp. 562 - 571 , 2006.  
+[5]  teipir, “PID Controllers,” [Online]. Available: 
+http://gun.teipir.gr/DSAELAB/Ergastiriakes/pidtutorial.pdf. 
+[6]  Wikipedia, “PID controller,” 2011. [Online]. Available: http://en.wikipedia.org/wiki/PID_controller. 
+[7]  N. Metni, J.-M. Pflimlin, T. Hamel and P. Soueres, “Attitude and gyro bias estimation for a flying 
+UAV,” Intelligent Robots and Systems, 2005. (IROS 2005). 2005 IEEE/RSJ International Conference 
+on , pp. 1114 - 1120 , 2005.  
+[8]  P. Martin and E. Salaun, “The true role of accelerometer feedback in quadrotor control,” IEEE 
+International Conference Robotics and Automation (ICRA), pp. 1623-1629, 3-7 May 2010, 2010.  
+[9]  W. Premerlani and P. Bizard, “Direction Cosine Matrix IMU: Theory,” [Online]. Available: 
+http://gentlenav.googlecode.com/files/DCMDraft2.pdf. 
+[10]  “NMEA Description,” [Online]. Available: 
+http://www.cs.put.poznan.pl/wswitala/download/pdf/NMEAdescription.pdf. 
+[11]  G. Baddeley, “GPS - NMEA sentence information,” 2001. [Online]. Available: 
+http://aprs.gids.nl/nmea/. 
+[12]  S. Hrabar, “3D path planning and stereo-based obstacle avoidance for rotorcraft UAVs,” in 
+Intelligent Robots and Systems, 2008. IROS 2008. IEEE/RSJ International Conference on, 2008.  
+[13]  S. Bouabdallah and R. Siegwart, “Full control of a quadrotor,” in Intelligent Robots and Systems, 
+2007. IROS 2007. IEEE/RSJ International Conference on, 2007.  
+[14]  M. Barr, “Embedded Systems Programming,” in Pulse Width Modulation, 2001, pp. 103-104. 
+[15]  “I2C Manual,” Philips Semiconductors, [Online]. Available: 
+http://www.nxp.com/documents/application_note/AN10216.pdf. 
+[16]  A. Soumelidis, Design of an embedded microcomputer based mini quadrotor UAV, unpublished.  
+[17]  J. Cai and D. Goodman, “General packet radio service in GSM,” Communications Magazine, vol. 35, 
+no. 10, pp. 122-131, 1997.  
+[18]  M. Jovanovic and D. Starcevic, “Software Architecture for Ground Control Station for Unmanned 
+Aerial Vehicle,” in Computer Modeling and Simulation, 2008.  
+[19]  I. Papini, “Vehicle Simulator reference manual,” 20 July 2010. [Online]. Available: 
+http://www.hangsim.com/vsf/help/print.htm. 
+[20]  A. Corporation, “ATmega2560,” [Online]. Available: 
+http://www.atmel.com/dyn/products/product_card.asp?category_id=163&family_id=607&subfamily
+_id=1723&part_id=3632. 
+[21]  Arduino, “Arduino Mega,” [Online]. Available: http://arduino.cc/en/Main/ArduinoBoardMega. 
+[22]  J. Zhong, “PID Controller Tuning: A Short Tutorial,” 2006. [Online]. Available: 
+http://saba.kntu.ac.ir/eecd/pcl/download/PIDtutorial.pdf. 
+[23]  “AT Commands Reference Guide,” Telit Wireless solutions, [Online]. Available: 
+http://www.telit.com/module/infopool/download.php?id=542. 
+[24]  radioman, “GMap.NET - Great Maps for Windows Forms & Presentation,” 2011. [Online]. 
+Available: http://greatmaps.codeplex.com/. 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   57 
+ 
+[25]  T. Madani and A. Benallegue, “Backstepping Control for a Quadrotor Helicopter,” IEEE/RSJ 
+International Conference on Intelligent Robots and Systems, pp. 3255-3260, 2006.  
+[26]  G. Mao, S. Drake and B. Anderson, “Design of an Extended Kalman Filter for UAV Localization,” 
+Information, Decision and Control, 2007. IDC '07 , pp. 224 - 229 , 2007.  
+[27]  S. Bouabdallah, A. Noth and R. Siegwart, “PID vs LQ control techniques applied to an indoor micro 
+quadrotor,” in Intelligent Robots and Systems, 2004.  
+ 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   58 
+ 
+9.  APPENDICES 
+ 
+9.1. UAV SYSTEM USER MANUAL 
+ 
+ 
+ 
+STEP 1 - Loading the sketch 
+1. If you are planning to use GPRS connectivity, please attach a 
+SIM card in the slot 
+2. Using the Arduino IDE software, load the sketch named: 
+QuadrotorUAVsoftware.pde 
+3. Locate the file named Aeroquad.h 
+4. Find the line: #define SIMPIN "" 
+5. Enter the pin code of the SIM card if any (leave it as is if you 
+have not set any PIN code on the card) 
+6. Locate the file: GM862.cpp 
+7. Find the line contains 
+8. Modify the following line according to the SIM network you 
+are on:  
+requestModem("AT+CGDCONT=1,\"IP\",\"m-bb.o2.co.uk\"", 
+3000, true, buf); 
+(leave it as is if you are on O2 mobile broadband) 
+9. Save and upload the sketch 
+ 
+STEP 2 – Calibration  
+1. Visit the www.aeroquad.info to download the configurator 
+software (note: the software transformed to UAV is 2.4, find a 
+compatible version of configurator). 
+2. Connect the USB cable and start the configurator, set as COM 
+the one the Arduino is connected to.  
+Baud rate of COM port: 115200 
+3. Follow the instructions to calibrate the EEPROM, ESCs RC 
+transmitter, and the magnetometer 
+4. Close port and then close the configurator Software 
+STEP 3 – GPS Navigation setup 
+1. Start the UAV GCS software 
+2. Select the COM port Arduino is connected, default baud rate 
+(115200) and click “Open Port” 
+3. Place to vehicle to a level position and navigate to “Visual 
+View” tab. Verify the vehicle appears level. If not click the 
+“calibrate level” button 
+4. Click the “Get GPS PID values” if you have not changed the 
+default ones, ensure they are: 0.3;0;0;0.3;0;0 
+5. Ensure your firewall does not block the GCS port shown. If 
+you are behind a router, forward that port on your computer. 
+6. Click the “Start listening” button found on top right position  
+7. Click the “Enable GPS/GPRS module”. Wait until the UAV 
+reports “ready!” on the console. The “UAV IP:” will become 
+available. The connection status will change to ”Connected to 
+UAV”  
+  
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   59 
+ 
+STEP 4 – Plan your missions 
+1. You can disconnect the USB cable now unless you prefer 
+uploading the mission via cable 
+2. Navigate to the “Mission planner” view 
+NOTE: You can upload up to 10 positions max! 
+3. Find the places you are interested of and mark them up: 
+Right clicks are sets new marker 
+Left click on marker removes it 
+(Note: only green markers are transferred to the vehicle 
+for navigation) 
+4. Upload the mission either via the USB cable or via the 
+internet link 
+5. Optional: navigate back to configurator mode and click 
+“Get stored missions”. Verify the correctness. 
+STEP 5 – The flight 
+1. Navigate to the “flight data” view 
+2. Navigate  to “Remote Data” tab, you will see raw data 
+coming from the UAV and the HUD will start moving 
+3. Wait until the “GPS fix” led indicator on the UAV is 
+turned on. 
+4. Test that the “GPS Nav” LED is getting ON when 
+switching the upper right auxiliary button of the 
+transmitter. 
+5. Turn it off  
+6. Take-off the vehicle to the desired altitude. 
+7. Enable the autonomous navigation by turning the upper 
+right auxiliary button.  
+The “Flight data” view keeps track of the UAV. You can also 
+observe its orientation. Check the battery voltage-percentage on 
+a regular basis. 
+To change its trajectory, just right click the map to the desired 
+position and click “fly here” 
+If the last position in the mission list is the base, it will hover 
+above you. If not, use the “fly here” feature to bring it near you. 
+Land it by turning off the GPS Navigation and using the throttle 
+stick. 
+Stefanos Constantinou, Advanced Microelectronic Systems Engineering, 2011   60 
+ 
+9.2. PCB Hardware Design - Interface 
+ 
+The following figures show the design of the PCB developed. On the right hand side the schematic is shown while on the left is the actual board 
+magnified 
+ 
+ 

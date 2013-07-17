@@ -1,3 +1,6 @@
+	
+   I	
+  
 Executive summary 
  
 This project presents a method for acquiring forensic grade evidence from Android Mobile devices 
@@ -46,7 +49,10 @@ smartphones.
  
  
  
-	   I	  Acknowledgement 
+	
+   II	
+  
+Acknowledgement 
  
 I would like to show my gratitude to Dr. Theo Tryfonas for being my supervisor for this project and 
 all the help and guidance he provided. I thank Mr. Panagiotis Andriotis and Mr. Shashank Singh 
@@ -85,7 +91,25 @@ golden opportunity to work in this area.
  
  
  
-	   II	  List of Tables 
+	
+   III	
+  
+List of Tables 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 Table 1.1 Android Market share 
 Table 1.2  Android Platforms 
@@ -111,29 +135,17 @@ Table 5.1  Accuracy results from precision-recall test
 Table 5.2  Independent variables used for CHI Square test 
 Table 5.3  Test results CHI Square 
 Table 5.4 Results collation 
+	
+   IV	
+  
+List of Figures 
  
  
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-	   III	  List of Figures 
  
 Figure 1.1 Android Architecture 
- 
 Figure 1.2 SDK application manager 
- 
 Figure 1.3 USB debugging mode 
- 
 Figure 1.4 Rooting Android device using Super one click 
 Figure 1.5 Tool assessment 
 Figure 2.1 Data Map 
@@ -175,103 +187,105 @@ Figure 4.14 Load average on CPU graph
 Figure 5.1 Precision-Recall classification conditions 
 Figure 5.2 Accuracy chart 
 Figure 5.3 Precision-Recall chart 
-	   IV	  Table of Contents 
+Table of Contents 
  
-1. Introduction and Background…………………………………………………………………...1 
-1.0 Aim and Objectives…….……………………………………………………………...…...1 
-1.1. Background…………………………………………………………………......................2 
-1.1.0 Introduction…………………………………………………………………..........2 
-1.1.1 Android Platform…………………………………………………………………...3 
-1.2 Android Platform Highlights of the Version used in the tests for this project……………………5 
-1.3 Software Development Kit (SDK) ………………………………………………………….5 
-1.3.1 SDK Install…………………………………………………………………...........5 
-1.3.2. Connecting Android Device to the Workspace…………………………………………6 
-1.3.3. USB Debugging……………………………………………………………………6 
-1.4. Android Debug Bridge……………………………………………………………………..7 
-1.5. Rooting Android OS……………………………………………………………………….9 
-1.6. Android File Systems……………………………………………………………………..10 
-1.6.1. Application data storage…………………………………………………………...10 
-1.6.2. SD cards…………………………………………………………………………11 
-1.7. Forensic Tools……………………………………………………………………………11 
-1.7.1. Autopsy…………………………………………………………………………11 
-1.7.2. Scalpel…………………………………………………………………………..11 
+1. Introduction and Background...1 
+1.0 Aim and Objectives...1 
+1.1. Background..2 
+1.1.0 Introduction..2 
+1.1.1 Android Platform...3 
+1.2 Android Platform Highlights of the Version used in the tests for this project 5
+1.3 Software Development Kit (SDK) .5 
+1.3.1 SDK Install...........5 
+1.3.2. Connecting Android Device to the Workspace 6 
+1.3.3. USB Debugging 6 
+1.4. Android Debug Bridge ..7 
+1.5. Rooting Android OS .9 
+1.6. Android File Systems..10 
+1.6.1. Application data storage...10 
+1.6.2. SD cards 11 
+1.7. Forensic Tools 11 
+1.7.1. Autopsy 11 
+1.7.2. Scalpel ..11 
 1.7.3. 
-AFLogical……………………………………………………………………12 
-1.7.4. ADB (Android Debug Bridge).……………………………………………………..12 
-1.8. Methodology of Experiments……………………………………………………………..12 
-1.9 Summary…………………………………………………………………………………12 
+AFLogical 12 
+1.7.4. ADB (Android Debug Bridge). ..12 
+1.8. Methodology of Experiments ..12 
+1.9 Summary 12 
  
-2. Device Specification & Test Cases……………………………………………………………..13 
-2.0 Introduction………………………………………………………………………………13  
-2.1 Device Specification and Development machine……………………………………………13 
-2.2. Test Cases and Methodology……………………………………………………………...13 
-2.2.1 Test case I………………………………………………………………………..14 
-   2.2.1.1 Methodology used to implement the test case…………………………………….14 
-  2.2.2 Test case II……………………………………………………………………….14 
-   2.2.2.1 Methodology used to implement the test case…………………………………….14 
- 2.3. Data Collection…………………………………………………………………………...15 
- 2.4. Summary………………………………………………………………………………...16 
+2. Device Specification & Test Cases                       ..13 
+2.0 Introduction                              13  
+2.1 Device Specification and Development machine                 13 
+2.2. Test Cases and Methodology                       ...13 
+2.2.1 Test case I                           ..14 
+   2.2.1.1 Methodology used to implement the test case              .14 
+  2.2.2 Test case II                            .14 
+   2.2.2.1 Methodology used to implement the test case              .14 
+ 2.3. Data Collection                            ...15 
+ 2.4. Summary                              ...16 
  
-3. Forensic Tools and Implementation…………………………………………………………...17 
- 3.0 Introduction………………………………………………………………………………17 
- 3.1 Techniques for data extraction……………………………………………………………..18 
-  3.1.1 Logical Techniques………………………………………………………………..18 
-  3.1.2 Physical Techniques……………………………………………………………….18 
- 3.2 Forensic Tools………………………………………………………………………….....19 
-  3.2.1 ADB (Android Debug Bridge) implementation………………………………………..20 
-  3.2.2 Autopsy…………………………………………………………………………..23 
-   3.2.2.1. Investigation Phase………………………………………………………...26 
-  3.2.3 Scalpel…………………………………………………………………………...28 
-   3.2.3.0 Scalpel Internals…………………………………………………………...28 
-   3.2.3.1. Working with Scalpel………………………………………………………28 
-  3.2.4 AFLogical……………………………………………………………………..…31 
-   3.2.4.1 Working with AFLogical…………………………………………………….32  3.3 Summary…………………………………………………………………………………34 
+3. Forensic Tools and Implementation                      ...17 
+ 3.0 Introduction                              17 
+ 3.1 Techniques for data extraction                       ..18 
+  3.1.1 Logical Techniques                        ..18 
+  3.1.2 Physical Techniques                        .18 
+ 3.2 Forensic Tools                            .....19 
+  3.2.1 ADB (Android Debug Bridge) implementation               ..20 
+  3.2.2 Autopsy                            ..23 
+   3.2.2.1. Investigation Phase                     ...26 
+  3.2.3 Scalpel                            ...28 
+   3.2.3.0 Scalpel Internals                      ...28 
+   3.2.3.1. Working with Scalpel                     28 
+  3.2.4 AFLogical                          .. 31 
+   3.2.4.1 Working with AFLogical                    .32 
+ 3.3 Summary                               34 
  
-4. Result Analysis…………………………………………………………………………………..35 
- 4.0 Introduction………………………………………………………………………………35 
- 4.1 Analysis of results………………………………………………………………………...35 
-  4.1.1 ADB Evaluation…………………………………………………………………..35  
-   4.1.1.1. Comparison of Results…………………………………………………...…36 
-  4.1.2 Autopsy Evaluation………………………………………………………………..38 
-   4.1.2.1. Autopsy Results…………………………………………………………...38  
-   4.1.2.2. Comparison of Results.……………………………………………………..41 
-  4.1.3. Scalpel Evaluation………………………………………………………………..43 
-  4.1.4 AFLogical Evaluation……………………………………………………………...45 
- 4.2  Summary………………………………………………………………………………...49 
+4. Result Analysis                               ..35 
+ 4.0 Introduction                              35 
+ 4.1 Analysis of results                           ...35 
+  4.1.1 ADB Evaluation                         ..35  
+   4.1.1.1. Comparison of Results                   ... 36 
+  4.1.2 Autopsy Evaluation                        ..38 
+   4.1.2.1. Autopsy Results                      ...38  
+   4.1.2.2. Comparison of Results.                    ..41 
+  4.1.3. Scalpel Evaluation                        ..43 
+  4.1.4 AFLogical Evaluation                       ...45 
+ 4.2  Summary                              ...49 
  
-5. Validation Testing ………………………………………………………………………………50 
- 5.0 Introduction………………………………………………………………………………50  
- 5.1. Precision and Recall……………………………………………………………………...50 
-  5.1.1 Definition in Classification context…………………………………………………..50 
- 5.2 Nonparametric Statistical tests……………………………………………………………..53 
-2
-  5.2.1 CHI Square (X ) Test………………………………………………………………53  
-2
-   5.2.1.1 Steps in calculation of the values of the CHI Square X ………………………….…54 
- 5.3 Results Collation………………………………………………………………………….56 
- 5.4 Summary………………………………………………………………………………….57 
+5. Validation Testing                               50 
+ 5.0 Introduction                              50  
+ 5.1. Precision and Recall                          ...50 
+  5.1.1 Definition in Classification context                   ..50 
+ 5.2 Nonparametric Statistical tests                       ..53 
+  5.2.1 CHI Square (X2) Test                        53  
+   5.2.1.1 Steps in calculation of the values of the CHI Square X2          . 54 
+ 5.3 Results Collation                            .56 
+ 5.4 Summary                               .57 
  
-6. Conclusion……………………………………………………………………………………….58 
- 6.1 Achieving the Objectives………………………………………………………………….58 
- 6.2. Critical Analysis………………………………………………………………………….59 
- 6.3 Future Work………………………………………………………………………………59 
+6. Conclusion                                 .58 
+ 6.1 Achieving the Objectives                         .58 
+ 6.2. Critical Analysis                            .59 
+ 6.3 Future Work                              59 
  
-Bibliography……………………………………………………………………………………….61 
- 
+Bibliography                                 .61 
  
  
- Forensic	  Toolset	  Benchmarkin	  g 1	  
-	  
+ 
+ 
+Forensic	
+  Toolset	
+  Benchmarking	
+   1	
+  	
+  
  
 Introduction and Background 
-1 
  
  
 Mobile phones have transmuted from just being a simple voice communication device to a high-
 tech device with the capabilities of computer. They can be considered as a small computer in 
 pocket, which always travels along with the person and hence act as a crucial part of digital 
-[24]
-evidence. According to Ericsson , Global mobile penetration reached 85 percent in 2011 and 
+evidence. According to Ericsson [24], Global mobile penetration reached 85 percent in 2011 and 
 mobile subscriptions reached to 6 billion. With the increasing use of mobile phones, new 
 technologies and devices with different operating systems have emerged into market. Android 
 operating system is one such mobile platform. It is open source and run by Open Handset Alliance 
@@ -284,16 +298,14 @@ are used to perform mobile banking through online applications available, and ar
 criminals to steal money and information. As the technology is developing people are adapting the 
 use of mobile phones, they exchange images, videos, use internet etc., this rapid development of 
 mobile phones serve both criminals and investigators in a same way. According to Bruce 
-[25]
-Schneier , Mobile phone’s microphone can be used as a transmitter to eavesdrop the conversation 
+Schneier[25], Mobile phone’s microphone can be used as a transmitter to eavesdrop the conversation 
 taking place nearby the device (Schneier, 2006).  
 Android Forensics provides a number of prospects and challenges in the field of digital 
 investigation. A good understanding of the Android platform and Forensic tools is fundamental to 
 extract and analyze forensically sound data. A plethora of forensic tools are available in market, 
 helping to make forensic techniques more sophisticated. This research report investigates open 
 source android forensics tools, against their ability to extract information from Android devices, 
-[2]
-based on disparate parameters . 
+based on disparate parameters [2]. 
 1.0 Aims and Objectives 
 There are extensive range of Android Mobile devices available, and a reasonable number of 
 forensic tools to investigate them. But there is no standard approach to analyze the performance and 
@@ -308,8 +320,14 @@ Objectives to back the aim are:
 • Detail the steps used for implementing the tools and record the results 
 • Set a standard to describe the results of forensic tools on Android phones. Critically analyze 
 the tools based on the standard set and actual data recorded manually during experiments. 
-  2	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+  
+1 
+2	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 1.1. Background 
  
 1.1.0 Introduction 
@@ -337,31 +355,45 @@ hence increase the complication amongst the set of evidences. Getting to underst
 functionality of mobile phone helps in a better investigation. For example manufacturer 
 documentation can provide a lot of information about the same. 
 Categories of evidence on Android mobile devices 
+ 
+Mobile Forensics is a fast paced field, which is exciting and has a powerful effect on various 
+situations comprising criminal investigations, national security, civil litigation etc. It evolves from 
+the digital forensics discipline giving us a variety of opportunities and a number of challenges. 
 Types&of&Evidences&
-Tradi1onal&Mobile&devices& •? Hardware' •? Date'and'Time,'IMEI'(interna-onal'Mobile'iden-ty'number)''
-•? Informa-on'set'by'user' •? Address'book,'to@do'lists,'Calendar'items,'etc.'
-•? Informa-on'set'by'device' •? Call'history'
+Tradi1onal&Mobile&devices& •? Hardware'
+•? Informa-on'set'by'user'
+•? Informa-on'set'by'device'
+•? Date'and'Time,'IMEI'(interna-onal'Mobile'iden-ty'number)''
+•? Address'book,'to@do'lists,'Calendar'items,'etc.'
+•? Call'history'
 '
-Smart&Phones&–&Android& •? Informa-on'set'by'device' •? images,'video/audio,'maps,'MMS,'GPS'waypoints,'stored'voicemail,'
-•? Internet'usage'details' ﬁles'stored'on'system,'connected'computers.''
-•? Third@party'applica-ons' •? Passwords,'online'accounts,'email,'social'networking'informa-on.''
+Smart&Phones&–&Android& •? Informa-on'set'by'device'
+•? Internet'usage'details'
+•? Third@party'applica-ons'
+•? images,'video/audio,'maps,'MMS,'GPS'waypoints,'stored'voicemail,'
+files'stored'on'system,'connected'computers.''
+•? Passwords,'online'accounts,'email,'social'networking'informa-on.''
 •? 'Malware'applica-ons,'communica-on'systems,'or'anything'that'
 can'provide'an'alibi.''
 '
 Local&worksta1on& •? Informa-on'transported' •? Back'up'of'phone'data,'third'party'applica-ons,'and'acquisi-on'
 media.''
 '
-Network&Provider& •? Details'of'whereabouts'' •? Di?erent'loca-ons,'current'loca-on.''
-•? Usage'informa-on'' •? Billing'details,'call'history'over-me,'internet'data'usage.''
-' '
+Network&Provider& •? Details'of'whereabouts''
+•? Usage'informa-on''
+'
+•? Different'loca-ons,'current'loca-on.''
+•? Billing'details,'call'history'over-me,'internet'data'usage.''
+'
 External&Memory& •? Informa-on'stored'by'user' •? Files,'images,'media,'everything'can'be'stored'as'there'is''
 availability'of'a'large'amount'storage'space.''
 '
- 
-Mobile Forensics is a fast paced field, which is exciting and has a powerful effect on various 
-situations comprising criminal investigations, national security, civil litigation etc. It evolves from 
-the digital forensics discipline giving us a variety of opportunities and a number of challenges. Forensic	  Toolset	  Benchmarkin	  g 3	  
-	  
+Forensic	
+  Toolset	
+  Benchmarking	
+   3	
+  	
+  
 When talking about the most interesting part of Android forensics, which is acquisition and 
 evaluation of the data acquired from the devices, it is important to have ample amount of 
 knowledge about the platform and the tools that are used during the investigation. A broad 
@@ -372,24 +404,32 @@ investigation and analysis of the Android device.
  
 Android is an open-source mobile device platform, based on Linux 2.6 kernel. Android has made a 
 major impact on the Smartphone market and subsequently in the area of Mobile Forensics. Android 
-[1]
-became the second largest smartphone platform after two years and a month of its release . Table 
-[39]
-1.1 shows the Android market share and number of activations per day . 
+became the second largest smartphone platform after two years and a month of its release [1]. Table 
+1.1 shows the Android market share and number of activations per day [39]. 
+ 
+ 
+ 
+Android Architecture [2] 
+ 
+Figure 1.1 
+ 
+ 
+ 
+Linux Kernel 
+   
+It is the core component of Android platform. It controls the hardware and its resources; controls 
+power management, memory management and maintain different drivers for all hardware of the 
+device. 
  
 Table&1.1!
-Period! Worldwide! Ac5va5ons!
-Smartphone!market! per!day!
+Period! Worldwide!
+Smartphone!market!
+Ac5va5ons!
+per!day!
 2009! 8.7%! 51,100!
 2010! 32.9%! 362,000!
 2011! 52.5%! 658,000!
 2012! 59%! 934,000!
- 
- 
- [2] 
-Android Architecture
- 
-Figure 1.1 
 In order to understand the 
 logical analysis processes, it is 
 important to have knowledge 
@@ -408,16 +448,12 @@ field, SQLite library provides a
 structured data storage and is an 
 area that can be focused on by 
 forensic experts.  
- 
- 
- 
-Linux Kernel 
-   
-It is the core component of Android platform. It controls the hardware and its resources; controls 
-power management, memory management and maintain different drivers for all hardware of the 
-device. 
- 4	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+4	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
  
 Libraries 
  
@@ -450,67 +486,78 @@ applications.
 Table 1.2 gives the complete list of Android platforms, API level, and release date as of September 
 4, 2012. 
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 Table&1.2!
+Version! Release&Date! API&Level!
+4.1.x%Jelly%Bean! July%9,%2012 % %%
+!
+16!
+4.0.x%Ice%Cream%Sandwich! October%19,%2011 % %%
+!
+14A15!
+3.x.x%Honeycomb! February%22,%2011 % %%
+!
+11A13!
+2.3.x%Gingerbread! December%6,%2010 % %%
+!
+9A10!
+2.2%Froyo! May%20,%2010 % %%
+!
+8!
+2.0,2.1%Eclair! October%26,%2009 % %%
+!
+7!
+1.6%Donut! September%15,%2009! 4!
+1.5%Cupcake! April%30,%2009 % %%
+!
+3!
 Having knowledge about the version of 
 Android platform assists in determining the 
-Version! Release&Date! API&Level!
 features of the device. 
-4.1.x%Jelly%Bean! July%9,%2012 % %% 16!
 All the platforms are given API levels, and 
-!
-4.0.x%Ice%Cream%Sandwich! October%19,%2011 % %% 14A15 !
 all the new versions are specified with code 
-!
 names. The latest code name of the 
-3.x.x%Honeycomb! February%22,%2011 % %% 11A13 !
-!
 Android version is Jelly Bean. When 
-2.3.x%Gingerbread! December%6,%2010 % %% 9A10 !
 looked at large number of Android versions 
-!
 present, it is easily construed that it has a 
-2.2%Froyo! May%20,%2010 % %% 8!
-!
 major impact in the field of mobile 
-2.0,2.1%Eclair! October%26,%2009 % %% 7!
 forensics and security analysis. Also there 
-!
 are many devices, which do not support the 
-1.6%Donut! September%15,%2009! 4!
 latest version of android, and some do get 
-1.5%Cupcake! April%30,%2009 % %% 3!
-!
 an update, in future many devices will be 
- 
- able to support and upgrade to the latest 
- version. Nevertheless from a forensic 
- 
+able to support and upgrade to the latest 
+version. Nevertheless from a forensic 
 viewpoint the old outliers can’t be ignored. 
- 
- 
- Forensic	  Toolset	  Benchmarkin	  g 5	  
-	  
+Forensic	
+  Toolset	
+  Benchmarking	
+   5	
+  	
+  
  
  
  
 1.2 Android Platform Highlights of the Version used in the tests for this project: 
-[40] 
-Androids 2.0 & 2.1 (ÉCLAIR) 
+Androids 2.0 & 2.1 (ÉCLAIR) [40] 
  
 Released October 2009 and January 2010, Table 1.3 Lists all the features of these versions. 
  
  
 Table 1.3 – Highlights and Features of Android version 2.0, 2.1 
-Features new for user New features for Developer, Built-in Applications 
+Features new for user New features for Developer, 
 APIs 
-• Multiple email account • Bluetooth 2.1 • Same as Android 1.6 
+Built-in Applications 
+• Multiple email account 
 feature, sync functionality 
-• API for live wallpapers 
 for contacts. 
-• Improved hardware 
 • SMS/MMS search facility 
-acceleration using revamped 
-• New and improved graphics architecture. 
+• New and improved 
 Android Virtual Keyboard 
 • Built-in flash, digital 
 zoom for camera 
@@ -518,9 +565,14 @@ zoom for camera
 thumbnails in bookmarks 
 • Calendar feature for 
 inviting guests. 
+• Bluetooth 2.1 
+• API for live wallpapers 
+• Improved hardware 
+acceleration using revamped 
+graphics architecture. 
+• Same as Android 1.6 
  
-[4]
-1.3 Software Development Kit (SDK) :  
+1.3 Software Development Kit (SDK) [4]:  
  
 Android Software Development Kit (SDK) is a very dominant tool used to assist forensic experts 
 during their investigation. It is the core resource used in developing android applications. Android 
@@ -545,8 +597,13 @@ required for SDK installation. The following command is used for its installatio
 2. Next step is to install Java: 
  
        apt-get install sun-java6-jdk 
- 6	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+ 
+6	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 3. The Package manager of Ubuntu doesn't offer the current version of eclipse 3.6, It can be 
 downloaded from http://www.eclipse.org/downloads/  
  
@@ -583,30 +640,23 @@ not supported by MTP.
  
 As mentioned above “Debug mode when USB is connected” is an USB interface used to uncover 
 the ADB (Android debug bridge), giving the forensic analysts power to interact with the Android 
-device using USB. This mode is not prompted on the screen of the device when USB is connected; Forensic	  Toolset	  Benchmarkin	  g 7	  
-	  
+device using USB. This mode is not prompted on the screen of the device when USB is connected; 
+Forensic	
+  Toolset	
+  Benchmarking	
+   7	
+  	
+  
 it has to be explicitly enabled. In order to enable go to: Settings à? Applications à? Development à? 
 Enable USB debugging. Figure 1.3 shows an example of this mode. 
  
-When the Debugging mode is checked the Android 
-device can then run the ADB daemon (adbd). This 
-daemon will limit the access it has to the data by 
-running under the public shell user account. On 
-contrary the devices, which have root access, can run 
  
  
-this daemon as a root and then can have broad access 
-Figure 1.3: Debug 
-to the system. For every existing Android forensic tool 
- 
-mode when USB is 
-this USB debugging must be checked on the device.  
- 
-connected. 
  
  
-[4]
-1.4. Android Debug Bridge  
+ 
+ 
+1.4. Android Debug Bridge [4] 
  
 Android Debug Bridge (ADB) is a command line tool used to interact with the Android device. It is 
 a client-server program consisting of the following components when it is running.  
@@ -644,8 +694,24 @@ a) Serial number: To identify a device instance by its console port number.
  
      Format à? <type>-<consolePort> 
      Example à? 4df14c30035e4f0f   device 
- 8	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+ 
+When the Debugging mode is checked the Android 
+device can then run the ADB daemon (adbd). This 
+daemon will limit the access it has to the data by 
+running under the public shell user account. On 
+contrary the devices, which have root access, can run 
+this daemon as a root and then can have broad access 
+to the system. For every existing Android forensic tool 
+this USB debugging must be checked on the device.  
+Figure 1.3: Debug 
+mode when USB is 
+connected. 
+8	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 b) State: Instance can have the following connection states  
 Offline: instance not connected to adb or not responding 
 Device: instance is connected to adb 
@@ -653,11 +719,7 @@ No device: device is not connected.
   
  Example of the ‘devices’ command output on terminal: 
   
-root@ubuntu:$  adb devices 
  
-List of devices attached 
- 
-4df14c30035e4f0f device 
  
  
 II. Installing Applications 
@@ -675,13 +737,9 @@ kind of file to any location to the device.
  
 Copying file from device use: 
  
-Commands local and remote 
           adb pull <remote> <local>  
-refer to paths to target file 
  
-on machine (local) and 
 Copying files to device use: 
-device (remote). 
  
                                   adb push <local> <remote>  
  
@@ -703,14 +761,26 @@ communication with the machine
  
 The following appears when this command is issued on the terminal of Ubuntu VM: 
  
-root@ubuntu:$./adb shell 
  
+ 
+root@ubuntu:$  adb devices 
+List of devices attached 
+4df14c30035e4f0f device 
+ 
+Commands local and remote 
+refer to paths to target file 
+on machine (local) and 
+device (remote). 
+root@ubuntu:$./adb shell 
 shell@android:/$ 
  
- Forensic	  Toolset	  Benchmarkin	  g 9	  
-	  
-[5]
-1.5. Rooting Android OS   
+Forensic	
+  Toolset	
+  Benchmarking	
+   9	
+  	
+  
+1.5. Rooting Android OS [5]  
  
 Rooting Android OS, also called root access is a method to acquire privileged control of the 
 Android’s system. The phone needs to be rooted in order to map the memory into an image file 
@@ -737,8 +807,6 @@ The following steps are used to root an Android device:
  
                          
  
-[6]
-Figure 1.4 : Rooting Android device using Super One-Click. 
  
   
 Settings can be done to avoid any application run with root access by configuring the notifications 
@@ -747,10 +815,15 @@ permission first. One of the major risks involved during rooting the Android dev
 “bricking” the device; this means if the phone gets bricked it remains nothing but the piece of metal 
 and glass. Super One-Click is a tested application and can be used safely on majority of Android 
 devices. 
- 10	   Forensic	  ToolsetB 	  enchmarking	  
-	  
-[1]
-1.6. Android File Systems  
+ 
+Figure 1.4 [6]: Rooting Android device using Super One-Click. 
+10	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
+1.6. Android File Systems [1] 
  
 Knowledge about the data stored on the Android device is required in order to understand and 
 analyze the data acquired through an investigation. For an effective analysis, factors such as types 
@@ -774,8 +847,7 @@ vii. Business information
 viii. Bluetooth file sharing 
 ix. Web history, etc. 
  
-[1]
-1.6.1. Application data storage  
+1.6.1. Application data storage [1] 
  
 The App data can be stored on either of SD card or internal memory of the device. The data stored 
 in internal memory gets saved in a subdirectory of /data/data named after the package name. For 
@@ -792,30 +864,99 @@ cache Cache files from web browser
 files Files saved to internal memory 
  
 There are generally six types of partitions found on Android device, cache, recovery, boot, and user 
-[7]
-data. Table 1.5  presents a list of such typical scheme: 
-[7]
+data. Table 1.5 [7] presents a list of such typical scheme: 
  
-Table	  1.5	  	  Partitions	  in	  Android	  Devic	  e
  
-Path	   Name	   File	  System	   Mount	  Point	   Description	  
  
-/dev/mtd/mtd0	   pds	   yaffs2	   /config	   Configuration	  data	  
  
-/dev/mtd/mtd1	   misc	   -??	   N/A	   Memory	  partitioning	  dat	  a
- /dev/mtd/mtd2	   boot	   bootimg	   N/A	   Typical	  boot	  
-/dev/mtd/mtd3	   recovery	   bootimg	   N/A	   Recovery	  mode	  
  
-/dev/mtd/mtd4	   system	   yaffs2	   /system	   System	  files,	  application	  s
  
-/dev/mtd/mtd5	   cache	   yaffs2	   /cache	   Cache	  files	  
  
-/dev/mtd/mtd6	   user	  data	   yaffs2	   /data	   User	  data	  (Apps	  )
  
-/dev/mtd/mtd7	   kpanic	   -??	   N/A	   Crash	  log	  Forensic	  Toolset	  Benchmarkin	  g 11	  
-	  
-[1]
-1.6.2. SD cards  (Removable Media) 
+ 
+Table	
+  1.5	
+  [7]	
+  Partitions	
+  in	
+  Android	
+  Device	
+  
+Path	
+   Name	
+   File	
+  System	
+   Mount	
+  Point	
+   Description	
+  
+/dev/mtd/mtd0	
+   pds	
+   yaffs2	
+   /config	
+   Configuration	
+  data	
+  
+/dev/mtd/mtd1	
+   misc	
+   -??	
+   N/A	
+   Memory	
+  partitioning	
+  data	
+  
+/dev/mtd/mtd2	
+   boot	
+   bootimg	
+   N/A	
+   Typical	
+  boot	
+  
+/dev/mtd/mtd3	
+   recovery	
+   bootimg	
+   N/A	
+   Recovery	
+  mode	
+  
+/dev/mtd/mtd4	
+   system	
+   yaffs2	
+   /system	
+   System	
+  files,	
+  applications	
+  
+/dev/mtd/mtd5	
+   cache	
+   yaffs2	
+   /cache	
+   Cache	
+  files	
+  
+/dev/mtd/mtd6	
+   user	
+  data	
+   yaffs2	
+   /data	
+   User	
+  data	
+  (Apps)	
+  
+/dev/mtd/mtd7	
+   kpanic	
+   -??	
+   N/A	
+   Crash	
+  log	
+  
+Forensic	
+  Toolset	
+  Benchmarking	
+   11	
+  	
+  
+1.6.2. SD cards [1] (Removable Media) 
  
 All the user files, such as multimedia files are places in SD card. The critical data remains on the 
 phone memory of the device, but SD card also proves to be a major source of information during an 
@@ -823,23 +964,16 @@ investigation. In Ubuntu, SD card gets automatically mounted unless auto –mounti
 devices is not disabled. The following Linux command can be used to check where the SD card is 
 mounted on the system: 
  
-root@ubuntu:platform-tools tanujapanwar$ df -h df  command:	  It reports the 
+root@ubuntu:platform-tools tanujapanwar$ df -h 
 Filesystem Size      Used      Avail Capacity  Mounted on 
-file system disk usage. From 
 /dev/disk0s2  297Gi   156Gi     141Gi    53%      / 
 devfs             186Ki    186Ki     0Bi       100% /dev 
-the output on the left, the 
 map -hosts       0Bi     0Bi        0Bi       100% /net 
 map auto_home  0Bi     0Bi     0Bi        100%     /home 
-SD card was mounted on 
 /dev/disk1      186Mi    50Mi      136Mi     27%      /Volumes/Untitled 
-/media/Music. The “-h” is 
              /dev/disk2       186Mi     59Mi      127Mi    32z      /Volumes/Untitled 1 
              /dev/sdb1      8Gi       2Gi       6Gi       75%      /media/Music 
-for printing the sizes in 
  
- [3]
-human readable format .  
   
 And, on the Android device the SD card is mounted as:  
               
@@ -864,34 +998,43 @@ II. Scalpel (Foremost)
 III. AFLogical (Viaforensics) 
 IV. ADB (Android SDK) 
  
-[8]
-1.7.1. Autopsy  
+1.7.1. Autopsy [8] 
  
 It is a Graphical user interface to the powerful forensic tool Sleuth kit. It can analyze Windows, 
 Unix, file systems such as NTFS, FAT, EXT2/3. Version 3.0 of the Autopsy was used. All the 
 results are stored in embedded SQlite3 database. Some of its features are – Hash value calculation, 
 keyword search, user activity (web search), recovery of deleted files etc. 
  
-[13]
-1.7.2. Scalpel  
+1.7.2. Scalpel [13] 
  
 It is a file-carving tool, basically used to recover deleted files. Scalpel has originated from Forensic 
 tool ‘Foremost’ and is a far more efficient that its predecessor. It reads the database of header and 
 footer definitions and extracts matching files from the image (.img) file partition that is being 
 analyzed. Version 1.0 of Ubuntu was used for the experiments. It can recover files such as jpeg, 
 pdf, mpeg, email etc. More features can be added by amending the scalpel.conf file by giving the 
-header and footer of file to be carved. 12	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+header and footer of file to be carved. 
+df  command:	
+   It reports the 
+file system disk usage. From 
+the output on the left, the 
+SD card was mounted on 
+/media/Music. The “-h” is 
+for printing the sizes in 
+human readable format [3].  
+12	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
  
-[17]
-1.7.3. AFLogical  
+1.7.3. AFLogical [17] 
  
 AFLogical OSE is an open source tool provided by viaForensics. It can be used as a command line 
 tool or can be installed on device using adb functionality. The extracted data is stored in .csv 
 format. Version 1.5.2 was used for experiments. 
  
-[4]
-1.7.4. ADB (Android Debug Bridge)  
+1.7.4. ADB (Android Debug Bridge) [4] 
  
 It is a command line tool used to interact with the Android device. In order to use this tool android 
 SDK has to be installed on the development machine. adb tool is located in the platform-tools folder 
@@ -907,7 +1050,6 @@ CPU when the tool was working etc. Figure 1.5 depicts the methodology used for t
   
  
  
-Figure	  1.5:	  Tool	  assessmen	  t
  
  
 1.9 Summary  
@@ -929,12 +1071,21 @@ discussed. And finally the forensic tools used in this research project are outl
  
  
  
- Forensic	  Toolset	  Benchmarkin	  g 13	  
-	  
+ 
+Figure	
+  1.5:	
+  Tool	
+  assessment	
+  
+Forensic	
+  Toolset	
+  Benchmarking	
+   13	
+  	
+  
  
 Device Specification & Test Cases 
  
-2 
  
  
 2.0 Introduction 
@@ -951,27 +1102,23 @@ S3. The devices were selected in such a manner that they cover the different ver
 operating system. Both the devices were tested based on two cases in order to investigate 
 information related to the use Android Smartphones.  
  
-[9]
-Table 2.1  Specification of devices used. 
+Table 2.1 [9] Specification of devices used. 
  
 Specifications Samsung Galaxy Europa Samsung Galaxy S3 
 CPU 600 MHz 1.4GHz 
 Android OS Version 2.1 (Éclair) Version 4.0 (ICS) 
-Internal 170MB 16GB 
+Internal 
 Memory 
+170MB 16GB 
 WLAN  
-Wi-Fi Direct, DLNA, MHL 
 Wi-Fi 802.11 b/g/n, DLNA, Wi-Fi 
-1.0, Wi-Fi hotspot 
-hotspot 
-Kbjbuihwdiwfeff 
+hotspot Kbjbuihwdiwfeff 
 Bluetooth V2.1 with A2DP V4.0 with A2DP, EDR 
  
 Development Machine 
  
 The development machine used for the experiments was running under Ubuntu 64-bit and OSAF 
- [10]
-VM . Osaf VM is an open source compilation of Forensics and malware software in the form of a 
+VM [10]. Osaf VM is an open source compilation of Forensics and malware software in the form of a 
 Toolkit. A variety of forensic tools other than the once used for Android smartphones were pre-
 loaded onto the Osaf VM and can be used directly from there. A limitation to this toolkit is that, the 
 forensic tools loaded onto the system were the most basic versions of the toolsets available, and 
@@ -983,8 +1130,16 @@ of the tools.
  
 Two test cases were used for investigation purpose. The data was recorded manually during the 
 tests, the recorded data was then compared with the data acquired using the Forensic tools. The 
-result of that comparison was analyzed by performing validation tests and the outcomes of those 14	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+result of that comparison was analyzed by performing validation tests and the outcomes of those 
+2 
+Wi-Fi Direct, DLNA, MHL 
+1.0, Wi-Fi hotspot 
+14	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 tests are presented as a visual representation. Following gives the description of both the test cases 
 and the environment that needs to be setup for performing the experiments. 
  
@@ -1036,8 +1191,13 @@ a. Get the device
 b. Copy the files from the system 
 c. Connect to the local wireless network of the area 
 d. Login to Dropbox 
-e. Upload the files using both wireless network and service provider’s network Forensic	  Toolset	  Benchmarkin	  g 15	  
-	  
+e. Upload the files using both wireless network and service provider’s network 
+Forensic	
+  Toolset	
+  Benchmarking	
+   15	
+  	
+  
 f. Transfer files using Bluetooth to three devices 
 g. Delete the files 
 h. Record the timestamp for all the above steps 
@@ -1051,8 +1211,7 @@ Test-Case Prospects
  Bluetooth – Files shared with two different devices - MacBook Pro, Samsung Galaxy S3 
  Native Dropbox and Gmail applications were used. 
  
-[2] 
-2.3. Data Collection 
+2.3. Data Collection [2] 
  
 Data collection is a principal step of a research. When the tools are tested and analyzed a large 
 amount of data is produced. This data is analyzed for further advancement in the investigation. 
@@ -1073,12 +1232,17 @@ procedure.
 [Note: This map focuses on the steps involved in Data collection only] 
  
  
+ 
+ 
+ 
+ 
 Figure 2.1.  Approach for Investigation 
- 
- 
- 
- 16	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+16	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 The final step in data analysis is the visual representation of the statistics acquired using the above 
 steps. The visual representation of the data will be in the form of tables and graphs for a clear 
 comparison of the performance of the tools. 
@@ -1130,16 +1294,18 @@ the phases employed in data collection process.
  
  
  
- Forensic	  Toolset	  Benchmarkin	  g 17	  
-	  
+ 
+Forensic	
+  Toolset	
+  Benchmarking	
+   17	
+  	
+  
  
 Forensic Tools and Implementation 
  
-3 
  
-	  
-[32] [38] 
-3.0 Introduction 
+3.0 Introduction [32] [38] 
  
 Forensic tools provide excellent techniques to extract forensically sound information from the 
 Android devices. A variety of Forensic toolkits are available in the market. Depending upon the 
@@ -1172,10 +1338,16 @@ presented in a human readable format, which is easily accessible by the user.
  
  
  
- 18	   Forensic	  ToolsetB 	  enchmarking	  
-	  
-[11] 
-3.1 Techniques for data extraction 
+ 
+3 	
+  
+18	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
+3.1 Techniques for data extraction [11] 
 Forensic Tools can acquire data in two ways, logical acquisition and physical acquisition. This 
 project is based on data acquired from the Android smartphones using Logical acquisition. The 
 following accord a brief outline about the difference between the both techniques. The comparison 
@@ -1189,8 +1361,7 @@ the file system. The data is still there on the device, just the file system is 
 data allocated and it can write over that space. But if the data is not over written by the file system, 
 it can then be easily carved out. Also the files such as SQLite database still contains the record of 
 deleted files and can be accessed form the databases. 
-[2] 
-3.1.2 Physical Techniques 
+3.1.2 Physical Techniques [2] 
 Such techniques target the physical storage medium of the device. It does not concern with the file 
 system. It offers the access to deleted data, both allocated and unallocated. Based on the figure 3.1 
 the physical extraction methods consist of namely three layers; Hex Dump, chip-off, Micro Read.  
@@ -1203,13 +1374,17 @@ manually. This method is a destructive way of acquiring data, and is used as a l
 nothing else could be done with the device.  
  
  Micro Read is very costly to perform and is not used as a standard method for data extraction. 
-[12]
-The following figure 3.1  shows a pyramid for extraction techniques. 
-                                                           
+The following figure 3.1 [12] shows a pyramid for extraction techniques. 
+                                                          
  
  
- Forensic	  Toolset	  Benchmarkin	  g 19	  
-	  
+ 
+Forensic	
+  Toolset	
+  Benchmarking	
+   19	
+  	
+  
 3.2 Forensic Tools 
  
 Following four Forensic tools were used for the experiments. All these tools were tested on the both 
@@ -1234,20 +1409,24 @@ dependencies of the other three tools on ADB.
                   
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 Figure 3.2. Tool Dependencies 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 20	   Forensic	  ToolsetB 	  enchmarking	  
-	  
-[9] 
-3.2.1 ADB (Android Debug Bridge) implementation 
+20	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
+3.2.1 ADB (Android Debug Bridge) implementation [9] 
  
 Android Debug Bridge (ADB) is a command line tool used to interact with the Android device. All 
 the background features of ADB are discussed in section 1.4. This section deals with the 
@@ -1257,14 +1436,12 @@ partition, this image file system is generated from phone memory of the Android 
  
  
  
-Figure	  3.3	  Implementation	  of	  AD	  B	  
  
  
 Prior to the investigation process the Forensic examiner should read the documentation of ADB 
 tool, which is available at [4]. The commands used for the extraction process is detailed in section 
 1.4 of the report.  
-[9]
-The following steps give the broad idea about the experiment performed . 
+The following steps give the broad idea about the experiment performed [9]. 
  
  
 1. Use of an SD card is crucial; the SD card used for the experiments should be formatted 
@@ -1281,8 +1458,20 @@ debugging (Section 1.3.3) option should be checked ON.
 check for device is rooted or not. If not rooted then follow the steps detailed in section 
 1.5 of the report. 
  
- Forensic	  Toolset	  Benchmarkin	  g 21	  
-	  
+ 
+Figure	
+  3.3	
+  Implementation	
+  of	
+  ADB	
+  	
+  
+Forensic	
+  Toolset	
+  Benchmarking	
+   21	
+  	
+  
  
 5. Once the phone is rooted, check for the relevant partitions of the device memory for 
 investigation using Section 1.6.2 
@@ -1335,8 +1524,13 @@ path represents the relevant path where the image file will be saved.
  
  
  
- 22	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+ 
+22	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
  
 20. Stop the server by using command 
 sudo adb kill-server 
@@ -1358,6 +1552,14 @@ files were browsed.
  
 Figure 3.4 ADB – Features catalogued 
  
+ 
+ 
+ 
+The information as detailed in figure 3.4 relates to the actual details about the files and activities 
+encountered. In order to get the details about the information related to email, YouTube, Wi-Fi, 
+Bluetooth etc., A forensic examiner is advised to analyze the files and folders represented in table 
+3.1. [9] 
+ 
 ADB!
 !? Interact with the Android Device!
 !? Android Rooting!
@@ -1365,25 +1567,21 @@ ADB!
 !? Map the device memory with DD command!
 !? Bypass phone lock/pattern!
 !? File recovery!
-!? Attributes of the ﬁles mapped into image partition!
+!? Attributes of the files mapped into image partition!
 !? Call history, SMS/MMS!
 !? Databases store Application data!
 !? Bluetooth usage details!
 !? Wi-Fi access information!
 !? Network Provider used by the Android device!
-!? Recovery of deleted ﬁles!
+!? Recovery of deleted files!
 !? Command line tool!
 !? Open source tool available in Android SDK!
- 
- 
- 
-The information as detailed in figure 3.4 relates to the actual details about the files and activities 
-encountered. In order to get the details about the information related to email, YouTube, Wi-Fi, 
-Bluetooth etc., A forensic examiner is advised to analyze the files and folders represented in table 
- [9] 
-3.1.
- Forensic	  Toolset	  Benchmarkin	  g 23	  
-	  
+Forensic	
+  Toolset	
+  Benchmarking	
+   23	
+  	
+  
 Table 3.1. Sources of Evidence 
  
 Path  Filename 
@@ -1402,8 +1600,7 @@ Logcat files Main and events buffer
 The paths given in the table 3.1 gives information about the databases, which stores the information 
 relating to the particular file. These databases can be browsed using SQLite3 tool. 
  
-[8] 
-3.2.2 Autopsy 
+3.2.2 Autopsy [8] 
  
 Autopsy is GUI forensic browser originated from the command line forensic tool ‘The Sleuth kit’. 
 It supports file systems such as FAT, Ext2/3, NTFS, Windows and Unix disks. Autopsy is Open 
@@ -1429,8 +1626,13 @@ Figure 3.5 Autopsy File catalogue
  
 The information in the files is represented in three formats, raw, hex and ASCII strings. It 
 does not use any client-side scripting languages. Refer figure 3.6. 
- 24	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+ 
+24	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 Figure 3.6 Autopsy File content 
  
  
@@ -1451,17 +1653,21 @@ File system can be searched using ASCII strings. Keyword search can be done on b
 file system and unallocated space. Following screen shot gives an example. Refer figure 3.7 
 and figure 3.8 
  
-Figure 3.7 Autopsy – Keyword search	  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 3.7 Autopsy – Keyword search	
+  
+Figure 3.8 Autopsy – Keyword search result in hex 
 From figure 3.7, the keyword 
 search functionality of Autopsy, 
 allows searching of files using 
 grep regular expressions, ASCII 
 formats.  
- 
- 
- 
-Figure 3.8 Autopsy – Keyword search result in hex 
- 
  
 Figure 3.8 shows the output of 
 searching a file named 
@@ -1471,12 +1677,14 @@ occurrences of the file name
 found, with the sector number 
 and status of the file- saying it 
 is allocated. Metadata address 
-can also be found. 
-	  
- 
- 
- Forensic	  Toolset	  Benchmarkin	  g 25	  
-	  
+can also be found. 	
+  
+Forensic	
+  Toolset	
+  Benchmarking	
+   25	
+  	
+  
 §? Metadata Analysis 
  
 Details about directories and files can be found in Meta data structures. Metadata 
@@ -1484,18 +1692,6 @@ information is useful for recovery of deleted files. Refer figure 3.9
  
 Figure 3.9. Autopsy Metadata analysis 
  
-Figure 3.9  
-Autopsy’s Metadata 
-analysis gives the 
-information about the file 
-type, MD5 of the content, 
-SHA-1 of the content, status 
-of the files, size of the files, 
-timestamp, and the sectors 
-related to the searched file. 
-It also gives an option to 
-export all the details into a 
-text format. 
  
  
 §? DataUnit analysis 
@@ -1509,19 +1705,36 @@ Figure 3.10 Autopsy DataUnit analysis
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 3.9  
+Autopsy’s Metadata 
+analysis gives the 
+information about the file 
+type, MD5 of the content, 
+SHA-1 of the content, status 
+of the files, size of the files, 
+timestamp, and the sectors 
+related to the searched file. 
+It also gives an option to 
+export all the details into a 
+text format. 
 From figure 3.10, DataUnit analysis of Autopsy provides the contents of the files. Files 
- 
 can also be browsed by providing the sector number and displayed on ASCII strings 
- 
 format. The file being browsed in this figure shows the details about the video uploaded 
- 
 on YouTube. 
- 
- 
- 
- 
- 26	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+26	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 §? Image details  
  
 All the details about the file system including system type, volume ID, file system layout, 
@@ -1530,21 +1743,10 @@ figure 3.11.
  
 Figure 3.11 Autopsy image Details 
  
-Figure 3.11 depicts the details related 
-to the image file system being 
-analyzed.  File system information, 
-Metadata information and Content 
-Information were detected. 
-Content Information was: - 
-• Sector Size: 512 
-• Cluster Size: 4096 
-• Total Cluster Range: 2 - 47719 
  
  
  
- 
-[8] 
-3.2.2.1. Investigation Phase 
+3.2.2.1. Investigation Phase [8] 
  
 In autopsy, investigation process is structured in cases. Every case contains its host with the time 
 zone setting. File system is contained in the host. Image file connected to the host retains its 
@@ -1567,8 +1769,23 @@ description, timezone and click add host. The host directory will be
  
  
  
- Forensic	  Toolset	  Benchmarkin	  g 27	  
-	  
+ 
+Figure 3.11 depicts the details related 
+to the image file system being 
+analyzed.  File system information, 
+Metadata information and Content 
+Information were detected. 
+Content Information was: - 
+• Sector Size: 512 
+• Cluster Size: 4096 
+• Total Cluster Range: 2 - 47719 
+ 
+Forensic	
+  Toolset	
+  Benchmarking	
+   27	
+  	
+  
 IV. Following fields will be presented after step III: 
  
 • Fields asking for location - enter the path of the image file where it is saved into the 
@@ -1593,14 +1810,6 @@ analyzed. The MD5 hash calculated for the image file generated for both the test
 • Testcase II (2.2.2): MD5 - D7A790CD104915B5AC4A403AA5AA309D  
  
  
-Figure 3.12: 
-Image files for both the testcases are 
-attached to the evidence locker. Various 
-options are available to handle the image 
-files. File activity timeline for tracking 
-the timestamp of the files in the image. 
-Click the button ‘analyze’ to the analyze 
-file system. 
  
  
 VI. On selecting analyze, it will direct to a new page with the options to select the analysis 
@@ -1618,14 +1827,25 @@ in figure 3.13.
  
  
  
- 28	   Forensic	  ToolsetB 	  enchmarking	  
-	  
-[13] 
-3.2.3 Scalpel 
+ 
+Figure 3.12: 
+Image files for both the testcases are 
+attached to the evidence locker. Various 
+options are available to handle the image 
+files. File activity timeline for tracking 
+the timestamp of the files in the image. 
+Click the button ‘analyze’ to the analyze 
+file system. 
+28	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
+3.2.3 Scalpel [13] 
  
 “Scalpel is fast file carver that reads a database of header and footer definitions and extracts 
- [13] 
-matching files or data fragments from a set of image files”
+matching files or data fragments from a set of image files” [13] 
  
 Scalpel is open source forensic tool, originally based on powerful forensic tool ‘Foremost’ and far 
 more efficient that its predecessor. Independent of file system it can carve files from ext2/3, FATx, 
@@ -1637,8 +1857,7 @@ carving purposes. It is a command line tool and carve files whose header and foo
 its scalpel.conf file. The file formats that are not defined in scalpel.conf file can be added manually 
 and easily carved. Scalpel supports multithreading and asynchronous I/O.  
  
-[16]
-3.2.3.0 Scalpel Internals  
+3.2.3.0 Scalpel Internals [16] 
  
 Working of Scalpel is based on a configuration file scalpel.conf in which different types of files to 
 be carved are specified with their appropriate header and footer information. Scalpel.conf also 
@@ -1666,8 +1885,7 @@ File under carving is being written with the entire contents of this block and t
 Carving operation finished in this block. File is now closed.  
 In the second pass the image file partition is again processed in blocks. 
  
-[14]
-3.2.3.1. Working with Scalpel  
+3.2.3.1. Working with Scalpel [14] 
  
 Following steps were accomplished to carve out the files based on test cases I & II. 
  
@@ -1675,17 +1893,26 @@ a. As mentioned previously the development machine used was Ubuntu, scalpel can 
 installed by giving the following command:  
      
 apt-get install scalpel 
- Forensic	  Toolset	  Benchmarkin	  g 29	  
-	  
+ 
+Forensic	
+  Toolset	
+  Benchmarking	
+   29	
+  	
+  
 b. File type of the video in test case I is 3GPP, this file format is not pre-defined in scalpel.conf 
 file. In order to carve out 3GPP files it needs to be added to scalpel.conf file. Browse to the 
 location /etc/scalpel/scalpel.conf and use nano command to edit this scalpel.conf file. 
 Similarly for carving out the email records, header and footer information of email also has 
 to be amended in the scalpel.conf file. 
  
-c. For amending the scalpel.conf file with the details about the 3GPP and email format, 
-[15]
-include	  the	  following	  lines	  in	  the	  f ile: 
+c. For amending the scalpel.conf file with the details about the 3GPP and email format, include	
+  the	
+  following	
+  lines	
+  in	
+  the	
+  file [15]: 
  
 3GP y 2500000 \x00\x00\x00\x14\x66\x74\x79\x70 
 Mail y 2500000 \x41\x4F\x4c\x56\x4d 
@@ -1700,17 +1927,7 @@ footer format.
  
 Figure 3.14 
  
-In figure 3.14 the fields 
-marked with red are the 
-extensions of the files to 
-be carved, ‘y’ represents 
-yes which means this file 
-format has to be searched, 
-next column is set of 
-numbers gives the max 
-file size, next is the header 
-bytes and some files like 
- jpg, zip have file footer. 
+ 
  
  
 e. For example the jpg files are to be carved out for test case II. From step d. the jpg definition 
@@ -1730,8 +1947,24 @@ uncomment the # from the jpg definition.
 f. Browse to the location where the image file is saved and copy the jpg.conf file to that 
 location. 
  
-Final step in carving out the jpg files is to write the following line in the terminal – 30	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+Final step in carving out the jpg files is to write the following line in the terminal – 
+In figure 3.14 the fields 
+marked with red are the 
+extensions of the files to 
+be carved, ‘y’ represents 
+yes which means this file 
+format has to be searched, 
+next column is set of 
+numbers gives the max 
+file size, next is the header 
+bytes and some files like 
+jpg, zip have file footer. 
+30	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
  
 scalpel –c ./jpg.conf crimeone.img 
  
@@ -1746,15 +1979,9 @@ From the first pass it carved out 281 jpeg files and the final carving process w
 in second pass. List of files based on the testcases is as follows: 
  
  
-ü? 3GP video files – 2 ü? pdf files – 2 
  
-  
  
-ü? docx files – 3 ü? java files – 0 
  
-  
- 
-ü? jpeg images – 6 ü? zip files – 1	  
  
  
  
@@ -1769,10 +1996,26 @@ cases:
  
 Figure 3.16 Data acquired from both test cases - Scalpel 
  
- Forensic	  Toolset	  Benchmarkin	  g 31	  
-	  
-[1] [17] 
-3.2.4 AFLogical  
+ 
+ü? 3GP video files – 2 
+ 
+ü? docx files – 3 
+ 
+ü? jpeg images – 6 
+ 
+ü? pdf files – 2 
+ 
+ü? java files – 0 
+ 
+ü? zip files – 1	
+  
+Forensic	
+  Toolset	
+  Benchmarking	
+   31	
+  	
+  
+3.2.4 AFLogical [1] [17]  
  
 AFLogical OSE is a free Android forensic tool provided by viaForensics. Any device that is 
 running under Android 1.5 or later can be analyzed using this version of the AFLogical. It is an 
@@ -1784,37 +2027,8 @@ data from the 41 content providers. The output of the data extraction is stored 
 device in CSV format and an info.xml file is generated containing the details about the installed 
 applications and device. Following is the list of currently supported content providers: 
  
-§? Browser Bookmarks  §? Contacts Settings §? IM Providers 
-§?  External Media 
-§? Browser Searches §?  IM Provider Settings 
-§? External Image Media  
-§? Calendars  §?  Internal Image Media 
-§? External Image Thumb Media  
-§? Calendar Attendees §?  Internal Image Thumb 
-§? External Videos 
-§? Calendar Events Media  
-§?   IM Account 
-§?  Calendar Extended §? Internal Videos  
-Properties  §?  IM Accounts §? Maps-Friends 
-§? Calendar Reminders §?  IM Chats §?  Maps-Friends extra  
-§?  IM Contacts Provider (IM 
-§?  Call Log Calls §? Maps-Friends contacts  
-Contacts)  
-§?  Contacts Contact §? MMS 
-§? IM Invitations  
-Methods    §? Mms Parts Provider 
-§? IM Messages  
-§? Contacts Extensions (MMSParts) 
-§? Phone Storage (HTC Incredible)  
-§? Contacts Groups §? Notes 
-§?  Contacts §? Search History §?  People  
-Organizations  §?  SMS §? People Deleted 3 
-§? Contacts Phones  §? Social Contracts 
-	  
-Activities 
  
-[18]
-Features of AFLogical  
+Features of AFLogical [18] 
  
 I. PIN LOCK/Pattern bypass of a locked Android device, provided adb is enabled. 
  
@@ -1836,10 +2050,62 @@ VII. Browser history, call logs, contacts, SMS etc are recoverable
 VIII. Forensically sound data is extracted. 
  
  
- 32	   Forensic	  ToolsetB 	  enchmarking	  
-	  
-[1] 
-3.2.4.1 Working with AFLogical 
+§? Browser Bookmarks  
+§? Browser Searches 
+§? Calendars   
+§? Calendar Attendees 
+§? Calendar Events 
+§?  Calendar Extended 
+Properties  
+§? Calendar Reminders 
+§?  Call Log Calls 
+§?  Contacts Contact 
+Methods   
+§? Contacts Extensions 
+§? Contacts Groups 
+§?  Contacts 
+Organizations  
+§? Contacts Phones  
+§? Contacts Settings 
+§?  External Media 
+§?  External Image Media  
+§? External Image Thumb Media  
+§? External Videos 
+§?   IM Account 
+§?  IM Accounts 
+§?  IM Chats 
+§?  IM Contacts Provider (IM 
+Contacts)  
+§? IM Invitations  
+§? IM Messages  
+§? Phone Storage (HTC Incredible)  
+§? Search History 
+§?  SMS 	
+  
+§? IM Providers 
+§?  IM Provider Settings 
+§?  Internal Image Media 
+§?  Internal Image Thumb 
+Media  
+§? Internal Videos   
+§? Maps-Friends 
+§?  Maps-Friends extra  
+§? Maps-Friends contacts  
+§? MMS   
+§? Mms Parts Provider 
+(MMSParts) 
+§? Notes 
+§?  People  
+§? People Deleted 3 
+§? Social Contracts 
+Activities 
+32	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
+3.2.4.1 Working with AFLogical [1] 
  
 Following is the flowchart describing steps to run AFLogical on the Android device 
  
@@ -1868,8 +2134,13 @@ itself.
  
 VII. There will be an application with AFLogical OSE icon will be created. Click the icon to 
 launch the app. 
- Forensic	  Toolset	  Benchmarkin	  g 33	  
-	  
+ 
+Forensic	
+  Toolset	
+  Benchmarking	
+   33	
+  	
+  
 VIII. Select the content providers for the respective data collection.  
  
 IX. After the extraction is completed, all the data gets stored into a folder named forensics in the 
@@ -1886,17 +2157,11 @@ XI. Uninstall the application from the device when all the acquisition process i
  
 Screenshots for AFLogical in working 
  
-AFLogical app installed Selecting the content Screen shot showing the 
  
-into the apps menu of providers depending on final step of AFLogical 
  
-the device, the the files to be extracted. on completion of the 
  
-application can now be Click the capture button. data extraction. Figure 
  
-directly launched from Figure 3.19 3.20 
  
-the device. Figure 3.18 
   
                                                
                   
@@ -1912,15 +2177,31 @@ the device. Figure 3.18
  
  
  
- 34	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+ 
+AFLogical app installed 
+into the apps menu of 
+the device, the 
+application can now be 
+directly launched from 
+the device. Figure 3.18 
+Selecting the content 
+providers depending on 
+the files to be extracted. 
+Click the capture button. 
+Figure 3.19 
+Screen shot showing the 
+final step of AFLogical 
+on completion of the 
+data extraction. Figure 
+3.20 
+34	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 Figure 3.21 gives a sample screenshot of the files recovered. 
  
-Analysis of acquired files 
-and its comparison with the 
-actual data is done in 
-chapter 4. 
-	  
  
  
  
@@ -1949,12 +2230,21 @@ operations.
  
  
  
- Forensic	  Toolset	  Benchmarkin	  g 35	  
-	  
+ 
+Analysis of acquired files 
+and its comparison with the 
+actual data is done in 
+chapter 4. 	
+  
+Forensic	
+  Toolset	
+  Benchmarking	
+   35	
+  	
+  
 Result Analysis 
  
  
-4 
  
  
  
@@ -1978,8 +2268,7 @@ data analysis are tabulated.
 All the features of adb based on both the test cases 2.2.1 and 2.2.2 have been portrayed in figure 
 3.2.  The files recovered with their respective location and related information is detailed in table 
 4.1. 
-[9] 
-Table 4.1. ADB file recovery details 
+Table 4.1. ADB file recovery details [9] 
  
  
  
@@ -1991,8 +2280,14 @@ information related to files was also found.
 /data/com.android.email, a database named EmailProvider.db gives the details about the files 
 attached to the email, information such as name of the file, MIME type, size, contentUri was 
 found. In the same directory a database named webview.db gives the details about the username 
-and password of the email used to send the files.  36	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+and password of the email used to send the files.  
+4 
+36	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 • All the information about the applications such as Facebook, YouTube, Dropbox, Gmail can be 
 found in the databases named db.db by browsing according to the location specified in the table 
 3.1. Also details about the login ID and password of the user, files uploaded, size of the files, 
@@ -2015,6 +2310,16 @@ tool has exceptionally exceeded in meeting all the expectations. NA indicates th
 to that particular file is not available. 
 Table 4.2 Comparison chart ADB Test case I 
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 Comparison chart! Test case I - ADB!
 File : 3GPP movie! Acquired Data ! Actual Data!
 Video Recovered! Meet! Meet!
@@ -2025,45 +2330,28 @@ Facebook upload time! 11:14:03! 17:29:12!
 Email sent timestamp! NA! 15:29:53!
 YouTube Upload timestamp! NA! 15:20:29!
 Bluetooth transfer time! Meet! Meet!
-Sender’s email id, subject and  body Above! Meet!
+Sender’s email id, subject and  body 
 of email, receiver’s id!
-Login ID used for Facebook and Meet ! Meet!
+Above! Meet!
+Login ID used for Facebook and 
 YouTube upload!
-Bluetooth transfer details -  parties Above! Meet!
+Meet ! Meet!
+Bluetooth transfer details -  parties 
 involved, pairing info, password, 
 timestamp!
-Wi-Fi used to upload the Video – Above! Meet!
+Above! Meet!
+Wi-Fi used to upload the Video – 
 Name(ssid) of Wi-Fi, Password, 
 data and time!
- 
- 
- 
- 
- 
- 
- 
- 
- 
- Forensic	  Toolset	  Benchmarkin	  g 37	  
-	  
+Above! Meet!
+Forensic	
+  Toolset	
+  Benchmarking	
+   37	
+  	
+  
 Table 4.3 Comparison chart ADB Test case II 
  
-Comparison*Chart! Test*case*II*1! ADB!
-File%Informa-on! Acquired%Data%! Actual%Data!
-Jpeg,%Docx,%Pdf,%Java,%Zip%ﬁles%Recovered! Meet! Meet!
-Time%Last%Accessed! NA! 23:26:14!
-Date%Created! NA! 30L08L12!
-Email%sent%-mestamp! Below! Meet!
-Bluetooth%transfer%-me! Meet! Meet!
-Dropbox%Upload%-me! Meet! Meet!
-Deleted%Files%recovery! Above! Meet!
-Sender’s%email%id,%subject%and%%body%of% Above! Meet!
-email,%receiver’s%id!
-Bluetooth%transfer%details%L%%par-es% Above! Meet!
-involved,%pairing%info,%password,%
--mestamp!
-WiLFi%used%to%upload%the%Video%–% Above! Meet!
-Name(ssid)%of%WiLFi,%Password,%-mestamp!
  
  
 From table 4.2 and 4.3, the video and the files were successfully recovered, time the video was last 
@@ -2083,6 +2371,27 @@ obtained using ‘top’ command.
  
 Table 4.4 Results of ‘top’ command for ADB. 
  
+ 
+ 
+Comparison*Chart! Test*case*II*1! ADB!
+File%Informa-on! Acquired%Data%! Actual%Data!
+Jpeg,%Docx,%Pdf,%Java,%Zip%files%Recovered! Meet! Meet!
+Time%Last%Accessed! NA! 23:26:14!
+Date%Created! NA! 30L08L12!
+Email%sent%-mestamp! Below! Meet!
+Bluetooth%transfer%-me! Meet! Meet!
+Dropbox%Upload%-me! Meet! Meet!
+Deleted%Files%recovery! Above! Meet!
+Sender’s%email%id,%subject%and%%body%of%
+email,%receiver’s%id!
+Above! Meet!
+Bluetooth%transfer%details%L%%par-es%
+involved,%pairing%info,%password,%
+-mestamp!
+Above! Meet!
+WiLFi%used%to%upload%the%Video%–%
+Name(ssid)%of%WiLFi,%Password,%-mestamp!
+Above! Meet!
 From table 4.4, CPU 
 utilization for both 
 system related and 
@@ -2098,9 +2407,12 @@ shown, also the up
 time tells that the 
 machine was up for 
 16hours 42mins. 
- 
- 38	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+38	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 4.1.2 Autopsy Evaluation 
  
 Figure 4.1 represents all the features of Autopsy based on test cases I and II. These features were 
@@ -2108,21 +2420,6 @@ encountered when analyzing the image file partitions with Autopsy. Some of the i
 met when working with Autopsy are also listed; such as MD5 hash value, GPS information, and 
 GUI interface are exclusive to Autopsy only. 
 Figure 4.1 Features of Autopsy 
-Autopsy!
-!? Suspect’s)ﬁle)recovery!
-!? Email)informa6on!
-!? Bluetooth)transfer)details!
-!? Wi;Fi)access)informa6on!
-!? Applica6on)data)recovery!
-!? Deleted)ﬁles)recovery!
-!? Browsing)History!
-!? Password)recovery!
-!? GPS)informa6on!
-!? MD5)Hash)value!
-!? GUI)interface!
-!? Supports)FAT16)ﬁle)system!
-!? Open)source)toolkit!
-!? E?cient)CPU)u6liza6on!
  
  
 4.1.2.1. Autopsy Results  
@@ -2131,13 +2428,6 @@ Following screen shots details about the files recovered, all the results are ba
  
 Figure 4.2 Video recovered – Testcase I 
  
-Figure 4.2 
-Details about the name of the video file, type 
-of video – 3GPP 
-Code for camera used, sector number in the 
-file system, status, and duration of video 
-recovered. No information about the 
-timestamp was recorded. 
  
  
 Facebook upload details  
@@ -2147,18 +2437,40 @@ Figure 4.3
  
 When browsed through the details of Facebook activities, information about the date and time of 
 the file uploaded, location of the file in the device and name of the file were found. 
- Forensic	  Toolset	  Benchmarkin	  g 39	  
-	  
+ 
+Autopsy!
+!? Suspect’s)file)recovery!
+!? Email)informa6on!
+!? Bluetooth)transfer)details!
+!? Wi;Fi)access)informa6on!
+!? Applica6on)data)recovery!
+!? Deleted)files)recovery!
+!? Browsing)History!
+!? Password)recovery!
+!? GPS)informa6on!
+!? MD5)Hash)value!
+!? GUI)interface!
+!? Supports)FAT16)file)system!
+!? Open)source)toolkit!
+!? Efficient)CPU)u6liza6on!
+Figure 4.2 
+Details about the name of the video file, type 
+of video – 3GPP 
+Code for camera used, sector number in the 
+file system, status, and duration of video 
+recovered. No information about the 
+timestamp was recorded. 
+Forensic	
+  Toolset	
+  Benchmarking	
+   39	
+  	
+  
  
 Documents Recovery Testcase II 
  
 Figure 4.4 Documents recovery Autopsy 
  
-Information about the files last 
-accessed and date created was not 
-recovered. Names of the files and 
-location in the device were 
-recovered. 
  
  
 Email upload information 
@@ -2176,8 +2488,18 @@ device and the format of the video were recovered. File type is data that repres
 about the email recovered and status is allocated which means information related to this email 
 activity is still in the file system and not deleted. When browsed through the corresponding sectors 
 of the file further information related to the email activities was found. Refer figures 4.4 and 4.5. 
- 40	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+ 
+Information about the files last 
+accessed and date created was not 
+recovered. Names of the files and 
+location in the device were 
+recovered. 
+40	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 Bluetooth Transfer Information  
  
 Figure 4.6 Bluetooth transfer information 
@@ -2194,17 +2516,22 @@ Wi-Fi Connection information
  
 Figure 4.7 Wi-Fi connection details 
  
-Information such as name of the 
-Wi-Fi network and password 
-were recovered. Also the files 
-sent using Wi-Fi was recovered. 
  
  
 Dropbox upload information  
 Figure 4.8 Dropbox activities 
  
- Forensic	  Toolset	  Benchmarkin	  g 41	  
-	  
+ 
+Information such as name of the 
+Wi-Fi network and password 
+were recovered. Also the files 
+sent using Wi-Fi was recovered. 
+Forensic	
+  Toolset	
+  Benchmarking	
+   41	
+  	
+  
  
 Information about names of the files uploaded on dropbox, date and time, and number of bytes were 
 recovered. Figure 4.8 shows the information about the pdf and docx files being uploaded. Date on 
@@ -2218,52 +2545,64 @@ for test cases I & II. Refer to section 4.1.1.1 for the meaning of ‘Meet’, ‘NA’,
  
 Table 4.5. Comparison Chart Autopsy Test case I 
  
-Comparison*chart! Test*case*I*1*Autopsy!
-File%:%3GPP%movie ! Acquired%Data%! Actual%Data!
-Video%Recovered! Meet! Meet!
-Dura9on%of%video%! Meet! Meet!
-Time%Last%Accessed! NA! 14:45:23!
-Date%Created! NA! 30F08F12!
-Facebook%upload%9me ! 16:11:53! 17:29:12!
-Email%sent%9mestamp! 17:29:04! 15:29:53!
-YouTube%Upload%9mestamp! NA! 15:20:29!
-Bluetooth%transfer%9me! Meet! Meet!
-Sender’s%email%id,%subject%and%%body% Meet! Meet!
-of%email,%receiver’s%id!
-Login%ID%used%for%Facebook%and% Meet%! Meet!
-YouTube%upload!
-Bluetooth%transfer%details%F%%par9es% Meet! Meet!
-involved,%pairing%info,%password,%
-9mestamp!
-WiFFi%used%to%upload%the%Video%–% Meet! Meet!
-Name(ssid)%of%WiFFi,%Password,%data%
-and%9me!
  
  
 Table 4.6 Comparison Chart Autopsy Test case II 
  
+ 
+ 
+From table 4.5, it can be inferred that the 3GPP video was successfully recovered. Duration of 
+video was matched with the actual data, whereas ADB was unable to provide this information. 
+Time last accessed and date the video created is not available. ADB was also unable to recover 
+Comparison*chart! Test*case*I*1*Autopsy!
+File%:%3GPP%movie! Acquired%Data%! Actual%Data!
+Video%Recovered! Meet! Meet!
+Dura9on%of%video%! Meet! Meet!
+Time%Last%Accessed! NA! 14:45:23!
+Date%Created! NA! 30F08F12!
+Facebook%upload%9me! 16:11:53! 17:29:12!
+Email%sent%9mestamp! 17:29:04! 15:29:53!
+YouTube%Upload%9mestamp! NA! 15:20:29!
+Bluetooth%transfer%9me! Meet! Meet!
+Sender’s%email%id,%subject%and%%body%
+of%email,%receiver’s%id!
+Meet! Meet!
+Login%ID%used%for%Facebook%and%
+YouTube%upload!
+Meet%! Meet!
+Bluetooth%transfer%details%F%%par9es%
+involved,%pairing%info,%password,%
+9mestamp!
+Meet! Meet!
+WiFFi%used%to%upload%the%Video%–%
+Name(ssid)%of%WiFFi,%Password,%data%
+and%9me!
+Meet! Meet!
 Comparison chart! Test case II -! Autopsy!
 File Information! Acquired Data ! Actual Data!
-Jpeg, Docx, Pdf, Java, Zip ﬁles Recovered! Meet! Meet!
+Jpeg, Docx, Pdf, Java, Zip files Recovered! Meet! Meet!
 Time Last Accessed! NA! 23:26:14!
 Date Created! NA! 30-08-12!
 Email sent timestamp! 15:50:04! 1:06:23!
 Bluetooth transfer time! Meet! Meet!
 Dropbox Upload time! 1:22:02! 2:22:18!
 Deleted Files recovery! Below! Meet!
-Sender’s email id, subject and  body of Meet! Meet!
+Sender’s email id, subject and  body of 
 email, receiver’s id!
-Bluetooth transfer details -  parties Meet! Meet!
+Meet! Meet!
+Bluetooth transfer details -  parties 
 involved, pairing info, password, 
 timestamp!
-Wi-Fi used to upload the Video – Meet! Meet!
+Meet! Meet!
+Wi-Fi used to upload the Video – 
 Name(ssid) of Wi-Fi, Password, timestamp!
- 
- 
-From table 4.5, it can be inferred that the 3GPP video was successfully recovered. Duration of 
-video was matched with the actual data, whereas ADB was unable to provide this information. 
-Time last accessed and date the video created is not available. ADB was also unable to recover 42	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+Meet! Meet!
+42	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 information about these two. Upload timing of video on Facebook and time when the email was 
 sent does not match. None of the tool, ADB or autopsy was able to recover correct information 
 about the timestamp related to email, Facebook or YouTube upload.  
@@ -2299,27 +2638,18 @@ and 65MB was in buffers.
  
  
  
- Forensic	  Toolset	  Benchmarkin	  g 43	  
-	  
+ 
+Forensic	
+  Toolset	
+  Benchmarking	
+   43	
+  	
+  
 4.1.3. Scalpel Evaluation 
  
 Figure 4.9 Files carved – Scalpel Figure    4.10 Actual files counted manually 
  
  
-Scalpel'
-Scalpel'
-Video# Jpeg# docx# Pdf# Java# Zip#
-Video# Jpeg# docx# Pdf# Java# Zip#
-6%# 6%#
-0%#
-8%# 8%#
-12%#
-15%#
-12%#
-47%#
-46%#
-23%#
-17%#
               
  
  
@@ -2334,8 +2664,29 @@ Refer table 4.9 for the comparison chart of the acquired data versus actual data
  
 Table 4.8 Comparison chart Scalpel Test case I 
  
-Comparison* Test*Case*I!
+ 
+ 
+ 
+ 
+ 
+8%#
+46%#23%#
+15%#
+0%#
+8%#
+Scalpel'
+Video# Jpeg# docx# Pdf# Java# Zip#
+6%#
+47%#
+17%#
+12%#
+12%#
+6%#
+Scalpel'
+Video# Jpeg# docx# Pdf# Java# Zip#
+Comparison*
 Chart:********!
+Test*Case*I!
 File:&3GP&Video! Acquired&Data! Actual&Data!
 Number! 2! 1!
 Size! 2.5MB! 2.1MB!
@@ -2344,12 +2695,12 @@ Bitrate! 128&Kbps! 780&Kbps!
 Date&Created! 30/08/2012! 31/08/2012!
 Time&Created! 14:45:09! 05:48:48!
 File&Extension! .MOV! .3GP!
- 
- 
- 
- 
- 44	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+44	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 From table 4.8, total number of 3GP videos recovered was two and when manually recorded the 
 media information from the device only one video file was recorded. Both video files are not 
 readable. Files recovered were stored in the sub-directory named 3GP under the main directory 
@@ -2383,8 +2734,13 @@ had to be done.
  
  
  
- Forensic	  Toolset	  Benchmarkin	  g 45	  
-	  
+ 
+Forensic	
+  Toolset	
+  Benchmarking	
+   45	
+  	
+  
  
 Table 4.10 Results of TOP command for Scalpel 
  
@@ -2402,40 +2758,46 @@ just represents the features of AFLogical. No other parameter was taken into con
  
 Figure 4.11- Features of AFLogical 
  
-AFlogical exceptionally recovered all 
-AFLogical*
-the details about the video files and 
-!? Internal and External videos!
-picture files from the device. All the 
-messages, Call history, installed 
-!? Images and other media ﬁles!
-applications found was accurate when 
-!? Browser search history!
-compared with the actual data. 
-!? Call history/SMS/MMS!
-Critical details about deleted contacts, 
-!? Network Provider!
-messages, their timestamp was 
-!? Installed applications!
-recovered. For the features mentioned 
-in figure 4.11, individual files were 
-!? IMSI and IMEI number!
-generated to store the details about 
-!? Deleted contacts recovery!
-them. So there was no additional 
-!? IM accounts/chats/Providers!
-overhead in manually searching for 
-!? Bypass locked phone!
-the relevant files for investigation. 
-!? Pre-conﬁgures VM!
-Reporting of data in pdf format was 
-!? Open source! an interesting feature. 
-!? Image phone memory directly from device!
      
  
  
- 46	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+ 
+AFLogical*
+!? Internal and External videos!
+!? Images and other media files!
+!? Browser search history!
+!? Call history/SMS/MMS!
+!? Network Provider!
+!? Installed applications!
+!? IMSI and IMEI number!
+!? Deleted contacts recovery!
+!? IM accounts/chats/Providers!
+!? Bypass locked phone!
+!? Pre-configures VM!
+!? Open source!
+!? Image phone memory directly from device!
+AFlogical exceptionally recovered all 
+the details about the video files and 
+picture files from the device. All the 
+messages, Call history, installed 
+applications found was accurate when 
+compared with the actual data. 
+Critical details about deleted contacts, 
+messages, their timestamp was 
+recovered. For the features mentioned 
+in figure 4.11, individual files were 
+generated to store the details about 
+them. So there was no additional 
+overhead in manually searching for 
+the relevant files for investigation. 
+Reporting of data in pdf format was 
+an interesting feature. 
+46	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 Based on the content providers (3.2.4) and test cases, information relating to media files, such as 
 video and Jpeg images was successfully recovered. Based on ‘browser search’ content provider; 
 trivial information about the login timings of Gmail, Facebook, YouTube, Dropbox was recovered. 
@@ -2445,6 +2807,17 @@ supported.
  
 Table 4.11 Comparison chart AFLogical 
  
+ 
+ 
+Table 4.12 Comparison chart AFLogical Test case II 
+ 
+ 
+ 
+ 
+Table 4.11 shows that the information about the video recovered were exceptionally accurate. All 
+the parameters shown in the table were matched with the actual data. As mentioned previously, the 
+open source edition of AFLogical was able to retrieve only this limited information about the 
+Testcase I. Rest of the details like, email, Wi-Fi, Bluetooth, and application data etc. was not found. 
 Test%case%I%%%%%%!
 File%A'ributes! Acquired%Data! Actual%Data!
 Number%! 1! 1!
@@ -2454,35 +2827,67 @@ Bitrate! 780%Kbps! 780%Kbps!
 Date%Created! 31/08/2012! 31/08/2012!
 Time%Created! 05:48:33! 05:48:48!
 File%Extension! .3GP! .3GP!
- 
- 
-Table 4.12 Comparison chart AFLogical Test case II 
- 
 Test%Case%II%
 Acquired%data%Vs.%Actual%data%
-Files& Acquired&Data&of& State&of& Size/& Date&Last& Time&/& Deleted&
-Suspect/&Actual&Data& Acquired& Actual& Modiﬁed&/& Actual&Time& File&
-Data& size& Actual&Date& Recovery&
+Files& Acquired&Data&of&
+Suspect/&Actual&Data&
+State&of&
+Acquired&
+Data&
 &
-Docx& 0&/&3& NA& NA&/& NA&/& NA&/& No&
-103kb& 18F11F2012& 2:03&
-JPEG& 8&/&8& Readable& 6.90&MB/& 12F08F2012/& 13:23&/& Yes&
-6.95&MB& 12F08F2012& 13:23&
-PDF& 1&/&2& NotF& NA&/ NA&/& NA&/& Below&
-Readable& 246kb& 18F04F2011& 23:36&
-& &
-JAVA& 0&/&2& NA& NA/12kb& NA/ NA/& NA&
-30F04F2012& 19:11& &
-ZIP& 0&&/&1& NA& NA&/&4kb& NA/& NA/& NA&
-7F08F2012& 00:20&
- 
- 
- 
-Table 4.11 shows that the information about the video recovered were exceptionally accurate. All 
-the parameters shown in the table were matched with the actual data. As mentioned previously, the 
-open source edition of AFLogical was able to retrieve only this limited information about the 
-Testcase I. Rest of the details like, email, Wi-Fi, Bluetooth, and application data etc. was not found. Forensic	  Toolset	  Benchmarkin	  g 47	  
-	  
+Size/&
+Actual&
+size&
+Date&Last&
+Modified&/&
+Actual&Date&
+Time&/&
+Actual&Time&
+Deleted&
+File&
+Recovery&
+Docx& 0&/&3& NA& NA&/&
+103kb&
+NA&/&
+18F11F2012&
+NA&/&
+2:03&
+No&
+JPEG& 8&/&8& Readable& 6.90&MB/&
+6.95&MB&
+12F08F2012/&
+12F08F2012&
+13:23&/&
+13:23&
+Yes&
+PDF& 1&/&2& NotF&
+Readable&
+NA&/
+246kb&
+NA&/&
+18F04F2011&
+&
+NA&/&
+23:36&
+&
+Below&
+JAVA& 0&/&2& NA& NA/12kb& NA/
+30F04F2012&
+NA/&
+19:11&
+NA&
+&
+ZIP& 0&&/&1& NA& NA&/&4kb& NA/&
+7F08F2012&
+NA/&
+00:20&
+NA&
+Forensic	
+  Toolset	
+  Benchmarking	
+   47	
+  	
+  
 Just the video recovery is not enough in deciding the outcome of an investigation. When compared 
 to the criticality of evidence extracted from ADB and Autopsy, AFLogical lags behind. But was 
 better than scalpel when speaking in terms of file recovery only. 
@@ -2519,9 +2924,24 @@ Values of CPU utilization, Ram utilization and load average on CPU are being gra
  
  
  
- 48	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+ 
+48	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 Figure 4.12 CPU utilization-  
+ 
+  
+ 
+ Figure 4.13 RAM utilization- 
+  
+ 
+ 
+ Figure 4.14 Load Average on CPU 
+ 
+  
  
 In both the cases, 
 AFLogical was 
@@ -2532,9 +2952,6 @@ among all three
 tools. Autopsy and 
 AFLogical were 
 nearly same.  
-  
- 
- Figure 4.13 RAM utilization- 
 An interesting reading 
 about the autopsy was 
 noted. Unlike CPU 
@@ -2545,11 +2962,6 @@ was better in this case
 too. ADB and Scalpel 
 have quite comparable 
 results. 
-  
- 
- 
- Figure 4.14 Load Average on CPU 
- 
 Yet again, AFLogical 
 gave exceptional 
 results than the other 
@@ -2559,11 +2971,15 @@ Load average on CPU.
 The figures for ADB 
 and Autopsy were 
 moderate. 
-  
- Forensic	  Toolset	  Benchmarkin	  g 49	  
-	  
+Forensic	
+  Toolset	
+  Benchmarking	
+   49	
+  	
+  
  
-4.2 Summary	  
+4.2 Summary	
+  
  
 All the results retrieved during the implementation, are tested against the actual data. The raw actual 
 data acts a benchmark for the comparison of results attained from implementation. All the levels of 
@@ -2613,11 +3029,15 @@ individual performances.
  
  
  
- 50	   Forensic	  ToolsetB 	  enchmarking	  
-	  
  
-Validation Testing        
-5 
+50	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
+ 
+Validation Testing       
    
  
  
@@ -2633,8 +3053,7 @@ data is true or not. All the results from these tests are tabulated. Lastly a gr
 tools comparison is made. This diagram consists of the results obtained from the data acquisition, 
 analysis and validation test. 
  
-[20] 
-5.1. Precision and Recall 
+5.1. Precision and Recall [20] 
  
 In information retrieval, Precision is the fraction of relevant retrieved instances and Recall is 
 fraction of retrieved relevant instance. Hence both are based on measure of relevance. In easier 
@@ -2648,32 +3067,33 @@ positive, true negative, false positive, false negatives were used. Positive and
 observed or in forensic terms retrieved values. And the terms true and false signify whether the 
 observed or retrieved values correspond to actual expected values. Figure 5.1 explains the same. 
  
-[20] 
-Figure 5.1 Precision-Recall Classification conditions 
+Figure 5.1 Precision-Recall Classification conditions [20] 
  
+                                 
+ 
+    
+ 
+  
+ 
+ 
+5 
 Definitions: 
  
-!"
-Precision =    
-!"!!"
+Precision = !"!"!!"   
  
-!"
-Recall =  
-!"!!"
+Recall = !"!"!!" 
  
-!"
-True negative rate =  
-!"!!"
-                                	   
- !"!!"
-Accuracy = 	  
-!"!!"!!"!!"
-    
-  
-  
+True negative rate = !"!"!!" 	
+  
+Accuracy = !"!!"!"!!"!!"!!"	
+  
  
- Forensic	  Toolset	  Benchmarkin	  g 51	  
-	  
+Forensic	
+  Toolset	
+  Benchmarking	
+   51	
+  	
+  
 Values for the above test are taken from the information retrieved by the tools. Since the 
 capabilities of all the tools are not similar enough, the parameters chosen for the test vary for all the 
 four tools. 
@@ -2682,122 +3102,69 @@ ADB
  
 Refer table 4.2 and 4.3 for values used in the test. 
  
-1. t = 17, all the files were recovered from both the test cases 
-p 
-2. f =  2, Mismatch in the values of Facebook upload time and last accessed time of video 
-p 
-3. f = 4, based on test cases, the information related to the files which was not available, here, 
-n 
+1. tp = 17, all the files were recovered from both the test cases 
+2. fp =  2, Mismatch in the values of Facebook upload time and last accessed time of video 
+3. fn = 4, based on test cases, the information related to the files which was not available, here, 
 Date and time for email sent, YouTube upload and timestamp for files in test case II were not 
 available. 
-4. t = 0 
-n
-  
-• Precision  =  0.894  
-  
-• Recall  =  0.809  
-  
-• True  negative  rate  =  0  
-  
-• Accuracy  =  0.73  9
-  
+4. tn = 0   
+• Precision  =  0.894    
+• Recall  =  0.809    
+• True  negative  rate  =  0    
+• Accuracy  =  0.739    
 Autopsy   
  
 Refer table 4.5 and 4.5 for the values used in the test. 
  
-1. t = 17, all the files were recovered from both the test cases. 
-p 
-2. f = 4, Mismatch in the email sent timing and dropbox upload time in testcase II , facebook 
-p
+1. tp = 17, all the files were recovered from both the test cases. 
+2. fp = 4, Mismatch in the email sent timing and dropbox upload time in testcase II , facebook 
 upload and email sent timing for testcase I. 
-3. f = 5, based on test cases the NA information, refer table 4.5 and table 4.6 
-n
-4. t = 0 
-n
-  
-• Precision  =  0.809  
-  
-• Recall  =  0.772  
-  
-• True  negative  rate  =  0  
-  
-• Accuracy  =  0.65  3
-  
+3. fn = 5, based on test cases the NA information, refer table 4.5 and table 4.6 
+4. tn = 0   
+• Precision  =  0.809    
+• Recall  =  0.772    
+• True  negative  rate  =  0    
+• Accuracy  =  0.653    
 Scalpel  
  
 Refer to table 4.8 and 4.9 for the values used in the test. 
  
-1. t = 7 (correct readable files  form both the test cases) 
-p 
-2. f = 5 ( Partially readable and not-readable files) 
-p 
-3. f = 4 (Files not recovered, i.e fields marked with NA) 
-n
-4. t = 1 (1 Zip file carved, but when checked manually the location of the file, no Zip files were 
-n
+1. tp = 7 (correct readable files  form both the test cases) 
+2. fp = 5 ( Partially readable and not-readable files) 
+3. fn = 4 (Files not recovered, i.e fields marked with NA) 
+4. tn = 1 (1 Zip file carved, but when checked manually the location of the file, no Zip files were 
 found. 
- 52	   Forensic	  ToolsetB 	  enchmarking	  
-	  
-• Precision  =  0.583  
+ 
+52	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
   
-• Recall  =  0.636  
-  
-• True  negative  rat  e=  0.166  
-  
+• Precision  =  0.583    
+• Recall  =  0.636    
+• True  negative  rate  =  0.166    
 • Accuracy  =  0.470  
  
 AFLogical  
  
 Refer to table 4.11 and 4.12 for the values used. 
  
-1. t = 9 (8 Jpeg and 1 Video file recovered) 
-p 
-2. f = 1 (1 Pdf recovered but not readable) 
-p 
-3. f = 7 (refer table 4.11 and 4.12 for the files marked NA)     
-n 
-4. t = 5 ( Besides all the files recovered by AFLogical, Files such as SMS, Contacts etc. were also 
-n 
+1. tp = 9 (8 Jpeg and 1 Video file recovered) 
+2. fp = 1 (1 Pdf recovered but not readable) 
+3. fn = 7 (refer table 4.11 and 4.12 for the files marked NA)     
+4. tn = 5 ( Besides all the files recovered by AFLogical, Files such as SMS, Contacts etc. were also 
 recovered. These files were accurate but does not provide any evidence based on test cases) 
  
-•  Precision  =  0.900  
-  
-• Recall  =  0.562  
-  
-• True  negative  rate  =  0 .833  
-  
-• Accuracy  =  0.636  
-  
-Table  5.1  shows  the  resulof  a ts   ccuracy  calculated  for  all  the  four  tool   s.
-  
+•  Precision  =  0.900    
+• Recall  =  0.562    
+• True  negative  rate  =  0.833    
+• Accuracy  =  0.636    Table  5.1  shows  the  results  of  accuracy  calculated  for  all  the  four  tools.    
 Table 5.1 ADB Autopsy Scalpel AFLogical 
 Accuracy 0.739 0.653 0.470 0.636 
  
 Figure 5.2 Accuracy chart 
  
-Using the accuracy values 
-Accuracy)
-obtained from accuracy test the 
-0.8$ graph in figure 5.2 is plotted. 
-0.7$
-Again from the graph on left, 
-0.6$
-ADB was able to extract 
-0.5$
-evidence in much efficient way. 
-0.4$
-Accuracy for Autopsy and 
-0.3$
-AFLogical is analogous.  
-0.2$
-0.1$
-Scalpel was least accurate. 
-0$
-Scalpel also had highest value 
-ADB$ Autopsy$ Scalpel$ AFLogical$
-Accuracy$
-0.739$ 0.653$ 0.47$ 0.636$
-of load average on CPU. 
  
  
  
@@ -2806,35 +3173,49 @@ returned than inappropriate. And high value of Recall means most of the appropri
 returned. 
  
  
-Percentage)Accuracy)Forensic	  Toolset	  Benchmarkin	  g 53	  
-	  
+ADB$ Autopsy$ Scalpel$ AFLogical$
+Accuracy$ 0.739$ 0.653$ 0.47$ 0.636$
+0$
+0.1$
+0.2$
+0.3$
+0.4$
+0.5$
+0.6$
+0.7$
+0.8$
+Pe
+rc
+en
+ta
+ge
+)A
+cc
+ur
+ac
+y)
+Accuracy)
+Using the accuracy values 
+obtained from accuracy test the 
+graph in figure 5.2 is plotted. 
+Again from the graph on left, 
+ADB was able to extract 
+evidence in much efficient way. 
+Accuracy for Autopsy and 
+AFLogical is analogous.  
+Scalpel was least accurate. 
+Scalpel also had highest value 
+of load average on CPU. 
+Forensic	
+  Toolset	
+  Benchmarking	
+   53	
+  	
+  
 Chart represented in figure 5.3 illustrates the results based on Precision and Recall 
  
 Figure 5.3 Precision-Recall charts 
  
-Based on the definition of 
-Precision)Recall-chart-
-Precision in section 5.1, 
-AFLogical gave the most 
-1$
-0.9$
-appropriate results than 
-0.8$
-irrelevant.  
-0.7$
-0.6$
-And, from definition of Recall 
-0.5$
-in section 5.1, ADB gave 
-0.4$
-0.3$ most the appropriate results. 
-0.2$
-0.1$
-0$
-ADB$ Autopsy$ Scalpel$ AFLogical$
-Precision$
-0.894$ 0.809$ 0.583$ 0.9$
-Recall$ 0.809$ 0.772$ 0.636$ 0.562$
  
  
 On comparison of the results obtained from Accuracy and Precision-Recall test, ADB’s 
@@ -2851,8 +3232,7 @@ particular distribution. Since a lesser number of assumptions are made, they are
 than the parametric tests. This feature also makes them Robust. Such tests are easier to compute and 
 can handle data measured on minimal scale. 
  
-2 [22] [23] 
-5.2.1 CHI Square (X ) Test 
+5.2.1 CHI Square (X2) Test [22] [23] 
  
 CHI Square is most substantial and practiced test from the family of nonparametric tests. CHI 
 Square test is used to test the difference between the results from a study and the result expected. It 
@@ -2866,22 +3246,38 @@ The data extracted using the forensic tools is accurate to successfully predict 
 forensic investigation. 
  
 Computation Equation 
- 
-!
-(!"#$%&$’  !"#$%#&’(!!"#$%&$’  !"#$%#&’()
-2
-X  =    
-!"#$%&$’  !"#$%#&’(
+ X2  =   (!"#$%&$'  !"#$%#&'(!!"#$%&$'  !"#$%#&'()!!"#$%&$'  !"#$%#&'(     X2  =   (!"!!")!!"   
+ADB$ Autopsy$ Scalpel$ AFLogical$
+Precision$ 0.894$ 0.809$ 0.583$ 0.9$
+Recall$ 0.809$ 0.772$ 0.636$ 0.562$
+0$
+0.1$
+0.2$
+0.3$
+0.4$
+0.5$
+0.6$
+0.7$
+0.8$
+0.9$
+1$
+Precision)Recall-chart-
+Based on the definition of 
+Precision in section 5.1, 
+AFLogical gave the most 
+appropriate results than 
+irrelevant.  
+And, from definition of Recall 
+in section 5.1, ADB gave 
+most the appropriate results. 
+54	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
   
-!
-(!"!!")
-2  
-X =    
-!"54	   Forensic	  ToolsetB 	  enchmarking	  
-	  
  
-Degrees of Freedom = d  =      ?1 
-f
+Degrees of Freedom = df  = ??????  ??  ?????? ? 1 
  
 CHI Square can calculate the difference between the distributions of categorical values. Since all 
 the four tools had their own unique features, therefore CHI Square was performed based on the 
@@ -2893,65 +3289,32 @@ Independent variables based on the features of ADB and Autopsy:
 Table 5.2 Independent Variable I for CHI Square test 
  
  
-Independent Variables 
  
-Files Recovered 
-1	  
  
-Time Last accessed 
-2	  
  
-Date Created 
-3	  
  
-4 Facebook details 
  
-YouTube details 
-5	  
  
-6	   Bluetooth transfer details 
  
-7	  
-Wi-Fi usage details 
  
-8	  
- Drop box upload info 
-9	  
  
-Email information 
  
-	  
+ 
  
 Independent variables based on features of AFLogical and Scalpel: 
  
  
-• Video file, • Java, 
- 
-• Jpeg, • Pdf, 
- 
-• Docx, • Zip 
- 
-	   	  
  
  
-2:
-5.2.1.1 Steps in calculation of the values of the CHI Square X 
  
-Observed Responses = F , Expected Responses =  F
-o e  
  
-! !
-(!"!!") (!"!!")
-!
- ?  à?  ( ? )  à?    à?    
-!" !"
-  
-!
-(!"!!")
-2 
-If X >  then null hypothesis is accepted. 
-.05 
-!"
+ 
+5.2.1.1 Steps in calculation of the values of the CHI Square X2: 
+ 
+Observed Responses = Fo, Expected Responses =  Fe  
+ 
+ ?? ? ??  à?  (?? ? ??)!  à?  (!"!!")!!"   à?   (!"!!")!!"     
+If X2.05  > (!"!!")!!"  then null hypothesis is accepted. 
  
 Values of Fo and Fe calculated for ADB and Autopsy based on ranks (Refer table 5.2) 
  
@@ -2962,9 +3325,40 @@ Fo 17 1 1 1 0 4 2 1 3
 Autopsy 1 2 3 4 5 6 7 8 9 
 Fe 17 2 2 2 1 4 2 1 4 
 Fo 17 0 0 1 0 4 2 1 2 
-?? ?? ?? ??
-?????? ?? ??????Forensic	  Toolset	  Benchmarkin	  g 55	  
-	  
+Independent Variables 
+Files Recovered 
+Time Last accessed 
+Date Created 
+Facebook details 
+YouTube details 
+Bluetooth transfer details 
+Wi-Fi usage details 
+Drop box upload info 
+Email information 	
+  
+1	
+  2	
+  3	
+  45	
+  6	
+  7	
+  8	
+  9	
+  
+• Java, 
+• Pdf, 
+• Zip 	
+  
+• Video file, 
+• Jpeg, 
+• Docx, 	
+  
+Forensic	
+  Toolset	
+  Benchmarking	
+   55	
+  	
+  
  
 Values of Fo and Fe calculated for Scalpel and AFLogical 
  
@@ -2980,51 +3374,68 @@ Based on the steps given in 5.2.1.1, table 5.3 was populated.
  
 Table 5.3 Test results ADB Autopsy Scalpel AFLogical 
 CHI Square Value 2.75 6.5 2.5 6.5 
-Degrees of freedom, d 8 8 5 5 
-f 
-2
-X based on d 15.51 15.51 11.07 11.07 
-.05 f 
+Degrees of freedom, df 8 8 5 5 
+X2.05 based on df 15.51 15.51 11.07 11.07 
 Null hypothesis True True True True 
  
 From the results of table 5.3, Null hypothesis for all the four tools comes out to be true and can be 
 accepted. (Refer 5.2.1 for Null hypothesis). Based on the independent variables the degrees of 
-freedom (d ) are chosen. The value of d corresponding to CHI Square is checked and as explained 
-f f 0.5
-2
-before if the value of X > CHI Square value then the null hypothesis is accepted. From table 5.3, 
-.05
-2 2
-the CHI Square value for: - ADB is 2.75 < 15.51 (X based on d ), Autopsy is 6.5 < 15.52 (X
-.05 f .05 
-2 2
-based on d ), Scalpel is 2.5 < 11.07 (X based on d ) and AFLogical is 6.5 < (X based on d ).  
-f .05 f .05 f
+freedom (df) are chosen. The value of df corresponding to CHI Square0.5 is checked and as explained 
+before if the value of X2.05 > CHI Square value then the null hypothesis is accepted. From table 5.3, 
+the CHI Square value for: - ADB is 2.75 < 15.51 (X2.05 based on df), Autopsy is 6.5 < 15.52 (X2.05 
+based on df), Scalpel is 2.5 < 11.07 (X2.05 based on df) and AFLogical is 6.5 < (X2.05 based on df).  
 And hence it can be accepted that the data extracted using the forensic tools is accurate to 
 successfully predict the outcome of a forensic investigation. 
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  56	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+	
+  
+56	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 5.3 Results Collation  
  
 Table 5.4 
@@ -3040,9 +3451,10 @@ Docx files ü?  ü?  ü?
 File attributes ü?  ü?  ü?  ü?  
 Time last accessed     ü?  ü?  
 Date created ü?    ü?  ü?  
-Application data recovery – ü?  ü?      
+Application data recovery – 
 Facebook, YouTube, Gmail, 
 Dropbox 
+ü?  ü?      
 Bluetooth transfer details ü?  ü?      
 Wi-Fi usage Details ü?  ü?      
 CPU utilization IV II III I 
@@ -3071,8 +3483,13 @@ four tools were accepted. (Refer section 5.2.1 for null hypothesis).
  
  
  
- Forensic	  Toolset	  Benchmarkin	  g 57	  
-	  
+ 
+Forensic	
+  Toolset	
+  Benchmarking	
+   57	
+  	
+  
 5.4 Summary  
  
 From the results of Accuracy test, ADB was the best tool in data recovery and information retrieval. 
@@ -3088,12 +3505,16 @@ analysis and validation test.
  
  
  
-  58	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+  
+58	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
  
 Conclusion 
  
-6 
  
  
  
@@ -3141,8 +3562,14 @@ one.
 II. Distinguish the best approaches presently used for Android forensics 
  
 Reviewing the techniques and methods used by Government and international forensic groups like 
-NIST and ACPO completed this objective. NIST [26] and ACPO [27] were identified and studied. Forensic	  Toolset	  Benchmarkin	  g 59	  
-	  
+NIST and ACPO completed this objective. NIST [26] and ACPO [27] were identified and studied. 
+6 
+Forensic	
+  Toolset	
+  Benchmarking	
+   59	
+  	
+  
 Also practices by viaForensics [1] was distinguished and reviewed. Besides the standard methods 
 used by these international agencies, some other methods which are not as efficient as standard ones 
 were also studied. 
@@ -3184,8 +3611,7 @@ the tools were very expensive and license required to use them was not granted t
 professionals. The project had to switch from hardware forensic tools to open source free software 
 forensic tools.  
  
- [28] [9]
-6.3 Future Work 
+6.3 Future Work [28] [9] 
  
 The future work for this project will be based on the newer versions of the Android operating 
 system. Studied has to be done to check whether the file system used by the Android devices is still 
@@ -3194,8 +3620,13 @@ the future versions of Android operating system. The technique presented in this
 device can be more advanced with less possibilities of bricking the device. Also new methods to 
 bypass the phone lock/pattern will be a great step towards future work. 
  The production of high-end smart phones poses a high impact on digital forensic investigation, and 
-hence requires a better analysis on a device-by-device basis. The new generation mobile phones and 60	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+hence requires a better analysis on a device-by-device basis. The new generation mobile phones and 
+60	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 operating systems are becoming largely independent of the hardware. This can help with data 
 extraction and examination by lessening the need to learn about the different devices and the 
 platform they are operating on.  
@@ -3244,8 +3675,13 @@ contribution in criminal investigations.
  
  
  
- Forensic	  Toolset	  Benchmarkin	  g 61	  
-	  
+ 
+Forensic	
+  Toolset	
+  Benchmarking	
+   61	
+  	
+  
 Bibliography 
  
 1) Andrew Hoog (2011). Android forensics. 225 Wyman Street, Waltham, MA 02451, USA: 
@@ -3295,8 +3731,13 @@ AND REPORTING. In: - Wind Resource Assessment Handbook. CESTM, 251 Fuller Road A
 NY 12203: AWS Scientific,. 9.1 - 9.15. 
 22)James P. Key. (2010). CHI Square. Available: 
 http://www.okstate.edu/ag/agedcm4h/academic/aged5980a/5980/newpage28.htm. Last accessed 24 
-September 2012. 62	   Forensic	  ToolsetB 	  enchmarking	  
-	  
+September 2012. 
+62	
+   Forensic	
+  Toolset	
+  Benchmarking	
+  	
+  
 23)Preacher, K. J.. (2001). Calculation for the Chi-Square Test. Available: 
 http://www.quantpsy.org/chisq/chisq.htm. Last accessed 23 September. 
 24) Georgina Enzer. (2012). Global mobile penetration hits 85%. Available: 

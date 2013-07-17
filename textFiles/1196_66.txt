@@ -1,10 +1,11 @@
+1 
+ 
 Abstract 
 With the trend that people rely on integrated devices, such as mobiles and computers, 
 low power consumption has become a paramount requirement in recent years. 
 Reducing the supply voltage to sub-threshold region is one of the effective methods to 
 combat low energy dissipation as dynamic power reducing quadratically will supply 
-voltage  . However, how to make the device work under sub-threshold region must 
-  
+voltage    . However, how to make the device work under sub-threshold region must 
 be figured out and the critical parameters influencing the reliability of the circuit need 
 to be studied. 
 In order to achieve ultra low power at sub-threshold operation, we did a lot of 
@@ -23,8 +24,9 @@ SRAM designs, summarized and analysed the reliability of the sub-threshold desig
 Key words---- SRAM, sub-threshold, reliability, static noise margin (SNM) 
  
   
-1 
- Declaration 
+3 
+ 
+Declaration 
 A dissertation is submitted to the University of Bristol in accordance with the 
 requirements of the degree of Master of Science in the Faculty of Engineering. It has 
 not been submitted for any other degree or diploma of any examining body. Except 
@@ -34,8 +36,9 @@ where specifically acknowledged, it is all the work of the Author.
  
 Zhang Yue, September 2012 
   
-3 
- Contents 
+4 
+ 
+Contents 
 ABSTRACT ...................................................................................................................................... 1 
 ACKNOWLEDGEMENTS .............................................................................................................. 2 
 DECLARATION .............................................................................................................................. 3 
@@ -74,8 +77,9 @@ LIST OF ABBREVIATIONS ..........................................................
 3.2.4 Write-Enable and Read-Enable Circuit Design .................................................................... 34 
 3.2.5 Sense Amplifier Design ......................................................................................................... 35 
 3.2.6 Input / Output Buffer Design ................................................................................................. 36 
-4 
- 3.2.7 Write and Read Control Sequences ....................................................................................... 37 
+5 
+ 
+3.2.7 Write and Read Control Sequences ....................................................................................... 37 
 3.3 DETAILED 8T SUB-THRESHOLD SRAM DESIGN ............................................................................ 37 
 3.3.1 Overview of the 8T Sub-threshold SRAM Cell Design .......................................................... 38 
 3.3.2 Pre-Charge Circuit Design .................................................................................................... 39 
@@ -100,38 +104,47 @@ BIBLIOGRAPHY....................................................................
 APPENDIX ..................................................................................................................................... 60 
  
   
-5 
- List of Figures 
+6 
+ 
+List of Figures 
 Figure 1.1 Simplified Classification of Memory Unit 13 
 Figure 2.1 MOS sub-threshold characteristics (Razavi 2011) 15 
-Figure 2.2 Results of the reliable-circuit minimum energy algorithm  16 
+Figure 2.2 Results of the reliable-circuit minimum energy algorithm  
 applied to test circuit (Keller 2011) 
+16 
 Figure 2.3 Store/Stolen represents the 6T SRAM cell state (Li et al. 2011) 19 
 Figure 2.4 Leakage current in one bitline (Wang 2010) 20 
 Figure 2.5 MOS symbols 21 
 Figure 2.6 Structure of a NMOS device (Razavi 2001) 22 
-Figure 2.7 Six-transistor CMOS SRAM cell  22 
+Figure 2.7 Six-transistor CMOS SRAM cell  
 (Rabaey, Chandrakasan & Nikolic 2003) 
-Figure 2.8 Simplified model of SRAM cell during read (Q=1)  23 
+22 
+Figure 2.8 Simplified model of SRAM cell during read (Q=1)  
 (Rabaey, Chandrakasan & Nikolic 2003) 
-Figure 2.9 Simplified model of SRAM cell during write (Q=1)  24 
+23 
+Figure 2.9 Simplified model of SRAM cell during write (Q=1)  
 (Rabaey, Chandrakasan & Nikolic 2003) 
-Figure 2.10 IWL-VC SRAM with Gate Leakage Currents when Cell Holds”0” 25 
+24 
+Figure 2.10 IWL-VC SRAM with Gate Leakage Currents when Cell Holds”0” 
 (Anand &Chandra 2011) 
+25 
 Figure 2.11 Proposed PP-SRAM Cell (Holding”0”) (Anand &Chandra 2011) 26 
 Figure 2.12 Schematic of the 10T Sub-threshold Bitcell (Calhoun 2007) 26 
 Figure 2.13 Decoupled 10T SRAM cells (Kim et al. 2008) 27 
 Figure 3.1 SRAM structure (Pavlov & Sachdev 2008) 29 
 Figure 3.2 The conventional 6T SRAM cell 30 
-Figure 3.3 The cross-coupled inverter with noise source included  30 
+Figure 3.3 The cross-coupled inverter with noise source included  
 (Wang 2010) 
+30 
 Figure 3.4 SNM estimation based on maximum square (Wang 2010) 30 
 Figure 3.5 6T sub-threshold SRAM structure 32 
 Figure 3.6 Pre-charge circuit for 6T 34 
-6 
- Figure 3.7 Write and read-driver circuit 34 
-Figure 3.8 YMUX circuit with a latch-type sense amplifier 34 
+7 
+ 
+Figure 3.7 Write and read-driver circuit 34 
+Figure 3.8 YMUX circuit with a latch-type sense amplifier 
 (Pavlov & Sachdev 2008) 
+34 
 Figure 3.9 Conventional current mirror SA circuit 35 
 Figure 3.10 Unstable outputs signals with current mirror SA 36 
 Figure 3.11 Latch type SA 36 
@@ -149,22 +162,24 @@ Figure 4.6 Simulation of 6T SRAM design 46
 Figure 5.1 Energy drawn for 8T sub-threshold design 48 
 Figure 5.2 Simulated SNM for 6T read/hold 48 
 Figure 5.3 Simulated SNM of 8T near and sub-threshold 49 
-Figure 5.4 Simulated SNM for 6T read/hold under near and sub-threshold 49 
+Figure 5.4 Simulated SNM for 6T read/hold under near and sub-threshold 
 region 
-Figure 5.5 SNM versus   50 
-  
+49 
+Figure 5.5 SNM versus     50 
 Figure 5.6 Simulated SNM with L and CR varying 51 
 Figure 5.7 SNM versus PR 51 
 Figure 5.8 SNM versus temperature 53 
-7 
- List of Tables 
+8 
+ 
+List of Tables 
 Table 5.1 8T Read SNM variety 49 
 Table 5.2 SNM varying with L and CR changing 51 
 Table 5.3 SNM varying with size changing 52 
  
   
-8 
- List of Abbreviations 
+9 
+ 
+List of Abbreviations 
 ABB Adaptive Body Biasing 
 BL & BLB Bitline & Bitline Bar- the true and the complementary 
 input/output lines of a column of SRAM cells 
@@ -189,8 +204,9 @@ PR Pullup Ratio
 PTMs Predictive Technology Models 
 PVT Process, Voltage, Temperature - a set of conditions affecting  
 the circuit 
-9 
- Q The point named Q 
+10 
+ 
+Q The point named Q 
 QB The opposite point named QB 
 RAM Random Access Memory 
 RBL Read Bitline 
@@ -203,10 +219,8 @@ SAE Sense Amplifier Enable Signal
 SL Select Line 
 SNM Static Noise Margin 
 SRAM Static Random Access Memory 
-Sub-  Sub-threshold Voltage 
-  
-SVT Standard   
-  
+Sub-    Sub-threshold Voltage 
+SVT Standard     
 TDDB Time-Dependent Dielectric Breakdown 
 ULP Ultra-Low-Power 
 VCVS Voltage Controlled Voltage Sources 
@@ -215,8 +229,9 @@ WL Word Line
 WWL Write Word Line 
 6T or 8T Six Transistors or Eight Transistors 
   
-10 
- 1. Introduction 
+11 
+ 
+1. Introduction 
 1.1 Aims and Objectives 
 Current trends show that minimizing power consumption is a paramount requirement 
 in the design of integrated circuits (Keller et al. 2011). Power consumption has 
@@ -226,8 +241,7 @@ embedded applications require extremely low power compromising real-time
 performance. These low power devices are generally designed using sub-threshold 
 based design techniques. Such techniques have proven to be useful for 
 ultra-low-power (ULP) and low-energy applications since dynamic energy 
-consumption is reduced exponentially with supply voltage   and the minimum 
-  
+consumption is reduced exponentially with supply voltage     and the minimum 
 energy operation usually occurs in the sub-threshold region (Calhoun et al. 2009). 
 However, a major challenge in the ultra low power design of circuits, particularly in 
 memory based circuits and systems, is reliable sub-threshold design. This is because 
@@ -252,8 +266,9 @@ improvement. After targetable reliability analysis, appropriate actions will be 
 mitigate the effects of those failures. In order to better carry out further research work, 
 we must figure out the importance of reliability first. 
 Take SRAM as an example, we use it as a significant part of the computer. Lack of 
-11 
- reliability will reflect on circuit instability and design life decrease, which will cause 
+12 
+ 
+reliability will reflect on circuit instability and design life decrease, which will cause 
 not only extra costs but also reputation problems. There are a number of reasons why 
 reliability is an important product attribute, including: 
 • Customer Satisfaction. If the device has instability in the performance or has less 
@@ -289,22 +304,17 @@ From reading the papers (Calhoun et al. 2006), (Calhoun et al. 2009), (Keller et
 designers are expected to explore approaches for the lowest possible power 
 consumption, which is well known as ultra low power (ULP). To combat power 
 consumption issues, lower voltage is expected to be used in devices. Both the static 
-and dynamic power are reduced quadratically as the supply voltage   is reduced. 
-  
-12 
- And the relationship between supply voltage and dynamic power dissipation can be 
+and dynamic power are reduced quadratically as the supply voltage     is reduced. 
+13 
+ 
+And the relationship between supply voltage and dynamic power dissipation can be 
 seen in equation (1.1) (Wang 2010). 
- 
-                                                         (1.1) 
-         
-Where,   represents the frequency of energy consuming transitions,   is the 
-     
-supply voltage, and   is the load capacitance.  
- 
-The ultra-low-power performance can be achieved by reducing   to sub-threshold 
-  
-region, as   has a quadratic effect. And sub-threshold operation as the potential 
-  
+                                       
+                            (1.1) 
+Where,      represents the frequency of energy consuming transitions,     is the 
+supply voltage, and    is the load capacitance.  
+The ultra-low-power performance can be achieved by reducing     to sub-threshold 
+region, as     has a quadratic effect. And sub-threshold operation as the potential 
 technology for large energy savings is being examined and used in ULP design 
 (Jorgenson 2010).As Keller et al. (2011) mentioned, the minimum-energy operating 
 point generally occurs near the sub-threshold voltage. Low voltage operation can 
@@ -328,16 +338,21 @@ We take SRAM as a first case to study in this project. And the details of read a
 write operation will be introduced later. 
 Memory
 ROM RAM
-MASK PROM DRAM
 SRAM
-(EPROM, EEPROM, (SDRAM, 
-ROM
 (Static RAM)
-FLASH...) DDR SDRAM...)
+DRAM
+(SDRAM, 
+DDR SDRAM...)
+PROM
+(EPROM, EEPROM, 
+FLASH...)
+MASK 
+ROM
  
 Figure 1.1 Simplified Classification of Memory Unit 
-13 
- The current advance of SRAM has presented the six transistors (6T), eight transistors 
+14 
+ 
+The current advance of SRAM has presented the six transistors (6T), eight transistors 
 (8T) and even twelve transistors (12T), and the 6T SRAM cell is commonly used. 
 However, when we use a low voltage operation for traditional 6T SRAM to get lower 
 leakage power and active energy, there exists some limitations. Numerous articles, e.g. 
@@ -351,8 +366,7 @@ SRAMs. What has been examined is that the low voltage operation can indeed reali
 the energy saving and stability. 
 SRAMs comprise a significant percentage of the total power for many digital chips. 
 Besides, SRAMs leakage can dominate total chip leakage. Furthermore, SRAMs with 
-lower   can reduce leakage power and access energy. Therefore, for system 
-  
+lower     can reduce leakage power and access energy. Therefore, for system 
 integration, SRAM must become capable of operating at sub-threshold voltage that is 
 compatible with sub-threshold combinational logic (Calhoun et al. 2007). To 
 overcome the difficulties of operating an SRAM in sub-threshold requires both circuit 
@@ -360,8 +374,9 @@ and architectural innovations. Considering the critical parameters affecting the
 stability of SRAM circuits, such as noise margin and device scale, the new detecting 
 method and innovative SRAM are proposed and will be introduced in detail later. 
   
-14 
- 2. Sub-threshold technology 
+15 
+ 
+2. Sub-threshold technology 
 This chapter is about sub-threshold technology and is divided into five parts. Firstly, 
 the sub-threshold technology will be introduced, and the following parts will 
 correspond to the circuit parameters affecting the sub-threshold circuit. The recent 
@@ -374,37 +389,27 @@ method to reduce energy consumption. To learn the sub-threshold technology well,
 have read the book Design of Analog CMOS Integrated Circuit (Razavi 2011) which 
 introduces the sub-threshold technology clearly. 
 As the book mentioned (Razavi 2011), when we analyse the MOSFET, we have 
-assumed that the device turns off abruptly as   drops below  . But for 
-    
- ≈    some current flows from D to S still exists in reality. Even for  <  , 
-        
-  is not infinitely small, but it exhibits an exponential relationship with  . We call 
-   
-it “Subthreshold conduction”. The region where   is higher than the threshold 
-  
+assumed that the device turns off abruptly as     drops below     . But for 
+   ≈      some current flows from D to S still exists in reality. Even for    <    , 
+   is not infinitely small, but it exhibits an exponential relationship with    . We call 
+it “Subthreshold conduction”. The region where     is higher than the threshold 
 voltage region is known as a strong inversion layer. And the area below the threshold 
 voltage is known as the sub-threshold or weak inversion layer. 
-For   greater than roughly 200mV, its formula can be represented as: 
-  
- 
-  
-                                                            (2.1) 
-  
-  
- 
-Where     is a no ideality factor. From this formula, we have seen that as   
-  
-falls below  , the drain current drops at a finite rate. With typical values of   and 
-  
-temperature,   must decrease by approximately 80mV for   to decrease by one 
+For     greater than roughly 200mV, its formula can be represented as: 
+                                  
    
+   
+                            (2.1) 
+Where     is a no ideality factor. From this formula, we have seen that as     
+falls below    , the drain current drops at a finite rate. With typical values of   and 
+temperature,     must decrease by approximately 80mV for    to decrease by one 
 decade (Fig. 2.1). 
  
 Figure 2.1 MOS sub-threshold characteristics (Razavi 2011) 
-15 
- We can see that using sub-threshold technology in MOS devices can achieve a higher 
-gain, which the exponential dependence of   upon   in sub-threshold operation 
-   
+16 
+ 
+We can see that using sub-threshold technology in MOS devices can achieve a higher 
+gain, which the exponential dependence of    upon     in sub-threshold operation 
 suggests. However in order to meet this condition, only a large device width or low 
 drain current happens. And this will be one of the challenges when we try to realize 
 scaling device. 
@@ -428,29 +433,26 @@ intra-die variation and statistical noise margin data must be considered. After
 collecting statistical noise margin data and considering total energy per operation, 
 they proposed the search algorithm and the reliable–circuit minimum energy 
 algorithm results for 1M inverter test circuit are shown in Fig. 2.2. P (L, W) and N (L, 
-W) mean PMOS/NMOS sized with length and width.   is the total energy per 
-   
+W) mean PMOS/NMOS sized with length and width.      is the total energy per 
 operation in a digital circuit. This figure shows each energy operating point status 
 with P (L, W) and N (L, W) given for each point in nanometers. 
  
 Figure 2.2 Results of the reliable-circuit minimum energy algorithm applied to test circuit  
 (Keller 2011) 
-16 
- Random variation and minimized energy are important components when we research 
+17 
+ 
+Random variation and minimized energy are important components when we research 
 into CMOS circuit reliability. Calhoun and Khanna (2009) also give us the strategies 
 to combat random variation and minimize energy for nodes below 45nm. In this paper, 
 they refine predictive technology models (PTMs) to capture the scaling trends of 
 low-power CMOS technologies and their effect on sub-threshold circuits. They find 
 that there is a net improvement in minimum energy with scaling in the LP 
-technologies. Although   is increasing with scaling, the improvement in delay 
-   
+technologies. Although      is increasing with scaling, the improvement in delay 
 results in a net improvement in energy. Variation fundamentally limits logic noise 
-margin (NM) and SRAM data retention voltage (DRV).   and L knobs for 
-  
+margin (NM) and SRAM data retention voltage (DRV).     and L knobs for 
 minimum energy become more useful in scaled technologies generally, but targeted 
 application of voltage knobs to specific circuit contexts are also necessary for 
-maintaining sub-  functionality (Calhoun et al. 2009). 
- 
+maintaining sub-   functionality (Calhoun et al. 2009). 
 2.2.2 Static Noise Margin 
 From reading the papers, we realized that numerous researchers focus on noise issues. 
 Noise trades with power dissipation, speed, and linearity make it be concerned as 
@@ -465,27 +467,21 @@ address the functional yield problem in sub-threshold circuit. The noise margin 
 amount by which the signal exceeds the threshold for a proper '0' or '1'. And the SNM, 
 as the name suggests, corresponds to a static form of analysis. 
 In their research, SNM is calculated by way of a DC sweep and is independent of 
-output load. Given any two gates  ,   (Keller et al. 2011), where    is 
-   
-driving  , the SNM is defined as: 
- 
-                                                      (2.2) 
-       
-                                                       (2.3) 
-       
-  
-                                                          (2.4) 
-  
+output load. Given any two gates    ,     (Keller et al. 2011), where     is 
+driving   , the SNM is defined as: 
+                                                             (2.2) 
+                                                              (2.3) 
+                                                            (2.4) 
 Keller (2011) also mentioned noise margin in sub-threshold logic circuits when they 
 examined the impact of technology scaling to 22nm on sub-threshold circuit design. 
 To investigate the scaling of LP processes, they incorporated variability into the 
-models, such as local   variation due to random dopant fluctuations (RDF). For a 
-  
+models, such as local     variation due to random dopant fluctuations (RDF). For a 
 large circuit, parameters like delay and leakage current are less affected by RDF. 
 However, due to inadequate SNM, RDF threatens the basic functionality of the circuit. 
 So, in their research, they characterize the SNM for logic gates. 
-17 
- 2.2.3 Potential Parameters Affecting the Circuit Reliability.  
+18 
+ 
+2.2.3 Potential Parameters Affecting the Circuit Reliability.  
 Introducing reliability analysis is an important step in taking corrective action, 
 ultimately leading to a product that is more reliable. Li and Qin (2006) used a simple 
 SRAM circuit, 1-bit six-transistor cell with a commercial 0.25-?m technology, as an 
@@ -497,10 +493,8 @@ The main effects of HCI on the device electrical characteristics are threshold-v
 drift and transconductance (gm) degradation. They use SPICE simulation to prove 
 that pass transistors in an SRAM cell receive more severe damages because of 
 bidirectional HCI stresses. As this paper mentioned, after SRAM circuit design and 
-device lifetime calculation are prepared, the SRAM circuit with HCI-induced    
- 
-elements was simulated at different stress times to check its functionality.    is 
- 
+device lifetime calculation are prepared, the SRAM circuit with HCI-induced     
+elements was simulated at different stress times to check its functionality.     is 
 only one parameter in HCI failure equivalent circuit model, and it characterizes drain 
 current reduction due to mobility degradation resulting from HCI-induced interface 
 charge and oxide charge. They made the conclusion that HCI had significant effects 
@@ -509,17 +503,16 @@ sizing, gate topology transform, and input-signal scheduling are presented in
 Hot-Carrier Reliability of MOS VLSI Circuits. Norwell. (Leblebici & Kang 1993). 
 B. Time-dependent dielectric breakdown (TDDB).  
 As Li, X.J. etc. mentioned, there are four topologically distinct oxide breakdown 
-locations in the SRAM cell shown in Fig. 2.3 store-to-stolen, store-to- , 
-  
+locations in the SRAM cell shown in Fig. 2.3 store-to-stolen, store-to-    , 
 store-to-gnd, and gate-to-diffusion of pass transistors. Store-to-Stolen breakdown and 
 gate-to-diffusion breakdown of pass transistors reduce the bias temperature instability 
-(BTI) differential voltage and output swing; whereas breakdowns at Store-to-  and 
-  
+(BTI) differential voltage and output swing; whereas breakdowns at Store-to-    and 
 Store-to-gnd increase the leakage current at the opposite transistors and degrade the 
 cell stability and static noise margin (SNM). Most SRAM cells become unstable 
 without sufficient SNM.  
-18 
-  
+19 
+ 
+ 
 Figure 2.3 Store/Stolen represents the 6T SRAM cell state (Li et al. 2011). 
 In the paper (Li et al. 2011), they took the second step to simulate SRAM circuit 
 reliability with inclusion of both TDDB and HCI failure equivalent circuit models. 
@@ -543,8 +536,9 @@ need to be found and examined.
 2.3.2 Sense Amplifier Problems 
 The sense amplifier is the critical component in SRAM design. The speed and power 
 dissipation of the whole SRAM design is extremely affected by the performance of 
-19 
- sense amplifier (Wang 2010). Therefore, trying to design the appropriate sense 
+20 
+ 
+sense amplifier (Wang 2010). Therefore, trying to design the appropriate sense 
 amplifier circuit will be one of the challenges in this project. And the details of 
 examining various sense amplifier circuits will be introduced in chapter3. 
 2.3.3 Voltage Margin and On-off Current Ratio reduction of Sub-threshold 
@@ -557,8 +551,7 @@ exist and influence the stability of the circuit.
 2.3.4 Reduced Number of Cells per Bitline 
 As Wang (2010) mentioned, the total number of cells per bitline will be reduced when 
 the conventional SRAM cells are used in sub-threshold design. This is because the 
-ratio between   (read current of accessed cell) and   (leakage current of 
-           
+ratio between       (read current of accessed cell) and          (leakage current of 
 un-accessed cell) is reduced. The leakage current in one bitline is shown in Fig. 2.4 
 (Wang 2010). Besides, as Verma & Chandrakasan mentioned at most 64 cells could 
 be attached to one bitline if no other technique was applied. 
@@ -568,8 +561,9 @@ However, in this project, we will focus on only one cell in the column and do re
 on designing and examining the reliability of a successful sub-threshold SRAM 
 circuit. Other components in SRAM such as pre-charge (PC), write and read sequence 
 generation circuits, etc., are also to be designed properly and these will be introduced 
-20 
- in detail in chapter3. 
+21 
+ 
+in detail in chapter3. 
 In conclusion, the design and analysis of sub-threshold SRAM for this project are 
 facing great challenges. 
 2.4 Recent Advance in Sub-threshold Design of SRAMs 
@@ -601,16 +595,13 @@ and even to implement a buffer in 10T SRAM.
  
 Figure 2.5 MOS symbols 
 Fig. 2.6 shows a simplified structure of an n-type MOS (NMOS) device. When 
-21 
-     enough, carriers are attracted into the channel region to initiate conduction. 
-    
+22 
+ 
+        enough, carriers are attracted into the channel region to initiate conduction. 
 The transistor is turned on, and a channel has been created which allows current to 
-flow between the drain and the source.   is threshold voltage, and influenced by 
-  
-body voltage drain voltage and channel length and so on. And when     
-    
- , the channel is cut off at the drain end. Further increases in   have little effect 
-    
+flow between the drain and the source.     is threshold voltage, and influenced by 
+body voltage drain voltage and channel length and so on. And when         
+   , the channel is cut off at the drain end. Further increases in     have little effect 
 on the current.  
  
 Figure 2.6 Structure of a NMOS device (Razavi 2001) 
@@ -621,18 +612,17 @@ PMOS has opposite polarity with NMOS.
 2.4.2 Sub-threshold 6T SRAM Design 
 As the book (Rabaey, Chandrakasan & Nikolic 2003) mentioned, the generic SRAM 
 cell is introduced in Fig. 2.7. It consists of six transistors per bit. The word line (WL), 
-which replaces the clock and controls the two pass transistors   and  , enable 
-  
+which replaces the clock and controls the two pass transistors    and  , enable 
 access to the cell. Two bit line (BL) transferring both the stored signal and its inverse 
 are required, which improves the noise margins during both read and write operations. 
 The middle of this circuit, which is used as SR latch, structures two pair of inverters 
-through    . 
-  
+through     . 
  
 Figure 2.7 Six-transistor CMOS SRAM cell (Rabaey, Chandrakasan & Nikolic 2003) 
  
-22 
- A. Read Operation  
+23 
+ 
+A. Read Operation  
 The Electronics Handbook (Whitaker &Dorf 2005) defines the memory read and 
 write operation as: 
 When an address is present to a memory device, and sometimes after a 
@@ -643,14 +633,11 @@ memory write. When SRAM circuit is writing, data and an address are
 presented to the memory device with the activation of a write control signal. 
 Assume that a 1 is stored at Q. Furthermore, both bit lines are precharged to 2.5V 
 before the read operation is initiated. The read cycle is started by asserting the word 
-line, enabling both pass transistors   and   after the initial word-line delay. Then 
-  
+line, enabling both pass transistors    and   after the initial word-line delay. Then 
 the values stored in Q and Q’ are transferred to the bit lines by leaving BL at its 
-precharge value and by discharging BL’ through    . This is shown in Fig. 2.8. 
-  
+precharge value and by discharging BL’ through     . This is shown in Fig. 2.8. 
  
-Figure 2.8 Simplified model of SRAM cell during read (Q=1,    )  
-           
+Figure 2.8 Simplified model of SRAM cell during read (Q=1,               )  
 (Rabaey, Chandrakasan & Nikolic 2003) 
 B. Write Operation 
 Assume that a 1 is stored at Q. A 0 is written in the cell by setting BL’ to 1 and BL to 
@@ -659,10 +646,10 @@ can be simplified to the model shown in Fig. 2.9. And Q’ side of the cell cannot
 pulled high enough to ensure the writing of 1. The sizing constraint, imposed by the 
 read stability, ensures that this voltage is kept below 0.4V. Therefore, the new value of 
 the cell has to be written through transistor   (Rabaey, Chandrakasan & Nikolic 
- 
 2003). 
-23 
-  
+24 
+ 
+ 
 Figure 2.9 Simplified model of SRAM cell during write (Q=1)  
 (Rabaey, Chandrakasan & Nikolic 2003) 
 2.4.3 Low Gate Leakage SRAM Cells 
@@ -681,8 +668,9 @@ highlighted in a red circle), the static power consumption is not significant. A
 estimated that the extra power dissipation for a row of 128 SRAM cells is less than 4% 
 of the total static power dissipation. This method lowered the gate current leakage of 
 the cell up to 58%. 
-24 
-  
+25 
+ 
+ 
 Figure 2.10 IWL-VC SRAM with Gate Leakage Currents when Cell Holds”0”  
 (Anand &Chandra 2011) 
 B. PMOS Pass-transistor (PP) SRAM Cell 
@@ -692,14 +680,14 @@ structure. Compared to the basic 6T SRAM, the PP-SRAM cell has lower gate
 leakage. In PP-SRAM, two PMOS transistors (P3 and P4, which are shown and 
 highlighted in a red circle) replace the NMOS transistors (N3 and N4). This 
 replacement can decrease the gate leakage currents of the SRAM cell. 
-PMOS pass transistors with high   and forward biasing method in PP-SRAM cell 
-  
+PMOS pass transistors with high     and forward biasing method in PP-SRAM cell 
 structure were used to reduce both the gate oxide direct tunneling and the 
 sub-threshold currents. And they estimated by circuit simulation that the gate leakage 
 current was reduced by 27% and the total static power up to 45% (Anand &Chandra 
 2011). 
-25 
-  
+26 
+ 
+ 
 Figure 2.11 Proposed PP-SRAM Cell (Holding”0”) with Gate Leakage Currents  
 (Anand &Chandra 2011) 
 2.4.4 Sub-threshold 10T SRAM Cell Design 
@@ -707,8 +695,7 @@ When we focus on low voltage operation, the limitation of traditional 6T SRAM
 cannot be ignored. Calhoun (2007) explores the limits of low voltage operation for 
 traditional 6T SRAM and proposes an alternative bitcell that functions to much lower 
 voltages. Fig. 2.12 shows the schematic of the 10T sub-threshold bitcell. Transistors 
-    implement a buffer used for reading and removing the problem of Read 
-   
+       implement a buffer used for reading and removing the problem of Read 
 SNM by buffering the stored data during a read access. 
  
 Figure 2.12 Schematic of the 10T Sub-threshold Bitcell (Calhoun 2007) 
@@ -716,8 +703,9 @@ Because of the Read SNM issues, traditional 6T SRAM fails to write in sub-thresh
 Calhoun, etc. tested that the 10T bitcell could solve the Read SNM problem, 
 overcome the write problem and relax the bit-line integration limitation to allow 
 sub-threshold operation.  
-26 
- Kim et al. (2008) also discuss the 10T SRAM techniques. They give an overview of 
+27 
+ 
+Kim et al. (2008) also discuss the 10T SRAM techniques. They give an overview of 
 traditional 6T SRAM issues in sub-threshold region .That is: due to the reduced SNM, 
 poor writability, limited number of cells per bit-line, and reduced bit-line sensing 
 margin, 6T SRAMs fail to deliver sufficient density and yield requirements in the 
@@ -729,7 +717,7 @@ First, they use 10T SRAM cell to eliminate the read failure caused by data-depen
 bit-line leakage. Second, they utilize reverse short channel effect (RSCE) to improve 
 cell writability, reduce power consumption, improve logic performance and enhance 
 circuit immunity to process variations. After circuit simulation and analysis, they 
-realized a sub-threshold SRAM with 1k cells per bit-line operating at 0.2V and 27° C 
+realized a sub-threshold SRAM with 1k cells per bit-line operating at 0.2V and 27°C 
 (Kim et al. 2008). 
 2.5 Motivation of Proposal Research 
 From the review of research articles, we know that many emerging embedded 
@@ -737,8 +725,7 @@ applications use extremely low power with compromising real-time performance.
 These low power devices are generally designed using sub-threshold based design 
 techniques. Besides, these techniques have proven useful for ultralow-power (ULP) 
 and low-energy applications since dynamic energy consumption is reduced 
-quadratically with  and minimum energy operation usually occurs in the 
-  
+quadratically with    and minimum energy operation usually occurs in the 
 sub-threshold region (Keller et al. 2011). 
 However, a major challenge in the ultra low power design of circuits, particularly in 
 memory based circuits and systems, is reliability in the presence of faults induced by 
@@ -746,8 +733,9 @@ electromagnetic radiation. This is because low threshold voltage and aggressive
 technology scaling exacerbate the reliability. Hence, more research is required to 
 evaluate the reliability of sub-threshold circuits and systems. 
   
-27 
- 3. Sub-threshold SRAM Design 
+28 
+ 
+3. Sub-threshold SRAM Design 
 Memory cells can be roughly divided into static and dynamic structures. Static 
 structure form cross-coupled inverters to keep the data (Wang 2010) and they use the 
 regular fast logic process and do not require additional mask steps. Because 
@@ -767,20 +755,20 @@ shows an N*M memory SRAM, where N is the number of rows and M is the number
 of bits. The SRAM blocking diagram mainly contains the row decoder, input data 
 control, memory matrix, and column decoder and sense amplifiers. Their names and 
 functions are listed as follows (Pavlov & Sachdev 2008). 
-· Row Decoder: The row decoder gated by appropriate timing block signal decodes 
-X row address bits and selects one of the word lines   –  . 
-    
-· Column Decoder: Column decoders or column MUXs (YMUXs) addressed by Y 
+ Row Decoder: The row decoder gated by appropriate timing block signal decodes 
+X row address bits and selects one of the word lines    –     . 
+ Column Decoder: Column decoders or column MUXs (YMUXs) addressed by Y 
 address bits allow the sharing of a single sense amplifier among 2, 4 or more 
 columns. 
-· Sense Amplifier: Dynamic latch-type sense amplifier with differential inputs. 
+ Sense Amplifier: Dynamic latch-type sense amplifier with differential inputs. 
 Several SRAM cells in one column decoder are sharing a single sense amplifier. 
-· Timing Block: The majority of modern SRAMs are self-timed, i.e. all the internal 
+ Timing Block: The majority of modern SRAMs are self-timed, i.e. all the internal 
 timing is generated by the timing block within an SRAM instance. 
 In the following sections, the detailed design for each sub-threshold SRAM part will 
 be introduced. 
-28 
-  
+29 
+ 
+ 
 Figure 3.1 SRAM structure (Pavlov & Sachdev 2008) 
 3.2 Detailed 6T Sub-threshold SRAM Design 
 3.2.1 Conventional 6T SRAM 
@@ -789,26 +777,26 @@ the cell structure is shown in Fig. 3.2. It uses six transistors to store and ac
 and the four transistors in the center (M1-M4) form two cross-coupled inverters. The 
 cross-coupled inverter pair is the foundation of the static storage elements (Wang 
 2010).  
-29 
-  
+30 
+ 
+ 
 Figure 3.2 the conventional 6T SRAM cell 
 As Seevinck (1987) describe, the cell area and the stability are two important aspects 
 in SRAM design. The dimension can be reduced by fabrication technology scaling 
 down, while the stability is always a significant issue. To evaluate the stability of an 
 SRAM cell, SNM is widely used.  
-As shown in Fig. 3.3, the SNM is defined as the maximum value of   that can be 
- 
+As shown in Fig. 3.3, the SNM is defined as the maximum value of    that can be 
 tolerated by the SRAM cell before changing states (Wang 2010). We added two 
 voltage controlled voltage sources (VCVS) into the SRAM cell to detect the 
-maximum value of   not flipping cell state. 
- 
+maximum value of    not flipping cell state. 
  
 Figure 3.3 The cross-coupled inverter with noise source included (Wang 2010) 
  
 Figure 3.4 SNM estimation based on maximum square (Wang 2010) 
 As Wang (2010) indicated, read SNM and hold SNM can be found respectively 
-30 
- during read operation and at standby mode of SRAM cells. Besides, read SNM is 
+31 
+ 
+during read operation and at standby mode of SRAM cells. Besides, read SNM is 
 much more critical than hold SNM in studying the stability of the SRAM cell because 
 the former is much smaller than the latter. From the butterfly picture (Fig. 3.4), the 
 SNM can be estimated according to the maximum squared inside the two I-V curves. 
@@ -821,12 +809,10 @@ To implement successful read and write operation at sub-threshold region, the SR
 cell transistor sizing must be calculated appropriately. 
 As Rabaey, Chandrakasan, & Nikolic (2003) mentioned, when we analyse this 6T 
 sub-threshold SRAM read operation, assume that a ‘1’ is stored at ‘Q’ point and this is 
-the data we need to read. Firstly, both bitlines (BL and BLB) are pre-charged to  . 
-  
+the data we need to read. Firstly, both bitlines (BL and BLB) are pre-charged to    . 
 Then the word line is asserted, and both pass transistors M5 and M6 turn on. Because 
 a ‘1’ is stored in the cell, BL stays charged. However, BLB discharges through M6 
-and M4. It must be ensured that the QB point doesn’t rise too high before   is 
-   
+and M4. It must be ensured that the QB point doesn’t rise too high before      is 
 discharged or M1 might turn off (the inverter defined by M1/M3 switches), and the 
 memory cell will change state. The appropriate sizing of the transistors can efficiently 
 avoid accidentally writing a ‘1’ into the cell. This is called a read upset. To prevent 
@@ -834,15 +820,18 @@ this, the voltage on QB will be dictated by the equivalent on resistances of M6 
 M4. Think of them as simple resistors, which form a voltage divider. So, the 
 resistance of M6 must be larger than M4 (there is a stronger connection from QB to 
 ground rather than to the precharged bit line). The way to control the relative 
-on-resistances is to have appropriate Width/Length ratios. In other words,     
-    
-has to be less than    . Here, we define the Cell Ratio (CR) as equation (3.1). 
-    
-        
-        
-                  CR =  =  =                      (3.1) 
-        
-        
+on-resistances is to have appropriate Width/Length ratios. In other words,         
+has to be less than       . Here, we define the Cell Ratio (CR) as equation (3.1). 
+                  CR = 
+  
+  
+ = 
+       
+       
+ = 
+       
+       
+                     (3.1) 
 To avoid a read upset, the voltage on node QB should remain below the trip point of 
 the inverter pair for all process, noise, and operating conditions. CRs are usually 
 greater than 1.2 (most microprocessor fabrications use a minimum CR of 1.25 to 2.5). 
@@ -853,34 +842,37 @@ to say Vdd/2 so QB could never reach the switching threshold of M4 (remember, M4
 is only one half of an inverter and hence M4 actually won’t switch that easily). This 
 has performance benefits as well, since the voltage swing is now halved, and the 
 operation is hence faster (Rabaey, Chandrakasan, & Nikolic 2003). 
-31 
- Pre-charge
-M7 M8
-WL
-M1 M2
+32 
+ 
+Pre-charge
+Write-driver
 BL BLB
-Q
-QB
+WL
+Data-in
+Read-enable
+SAE
+OUT
+Cbl
+Cblb
+M1 M2
+M3 M4
 M5
 M6
-M3 M4
-Cblb
-Cbl
-Write-driver
+M7 M8
 M9 M10
-Data-in
 M11 M12
-Read-enable
-Q6 Q7
 Q1 Q2
 Q3 Q4
 Q5
-SAE
-OUT OUTB
+Q6 Q7
+OUTB
+Q
+QB
  
 Figure 3.5 6T sub-threshold SRAM structure 
-32 
- For the write cycle, assume that a ‘1’ is stored in the cell (Q = 1), and a ‘0’ is the data 
+33 
+ 
+For the write cycle, assume that a ‘1’ is stored in the cell (Q = 1), and a ‘0’ is the data 
 needing to be written in the cell. When write enable signal (WE) is asserted, BL will 
 discharge to ‘0’ through M9 and M11, while BLB is still charged to ‘1’. And this 
 causes the cell to change state if the devices are sized properly. 
@@ -898,11 +890,16 @@ Therefore, M5 should have the lower on-resistance than M1.
 The writing operation of the cell is reliable if Q point can be pulled low enough, and 
 the pullup ratio (PR) of the cell is defined as the size ratio between the PMOS pullup 
 and the NMOS pass transistor (Rabaey, Chandrakasan, & Nikolic 2003): 
-        
-        
-                 PR =  =  =                       (3.2) 
-        
-        
+                 PR = 
+  
+  
+ = 
+       
+       
+ = 
+       
+       
+                      (3.2) 
 We can write the transistor equations (M5 is in linear, M1 in saturation regimes), and 
 solve for the voltage at Q in terms of the W/L ratio of the devices. Because M5 is an 
 NMOS (higher mobility and hence lower resistance) and M1 is a PMOS, using 
@@ -912,18 +909,17 @@ Longer than minimum channel lengths may also be employed to further reduce the
 pullup ratio. This is necessary since the read sizing of the SRAM cell dictates that the 
 pass gate sizing should be minimized to prevent read disturbance. According to 
 Rabaey (2003), the PR should be less than 1.8. We define PR = 1 in this project. 
-In addition, the bit line capacitances   and   are in the pF range. Therefore, the 
-     
+In addition, the bit line capacitances     and      are in the pF range. Therefore, the 
 size of the transistor connected directly with bitline will be 10 times larger than 
 PMOS (M1 and M2) in the SRAM cell. 
 3.2.3 Pre-Charge Circuit Design  
 Before write and read operation are initiated, both BL and BLB should be pre-charged 
 firstly. In this project, we use PMOS as PC switch, shown as Fig. 3.6. When PC signal 
-is ‘0’, M7 and M8 turns on, then BL and BLB will be charged to  . Before 
-  
+is ‘0’, M7 and M8 turns on, then BL and BLB will be charged to    . Before 
 write-enable and read-enable signals are asserted, the PC will turn off. 
-33 
-  
+34 
+ 
+ 
 Figure 3.6 Pre-charge circuit for 6T 
 3.2.4 Write-Enable and Read-Enable Circuit Design 
 A. Write-driver 
@@ -931,8 +927,7 @@ In this project, we use M9 and M10 to implement the write-driver function. When
 write operation signal is enabled, M9 and M10 turns on. If a ‘1’ is waiting to be 
 written into the cell, M11 turns off while M12 turns on. BLB will discharge through 
 M10 and M12, and then QB point was pulled down to make M1 turn on, which makes 
-Q point voltage increase to  . Therefore, a ‘1’ is written into the cell successfully. 
-  
+Q point voltage increase to    . Therefore, a ‘1’ is written into the cell successfully. 
  
 Figure 3.7 Write and read-driver circuit 
 B. Read-enable circuit 
@@ -941,15 +936,15 @@ word line (WL) is asserted, the bit lines (BL and BLB) have discharged to a suff
 voltage differential, and then the SA is enabled by a high-to-low transition of SAE 
 pulse. Shortly after that, the column MUX/isolation transistors Q6 and Q7 are turned 
 off by YMUX signal changing low to high, isolating the highly capacitive bit lines 
-from the SA parts and preventing the complete discharge of   and  . Then the 
-     
+from the SA parts and preventing the complete discharge of     and     . Then the 
 positive feedback of the cross-coupled inverters Q1 ? Q3 and Q2 ? Q4 quickly drives 
 the low-capacitance outputs ‘OUT’ and ‘OUTB’ to the full swing complementary 
 voltages.  
  
 Figure 3.8 YMUX circuit with a latch-type sense amplifier (Pavlov & Sachdev 2008) 
-34 
- However, Pavlov and Sachdev’s circuit output will not be stable, because the output 
+35 
+ 
+However, Pavlov and Sachdev’s circuit output will not be stable, because the output 
 line is connected directly with the bitline during the whole operation except the short 
 isolation moment. Therefore, we have improved the YMUX switch to read-enable 
 switch with NMOS Q6 and Q7, shown in Fig. 3.7. Additionally, because the 
@@ -963,23 +958,24 @@ Fig. 3.9(a) (Seevinck, van Beers, & Ontrop 1991). Assume that a ‘1’ is stored in
 SRAM cell, Q3 will turn on shortly after read-enable (RE) and sense amplifier enable 
 (SAE) signal assert. And then the current of left side of SA flows to ground through 
 Q3 and Q5, which enable Q1 and Q2 to turn on. The output will be ‘1’ as current 
-flows from   through Q2. However, the current flowing from   through Q1 
-    
+flows from     through Q2. However, the current flowing from     through Q1 
 will influence the gate (G) current of Q1 and Q2, which even changes the state of the 
 Q2 switch during one read operation. To improve this SA, we separate the gate 
 current control of Q1 and Q3, and the improved SA is shown as Fig. 3.9(b). 
-Read-enable
-Read-enable
-Q1 Q2
-Q1 Q2
-OUT
-OUT
-Q3 Q4
-Q3 Q4
-Q5 Q5
 SAE
+Q1 Q2
+Q3 Q4
+Q5
+OUT
+Read-enable
+ 
 SAE
-  
+Q1 Q2
+Q3 Q4
+Q5
+OUT
+Read-enable
+ 
 Figure 3.9 Conventional current mirror SA circuit 
 However, because the current mirror SA has high sensitivity, some error signal may 
 be amplified and produce the unstable output signal. This is difficult to control and 
@@ -991,8 +987,9 @@ cycle, WL is asserted firstly, meanwhile, the QB point’s voltage will pullup abr
 as BLB presents a positive strong voltage. And then, the current will flow from BLB 
 to ground through M6 and M4. However, the differential voltage value between Q and 
 QB is not so obvious. Additionally, the switch fluctuation of CMOS which is caused 
-35 
- by voltage fluctuation also can be amplified by current mirror SA, which is not 
+36 
+ 
+by voltage fluctuation also can be amplified by current mirror SA, which is not 
 expected. 
  
 Figure 3.10 Unstable output signals with current mirror SA 
@@ -1016,8 +1013,9 @@ Figure 3.12 Stable outputs with latch type SA
 Inverter type read buffers are often applied in sub-threshold design, as it can satisfy 
 the speed requirement. The inverter type buffers are also used as data buffer and read 
 buffer in our project. 
-36 
- 3.2.7 Write and Read Control Sequences 
+37 
+ 
+3.2.7 Write and Read Control Sequences 
 After describing the whole architecture of the 6T sub-threshold SRAM and the design 
 of each part, the read and write sequences need to be explained for future analysis. 
  
@@ -1035,8 +1033,9 @@ After designing the 6T sub-threshold, we realized that more research needs to be
 on 8T sub-threshold SRAM design. And then more reliability analysis on 8T 
 sub-threshold SRAM design and the contrastive analysis between 6T and 8T 
 sub-threshold will be examined and introduced. 
-37 
- 3.3.1 Overview of the 8T Sub-threshold SRAM Cell Design 
+38 
+ 
+3.3.1 Overview of the 8T Sub-threshold SRAM Cell Design 
 The 8T sub-threshold SRAM design mainly including SRAM cell, pre-charge, write 
 driver, input/output, and read operation circuit, and the schematic of the cell is shown 
 in Fig. 3.14. To combat the challenges of sub-threshold SRAM design, this cell has a 
@@ -1047,34 +1046,35 @@ cell. Therefore, the SA circuit is no longer needed at 8T design (Wang 2010). Th
 details of how write and read operation operate will be introduced in the following 
 section. 
 Pre-charge
-M7 M8
-M21
-WWL
-RBL
-Vdd1
-M18
-RWL
-M1 M2
+Write-driver
 BL BLB
-M19
+WWL
+Data-in
+OUT
+Cbl
+Cblb
+M1 M2
+M3 M4
 M5
 M6
-M3 M4
-Cblb
-Cbl
-OUT
-Write-driver
+M7 M8
 M9 M10
-Data-in
 M11 M12
+Vdd1
+RBL
+RWL
+M21
+M18
+M19
  
 Figure 3.14 8T sub-threshold SRAM structure 
 To implement successful read and write operation at sub-threshold region, the SRAM 
 cell transistor sizing are also needs to be calculated appropriately. Based on CR and 
 PR calculation discussed before, the 8T sub-threshold SRAM cell has similarly sizing 
 with 6T sub-threshold SRAM design. The CR is also 2.5, and PR is 1. 
-38 
- 3.3.2 Pre-Charge Circuit Design  
+39 
+ 
+3.3.2 Pre-Charge Circuit Design  
 Different from 6T, a new line named read bitline (RBL) is added into the 8T 
 sub-threshold circuit. Therefore, PC needs to charge RBL as well before write and 
 read operation, shown in Fig.3.15. 
@@ -1105,13 +1105,15 @@ are separate to implement write operation control and read operation control. Th
 period of PC is set the same as 6T sub-threshold design. During write operation set, 
 the WE signal is synchronous with WWL. Different from 6T control sequences, read 
 operation has no relationship with WWL.  
-39 
-  
+40 
+ 
+ 
 Figure 3.16 Write and read operation timing sequence for 8T 
  
   
-40 
- 4. Software Introduction and Design Simulation  
+41 
+ 
+4. Software Introduction and Design Simulation  
 The purpose of design simulation is to check whether the designed circuits work as 
 expected or not before fabrication. And the circuit will be corrected considering the 
 feedback from simulation once there is any error, which will prevent the failure of the 
@@ -1137,8 +1139,9 @@ includes file title, parameter setting for PMOS and NMOS (which is shown and
 highlighted in a red circle); pulses form (which is shown and highlighted in a blue 
 circle), CMOS circuit model building (which is shown and highlighted in a yellow 
 circle). Besides, the setting for clock, delay and power are also needed. Considering 
-41 
- different needs and research, other functions such as power consumption, time delay 
+42 
+ 
+different needs and research, other functions such as power consumption, time delay 
 and etc. are written in the Hspice file. Finally, the predictive technology model (PTM) 
 for CMOS should be added.  
  
@@ -1152,8 +1155,9 @@ Figure 4.3 CMOS AND gate and OR gate circuits
 After building the model that corresponds to the CMOS circuits with Hspice language, 
 the simulation waveforms are shown in Fig. 4.4. V (a0) and V (b0) are input signals 
 and shown in first two row sub-windows, and V (cout) is the output signal.  
-42 
-   
+43 
+ 
+  
 (a) AND_gate waveform                 (b) OR_gate waveform 
 Figure 4.4 AND gate and OR gate Hspice simulation waveform 
 From the waveform we can get correct signal feedback, which is an important basis 
@@ -1169,8 +1173,7 @@ After thinking and solving the challenges, and designing each part of the circui
 introduced before, the 6T sub-threshold design with 0.22v as threshold voltage can 
 work successfully under sub-threshold voltage equaling 0.2v (which is the supply 
 voltage for the SRAM cell). The simulation results for both normal threshold 
-(      ) and sub-threshold (      ) are shown as Fig. 4.5. The input data 
-    
+(        ) and sub-threshold (        ) are shown as Fig. 4.5. The input data 
 are ‘1’, ‘0’, ‘1’ and then ‘0’. Write operation has been set firstly, and then read. The 
 PC, WL, WE and RE signals are set as introduced in chapter3 and shown in the first 
 four rows in the screenshot as Fig. 4.5(a). The next rows present the state of Q/QB 
@@ -1179,22 +1182,22 @@ read from output at 120ns, and a ‘0’ for second read operation at about 280ns, a
 then ‘1’, and ‘0’. Besides, the output waveform for normal supply voltage, which is 
 0.5v, is also simulated as Fig. 4.5(b), and the sub-threshold result shown in Fig. 4.5(c). 
 As the screen shows, the final simulation exports the results as expected. 
-43 
-  
+44 
+ 
+ 
 (a) PC, WL, WE, RE, data_in signal 
  
 (b) Normal threshold design simulation 
  
 (c) Sub-threshold design simulation 
 Figure 4.5 Simulation of 6T SRAM design 
-44 
- 4.2.2 8T Sub-threshold Design Simulation 
+45 
+ 
+4.2.2 8T Sub-threshold Design Simulation 
 The 8T sub-threshold design with 0.587v as threshold voltage can work successfully 
 under sub-threshold voltage equaling 0.4v (which is the supply voltage for the SRAM 
-cell). The simulation results for both normal threshold (      ) and 
-  
-sub-threshold (      ) are shown as Fig. 4.6. The input data are ‘1’ and‘0’, 
-  
+cell). The simulation results for both normal threshold (         ) and 
+sub-threshold (        ) are shown as Fig. 4.6. The input data are ‘1’ and‘0’, 
 shown as Fig. 4.6(b). Write operation has been set firstly, and then read.  
 Different from 6T sub-threshold SRAM design, the 8T read operation connected with 
 a new word line named read word line (RWL). The PC, WWL, WE and RWL signal 
@@ -1210,16 +1213,18 @@ As the screen shows, the final simulation exports the results, which is a ‘1’ an
 (a) PC, WWL, WE, RWL signal 
  
 (b) Input signal (first ‘1’, and then ‘0’) 
-45 
-  
+46 
+ 
+ 
 (c) Normal threshold design simulation 
  
 (d) Sub-threshold design simulation 
 Figure 4.6 Simulation of 6T SRAM design 
  
   
-46 
- 5. Reliability Analysis of Sub-threshold Design 
+47 
+ 
+5. Reliability Analysis of Sub-threshold Design 
 In order to evaluate the inherent reliability of a device, find the critical characteristics 
 which influence reliability, and pinpoint potential areas for reliability improvement, 
 the reliability analysis is significant. SNM as the paramount method to evaluate the 
@@ -1231,49 +1236,28 @@ models (PTMs) technology will be introduced. And then, the critical parameters
 affecting reliability of sub-threshold design will be carried out. 
 5.1 Comparison Near-threshold and Sub-threshold Design 
 As Keller (2011) mentioned, to implement ultra-low energy operation, reducing the 
-supply voltage below the process nominal   is necessary. Additionally, the power 
-  
+supply voltage below the process nominal     is necessary. Additionally, the power 
 consumption and reliability comparison between near-threshold and sub-threshold 
 design is significant. Before the reliability analysis of sub-threshold SRAM design, 
 some research on near-threshold also has been introduced in the following sections. 
 5.1.1 Power Consumption 
 Energy reduction usually motivates sub-threshold design (Calhoun et al. 2009). This 
-section shows the energy variety with supply voltage   decreasing. Take 8T 
-  
+section shows the energy variety with supply voltage     decreasing. Take 8T 
 sub-threshold as an example, dynamic and leakage energy consumption and total 
 energy reduction for per operation are shown in Fig 5.1 with Hspice simulation. The 
-threshold voltage for 8T sub-threshold design is 0.587v. To see reducing   effects 
-  
+threshold voltage for 8T sub-threshold design is 0.587v. To see reducing     effects 
 on energy, we changed the supply voltage for the SRAM cell from 0.8v (which is 
 normal voltage) to 0.4v (which is sub-threshold voltage). And 0.57v~0.6v can be 
 considered as a near-threshold region. As the bar chart shows, the dynamic energy 
-reduced quadratically with   decreasing, while the leakage energy increased 
-  
+reduced quadratically with     decreasing, while the leakage energy increased 
 slowly. As Calhoun (2009) and Keller (2011) mentioned the minimum energy 
 operating point always occurs at the sub-threshold region, and the minimum-energy 
 operating point depends largely upon the ratio of dynamic to leakage energy. 
 As Keller (2011) mentioned, the issue of reliability is critical when facing the random 
-parameter variation and CMOS circuits become less reliable as   is reducing. 
-  
-Therefore, it is necessary for the comparison of reliability analysis with changing  . 
-  
-47 
- 2.20E-13 
-2.00E-13 
-1.80E-13 
-1.60E-13 
-1.40E-13 
-1.20E-13 
-1.00E-13 Etot 
-8.00E-14 
-Edyn 
-6.00E-14 
-Elkg 
-4.00E-14 
-2.00E-14 
-0.00E+00 
-0.8 0.7 0.6 0.5 0.4 
-Supply Voltage 
+parameter variation and CMOS circuits become less reliable as     is reducing. 
+Therefore, it is necessary for the comparison of reliability analysis with changing    . 
+48 
+ 
  
 Figure 5.1 Energy drawn for 8T sub-threshold design 
 5.1.2 SNM Comparison Analysis between Near-threshold and Sub-threshold 
@@ -1288,27 +1272,40 @@ following part, SNM is always referred to as read SNM unless specified.
  
 Figure 5.2 Simulated SNM for 6T read/hold  
 Take 8T SRAM cell as an example, as Fig. 5.3 shows, it can be seen obviously that 
-the SNM of sub-threshold design (  = 0.4v) is much lower than near threshold 
-  
-design (  = 0.6v). And the table (5.1) shows the value of SNM varying with  . 
-    
+the SNM of sub-threshold design (    = 0.4v) is much lower than near threshold 
+design (    = 0.6v). And the table (5.1) shows the value of SNM varying with    . 
 Obviously, the SNM will decrease with supply voltage drop. However, the power 
 consumption is still the paramount requirement factor in the digital world (Keller et al. 
-48 
+0.00E+00 
+2.00E-14 
+4.00E-14 
+6.00E-14 
+8.00E-14 
+1.00E-13 
+1.20E-13 
+1.40E-13 
+1.60E-13 
+1.80E-13 
+2.00E-13 
+2.20E-13 
+0.8 0.7 0.6 0.5 0.4 
+E
+n
+e
+r
+g
+y
  
-Energy 2011). In the following parts of this thesis, Seecinck’s (1987) method is applied when 
+Supply Voltage 
+Etot 
+Edyn 
+Elkg 
+49 
+ 
+2011). In the following parts of this thesis, Seecinck’s (1987) method is applied when 
 comparing the stability of different cell designs and same design under different 
 critical parameters. 
  
-  (v)  read SNM (v) 
-  
-0.8  0.2953 
- 0.2910 
-0.7 
-0.6  0.2561 
-0.5  0.2093 
- 0.1581 
-0.4 
  
 Table 5.1 8T Read SNM variety 
  
@@ -1327,8 +1324,15 @@ very small even at near threshold, shown as Fig.5.4 (b).
  
 (a) Hold SNM at near and sub-threshold region   (b) Read SNM at above-threshold region 
 Figure 5.4 Simulated SNM for 6T read/hold under near and sub-threshold region. 
-49 
- As Calhoun (2006) described, many techniques have been reported to mitigate the 
+    (v)  read SNM (v) 
+0.8  0.2953 
+0.7  0.2910 
+0.6  0.2561 
+0.5  0.2093 
+0.4  0.1581 
+50 
+ 
+As Calhoun (2006) described, many techniques have been reported to mitigate the 
 low-voltage SRAM read SNM problems described above. To reduce bit-line 
 precharge voltages and negative word line bias for unaccessed cells are two ways to 
 increase the read SNM. However, forming a read buffer to isolate the internal storage 
@@ -1342,41 +1346,42 @@ always referred to read SNM unless specified in the following parts. As mentione
 above, the SNM for 8T sub-threshold design is larger than 6T. And more reliability 
 analysis for same design under different critical parameters will be introduced in the 
 following sections. 
-A.   Varying 
-  
+A.     Varying 
 As shown in Fig. 5.3, the values of SNM decrease apparently as supply voltages drop 
-and limited to  /2 because of the two sides of the butterfly curve. Therefore, the 
-  
-upper limit on the change in SNM with   is 1/2 (Calhoun et al. 2006). Fig. 5.5 
-  
+and limited to    /2 because of the two sides of the butterfly curve. Therefore, the 
+upper limit on the change in SNM with     is 1/2 (Calhoun et al. 2006). Fig. 5.5 
 shows the butterfly curves at different supply voltages from 0.4v to 0.8v, which 
 indicates the impact of supply voltage on SNM is significant. 
  
-Figure 5.5 SNM versus   
-  
+Figure 5.5 SNM versus     
 B. Length Varying 
 We investigate some critical parameters to improve SNM. As Calhoun (2009) 
 introduced, increasing length (L) with constant width (W) as one powerful way to 
 improve NM, can be seen in Fig. 5.6 (a). However, considering the size of chip, the 
 value of L must be set appropriately. Table 5.2 shows the SNM varying with L and CR 
 changing. 
-50 
- Table 5.2: SNM varying with L and CR changing 
-L CR 
-Length SNM (vdd=0.8) Cell Ratio SNM (vdd=0.8) 
-45 0.1455 1 0.1487 
-60 0.1500 1.5 0.1489 
-75 0.1521 2 0.1496 
-90 0.1532 2.5 0.1504 
+51 
  
+Table 5.2: SNM varying with L and CR changing 
+L CR 
+Length SNM (vdd=0.8) 
+45 0.1455 
+60 0.1500 
+75 0.1521 
+90 0.1532 
+ 
+Cell Ratio SNM (vdd=0.8) 
+1 0.1487 
+1.5 0.1489 
+2 0.1496 
+2.5 0.1504 
 3 0.1509 
  
  
 (a) L changing                         (b) CR changing 
 Figure 5.6 Simulated SNM with L and CR varying 
 C. Cell Ratio (CR) Varying 
-In contrast to   and L, CR has very little impact on SNM during sub-threshold 
-  
+In contrast to     and L, CR has very little impact on SNM during sub-threshold 
 read operation (Calhoun et al. 2006), shown as Fig. 5.6 (b).  
 D. Pullup Ratio (PR) Varying 
 The impact of PR on SNM in sub-threshold is also not large. Fig.5.7 (a) shows SNM 
@@ -1386,8 +1391,9 @@ sub-threshold SNM sensitivity to any sizing changes is reduced, shown as Fig. 5.
  
 (a) Simulated SNM with PR varying                (b) PR affects on SNM 
 Figure 5.7 SNM versus PR 
-51 
- E. Size Varying 
+52 
+ 
+E. Size Varying 
 The project we introduced before is based on 45nm LPPTM technology, and in this 
 section, we try to use different technology to evaluate the SNM of the SRAM cell. 
 When the supply voltage is lowered, the noise margin decreases significantly. Table 
@@ -1406,38 +1412,35 @@ Technology Vdd (V) SNM (V)
 0.4 0.1415 
  
 F. Temperature Varying 
-Although the impact of temperature on SNM is not as large as  , the SNM reduced 
-  
-with temperature increasing from -40° to 100° . The reason why the higher 
+Although the impact of temperature on SNM is not as large as    , the SNM reduced 
+with temperature increasing from -40°to 100°. The reason why the higher 
 temperatures have lower SNM in sub-threshold is that the degraded gain in the 
 inverters that results from worse sub-threshold slope and PMOS devices weaken 
 relative to NMOS at higher temperatures (Calhoun et al. 2006). Fig. 5.8 (a) shows 
 SNM versus temperature in sub-threshold, and Fig. 5.8 (b) gives us the SNM vary 
-comparison between  =0.8v and  =0.4v. It can be seen that the SNM of 
-    
-above-  (above threshold voltage) varies a little faster than sub-  as the 
-    
+comparison between    =0.8v and    =0.4v. It can be seen that the SNM of 
+above-     (above threshold voltage) varies a little faster than sub-     as the 
 temperature changes. 
  
 (a) Simulated SNM with TEMP varying 
-52 
-  
-(b) SNM varying of  =0.8v and  =0.4v as TEMP varying 
-    
+53 
+ 
+ 
+(b) SNM varying of    =0.8v and    =0.4v as TEMP varying 
 Figure 5.8 SNM versus temperature 
 5.2.3 Conclusion of Circuit Parameters Affection Sub-threshold Design 
-· 8T sub-threshold design solved the read upset problem and has larger SNM than 6T 
+ 8T sub-threshold design solved the read upset problem and has larger SNM than 6T 
 sub-threshold design. 
-· Supply voltage    and length have a significant impact on SNM. SNM will be 
-  
+ Supply voltage      and length have a significant impact on SNM. SNM will be 
 larger with supply voltage higher. 
-· SNM drops as size decreases in the real digital world; we should try to set 
+ SNM drops as size decreases in the real digital world; we should try to set 
 appropriate CR to ensure SNM is large enough. 
-· SNM decreases as temperature increases. Therefore, the temperature has an impact 
+ SNM decreases as temperature increases. Therefore, the temperature has an impact 
 on reliability of sub-threshold design. 
   
-53 
- 5. Conclusion  
+54 
+ 
+5. Conclusion  
 In this thesis, an overview of sub-threshold technology has been introduced firstly, 
 and then the 6T and 8T sub-threshold design to overcome the challenges as mentioned 
 in chapter2 have been improved. The details of 6T and 8T sub-threshold SRAM 
@@ -1463,8 +1466,9 @@ systems will have significant impact on future research and fabrication. The fut
 work will be introduced in the following chapter. 
  
   
-54 
- 6. Future Work 
+55 
+ 
+6. Future Work 
 Since the read SNM and hold SNM have already been simulated and analysed, the 
 write margin of sub-threshold SRAM design could be tested in the future as write 
 margin also can be used to evaluate the stability of the system. 
@@ -1479,8 +1483,9 @@ can also be a part of future work.
  
  
   
-55 
- Bibliography 
+56 
+ 
+Bibliography 
 [1] Anand P, R. & Chandra Sekhar, P. (26-28 May, 2011). Reduce Leakage Currents in 
 Low Power SRAM Cell Structures. IEEE conference publications, pp. 33-38. 
 [2] Blalock, T.N. & Jaeger, R.C. (1991). A High-speed Clamped Bit-line 
@@ -1513,8 +1518,9 @@ Transactions on Nuclear Science, Vol. 54, No. 6, pp. 2004-2011.
 IEEE conference publications, pp. 3182 – 3185. 
 [12] James, T.K. (May, 2001). Subthreshold Leakage Control Techniques for Low 
 Power Digital Circuits. 
-56 
- [13] Jorgenson, R.D. (Feb, 2010). Ultralow-Power Operation in Subthreshold 
+57 
+ 
+[13] Jorgenson, R.D. (Feb, 2010). Ultralow-Power Operation in Subthreshold 
 Regimes Applying Clockless Logic. Proceedings of the IEEE, Vol. 98, No. 2, pp. 
 299-314. 
 [14] Keller, S.; Bhargav, S.S.; Moore, C. & Martin, A.J. (2011). Reliable Minimum 
@@ -1548,8 +1554,9 @@ Variations in Sub-Threshold SRAM Cells in 65nmCMOS.
 [25] Pavlov, A. & Sachdev, M. (2008). CMOS SRAM Circuit Design And Parametric 
 Test in Nano-Scaled Technologies: Process-Aware SRAM Design and Test. 
 Springer Science. ISBN 978-1-4020-8362-4. 
-57 
- [26] Rabaey, J.M.; Chandrakasan, A. & Nikolic, B. (Jan, 2003). Digital Integrated 
+58 
+ 
+[26] Rabaey, J.M.; Chandrakasan, A. & Nikolic, B. (Jan, 2003). Digital Integrated 
 Circuit: A Design Perspective. Prentice Hall (2nd ed.). ISBN-10: 0130909963 
 [27] Razavi, B. (2001). Design of Analog CMOS Integrated Circuit. New York: 
 McGraw-Hill. 
@@ -1584,16 +1591,18 @@ Saskatchewan.
 Tolerant SRAM Design in 90nm CMOS. IEEE conference publications, 
 pp.1076-1079. 
 [38] Whitaker, J.C., & Dorf, R.C. (Eds). (2005). The Electronics Handbook. CRC 
-58 
- Press (2nd ed.). 
+59 
+ 
+Press (2nd ed.). 
 [39] Synopsys (Mar, 2005). HSPICE Device Models Quick Reference Guide. 
 Document Order Number: 37822-000-XA. 
 [40] Synopsys (Sep, 2005). HSPICE Command Reference. Print place: U.S.A. 
 [41] Predictive Technology Model (PTM). Website: http://ptm.asu.edu/. 
  
   
-59 
- Appendix 
+60 
+ 
+Appendix 
 Part Hspice and MATLAB code have been shown as follows: 
 1. Hspice Code for 6T Sub-threshold SRAM Design 
 * SRAM 6T WRITE AND READ ANALYSIS 
@@ -1633,8 +1642,9 @@ M13 vdd in in1 vdd  pch l='l' w='w*2'
 M14 in1 in 0 0      nch l='l' w='w' 
 M15 vdd in1 in2 vdd pch l='l' w='w*2' 
 M16 in2 in1 0 0     nch l='l' w='w' 
-60 
- ************SA******** 
+61 
+ 
+************SA******** 
 M17 vdd outb out vdd  pch l='l' w='w' 
 M18 vdd out outb vdd  pch l='l' w='w' 
 M19 out outb e 0      nch l='l' w='w' 
@@ -1678,8 +1688,9 @@ Cbl   bl   0  1pf
 +k3b = 0           w0 = 2.5e-006         dvt0 = 2.8            dvt1 = 0.52        
 +dvt2 = -0.032     dvt0w = 0              dvt1w = 0             dvt2w = 0           
 +dsub = 2         minv = 0.05             voffl = 0              dvtp0 = 1e-007      
-61 
- +dvtp1 = 0.05        lpe0 = 5.75e-008       lpeb = 2.3e-010         xj = 2e-008      
+62 
+ 
++dvtp1 = 0.05        lpe0 = 5.75e-008       lpeb = 2.3e-010         xj = 2e-008      
 +ngate = 5e+020     ndep = 2.8e+018         nsd = 1e+020          phin = 0           
 +cdsc = 0.0002       cdscb = 0              cdscd = 0                cit = 0           
 +voff = -0.15        nfactor = 1.2             eta0 = 0.15           etab = 0           
@@ -1723,8 +1734,9 @@ Cbl   bl   0  1pf
 (Considering the pages, the library of nch and pch are elided here) 
 … 
 .end 
-62 
- 2. Hspice Code for 8T Sub-threshold SRAM Design 
+63 
+ 
+2. Hspice Code for 8T Sub-threshold SRAM Design 
 * SRAM 8T ANALYSIS 
 .option nopage nomod post 
 *.tran 1ns 700ns sweep data=vddtest 
@@ -1767,8 +1779,9 @@ M21 vdd pc rbl vdd  pch l='l' w='w*10'
 M9 bl we a 0        nch l='l' w='w*10' 
 M10 blb we b 0      nch l='l' w='w*10' 
 M11 a in1 0 0       nch l='l' w='w*10' 
-63 
- M12 b in2 0 0       nch l='l' w='w*10' 
+64 
+ 
+M12 b in2 0 0       nch l='l' w='w*10' 
 M13 vdd in in1 vdd  pch l='l' w='w*2' 
 M14 in1 in 0 0      nch l='l' w='w' 
 M15 vdd in1 in2 vdd pch l='l' w='w*2' 
@@ -1810,8 +1823,9 @@ Cbl   bl   0  1pf
 .param nvt1=0.18v 
 .param pvt1=-0.22v 
 .param vdd=0.5v 
-64 
- .GLOBAL vdd 
+1 
+ 
+.GLOBAL vdd 
 VDD vdd 0 0.5 
 VWL wl 0 0.5 
 ********when reading, use VDD******** 
@@ -1853,8 +1867,9 @@ EVD VD 0 VOL='ABS(V(V1) - V(V2))'
 .param UH = ' VDD/sqrt(2)' 
 .param cload=0.1pf 
 .param l=45n 
-1 
- .param w=90n 
+2 
+ 
+.param w=90n 
 .param nvt=0.52261v 
 .param pvt=-0.587v 
 .param nvt1=0.4v 
@@ -1898,8 +1913,9 @@ EVD VD 0 VOL='ABS(V(V1) - V(V2))'
 (Considering the pages, the library model for nch,pch and nch1 are elided here) 
 … 
 .end 
-2 
- 5. Hspice Code Used to Collect 6T Read SNM Data for MATLAB 
+3 
+ 
+5. Hspice Code Used to Collect 6T Read SNM Data for MATLAB 
 * SRAM 6T READ SNM ANALYSIS 
 .option nopage nomod post 
  
@@ -1940,8 +1956,9 @@ Cbl   bl   0  cload
 … 
 .end 
  
-3 
- 6. Hspice Code Used to Collect 8T Read SNM Data for MATLAB 
+4 
+ 
+6. Hspice Code Used to Collect 8T Read SNM Data for MATLAB 
 * SRAM 8T READ SNM ANALYSIS 
 .option nopage nomod post 
  
@@ -1982,8 +1999,9 @@ Cbl   bl   0  cload
 … 
 .end 
  
-4 
- 7. MATLAB Code for Plotting SNM Butterfly Picture 
+5 
+ 
+7. MATLAB Code for Plotting SNM Butterfly Picture 
 clear all; 
 clc; 
 x=loadsig('sram_read_snm.sw0'); 
@@ -1991,5 +2009,3 @@ lssig(x);
 Q2=evalsig(x,'q'); 
 QB2=evalsig(x,'qb'); 
 plot(Q2,QB2,'y',QB2, Q2,'y') 
-5 
- 

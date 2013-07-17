@@ -28,7 +28,10 @@ when this package tool is finished. A summary of the current achievements will b
 listed and illustrated with pictures and figures in the report, followed with project 
 evaluation. In addition, the suggestions of further improvements will also be 
 discussed based on the current achievements. 
-  Contents 
+  
+I 
+ 
+Contents 
 1. Introduction ...................................................................................................................... 1 
 1.1 Field of Computer Graphics........................................................................................ 1 
 1.2 Major Applications of Computer Graphics ................................................................... 2 
@@ -65,14 +68,16 @@ discussed based on the current achievements.
 5.4.1 Modeling modules ......................................................................................... 39 
 5.4.2 Interaction modules ....................................................................................... 43 
 5.4.3 Projection modules ........................................................................................ 48 
-I 
- 6. Project Evaluation ....................................................................................................... 52 
+II 
+ 
+6. Project Evaluation ....................................................................................................... 52 
 7. Further Work ................................................................................................................ 56 
 8. Bibliography ................................................................................................................. 57 
 9. Appendix: source code ............................................................................................... 59 
  
-II 
- 1. Introduction 
+1 
+ 
+1. Introduction 
 1.1 Field of Computer Graphics 
 Graphics provides one of the most natural means of communicating with a computer, 
 since human’s highly developed 2D and 3D pattern-recognition allow us to perceive 
@@ -101,8 +106,9 @@ animation technique create an illusion of motion through a sequence of
 images with a key issue on the time. 
  
 Some other areas also related to computer graphics, but it is not a common agreement 
-1 
- for all the practitioners that they are the core area of computer graphics. The examples 
+2 
+ 
+for all the practitioners that they are the core area of computer graphics. The examples 
 for such areas can be [1]: 
  
 ? User interaction deals with the interface between input/output devices and 
@@ -123,8 +129,7 @@ are graphic issues to be addressed in a visualization problem [1].
 removing, segmentation, and image sharpening. It is often used in both field 
 of graphics and vision. 
  
- 
- 
+  
 Figure 1.3 Segmentation of image processing  
  
  
@@ -138,8 +143,9 @@ following industries consist of the major consumers of computer graphics technol
  
 ? Video game is an electronic game that involves human interaction with a 
 user interface to generate visual feedback on a video device. It increasingly 
-2 
- use advanced 3D models, user interface, and rendering technologies. 
+3 
+ 
+use advanced 3D models, user interface, and rendering technologies. 
  
 ? Cartoon is a form of two-dimensional illustrated visual art. It often rendered 
 directly from 3D models with the handling of a sequence of images called 
@@ -160,8 +166,10 @@ can easily create 3D building models in this software’s workspace by
 clicking and dragging the mouse. 
  
   
-Figure 1.4 Projection system from Antycipe Figure 1.5 A CT scan image showing a 
-simulation ruptured abdominal aortic aneurysm 
+Figure 1.4 Projection system from Antycipe 
+simulation 
+Figure 1.5 A CT scan image showing a 
+ruptured abdominal aortic aneurysm 
   
 ? Simulation is the imitation of the operation of a real-world process or system 
 over time. It can be thought of as an accurate video gaming. For example, a 
@@ -175,8 +183,9 @@ the human body for clinical purposes or medical science. Computer graphics
 is used to create meaningful shaded images with saliency which can be used 
 by the doctor to diagnose or examine diseases. 
  
-3 
- 1.3 Aims and Objectives 
+4 
+ 
+1.3 Aims and Objectives 
 The novelty of this project is providing a simple and efficient 3D interactive graphic 
 application to users such as researchers, managers, students etc. who frequently need 
 to insert some 3D structure charts or flow charts into their papers and reports. As we 
@@ -215,8 +224,9 @@ generate 2D vector images which is the 3D models projection from any
 perspective view. 
  
   
-4 
- 2. Fundamental Theories  
+5 
+ 
+2. Fundamental Theories  
 2.1 Constructing a 3D scene 
 This project is called ‘3D projection drawing package’ which means implementing 3D 
 drawing is one of the main task. With basic theory about vertices, curves, surfaces, 
@@ -243,8 +253,9 @@ storing all the vertices into an array. And for each face, points out which vert
 contribute to form it. The following figure shows an example of a simple polygon: 
  
 Figure 2.1 Vertex-face data structure 
-5 
-  
+6 
+ 
+ 
 A vertex can be presented by a 3 dimension vector (x, y, z). So that a face can be 
 presented by the vertices contribute to form it just like the front face (F0) in the figure, 
 vertex 0 (V0), vertex 1 (V1), and vertex 3 (V3) in charge of consisting it. The front 
@@ -283,10 +294,21 @@ the follow situations [2]:
 Edges are the first-class citizen of the winged edged data structure. The 
 implementation is illustrated in the following two figures: 
  
-6 
-  
-Edge Vertex1 Vertex2 Face Face Pred Succ Pred Succ 
-left right left left right right 
+7 
+ 
+ 
+Edge Vertex1 Vertex2 Face 
+left 
+Face 
+right 
+Pred 
+left 
+Succ 
+left 
+Pred 
+right 
+Succ 
+right 
 a B A 0 1 c b d e 
 Figure 2.3 An edge in a winged edge data structure 
  
@@ -297,8 +319,18 @@ polyhedron is represented in this data structure:
  
  
  
-Edge Vertex1 Vertex2 Face Face Pred Succ Pred Succ 
-left right left left right right 
+Edge Vertex1 Vertex2 Face 
+left 
+Face 
+right 
+Pred 
+left 
+Succ 
+left 
+Pred 
+right 
+Succ 
+right 
 a A D 3 0 f e c b 
 b A B 0 2 a c D f 
 c B D 0 1 b a e d 
@@ -306,8 +338,9 @@ d B C 1 2 c e f b
 e C D 1 3 d c a f 
 f C A 3 2 e a b d 
  
-7 
- Vertex Edge  Face Edge 
+8 
+ 
+Vertex Edge  Face Edge 
 A a  0 a 
 B d  1 c 
 C d  2 d 
@@ -331,7 +364,7 @@ robot, and addition operation of rotation of the right arm. The transformation
 matrices: 
  
 M1 = translate(p); 
-M2 = rotate(ø ); 
+M2 = rotate(ø); 
 M3 = M1 * M2; 
  
 Apply M3 to the polyhedron of the body to implement the transformation. However, 
@@ -348,8 +381,9 @@ movement of the whole body has constraint on arms and legs which are body’s
 belonging parts. The relationship can be explained as parents and children, more 
 specifically some certain constraints on transformations such as only constraints on 
 rotation or translation. 
-8 
-  
+9 
+ 
+ 
 It is common requirement for primitives to be transformed frequently. The 
 relationships of different models in the scene can be complex. In order to well 
 organize the scene, a tree structure to store such relationship is needed. And a matrix 
@@ -378,8 +412,9 @@ following figure shows orthographic projection’s way of working.
  
 Figure 2.5 orthographic projection 
  
-9 
- Limit the projection objects within canonical view volume often brings convenience. 
+10 
+ 
+Limit the projection objects within canonical view volume often brings convenience. 
 The canonical view volume is a cube with side of length two centered at the origin. 
 All the coordinates of 3D points in this cube have been specified as (x, y, z)   [-1,1]3. 
 For a screen made up of m by n pixels, x = -1 should be projected to the left side of 
@@ -396,46 +431,59 @@ axis-aligned box [l , r] ? [b ,t] ?[n , f]:
 For any point in the world coordinate, a matrix M0 to map it into the canonical cube 
 should be calculated [1]:  
  
-                     
-                     
-           (1) 
-                     
-        
+      
+          
+          
+          
+    
+   
+           
+           
+           
+    
+  (1) 
  
  
           
- 
           
-   = M0    (2) 
- 
           
  
+  = M0  
  
+ 
+ 
+ 
+  (2) 
  
 From canonical view volume space to the window output, another matrix M1 is 
 presented below [1]: 
  
+     
             
             
-       (3) 
     
     
+  (3) 
+ 
  
       
+      
           
-                
-    = M1    (4) 
+ 
+   = M1  
+          
           
           
  
- 
+  (4) 
  
 Despite the simple axis-aligned view, an arbitrary view is commonly required in many 
 3D graphics applications. The conventions to specify viewer’ position and orientation 
 can be [1]: 
  
-10 
- ? Eye point e, 
+11 
+ 
+? Eye point e, 
 ? The gaze direction g, 
 ? The view-up vector t. 
 ?  
@@ -447,13 +495,17 @@ In this situation, the object should be drawn into uvw coordinate. A matrix M2
 implement the transform from as moving eye point to the origin and aligning uve to 
 xyz [1]: 
  
+     
        
+       
+       
+    
+   
       
-             
-          (5) 
-             
+      
+      
     
-    
+  (5) 
  
 To summarize the procedure of implementing orthographic projection above, a simple 
 algorithm is presented. The code to draw 3D lines segments with end points a and b in 
@@ -472,8 +524,9 @@ figure. The farther the object is from the viewer, the smaller it is. This basic
 be followed in the perspective projection if the objects are projected directly toward 
 the eye point, and they are displayed where the ray of projection hit the view plane in 
 front of the eye point. 
-11 
-  
+12 
+ 
+ 
 Figure 2.6 perspective projection 
  
 To implement perspective projection, it is simple to just multiply another matrix into 
@@ -488,40 +541,51 @@ A fourth coordinate as the homogeneous coordinate h is presented to be in charge
 encoding how much the other three coordinates have been scaled. The perspective 
 matrix be constructed as [1]: 
  
+     
     
     
-       (6) 
            
       
+  (6) 
+ 
+M3  
  
  
-     
-  
  
  
     
-  
-M3                              (7) 
-    
+ 
+ 
+ 
+ 
+ 
+ 
+      
  
   
+  
+ 
+ 
+ 
+                    
+    
+    
         
-  
  
- 
-   
- 
+  (7) 
  
 Matrix M3 can be prettier as [1]: 
  
+     
     
     
-       (8) 
         
     
+  (8) 
  
-12 
- As a result, when the perspective matrix is applied to the procedure of implementing 
+13 
+ 
+As a result, when the perspective matrix is applied to the procedure of implementing 
 the orthographic projection, it becomes the implementation of perspective projection, 
 the basic algorithm can be stated as [1]: 
  
@@ -563,8 +627,9 @@ Complexity concerns are mainly because of the entire solution is in the main fun
 One of the situations demonstrates this is that all the relevant user interactions must be 
 parsed and handled. This task can be executed by the switch statement. However, 
 many actions performed by the user in modern software are actually non-application 
-13 
- specific. Such kind of increasing requirements rapidly becomes limitations to the 
+14 
+ 
+specific. Such kind of increasing requirements rapidly becomes limitations to the 
 dataflow of graphics applications. To implement interactions with the control-driven 
 model also becomes a burden. 
  
@@ -596,8 +661,9 @@ routines and terminate the program within the service routine.
  
 ? Stop and wait: Instead of actively polling the user for actions which wastes 
 machine resources, the MainEventLoop() provided by GUI stops the entire 
-14 
- application process and will only be wake up by operation system calls 
+15 
+ 
+application process and will only be wake up by operation system calls 
 because the application is in the presence of relevant user actions. 
  
 ? Event and central parsing switch statement: All the possible actions that a 
@@ -621,8 +687,9 @@ relationship between each component and the way they collaborate to work.
  
  
 Figure 2.8 Components of an interactive graphics application 
-15 
-  
+16 
+ 
+ 
 The model component defines the application state and implements the interface 
 function for them. Because the graphics primitives represent part of the applications 
 state in graphics application, part of the model component also needs to use graphics 
@@ -664,8 +731,9 @@ human factors issues. Although practitioners and researchers in many fields make
 contribution in the improvement of human-computer interaction, software designers 
 and developers are mainly exploring [5]: 
  
-16 
- ? Menu selection techniques 
+17 
+ 
+? Menu selection techniques 
 ? Command, parametric, and query languages 
 ? Use of graphics, animation, and color 
 ? Direct manipulation 
@@ -704,8 +772,9 @@ unwarranted access, inadvertent destruction of data, or malicious tampering [5].
 ? Schedules and budgets 
 The third step is to have a plan which is on schedule and within budget. The 
 delayed delivery of the software may cause the users to choose the alternative 
-17 
- software in this high competitive market environment. If the implementation, test, 
+18 
+ 
+software in this high competitive market environment. If the implementation, test, 
 and maintenance of the system are too costly, it causes higher price of the system, 
 and the customer’s resistance to accept the price gives chance to the competitor to 
 capture the market. 
@@ -747,8 +816,9 @@ error detection and handling. When an error is made, the user will be
 prompted about the error in a comprehensible mechanism. It is better for the 
 error to be repaired in the way that just let the user fix the faulty part but not 
 redo the whole actions 
-18 
-  
+19 
+ 
+ 
 ? Permit easy reversal of actions 
 As much as possible, the actions should be reversible. Always allow the user 
 to undo their current action or redo their former action, this alleviates the 
@@ -789,8 +859,9 @@ the different interaction styles according to their task analysis and requiremen
  
  
  
-19 
- ADVANTAGES DISADVANTAGES 
+20 
+ 
+ADVANTAGES DISADVANTAGES 
 Menu Selection 
 Shortens leaning Danger of many menus 
 Reduces keystrokes May slow frequent users 
@@ -805,9 +876,10 @@ Management tools
 Command Language 
 Flexibility Poor error handling 
 Appeals to “power” users Requires substantial training and 
-Supports user initiative memorization 
-Convenient for creating user defined  
+memorization Supports user initiative 
+Convenient for creating user defined 
 macros 
+ 
 Natural Language 
 Relieves burdens of leaning syntax Requires clarification dialog 
  May require more keystrokes 
@@ -816,15 +888,15 @@ Relieves burdens of leaning syntax Requires clarification dialog
 Direct Manipulation 
 Visually represents task concepts May be hard to program 
 Easy to learn May require graphics display and 
-pointing devices 
-Easy to retain 
+pointing devices Easy to retain 
 Errors can be avoided  
 Encourages exploration  
 High subjective satisfaction  
  
   
-20 
- 3. Requirement Analysis 
+21 
+ 
+3. Requirement Analysis 
 Computer graphics today is largely interactive: The user controls the contents, 
 structure, and appearance of objects and of their displayed images by using input 
 devices [3]. Interaction between humans and such regular desktop devices involves 
@@ -863,8 +935,9 @@ been imitated. As showed in the pictures, the 3D model can be viewed from 4
 windows and each of them has a different point of view to help the user easily 
 observe every detail of the 3D model.  
  
-21 
-   
+22 
+ 
+  
  Figure 3.1 Autodesk 3ds Max Figure 3.2 Autodesk Maya 
  
  
@@ -885,15 +958,15 @@ Photoshop is almost powerful enough to do any creation or modification in 2D
 graphics field. Compare to Photoshop, illustrator especially aims at 2D vector 
 image drawing. 
  
- 
- 
+  
  Figure 3.3 Adobe Photoshop Figure 3.4 Adobe Illustrator 
  
 Both of the software provides functions to generate 2D vector images which is 
 the aiming of this 3D projection drawing package, but none of them has any 
 relationship with 3D graphics. If the user would like to create an objective 2D 
-22 
- vector image which has the perspective view of 3D shapes by using Photoshop or 
+23 
+ 
+vector image which has the perspective view of 3D shapes by using Photoshop or 
 illustrator, they must be good at 2D drawing. And the same problem as Autodesk 
 3ds Max and Maya, Photoshop and Illustrator are professional applications, they 
 are powerful based on their complexity, which requires a certain time of training 
@@ -907,8 +980,7 @@ designed in a simple way to use. Especially Microsoft Visio, which aims at
 drawing a variety kind of 2D schematic diagrams or flow charts, it is an excellent 
 example for this project to imitate the way of interaction. 
  
- 
- 
+  
  Figure 3.5 Microsoft PowerPoint Figure 3.6 Microsoft Visio 
   
 However, the problem with both of these two applications is that they can only 
@@ -925,8 +997,9 @@ professional software, should be concise to ensure the user can go straight forw
 the aiming output. 
  
   
-23 
- 4. Project Specification 
+24 
+ 
+4. Project Specification 
 According to the requirement analysis and principle of user interface design, the 3D 
 projection drawing package is a regular 3D interactive graphics application, which 
 means the participants will use keyboard and mouse as input devices and the screen 
@@ -962,8 +1035,9 @@ and perspective view.
 To implement the task of 3D drawing, the function of 3D modeling should be 
 provided by this application. A series of basic 3D geometry such cube, pyramid, and 
 cylinder can be created in the workspace by simply clicking the relevant tool buttons. 
-24 
- Because of drawing figures like 3D flow chat, different types of arrows should be 
+25 
+ 
+Because of drawing figures like 3D flow chat, different types of arrows should be 
 implemented in the same way as the geometry mentioned above. Different colors can 
 be applied to the created object by implementing a color palette. All the elements 
 mentioned above can be duplicated or deleted once they have been created based on 
@@ -997,8 +1071,9 @@ perspective display of the workspace and objects in the output image are showed 
 wire frames. For the situation the user cannot finish working at one time, the working 
 source file can also be saved and loaded for the user to continue the undone work. 
   
-25 
- 5. Implementation 
+26 
+ 
+5. Implementation 
 5.1 API Introduction 
 This project aims at developing a 3D drawing package, dealing with a graphics 
 application program interface (API) is inevitable. An API is a software interface that 
@@ -1035,8 +1110,9 @@ to another computer operating system.
  
 5.1.1 Java3D 
 The Java3D API is an interface for program on the display and interaction of 3D 
-26 
- graphic. It is a collection of high-level constructs for creating and interacting with 
+27 
+ 
+graphic. It is a collection of high-level constructs for creating and interacting with 
 geometries, camera views, lights and textures and rendered them in a virtual universe. 
 This API is straight forward to use and helps the programmer on interactive 3D 
 graphics application development. 
@@ -1064,8 +1140,9 @@ children of Transform Group is normally used to describe single 3D model by
 defining its shape and appearance. Transform Group used to record all the 
 transformation data of its child, it can be treated as a 4 by 4 matrix which include 3D 
 translation, rotation, and scale.  
-27 
-  
+28 
+ 
+ 
  
 Figure 5.2 Mathematical Foundation Classes 
  
@@ -1085,8 +1162,9 @@ JFC which includes everything from buttons to split panes to tables [14]. Compar
 the earlier GUI components provided by Java – AWT (abstract window toolkit), 
 Swing is more sophisticated, powerful and flexible.  
  
-28 
-  
+29 
+ 
+ 
 Figure 5.3 AWT Swing Class Hierarchy 
  
 The relationship between Swing and AWT is showed in the figure, this illustrates the 
@@ -1108,8 +1186,9 @@ following figure shows the design of the program work flow. It is based on the
 event-driven model and MVC architecture. Once the application has been started, all 
 the initialization should be done first, this include a scene without any object, all tools’ 
 status has been set by default, and a default camera view has been set focusing on the 
-29 
- origin of the scene. Using the event- driven model of the graphics API, and the event 
+30 
+ 
+origin of the scene. Using the event- driven model of the graphics API, and the event 
 listener is waiting for the users’ action. The user’ input devices are keyboard and 
 mouse, all the different kinds of action will be exactly defined later such as a click on 
 the tool button, typing texts into the dialogue window, dragging to move the camera, 
@@ -1129,8 +1208,9 @@ the event listener and switcher belongs to the controller model which is in char
 the interaction with the user, the update data process controls all the data information 
 of the scene, and update display is responsible for the visual output. 
  
-30 
-  
+31 
+ 
+ 
 Figure 5.5 Virtual universe module 
  
 In the program framework, once the program has been started, the system should 
@@ -1165,8 +1245,9 @@ and the program’s work flow can be switched to the branch module which is
 responsible for responding the event input from the user. So these modules are 
 actually implementing the interactions of the system. 
  
-31 
- Based on the common features of responding tasks, the task can be organized in some 
+32 
+ 
+Based on the common features of responding tasks, the task can be organized in some 
 modules. The camera view manipulation module in the program framework has two 
 sub-modules:  
  
@@ -1194,8 +1275,9 @@ the 3D scene.
  
 Figure 5.7 Module of Adding, deleting, and selecting an object 
  
-32 
- It is important to clearly identify which object in the 3D scene is selected, because the 
+33 
+ 
+It is important to clearly identify which object in the 3D scene is selected, because the 
 user can only be allowed to interact with the object selected. All the objects created in 
 the 3D scene are recorded in a list, with the returning of an index from the list, the 
 interaction will only be applied to the selected object. So once the user clicks the 
@@ -1221,8 +1303,9 @@ Figure 5.9 Grid operation module
  
 The grid operation module showed in the figure below is used to provide assistance to 
 user. It is a gird ground plane, to be treated as reference object, so that the user can 
-33 
- easily get an idea about the position of their objects like the height of a box from the 
+34 
+ 
+easily get an idea about the position of their objects like the height of a box from the 
 ground floor. The grid can be turn on or off quickly. Snap the selected object function 
 can automatically put the selected object on the ground floor – the grid plane. The 
 user can also perform the action to quickly snap all the objects created in the 3D scene 
@@ -1243,8 +1326,9 @@ the scene graph organized in structure of using Java3D.
 Figure 5.10 Java3D scene graph of this project 
  
 As showed in the figure, the camera view is set up in the virtual universe class, and 
-34 
- there are always interaction modules applying on it. The object which cannot interact 
+35 
+ 
+there are always interaction modules applying on it. The object which cannot interact 
 with the user but still necessary for the 3D scene like bounding, background color, 
 and lights are added to an individual branch group.  
  
@@ -1283,8 +1367,9 @@ Figure 5.11 Modeling button group
  
 Create a line is different from create other primitives like box, cone, or cylinder. Lines 
 are normally used to connect objects, the start point and end point is more important 
-35 
- than the shape and position of the line in most of the cases. So it is more convenient to 
+36 
+ 
+than the shape and position of the line in most of the cases. So it is more convenient to 
 let the user input the position of the start point and the end point to specify and create 
 a line. 
  
@@ -1297,11 +1382,14 @@ name. The user can select the object by picking any name in the object list, and
 interaction can be applied to the selected object. A delete button to be presented not 
 far away from the object list can help the user quickly delete the selected object. 
  
+  
  
- 
- 
-Figure 5.12 (Empty ) Object Figure 5.13 Object interaction Figure 5.14 Position setting 
-list button group button group 
+Figure 5.12 (Empty ) Object 
+list 
+Figure 5.13 Object interaction 
+button group 
+Figure 5.14 Position setting 
+button group 
  
  
 The user can quickly switch the selected object, and interact with this object. The 
@@ -1321,8 +1409,9 @@ important tasks. As mentioned before, both camera view manipulation based on wor
 coordinate and the camera coordinate is useful, and result in this application is that the 
 user can use the keyboard navigator buttons to manipulate the camera view in the 
 camera’s coordinate, and can also use the button on the user interface to manipulate 
-36 
- the camera in the world coordinate.  
+37 
+ 
+the camera in the world coordinate.  
  
  
  
@@ -1352,16 +1441,16 @@ JFileChooser
 It is one choice to type in the code and manually generate the GUI, this takes more 
 time but allows more flexibility. Another choice to implement the user interface is 
 using the development tools provided by NetBeans IDE. The NetBeans IDE is a free, 
-37 
- open-source, cross-platform integrated development environment with built-in 
+38 
+ 
+open-source, cross-platform integrated development environment with built-in 
 support for the Java programming language []. As showed in the picture, in the design 
 view of the NetBeans IDE, the user interface components of Java have been provided 
 as visual tools, developer can simple drag the needed component form the palette into 
 the workspace and then adjust the properties of the component, the code will be 
 automatically generated. 
  
- 
- 
+  
 Figure 5.18 Palette Figure 5.19 Properties 
  
 For example, the button used to create the box primitive has been drag from the 
@@ -1383,8 +1472,9 @@ Create.add(Box);
  
 The event listeners have also been added to the components while the function of 
 responding to the event is empty, which need the developer to write their own code to 
-38 
- implement the interaction with the GUI component. The whole user interface with 
+39 
+ 
+implement the interaction with the GUI component. The whole user interface with 
 event listener can be implemented in this efficient way. 
  
 5.4 Module design 
@@ -1411,8 +1501,9 @@ quickly finish building of the view branch by just setting some parameters.
 By default, the camera set up by simple universe has the following features: the 
 image plate is centered at the origin of the world coordinate, the eye position has 
 been put at the point (0, 0, 2.41), the look at point is the origin, the up vector is (0, 
-39 
- 1, 0).  
+40 
+ 
+1, 0).  
  
 The simple universe object has the function of ‘getViewingPlatform()’ which 
 retrieve the object used to manipulate the camera. A transform matrix can be 
@@ -1439,8 +1530,9 @@ system.
 In Java3D, models can be presented by calling the function of creating points, 
 lines and faces, then with a proper data structure to organize them. The primitives 
 provided by this application are mainly boxes, cylinders, spheres, and cones, they 
-40 
- are regular basic geometries, and Java3D has included functions which can 
+41 
+ 
+are regular basic geometries, and Java3D has included functions which can 
 directly generate them. 
  
 This figure shows the hierarchy of primitives in Java3D API, but they only 
@@ -1469,8 +1561,9 @@ The primitives are created at the origin of the world coordinate, while the user
 need to user the translation function to move them to their ideal place. The 
 constructor refers the created Appearance Class, and set the size of each 
 geometry. 
-41 
-  
+42 
+ 
+ 
 The user can also create lines with specifying the start point and the end point in 
 this application. LineArray Class is used in the modeling work of lines, it is 
 specified by an array points and packaging the points and appearance in the 
@@ -1513,8 +1606,9 @@ Recipe for building the background content branch which used to create objects
 in initialization is listed below: 
  
 1. Create a background color object with proper parameters and refer the 
-42 
- bounding sphere to it. 
+43 
+ 
+bounding sphere to it. 
 2. Create an ambient light object with not very bright white color and refer 
 the bounding sphere to it. 
 3. Create the primary directional light object with proper direction vector 
@@ -1539,8 +1633,9 @@ operation all has relationship with the object list. So the program of this modu
 must make Swing’s JList and Java3D cooperate with each other. 
  
  
-43 
- Figure 5.23 Ways of organization of Object Branches 
+44 
+ 
+Figure 5.23 Ways of organization of Object Branches 
  
 JList is created by dragging the icon in NetBeans IDE into the workspace to 
 implement the object list, and the module of creating any geometry or lines has 
@@ -1562,8 +1657,9 @@ pressed and add it as the child of Transform Group.
 7. Interaction with the object switch to this newly created branch. 
 8. Set selected object as previous selected. 
  
+The 7
 th
-The 7 step will be discussed in details later, while the process above can 
+ step will be discussed in details later, while the process above can 
 successfully create a new object and display it in the 3D scene. In a familiar way, 
 the deleting procedure is: 
  
@@ -1585,8 +1681,9 @@ respond to the change of JList’s index value:
 1. Get the selected index and interaction switch to currently selected object 
 branch. 
 2. Set selected object as previous selected. 
-44 
-  
+45 
+ 
+ 
  
 ? Interaction Switching 
 Only one object is allowed to interact with the user at a time, each time the user 
@@ -1620,8 +1717,9 @@ behavior node is organized in the scene graph, the behavior node normally should
 be added as child of a Branch Group, and set the applied object to the Transform 
 Group the behavior would like to control. The core code for implement the 
 KeyNavigatorBehavior is showed below: 
-45 
-  
+46 
+ 
+ 
  TransformGroup viewTransformGroup = 
                 u.getViewingPlatform().getViewPlatformTransform(); 
  
@@ -1643,8 +1741,7 @@ The other kind of manipulation provided by the program is based on the world
 coordinate, the camera will always look at the origin. Using four buttons to move 
 the camera up, down, left or right, the manipulation can be implemented by 
 resetting the matrix of the transform group which controls the camera view. In the 
-3D transformation matrix M, the element M M , and M is the translation 
-03, 13 23
+3D transformation matrix M, the element M03, M13, and M23 is the translation 
 vector (x, y, z). The matrix provided by Java3D can be presented in a ‘LookAt’ 
 way, which uses an eye point, a look at point, and an up vector to form the matrix. 
 For example, in the function responds to move the camera up but still looks at the 
@@ -1652,10 +1749,10 @@ origin of the world coordinate:
  
 1. Retrieve the matrix M recorded the data of camera transformation. 
 2. Create a new matrix by the way ‘LookAt’ 
-a) The eye point (M M + moving interval M ); 
-03, 13 , 23
-46 
- b) Look at point (0, 0, 0); 
+a) The eye point (M03, M13 + moving interval, M23); 
+47 
+ 
+b) Look at point (0, 0, 0); 
 c) Up vector (0, 1, 0); 
 3. Applied this new matrix to the camera view. 
  
@@ -1696,8 +1793,9 @@ buttons of his mouse. The important code for implementing a mouse behavior is:
         behaviourBranch.addChild(uTranslate); 
           uTranslate.setSchedulingBounds(bounds); 
   
-47 
-  
+48 
+ 
+ 
 Figure 5.26 Mouse behavior to interact with the selected object 
  
 Another way to interact with the object is using the button on the user interface, 
@@ -1719,27 +1817,24 @@ object to a certain position. This can be done in the function responds to the
 ‘position’ button is clicked: 
  
 1. Retrieve the selected object’s transformation matrix M. 
-2. If the text field is not empty, replace the data of M M , and M by the 
-03, 13 23
-data input in the text field; else, display the data of M M , and M in 
-03, 13 23 
+2. If the text field is not empty, replace the data of M03, M13, and M23 by the 
+data input in the text field; else, display the data of M03, M13, and M23 in 
 the text field. 
  
 The object can be snap to grid, and this can also be implemented in the button 
 action performed function: 
  
 1. retrieve the selected object’s transformation matrix M 
-2. M is the value on y-axis in the world coordinate. 
-13 
+2. M13 is the value on y-axis in the world coordinate. 
 3. For different objects, calculate the radius R after they can been scaled. 
-4. Set M to the value R. 
-13
+4. Set M13 to the value R. 
  
 5.4.3 Projection modules 
 IText is an open source library for creating and manipulating PDF files in Java.  
 The images in PDF file format are vector images which meet the requirements of 
-48 
- this project. In order to draw 2D perspective geometries, this project requires only 
+49 
+ 
+this project. In order to draw 2D perspective geometries, this project requires only 
 some of the functions provided by IText: 
  
 1. Draw 2D points 
@@ -1754,8 +1849,7 @@ to call the program to launch the projection module.
 The projection module will go through all the object branches in the scene graph, one by 
 one, translate the 3D data into 2D and draw it on a PDF file: 
  
-1. Retrieve the transformation matrix M of the camera view 
-c
+1. Retrieve the transformation matrix Mc of the camera view 
 2. From the first object branch to the last object branch 
 3. Retrieve the class name of the shape node in the current branch 
 4. If class name equals to ‘box’ 
@@ -1773,35 +1867,39 @@ From the process above, it is obvious that each type of primitives provided by t
 application requires an individual projection and drawing function based on the 
 primitive’s features. The object P is created by default size at the origin of the world 
 coordinate. After the object has been manipulated by the user, the transformation matrix 
-M can be retrieved. The object’s new status P in the world coordinate is: 
-w
+M can be retrieved. The object’s new status Pw in the world coordinate is: 
  
-P = M * P; 
-w
+Pw = M * P; 
  
 According to the perspective projection module described in the background theory 
 section, the data in the world coordinate of any object need to be projected should be 
 firstly transformed into the camera coordinate. 
  
-P = M * P ; 
-c c w
+Pc = Mc * Pw; 
  
 For the point p or radius r of any primitive needs to be projected, it has: 
-49 
- p /p = p’ /d; 
-x z x
-p /p = p’ /d; 
-y z y
-2 2 2 2 2 2
-r/sqrt(p , p , p ) = r’/sqrt(p’ , p’ , p’ ); 
-x y z x y z
+50 
+ 
+px/pz = p’x/d; 
+py/pz = p’y/d; 
+r/sqrt(px
+2
+, py
+2
+, pz
+2
+) = r’/sqrt(p’x
+2
+, p’y
+2
+, p’z
+2
+); 
  
 The page size of the PDF file can be width and height, in which the origin is located at 
 the left-bottom corner, while the projected 2D object, they are based on the origin at the 
-center of the page. To solve this mismatch problem, the projected point p’ (p’ , p’ ) 
-x y
-should be adjusted as p’ (p’ + width/2, p’ + height/2). 
-x y
+center of the page. To solve this mismatch problem, the projected point p’ (p’x, p’y) 
+should be adjusted as p’ (p’x + width/2, p’y + height/2). 
  
 ? Sphere  
 The projection of the sphere in 2D is always a circle, so the only center point and the 
@@ -1835,8 +1933,9 @@ relationship with the projected height (h) of the cylinder.
  
 cos(angle) = d/h; 
 sine(angle) = b/a; 
-50 
- By now, the projected center c1and c2, the long radius of the ellipse a1 and a2, and the 
+51 
+ 
+By now, the projected center c1and c2, the long radius of the ellipse a1 and a2, and the 
 short radius of the ellipse b1 and b2 are known. Another important parameter to know is 
 the orientation of the ellipse, and it is obvious the orientation of the ellipse (k) can be 
 calculated by using the slope of the line which is the actual height calculated by c1 and 
@@ -1853,8 +1952,9 @@ two tangents need to be calculated. They are the tangents of the ellipse, but go
 top vertex of the cone. And these two tangent lines should certainly be drawn by using 
 IText. 
   
-51 
- 6. Project Evaluation 
+52 
+ 
+6. Project Evaluation 
 The project is mainly on software development, and the final user interface has been 
 showed in the picture. Compare to other software in the market, it still needs many 
 improvements to reach a product level. However, this application can now go through 
@@ -1882,8 +1982,9 @@ button.
 3. Turn on or turn off the grid by a simple click on the ‘Grid’ button. 
  
 4. Quickly switch camera view among top, left, front, and perspective using the 
-52 
- combo box in the top-right corner of the GUI. 
+53 
+ 
+combo box in the top-right corner of the GUI. 
  
  
 5. Change the selection of an existing object by using the object list in the left of 
@@ -1913,8 +2014,9 @@ chooser.
 Figure 6.2 The user interface of 3D projection drawing package when the user is working 
  
 The above picture shows the GUI when user is using this application, the work space 
-53 
- of the GUI demonstrate the 3D scene clearly. From the list of functions, the user will 
+54 
+ 
+of the GUI demonstrate the 3D scene clearly. From the list of functions, the user will 
 be satisfied by quickly creating 3D primitives in the 3D scene and conveniently 
 interacting with the created objects and the camera view. In terms of result – 2D 
 vector images, the following figures shows the geometries in pairs, the left side 
@@ -1926,16 +2028,14 @@ Figure 6.3 Box in 3D scene Figure 6.4 Box in vector image
  
  
 Figure 6.5 Sphere in 3D scene Figure 6.6 Sphere in vector image 
- 
- 
+  
 Figure 6.7 Cone in 3D scene Figure 6.8 Cone in vector image 
- 
- 
+  
 Figure 6.9 Cylinder in 3D scene Figure 6.10 Cylinder in vector image 
+  
+55 
  
- 
-54 
- Figure 6.11 Lines in 3D scene Figure 6.12 Lines in vector image 
+Figure 6.11 Lines in 3D scene Figure 6.12 Lines in vector image 
   
 Figure 6.13 Multiple objects in 3D scene Figure 6.14 Multiple objects in vector image 
  
@@ -1962,8 +2062,9 @@ the software development, the functionalities currently provided may be simple a
 needs expansion. Although, it still has a long way to go to reach the product level, this 
 simple 3D drawing tool can be an excellent beginning.  
   
-55 
- 7. Further Work 
+56 
+ 
+7. Further Work 
 In terms of software development, the application can still be improved in many ways 
 as mentioned in last section. It is common for the most sophisticated software to be 
 along with regular updating, so not only the 7 improvements below can be raised for 
@@ -1995,8 +2096,9 @@ switch between these 2 modes by using a button.
 mouse in the workspace. 
  
   
-56 
- 8. Bibliography  
+57 
+ 
+8. Bibliography  
 [1] P. Shirley et al. Fundamentals of Computer Graphics, 2nd ed. India: A K Peters 
 Wellesley, 2005. 
  
@@ -2038,8 +2140,9 @@ Drawing.” ACM SIGGRAPH 2006 Courses, 2006, pp. 1.
  
 [13] S. Uno & H. Matsuka. “A General Purpose Graphic System.” Proceedings of the 
 6th annual conference on Computer graphics and interactive techniques, 1979, pp. 25. 
-57 
- [14] Oracle . “Lesson: Using Swing Components.” Internet: 
+58 
+ 
+[14] Oracle . “Lesson: Using Swing Components.” Internet: 
 http://docs.oracle.com/javase/tutorial/uiswing/components/index.html, 2012 [21, 
 September, 2012]. 
  
@@ -2051,8 +2154,9 @@ http://java.sun.com/developer/onlineTraining/java3d/, September 2000 [21,
 September, 2012]. 
  
   
-58 
- 9. Appendix: source code 
+59 
+ 
+9. Appendix: source code 
 Not all the code are included in the appendix because there will be too many pages, 
 just 3 important parts of the program code is attached here. 
  
@@ -2094,8 +2198,9 @@ if (name.equals("") || alreadyInList(name)) {
 Toolkit.getDefaultToolkit().beep(); 
 InputName.requestFocusInWindow(); 
 InputName.selectAll(); 
-59 
- return; 
+60 
+ 
+return; 
 } 
 selectedIndex = ObjList.getSelectedIndex(); //get selected index 
 if (selectedIndex == -1) { //no selection, so insert at beginning 
@@ -2139,8 +2244,9 @@ RotateGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
  ////////////////////////// 
 Group lineGroup = new Group(); 
 Appearance app = new Appearance(); 
-60 
- ColoringAttributes ca = new ColoringAttributes(black, 
+61 
+ 
+ColoringAttributes ca = new ColoringAttributes(black, 
 ColoringAttributes.SHADE_FLAT); 
 app.setColoringAttributes(ca); 
  
@@ -2152,7 +2258,7 @@ pla.setCoordinates(0, plaPts);
 Shape3D plShape = new Shape3D(pla, app); 
 lineGroup.addChild(plShape); 
 ////////////////////////// 
-if(prevIndex != -1) { 
+if(prevIndex = -1) { 
 BranchGroup lastBG = (BranchGroup) objRoot.getChild(prevIndex); 
 BranchGroup behaviourBranch = (BranchGroup) lastBG.getChild(1); 
 behaviourBranch.detach(); 
@@ -2184,8 +2290,9 @@ objRoot.addChild(extend);
 } 
  
  
-61 
- ? Projection is one of the most important part of the program, because they are 
+62 
+ 
+? Projection is one of the most important part of the program, because they are 
 coded in a similar way, cylinder projection is given as the example code: 
  
 private void TAPCylinder(Matrix4d M, Matrix4d Ms, PdfContentByte cb) throws Exception { 
@@ -2229,8 +2336,9 @@ cc[i].z = M.m20*c[i].x + M.m21*c[i].y + M.m22*c[i].z + M.m23;
 cp[i].x = (d*cc[i].x)/cc[i].z; 
 cp[i].y = (d*cc[i].y)/cc[i].z; 
  
-62 
- rp[i] = r*(Math.sqrt(cp[i].x*cp[i].x + cp[i].y*cp[i].y + d*d))/(Math.sqrt(cc[i].x*cc[i].x + 
+63 
+ 
+rp[i] = r*(Math.sqrt(cp[i].x*cp[i].x + cp[i].y*cp[i].y + d*d))/(Math.sqrt(cc[i].x*cc[i].x + 
 cc[i].y*cc[i].y + cc[i].z*cc[i].z)); 
 //adjust to the pdf page 
 cp[i].x = cp[i].x*a + pageWidth/2; 
@@ -2274,8 +2382,9 @@ pp[7].y = cp[1].y - sp[1]*Math.sin(alpha);
 drawCylinder2D (pp[0], pp[1], pp[2], pp[3], pp[4], pp[5], pp[6], pp[7], cb); 
 } 
  
-63 
- protected void drawCylinder2D (Point p1, Point p2, Point p3, Point p4, 
+64 
+ 
+protected void drawCylinder2D (Point p1, Point p2, Point p3, Point p4, 
             Point p5, Point p6, Point p7, Point p8, PdfContentByte cb) throws Exception {                
 double k1 = 0; 
 double k2 = 0; 
@@ -2304,7 +2413,7 @@ double p_6y;
 double p_8x; 
 double p_8y; 
          
-if(p1.x - p3.x != 0 && p2.x - p4.x != 0) { 
+if(p1.x - p3.x = 0 && p2.x - p4.x = 0) { 
  
 k1 = (p1.y - p3.y)/(p1.x - p3.x); 
 k2 = (p2.y - p4.y)/(p2.x - p4.x); 
@@ -2315,14 +2424,15 @@ p2y = k2*(p2x - p3.x) + p3.y;
 p4x = (k2*p1.x - k1*p4.x + p4.y - p1.y)/(k2 - k1); 
 p4y = k2*(p4x - p1.x) + p1.y; 
 } 
-if(p1.x - p3.x == 0 && p2.x - p4.x != 0) { 
+if(p1.x - p3.x == 0 && p2.x - p4.x = 0) { 
 p2x = p2.x; 
 p2y = p3.y; 
 p4x = p4.x; 
-64 
- p4y = p1.y; 
+65 
+ 
+p4y = p1.y; 
 } 
-if(p1.x - p3.x != 0 && p2.x - p4.x == 0) { 
+if(p1.x - p3.x = 0 && p2.x - p4.x == 0) { 
 p2x = p3.x; 
 p2y = p2.y; 
 p4x = p1.x; 
@@ -2342,7 +2452,7 @@ cb.ellipse((float)p_2x, (float)p_2y, (float)p_4x, (float)p_4y);
 cb.stroke(); 
 cb.restoreState(); 
          
-if(p5.x - p7.x != 0 && p6.x - p8.x != 0) { 
+if(p5.x - p7.x = 0 && p6.x - p8.x = 0) { 
  
 k3 = (p5.y - p7.y)/(p5.x - p7.x); 
 k4 = (p6.y - p8.y)/(p6.x - p8.x); 
@@ -2353,19 +2463,20 @@ p6y = k4*(p6x - p7.x) + p7.y;
 p8x = (k4*p5.x - k3*p8.x + p8.y - p5.y)/(k4 - k3); 
 p8y = k4*(p8x - p5.x) + p5.y; 
 } 
-if(p5.x - p7.x == 0 && p6.x - p8.x != 0) { 
+if(p5.x - p7.x == 0 && p6.x - p8.x = 0) { 
 p6x = p6.x; 
 p6y = p7.y; 
 p8x = p8.x; 
 p8y = p5.y; 
 } 
-if(p5.x - p7.x != 0 && p6.x - p8.x == 0) { 
+if(p5.x - p7.x = 0 && p6.x - p8.x == 0) { 
 p6x = p7.x; 
 p6y = p6.y; 
 p8x = p5.x; 
 p8y = p8.y; 
-65 
- } 
+66 
+ 
+} 
 angle2 = Math.atan(k3); 
 p_6x = (p6x - x2)*Math.cos(-angle2) - (p6y - y2)*Math.sin(-angle2) + x2; 
 p_6y = (p6y - y2)*Math.cos(-angle2) + (p6x - x2)*Math.sin(-angle2) + y2; 
@@ -2409,8 +2520,9 @@ u.getViewingPlatform().getViewPlatformTransform().setTransform(lookAt);
 if (View.getSelectedIndex() == 2) { 
 Transform3D lookAt = new Transform3D(); 
 lookAt.lookAt(new Point3d(0.0, 0.0, 20), new Point3d(0.0, 0.0, 0.0), new Vector3d(0.0, 
-66 
- 1.0, 0.0)); 
+67 
+ 
+1.0, 0.0)); 
 lookAt.invert(); 
 u.getViewingPlatform().getViewPlatformTransform().setTransform(lookAt); 
 } 
@@ -2454,8 +2566,9 @@ plaPts[0] = new Point3f(-10.0f, 0.0f, a);
 plaPts[1] = new Point3f(10.0f, 0.0f, a); 
 LineArray pla = new LineArray(2, LineArray.COORDINATES); 
 pla.setCoordinates(0, plaPts); 
-67 
- Shape3D plShape = new Shape3D(pla, app); 
+68 
+ 
+Shape3D plShape = new Shape3D(pla, app); 
 lineGroup.addChild(plShape); 
  
 Point3f[] pla_Pts = new Point3f[2]; 
@@ -2487,5 +2600,3 @@ lookAt.lookAt(new Point3d(M.m03, M.m13 + 2, M.m23), new Point3d(0.0, 0.0,
 lookAt.invert(); 
 u.getViewingPlatform().getViewPlatformTransform().setTransform(lookAt); 
 } 
-68 
- 

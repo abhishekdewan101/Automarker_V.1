@@ -1,3 +1,5 @@
+2 
+ 
 Executive Summary 
 Chinese Chess is one of the most popular board game in China and some other Asian 
 countries. However, it is hardly to be accepted by western countries. That is because, 
@@ -34,8 +36,9 @@ in polar coordinates space and Fourier descriptor is proposed and implemented.
  
  
   
-2 
- Table of Contents 
+4 
+ 
+Table of Contents 
 Declaration ............................................................................................................................... 1 
 Executive Summary ................................................................................................................... 2 
 Acknowledgements ................................................................................................................... 3 
@@ -77,8 +80,9 @@ Table of Contents ..............................................................
 Bibliography ............................................................................................................................ 61 
 Appendix – Essential Source Code ........................................................................................... 64 
   
-4 
- 1. Introduction 
+5 
+ 
+1. Introduction 
 With the permit of technical conditions, people are constantly trying to find a more 
 natural and convenient way to interact with machines. The development of IT 
 technologies especially computer vision technique nowadays allows the way that 
@@ -87,8 +91,7 @@ screens. One of many ways that humans and machine can interact is through physic
 game play, using board games such as Chinese chess.  
  
 Chinese Chess is one of the most popular board game in China and some other Asian 
-th
-countries. It has a long history and can be date back to 9 century, which is a 
+countries. It has a long history and can be date back to 9th century, which is a 
 precious heritage of Chinese culture.  Chinese chess is a two-player board game in 
 the same family as Western chess. However, it is hardly to be accepted by western 
 countries. That is because, unlike western chess whose piece is recognized by the 
@@ -118,8 +121,9 @@ looks at the vision part of chess robot.
 This project is aimed to reconstruct Chinese chess game-playing in physical world. To 
 achieve this aim, the project looks at using a camera to monitor the chess board and 
 using vision technique to recognize and analyse the current board state. The result 
-5 
- will be shown in screen in symbolic images to reconstruct Chinese chess 
+6 
+ 
+will be shown in screen in symbolic images to reconstruct Chinese chess 
 game-playing in real time. To achieve the aims, following tasks should be 
 accomplished. 
 (1) correctly calibrate the chess board 
@@ -158,8 +162,9 @@ piece recognition algorithm based on projection histogram in polar coordinates
 space and Fourier descriptor. In this paper, we will describe and discuss the whole 
 system that implements all phases needed for tracking the progress of the chess 
 game, including extracting valid frames of individual moves from the video sequence, 
-6 
- calibrate the chess board, locating individual fields, segmentation of chess pieces on 
+7 
+ 
+calibrate the chess board, locating individual fields, segmentation of chess pieces on 
 the board and recognizing the identity of each piece and its position. 
 1.4 Significance of Research 
 As researches on computer vision technique mature, the problem of chess vision 
@@ -184,8 +189,9 @@ chess piece recognition respectively. Chapter 8 provides a brief introduction to
 system software. Chapter 9 evaluates the works have been done. Chapter 10 
 concludes the report and gives a suggestion on future works. 
   
-7 
- 2 System Framework 
+8 
+ 
+2 System Framework 
 Before moving on to the algorithm details of each module, this section gives the 
 framework and working conditions of my system.  
  
@@ -198,33 +204,25 @@ Fig. 2.1 System Device
  
 Fig. 2.2 Software GUI 
  
-8 
- The system architecture is illustrated as following flowchart.  
+9 
+ 
+The system architecture is illustrated as following flowchart.  
  
  
  
  
-Frame Extraction 
- 
- 
-Piece Samples 
- 
- 
-Pre-Process 
- 
-SVM train 
  
  
  
  
-Piece Segmentation Board Detection 
  
  
-Piece Recognition 
  
-Detection of 
  
-Piece Position 
+ 
+ 
+ 
+ 
  
  
  
@@ -252,8 +250,18 @@ frames. If the difference of image frames is below a specified threshold, then i
 considered that the static image has been detected. 
  
  
-9 
- Pre-process 
+Board Detection Piece Segmentation 
+Detection of 
+Piece Position 
+Piece Recognition 
+Piece Samples 
+SVM train 
+ 
+Pre-Process 
+Frame Extraction 
+10 
+ 
+Pre-process 
 Before we beginning to detect chess board and pieces, image extracted from video 
 frames must be pre-processed. For board detection, image is firstly changed from 
 RGB format to gray-scale image and median filter is applied to remove noise. Then, 
@@ -287,8 +295,9 @@ In this module, we use SVM classifier to recognize chess pieces. Detailed algori
 and descriptor representation will be described in Chapter 7.  
  
   
-10 
- 3 Comparison of Approaches 
+11 
+ 
+3 Comparison of Approaches 
 Many different solutions have been attempted in chessboard recognition problem. 
 After background survey of existing approaches, Jason E. [1] summarizes three major 
 solutions: modified board/pieces, differential image, and object recognition. This 
@@ -324,8 +333,9 @@ Step 1 Board Detection
 In order to identify piece position, we must know board position and segment the 
 image of a chessboard into chess squares. The simplest method is to mount the 
 camera directly above and orthogonal to the board. However, this constraint leads to 
-11 
- less user-friendly. To detect board from arbitrary camera view is necessary. Tam, et 
+12 
+ 
+less user-friendly. To detect board from arbitrary camera view is necessary. Tam, et 
 al., has proposed a method of board detection at a flexible camera angle with little 
 constraint on camera view. [9] There is a bunch of different method existing to deal 
 with that problem. The most frequently utilized method is Hough transform. [10] As 
@@ -366,8 +376,9 @@ computer needs to know the identity of each piece according to their initial pos
 However, if a game starts in an arbitrary position, it will require manual entry of 
 piece locations into the chess engine. This is the weak point of differential imaging 
 approach. 
-12 
- 3.3 Object Recognition 
+13 
+ 
+3.3 Object Recognition 
 The object recognition approach shares commonality with the differential image 
 method in the areas of board detection. [1] They differ in the step of piece 
 identification.  
@@ -400,8 +411,9 @@ different algorithms and ideas on this topic will be given in Chapter 5.
  
  
   
-13 
- 4 Review of Board Calibration Methods 
+14 
+ 
+4 Review of Board Calibration Methods 
 Before any further processing, the problem that confronts us is chess board 
 calibration. In this step, we should detect squares on the chess board from video 
 frame and map the chess board to the chess notation. In order to let our vision 
@@ -432,8 +444,9 @@ weak points of each approach.
 Line-based detection method works by detecting the lines of the chessboard. Then 
 use the line equations to form squares on the board. Line-based detection can be 
 divided into following steps (Figure 4.1).  
-14 
-  
+15 
+ 
+ 
 Fig. 4.1 Major steps used in line-based board detection algorithm 
 Step 1 – Image Pre-process 
 Before formally beginning to apply line-based detection approach, some basic filters 
@@ -463,8 +476,9 @@ quadrant;
 (2) Select a vertical line that interests with the same horizontal line in the upper 
 right quadrant; 
 (3) Select a horizontal line that intersects with the last vertical line in the lower 
-15 
- right quadrant.  
+16 
+ 
+right quadrant.  
 (4) The lower left intersection is found using the first vertical line and the last 
 horizontal line.  
  
@@ -497,8 +511,9 @@ meet.
 chessboard. If the edge of the board is known, only a single square is needed 
 to grow into a complete board. Figure 4.2 illustrate the how the square 
 above the current one can be constructed using simple construction lines. 
-16 
-  
+17 
+ 
+ 
 Fig. 4.2 Steps showing how the square above the current one can be 
 constructed using simple construction line 
 Grid-based detection nearly eliminates false positives and misses, which is a big 
@@ -524,8 +539,9 @@ Whereas, the weak points are also obvious, corners are not guaranteed to be
 detected on a populated chessboard from perspective camera view. Moreover, the 
 corners returned would have no information as to which points are co-linear with 
 other points. Generally speaking, for most system, line-based detection algorithm 
-17 
- works better than corner-based detector.  
+18 
+ 
+works better than corner-based detector.  
 4.4 Template Matching-based Detection 
 Template matching-based detection method (proposed by T. Cour, et al. [8]) is a kind 
 of corner-based detection method. We use templates to detect the corners of the 
@@ -559,8 +575,9 @@ However, the classes ‘light square’ and ‘light piece’ overlap, when pixels are
 represented in RBG color space, which will lead to misclassification. To deal with that 
 problem, we therefore switch the chessboard image from RBG color space to a HSB 
 (Hue, Saturation, and Brightness) color space. After computing the color domain of 
-18 
- each class, we than classify all pixels in the image. A sample result of this step is 
+19 
+ 
+each class, we than classify all pixels in the image. A sample result of this step is 
 showed in Figure 4.4. 
  
 Fig. 4.4  
@@ -593,8 +610,9 @@ are some constraints such as, the camera must be mounted about the chessboard;
 the algorithm requires that the game must started from the beginning, as computer 
 needs to know the identity of each piece according to their initial position, but if a 
 game starts in an arbitrary position, it will require manual entry of piece locations 
-19 
- into the chess engine. 
+20 
+ 
+into the chess engine. 
 4.6 Square Detector 
 In [16], the square detector is used to find chess squares. To cope with the rotation 
 and scale, the system generates 20 square templates by rotating a square in different 
@@ -625,8 +643,9 @@ those peaks on the distribution, the horizontal board lines can be calibrated.
 Fig. 4.6 Horizontal Projection 
 On the basis of above description, the detailed algorithm is elaborated as follows. 
 (1) Define an array (dis[10]) to record coordinate; define a array 
-20 
- (ptempdata[2][height]) to record the number of black pixels on horizontal lines 
+21 
+ 
+(ptempdata[2][height]) to record the number of black pixels on horizontal lines 
 and its corresponding coordinate. 
 (2) Scan each horizontal line, count the number of black pixels, and store it and its 
 corresponding coordinate in the array (ptempdata). In order to decrease the 
@@ -663,8 +682,9 @@ the coordinates in hlinedis[10];
 (2) Separate the image from top to bottom according to the results in (1). 
 (3) Project the separated images in vertical direction to get the vertical coordinates 
 and save the coordinates in vlinedis[9]. 
-21 
-  
+22 
+ 
+ 
 Experiment results show that this method to calibrate the chess board is highly 
 affected by the position of chess board relative to the position of camera.  
 4.8 Other Solutions 
@@ -675,8 +695,9 @@ can be calculated automatically, based on the knowledge of introduced corners. I
 Chapter 6, we will propose a more robust and efficient Chinese board calibration 
 algorithm.  
   
-22 
- 5 Review of Piece Recognition Methods 
+23 
+ 
+5 Review of Piece Recognition Methods 
 Several solutions can be used to detect a chess piece. In Section 3.2 (differential 
 image), we have discussed a method of inferring the type of chess piece by simply 
 comparing current situation with the situation before the last move. But, this is not a 
@@ -696,60 +717,67 @@ an image.
  
 Template matching is image processing technique based on 2-d image window. For 
 instance, the template T (n x n pixels) is stacked on the searching image S (w x h 
-pixels) and the overlap area is called sub-image S . ( i, j) is the top-left coordinate of 
-ij
+pixels) and the overlap area is called sub-image Sij. ( i, j) is the top-left coordinate of 
 the sub-image on S. The searching range will be: 
            
           
 The process of template matching will be done by comparing the similarity of T and 
-S , which can be measured by following formula: 
-ij
-  
-  
-          
-               
-      
-    
-   
-                                
-            
-  
+Sij, which can be measured by following formula: 
+                           
  
+   
+ 
+   
+              
+ 
+   
+ 
+   
+                     
+ 
+   
+ 
+   
              
-      
+ 
+   
+ 
+   
+ 
 In the formula, the first item is the energy of sub-image; the third item is the energy 
 of template. They are irrelevant to template matching. The second item is the 
 cross-correlation between the template and sub-image and is changed along with (i, 
-23 
- j). When matching the template with sub-image, this item has a maximum value. If 
+24 
+ 
+j). When matching the template with sub-image, this item has a maximum value. If 
 we normalise this item, we can get correlation coefficient: 
-   
-      
-          
-      
-  
         
-    
+                     
+ 
    
-                      
-            
+                 
+ 
+              
+  
+   
+ 
+   
+  
 When the template is completely the same with sub-image, the correlation 
 coefficient R(i , j) = 1. When finishing searching on image S, we will get a maximum 
-value of R (R (i , j )), then its corresponding sub-image S is the matching result. 
-max m m im,jm
+value of R (Rmax(im, jm)), then its corresponding sub-image Sim,jm is the matching result. 
 Obviously, when applying this formula to do image matching, the amount of 
 computation is fairly large and the speed will be low.  
  
-Another formula to measure error between T and S is: 
-ij
-  
+Another formula to measure error between T and Sij is: 
+                          
  
-    
-                      
-      
+   
+ 
+   
+ 
 Where E(i,j) get to its minimum is the matching result. In order to increase 
-computing speed, we define an error threshold E . When E(i, j) > E , we can stop 
-0 0
+computing speed, we define an error threshold E0. When E(i, j) > E0, we can stop 
 calculation on that position and begin to compute in next position.  
  
 The result of template matching method is proven to be efficient. However, as chess 
@@ -773,8 +801,9 @@ each character is the direction. Here is the main idea of this algorithm. We fir
 the centre of a character and use this as the centre to build concentric circles, whose 
 radius are R/4, R/2, 3R/4 (R is the radius of a chess piece) respectively. At the mean 
 while, we count time of intersections between each circle and the character. The 
-24 
- statistical result is used as code to build the descriptor to classify each character. This 
+25 
+ 
+statistical result is used as code to build the descriptor to classify each character. This 
 method obtains the structure information of characters and is irrelevant to the 
 orientation. The idea of this algorithm is shown as Figure 5.2.  
   
@@ -783,30 +812,21 @@ Fig. 5.2 Ring statistics diagram
 The flow chart of ring statistics algorithm is shown as follows. 
  
  
-Find piece center 
  
  
  
-Build concentric 
- 
-circles 
  
  
  
-Count the number of 
- 
-intersections 
- 
- 
-Encode by statistic 
- 
-results 
  
  
  
-Decode to 
  
-determine the type 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -819,33 +839,53 @@ the last two images in Figure 5.2 represent black bishop in Chinese chess, and t
 numbers of intersection between concentric circles and the character are 7, 8, and 
 4respectively. Therefore, black pawn can be encoded as 784. According to this rule, 
 we can easily get a character code table shown as follows. 
-25 
- Table 1 – Character Code 
+Find piece center 
+Build concentric 
+circles 
+Count the number of 
+intersections 
+Encode by statistic 
+results 
+Decode to 
+determine the type 
+26 
+ 
+Table 1 – Character Code 
+ 
 Chinese 
- R/4 R/2 3R/4 code 
 Characters 
-Pawn(black) 5 6 1 561 
+R/4 R/2 3R/4 code 
+Pawn(black) 
  
-Pawn(red) 5 4 3 543 
+5 6 1 561 
+Pawn(red)  5 4 3 543 
+Bishop(black) 
  
-Bishop(black) 7 8 4 784 
+7 8 4 784 
+Bishop(red) 
  
-Bishop(red) 6 8 2 682 
+6 8 2 682 
+Cannon 
  
-Cannon 2 6 3 263 
+2 6 3 263 
+Guard(red) 
  
-Guard(red) 3 5 1 351 
+3 5 1 351 
+Guard(black) 
  
-Guard(black) 4 2 0 420 
+4 2 0 420 
+King(red) 
  
-King(red) 4 8 1 481 
+4 8 1 481 
+King(black) 
  
-King(black) 6 8 4 684 
+6 8 4 684 
+Horse 
  
-Horse 7 6 2 762 
+7 6 2 762 
+Rook 
  
-Rook 6 4 4 644 
- 
+6 4 4 644 
 5.2.1 The Method of Counting Intersection 
 To count the number of intersections between each concentric circle and the 
 characters, we first get the centre (x, y), and the radius (r), and then count along the 
@@ -859,8 +899,9 @@ represent tell each character, we must analysis and sift the string. The method 
 sifting is: if we delete a circle and the code of the rest of the string can distinguish 
 each character, then we delete the circle; otherwise, we retrain that circle.  
  
-26 
- In this case, the result of sifting is the three circles whose radiuses are R/4, R/2 and 
+27 
+ 
+In this case, the result of sifting is the three circles whose radiuses are R/4, R/2 and 
 3R/4 for each. Deleting of any circle will result in repetition of codes.  
 5.2.3 Experiment Analysis 
 The experiment result shows that this algorithm is efficient if we the light condition is 
@@ -868,7 +909,7 @@ good enough. Otherwise, pieces will be mistakenly recognized. Ideally, the code 
 horse is 762, be it will produce unexpected result in poor light condition shown as 
 Figure 5.4.  
  
-Fig. 5.4 binary image of “Horse ” in poor light condition 
+Fig. 5.4 binary image of “Horse” in poor light condition 
 5.3 Recognition Based on Connectivity and Holes 
 Another recognition algorithm of Chinese chess pieces is based on connectivity and 
 amount of holes of Chinese characters. [23] The so-called connectivity of a character 
@@ -896,40 +937,56 @@ of holes of Chinese characters is described as follows.
 (1) Count the number of connecting areas: call the connecting area statistics 
 algorithm with the parameter color set to 0 to get the number of connecting 
 areas of black pixels. 
-27 
- (2) Count the number of holes: call the connecting area statistics algorithm with the 
+28 
+ 
+(2) Count the number of holes: call the connecting area statistics algorithm with the 
 parameter color set to 1 to get the number of connecting areas of white pixels. 
 (3) Build the feature code: combine the results from (1) and (2) to a string to match 
 with standard identification code. 
 Following table shows the identification code of each character. 
 Table 2 – Character Code 
+ 
+Chinese 
+Characters 
 Number of 
-Chinese Number of 
- connecting code 
-Characters Holes 
+connecting 
 areas 
-Pawn(black) 1 3 13 
+Number of 
+Holes 
+code 
+Pawn(black) 
  
-Pawn(red) 3 1 31 
+1 3 13 
+Pawn(red) 
  
-Bishop(black) 1 3 13 
+3 1 31 
+Bishop(black) 
  
-Bishop(red) 2 3 23 
+1 3 13 
+Bishop(red) 
  
-Cannon 5 1 51 
+2 3 23 
+Cannon 
  
-Guard(red) 2 0 20 
+5 1 51 
+Guard(red) 
  
-Guard(black) 1 0 10 
+2 0 20 
+Guard(black) 
  
-King(red) 3 0 30 
+1 0 10 
+King(red) 
  
-King(black) 6 1 61 
+3 0 30 
+King(black) 
  
-Horse 5 3 53 
+6 1 61 
+Horse 
  
-Rook 1 4 14 
+5 3 53 
+Rook 
  
+1 4 14 
 Experiment result shows that this algorithm is fast and has a high reliability, but the 
 feature codes are highly restricted to specific character font.  
 5.4 Other Solutions 
@@ -940,14 +997,16 @@ solutions to that problem, among which, relatively mature methods are including 
 [25] and Zernicke [26] moment feature which are based on methods of algebraic 
 invariants. Some other method firstly obtains the contour points and then adopts 
 Fourier transform. All of them have been proven by experiments to be less resistant 
-28 
- to interference and less robust. Therefore, the proposed Chinese chess piece 
+29 
+ 
+to interference and less robust. Therefore, the proposed Chinese chess piece 
 recognition algorithm based on projection histogram of polar coordinates spaces and 
 Fourier descriptor will be elaborated in Chapter 7.  
  
   
-29 
- 6 Proposed Board Calibration Algorithm 
+30 
+ 
+6 Proposed Board Calibration Algorithm 
 In this Chapter, we will introduce our proposed Chinese board detection algorithm 
 which is based on corner-line matching method. In the end of this section, an 
 analysis on experiment result will be given. Also, we will give a comparison between 
@@ -975,11 +1034,10 @@ the result of detection.
  
 Figure 6.2 shows the original chess board images and the results of applying Hough 
 transform to detect lines in different cases.  
-30 
-  
-Original Chess Results of Line 
+31 
  
-board Images Detection 
+ 
+ 
  
          
          
@@ -988,17 +1046,22 @@ Fig. 6.2 Chess Board Images and the Results of Line Detection
 Figure 6.3 show the original chess board images and the results of applying Harris 
 corner detector in different cases. 
  
-Original Chess 
-Results of Harris 
  
-board Images 
-Corner Detector 
  
      
      
 Fig. 6.3 Chess Board Images and the Results of Harris Corner Detector 
-31 
- As we can see from the results, the detecting result is easily affected by environment. 
+Original Chess 
+board Images 
+Results of Line 
+Detection 
+Results of Harris 
+Corner Detector 
+Original Chess 
+board Images 
+32 
+ 
+As we can see from the results, the detecting result is easily affected by environment. 
 Especially in real-time environment, the result will change all the time. In order to 
 build a high fault tolerance algorithm, we make use of following basic rules that are 
 applicable in standard Chinese chess board: 
@@ -1021,7 +1084,7 @@ Step 3: Detect corners by Harris corner detector.
 Step 4: Select “valid” board corners. (Passed by at least 2 lines) 
 Step 5: Select “valid” board lines. (Come across at least 4 “valid” corners ) 
 Step 6: Select four boundary lines of chess board. 
-Step 7: Compute the four boundary corners by Cramer’s rule. 
+Step 7: Compute the four boundary corners by Cramer ’s rule. 
 Step 8: Determine the direction of board. 
 Step 9: Compute all of the inner board corners by bilinear interpolation. 
  
@@ -1039,8 +1102,9 @@ image format and size. However, if the size of image is big (e.g., the size of i
 captured from iPhone camera: 1936x2592), the speed of detecting cannot be 
 tolerated. That is mainly because the computing time of Hough transform to 
 detect lines will increase dramatically along with the increase of image size. 
-32 
- Therefore, we resize the image to 500 by 500 pixels and in the final stage, when 
+33 
+ 
+Therefore, we resize the image to 500 by 500 pixels and in the final stage, when 
 we finish calibrating board, the detecting result will be restored to fit the original 
 image.  
 (4) Edge extraction: As Hough transform works on binary image, so before doing line 
@@ -1059,15 +1123,16 @@ of Line detection is shown in following figure (the detected lines are plot in b
 color).  
  
 Fig. 6.5 Result of Using Hough Transform to Detect Lines 
-33 
- Step 3: Corner Detection 
+34 
+ 
+Step 3: Corner Detection 
 To detect corners on the chess board image, we adopt Harris corner detector. Harris 
 corner detection method compares a small number of surrounding pixels with its 
 immediate neighbor to check if current pixel is a corner. The result of corner 
 detection is shown in following figure (the detected corners are plot in black color).  
  
 Fig. 6.6 Result of Using Harris Corner Detector to Detect Corners 
-Step 4: Select “Valid ” Board Corners 
+Step 4: Select “Valid” Board Corners 
 As we can see from the result of Step 3, when we apply Harris corner detector, a 
 bunch of corners will be detected including “invalid” corners which is actually not 
 board corners. In this step, we will select “valid” board corners from the bunch of 
@@ -1081,11 +1146,12 @@ The result of selecting “valid” board corners is shown on following figure, wher
 blue “*” marks represent the selecting result. As you can see, there are also some 
 “fake” board corners selected. Therefore, it is not enough so for to calibrate the 
 chess board.  
-34 
-  
-Fig. 6.7 Result of Selecting “Valid ” Board Corners 
+35 
  
-Step 5: Select “Valid ” Board Lines 
+ 
+Fig. 6.7 Result of Selecting “Valid” Board Corners 
+ 
+Step 5: Select “Valid” Board Lines 
  “Valid” board lines selection can be done based on the result of step 4. According to 
 Rule 4, valid board lines in Chinese chess board must pass through a bunch of valid 
 board corners. In our case, we set the threshold of the number of valid board corners 
@@ -1107,14 +1173,15 @@ most lines, i.e., the average degree of horizontal lines and average degree of
 vertical lines. 
 (3) Traverse all of the lines. If they satisfy: (a) the difference between its degree of 
 angles and ave1 or ave2 is less than 10 degree; (b) the number of valid board 
-35 
- corners on the lines are bigger than 4, then those lines are regarded as valid 
+36 
+ 
+corners on the lines are bigger than 4, then those lines are regarded as valid 
 board lines. 
   
 The result of selecting “valid” board lines is shown on following figure, where the 
 green lines represent the selecting result.  
  
-Fig. 6.8 Result of Selecting “Valid ” Board Lines 
+Fig. 6.8 Result of Selecting “Valid” Board Lines 
 Step 6: Select Four Chess Board Boundary Lines 
 Simply knowing valid board lines is not enough. That is because we cannot guarantee 
 each of the board lines is detected or no redundant lines are detected. In order to 
@@ -1129,8 +1196,9 @@ lines.
  
 The result of boundary lines is shown on following figure, they are drew in red, blue, 
 yellow, green colour respectively in thick line. 
-36 
-  
+37 
+ 
+ 
 Fig. 6.9 Result of Selecting Boundary Lines 
 Step 7: Compute Four Boundary Corners  
 Boundary corners are the points of intersection between boundary lines pair wise, 
@@ -1139,8 +1207,9 @@ on following figure, they are drew in red, blue, yellow, green colour respective
 rectangle mark. 
  
 Fig. 6.10 Result of Selecting Boundary Corners 
-37 
- Step 8: Determine Board Direction  
+38 
+ 
+Step 8: Determine Board Direction  
 Unlike western chess, in Chinese chess, the number of horizontal board lines and 
 vertical board lines are different. So far, we have got four boundary corners. In order 
 to do further calibrate we must know the direction of current board, i.e., which 
@@ -1182,8 +1251,9 @@ line”corner1->corner4” or “corner2-> corner3” is “vertical” line.
 (11) Build 8 “vertical” inner board lines, whose “theta” is close to ave1 (see Step 5). 
 (12) For current_line = each “vertical” inner board lines 
      Traverse each valid board lines (see Step 5); 
-38 
- If there is a valid board lines that has a similar theta as current_line and is 
+39 
+ 
+If there is a valid board lines that has a similar theta as current_line and is 
 close to current_line;  
 Then, calculate the distance between the two lines and save as dis; let 
 error2 = error2 + dis; let counter = counter + 1; 
@@ -1219,8 +1289,9 @@ The corresponding positions of bc1, bc2, bc3, and bc4 in Chinese chess board are
 illustrated in following figure.   
  
 Fig. 6.11 Result of Determining the Board Direction 
-39 
- Step 9: Calculate Inner Board Corners  
+40 
+ 
+Step 9: Calculate Inner Board Corners  
 So far, we have got the four chess board boundary corners and the board direction. 
 The final step to calibrate Chinese chess board is to get the positions of all other 
 inner board corners.  
@@ -1245,18 +1316,17 @@ The result of board calibration is shown on following figure, the board corners 
 drew as cyan circles and magenta circles on each side. 
  
 Fig. 6.12 Result of Board Calibration 
-40 
- 6.2 Result Analysis 
+41 
+ 
+6.2 Result Analysis 
 Experiments have been taken to use the proposed algorithm to detect Chinese chess 
 board under different viewing angles, different backgrounds, and different light 
 conditions. Following figures show the result in typical scenarios.  
 6.2.1 Different Viewing Angles 
 First, let’s look at board calibration results in different viewing angles.  
- 
- 
   
- 
- 
+  
+  
 Fig. 6.13 Board Calibrate in Different Viewing Angles 
 As we can see from the first two images, chess board is successfully calibrated in top 
 view with different rotation angle with different rotation angles, which indicates the 
@@ -1267,8 +1337,9 @@ calibration result in perspective view. Although, the chess board is successfull
 calibrated, however, if looking carefully, we can found the inner board corners are 
 not overlapping exactly with real board corners. That is caused by a defect of the 
 proposed algorithm. As in the proposed algorithm, inner board corners are 
-41 
- calculated by bilinear interpolation of the four boundary corners. While in 
+42 
+ 
+calculated by bilinear interpolation of the four boundary corners. While in 
 perspective view, the distribution of board lines is not linear any more. Following 
 figures provide a good illustration of this. 
  
@@ -1277,13 +1348,12 @@ Fig. 6.14 Deformation Caused by Perspective View
 6.2.2 Different Background 
 Now, let’s look at the results affected by different background. 
   
- 
- 
- 
- 
+  
+  
 Fig. 6.15 Board Calibration Affected by Different Background 
-42 
- Image 1 and image 2 shows chess board in different background, both of them are 
+43 
+ 
+Image 1 and image 2 shows chess board in different background, both of them are 
 successfully calibrated. Image 3 and image 4 shows chess board that is covered by 
 objects. Both of them are successfully calibrated. Image 5 and image 6 shows the 
 results of board calibration affected by surrounding objects. One of them fails in 
@@ -1293,20 +1363,18 @@ We can easily conclude that the algorithm is highly resistant to backgrounds,
 surrounding objects, or even object covered partially on the board.  
 6.2.3 Different Light Conditions 
 Here we show some experimental result under different light conditions. 
- 
- 
- 
- 
- 
- 
+  
+  
+  
 Fig. 6.16 Board Calibration Affected by Different Light Conditions 
 As can be seen, the first four images show the experiments under different intensity 
 of light sources. The last fourth image in dark light condition failed the test. Last two 
 images show the experiments under effect of non-uniform illumination. One of them 
 failed the test.  
  
-43 
- The results of experiment indicate that the algorithm will be affected if the intensity 
+44 
+ 
+The results of experiment indicate that the algorithm will be affected if the intensity 
 of light source is quite low or the illumination is extremely non-uniform. However, 
 the overall performance of the algorithm shows good robustness under the influence 
 of different light conditions.  
@@ -1318,8 +1386,9 @@ different light conditions. However, the performance will decrease with the view
 angle become lower. Also, in some extremely condition of illumination, chess board 
 will be mistakenly detected.  
   
-44 
- 7 Proposed Piece Recognition Algorithm 
+45 
+ 
+7 Proposed Piece Recognition Algorithm 
 The key problems of Chinese piece recognition are the extraction of pieces and the 
 recognition of piece characters.  
  
@@ -1357,8 +1426,9 @@ projection histogram. Finally, Fourier transform is applied to solve the shift
 invariance.  
  
 Algorithm procedures are expounded in details in following sections.  
-45 
- 7.1 Algorithm Procedures 
+46 
+ 
+7.1 Algorithm Procedures 
 Step 1: Piece Extraction 
 Before we could do recognition on chess pieces, we must segment the chess piece 
 from the chess board. The segmentation steps are list as follows. 
@@ -1390,11 +1460,13 @@ Fig. 7.1 Edge Extraction Result
 In order to increase the performance of circle detection, we need to use 
 morphological algorithm [32] [33] to do pre-processing. Here we adopt dilate 
 operation. The kernel of dilate operation we adopt is:  
-46 
-      
-   
+47 
+ 
+ 
      
      
+     
+  
 The result of dilate operation is shown as follows. 
  
 Fig. 7.2 Result of Dilate Operation 
@@ -1413,8 +1485,9 @@ comparing the similarity of corresponding sub-image of foreground and
 background. If their similarity is less than a threshold, we can judge they are 
 invalid circles and should be rejected. Following figure shows the result of circle 
 detection. (The detected circles are drawn in red color)   
-47 
-  
+48 
+ 
+ 
 Fig. 7.4 Result of Circle Detection 
 (7) Piece Segmentation 
 After detection of circles, we can easily segment the corresponding chess pieces 
@@ -1426,8 +1499,9 @@ result.
          
      
 Fig. 7.5 Result of Piece Segmentation 
-48 
- Step 2: Binarization 
+49 
+ 
+Step 2: Binarization 
 Piece images that are segmented from chess board should be processed and 
 binarized, so as to extract the feature of each piece character. We first convert the 
 original image to gray-scale image. Then image is binarized by using Otsu’s method 
@@ -1443,15 +1517,10 @@ Step 3: Convert to Polar Coordinates Space
 The rotation transformation of image in Cartesian coordinate space corresponds to 
 the translation transformation in polar coordinates space. The relation between the 
 two coordinate spaces is indicated by formulas 7.1. 
-  
-                                
-     
  
- 
-            
-  
+                                       
+                 
              
-  
 Before doing the conversion of coordinates, the center of the character should be 
 found. We get the center point by doing statistics on position of each black pixel on 
 the binarized image. Then we use the center as origin of Cartesian coordinate and 
@@ -1462,8 +1531,9 @@ examples (pawn) of the conversion.
                         
 a. Original Image   b. Cartesian coordinate       c. Polar Coordinate Space 
 Fig. 7.7 Convert Image from Cartesian Coordinates to Polar Coordinates 
-49 
- The projection histogram of the two axes in polar coordinate space equals to the 
+50 
+ 
+The projection histogram of the two axes in polar coordinate space equals to the 
 projection histogram of the radial direction and tangential direction in Cartesian 
 coordinate space.  
 Step 4: Projection Histogram 
@@ -1478,31 +1548,25 @@ tangential direction. By this way, the projection histogram of the image in pola
 coordinate space can keep the most information of character structures.  
  
 The formulas of projection histogram are: 
-  
-           
- 
-  
  
  
  
-                
  
-  
-           
-  
+               
  
+              
  
- 
-As      have a poor representational ability, our proposed solution adopts      
-  
+                 
+As       have a poor representational ability, our proposed solution adopts       
 to do character recognition. Following figures show the result of “pawn” in Chinese 
 chess with different rotation angles.  
 Table 7.1 
 Character Projection Histogram 
  
  
-50 
-  
+51 
+ 
+ 
  
  
  
@@ -1516,65 +1580,78 @@ Fast Fourier Transform (FFT) [37] is an efficient method to deal with discrete F
 transform (DFT) [38].  
  
 The expression of discrete Fourier transform is:  
-   
-    
-   
+       
  
-                    
+    
+ 
   
    
+   
+              
 There are many forms of fast Fourier transform. The most frequently used algorithm 
 is Cooley-Tukey FFT [39], it recursively divides DFT into odd part and even part, until 
 each part of DFT has only two items. The expressional forms are: 
-51 
+52 
+ 
+         
+ 
+   
+ 
+     
+ 
+ 
+  
+   
+        
+ 
+   
+ 
+       
+ 
+ 
+  
+   
+       
+ 
+   
+ 
+  
+   
    
     
-  
-      
-              
-  
-          
-       
-      
-      
-         
+   
+ 
         
+ 
    
-           
-      
-      
-   
+ 
   
- 
-                
-  
- 
- 
-                   
    
+   
+   
+    
+ 
+   
+ 
+               
       
  
-                
-      
+   
+ 
+                     
+                  
 Signal shift in time domain corresponds to the rotation in frequency domain, where 
 only phase-frequency can be changed the amplitude-frequency will not be affected. 
 Then expressional formulas are: 
-  
-       
  
+         
+             
+     
                 
-    
- 
-            
- 
-  
-Therefore, as for the vertical projection of polar coordinate   , to make it shift 
- 
+Therefore, as for the vertical projection of polar coordinate      , to make it shift 
 invariance, we should apply Fourier transform to it, and finally get the rotate 
 invariance feature vector (V) of the piece character. 
-      
-                        
- 
+                               
 As most of the information converge at the front part and end part of the result of 
 Fourier transform, so we only clip the front part and the end part to act as our 
 descriptor. Following table shows the Fourier descriptor of “pawn” in Chinese chess 
@@ -1583,8 +1660,9 @@ Table 7.2
 Character Fourier Descriptor 
  
  
-52 
-  
+53 
+ 
+ 
  
  
  
@@ -1594,39 +1672,23 @@ Fourier descriptor.
  
 In following table, we list the Fourier descriptor of each piece characters.  
 Table 7.3 
-Original Piece 
+Original 
+Image 
+Piece 
+Character 
 Fourier Descriptor 
-Image Character 
+   
+   
+   
+   
+54 
  
- 
- 
- 
-  
- 
- 
- 
- 
- 
- 
-53 
-  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+   
+   
+   
+   
+   
+   
 Step 6: Classification 
 In standard Chinese chess, there are 14 distinct piece types. As relatively low number 
 of training images of chess pieces can be obtained. We choose to adopt Support 
@@ -1635,9 +1697,9 @@ training samples.
  
 In our system, we use the Gaussian radial base function as a kernel for transforming 
 the samples.  
+                      
  
-                                        
-    
+                      
 The variable   determines the width of the radial function. If the value of   is large, 
 then the radial function will be narrow which is too specific and usually result in 
 more false negative classifications than false positives. Otherwise, if the value of   is 
@@ -1645,20 +1707,19 @@ small, the radial function will be wide, which is not specific enough and may pr
 more false positives.  
  
 In addition, the weight coefficient w and offset b should satisfy following constraints: 
- 
-  
-                                             
-  
+    
+                                              
 The variable   is the penalty for misclassification. The optimal weight coefficients 
 minimize the criterion function: 
+      
  
  
-                                                     
+        
  
+                                         
+55 
  
- 
-54 
- The C parameter represent the penalty for misclassification of each sample, which is 
+The C parameter represent the penalty for misclassification of each sample, which is 
 crucial for avoiding the over fitting of the classifier on the training samples.  
 7.2 Result Analysis 
 To test the recognition accuracy and performance of proposed algorithm, we take 16 
@@ -1698,8 +1759,9 @@ R5 (red rook) 4/16=0.25 1/13=0.077 12/13=0.923 12/16=0.75
 R6 (red cannon) 3/16=0.188 2/15=0.133 13/15=0.867 13/16=0.813 
 R7 (red pawn) 4/16=0.25 2/14=0.14 12/14=0.86 12/16=0.75 
 B1 (black king) 4/16=0.25 6/18=0.333 12/18=0.667 12/16=0.75 
-55 
- B2 (black guard) 5/16=0.313 5/16=0.313 11/16=0.688 11/16=0.688 
+56 
+ 
+B2 (black guard) 5/16=0.313 5/16=0.313 11/16=0.688 11/16=0.688 
 B3 (black bishop) 3/16=0.188 0/13=0 13/13=1 13/16=0.813 
 B4 (black horse) 2/16=0.125 4/18=0.222 14/18=0.778 14/16=0.875 
 B5 (black rook) 3/16=0.188 0/13=0 13/13=1 13/16=0.813 
@@ -1713,8 +1775,9 @@ Kappa Coefficient 0.76
  
  
   
-56 
- 8 The Software 
+57 
+ 
+8 The Software 
 This Chapter provides a brief introduction to the system software.  
  
 Fig. 8.1 System Software GUI 
@@ -1737,14 +1800,16 @@ chess pieces in real-time, which can be stop or resumed in any time.
 Module 3 provides the function of taking piece samples that can be used to train the 
 recognition system. To take samples, user should input the target directory and put 
 the chess pieces on the right position of the board according to their initial position. 
-57 
- Then, press the button “Take Sample”, the system will automatically take image 
+58 
+ 
+Then, press the button “Take Sample”, the system will automatically take image 
 sample of each piece according to where the piece locates.  
  
  
   
-58 
- 9 Evaluation 
+59 
+ 
+9 Evaluation 
 The objectives of this project include: 
 (1) correctly calibrate the chess board 
 (2) automatically recognize the identity of each chess piece on chess board 
@@ -1781,8 +1846,9 @@ western people can read Chinese characters, our system displays the result in
 symbolic images instead of Chinese characters.  
  
   
-59 
- 10 Conclusion and Future Work 
+60 
+ 
+10 Conclusion and Future Work 
 This project studies and implements the vision system of chess-playing robot. In the 
 project, we have proposed corner-line matching algorithm to calibrate the chess 
 board and proposed a new Chinese chess piece recognition algorithm based on 
@@ -1792,8 +1858,9 @@ increase the accuracy of piece character recognition. Also, based on our researc
 Chinese chess-playing robot or some other intelligent system can be developed.  
  
   
-60 
- Bibliography 
+61 
+ 
+Bibliography 
 1. Jason E., “Probabilistic Location of a Populated Chessboard Using Computer 
 Vision”, 2004 
 2. S. Blunsden, “Chess Recognition”, Ph.D. dissertation, University of Plymouth, BSc 
@@ -1835,8 +1902,9 @@ Automation”
 17. Fenglei Xu, “The Research of the Vision Algorithm and Intelligent Control 
 Software for Chess”, Postgraduate Dissertation, Harbin Institute of Technology, 
 2006 
-61 
- 18. S. Theodoridis, K. Koutroumbas, “Pattern Recognition (fourth edition)”, Academic 
+62 
+ 
+18. S. Theodoridis, K. Koutroumbas, “Pattern Recognition (fourth edition)”, Academic 
 Press, 2009 
 19. Y. Amit, “2D Object Detection and Recognition”, Cambridge, MA: MIT Press, 2002 
 20. S. Theodoridis, K. Koutroumbas, “An Introduction to Pattern Recognition: A 
@@ -1880,8 +1948,9 @@ Contour”, Computer Graphics and Image Processing, 1981
 38. C. Candan, M. A. Kutay and H. M.Ozaktas, "The discrete fractional Fourier 
 transform”, IEEE Trans. on Signal Processing, 2002 
 39. Cooley, James W., and John W. Tukey, “An Algorithm for the Machine Calculation 
-62 
- of Complex Fourier Series”, Math. Comput., 1965 
+63 
+ 
+of Complex Fourier Series”, Math. Comput., 1965 
 40. C. Lin, C. Hsu and C. Chang, “A practical guide to support vector classification”, 
 Technical report, Department of Computer Science, National Taiwan University, 
 2003. 
@@ -1891,455 +1960,895 @@ learning methods”, Cambridge University Press, 2000.
 classification accuracy", Remote Sensing of Environment, 1997 
  
   
-63 
- Appendix – Essential Source Code 
-if DRAW == 1 
-Descriptor Extraction 
-function f = descriptor(img)     %figure, imshow(BW1), 
-% DESCRIPTOR title('median filter apply on binary 
-% extract the feature vector from a image'); 
-Chinese chess piece image. end 
-% the program adopts the proposed  
-algorithm based on  % erode (black to white) - make the 
-% projection histogram in polar character thicker 
-coordinates space and Fourier se1 = strel('arbitrary', [0 1 0; 1 1 1; 
-descriptor 0 1 0]); 
-% Input: BW1 = imerode(BW1,se1); 
-%  img - the image of a Chinese chess if DRAW == 1 
-piece (can be a string or image matrix)     figure, imshow(BW1), title('eroded 
-% Output: image'), hold on; 
-%  f - the feature extracted from end  
-current image   
-   
-DRAW = 0;   % indicate whether to show B = BW1; 
-the result image. 0: off 1: on % calculate the center of the character 
-PI_DIV_180 = 0.0174; cx = 0;      
-if ischar(img) cy = 0; 
-    I = imread(img); index = 0; 
-else for i = 1:s 
-    I = img;     for j = 1:s 
-end         if B(i, j) == 0  % black 
-s = 50;             index = index + 1; 
-II = imresize(I, [s, s]);             CX(index) = j; 
-% change to gray-scale             CY(index) = i; 
-G = rgb2gray(II);             cx = cx + j; 
-mean = sum(sum(G)) / (s*s) - 1;             cy = cy + i; 
-trh = mean / 2 + 10; % 80 55         end 
-trh = trh / 255;   % threshold for     end 
-binarizing the image end 
-%trh = graythresh(G); % OTSU method to assert(index ~= 0); 
-get threshold cx = round(cx / index); % center 
-BW = im2bw(G, trh); coordinate of black pixels 
-%figure, imshow(BW), title('the binary cy = round(cy / index); 
-image'); CX = CX - cx;   % coordinate of black 
- pixels 
-% apply median filter  CY = CY - cy; 
-BW1 = medfilt2(BW); if DRAW == 1 
 64 
-     %plot(cx, cy, '+y',     while x < s && x > 1 && y < s && y > 
-'MarkerSize',3); 1           % loop to "plot" the dots on 
-end the line 
-% 360 pixel sum method         if d < 0 
-% compute the distances between the             d = d + inc1; 
-contour and center         else 
-f = zeros(1, 360);             y = y + ty; 
-max_d = 100;             d = d + inc2; 
-CC = zeros(360, 2);         end 
-total = 0;         if iTag == 1 
-for i = 1:360%360             if B(x, y) == 0 % black 
-    % apply bresenham algorithm                 f(i) = f(i) + 1; 
-    x1 = cx;                 total = total +1; 
-    y1 = cy;                 CC(i, 1) = x; 
-    x2 = round(x1 + max_d *                 CC(i, 2) = y; 
-cos(PI_DIV_180 * i));             end 
-    y2 = round(y1 + max_d *         else 
-sin(PI_DIV_180 * i));             if B(y, x) == 0 % black 
-    dx = abs(x2 - x1);                 f(i) = f(i) + 1; 
-    dy = abs(y2 - x1);                 total = total + 1; 
-    iTag = 0;                 CC(i, 1) = y; 
-    if dx < dy  % if dy is bigger, then                 CC(i, 2) = x; 
-swap x, y coordiante             end 
-        iTag = 1;         end 
-       [x1, y1] = swap(x1, y1);          x = x + tx; 
-       [x2, y2] = swap(x2, y2);         
-       [dx, dy] = swap(dx, dy);     end 
-    end end 
-    if x2 > x1   % assure whether minus f = f / total; 
-1 or plus 1 on each step if DRAW == 1 
-        tx = 1;     figure, bar(f); %  
-    else end  
-        tx = -1; f = fft(f); % apply Fast Fourier 
-    end transform to turn signal into 
-    if y2 > y1 frequency-domain  
-        ty = 1; f = abs(f); % amplitude (translation 
-    else invariance ) 
-        ty = -1; f = [f(2:25), f(340:360)]; % extract 
-    end the foremost few data (as most 
-    x = x1; information gather at foremost range) 
-    y = y1; if DRAW == 1 
-    inc1 = 2*dy;     figure, bar(f);  
-    inc2 = 2*(dy-dx); end 
-    d = inc1 - dx; end 
+ 
+Appendix – Essential Source Code 
+Descriptor Extraction 
+function f = descriptor(img) 
+% DESCRIPTOR 
+% extract the feature vector from a 
+Chinese chess piece image. 
+% the program adopts the proposed 
+algorithm based on  
+% projection histogram in polar 
+coordinates space and Fourier 
+descriptor 
+% Input: 
+%  img - the image of a Chinese chess 
+piece (can be a string or image matrix) 
+% Output: 
+%  f - the feature extracted from 
+current image 
+ 
+DRAW = 0;   % indicate whether to show 
+the result image. 0: off 1: on 
+PI_DIV_180 = 0.0174; 
+if ischar(img) 
+    I = imread(img); 
+else 
+    I = img; 
+end 
+s = 50; 
+II = imresize(I, [s, s]); 
+% change to gray-scale 
+G = rgb2gray(II); 
+mean = sum(sum(G)) / (s*s) - 1; 
+trh = mean / 2 + 10; % 80 55 
+trh = trh / 255;   % threshold for 
+binarizing the image 
+%trh = graythresh(G); % OTSU method to 
+get threshold 
+BW = im2bw(G, trh); 
+%figure, imshow(BW), title('the binary 
+image'); 
+ 
+% apply median filter  
+BW1 = medfilt2(BW); 
+if DRAW == 1 
+    %figure, imshow(BW1), 
+title('median filter apply on binary 
+image'); 
+end 
+ 
+% erode (black to white) - make the 
+character thicker 
+se1 = strel('arbitrary', [0 1 0; 1 1 1; 
+0 1 0]); 
+BW1 = imerode(BW1,se1); 
+if DRAW == 1 
+    figure, imshow(BW1), title('eroded 
+image'), hold on; 
+end  
+  
+  
+B = BW1; 
+% calculate the center of the character 
+cx = 0;      
+cy = 0; 
+index = 0; 
+for i = 1:s 
+    for j = 1:s 
+        if B(i, j) == 0  % black 
+            index = index + 1; 
+            CX(index) = j; 
+            CY(index) = i; 
+            cx = cx + j; 
+            cy = cy + i; 
+        end 
+    end 
+end 
+assert(index ~= 0); 
+cx = round(cx / index); % center 
+coordinate of black pixels 
+cy = round(cy / index); 
+CX = CX - cx;   % coordinate of black 
+pixels 
+CY = CY - cy; 
+if DRAW == 1 
 65 
- % Find lines and plot them 
-Board Calibration 
-function [X, Y] = boardDetect(img) lines = 
-%BOARDDETECT calibrate Chinese chess houghlines(BW,T,R,P,'FillGap',185,'M
-board inLength',2); 
-% input: if DRAW == 1 
-%   img - the image of a Chinese chess     figure, imshow(K), hold on; 
-board (can be a string or image matrix)     title('The lines that have been 
-%   (upper left corner of image is the found'); 
-origin of coordinate system.) end 
-% output: n_lines  = length(lines); 
-%   X, Y - the coordinate of board for k = 1:n_lines 
-corners    xy = [lines(k).point1; 
-lines(k).point2]; 
  
-MAX_LINES = 35; % maximun number of    if DRAW == 1 
-lines can be detected by hough 30, 35         
-DRAW = 0;   % indicate whether to show plot(xy(:,1),xy(:,2),'LineWidth',1,'
-the result image. 0:off 1:on Color','black'); 
-RESTORE = 1;    % map the result back the    end 
-original size? 0:no; 1:yes end  
-if ischar(img) %detect corners 
-    I = imread(img); C = corner(K, 500); 
-else n_c = size(C, 1); 
-    I = img; if DRAW == 1 
-end     plot(C(:,1), C(:,2), 'k*'); 
-% to gray-scale end 
-G = rgb2gray(I); %correct lines and corners 
-% remove noise % 1. count number of lines passed on each 
-G = medfilt2(G); corner. 
-s = 500;    % (scale factor) the width l_on_c = zeros(n_c, 1); %store number 
-of scaled image of lines passed on each corner. 
-[s_h, s_w] = size(G); diff_thresh = 5; % corner-line detect 
-current_h = round(s_h/s_w*s); threshold 
-current_w = s; for i = 1 : n_c 
-K = imresize(G, [current_h,     for j = 1 : n_lines 
-current_w]); % resize to make faster         diff = 
-detection abs(C(i,1)*cos_d(lines(j).theta) + 
-% edge extract C(i,2)*sin_d(lines(j).theta)...  
-BW = edge(K, 'canny');             - lines(j).rho); 
-[H,T,R] =         if diff < diff_thresh 
-hough(BW,'RhoResolution',0.5,'ThetaR            l_on_c(i) = l_on_c(i) + 1; 
-esolution',0.5);%hough transfer         end 
-P =     end 
-houghpeaks(H,MAX_LINES,'threshold',c end 
-eil(0.2*max(H(:))));    % 2. select valid corner (the number of 
+    %plot(cx, cy, '+y', 
+'MarkerSize',3); 
+end 
+% 360 pixel sum method 
+% compute the distances between the 
+contour and center 
+f = zeros(1, 360); 
+max_d = 100; 
+CC = zeros(360, 2); 
+total = 0; 
+for i = 1:360%360 
+    % apply bresenham algorithm 
+    x1 = cx; 
+    y1 = cy; 
+    x2 = round(x1 + max_d * 
+cos(PI_DIV_180 * i)); 
+    y2 = round(y1 + max_d * 
+sin(PI_DIV_180 * i)); 
+    dx = abs(x2 - x1); 
+    dy = abs(y2 - x1); 
+    iTag = 0; 
+    if dx < dy  % if dy is bigger, then 
+swap x, y coordiante 
+        iTag = 1; 
+       [x1, y1] = swap(x1, y1);  
+       [x2, y2] = swap(x2, y2); 
+       [dx, dy] = swap(dx, dy); 
+    end 
+    if x2 > x1   % assure whether minus 
+1 or plus 1 on each step 
+        tx = 1; 
+    else 
+        tx = -1; 
+    end 
+    if y2 > y1 
+        ty = 1; 
+    else 
+        ty = -1; 
+    end 
+    x = x1; 
+    y = y1; 
+    inc1 = 2*dy; 
+    inc2 = 2*(dy-dx); 
+    d = inc1 - dx; 
+    while x < s && x > 1 && y < s && y > 
+1           % loop to "plot" the dots on 
+the line 
+        if d < 0 
+            d = d + inc1; 
+        else 
+            y = y + ty; 
+            d = d + inc2; 
+        end 
+        if iTag == 1 
+            if B(x, y) == 0 % black 
+                f(i) = f(i) + 1; 
+                total = total +1; 
+                CC(i, 1) = x; 
+                CC(i, 2) = y; 
+            end 
+        else 
+            if B(y, x) == 0 % black 
+                f(i) = f(i) + 1; 
+                total = total + 1; 
+                CC(i, 1) = y; 
+                CC(i, 2) = x; 
+            end 
+        end 
+        x = x + tx; 
+        
+    end 
+end 
+f = f / total; 
+if DRAW == 1 
+    figure, bar(f); %  
+end  
+f = fft(f); % apply Fast Fourier 
+transform to turn signal into 
+frequency-domain  
+f = abs(f); % amplitude (translation 
+invariance ) 
+f = [f(2:25), f(340:360)]; % extract 
+the foremost few data (as most 
+information gather at foremost range) 
+if DRAW == 1 
+    figure, bar(f);  
+end 
+end 
 66 
- lines passed on each corner is bigger % cross lines 
-then threshold) Y = zeros(181, 1); %(-90  -> 90) 
-% improve? the line passed by the corner for i = 1:n_lines 
-must corssed with a big angle    theta = 
-thresh = 2; int16(round(lines(i).theta)); 
-temp = find(l_on_c >= thresh);    assert(theta>=-90 && theta<=90); 
-n_valid_corners = length(temp);    Y(theta+91) = Y(theta+91) + 1; 
-valid_corners = zeros(n_valid_corners,    for k = -5:5 
-2);       Y(mod(theta+91+k-1,181)+1) = 
-index = 1; Y(mod(theta+91+k-1,181)+1) + 1; 
-for i = 1:n_c    end 
-    if l_on_c(i) >= thresh end  
-        valid_corners(index,:) = ave1 = 0; % make sure ave1 is bigger than 
-C(i,:); ave2 
-        if DRAW == 1 ave2 = 0; %  
-            for i = 1:181 
-plot(valid_corners(index,1),    if ave1==0 || Y(i)>Y(ave1) 
-valid_corners(index,2), 'b*');       ave1 = i;  
-        end    end 
-        index = index + 1; end 
-    end for i = 1:181 
-end     if abs(ave1-i) < 10 
-assert(n_valid_corners == index-1);         continue; 
-% 3. count number of valid corners on     end 
-each line     if ave2==0 || Y(i)>Y(ave2) 
-c_on_l = zeros(n_lines, 1); %store the       ave2 = i;  
-number of valid corners on each line    end 
-for i = 1 : n_valid_corners end 
-    for j = 1 : n_lines ave1 = ave1 - 91; 
-        diff = ave2 = ave2  -91; 
-abs(  valid_corners(i,1)*cos_d(lines % 4.2 select valid lines 
-(j).theta)... thresh = 4;  % number of corners at 
-                   + least on a valid line 
-valid_corners(i,2)*sin_d(lines(j).th index = 1; 
-eta)...  angle_distance_thresh = 0.17;    
-                   - lines(j).rho); for i = 1:n_lines 
-        if diff < diff_thresh     if c_on_l(i) >= thresh && 
-            c_on_l(j) = c_on_l(j) + 1; (angleDistance(lines(i).theta, 
-        end ave1)<=angle_distance_thresh ||... 
-    end                                
-end angleDistance(lines(i).theta, 
-% 4. select valid lines ave2)<=angle_distance_thresh) 
-% 4.1 choose the two average angles of         valid_lines(index) = lines(i); 
-most lines in order to elimite         xy = 
-67 
- [valid_lines(index).point1;                 bottom_right = i; 
-valid_lines(index).point2];             else 
-        if DRAW == 1                 bx_current = 
-            valid_lines(bottom_right).rho/cos_d(
-plot(xy(:,1),xy(:,2),'LineWidth',1,' valid_lines(bottom_right).theta); 
-Color','green');                 bx = 
-        end valid_lines(i).rho/cos_d(valid_lines
-        index = index + 1; (i).theta);   
-    end                 if bx > bx_current 
-end                     bottom_right = i; 
-n_valid_lines = index-1;                 end 
-% 5. calculate the four outermost lines             end 
-up_left = 0;         else 
-bottom_right = 0;             if up_left == 0 
-up_right = 0;                 up_left = i; 
-bottom_left = 0;             else 
-angleType = zeros(n_valid_lines, 1); %                 by_current = 
-used to classify lines according to valid_lines(up_left).rho/sin_d(valid
-whether  _lines(up_left).theta); 
-                                 % their                 by = 
-angle belongs to ave1 or ave2 valid_lines(i).rho/sin_d(valid_lines
-for i = 1 : n_valid_lines (i).theta);   
-    if                 if by < by_current 
-angleDistance(valid_lines(i).theta,                     up_left = i; 
-ave1) <                 end  
-angleDistance(valid_lines(i).theta,             end 
-ave2)               
-    % angle 1             if bottom_right == 0 
-        angleType(i) = 1;                 bottom_right = i; 
-        if abs(ave1)<5             else 
-            if up_left == 0                 by_current = 
-                up_left = i; valid_lines(bottom_right).rho/sin_d(
-            else valid_lines(bottom_right).theta); 
-                bx_current =                 by = 
-valid_lines(up_left).rho/cos_d(valid valid_lines(i).rho/sin_d(valid_lines
-_lines(up_left).theta); (i).theta);   
-                bx =                 if by > by_current 
-valid_lines(i).rho/cos_d(valid_lines                    bottom_right = i; 
-(i).theta);                   end 
-                if bx < bx_current             end 
-                    up_left = i;         end 
-                end      else   % angle 2 
-            end          angleType(i) = 2; 
-            if bottom_right == 0         if abs(ave2)<5 
-68 
-             if up_right == 0 valid_lines(bottom_left).rho/sin_d(v
-                up_right = i; alid_lines(bottom_left).theta); 
-            else                 by = 
-                bx_current = valid_lines(i).rho/sin_d(valid_lines
-valid_lines(up_right).rho/cos_d(vali (i).theta);   
-d_lines(up_right).theta);                 if by > by_current 
-                bx =                     bottom_left = i; 
-valid_lines(i).rho/cos_d(valid_lines                end 
-(i).theta);               end 
-                if bx > bx_current         end 
-                    up_right = i;     end 
-                end  end  
-            end  if  up_left==0 || bottom_right==0 || 
-            if bottom_left == 0 up_right==0 || bottom_left==0  
-                bottom_left = i;     disp('fail to detect board'); 
-            else     X = 0; 
-                bx_current =     Y = 0; 
-valid_lines(bottom_left).rho/cos_d(v    return; 
-alid_lines(bottom_left).theta); end 
-                bx = if DRAW == 1 
-valid_lines(i).rho/cos_d(valid_lines    
-(i).theta);   plot([valid_lines(up_left).point1(1); 
-                if bx < bx_current valid_lines(up_left).point2(1)],... 
-                    bottom_left = i;         
-                end [valid_lines(up_left).point1(2); 
-            end valid_lines(up_left).point2(2)],... 
-        else         'LineWidth',2,'Color','red');  
-            if up_right == 0     
-                up_right = i; plot([valid_lines(bottom_right).poin
-            else t1(1); 
-                by_current = valid_lines(bottom_right).point2(1)]
-valid_lines(up_right).rho/sin_d(vali ,... 
-d_lines(up_right).theta);         
-                by = [valid_lines(bottom_right).point1(2); 
-valid_lines(i).rho/sin_d(valid_lines valid_lines(bottom_right).point2(2)]
-(i).theta);   ,... 
-                if by < by_current         
-                    up_right = i; 'LineWidth',2,'Color','blue');  
-                end      
-            end  plot([valid_lines(bottom_left).point
-            if bottom_left == 0 1(1); 
-                bottom_left = i; valid_lines(bottom_left).point2(1)],
-            else ... 
-                by_current =         
-69 
- [valid_lines(bottom_left).point1(2); F = valid_lines(bottom_right).rho; 
-valid_lines(bottom_left).point2(2)], delta = A*E-B*D; 
-... 'LineWidth',2,'Color','yellow'); assert(delta ~= 0); 
-plot([valid_lines(up_right).point1(1 boardCorner(2, 1) = (C*E - B*F)/delta; 
-); boardCorner(2, 2) = (A*F - C*D)/delta;  
-valid_lines(up_right).point2(1)],... % corner3 
-[valid_lines(up_right).point1(2); A = 
-valid_lines(up_right).point2(2)],... cos_d(valid_lines(bottom_right).thet
-'LineWidth',2,'Color','green'); a); 
-end  B = 
-% 6. calculate the four board corners sin_d(valid_lines(bottom_right).thet
-according to Cramer's rule  a); 
-boardCorner = zeros(4, 2); C = valid_lines(bottom_right).rho; 
-% corner1 D = 
-A = cos_d(valid_lines(up_right).theta); 
-cos_d(valid_lines(up_left).theta); E = 
-B = sin_d(valid_lines(up_right).theta); 
-sin_d(valid_lines(up_left).theta); F = valid_lines(up_right).rho; 
-C = valid_lines(up_left).rho; delta = A*E-B*D; 
-D = assert(delta ~= 0); 
-cos_d(valid_lines(bottom_left).theta boardCorner(3, 1) = (C*E - B*F)/delta; 
-); boardCorner(3, 2) = (A*F - C*D)/delta;  
-E = % corner4 
-sin_d(valid_lines(bottom_left).theta A = 
-); cos_d(valid_lines(up_right).theta); 
-F = valid_lines(bottom_left).rho; B = 
-delta = A*E-B*D; sin_d(valid_lines(up_right).theta); 
-assert(delta ~= 0); C = valid_lines(up_right).rho; 
-boardCorner(1, 1) = (C*E - B*F)/delta; D = 
-boardCorner(1, 2) = (A*F - C*D)/delta;  cos_d(valid_lines(up_left).theta); 
-% corner2 E = 
-A = sin_d(valid_lines(up_left).theta); 
-cos_d(valid_lines(bottom_left).theta F = valid_lines(up_left).rho; 
-); delta = A*E-B*D; 
-B = assert(delta ~= 0); 
-sin_d(valid_lines(bottom_left).theta boardCorner(4, 1) = (C*E - B*F)/delta; 
-); boardCorner(4, 2) = (A*F - C*D)/delta;  
-C = valid_lines(bottom_left).rho; if DRAW == 1 
-D =     plot(boardCorner(1,1), 
-cos_d(valid_lines(bottom_right).thet boardCorner(1,2), 'rs'); 
-a);     plot(boardCorner(2,1), 
-E = boardCorner(2,2), 'bs'); 
-sin_d(valid_lines(bottom_right).thet    plot(boardCorner(3,1), 
-a); boardCorner(3,2), 'ys'); 
-70 
-     plot(boardCorner(4,1),         point(1) = innerLines1_v(i, 2, 
-boardCorner(4,2), 'gs'); 1); 
-end          point(2) = innerLines1_v(i, 2, 
-% 7. determine the direction of board 2); 
-% 7.1 assume (corner1, corner2) vs         temp_d = (temp_d + 
-(corner4, corner3) - calculate the pointLineDistance(point, 
-error valid_lines(j)))/2; 
-e1 = 0.0;   % error value        if temp_d < d 
-en = 0;                 d = temp_d; 
-% build 8 "vertical" inner board line        end 
-(whose theta belongs to ave2)     end  
-innerLines1_v = zeros(8, 2, 2);     if d < d_thresh 
-point = zeros(2, 1);        e1 = e1 + d; 
-d_thresh =        en = en + 1; 
-(pointDistance(boardCorner(1,:),     end  
-boardCorner(4,:)) + ... end 
-pointDistance(boardCorner(2,:), % build 7 "horizontal" inner board line 
-boardCorner(3,:))) / 2 / 9 / 2; (whose theta belongs to ave1) 
-for i = 1:8 innerLines1_h = zeros(7, 2, 2); 
-    innerLines1_v(i, 1, 1) = d_thresh = 
-((9-i)*boardCorner(1, 1) + (pointDistance(boardCorner(1,:), 
-i*boardCorner(4, 1))/9; boardCorner(2,:)) + ...    
-    innerLines1_v(i, 1, 2) = pointDistance(boardCorner(4,:), 
-((9-i)*boardCorner(1, 2) + boardCorner(3,:))) / 2 / 8 / 2; 
-i*boardCorner(4, 2))/9; for i = 1:7 
-    innerLines1_v(i, 2, 1) =     innerLines1_h(i, 1, 1) = 
-((9-i)*boardCorner(2, 1) + ((8-i)*boardCorner(1, 1) + 
-i*boardCorner(3, 1))/9; i*boardCorner(2, 1))/8; 
-    innerLines1_v(i, 2, 2) =     innerLines1_h(i, 1, 2) = 
-((9-i)*boardCorner(2, 2) + ((8-i)*boardCorner(1, 2) + 
-i*boardCorner(3, 2))/9; i*boardCorner(2, 2))/8; 
-    d = 10000.0; %record the smallest     innerLines1_h(i, 2, 1) = 
-distance ((8-i)*boardCorner(4, 1) + 
-    for j = 1 : n_valid_lines i*boardCorner(3, 1))/8; 
-        if angleType(j) ~= 2     innerLines1_h(i, 2, 2) = 
-            continue; ((8-i)*boardCorner(4, 2) + 
-        end  i*boardCorner(3, 2))/8; 
-        point(1) = innerLines1_v(i, 1,     d = 10000.0; %record the smallest 
-1); distance 
-        point(2) = innerLines1_v(i, 1,     for j = 1 : n_valid_lines 
-2);          if angleType(j) ~= 1 
-        temp_d =             continue; 
-pointLineDistance(point,         end  
-valid_lines(j));         point(1) = innerLines1_h(i, 1, 
-71 
- 1); ((9-i)*boardCorner(4, 1) + 
-        point(2) = innerLines1_h(i, 1, i*boardCorner(3, 1))/9; 
-2);      innerLines2_v(i, 2, 2) = 
-        temp_d = ((9-i)*boardCorner(4, 2) + 
-pointLineDistance(point, i*boardCorner(3, 2))/9; 
-valid_lines(j));     d = 10000.0; %record the smallest 
-        point(1) = innerLines1_h(i, 2, distance 
-1);     for j = 1 : n_valid_lines 
-        point(2) = innerLines1_h(i, 2,         if angleType(j) ~= 1 
-2);             continue; 
-        temp_d = (temp_d +         end  
-pointLineDistance(point,         point(1) = innerLines2_v(i, 1, 
-valid_lines(j)))/2; 1); 
-       if temp_d < d         point(2) = innerLines2_v(i, 1, 
-           d = temp_d; 2);  
-       end         temp_d = 
-    end  pointLineDistance(point, 
-    if d < d_thresh valid_lines(j)); 
-       e1 = e1 + d;         point(1) = innerLines2_v(i, 2, 
-       en = en + 1; 1); 
-    end         point(2) = innerLines2_v(i, 2, 
-end 2); 
-e1 = e1 / en;         temp_d = (temp_d + 
-% 7.2 assume (corner1, corner4) vs pointLineDistance(point, 
-(corner2, corner3) - calculate the valid_lines(j)))/2; 
-error        if temp_d < d 
-e2 = 0.0;            d = temp_d; 
-en = 0;        end 
-% build 8  "vertical" inner board line     end  
-innerLines2_v = zeros(8, 2, 2);     if d < d_thresh 
-d_thresh =        e2 = e2 + d; 
-(pointDistance(boardCorner(1,:),        en = en + 1; 
-boardCorner(2,:)) + ...     end  
-            end  
-pointDistance(boardCorner(4,:), % build 7 "horizontal" inner board line 
-boardCorner(3,:))) / 2 / 9 / 2; innerLines2_h = zeros(7, 2, 2); 
-for i = 1:8 d_thresh = 
-    innerLines2_v(i, 1, 1) = (pointDistance(boardCorner(1,:), 
-((9-i)*boardCorner(1, 1) + boardCorner(4,:)) + ... 
-i*boardCorner(2, 1))/9;             
-    innerLines2_v(i, 1, 2) = pointDistance(boardCorner(2,:), 
-((9-i)*boardCorner(1, 2) + boardCorner(3,:))) / 2 / 8 / 2; 
-i*boardCorner(2, 2))/9; for i = 1:7 
-    innerLines2_v(i, 2, 1) =     innerLines2_h(i, 1, 1) = 
-72 
- ((8-i)*boardCorner(1, 1) + board  
-i*boardCorner(4, 1))/8; if e1 < e2 
-    innerLines2_h(i, 1, 2) =     bc1 = boardCorner(1,:); 
-((8-i)*boardCorner(1, 2) +     bc2 = boardCorner(2,:); 
-i*boardCorner(4, 2))/8;     bc3 = boardCorner(3,:); 
-    innerLines2_h(i, 2, 1) =     bc4 = boardCorner(4,:); 
-((8-i)*boardCorner(2, 1) + else 
-i*boardCorner(3, 1))/8;     bc1 = boardCorner(2,:); 
-    innerLines2_h(i, 2, 2) =     bc2 = boardCorner(3,:); 
-((8-i)*boardCorner(2, 2) +     bc3 = boardCorner(4,:); 
-i*boardCorner(3, 2))/8;     bc4 = boardCorner(1,:); 
-    d = 10000.0; %record the smallest end  
-distance X = zeros(9, 10); 
-    for j = 1 : n_valid_lines Y = zeros(9, 10); 
-        if angleType(j) ~= 2 for m = 1:9 
-            continue;     for n = 1:10 
-        end          x1 = ((n-1)*bc4(1) + 
-        point(1) = innerLines2_h(i, 1, (10-n)*bc1(1)) / 9; 
-1);         y1 = ((n-1)*bc4(2) + 
-        point(2) = innerLines2_h(i, 1, (10-n)*bc1(2)) / 9; 
-2);          x2 = ((n-1)*bc3(1) + 
-        temp_d = (10-n)*bc2(1)) / 9; 
-pointLineDistance(point,         y2 = ((n-1)*bc3(2) + 
-valid_lines(j)); (10-n)*bc2(2)) / 9;  
-        point(1) = innerLines2_h(i, 2,         X(m, n) = ((m-1)*x2 + (9-m)*x1) 
-1); / 8; 
-        point(2) = innerLines2_h(i, 2,         Y(m, n) = ((m-1)*y2 + (9-m)*y1) 
-2); / 8;  
-        temp_d = (temp_d +     end 
-pointLineDistance(point, end  
-valid_lines(j)))/2; if DRAW == 1 
-       if temp_d < d     plot(X(:,1:5), Y(:,1:5), 'mo'); 
-           d = temp_d;     plot(X(:,6:10), Y(:,6:10), 'co');  
-       end     hold off; 
-    end  end  
-    if d < d_thresh if RESTORE == 1 
-       e2 = e2 + d;     % map the result back into original 
-       en = en + 1; image size 
-    end     X = round(X * s_w / current_w); 
-end      Y = round(Y * s_h / current_h); 
-e2 = e2 / en;  end  
-% 8. output the X-Y coordinates of chess end 
  
+Board Calibration 
+function [X, Y] = boardDetect(img) 
+%BOARDDETECT calibrate Chinese chess 
+board 
+% input: 
+%   img - the image of a Chinese chess 
+board (can be a string or image matrix) 
+%   (upper left corner of image is the 
+origin of coordinate system.) 
+% output: 
+%   X, Y - the coordinate of board 
+corners 
+ 
+MAX_LINES = 35; % maximun number of 
+lines can be detected by hough 30, 35 
+DRAW = 0;   % indicate whether to show 
+the result image. 0:off 1:on 
+RESTORE = 1;    % map the result back the 
+original size? 0:no; 1:yes 
+if ischar(img) 
+    I = imread(img); 
+else 
+    I = img; 
+end 
+% to gray-scale 
+G = rgb2gray(I); 
+% remove noise 
+G = medfilt2(G); 
+s = 500;    % (scale factor) the width 
+of scaled image 
+[s_h, s_w] = size(G); 
+current_h = round(s_h/s_w*s); 
+current_w = s; 
+K = imresize(G, [current_h, 
+current_w]); % resize to make faster 
+detection 
+% edge extract 
+BW = edge(K, 'canny'); 
+[H,T,R] = 
+hough(BW,'RhoResolution',0.5,'ThetaR
+esolution',0.5);%hough transfer 
+P = 
+houghpeaks(H,MAX_LINES,'threshold',c
+eil(0.2*max(H(:))));    
+% Find lines and plot them 
+lines = 
+houghlines(BW,T,R,P,'FillGap',185,'M
+inLength',2); 
+if DRAW == 1 
+    figure, imshow(K), hold on; 
+    title('The lines that have been 
+found'); 
+end 
+n_lines  = length(lines); 
+for k = 1:n_lines 
+   xy = [lines(k).point1; 
+lines(k).point2]; 
+   if DRAW == 1 
+        
+plot(xy(:,1),xy(:,2),'LineWidth',1,'
+Color','black'); 
+   end 
+end  
+%detect corners 
+C = corner(K, 500); 
+n_c = size(C, 1); 
+if DRAW == 1 
+    plot(C(:,1), C(:,2), 'k*'); 
+end 
+%correct lines and corners 
+% 1. count number of lines passed on each 
+corner. 
+l_on_c = zeros(n_c, 1); %store number 
+of lines passed on each corner. 
+diff_thresh = 5; % corner-line detect 
+threshold 
+for i = 1 : n_c 
+    for j = 1 : n_lines 
+        diff = 
+abs(C(i,1)*cos_d(lines(j).theta) + 
+C(i,2)*sin_d(lines(j).theta)...  
+            - lines(j).rho); 
+        if diff < diff_thresh 
+            l_on_c(i) = l_on_c(i) + 1; 
+        end 
+    end 
+end 
+% 2. select valid corner (the number of 
+67 
+ 
+lines passed on each corner is bigger 
+then threshold) 
+% improve? the line passed by the corner 
+must corssed with a big angle 
+thresh = 2; 
+temp = find(l_on_c >= thresh); 
+n_valid_corners = length(temp); 
+valid_corners = zeros(n_valid_corners, 
+2); 
+index = 1; 
+for i = 1:n_c 
+    if l_on_c(i) >= thresh 
+        valid_corners(index,:) = 
+C(i,:); 
+        if DRAW == 1 
+            
+plot(valid_corners(index,1), 
+valid_corners(index,2), 'b*'); 
+        end 
+        index = index + 1; 
+    end 
+end 
+assert(n_valid_corners == index-1); 
+% 3. count number of valid corners on 
+each line 
+c_on_l = zeros(n_lines, 1); %store the 
+number of valid corners on each line 
+for i = 1 : n_valid_corners 
+    for j = 1 : n_lines 
+        diff = 
+abs(  valid_corners(i,1)*cos_d(lines
+(j).theta)... 
+                   + 
+valid_corners(i,2)*sin_d(lines(j).th
+eta)...  
+                   - lines(j).rho); 
+        if diff < diff_thresh 
+            c_on_l(j) = c_on_l(j) + 1; 
+        end 
+    end 
+end 
+% 4. select valid lines 
+% 4.1 choose the two average angles of 
+most lines in order to elimite 
+% cross lines 
+Y = zeros(181, 1); %(-90  -> 90) 
+for i = 1:n_lines 
+   theta = 
+int16(round(lines(i).theta)); 
+   assert(theta>=-90 && theta<=90); 
+   Y(theta+91) = Y(theta+91) + 1; 
+   for k = -5:5 
+      Y(mod(theta+91+k-1,181)+1) = 
+Y(mod(theta+91+k-1,181)+1) + 1; 
+   end 
+end  
+ave1 = 0; % make sure ave1 is bigger than 
+ave2 
+ave2 = 0; %  
+for i = 1:181 
+   if ave1==0 || Y(i)>Y(ave1) 
+      ave1 = i;  
+   end 
+end 
+for i = 1:181 
+    if abs(ave1-i) < 10 
+        continue; 
+    end 
+    if ave2==0 || Y(i)>Y(ave2) 
+      ave2 = i;  
+   end 
+end 
+ave1 = ave1 - 91; 
+ave2 = ave2  -91; 
+% 4.2 select valid lines 
+thresh = 4;  % number of corners at 
+least on a valid line 
+index = 1; 
+angle_distance_thresh = 0.17;    
+for i = 1:n_lines 
+    if c_on_l(i) >= thresh && 
+(angleDistance(lines(i).theta, 
+ave1)<=angle_distance_thresh ||... 
+                               
+angleDistance(lines(i).theta, 
+ave2)<=angle_distance_thresh) 
+        valid_lines(index) = lines(i); 
+        xy = 
+68 
+ 
+[valid_lines(index).point1; 
+valid_lines(index).point2]; 
+        if DRAW == 1 
+            
+plot(xy(:,1),xy(:,2),'LineWidth',1,'
+Color','green'); 
+        end 
+        index = index + 1; 
+    end 
+end 
+n_valid_lines = index-1; 
+% 5. calculate the four outermost lines 
+up_left = 0; 
+bottom_right = 0; 
+up_right = 0; 
+bottom_left = 0; 
+angleType = zeros(n_valid_lines, 1); % 
+used to classify lines according to 
+whether  
+                                 % their 
+angle belongs to ave1 or ave2 
+for i = 1 : n_valid_lines 
+    if 
+angleDistance(valid_lines(i).theta, 
+ave1) < 
+angleDistance(valid_lines(i).theta, 
+ave2)  
+    % angle 1 
+        angleType(i) = 1; 
+        if abs(ave1)<5 
+            if up_left == 0 
+                up_left = i; 
+            else 
+                bx_current = 
+valid_lines(up_left).rho/cos_d(valid
+_lines(up_left).theta); 
+                bx = 
+valid_lines(i).rho/cos_d(valid_lines
+(i).theta);   
+                if bx < bx_current 
+                    up_left = i; 
+                end  
+            end  
+            if bottom_right == 0 
+                bottom_right = i; 
+            else 
+                bx_current = 
+valid_lines(bottom_right).rho/cos_d(
+valid_lines(bottom_right).theta); 
+                bx = 
+valid_lines(i).rho/cos_d(valid_lines
+(i).theta);   
+                if bx > bx_current 
+                    bottom_right = i; 
+                end 
+            end 
+        else 
+            if up_left == 0 
+                up_left = i; 
+            else 
+                by_current = 
+valid_lines(up_left).rho/sin_d(valid
+_lines(up_left).theta); 
+                by = 
+valid_lines(i).rho/sin_d(valid_lines
+(i).theta);   
+                if by < by_current 
+                    up_left = i; 
+                end  
+            end 
+             
+            if bottom_right == 0 
+                bottom_right = i; 
+            else 
+                by_current = 
+valid_lines(bottom_right).rho/sin_d(
+valid_lines(bottom_right).theta); 
+                by = 
+valid_lines(i).rho/sin_d(valid_lines
+(i).theta);   
+                if by > by_current 
+                    bottom_right = i; 
+                end 
+            end 
+        end 
+    else   % angle 2 
+        angleType(i) = 2; 
+        if abs(ave2)<5 
+69 
+ 
+            if up_right == 0 
+                up_right = i; 
+            else 
+                bx_current = 
+valid_lines(up_right).rho/cos_d(vali
+d_lines(up_right).theta); 
+                bx = 
+valid_lines(i).rho/cos_d(valid_lines
+(i).theta);   
+                if bx > bx_current 
+                    up_right = i; 
+                end  
+            end  
+            if bottom_left == 0 
+                bottom_left = i; 
+            else 
+                bx_current = 
+valid_lines(bottom_left).rho/cos_d(v
+alid_lines(bottom_left).theta); 
+                bx = 
+valid_lines(i).rho/cos_d(valid_lines
+(i).theta);   
+                if bx < bx_current 
+                    bottom_left = i; 
+                end 
+            end 
+        else 
+            if up_right == 0 
+                up_right = i; 
+            else 
+                by_current = 
+valid_lines(up_right).rho/sin_d(vali
+d_lines(up_right).theta); 
+                by = 
+valid_lines(i).rho/sin_d(valid_lines
+(i).theta);   
+                if by < by_current 
+                    up_right = i; 
+                end  
+            end  
+            if bottom_left == 0 
+                bottom_left = i; 
+            else 
+                by_current = 
+valid_lines(bottom_left).rho/sin_d(v
+alid_lines(bottom_left).theta); 
+                by = 
+valid_lines(i).rho/sin_d(valid_lines
+(i).theta);   
+                if by > by_current 
+                    bottom_left = i; 
+                end 
+            end 
+        end 
+    end 
+end  
+if  up_left==0 || bottom_right==0 || 
+up_right==0 || bottom_left==0  
+    disp('fail to detect board'); 
+    X = 0; 
+    Y = 0; 
+    return; 
+end 
+if DRAW == 1 
+    
+plot([valid_lines(up_left).point1(1); 
+valid_lines(up_left).point2(1)],... 
+        
+[valid_lines(up_left).point1(2); 
+valid_lines(up_left).point2(2)],... 
+        'LineWidth',2,'Color','red');  
+    
+plot([valid_lines(bottom_right).poin
+t1(1); 
+valid_lines(bottom_right).point2(1)]
+,... 
+        
+[valid_lines(bottom_right).point1(2); 
+valid_lines(bottom_right).point2(2)]
+,... 
+        
+'LineWidth',2,'Color','blue');  
+    
+plot([valid_lines(bottom_left).point
+1(1); 
+valid_lines(bottom_left).point2(1)],
+... 
+        
+70 
+ 
+[valid_lines(bottom_left).point1(2); 
+valid_lines(bottom_left).point2(2)],
+... 'LineWidth',2,'Color','yellow'); 
+plot([valid_lines(up_right).point1(1
+); 
+valid_lines(up_right).point2(1)],... 
+[valid_lines(up_right).point1(2); 
+valid_lines(up_right).point2(2)],... 
+'LineWidth',2,'Color','green'); 
+end  
+% 6. calculate the four board corners 
+according to Cramer's rule  
+boardCorner = zeros(4, 2); 
+% corner1 
+A = 
+cos_d(valid_lines(up_left).theta); 
+B = 
+sin_d(valid_lines(up_left).theta); 
+C = valid_lines(up_left).rho; 
+D = 
+cos_d(valid_lines(bottom_left).theta
+); 
+E = 
+sin_d(valid_lines(bottom_left).theta
+); 
+F = valid_lines(bottom_left).rho; 
+delta = A*E-B*D; 
+assert(delta ~= 0); 
+boardCorner(1, 1) = (C*E - B*F)/delta; 
+boardCorner(1, 2) = (A*F - C*D)/delta;  
+% corner2 
+A = 
+cos_d(valid_lines(bottom_left).theta
+); 
+B = 
+sin_d(valid_lines(bottom_left).theta
+); 
+C = valid_lines(bottom_left).rho; 
+D = 
+cos_d(valid_lines(bottom_right).thet
+a); 
+E = 
+sin_d(valid_lines(bottom_right).thet
+a); 
+F = valid_lines(bottom_right).rho; 
+delta = A*E-B*D; 
+assert(delta ~= 0); 
+boardCorner(2, 1) = (C*E - B*F)/delta; 
+boardCorner(2, 2) = (A*F - C*D)/delta;  
+% corner3 
+A = 
+cos_d(valid_lines(bottom_right).thet
+a); 
+B = 
+sin_d(valid_lines(bottom_right).thet
+a); 
+C = valid_lines(bottom_right).rho; 
+D = 
+cos_d(valid_lines(up_right).theta); 
+E = 
+sin_d(valid_lines(up_right).theta); 
+F = valid_lines(up_right).rho; 
+delta = A*E-B*D; 
+assert(delta ~= 0); 
+boardCorner(3, 1) = (C*E - B*F)/delta; 
+boardCorner(3, 2) = (A*F - C*D)/delta;  
+% corner4 
+A = 
+cos_d(valid_lines(up_right).theta); 
+B = 
+sin_d(valid_lines(up_right).theta); 
+C = valid_lines(up_right).rho; 
+D = 
+cos_d(valid_lines(up_left).theta); 
+E = 
+sin_d(valid_lines(up_left).theta); 
+F = valid_lines(up_left).rho; 
+delta = A*E-B*D; 
+assert(delta ~= 0); 
+boardCorner(4, 1) = (C*E - B*F)/delta; 
+boardCorner(4, 2) = (A*F - C*D)/delta;  
+if DRAW == 1 
+    plot(boardCorner(1,1), 
+boardCorner(1,2), 'rs'); 
+    plot(boardCorner(2,1), 
+boardCorner(2,2), 'bs'); 
+    plot(boardCorner(3,1), 
+boardCorner(3,2), 'ys'); 
+71 
+ 
+    plot(boardCorner(4,1), 
+boardCorner(4,2), 'gs'); 
+end  
+% 7. determine the direction of board 
+% 7.1 assume (corner1, corner2) vs 
+(corner4, corner3) - calculate the 
+error 
+e1 = 0.0;   % error value 
+en = 0;      
+% build 8 "vertical" inner board line 
+(whose theta belongs to ave2) 
+innerLines1_v = zeros(8, 2, 2); 
+point = zeros(2, 1); 
+d_thresh = 
+(pointDistance(boardCorner(1,:), 
+boardCorner(4,:)) + ... 
+pointDistance(boardCorner(2,:), 
+boardCorner(3,:))) / 2 / 9 / 2; 
+for i = 1:8 
+    innerLines1_v(i, 1, 1) = 
+((9-i)*boardCorner(1, 1) + 
+i*boardCorner(4, 1))/9; 
+    innerLines1_v(i, 1, 2) = 
+((9-i)*boardCorner(1, 2) + 
+i*boardCorner(4, 2))/9; 
+    innerLines1_v(i, 2, 1) = 
+((9-i)*boardCorner(2, 1) + 
+i*boardCorner(3, 1))/9; 
+    innerLines1_v(i, 2, 2) = 
+((9-i)*boardCorner(2, 2) + 
+i*boardCorner(3, 2))/9; 
+    d = 10000.0; %record the smallest 
+distance 
+    for j = 1 : n_valid_lines 
+        if angleType(j) ~= 2 
+            continue; 
+        end  
+        point(1) = innerLines1_v(i, 1, 
+1); 
+        point(2) = innerLines1_v(i, 1, 
+2);  
+        temp_d = 
+pointLineDistance(point, 
+valid_lines(j)); 
+        point(1) = innerLines1_v(i, 2, 
+1); 
+        point(2) = innerLines1_v(i, 2, 
+2); 
+        temp_d = (temp_d + 
+pointLineDistance(point, 
+valid_lines(j)))/2; 
+       if temp_d < d 
+           d = temp_d; 
+       end 
+    end  
+    if d < d_thresh 
+       e1 = e1 + d; 
+       en = en + 1; 
+    end  
+end 
+% build 7 "horizontal" inner board line 
+(whose theta belongs to ave1) 
+innerLines1_h = zeros(7, 2, 2); 
+d_thresh = 
+(pointDistance(boardCorner(1,:), 
+boardCorner(2,:)) + ...    
+pointDistance(boardCorner(4,:), 
+boardCorner(3,:))) / 2 / 8 / 2; 
+for i = 1:7 
+    innerLines1_h(i, 1, 1) = 
+((8-i)*boardCorner(1, 1) + 
+i*boardCorner(2, 1))/8; 
+    innerLines1_h(i, 1, 2) = 
+((8-i)*boardCorner(1, 2) + 
+i*boardCorner(2, 2))/8; 
+    innerLines1_h(i, 2, 1) = 
+((8-i)*boardCorner(4, 1) + 
+i*boardCorner(3, 1))/8; 
+    innerLines1_h(i, 2, 2) = 
+((8-i)*boardCorner(4, 2) + 
+i*boardCorner(3, 2))/8; 
+    d = 10000.0; %record the smallest 
+distance 
+    for j = 1 : n_valid_lines 
+        if angleType(j) ~= 1 
+            continue; 
+        end  
+        point(1) = innerLines1_h(i, 1, 
+72 
+ 
+1); 
+        point(2) = innerLines1_h(i, 1, 
+2);  
+        temp_d = 
+pointLineDistance(point, 
+valid_lines(j)); 
+        point(1) = innerLines1_h(i, 2, 
+1); 
+        point(2) = innerLines1_h(i, 2, 
+2); 
+        temp_d = (temp_d + 
+pointLineDistance(point, 
+valid_lines(j)))/2; 
+       if temp_d < d 
+           d = temp_d; 
+       end 
+    end  
+    if d < d_thresh 
+       e1 = e1 + d; 
+       en = en + 1; 
+    end 
+end 
+e1 = e1 / en; 
+% 7.2 assume (corner1, corner4) vs 
+(corner2, corner3) - calculate the 
+error 
+e2 = 0.0; 
+en = 0; 
+% build 8  "vertical" inner board line 
+innerLines2_v = zeros(8, 2, 2); 
+d_thresh = 
+(pointDistance(boardCorner(1,:), 
+boardCorner(2,:)) + ... 
+            
+pointDistance(boardCorner(4,:), 
+boardCorner(3,:))) / 2 / 9 / 2; 
+for i = 1:8 
+    innerLines2_v(i, 1, 1) = 
+((9-i)*boardCorner(1, 1) + 
+i*boardCorner(2, 1))/9; 
+    innerLines2_v(i, 1, 2) = 
+((9-i)*boardCorner(1, 2) + 
+i*boardCorner(2, 2))/9; 
+    innerLines2_v(i, 2, 1) = 
+((9-i)*boardCorner(4, 1) + 
+i*boardCorner(3, 1))/9; 
+    innerLines2_v(i, 2, 2) = 
+((9-i)*boardCorner(4, 2) + 
+i*boardCorner(3, 2))/9; 
+    d = 10000.0; %record the smallest 
+distance 
+    for j = 1 : n_valid_lines 
+        if angleType(j) ~= 1 
+            continue; 
+        end  
+        point(1) = innerLines2_v(i, 1, 
+1); 
+        point(2) = innerLines2_v(i, 1, 
+2);  
+        temp_d = 
+pointLineDistance(point, 
+valid_lines(j)); 
+        point(1) = innerLines2_v(i, 2, 
+1); 
+        point(2) = innerLines2_v(i, 2, 
+2); 
+        temp_d = (temp_d + 
+pointLineDistance(point, 
+valid_lines(j)))/2; 
+       if temp_d < d 
+           d = temp_d; 
+       end 
+    end  
+    if d < d_thresh 
+       e2 = e2 + d; 
+       en = en + 1; 
+    end  
+end  
+% build 7 "horizontal" inner board line 
+innerLines2_h = zeros(7, 2, 2); 
+d_thresh = 
+(pointDistance(boardCorner(1,:), 
+boardCorner(4,:)) + ... 
+            
+pointDistance(boardCorner(2,:), 
+boardCorner(3,:))) / 2 / 8 / 2; 
+for i = 1:7 
+    innerLines2_h(i, 1, 1) = 
 73 
+ 
+((8-i)*boardCorner(1, 1) + 
+i*boardCorner(4, 1))/8; 
+    innerLines2_h(i, 1, 2) = 
+((8-i)*boardCorner(1, 2) + 
+i*boardCorner(4, 2))/8; 
+    innerLines2_h(i, 2, 1) = 
+((8-i)*boardCorner(2, 1) + 
+i*boardCorner(3, 1))/8; 
+    innerLines2_h(i, 2, 2) = 
+((8-i)*boardCorner(2, 2) + 
+i*boardCorner(3, 2))/8; 
+    d = 10000.0; %record the smallest 
+distance 
+    for j = 1 : n_valid_lines 
+        if angleType(j) ~= 2 
+            continue; 
+        end  
+        point(1) = innerLines2_h(i, 1, 
+1); 
+        point(2) = innerLines2_h(i, 1, 
+2);  
+        temp_d = 
+pointLineDistance(point, 
+valid_lines(j)); 
+        point(1) = innerLines2_h(i, 2, 
+1); 
+        point(2) = innerLines2_h(i, 2, 
+2); 
+        temp_d = (temp_d + 
+pointLineDistance(point, 
+valid_lines(j)))/2; 
+       if temp_d < d 
+           d = temp_d; 
+       end 
+    end  
+    if d < d_thresh 
+       e2 = e2 + d; 
+       en = en + 1; 
+    end 
+end  
+e2 = e2 / en;  
+% 8. output the X-Y coordinates of chess 
+board  
+if e1 < e2 
+    bc1 = boardCorner(1,:); 
+    bc2 = boardCorner(2,:); 
+    bc3 = boardCorner(3,:); 
+    bc4 = boardCorner(4,:); 
+else 
+    bc1 = boardCorner(2,:); 
+    bc2 = boardCorner(3,:); 
+    bc3 = boardCorner(4,:); 
+    bc4 = boardCorner(1,:); 
+end  
+X = zeros(9, 10); 
+Y = zeros(9, 10); 
+for m = 1:9 
+    for n = 1:10 
+        x1 = ((n-1)*bc4(1) + 
+(10-n)*bc1(1)) / 9; 
+        y1 = ((n-1)*bc4(2) + 
+(10-n)*bc1(2)) / 9; 
+        x2 = ((n-1)*bc3(1) + 
+(10-n)*bc2(1)) / 9; 
+        y2 = ((n-1)*bc3(2) + 
+(10-n)*bc2(2)) / 9;  
+        X(m, n) = ((m-1)*x2 + (9-m)*x1) 
+/ 8; 
+        Y(m, n) = ((m-1)*y2 + (9-m)*y1) 
+/ 8;  
+    end 
+end  
+if DRAW == 1 
+    plot(X(:,1:5), Y(:,1:5), 'mo'); 
+    plot(X(:,6:10), Y(:,6:10), 'co');  
+    hold off; 
+end  
+if RESTORE == 1 
+    % map the result back into original 
+image size 
+    X = round(X * s_w / current_w); 
+    Y = round(Y * s_h / current_h); 
+end  
+end 
  

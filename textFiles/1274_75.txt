@@ -1,3 +1,4 @@
+ II 
  
 Abstract 
 There are two main purposes of this project. The first is to study the effect of behavioural 
@@ -49,8 +50,8 @@ path.
  
  
  
-II 
-  
+ III 
+ 
 Acknowledgements 
 First and foremost, I would like to show my deepest gratitude to my supervisor, Dr. 
 Steve Gregory, who has provided me with invaluable advice, guidance and 
@@ -65,8 +66,8 @@ advice.
 Last but not least, I would give my sincere appreciation for my families for their 
 unconditional love and support. 
  
-III 
-  
+ IV 
+ 
 Contents 
 1 INTRODUCTION ....................................................................................................... 1 
 1.1 AIMS AND OBJECTIVES ...................................................................................................... 1 
@@ -93,8 +94,8 @@ Contents
 3 METHODS ................................................................................................................ 17 
 3.1 EXPERIMENT DESIGN ...................................................................................................... 17 
 3.1.1 Experiment one: global-belief-based ............................................................................ 18 
-IV 
-  
+ V 
+ 
 3.1.2 Experiment two: local- prevalence-based ..................................................................... 18 
 3.1.3 Experiment three: global- prevalence-based ................................................................. 18 
 3.1.4 Experiment four: local- belief-based ............................................................................. 18 
@@ -122,8 +123,8 @@ IV
 4.2 ALL POPULATION AWARE IN DIFFERENT TIME STEPS ...................................................... 40 
 4.3 BEHAVIOURAL CHANGES HAPPEN DURING DISEASE SPREAD .......................................... 41 
 4.3.1 Compare with strategies applied before epidemic process ............................................ 41 
-V 
-  
+ VI 
+ 
 4.3.2 Compare with local “SI link” strategy ........................................................................... 42 
 4.4 THE EFFECT OF AWARENESS SPREADING ........................................................................ 44 
 4.5 EFFECTS OF NETWORK PROPERTIES ANALYSIS ................................................................ 45 
@@ -141,8 +142,8 @@ V
 9 APPENDIX: SOURCE CODE .................................................................................. 55 
  
   
-VI 
- Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                        1 
 1 Introduction 
 The most common infectious disease in human is usually transmitted by air during close 
 proximity interactions. During the outbreak of influenza A (H1N1) in 2009, not only the 
@@ -178,7 +179,8 @@ d) How network structure and properties will affect disease spread and strategy 
 e) How awareness spread can affect the epidemic results? 
  
  
-Yilei Bu, Internet Technologies with Security, 2012                                                        1 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      2 
 1.2 Structure 
 This dissertation consists of 5 main chapters. Firstly, in “Background” section, we review the 
 basic concept of epidemic models and the categories of behaviour models. Then various 
@@ -193,7 +195,8 @@ findings and discuss its relationship to current epidemic and behaviour studies.
 of this project is also explained in this section to determine whether objectives have been met. 
 Finally, future work is discussed related to further improvements and further extensions that 
 could be carried out based on our existing findings. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      2 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      3 
 2 Background 
 2.1 Network 
 In this project network is used to model the structure of population where epidemic spreading 
@@ -237,7 +240,8 @@ this area. But most of the datasets are small like a dataset of a club. There ra
 with a relationship of a town or a city. The only possible dataset about social communities are 
 from virtual web communities such as “Facebook” which may not be as same network 
 structure as the one within real population. So it is hard to find convincing datasets. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      3 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      4 
 2.1.3 Idealized networks or theoretical networks 
 Since the real networks and simulated networks both need huge effort to obtain large scale 
 and reliable data on real population. Many idealized networks have been constructed to 
@@ -283,14 +287,15 @@ clustering phenomenon makes disease spread locally while the short long-range ed
 enable rapid spread disease to reach wider area outside local regions [Matt and Ken 2005]. 
 Therefore it is a good idea to consider what kind of behaviour changes can reduce the 
 long-rang edges so that disease can be kept in small regions. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      4 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      5 
 2.1.3.4 Spatial networks 
 Individuals are positioned within a given area and two individuals are connected with a specific 
 probability decided by a connection kernel which usually decays with distance to make 
 connection locally. Spatial network can be configured to generate lattices or small-world 
 networks. The degree distribution of spatial networks is usually Poisson. 
 2.1.3.5 Scale-free networks 
-Scale-free networks [Barabá si and Albert 1999] are used to study those highly connected 
+Scale-free networks [Barabási and Albert 1999] are used to study those highly connected 
 individuals. The degree distribution in scale-free network is power-law, which means that some 
 node have extreme large number of contacts compared with average nodes. The new joined 
 individual tends to connect with those highly connected individuals, which is familiar with the 
@@ -315,7 +320,8 @@ scale-free network. Source from [Matt and Ken 2005]
 In summary, as shown in Figure 1, different network types have different network properties 
 and suit for different study emphases. The random network have short path length but low 
 clustering while the lattices have high clustering but long path length. Small-world networks 
-Yilei Bu, Internet Technologies with Security, 2012                                                      5 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      6 
 have clustering and short path length while scale free network particularly have some highly 
 connected nodes. Therefore, lattices are useful to study how clustering stop disease spread and 
 small world can be used to study whether reducing long-range edges (same as increase path 
@@ -338,26 +344,23 @@ of close proximity interaction in a high school, [Salathé et al. 2010] found tha
 network was a high-density network with typical small-world properties and a homogeneous 
 distribution of both interaction time and interaction partners among subjects. In [Lagorio et al. 
 2011], they use one homogeneous network and one heterogeneous network to represent the 
-social network respectively. For the homogeneous network, they use Erdö s-Ré nyi networks 
+social network respectively. For the homogeneous network, they use Erdös-Rényi networks 
 with Poissonian degree distribution: 
-?<? > ?
-? <? >
-  
-? ? = . 
-? !
+? ? =
+??<?><?>?
+? 
+ . 
 For the heterogeneous network, they use finite sale-free networks with degree distribution: 
+? ? =
+??? ???  ?
 ?
-??
-  
-? ? ? ? ?
 ?
-  
-? ? = ,  
+ 
+???  ?
+?
 1
-?
-?
-? ? ? 
-?
+? 
+,  
 where K is the degree cut-off. However, it is not clear that whether the real world contact 
 network is scale-free or small-world or not. Since the real world contact network may be quit 
 complicated and contain all of those properties, only one theoretical network not be able to 
@@ -375,7 +378,8 @@ high-resolution data of close proximity interactions during a typical day at an 
 school and thus construct a simulated network with weighted edges for an influenza-like 
 disease. The problem is the accuracy of these kinds of empirical network is not known. 
 Whether the data collected is convincing enough still need further verification.  
-Yilei Bu, Internet Technologies with Security, 2012                                                      6 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      7 
 Besides, [Bansal et al. 2007] have studied several empirical contact networks based on the real 
 contact networks and find that the empirical human contact networks created in many research 
 papers fit an exponential degree distribution. In the appendix of [Bansal et al. 2007], the 
@@ -393,52 +397,50 @@ for all the nodes shows the degree distribution of the network. Degree distribut
 important way of measuring how network structure has been changed by individuals' 
 behavioural changes. The average degree k of an undirected graph is defined as the number of 
 all edges divided by the number of all nodes times two: 
+? =  ?? ? =
 2?
-? =  ? ? ? = 
 ?
 ?
+ 
 The degree distribution is critical in measuring the heterogeneity of the network that related to 
 individuals' potential to become infected and causing infection. The higher the degree a node 
 has, the more likely it will be infected and infect others. The moments of the degree distribution 
 can help calculating the degree distribution variance and n th moment of P(k) is defined as 
 [Leon et al. 2011]: 
-? ?
-< ? >= ? ? (? )  . 
+< ?? >=  ???(?)
 ?
-?
-For the correlated network in our simulation, the probability ? (? |? ) of a node with degree k 
+  . 
+For the correlated network in our simulation, the probability ?(?? |?) of a node with degree k 
 is dependent on the degree k' of its neighbours. Then the average of k' for all nodes with degree 
 k can be calculated as [Leon et al. 2011]: 
-? ?
-    
-? = ? ? ? ?  . 
-? ?
+??? =  ?
 ?
-?
-k is used to show the relationship between the degree of the node and its neighbours' degrees. 
-nn
+? ?
+? ??  ?   . 
+knn  is used to show the relationship between the degree of the node and its neighbours' degrees. 
 2.1.5.2 Distance 
 In a network, the distance between two nodes is the shortest path between them. The average 
 distance < d > of all pairs of nodes can be defined as mean of the distances between all nodes 
 [Leon et al. 2011]: 
+< ? >=
 1
-< ? >= ?  , 
-? ,?
-? (? + 1)
-? ≠?
-Yilei Bu, Internet Technologies with Security, 2012                                                      7 Behavioural changes and disease propagation in networks 
-where N is the number of nodes in the network and diameter of the network is max(d ). 
-i,j
+?(? + 1)
+ ??,?
+?≠?
+  , 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      8 
+where N is the number of nodes in the network and diameter of the network is max(di,j). 
 The distance always shows how many steps are needed to spread disease from one node to 
 another. The effect of small-world phenomenon is because of short average distance between 
 all nodes which makes disease spread much more rapidly. So distance study has clear effect in 
 controlling disease. 
 Shortest distance through a network also helps quantify the node betweenness centrality which 
 is defined as the proportion of shortest path that pass through a single node [Leon et al. 2011]: 
-#? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?
-? =  , 
-?
-? (? ? 1)
+?? =
+#???????? ???? ??????? ?
+?(? ? 1)
+  , 
 where N is the number of nodes in the network. Edge betweenness centrality is defined 
 similarly, which is the proportion of shortest path that pass through a single edge. It is widely 
 known that central nodes are likely to be infected early and most of disease will spread through 
@@ -448,19 +450,16 @@ disease control [Salathé and Jones 2010].
 The clustering coefficient ? represents the local density of a graph. It is defined as the 
 probability that two neighbours of a node are also connected with each other and can be 
 calculated as [Leon et al. 2011]: 
-3 ? # ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?
-? =  . 
-?
-# ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ?
+?? =
+3 ? # ?? ????????? ?? ??? ???????
+# ?? ????????? ???????
+  . 
 The clustering coefficient for each node in undirected graph can be calculated as: 
-2|? |
-? ?
-? =  , 
-?
-? (? ? 1)
-? ?
-where k is the number of neighbours of node i, e defines all edges among neighbours of 
-i jk
+?? =
+2|??? |
+??(?? ? 1)
+  , 
+where ki  is the number of neighbours of node i, ejk  defines all edges among neighbours of 
 node i. Clustering always be considered important in disease spread for the rapid local 
 depletion of susceptible individuals[Leon et al. 2011]. 
 2.1.5.4 Community 
@@ -473,7 +472,8 @@ identifying community structure can help split the social and biological network
 meaningful clusters. [Salathé and Jones 2010] find that immunization interventions that change 
 the structure of the contact network targeted in network with strong community structure are 
 much more effective. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      8 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      9 
  
 Figure 2: The nodes fall into sets of nodes (shaded) with many edges in set and few edges between sets. 
 (Source from [Newman 2006]) 
@@ -500,16 +500,21 @@ last it becomes removed (R) which means recover from the disease and immune or d
 Infected individuals infect all states contacted with them at rate ? per unit time while ? means 
 average recover rate per unit time. This can be described by the following coupled non-linear 
 differential equations [Bailey 1975]: 
-? ? ? ? ? ?
-= ?? ? ? , = ? ? ? ?? ? , = ? ?  , 
-? ? ? ? ? ?
+??
+??
+= ????,
+??
+??
+= ??? ? ??,
+??
+??
+= ??  , 
 where s, i, r are the fraction of the population in each states and s + i + r = 1. The SIR model suit 
 for infectious disease that confers lifelong immunity such as influenza, which is also our project 
 focuses on. However, deterministic equation based model is more appropriate for representing 
 expected results under mean-field approximation in mathematical study. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      9 Behavioural changes and disease propagation in networks 
-? ? 
- S  I  R 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      10 
  
 Figure 3: SIR model with the transitions of infection (rate ?) and recovery (rate ?) (Source from [Funk 
 et al. 2010]) 
@@ -526,19 +531,17 @@ Since our project focuses on individual’s behavioural changes, the stochastic ag
 model is more suitable to study the changes in individual level and it can easily be run on 
 different network topologies (e.g. random, scale-free etc.) 
 2.2.3 Measurement of epidemic 
-For the deterministic equation based model, the basic reproduction number denoted by R is 
-0
+For the deterministic equation based model, the basic reproduction number denoted by R0 is 
 used to determine whether an epidemic occurs or die out, which is defined as the average 
 number of secondary infections from a single infective individual in a fully susceptible 
 population [Diekmann et al.1990]. The infective individual makes ?N contact per time step 
 leading to new infections with duration of 1/?. So the basic reproduction number can be 
 calculated by  
-? ?
-? = , 
-0
+?0 =
+??
 ?
-If R > 1, the infection die out, otherwise there will be an epidemic in the population. 
-0
+ , 
+If R0 > 1, the infection die out, otherwise there will be an epidemic in the population. 
 For the stochastic agent-based model, we can get the number of individuals in each epidemic 
 state each time step. So we can calculate the ratio of infectious cases in each time step, the total 
 infected cases at all (epidemic size), the highest infection rate and the epidemic duration as a 
@@ -550,7 +553,10 @@ model talked above and the behaviour models. Our review in this section is based
 [Funk et al. 2010]. There are various ways to model the behaviour change over time. [Funk et 
 al. 2010] gave a classification of behaviour-disease model based on the causes and 
 consequences of behavioural change. They focus on conceptual difference in the process to 
-Yilei Bu, Internet Technologies with Security, 2012                                                      10 Behavioural changes and disease propagation in networks 
+ S  I  R 
+? ? 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      11 
 combine behaviour element into disease model. In the following parts, we first discuss the 
 classification of causes of behavioural changes and then give the summary of consequences of 
 behavioural changes along with the integration of behaviour-disease model. 
@@ -595,38 +601,24 @@ like the idea that people is infected based on transmission probability. Therefo
 parameters can be integrated into epidemic model using the way of disease spreading. [Epstein 
 et al. 2008][Funk et al. 2009][Funk et al. 2010] 
  
-Yilei Bu, Internet Technologies with Security, 2012                                                      11 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      12 
  
-S: Susceptible to pathogen and fear 
-I : Infected with fear only 
-F
  
-I : Infected with pathogen only 
-P
-I : Infected with pathogen and fear 
-PF
  
-R : Removed from circulation due to fear 
-F
-R : Removed from circulation due to fear and infected with pathogen 
-PF
- 
-R: Recovered from pathogen and immune to fear 
  
  
  
 Figure 4: State space from [Epstein et al. 2008] 
  Get scared Not get scared 
-?? (1- ?) ? 
-Get sick 
-Not get sick ?(1- ?) (1- ?)(1- ?) 
+Get sick ?? (1-?)? 
+Not get sick ?(1-?) (1-?)(1-?) 
 Figure 5: Transmission Probabilities from [Epstein et al. 2008] 
 [Epstein et al. 2008] extends the basic SIR model to seven states shown in Figure 4. Each 
 individual can be infected by disease (pathogen, see Figure 5) or awareness (fear, see Figure 5) 
 and recovered from disease or fear. Let ? denote the awareness transmission rate and ? denote 
 the disease transmission rate. Figure 5 shows the possibilities of individual in S state becoming 
-state I , I , I or remaining state S when he contacts an individual in state IPF . If ? is set to 0, 
-F P PF
+state IF , IP , IPF  or remaining state S when he contacts an individual in state IPF . If ? is set to 0, 
 a purely SIR model of disease is shown and if ? is set to 0, a SIR model of awareness is got. 
 Both the model will show a declining susceptible S-curve and an increasing disease infection 
 S-curve. [Epstein et al. 2008] define two possible behavioural changed when individual is 
@@ -651,48 +643,40 @@ awareness fading parameter in the model which makes the model more practical. Th
 behavioural changes are denoted as the changes in infection rate. 
  
  
-Yilei Bu, Internet Technologies with Security, 2012                                                      12 Behavioural changes and disease propagation in networks 
-S Susceptible unaware 
-?
-Infected unaware 
-I 
-?
-Recovered unaware 
-R 
-?
-Susceptible aware 
-S 
-+
-Infected aware 
-I 
-+
-Recovered aware 
-R 
-+
+S: Susceptible to pathogen and fear 
+IF: Infected with fear only 
+IP : Infected with pathogen only 
+IPF : Infected with pathogen and fear 
+RF: Removed from circulation due to fear 
+RPF : Removed from circulation due to fear and infected with pathogen 
+R: Recovered from pathogen and immune to fear 
+ 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      13 
+S? Susceptible unaware 
+I? Infected unaware 
+R? Recovered unaware 
+S+ Susceptible aware 
+I+ Infected aware 
+R+ Recovered aware 
 Figure 6: Epidemic states from [Funk et al. 2010] 
 ? Infection rate from unaware infected to unaware 
 susceptible 
-Infection rate from unaware infected to aware 
-? ? 
-S
+?S? Infection rate from unaware infected to aware 
 susceptible 
-? ? Infection rate from aware infected to unaware 
-I
+?I? Infection rate from aware infected to unaware 
 susceptible 
-? ? ? Infection rate from aware infected to aware 
-S I
+?S?I? Infection rate from aware infected to aware 
 susceptible 
 Figure 7: Infection rates from [Funk et al. 2010] 
 [Funk et al. 2009][Funk et al. 2010] define six states shown in Figure 6 to denote whether 
 individual is aware or unaware. They assume the behavioural changes happen both in 
 susceptible individuals and infected individuals. They denote the infection rate from unaware 
 person to unaware person as ?. If the infected individual takes some action to prevent the 
-disease spreading, the reduction in infectivity is shown by a factor 0 < ? < 1 multiple infection 
-s
+disease spreading, the reduction in infectivity is shown by a factor 0 < ?s< 1 multiple infection 
 rate ?. If the susceptible individuals are aware of the disease, they will reduce contact or take 
 medication which reduces their infectiveness. Such reduce is denoted as a reduction factor 0 < 
-? < 1 Thus the four resulted infection rate is shown in Figure 7. They also define a rate of 
-I
+?I< 1 Thus the four resulted infection rate is shown in Figure 7. They also define a rate of 
 infected individual becoming aware. The recovery rate is different between aware and unaware 
 people. All these parameters help [Funk et al. 2009][Funk et al. 2010] find that reduced 
 infectivity, shorter duration of infection of those aware and infected, reduced susceptibility of 
@@ -718,7 +702,8 @@ non-infected nodes have larger degrees since non-infected nodes tend to rewire t
 nodes. This also leads to the balance of the epidemic and disease-free states. Another worth 
 learning parameter is the distance from nearest infective node. As shown in Figure 8(a), 
 rewiring significantly decrease the number of nodes connected to an infected node compared to 
-Yilei Bu, Internet Technologies with Security, 2012                                                      13 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      14 
 un-rewired model. Figure 8(b) shows that the distribution of distance decays in the same way in 
 an adaptive network and random network except that adaptive network has some nodes totally 
 disconnected with the infected nodes. 
@@ -756,7 +741,8 @@ immunization strategies below.
 In order to keep the infection of disease in one community only, the nodes connecting multiple 
 communities show great role in controlling disease spread. One strategy of controlling disease 
 spread is to immunize the individuals connecting multiple communities (so-called community 
-Yilei Bu, Internet Technologies with Security, 2012                                                      14 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      15 
 bridge)[Salathé and Jones 2010]. Despite of finding these nodes with betweenness centrality as 
 community bridges, [Salathé and Jones 2010] design a community bridge finder (CBF) 
 algorithm without the need to know the complete network structure. The general idea of CBF is 
@@ -804,7 +790,8 @@ susceptible nodes have no state information of their neighbours until they have 
 At each time step, each infected node try to transmit the disease to its neighbours with some 
 probability. If it failed, its susceptible neighbour will cut the edge between them and rewire to 
 connect another randomly chosen susceptible node with probability w. In strategy B, each node 
-Yilei Bu, Internet Technologies with Security, 2012                                                      15 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      16 
 knows the state of its neighbours. Thus each susceptible node attached to an infected node will 
 cut the edge between them and rewire to connect another randomly chosen susceptible node 
 with probability w before physical contact. After proof using analytical approach and 
@@ -833,12 +820,13 @@ susceptible nodes to another uninfected area may not be a suitable strategy sinc
 amount of flight can dramatically increases the number of infected people and spreads the 
 disease to further areas. This means that when designing rewire strategy, it is important to 
 carefully control the number of edges that can be cut. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      16 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      17 
 3 Methods  
 In this section, we are going to explain the methods of our experiments in detail. Our 
 experiments have three main components: networks, epidemic models and edge removal 
 strategies. Networks define where the disease spread while epidemic models determine how 
-disease will spread. The edge removal strategies can be applied in different time step ? of 
+disease will spread. The edge removal strategies can be applied in different time step? of 
 epidemic process to form our four main experiment models. Firstly, we are going to summarize 
 experiment models. Then the detail of networks used and epidemic models will be discussed in 
 section 3.2 and 3.3 respectively. Finally, algorithms of local edge removal strategies and 
@@ -850,43 +838,60 @@ separated into four parts (shown in table 1): strategies applied before disease 
 applied by infected nodes, strategies applied by all nodes in different steps and strategies 
 applied by aware nodes. These four kinds of experiments are shown in Table 1 and a summary 
 of all experiment parameters are shown in Table 2. 
+Table 1: Behavioural change model 
+Table 2: Experiment parameters 
  Belief-based Prevalence-based 
-Global All nodes aware and strategies applied All nodes aware in different steps; 
+Global All nodes aware and strategies applied 
 before disease start; 
+All nodes aware in different steps; 
 Strategies applied by all nodes in 
 different steps; 
-Local Awareness spread; Only infected become aware, no 
-awareness spread; 
+Local Awareness spread; 
 Strategies applied by aware nodes; 
+Only infected become aware, no 
+awareness spread; 
 Strategies applied by infected nodes. 
-Table 1: Behavioural change model 
-Edge removal Epidemic 
-Networks Variables Output 
-strategies models 
-Random; Random; SI model Day; Percentage of infected nodes; 
-Similarity; 
-Exponential; Remove fraction; Total removed edges; 
-CC; 
-Scale-free; SIR Remove fraction; Epidemic size, duration, peak; 
-LFM; 
-model Total removed edges; 
+Networks 
+Edge removal 
+strategies 
+Epidemic 
+models 
+Variables Output 
+Random; 
+Exponential; 
+Scale-free; 
 Community; 
-Local Modularity; 
-SIIR Remove fraction; Epidemic size; 
-High degree; 
 Real 
-model Asymptomatic 
-Global: 
 network; 
-Total removed edges; 
-duration; 
+Random; 
+Similarity; 
+CC; 
+LFM; 
+Local Modularity; 
+High degree; 
+Global: 
 Edgebetweeness;  
-Awareness 
 InfoMap; 
-spreading speed; 
 Local: SI link; 
-Table 2: Experiment parameters 
-Yilei Bu, Internet Technologies with Security, 2012                                                      17 Behavioural changes and disease propagation in networks 
+SI model Day; 
+Remove fraction; 
+Percentage of infected nodes; 
+Total removed edges; 
+SIR 
+model 
+Remove fraction; Epidemic size, duration, peak; 
+Total removed edges; 
+SIIR 
+model 
+Remove fraction; 
+Asymptomatic 
+duration; 
+Awareness 
+spreading speed; 
+Epidemic size; 
+Total removed edges; 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      18 
 3.1.1 Experiment one: global-belief-based 
 This experiment can be viewed as whole population become aware of disease before disease 
 actually starts spreading, which means that all nodes in network will apply edge removal 
@@ -929,7 +934,8 @@ For simplicity, SIR model and epidemic size are enough to conduct this experimen
 3.1.4 Experiment four: local- belief-based 
 In order to find out how local belief-based behavioural changes can affect disease spread, we 
 use SIIR model to allow awareness spread. This means that not only infected nodes but also 
-Yilei Bu, Internet Technologies with Security, 2012                                                      18 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      19 
 aware nodes will apply edge removal strategies. In this case, infected nodes become aware and 
 aware node will infect other unaware nodes. We also add an asymptomatic infected state before 
 infectious state in SIR model to see whether awareness spread will help disease control in 
@@ -943,31 +949,40 @@ structure. So we continue to do three more experiments focusing on the effects o
 properties including cluster coefficient, degree distribution and community strength on the 
 performance of the “Local Modularity” strategy. Epidemic models and behavioural changes 
 models are fixed in this part for simplicity. The details of experiments are shown in Table 3. 
-Network Edge removal 
-Network Model Outputs 
-properties strategies 
-Epidemic size; 
+Network 
+properties 
+Network Model 
+Edge removal 
+strategies 
+Outputs 
 Clustering 
-Exponential network 
-Total removed 
 coefficient 
-edges; 
-The rate of 
-Scale-free network; SIR model; 
-removed edges 
-Degree Local 
-Community network Global-Belief 
-are 
-distribution Modularity 
-with power law based behaviour 
-intercommunity 
-degree distribution model; 
-edges; 
+Exponential network 
+SIR model; 
+Global-Belief 
+based behaviour 
+model; 
+Local 
+Modularity 
 Epidemic size; 
-Community 
-Community network 
 Total removed 
+edges; 
+Degree 
+distribution 
+Scale-free network; 
+Community network 
+with power law 
+degree distribution 
+The rate of 
+removed edges 
+are 
+intercommunity 
+edges; 
+Community 
 strength 
+Community network 
+Epidemic size; 
+Total removed 
 edges; 
 Table 3: Parameters for experiments studying the effects on network property 
 3.2 Networks used in experiments 
@@ -977,11 +992,12 @@ network. The properties of these networks have been discussed in section 2.1. In
 mainly focus on the generation and data source of these networks. All networks used in our 
 experiments are undirected and unweighted. 
 3.2.1 Random network 
-The random network in our experiment is generated using the Erdö s-Ré nyi binomial model. 
+The random network in our experiment is generated using the Erdös-Rényi binomial model. 
 There are 128 nodes in this network and each pair of nodes is connected with probability 1%, 
 which results in total 859 edges. It is automatically generated using library of JUNG graph 
 framework (edu.uci.ics.jung.algorithms.generators.random.ErdosRenyiGenerator<V, E>). 
-Yilei Bu, Internet Technologies with Security, 2012                                                      19 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      20 
 3.2.2 Exponential network 
 First we use JUNG to generate a random network with 168 nodes and 650 edges (each pair of 
 nodes is connected with probability 0.05). Then we rewired it to exponential degree distribution 
@@ -989,12 +1005,18 @@ by using greedy rewiring algorithm in [Bansal et al. 2007].
 For the purpose of experiment in section 3.1.5, we also rewire the exponential networks to have 
 different average clustering coefficients using algorithm in [Bansal et al. 2009]. We generated 
 5 exponential networks with same properties except the clustering coefficient. (See Table4) 
-Exponential Coefficient of Clustering 
+Exponential 
+network 
 Nodes Edges Mean degree 
-network variation coefficient 
-1 0.16 
+Coefficient of 
+variation 
+Clustering 
+coefficient 
+1 
+168 650 7.738 1.001 
+0.16 
 2 0.2 
-3 168 650 7.738 1.001 0.3 
+3 0.3 
 4 0.4 
 5 0.5 
 Table 4: Parameters of exponential networks 
@@ -1012,26 +1034,35 @@ running the program, there is a mixing parameter to control the community streng
 for the ratio of external degree of total degree. The higher the mixing parameter, the lower the 
 community strength will be. We generated five Girvan-Newman benchmark kind networks as 
 shown in table5. 
-Community Mixing Community 
+Community 
+network 
+Mixing 
+parameter 
+Community 
+size/number 
 Total nodes Total edges Degree 
-network parameter size/number 
 1 0.05 
+32/4 128 1024 16 
 2 0.1 
-3 0.2 32/4 128 1024 16 
+3 0.2 
 4 0.3 
 5 0.4 
 Table 5: Parameters of community networks 
 For the experiment to study the effect of power-law degree distribution in section 3.1.5, we 
 also generate a community network with same degree distribution as a scale-free network 
-Yilei Bu, Internet Technologies with Security, 2012                                                      20 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      21 
 using Pajek which is a software of large network analysis and visualization developed 
 by Vladimir Batagelj and Andrej Mrvar. The community network has totally 508 edges and 
 128 nodes. The degree distribution is shown in Figure 9: 
  
 Figure 9: The degree distribution of community network and scale-free network 
-  
-(a) Power-law degree distribution with (b) Power-law degree distribution without 
-community structure community structure 
+ 
+(a) Power-law degree distribution with 
+community structure 
+ 
+(b) Power-law degree distribution without 
+community structure 
 Figure 10: Illustrations of community network and scale-free network 
 The community network and scale-free network have same network parameters except that 
 the community network contains four communities. (See Figure 10) 
@@ -1042,8 +1073,7 @@ Since our experiments are aimed at testing the performance of edge removal strat
 three datasets used in real network tests: blogs, school and global flight network. The first two 
 are social networks and the flight network is a real life network but is not social network. 
 1) “Blogs” network 
-TM
-“Blogs” is a network of blogs on the Window Live Spaces platform from [Gregory 2009]. 
+“Blogs” is a network of blogs on the Window LiveTM  Spaces platform from [Gregory 2009]. 
 This network has strong community structure with totally 273 communities found by 
 “InfoMap” community detection algorithm. There are totally 3982 nodes and 6803 edges in 
 this network. 
@@ -1051,7 +1081,9 @@ this network.
 “School” network is generated from a high school contact data of a day from [Salathé et al. 
 2010]. We only kept the contacts with duration longer than 5 second to form a network work 
 with totally 786 nodes and 20345 edges. This dataset (have been mentioned above) is 
-Yilei Bu, Internet Technologies with Security, 2012                                                      21 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      22 
+S Ia  I R 
 collected using wireless sensor network technology and records high-resolution data of close 
 proximity interactions among students, teachers and staffs during a typical day at an 
 American high school. This dataset is collected particularly for influenza-like disease study so 
@@ -1072,65 +1104,44 @@ going to introduce our threes epidemic models in detail, including SI model, SIR
 SIIR model. 
  
                    ?                n                ? 
-S I I R 
-a
  
  
-Figure 11: An illustration of epidemic model with parameters S (susceptible), I (asymptomatic 
-a
+Figure 11: An illustration of epidemic model with parameters S (susceptible), Ia (asymptomatic 
 infectious), I (symptomatic infectious), R (recovered), ? (infection rate), n (asymptomatic duration), ? 
 (recover rate) 
 3.3.1 SIIR model 
 Here we define SIIR model as shown in Figure 11: each node can be in one of four possible 
-states: S (susceptible), I (asymptomatic infectious), I (symptomatic infectious), R (recovered). 
-a
+states: S (susceptible), Ia  (asymptomatic infectious), I (symptomatic infectious), R (recovered). 
 Initially all nodes are susceptible and one node will be chosen randomly to be in asymptomatic 
 state. At each time step (one day), node in susceptible state can be infected by its neighbour in 
 asymptomatic or symptomatic infectious state with probability ?, which means that if one node 
-has k neighbours in state I or I, the probability of being infected will be 1-(1-?)^k. Once a 
-a
-node in state S is infected, it will transfer to state I . Each node in state I takes n days to 
-a a
+has k neighbours in state Ia  or I, the probability of being infected will be 1-(1-?)^k. Once a 
+node in state S is infected, it will transfer to state Ia . Each node in state Ia  takes n days to 
 become state I and then become recovered state R with probability ?. During a number of time 
 steps, the initial infection can spread through the network and the simulation will be halted once 
-no node is in state I or I. 
-a
+no node is in state Ia  or I. 
 3.3.2 SIR model and SI model 
 After defining SIIR model, both SIR model and SI model can be transferred from SIIR model. 
-When we set n=0, state I will no longer exist and the model turns into SIR model. Similarly, if 
-a
+When we set n=0, state Ia  will no longer exist and the model turns into SIR model. Similarly, if 
 both n and ? are set to be 0, only state S and state I will be left. Thus SIIR model becomes SI 
 model. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      22 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      23 
 3.3.3 Statistics of epidemic model 
 The values of parameters used in these models vary according to different specific disease. 
 Since we are not concentrate on one specific disease but a category of flu-like infectious disease 
 which are transmitted from person to person by the respiratory or close-contact, we use the 
 method introduced in paper [Salathé and Jones 2010] to decide our epidemic parameters. In 
-epidemiology, R (the basic reproduction number) represents the number of nodes that one 
-0
-node can infect on average over its infectious period. If R <1 the infection will die out 
-0
-otherwise infection will spread in a population. R is widely used in mathematical models 
-0
+epidemiology, R0 (the basic reproduction number) represents the number of nodes that one 
+node can infect on average over its infectious period. If R0<1 the infection will die out 
+otherwise infection will spread in a population. R0 is widely used in mathematical models 
 particularly in ordinary differential equations but cannot be used in our agent-based model. 
 However, paper [Salathé and Jones 2010] mentioned that transmission rate ? can be chosen 
-according to the relationship that R ~ (?/?)*d=3 where d is the mean network degree, and ? is 
-0
-the recovery rate. They choose ? =0.2(an average infectious period of 5 days) and R =3 
-0
+according to the relationship that R0~ (?/?)*d=3 where d is the mean network degree, and ? is 
+the recovery rate. They choose ? =0.2(an average infectious period of 5 days) and R0=3 
 because these parameter values reflect most widespread infectious diseases in previous studies. 
-Therefore, we also set R =3 and let the infectious period to be 5 days in our simulation (?=0.2). 
-0
+Therefore, we also set R0=3 and let the infectious period to be 5 days in our simulation (?=0.2). 
 So the transmission rate ? in different networks can be calculated as following in Table 6. 
-Networks Mean degree d ? R0 ? = R0*?/d 
-Random 13.421 0.0447 
-Exponential 7.738 0.0775 
-Scale-free 8.46 0.07 
-Community 16 0.2 3 0.0375 
-Flight network 52 0.01 
-Blogs 3.42 0.1756 
-School 51.77 0.0116 
 Table 6: Epidemic parameters for different networks 
 3.3.4 Awareness spread model 
 In our model, only aware nodes will apply edge remove strategies. Nodes can be aware in 
@@ -1139,15 +1150,27 @@ section 3.1). For the global condition, all nodes become aware at same time infl
 public information. For the local, infected nodes become aware and the awareness can spread, 
 which is same as disease spread (see Figure 12). Unaware node affected by its aware neighbour 
 by probability w. If w=0, no awareness spreads. 
-w 
-Un aware A ware 
  
 Figure 12: Awareness spread model 
 3.4 Edge removal strategies 
 Since behavioural changes are conducted by the individual who has limited knowledge of the 
 whole network, the strategies used to select critical edges since each node can only use local 
 information. We modified range of different measurements of network parameters including 
-Yilei Bu, Internet Technologies with Security, 2012                                                      23 Behavioural changes and disease propagation in networks 
+Networks Mean degree d ? R0 ? = R0*?/d 
+Random 13.421 
+0.2 3 
+0.0447 
+Exponential 7.738 0.0775 
+Scale-free 8.46 0.07 
+Community 16 0.0375 
+Flight network 52 0.01 
+Blogs 3.42 0.1756 
+School 51.77 0.0116 
+  
+w 
+Aware Unaware 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      24 
 similarity, degree, clustering coefficient, community strength and so on to form five candidate 
 local edge removal strategies. In the following part, we will firstly provide all our modified 
 local edge removal strategies and then give an introduction of those strategies we used to 
@@ -1159,12 +1182,10 @@ having one degree even if this edge is the best choice calculated by these strat
 1) Similarity 
 We use Jaccard similarity coefficient proposed by Jaccard in paper [Jaccard 1901] to measure 
 how similar neighbourhood connectivity structure of each node and its neighbours are. The 
-|? ?? |
-? ?
-Jaccard similarity coefficient are defined as ? = , where ? equals to the degree 
-? ? ? ? ? ? ? i
-|? ?? |
-? ?
+Jaccard similarity coefficient are defined as ???????? =
+|????? |
+|????? |
+ , where ?i  equals to the degree 
 of node i. This equation calculates the ratio of common neighbours between two nodes. If two 
 vertice have exact same degrees, the similarity coefficient reaches maximum value of 1. 
 Otherwise, a low coefficient reveals that the two vertice may belong to different network 
@@ -1186,32 +1207,32 @@ c) Choose the edge that can increase CC mostly to remove
 We modify a local community detection algorithm called local fitness maximization (LFM) in 
 paper [Lancichinetti et al. 2009] to try to find those intercommunity edges. Fitness of subgraph 
 g is used to measure a community in paper [Lancichinetti et al. 2009] and is defined as: 
+?? =
+???
 ?
+(???
 ?
-? ?
-? = 
-? ? ?
++ ????
 ?
-(? +? )
-? ? ?
-? ?
-? ?
-, where ? and ? are the total internal and external degrees of the nodes in community g 
-? ? ? ? ?
+)?
+ 
+, where ???
+?
+ and ????
+?
+ are the total internal and external degrees of the nodes in community g 
 and ? is a positive value to control the size of the community. The community detection method 
 starts from a node A and aims to find the largest fitness by adding new nodes or removing 
 existing nodes in community, which means that the final detected community from node A will 
-have lower ? if a new node is added or a node of the community is removed. They also 
-?
-?
-introduced a concept of node fitness ? which is the fitness of node A in sub-graph g and is 
-?
+have lower ??  if a new node is added or a node of the community is removed. They also 
+introduced a concept of node fitness ??
+?  which is the fitness of node A in sub-graph g and is 
 defined as the variation of sub-graph fitness with and without node A [Lancichinetti et al. 
 2009]: 
-Yilei Bu, Internet Technologies with Security, 2012                                                      24 Behavioural changes and disease propagation in networks 
-?
-? = ? ?? 
-? ? +{? } ? ?{? }
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      25 
+??
+? = ??+{?} ? ???{?} 
 In each iteration step, they find the neighbour with the largest fitness and add it into the 
 sub-graph g. Then they recalculate the fitness of each node and removes the one has negative 
 fitness. After each add and remove action, the fitness of each node will be updated and the 
@@ -1220,36 +1241,35 @@ the end, the generated sub-graph is the largest community from A.
 When it comes to our modified strategy, we define an edge fitness based on the idea of node 
 fitness in paper [Lancichinetti et al. 2009] which is variation of sub-graph fitness with and 
 without the target edge. The fitness of edge e connecting node A and node n can be defined as: 
-?
-? = ? ?? 
-? ? +{? } ? ?{? }
-, where sub-graph g consists of node A and its neighbours and ? ? {? } here means node n is 
+??
+? = ??+{?} ? ???{?} 
+, where sub-graph g consists of node A and its neighbours and ? ? {?} here means node n is 
 moved out of subgraph g and edge e is removed from original graph. Our idea of finding critical 
 edges for each node is similar with paper [Lancichinetti et al. 2009], which is to remove the 
 edge with lowest negative edge fitness value. After testing various ? values, we find that ?=2 
 has the best performance in our experiment, so we set ?=2 in all experiments. When we apply 
 the definition to our experiment, the fitness of sub-graph g which consists of node A and its 
 neighbours can be calculated as: 
-2?? ? ? ? ? ? ? ? ? ? ? ? ? ?
-?
-? = 
-?
-2
-(? ? ? ? ? ? ? ? ? ? ? ? ? ? ? +? ? ? ? ? ? ? ? ? ? ? ? ? ? ? )
+??
+? =
+2 ? ???????? ??????
+(???????? ??????? + ???????? ???????)2
+ 
 The fitness of each edge from node A can be calculated as: 
-2?? 2?? ? 2??
-? ?
-? = ? 
+??
+?? =  
+2 ? ?
+(2 ? ? + ?)2
 ?
-2 2
-(2?? +? ) (2?? +? ?? ?? ? 1)
+2 ? ? ? 2 ? ?
+(2 ? ? + ? ? ? ? ? ? 1)2
+ 
 , where ei stand for the fitness of edge connecting node A and node I, I is the total internal 
 degrees of sub-graph g, E is the total external degrees of sub-graph g, i is internal degree of 
 node I and e is the external degree of node i. 
 The LFM strategy for each target node consists of following steps: 
 a) Consider the target node and its neighbours as a sub-graph g and calculate the sub-graph 
-fitness ? 
-?
+fitness ??  
 b) Calculate the edge fitness for each edge of target node 
 c) Remove the edge with lowest fitness value 
 d) If no edge has negative fitness value, no edge will be removed 
@@ -1258,65 +1278,49 @@ Suppose node A will apply the LFM strategy (see Figure 13). Nodes in dark blue c
 neighbours of node A named from 1 to 6. They construct a sub-graph named g. The red lines are 
 external degrees of sub-graph g while green lines are the internal degrees. 
 Calculate fitness of sub-graph g (consist of node A and its neighbours, see Figure 13): 
+?? =
 22
-? = = 0.0215  
-?
-2
-(22+10)
-Yilei Bu, Internet Technologies with Security, 2012                                                      25 Behavioural changes and disease propagation in networks 
-ei
-Fitness for each neighbour: (f stand for the fitness of edge connecting node A and node i) 
-g
-22? 2? 4
-? 1
-? = 0.0215 ? = ?0.0009 
-?
-2
-(22 + 10? 2? 4? 1)
-22? 2? 3
-? 2
-? = 0.0215 ? = 0.001 
-?
-2
-(22 + 10? 3? 1)
-22? 2? 1
-? 3
-? = 0.0215 ? = ?0.004 
-?
-2
-(22 + 10? 2? 1? 1)
-22 ? 2? 2
-? 4
-? = 0.0215 ? = ?0.001 
-?
-2
-(22 + 10— 1? 2? 1)
-22? 2? 4
-? 5
-? = 0.0215 ? = ?0.0028 
-?
-2
-(22 + 10? 3? 4? 1)
-22? 2? 2
-? 6
-? = 0.0215 ? = ?0.00319 
-?
-2
-(22 + 10? 2? 2? 1)
-? 3
-? has the lowest fitness value, so the edge connecting node A and node 3 will be removed. 
-?
-Then go back to step a). Sub-graph fitness ? will become 0.0255 and the edge fitnesss of e1, 
-?
+(22+10)2
+= 0.0215  
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      26 
+Fitness for each neighbour: (fg
+ei  stand for the fitness of edge connecting node A and node i) 
+??
+?1 =  0.0215 ?
+22 ? 2 ? 4
+(22 + 10 ? 2 ? 4 ? 1)2
+= ?0.0009 
+??
+?2 =  0.0215 ?
+22 ? 2 ? 3
+(22 + 10 ? 3 ? 1)2
+= 0.001 
+??
+?3 =  0.0215 ?
+22 ? 2 ? 1
+(22 + 10 ? 2 ? 1 ? 1)2
+= ?0.004 
+??
+?4 =  0.0215 ?
+22 ? 2 ? 2
+(22 + 10— 1 ? 2 ? 1)2
+= ?0.001 
+??
+?5 =  0.0215 ?
+22 ? 2 ? 4
+(22 + 10 ? 3 ? 4 ? 1)2
+= ?0.0028 
+??
+?6 =  0.0215 ?
+22 ? 2 ? 2
+(22 + 10 ? 2 ? 2 ? 1)2
+= ?0.00319 
+??
+?3  has the lowest fitness value, so the edge connecting node A and node 3 will be removed. 
+Then go back to step a). Sub-graph fitness ??  will become 0.0255 and the edge fitnesss of e1, 
 e2, e4, e5 and e6 will be updated. If there is a negative value, we can continue remove the edge 
 of node A with lowest value. Otherwise on edge of node A will be removed any more. 
-1 
-6 
-A 
-2 
-5 
-3 
-4 
  
 Figure 13: An illustration of sub-graph start from node A 
 4) Local Modularity (denote as LM) 
@@ -1326,20 +1330,25 @@ by taking the boundary of C into consideration. Boundary B of C makes up of thos
 subset of C that have at least one neighbour in U. It is expected that community structure tends 
 to have sharp boundary with larger proportion of connections from boundary to local 
 community C and fewer to the unknown part U that is outside of community. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      26 Behavioural changes and disease propagation in networks 
- 
-Figure 14: An illustration of Local Modularity (source from [Clauset 2005]) 
+6 
+4 
+5 
+A 
+1 
+2 
+3 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      27 
  
 They measure a local community using local modularity R which is defined as [Clauset 2005]: 
- 
-? ? (? ,? ) ?
-? ? ? ?
-? = =   , 
- 
-? ?
-? ? ? ?
-Where ? is 1 if nodes I and j are connected and either node is in B and ? (? ,? ) is 1 when 
-? ?
+? =
+ ??? ?(?, ?)??
+ ?????
+=
+?
+?
+   , 
+Where ???  is 1 if nodes I and j are connected and either node is in B and ?(?, ?) is 1 when 
 either node i ? B and node j ? C or vice versa. T is the number of edges that with at least one 
 endpoint in B while I is the number of edges in T with no endpoint in U.  
 This local modularity R lies from 0 to 1. If R=1 it means that a complete community is found 
@@ -1349,59 +1358,68 @@ edges have high possibility to be intercommunity edges.
 Suppose node A will apply “Local Modularity” strategy. The steps can be described as follows: 
 a) Consider node A and its neighbours as local community C and find the B for C 
 b) Calculate R of local community C 
-c) For each neighbour i in B: Define ? is the number of external degrees of node i 
-?
-which connecting nodes in U, ? are defined as the number of internal degrees of 
-?
-node I that connecting nodes in C (except node A) and  ? ? ? ? ? is defined as the 
-nodes in C but not in B (except A) connecting node i and ? is defined as number of 
-?
+c) For each neighbour i in B: Define ??  is the number of external degrees of node i 
+which connecting nodes in U, ??  are defined as the number of internal degrees of 
+node I that connecting nodes in C (except node A) and  ???? ? is defined as the 
+nodes in C but not in B (except A) connecting node i and ??  is defined as number of 
 the degrees of node j connecting other nodes in C but not in B (include node A). e is 
+the number of edges that  ???? ? are connecting each other. 
+d) Calculate ∆?? = ? ?  
+?????1+ ????
+????1+ ????
  
-the number of edges that ? ? ? ? ? are connecting each other. 
-? ?? ?1+ ? ??
-? ?
-d) Calculate ∆? = ? ?  
-?
-? ?? ?1+ ? ??
-?
-e) Choose the edge from node A to node i that ∆? is lowest negative value. If there is 
-?
+e) Choose the edge from node A to node i that ∆??  is lowest negative value. If there is 
 no negative value, no edge of node A will be removed otherwise iterate from step a). 
 Here we give an example of calculation (see Figure 15): 
+? =
 6
-? = 
 12
-6 6? 2? 1 + 1? 0 6 4
-∆? = ? = ? = 0.055 
-1
-12 12? 3? 1 + 1? 0 12 9
-Yilei Bu, Internet Technologies with Security, 2012                                                      27 Behavioural changes and disease propagation in networks 
-6 6? 2? 1 + 1? 0 6 4
-∆? = ? = ? = 0.136 
-2
-12 12? 1? 1 + 1? 0 12 11
-6 6? 0? 1 + 0? 0 6 5
-∆? = ? = ? = ?0.055 
+ 
+∆?1 =
+6
+12
+?
+6 ? 2 ? 1 + 1 ? 0
+12 ? 3 ? 1 + 1 ? 0
+=
+6
+12
+?
 4
-12 12? 2? 1 + 0? 0 12 9
-Node 3 is in C not in B, so ignore it. Since ∆? is the lowest negative value, the edge from 
+9
+= 0.055 
+ 
+Figure 14: An illustration of Local Modularity (source from [Clauset 2005]) 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      28 
+∆?2 =
+6
+12
+?
+6 ? 2 ? 1 + 1 ? 0
+12 ? 1 ? 1 + 1 ? 0
+=
+6
+12
+?
 4
+11
+= 0.136 
+∆?4 =
+6
+12
+?
+6 ? 0 ? 1 + 0 ? 0
+12 ? 2 ? 1 + 0 ? 0
+=
+6
+12
+?
+5
+9
+= ?0.055 
+Node 3 is in C not in B, so ignore it. Since ∆?4  is the lowest negative value, the edge from 
 node A to node 4 will be removed. 
-2 
- 
-A 
- 
- 
-4 
- 
- 
-3 
-              B 
-   C 
-1 
-U 
- 
  
 Figure 15: An illustration of applying “Local Modularity” in node A. 
 5) High degree 
@@ -1432,7 +1450,22 @@ strategy to use in large network described in 2).
 probability flow of random walks on a network to reveal community structure. We firstly run 
 “InfoMap” strategy to find all communities and then regard all intercommunity edges as 
 candidate removal edges. The above two strategies are all global for they need the information 
-Yilei Bu, Internet Technologies with Security, 2012                                                      28 Behavioural changes and disease propagation in networks 
+ 
+ 
+ 
+ 
+              B 
+ 
+ 
+   C 
+2 
+A 
+3 
+1 
+4 
+U 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      29 
 of whole network. Although our edge removal strategies are only using local information, they 
 still can be compared with these two global ones when all nodes in the network apply local edge 
 removal strategies at same time. For time complexity reason, we use “global EdgeBetweenness” 
@@ -1451,49 +1484,58 @@ approach and averaged results from 150 runs for each possible combination on the
 networks and 300 times on real dataset. The disease starting node is chosen at random each run. 
 The input parameters of simulation are summarized in table 7 below: 
 Parameter name Explanation 
+Infection rate (?) 
 This is calculated according to specific network (Method has been 
 discussed in section 3.3.3). 
-Infection rate (? ) Each iterative step, for each neighbour of infected nodes, a random number 
+Each iterative step, for each neighbour of infected nodes, a random number 
 r in (0,1] is generated; If ? >= r, the neighbor become infected. 
-If n=0: SIR model;  
 Asymptomatic 
+infectious 
+duration (n) 
+If n=0: SIR model;  
 If n>0: SIIR model;  
-infectious When a node get infected, it will be in state asymptomatic I for n step and 
-duration (n) then become symptomatic I state. 
+When a node get infected, it will be in state asymptomatic I for n step and 
+then become symptomatic I state. 
+Recover rate (?) 
 All nodes in state symptomatic I take d steps (d=5? ?=0.2) to become state 
 R.  
-Recover rate (? ) If d? ∞(? = 0): SI model;  
+If d? ∞(? = 0): SI model;  
 Otherwise SIR or SIIR model. 
-All network (undirected and unweighted) data are stored in Pajek NET 
 Network data 
+All network (undirected and unweighted) data are stored in Pajek NET 
 format. 
-Maximum remove limit for each node; 
 Remove fraction 
 (denote as rf) 
-Define which strategy to use; 
+Maximum remove limit for each node; 
 Strategy number 
-Simulation will stop if reach maximum step or there is no node in state I 
+Define which strategy to use; 
 Maximum step 
+Simulation will stop if reach maximum step or there is no node in state I 
+Global step 
 -1:  All nodes become aware and apply strategy before disease start; 
 (-1, maximum step):  infected nodes apply strategy first and at global 
-Global step 
 step all nodes have not applied will apply strategy; 
 > Maximum step:  only aware nodes apply strategy. 
+Awareness spread 
+rate (?) 
 Infected nodes become aware; 
 Each iterative step, for each unaware neighbour of aware nodes, a random 
-Awareness spread 
 number r in (0,1] is generated, if ? > ? unaware neighbour become aware; 
-rate (? ) 
 w = 0: No awareness spread, only infected nodes become aware. 
 Table 7: Input parameters of simulation 
-Yilei Bu, Internet Technologies with Security, 2012                                                      29 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      30 
 4 Results and analysis 
 4.1 Behavioural changes happen before disease spread 
 4.1.1  Infection ratio analysis in different network structure 
-  
-(a) Random rf = 0.1 (b) Random rf = 0.2 
-  
-(c) Exponential rf = 0.1 (d) Exponential rf = 0.2 
+ 
+(a) Random rf = 0.1 
+ 
+(b) Random rf = 0.2 
+ 
+(c) Exponential rf = 0.1 
+ 
+(d) Exponential rf = 0.2 
 Figure 16: Ratio of infected nodes in SI model in Random and Exponential network with different 
 remove fraction (rf) 
 As can be seen in Figure 16, our five candidate local edge removal strategies are applied before 
@@ -1510,11 +1552,16 @@ spread with more edges being removed but still infects all nodes at last. For th
 their performances are just similar with random removal even when more edges are removed. 
 Therefore, it can be known that “Similarity” and “CC” can be more effective when each node 
 removes more edges. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      30 Behavioural changes and disease propagation in networks 
-  
-(a) Scale-free rf = 0.1 (b) Scale-free rf = 0.2 
-  
-(c) Community rf =0.1 (d) Community rf = 0.2 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      31 
+ 
+(a) Scale-free rf = 0.1 
+ 
+(b) Scale-free rf = 0.2 
+ 
+(c) Community rf =0.1 
+ 
+(d) Community rf = 0.2 
 Figure 17: Ratio of infected nodes in SI model in Scale-free and community network with different 
 remove fraction (rf) 
 Figure 17 has same compare structure as Figure 16 except that the test networks are replaced by 
@@ -1538,7 +1585,8 @@ better performance, we also study the effect of remove fraction further in the f
 4.1.2  Epidemic results on different remove fraction 
 In this part, we apply local edge removal strategies on four kind of networks using SIR model 
 as epidemic model to see how remove fraction can influence epidemic process. Firstly in the 
-Yilei Bu, Internet Technologies with Security, 2012                                                      31 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      32 
 random network as revealed by Figure 18 (a) and (c), when remove fraction is enhanced, 
 epidemic size and peak are decreased and disease will die out at 50% remove fraction. All 
 strategies have similar performance in disease control except “Local Modularity” and this is 
@@ -1550,10 +1598,14 @@ requirement in choosing candidate edges than others. With remove fraction increa
 strategies, the epidemic duration first ascends to be higher than no strategy situation and then 
 continues to decrease to be much lower than no strategy situation. Purposive removal does not 
 give improvement compared with completely random removal. 
-  
-(a) Epidemic size (b) Epidemic duration 
-  
-(c) Epidemic peak (d) Total removed edges 
+ 
+(a) Epidemic size 
+ 
+(b) Epidemic duration 
+ 
+(c) Epidemic peak 
+ 
+(d) Total removed edges 
 Figure 18: Random network in SIR model 
 The effect of remove fraction to epidemic size, peak, duration and total removed edges in 
 exponential network resembles that in random network. The main different is that each strategy 
@@ -1565,28 +1617,42 @@ much fewer edges. Therefore it is hard to say whether “Local Modularity” and “CC
 or good control in epidemic. Additionally, it seems that strategies leading to lower epidemic 
 size tend to have longer epidemic duration when remove fraction is not high enough, which is 
 revealed from (a) and (b) when remove fraction is between 0.3 and 0.4. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      32 Behavioural changes and disease propagation in networks 
-  
-(a) Epidemic size (b) Epidemic duration 
-  
-(c) Epidemic peak (d) Total removed edges 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      33 
+ 
+(a) Epidemic size 
+ 
+(b) Epidemic duration 
+ 
+(c) Epidemic peak 
+ 
+(d) Total removed edges 
 Figure 19: Exponential network in SIR model 
-  
-(a) Epidemic size (b) Epidemic duration 
-  
-(c) Epidemic peak (d) Total removed edges 
+ 
+(a) Epidemic size 
+ 
+(b) Epidemic duration 
+ 
+(c) Epidemic peak 
+ 
+(d) Total removed edges 
 Figure 20: Scale-free network in SIR model 
-Yilei Bu, Internet Technologies with Security, 2012                                                      33 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      34 
 When it comes to scale-free network (see Figure 20), the situation is quite similar with the one 
 in exponential network except that “Local Modularity” results in better epidemic control than 
 “CC”, “Similarity” and “Random” removal for removing much fewer edges. “LFM” and “High 
 degree” are still better than “Random” and “Similarity” since they remove same number of 
 edges but have lower epidemic size and peak. “Local Modularity” also deserves study for it is 
 the third best in disease control with fewest totally removed edges. 
-  
-(a) Epidemic size (b) Epidemic duration 
-  
-(c) Epidemic peak (d) Total removed edges 
+ 
+(a) Epidemic size 
+ 
+(b) Epidemic duration 
+ 
+(c) Epidemic peak 
+ 
+(d) Total removed edges 
 Figure 21: Community network in SIR model 
 As in section 4.1.1, when apply these local edge removal strategies in network with community 
 structure, some strategies present extremely good effects in disease control. From Figure 21 (a), 
@@ -1607,7 +1673,8 @@ remove fraction. When compare “Local Modularity” with “LFM” and “Similarity” in 
 (d), it can be seen that at 14% remove fraction, they lead to same epidemic size but “Local 
 Modularity” removes approximately twice fewer edges than the other two. When remove 
 fraction becomes 40%, although “LFM” and “Similarity” totally control the disease spread, 
-Yilei Bu, Internet Technologies with Security, 2012                                                      34 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      35 
 they remove six times edges as many as “Local Modularity”, which account for 60% of the total 
 edges in network. Obviously, the more edges are removed the better the disease can be 
 controlled since all nodes are isolated. So the reason that “LFM” and “Similarity” perform 
@@ -1633,19 +1700,33 @@ its excellent performance in community network.
 Similarity  259/859 180/650 155/542 169/1024 
 CC 261/859 * * * 
 LFM * * * 169/1024 
-* * * 109/1024 
-Local Modularity 
+Local Modularity * * * 109/1024 
 EdgeBetweenness 259/859 180/650 155/542 110/1024 
 Table 8:  Total removed edges/total edges for each strategy in different network from Figure 22 
 (a) to (d) 
-Local High Edge 
 Strategy Random Similarity CC LFM 
-Modularity degree Betweenness 
+Local 
+Modularity 
+High 
+degree 
+Edge 
+Betweenness 
 Total 
-3390 3372 3324 3362 1548 3348 25% 
 removed 
 edges 
-26% 25.8% 25.5% 25.7% 11.9% 25.7% 
+3390 
+26% 
+3372 
+25.8% 
+3324 
+25.5% 
+3362 
+25.7% 
+1548 
+11.9% 
+3348 
+25.7% 
+25% 
 Table 9: Total removed edges and percentage for each strategy in flight network 
 Table 8 shows the total removed edges for each strategy in different network from figure 20 (a) 
 to (d). Only best strategies in section 4.1.1 are listed and the “Global EdgeBetweenness” 
@@ -1653,13 +1734,20 @@ strategy is set to remove same number of edges as best local edge removal strate
 comparison. Table 9 is the detail of total removed edges for each strategy in flight network. 
 Since “Global EdgeBetweenness” is computing complexity demanding, we use the data from 
 [Marcelino and Kaiser 2009] to make a comparison. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      35 Behavioural changes and disease propagation in networks 
-  
-(a) Random network rf = 0.2 (b) Exponential network rf = 0.2 
-  
-(c) Scale-free network rf = 0.2 (d) Community network rf = 0.13 
-  
-(e) Flight network rf=0.15 (f)  Ratio of infected nodes versus sequential 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      36 
+ 
+(a) Random network rf = 0.2 
+ 
+(b) Exponential network rf = 0.2 
+ 
+(c) Scale-free network rf = 0.2 
+ 
+(d) Community network rf = 0.13 
+ 
+(e) Flight network rf=0.15 
+ 
+(f)  Ratio of infected nodes versus sequential 
 edge elimination by betweenness centrality, 
 Jaccard coefficient, and by hub removal. ( source 
 from [Marcelino and Kaiser 2009]) 
@@ -1673,7 +1761,8 @@ structure, it still can separate the network while local edge removal strategy s
 ability. However, in the community network (d), we can find that “Local Modularity” performs 
 as well as “EdgeBetweenness” with same number of removed edges. Although the local edge 
 removal strategy have higher final infection ratio, in the early stage of epidemic process in (a) 
-Yilei Bu, Internet Technologies with Security, 2012                                                      36 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      37 
 and (b), local strategies delay the infection better than the global one and this will be studied 
 further in flight network (see Figure 22 (e) ). 
 Figure 22 (e) is the testing results in real global flight network. Paper [Marcelino and Kaiser 
@@ -1687,10 +1776,14 @@ applying the same condition. The final infection ratio is more than 90% for “Edg
 in (e), which is same as “Similarity” in (f). This means that local edge removal strategy can 
 delay disease spread at least as well as “global edge betweenness” only using local information 
 and not be computationally as costly as “Edge betweenness”. 
-  
-(a) Random network (b) Exponential network 
-  
-(c) Scale-free network (d) Community network 
+ 
+(a) Random network 
+ 
+(b) Exponential network 
+ 
+(c) Scale-free network 
+ 
+(d) Community network 
 Figure 23: Compare with global EdgeBetweenness strategy using SIR model 
 Since local edge removal strategies show better delay functions than “Global 
 EdgeBetweenness” in early epidemic stage, we test them in SIR model further to see whether 
@@ -1704,27 +1797,28 @@ strategies while “EdgeBetweenness 2” remove as many as “Local Modularity” algori
 Similarly, in scale-free network, “EdgeBetweenness” is set to remove same amount as “LFM” 
 and similar amount with “Similarity” and “High degree”. “Similarity” and “EdgeBetweenness” 
 have equal total removed edges in exponential network, which is also same situation for “Local 
-Yilei Bu, Internet Technologies with Security, 2012                                                      37 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      38 
 Modularity” and “EdgeBetweenness” in community network. The detail of removed edges for 
 exponential and community networks can be found in Figure 19.d and Figure 20.d respectively. 
 Remove fraction: (%) 0.1 0.12 0.14 0.18 0.2 0.25 0.3 
+Random 
+ 
 Similarity 13.4 15.5 18.4 24.8 30.1 37.8 43.5 
 LFM 13.5 15.2 17.7 24.6 30.3 37.5 43.3 
-Random 
 EdgeBetweenness1 13.4 15.3 18 24.8 30.1 37.6 43.4 
- 
 Local Modularity 13.4 15.2 17.7 23.3 28 33.7 38 
 EdgeBetweenness2 13.4 15.2 17.7 23.3 28 33.7 38 
+Scale-free  
 Similarity  7.3 * 11.7 21.3 28.6 36 40.8 
 LFM 7.4 * 11.3 20.8 29.9 37.1 41 
-Scale-free  
 High degree 7.4 * 11.3 21.4 30.1 37 41.7 
 EdgeBetweenness 7.4 * 11.3 20.8 29.9 37.1 41 
-Similarity 10.61 12.61 15.28 22.3 27.69 * 40.62 
 Exponential 
+Similarity 10.61 12.61 15.28 22.3 27.69 * 40.62 
 EdgeBetweenness 10.61 12.61 15.28 22.3 27.69 * 40.62 
-Local Modularity 9.77 9.77 10.93 11 11.52 * * 
 Community 
+Local Modularity 9.77 9.77 10.93 11 11.52 * * 
 EdgeBetweenness 9.77 9.77 10.93 11 11.52 * * 
 Table 10: The percentage of total removed edges for different strategies in different network structure 
 in Figure 23. (show in %) 
@@ -1755,24 +1849,29 @@ these communities, the disease dies out extremely quickly. Although “Local Modul
 cannot perform as well as “InfoMap”, but at 25% remove fraction where they remove same 
 number of edges, the epidemic size for “Local Modularity” is also very low about 15%. When 
 it comes to “School” network (see Figure 24 (c) and (d)) which shows scale-free property, 
-Yilei Bu, Internet Technologies with Security, 2012                                                      38 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      39 
 “InfoMap” plays approximately four times better than local edge removal strategies at same 
 total removed edges (19% remove fraction). The performance of local edge removal strategies 
 seems incomparable because the strategy leads to low epidemic size also removes more edges. 
 The “school” network has low community strength since the intercommunity edges account 
 for 32% of total edges. So the performance of local edge removal strategies is similar with 
 that in theoretical scale-free network. (See Figure 20) 
-  
-(a) Epidemic size, “Blogs” network (b) Total removed edges, “Blogs” network 
-  
-(c) Epidemic size, “School” network (d) Total removed edges, “School” network 
+ 
+(a) Epidemic size, “Blogs” network 
+ 
+(b) Total removed edges, “Blogs” network 
+ 
+(c) Epidemic size, “School” network 
+ 
+(d) Total removed edges, “School” network 
 Figure 24: Compare Local Modularity with “InfoMap” in “Blogs” and “School” network 
 Secondly, we test it on real global flight network. Comparing “Local Modularity” with 
 “InfoMap” in SI model (see Figure 25 a and b), “InfoMap” keeps the infection ratio at around 
+30% when disease spreads on the 70
 th
-30% when disease spreads on the 70 day by removing lower than 15% edges while the best 
-th
-result of “Local Modularity” on 70 day is around four times worse by removing more than 17% 
+ day by removing lower than 15% edges while the best 
+result of “Local Modularity” on 70th day is around four times worse by removing more than 17% 
 edges. We can see that with the growth of remove fraction, the final number of infected nodes 
 firstly drop and then remain unchanged. This is because that the total removed edges reach an 
 upper limit when remove fraction is larger than 50% as shown in (b). Since “InfoMap” removes 
@@ -1782,11 +1881,16 @@ as that in “InfoMap” due to that the communities in network have not been totall
 There is no recover in SI model, so all nodes will be infected if the network is connected. We 
 just use SI model to test how well those strategies can isolate the communities. In order to 
 accord with realistic epidemic process, we continue to compare them in SIR model below. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      39 Behavioural changes and disease propagation in networks 
-  
-(a) Epidemic size in SI model (b) Total removed edges in SI model 
-  
-(c) Epidemic size in SIR model (d) Total removed edges in SIR model 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      40 
+ 
+(a) Epidemic size in SI model 
+ 
+(b) Total removed edges in SI model 
+ 
+(c) Epidemic size in SIR model 
+ 
+(d) Total removed edges in SIR model 
 Figure 25: Compare Local Modularity with “InfoMap” in flight network 
 As in (b), in (d) we also first run “InfoMap” to remove all intercommunity edges and get the 
 epidemic size in (c). When comparing “Local Modularity” with other local strategies, we can 
@@ -1811,10 +1915,13 @@ epidemic control as global strategies.
 In the previous experiments, we only consider that the whole population becomes aware before 
 epidemic is known (all strategies applied before disease start). Actually in real life, population 
 may make behavioural changes after disease prevalence, so in this section, we vary the time 
-Yilei Bu, Internet Technologies with Security, 2012                                                      40 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      41 
 when strategies are applied to make a contrast. 
-  
-(a) Epidemic size (b) Total removed edges 
+ 
+(a) Epidemic size 
+ 
+(b) Total removed edges 
 Figure 26: Community network in SIR model 
 As shown in Figure 26, the earlier the strategies are applied the lower the epidemic size will be 
 for “Similarity”, “LFM” and “Local Modularity” strategies, but it will also cause more edges to 
@@ -1824,8 +1931,10 @@ Therefore, it cannot conclude that it is better for epidemic control if all popu
 behavioural changes earlier, because more edges will be needed to remove also. 
 4.3 Behavioural changes happen during disease spread 
 4.3.1 Compare with strategies applied before epidemic process 
-  
-(a) Epidemic size (b) Total removed edges 
+ 
+(a) Epidemic size 
+ 
+(b) Total removed edges 
 Figure 27: Compare global and local in community network using SI model (Local Modularity denote 
 as LM) 
 After viewing the result in previous section, there is a strong possibility that local strategies 
@@ -1837,7 +1946,8 @@ However, when remove fraction increase, this superiority become descending and f
 get same performance at 20% remove fraction with local ones removing only half total 
 removed edges of the global ones. It can be seen that strategies applied globally perform better 
 in small remove fraction due to removing more edges and if remove fraction high enough, local 
-Yilei Bu, Internet Technologies with Security, 2012                                                      41 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      42 
 application can be equally effective with fewer edges removing. Although local application of 
 strategies need higher remove fraction to get same performance as global ones, the total 
 removed edges are not higher but even lower. So it seems that only individual in disease 
@@ -1847,17 +1957,20 @@ remove critical edges since disease may die out quickly if behavioural changes a
 enough. 
 4.3.2 Compare with local “SI link” strategy 
  
+(a) Epidemic size, random network 
  
+(b) Total remove rate, random network 
  
-(a) Epidemic size, random network (b) Total remove rate, random network 
 (c) Epidemic size, exponential network 
-  
  
-(d) Total removal, exponential network (e) Epidemic size, scale-free network 
+(d) Total removal, exponential network 
+ 
+(e) Epidemic size, scale-free network 
+ 
 (f) Total removal rate, scale-free network 
  
- 
 (g) Epidemic size, community network 
+ 
 (h) Total remove rate, community network 
 Figure 28: Compare with “SI link” in different network structure using SIR model 
 As knowing that local strategies applied with disease spread can be effective as well in previous 
@@ -1865,7 +1978,8 @@ experiments, we are going to compare it with the “SI link” strategy which is vie
 instinct to reduce contact with infected people and can only be applied if neighbours’ epidemic 
 states are revealed. 
 Firstly in random network as shown in Figure 28 (a) and (b), “SI link” has similar performance 
-Yilei Bu, Internet Technologies with Security, 2012                                                      42 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      43 
 with “High degree” strategy with similar number of total removed edges before 25% remove 
 fraction and much more removal than “High degree” from 25% to 40% remove fraction. 
 Secondly, in exponential network, “Local Modularity” is as effective as “High degree” and 
@@ -1907,14 +2021,21 @@ remove fraction to get same performance. “Local Modularity” was showed much bett
 Therefore, according to all above results, we could say that some of local edge remove 
 strategies are more effective than “SI link” because they are epidemic status independent and 
 focus on critical edges rather than infected nodes. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      43 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      44 
 4.4 The effect of awareness spreading 
-  
-(a) Epidemic size, n=0 (b) Total remove rate, n=0 
-  
-(c) Epidemic size, n=1 (d) Total remove rate, n=1 
-  
-(e) Epidemic size (f) Total remove rate 
+ 
+(a) Epidemic size, n=0 
+ 
+(b) Total remove rate, n=0 
+ 
+(c) Epidemic size, n=1 
+ 
+(d) Total remove rate, n=1 
+ 
+(e) Epidemic size 
+ 
+(f) Total remove rate 
 Figure 30: The effect of awareness spreading (using SIIR model), where n is the duration of 
 asymptomatic infectious state and w is the awareness spreading rate. 
 By far, we have tried all population become aware based on publicly available information 
@@ -1926,7 +2047,8 @@ individual takes behavioural changes not only by disease prevalence but also by 
 disease. So in this section, we set all infected nodes become aware and awareness will spread 
 simultaneously with disease spread. Once a node becomes aware, it will apply the edge removal 
 strategies. In section 4.3, we set that all infected nodes will first apply edge removal strategy 
-Yilei Bu, Internet Technologies with Security, 2012                                                      44 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      45 
 and then start infecting other nodes, which may not quite realistic in real life since some of 
 infections are asymptomatic. So we add an asymptomatic infectious state in SIR model and 
 nodes in this state will not become aware but still be infectious. 
@@ -1973,17 +2095,23 @@ We test “Local Modularity” on five exponential networks with different clusterin
 edges in different clustering coefficients and the results of epidemic size are also similar in 
 small remove fraction less than 30%. From 30% remove fraction to 50% remove fraction, 
 although the network with higher clustering coefficient tends to show smaller epidemic size, 
-Yilei Bu, Internet Technologies with Security, 2012                                                      45 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      46 
 the ability of epidemic control for “Local Modularity” is not proportional to clustering 
 coefficient since it performs better in clustering coefficient value of 0.3 than 0.4. So clustering 
 coefficient affect a little to the performance of local edge removal strategies. 
-  
-(a) Epidemic size (b) Percentage of total removed edges 
+ 
+(a) Epidemic size 
+ 
+(b) Percentage of total removed edges 
 Figure 31: Exponential networks in different clustering coefficient 
 4.5.2 Degree distribution 
-  
-(a) Community network, 250/508 high (b) Scale-free network, 250/499 high betweenness 
-betweenness edges edges 
+ 
+(a) Community network, 250/508 high 
+betweenness edges 
+ 
+(b) Scale-free network, 250/499 high betweenness 
+edges 
 Figure 32: Show the percentage of removed edges that are high betweenness edges in different remove 
 fractions. Scale-free and community network both with power law degree distribution 
 As observed in previous results, “Local Modularity”, “Similarity” and “LFM” prevents disease 
@@ -2000,7 +2128,8 @@ drops a little first and then increases a lot for “Similarity” and a little for 
 while for “LFM”, the increase becomes rapidly after 18% remove fraction. The drop is 
 because total removed edges increase a lot but the found critical edges only increase a little. 
 However, in scale-free network Figure 32 (b), although the rate of critical edges increases with 
-Yilei Bu, Internet Technologies with Security, 2012                                                      46 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      47 
 removing fraction, accuracy in it is always smaller than that in community network at each 
 remove fraction, especially at low remove fraction. To get the nearly 50% accuracy, the 
 strategies in scale-free network needs approximately three times remove fraction more than 
@@ -2027,7 +2156,8 @@ intercommunity edges. Figure 33 shows the community network with mu=0.1 before a
 applying the “Local Modularity” algorithm when remove fraction is 0.3. It can be found that 
 all intercommunity edges have been removed accurately so that epidemic could be kept only 
 in one community. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      47 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      48 
 5 Discussion 
 In this section, we will summarize the observed results and provide our most important 
 findings.  
@@ -2078,7 +2208,8 @@ easily than in other network structures. Additionally, we found that local edge 
 strategies performed best in network with community structure and the higher the community 
 strength, the easier to find intercommunity edges. “Local Modularity” performed well in 
 finding intercommunity edges was because of community structure rather than clustering 
-Yilei Bu, Internet Technologies with Security, 2012                                                      48 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      49 
 coefficient or power-law degree distribution.  
 Fourthly, our local edge removal strategies performed better than the strategy that randomly 
 removes edges to infected individuals in all kinds of networks especially community network,  
@@ -2126,7 +2257,8 @@ to slow down and control disease spreading efficiently in network with community
 and potentially other networks. The effect of behavioural change to epidemic is worth study 
 further since we have observed quite optimistic performances of local edge removal 
 strategies. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      49 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      50 
 6  Evaluation 
 The first objective of this project is to build a disease-behaviour model and simulate it. This 
 was completed by designing four types of behavioural change models and three types of 
@@ -2166,14 +2298,14 @@ practical significance. So the third objective can be considered success.
 The key contribution of our project is to build a new model to study behavioural changes and 
 explore a new direction to help epidemic control (find critical edges locally), which can be 
 used not only in epidemic studies but also in network theory studies. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      50 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      51 
 7 Future works 
 The good results of local edge removal strategies highlighted the potential further exploitation 
 in the study of behavioural changes. 
 7.1 Different spreading rate 
 For the simplicity, our experiment only set the transmission rate to be calculated under the 
-condition when the basic reproduction ratio R =3. Since different disease has different 
-0
+condition when the basic reproduction ratio R0 =3. Since different disease has different 
 epidemic parameter. Our project can be extended to study a particular disease or explore the 
 distribution under all kinds of epidemic possibilities. It is interesting to see the local edge 
 removal strategies’ performance under various circumstances. 
@@ -2201,9 +2333,10 @@ and actually contacts others in real life social network. The awareness can be g
 virtual network and the local edge removal strategies will be applied in real life network. 
 Then the behaviour-disease model will be more complex and thus more dynamic results will 
 be observed, which might be quite interesting. 
-Yilei Bu, Internet Technologies with Security, 2012                                                      51 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      52 
 8 References 
-[Bagnoli and Sguanci 2007]Bagnoli, F., Liò , P. and Sguanci, L., 2007. “Risk perception in 
+[Bagnoli and Sguanci 2007]Bagnoli, F., Liò, P. and Sguanci, L., 2007. “Risk perception in 
 epidemic modeling”, Phys. Rev. E76, 061904–7. (doi:10. 1103/PhysRevE.76.061904) 
 [Bailey 1975] N. T. J. Bailey, 1975.The Mathematical Theory of Infectious Diseases and its 
 Applications,Hafner Press, New York. 
@@ -2213,11 +2346,11 @@ Soc.Interface 4, 879-891. (doi:10.1098/rsif.2007.1100)
 [Bansal et al. 2009]Bansal, S., Khandelwal, S. and Meyers, L. A., 2009. “Exploring biological 
 network structure with clustered random networks”, BMC Bioinformatics 10, 405. 
 (doi:10.1186/1471-2105-10-405) 
-[Barabá si and Albert 1999] Barabá si, A.L. and Albert, R., 1999. “Emergence of scaling in 
+[Barabási and Albert 1999] Barabási, A.L. and Albert, R., 1999. “Emergence of scaling in 
 random networks”, Science286, 509-512. (doi:10.1126/science.286.5439.509) 
 [Batagelj and Brandes2005] Batagelj, V. and Brandes, U., 2005. “Efficient generation of large 
 random networks”, Pre.71 (3), 036113-+. 
-[Burgess et al. 2011] Simon Burgess, Eleanor Sanderson and Marcela Umañ a-Aponte, 2011. 
+[Burgess et al. 2011] Simon Burgess, Eleanor Sanderson and Marcela Umaña-Aponte, 2011. 
 “School ties: An analysis of homophily in an adolescent friendship network”, CMPO 
 Working Paper Series No. 11/267. 
 [Clauset 2005] Clauset, A., 2005. “Finding local community structure in networks”, Phys. Rev. 
@@ -2234,18 +2367,19 @@ awareness and its impact on epidemic outbreaks”, P. Natl. Acad. Sci. USA 106,
 [Funk et al. 2010] Funk, S., Gilad, E. and Jansen, V. A. A., 2010. “Endemic disease, 
 awareness, and local behavioural response”, J. Theor. Biol. 264, 501-509. 
 (doi:10.1016/j.jtbi.2010.02.032) 
-[Funk et al. 2010] Funk, S., Salathé , M. and Jansen, V. A. A., 2010. “Modelling the influence 
+[Funk et al. 2010] Funk, S., Salathé, M. and Jansen, V. A. A., 2010. “Modelling the influence 
 of human behaviour on the spread of infectious diseases: a review”, J. R. 
 Soc.Interface7, 1247-1256. (doi:10.1098/rsif.2010.0142) 
 [Girvan and Newman 2002]Girvan, M. and Newman, M. E. J., 2002. “Community structure in 
 social and biological networks”, P. Natl. Acad. Sci. USA99 (12), 7821-7826. 
  
-Yilei Bu, Internet Technologies with Security, 2012                                                      52 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      53 
 [Huang and Li 2007] Wei Huang and Chunguang Li., 2007. “Epidemic spreading in 
 scale-free networks with community structure”, J. Stat. Mech-Theory E. 
 (doi:10.1088/1742- 5468/2007/01/P01014) 
 [Jaccard 1901] Jaccard, P., 1901.“Étude comparative de la distribution floraledansune portion 
-des Alpes et des Jur”, Bulletin de la Socié té Vaudoise des Sciences Naturelles37, 
+des Alpes et des Jur”, Bulletin de la SociétéVaudoise des Sciences Naturelles37, 
 547-579. 
 [Kermack and McKendrick 1927] Kermack, W. O. and McKendrick, A. G., 1927. “A 
 contribution to the mathematical theory of epidemics”, Proc. R. Soc. Lond.A115, 
@@ -2269,7 +2403,7 @@ Phys.11,033015, cite arxiv:0802.1218 [physics.soc-ph]
 [Leon et al. 2011] Leon Danon, Ashley P. Ford, Thomas House, et al., 2011. “Networks and 
 the Epidemiology of Infectious Disease”, Interdiscip.Perspect. Infect.Dis., vol. 2011, 
 284909. (doi:10.1155/2011/284909) 
-[Marcelinoand Kaiser 2009] Marcelino J, Kaiser M., 2009. “Reducing inﬂuenza spreading 
+[Marcelinoand Kaiser 2009] Marcelino J, Kaiser M., 2009. “Reducing influenza spreading 
 over the airline network”, PLoS Currents Influenza.1, RRN1005. (doi: 
 10.1371/currents.RRN1005.) 
 [Marcelino and Kaiser 2012] Marcelino, J. and Kaiser, M., 2012. “Critical paths in a 
@@ -2283,14 +2417,15 @@ andBrunham, R. C., 2005. “Network theory and SARS: predicting outbreak diversity
 J. Theor. Biol.232, 71-81. (doi:10.1016/j.jtbi.2004.07.026) 
 [Newman 2002] Newman, M. E. J., 2002. “Spread of epidemic disease on networks”, Phys. 
 Rev. E 66, 016128. (doi:10.1103/PhysRevE.66.016128) 
-Yilei Bu, Internet Technologies with Security, 2012                                                      53 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      54 
  
 [Newman 2006] Newman, M. E. J., 2006. “Modularity and community structure in 
 networks”,  P. Natl. Acad. Sci.103 (23), 8577-8582. (doi:10.1073/pnas.0601602103) 
-[Salathé and Jones 2010] Salathé , M. and Jones, J. H., 2010. “Dynamics and Control of 
+[Salathé and Jones 2010] Salathé, M. and Jones, J. H., 2010. “Dynamics and Control of 
 Diseases in Networks with Community Structure”, PLoS Comput.Biol.6(4), e1000736. 
 (doi:10.1371/journal.pcbi.1000736) 
-[Salathé et al. 2010] Salathé , M., M. Kazandjieva, et al., 2010. “A high-resolution human 
+[Salathé et al. 2010] Salathé, M., M. Kazandjieva, et al., 2010. “A high-resolution human 
 contact network for infectious disease transmission”, P. Natl. Acad. Sci.107(51), 
 22020-22025. (doi:10.1073/pnas.1009094108) 
 [Shaw and Schwartz 2008] Shaw, L. B. and Schwartz, I. B., 2008. “Fluctuating epidemics on 
@@ -2303,7 +2438,8 @@ strategy for epidemic control”, Phys.Rev. E85(3), 036108. (doi:
 10.1103/PhysRevE.85.036108) 
 [Watts and Strogatz 1998] Watts, D. J. and Strogatz, S. H., 1998. “Collective dynamics of 
 “small-world” networks”, Nature 393, 440-442. (doi: 10.1038/30918) 
-Yilei Bu, Internet Technologies with Security, 2012                                                      54 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      55 
 9 Appendix: Source code 
 ? LFM strategy function 
 public void LFM(Graph<node, edge> g, node a)   
@@ -2329,10 +2465,10 @@ public void LFM(Graph<node, edge> g, node a)
   while(collection.hasNext()) 
   { 
        node n = collection.next(); 
-        if(neighbors.contains(n)) 
-        connection[i][0]++; 
+       if(neighbors.contains(n)) 
+       connection[i][0]++; 
        else 
-        connection[i][1]++; 
+       connection[i][1]++; 
    } 
    connection[i][1]--;// count for node a 
    connection[i][0]++ ;//count  for node a 
@@ -2361,7 +2497,8 @@ public void LFM(Graph<node, edge> g, node a)
   if(f_node > max) 
   { 
    remove =i; 
-Yilei Bu, Internet Technologies with Security, 2012                                                      55 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      56 
    max = f_node; 
   } 
  } 
@@ -2403,9 +2540,9 @@ public void Local_modularity(Graph<node, edge> g, node a)
   { 
        node n = collection.next(); 
        if(neighbors.contains(n)) 
-        connection[i][0]++; 
+       connection[i][0]++; 
        else 
-        connection[i][1]++; 
+       connection[i][1]++; 
    } 
    connection[i][1]--;//exclude edge to node a to get external degree 
  } 
@@ -2417,13 +2554,14 @@ public void Local_modularity(Graph<node, edge> g, node a)
  for(int i=0; i<total; i ++) 
  { 
 // only count those in B AND c, exclude the one in C but not in B 
-      if(connection[i][1]>0)    
-      { 
+     if(connection[i][1]>0)    
+     { 
    k++; 
    in =(double)connection[i][0] + in; 
    out =(double)connection[i][1] + out; 
   } 
-Yilei Bu, Internet Technologies with Security, 2012                                                      56 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      57 
   else 
   { 
    if(connection[i][0]>0) 
@@ -2441,7 +2579,7 @@ Yilei Bu, Internet Technologies with Security, 2012                             
   inner_connection[neighbors.indexOf(n_inner)]=1; 
   for(int y2=0;y2<c.size();y2++) 
   { 
-   if(y!=y2 && g.findEdge(n_inner, c.get(y2))!=null) 
+   if(y=y2 && g.findEdge(n_inner, c.get(y2))=null) 
    { 
     inner_connection[neighbors.indexOf(n_inner)]++; 
     delete++; 
@@ -2485,12 +2623,13 @@ double out2 = out-(double)connection[i][1] +
     } 
     //the edge between n_c has been added twice, reduce one time 
     delete=0; 
-Yilei Bu, Internet Technologies with Security, 2012                                                      57 Behavioural changes and disease propagation in networks 
+Behavioural changes and disease propagation in networks 
+Yilei Bu, Internet Technologies with Security, 2012                                                      58 
     for(node n : n_c) 
     { 
      for(node m : n_c) 
      { 
-      if(!n.equals(m)&&g.findEdge(n, m)!=null) 
+      if(n.equals(m)&&g.findEdge(n, m)=null) 
       { 
        delete++; 
       } 
@@ -2516,4 +2655,3 @@ Yilei Bu, Internet Technologies with Security, 2012                             
   removalEdges++; 
  } 
 } 
-Yilei Bu, Internet Technologies with Security, 2012                                                      58 

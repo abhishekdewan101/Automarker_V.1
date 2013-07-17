@@ -1,3 +1,4 @@
+w - 3 - 
 Abstract 
 This project has two main components, the first one is to create a 3D head pose 
 estimation software. This software is based on random regression forest, which was 
@@ -21,8 +22,8 @@ which is provided by Kinect for Windows SDK, see Section 5.1.3.
 ? I created a method to help estimating the head pose by comparing 
 the positional relationship between head and shoulder centre, see 
 page 46-47. 
- 
-- 3 - Contents 
+ - 5 - 
+Contents 
 1. Introduction .................................................................................................... - 7 - 
 1.1. Aims and Objectives ............................................................................. - 7 - 
 1.1.1. Implementation Objectives ......................................................... - 7 - 
@@ -42,11 +43,12 @@ page 46-47.
 3.5. Expanding .......................................................................................... - 28 - 
 3.5.1. Moving People ......................................................................... - 30 - 
 3.5.2. More People ............................................................................. - 31 - 
+4. Summary of 3
 rd
-4. Summary of 3 Party Hardware/Software ..................................................... - 33 - 
+ Party Hardware/Software ..................................................... - 33 - 
 5. Implementation and Results .......................................................................... - 35 - 
- 
-- 5 - 5.1. Implementation .................................................................................. - 35 - 
+ - 6 - 
+5.1. Implementation .................................................................................. - 35 - 
 5.1.1. Training .................................................................................... - 36 - 
 5.1.2. Testing and Cross Validation .................................................... - 46 - 
 5.1.3. Expanding ................................................................................ - 48 - 
@@ -67,8 +69,8 @@ rd
 6.2.2. Moving People ......................................................................... - 58 - 
 7. Reference ..................................................................................................... - 59 - 
  
- 
-- 6 - 1. Introduction 
+ - 7 - 
+1. Introduction 
 1.1. Aims and Objectives 
 The objective of this project is to use fast and accurate estimators that are able to do a 
 regression on the 3D data, to estimate the orientation in space of people's head. 
@@ -96,17 +98,17 @@ head pose estimation will be introduced. The research of Gabriele et al., Random
 Regression Forest, will also be explained in this section as a typical example of 3D 
 image-based head pose estimation algorithm. The next section will describe the 
 technic basis of this project, as well as several alternative methods, and how they are 
-rd 
 chosen or abandoned during implementation. In Section 4, I will introduce the 3
+rd 
 party hardware and software that are used in this project, including their technical 
- 
-- 7 - basis and function. How this project is realized, as well as the result of it, will be 
+ - 8 - 
+basis and function. How this project is realized, as well as the result of it, will be 
 discussed in Section 5. The testing results of the alternative methods that I mentioned 
 in Section 3, and the comparison between each method will also be listed and 
 discussed in Section 5. Finally, the result of my project and future work will be fully 
 discussed in Section 6. 
- 
-- 8 - 2. Background 
+ - 9 - 
+2. Background 
 Human behaviour analysis techniques, which is considered to be the most popular 
 issue in the field of pattern recognition and computer vision research, had kept 
 offering new services and improving human life in the last decades. Estimating the 
@@ -132,8 +134,8 @@ angles from three directions in the space accurately [1].
 A common algorithm uses the Gaussian filter template to process images to get the 
 gray value of every pixel, and then pupils and nose can be localized using Hough 
 Transform [4]. After getting the coordinates of eyes and nose, we can calculate the 
- 
-- 9 - middle point of two eyes and connect this point to nose tip (Figure 2.2) to build 
+ - 10 - 
+middle point of two eyes and connect this point to nose tip (Figure 2.2) to build 
 different models for this issue. The simplest one is to use the angle between target 
 vector and eyes and nose. Certainly, some other methods can be used here too. No 
 matter which method would be used, the data that after preprocess can be used as 
@@ -154,8 +156,8 @@ photoelectric conversion and quantification. Therefore, such an image contains n
 only essential factors of the face, but also external factors (i.e. illumination). Since 
 most of the 2D image-processing methods are based upon color, lights from different 
 directions and lights in different intensities might cause the changing of contrast of 
- 
-- 10 - the image, leading to the difference of color extraction. 
+ - 11 - 
+the image, leading to the difference of color extraction. 
 In addition, it will be a devastating problem if the head is covered by another object in 
 practical situations. For instance, motion-sensing games often have multiple players 
 simultaneously. Limited space and large movements make it inevitable that some 
@@ -189,8 +191,8 @@ capability to handle large training datasets, high generalization power, fast
 computation, and ease of implementation. Recent works showed the power of random 
 forests in mapping image features to votes in a generalized Hough space [8] or to 
 real-valued functions [7, 9]. Recently, multiclass random forests have been proposed 
- 
-- 11 - in [9] for real-time head pose recognition from 2D video data. The approach that uses 
+ - 12 - 
+in [9] for real-time head pose recognition from 2D video data. The approach that uses 
 random regression forests for the task of head pose estimation from range data has 
 also been presented lately. 
 Gabriele et al. [2] used random regression forest to compute head pose by jointly 
@@ -222,8 +224,8 @@ Figure 2.3. A training image [5].
 The blue bounding box enclosing the head species 
 where to sample positive (green - inside) and 
 negative patches (red - outside) [5]. 
+ - 13 - 
  
-- 12 -  
 Figure 2.4. Example of regression forest. Image 
 from [2]. 
  For each tree, the tests at the non-leaf nodes direct an 
@@ -237,39 +239,35 @@ the head has been detected in the image and setting up the training examples wit
 range images of faces annotated with 3D nose location and head rotation angles. Also, 
 they set up one to four feature channels, i.e., depth values and the X, Y and Z values 
 of the geometric normals computed over neighboring, non-border pixels [2]. 
+Parameter Patches {Pi = (I
 f
-Parameter Patches {P = (I , ? )} was introduced by random sampling from the 
-i i i
-f
-training examples that acts as a element to construct trees ( ?) in the forest [2]. I are 
-i
-the extracted visual features for a fix-sized patch, and the real-valued vector ? 
-i
-contains the pose parameters associated to each patch, i.e., the ? , ? , ? represent an 
-x y z
+i, ?i)} was introduced by random sampling from the 
+training examples that acts as a element to construct trees (? ) in the forest [2]. Ifi are 
+the extracted visual features for a fix-sized patch, and the real-valued vector ?i 
+contains the pose parameters associated to each patch, i.e., the ?x, ?y, ?z represent an 
 offset vector from the center point of the training patch in the range image, to the nose 
-position in 3D, while the ? , ? , and ? represent the head rotation angles 
-yaw patch roll
+position in 3D, while the ?yaw, ?patch, and ?roll represent the head rotation angles 
 denoting the head orientation [2]. 
 A Binary test will be randomly generated from a set of possible tests at each non-leaf 
-node, which is defined as t (I): 
-f, F1, F2, ? 
-?? 11
-ff
-F I q?? F I q ? ,
+node, which is defined as tf, F1, F2, ? (I): 
 ? ? ? ?
-12??
- 
-q?? F q F
-12
-f
-where I indicates the feature channel, F and F are two rectangles within the patch 
 1 2
+1 1
+1 2 ,
+f f
+q F q F
+F I q F I q ?
+? ?
+? ?
+? ?? ?  
+where I
+f
+ indicates the feature channel, F1 and F2 are two rectangles within the patch 
 boundaries, and ? is a threshold [2]. 
 Thus, when a patch satisfies the test, it will be passed to the right child while it can be 
 directed to the left child if not. The difference between the two average values of 
- 
-- 13 - rectangular spaces is chosen to estimate the head pose in order to reduce the 
+ - 14 - 
+rectangular spaces is chosen to estimate the head pose in order to reduce the 
 sensitivity to the nose tip [2]. This is shown in Figure 2.5. 
  
 Figure 2.5. Example of a training patch. Image 
@@ -280,54 +278,49 @@ falling at the patch’s centre (red dot) and the ground
 truth location of the nose (marked in green). The 
 rectangles F1 and F2 represent a possible choice for 
 the regions over which to compute a binary test [2]. 
+The values of f, F1, F2 and ? are randomly generated from a pool of binary tests {t
 k
-The values of f, F , F and ? are randomly generated from a pool of binary tests {t } 
-1 2
+} 
 at each non-leaf node, thus when the patches arrive at the node, they can be evaluated 
 by all binary tests in the pool and the test maximizing a predefined measure will be 
 assigned to the node. Furthermore, they optimize the trees by maximizing the 
 information gain, which is defined as the difference between the differential entropy 
 of the set of patches at the parent node P and the weighted sum of differential 
-entropies at the left and right node P and P [2]. 
-L R 
-IG ? H ( p) ? (w H ( p ) ? w H ( p )),
- 
-L L R R
-Where P is the set of patches reaching node I and WI is the ratio between the 
-?
-i {L, R}
-number of patches in i and in its parent node, i.e., w = |P | / |P|. 
-i i
+entropies at the left and right node PL and PR [2]. 
+( ) ( ( ) ( )),L L R RIG H p w H p w H p? ? ?  
+Where Pi? {L, R} is the set of patches reaching node I and WI is the ratio between the 
+number of patches in i and in its parent node, i.e., wi = |Pi| / |P|. 
 The vectors ? at each node are modelled as realizations of a random variable with a 
 multivariate Gaussian distribution, which lead to the equation [2]: 
-IG?? log ( p) w log ( p ) ,
- 
-? ? ?
-i i i
-i ? L,R
-? ?
+? ?,
+log ( ) log ( ) ,i i i
+i L R
+IG p w p
+?
+? ?? ? ?  
 This decreases the uncertainty of the output parameters cast by each set of patches 
 due to the minimizing the determinant of the covariance matrix ∑. Then, the authors 
- 
-- 14 - v
-?? 0
-?
-assume the matrix is block-diagonal ? , which allows covariance 
-??
-?
-a
-??
+ - 15 - 
+assume the matrix is block-diagonal 
 0
+0
+v
+a
+? ?
+? ? ?? ?
+? ?
 ?
-??
-v a
-among offset vectors ( ∑ ) and among head rotation angles ( ∑ ), rather than between 
+?
+?
+, which allows covariance 
+among offset vectors (∑v) and among head rotation angles (∑a), rather than between 
 them, and the equation above can be written as: 
-v a v a
-IG ? log( ? ) ? w log( ? ), 
-? ? ? ? ?
-i i i
-i ?{L,R}
+{ , }
+log( ) log( ),v a v ai i i
+i L R
+IG w
+?
+? ? ? ?? ? ? ? ?  
 The leaf node is introduced to store the mean value of all angles and offset vectors reached it, 
 together with their covariance to create a multivariate Gaussian distribution [2]. 
 Testing 
@@ -338,8 +331,7 @@ evaluated by the stored binary test and sent either to the right or left child, 
 reach the leaf l while giving estimates for the pose parameters [2]. 
 In order to reduce the noise of the estimation generated by less informative leaves 
 with high variance, the researchers discard all Gaussians whose total variance are 
-greater than an empiric threshold max . Also, they locate the nose position before 
-v
+greater than an empiric threshold maxv. Also, they locate the nose position before 
 computing other parameters to remove outliers. A 10 mean-shift [10] iterations is 
 carried out using a spherical kernel and only random variables with means falling 
 within the mean shift kernel are kept. The radius of the kernel is defined as a fraction 
@@ -356,18 +348,18 @@ the measure of uncertainty extent for the estimate. This can be simply explained
 Figure 2.6, where the blue spheres are all votes cast by the forest, while the green 
 ones are all votes selected after mean-shift. The green cylinder represents the final 
 estimate of the nose position and head orientation. 
+ - 16 - 
  
-- 15 -  
 Figure 2.6. One example of testing image. Image from [2]. 
 The green spheres are the ones selected after the filtering of 
 the outliers (blue spheres) by mean shift. The large green 
 cylinder stretches from the final estimate of the nose center in 
 the estimated face direction. 
- 
-- 16 - 3. Technical Basis 
+ - 17 - 
+3. Technical Basis 
 The primary focus of this project is the head pose estimation algorithm, while 
 additional vital components of the proposed program will be considered too. The 
-program process can be divided into five clearly defined stages ? which are executed in 
+program process can be divided into five clearly defined stages?which are executed in 
 the following order: 
 1. Data capture: 
     Collect images of people with their heads in different 
@@ -394,8 +386,8 @@ The project was implemented with the 3D camera Kinect, which is a programmable
 sensor and multi-array microphone running proprietary software", which renders 
 Kinect with the capabilities of full-body 3D motion capture, facial recognition and 
 voice recognition [10]. The protagonist of this project is the depth sensor. It utilizes 
- 
-- 17 - the Light Coding technology to encode the testing space with continuous light that 
+ - 18 - 
+the Light Coding technology to encode the testing space with continuous light that 
 could be read by the sensor and calculated, decoded by a chip sequentially, and finally 
 produces a depth image. Figure 3.1 (a) shows the Kinect sensor, 3.1 (b) shows Light 
 Coding technology. 
@@ -415,8 +407,8 @@ is the distance between the depth sensor and the testing object, by using bit co
 (shift the data to the right by three). 
  
  
+ - 19 - 
  
-- 18 -  
 Figure 3.2. The structure of depth data. 
 It shows the structure of depth data, only the first 13 
 bits are Depth Bits and the last 3 are Player Index. 
@@ -446,8 +438,8 @@ to the point cloud [15]. This process resulted in a template representing the sh
 the head, which is called the personalized templates, and thanks to such ICP-based 
 head tracking technology, which made it possible to estimate head pose for each 
 frame. Figure 3.3 shows the face tracking processes. 
+ - 20 - 
  
-- 19 -  
 Figure 3.3. Training data based on template. Image 
 from [5]. 
 Automatic pose labelling: A user turns the head in front of 
@@ -481,8 +473,8 @@ specified pixels and this color value represents the depth attribute. Although t
 method saves time in the follow-up work and reduces the size of the database, I found 
 it could not be adopted in this project after several tests. The reason and the 
 experiment detail will be described in Section 5.1. 
+ - 21 - 
  
-- 20 -  
 Figure 3.4. A training image. 
 One training data uses method i). The too far away 
 distance and the too close distance are filtered out. 
@@ -496,10 +488,10 @@ or about 15 hours when the training data contained 6 orientations and 500 images
 each. The technical basis of this part will be described in detail below. 
 In Gabriele Fanelli’s research, the first step in their program is to build up the forest. 
 In their work, the authors gave a patch to each tree and randomly selected two 
-rectangular areas (F and F , named feature zones below), and as they described, “at 
-1 2
+rectangular areas (F1 and F2, named feature zones below), and as they described, “at 
+each non-leaf node, a pool of binary tests {t
 k
-each non-leaf node, a pool of binary tests {t } is generated with random values for f, 
+} is generated with random values for f, 
 F1, F2, and ?”[2]. Thus, each patch would be evaluated by all binary tests in this pool 
 when it arrived at the non-leaf node, and then, information attached to the node would 
 be selected by the authors, according to how they wanted to build the non-leaf nodes. 
@@ -509,16 +501,18 @@ time, which I could not afford in my project. The alternative method implemented
 this project let all of the training data go into a node and subsequently calculate a 
 value by the left side of the inequality listed below, which is mentioned in Section 
 1.1.3, and will also be used in the following steps. 
-?? 11
-ff
-F I q?? F I q ? ,
 ? ? ? ?
-??
-12 
-q?? F q F
-12
- 
-- 21 - The threshold of this node would be set as the mean value of all ?s. Same process 
+1 2
+1 1
+1 2 ,
+f f
+q F q F
+F I q F I q ?
+? ?
+? ?
+? ?? ?  
+ - 22 - 
+The threshold of this node would be set as the mean value of all ?s. Same process 
 would be applied to all non-leaf nodes. There are two reasons why I renounced 
 Gabriele Fanelli’s method. Firstly, the method I used in this project allowed each 
 non-leaf node to be calculated by the equation listed above for only n+1 times 
@@ -544,8 +538,7 @@ files described above. Because there is a mapping between
 depth and color, I just summed up the blue value (because 
 when the color of a RGB pixel is grey, the red, green and 
 blue value will be equivalent) of each pixel in feature zones 
-F and F . This formula is the simplest one and takes the 
-1 2
+F1 and F2. This formula is the simplest one and takes the 
 shortest calculation time. However, this formula only 
 contains one feature, i.e. the depth value, and does not use a 
 reference point. 
@@ -559,8 +552,8 @@ the calculation more specific, since the reference point
 associate the calculation results with the head position. 
 iii) Both of the formulas described above are based on images, 
 but file data was preferred due to several defects of the image 
- 
-- 22 - data. Also, this formula was improved by introducing a new 
+ - 23 - 
+data. Also, this formula was improved by introducing a new 
 technology that supports the tracking of many human body 
 parts, including head, and will be described in detail in 
 Section 3.5. Since the head zone moves with the head 
@@ -586,8 +579,7 @@ average of all the pixels. So the ? value would be the sum of
 the difference between each pixel in the two feature zones 
 and the reference point, divided by the number of the pixels. 
 v) The last formula is also based on file data, but an extra 
-feature channel, the position of F and F is added, in order 
-1 2,
+feature channel, the position of F1 and F2, is added, in order 
 to confer higher specificity to the eigenvalue of each pixel in 
 the feature zones. Then the ? value can be calculated as: the 
 difference between each pixel in the two feature zones and 
@@ -600,8 +592,8 @@ the work done above to build leaf nodes. Figure 3.5 shows the training process. 
 one training data enters the root node, it will be directed into left or right child node 
 by the calculated ? value, and finally arrives at a leaf node. Then the orientation of this 
 training data will be added to the corresponding array in this leaf. The information 
- 
-- 23 - attached to these leaf nodes is statistical result of different orientations from the 
+ - 24 - 
+attached to these leaf nodes is statistical result of different orientations from the 
 training data, and I have tried two alternative methods to save such information, 
 which are listed below.  
  
@@ -628,8 +620,8 @@ may mislead the final result.
 ii) The second method saves the statistical distribution of every 
 orientation in one leaf node, so that we can calculate the 
 proportion of each orientation in the leaf node at which the 
- 
-- 24 - testing data arrives. Although this method solves the problem 
+ - 25 - 
+testing data arrives. Although this method solves the problem 
 brought about by method i), the final results may still be 
 confused if there are some trees not sensitive to some 
 orientations and some trees are not sensitive to some other 
@@ -650,7 +642,7 @@ Kinect for Windows SDK, there are three events can be registered for different k
 images, they are ColorFrameReady(), DepthFrameReady() and 
 SkeletonFrameReady(). In addition, AllFramesReady() can monitor multiple image 
 events at the same time. Once the camera generates a frame, the event will be 
-triggered ?and the trigger frequency of these events is 30 frames per second, since the 
+triggered?and the trigger frequency of these events is 30 frames per second, since the 
 Kinect camera can create 30 frames per second. 
 Estimating the orientation of an image requires this image to go through all the trained 
 trees. Due to the trigger frequency of the event, the whole-forest calculation of this 
@@ -664,8 +656,8 @@ from testing, which requires training data to traverse all the trees. This means
 training data enter one node to calculate the ? value one by one, and each training data 
 needs to go through all of the nodes in the whole forest. Figure 3.6 illustrates the 
 difference between training and testing.  
- 
-- 25 -   
+ - 26 - 
+  
              (a). Training.                         (b). Testing. 
 Figure 3.6 Process of training and testing. 
 It shows the difference between training and testing. The data 
@@ -695,8 +687,8 @@ number of layer increases by 1, the number of leaf nodes
 would become 16 and this tree therefore can classify 16 
 orientations. Nevertheless, time limitation will be 
 another factor that must be taken into consideration. 
- 
-- 26 - ii) Increase training data. There are two ways to increase 
+ - 27 - 
+ii) Increase training data. There are two ways to increase 
 training data. The first one is to increase the number of 
 training data. The low quality of Kinect device manifests 
 as that even for static objects, the depth value keeps 
@@ -724,17 +716,13 @@ the equation, the breadth of the trees will increase.
 Figure 3.7 shows the change 
  
 Figure 3.7. Multiple thresholds. 
-There are two ? values, ? and ? , the four children are 
-1 2
-greater than ? and greater than ? , greater than ? and 
-1 2 1
-smaller than ? , smaller than ? and greater than ? and 
-2 1 2
-smaller than ? and smaller than ? respectively. 
-1 2
+There are two ? values, ?1 and ?2, the four children are 
+greater than ?1 and greater than ?2, greater than ?1 and 
+smaller than ?2, smaller than ?1 and greater than ?2 and 
+smaller than ?1 and smaller than ?2 respectively. 
 iv) Use skeleton. This method uses the SkeletonFrame in 
- 
-- 27 - Kinect for Windows SDK to monitor the positional 
+ - 28 - 
+Kinect for Windows SDK to monitor the positional 
 relationship between head and shoulders during head 
 pose estimation. The SDK provides API to track 20 
 joints, including head, shoulders and many other parts of 
@@ -761,8 +749,8 @@ of two or more heads.
 I would like to introduce the Skeleton Tracking provided by Kinect for Windows SDK 
 before introducing the two ideas above, since this technic will be used in both of 
 them. 
- 
-- 28 - Since there are functional deficiencies in the depth data returned by Kinect, and much 
+ - 29 - 
+Since there are functional deficiencies in the depth data returned by Kinect, and much 
 needs to be done other than depth data in order to achieve human-computer 
 interaction and produce attractive applications, the Skeleton Tracking has been 
 introduced as the core technology of Kinect. Thanks to this technology which leads to 
@@ -783,8 +771,8 @@ Figure 3.9 (b). Skeleton sample.
 It shows a human skeleton that is tracked by a sample 
 program provided by Kinect Developer Toolkit Browser 
 v1.5.1. 
- 
-- 29 - Skeleton Tracking can localize the position of people’s head and shoulders, which can 
+ - 30 - 
+Skeleton Tracking can localize the position of people’s head and shoulders, which can 
 be used to track head orientation and to increase the accuracy (use the positional 
 relationship between head and shoulders that I described above). In addition, Skeleton 
 Tracking is able to track two people at the same time, and this can be used for 
@@ -799,8 +787,7 @@ where the head is before we can process the head image. ii) Set the feature valu
 proportional to the distance, due to that if the head is close to the camera, the head 
 would be a big one in the image, while if the head moves away from the camera, it 
 would gradually become smaller. Thus it must be ensured that the size of head zone 
-changes with the head and the F and F change with the head zone. iii) Use the 
-1 2
+changes with the head and the F1 and F2 change with the head zone. iii) Use the 
 Skeleton Tracking to increase the accuracy, which will be described in Section 5. 
 Head tracking is the foundation of tracking moving people, it is because that data 
 calculations and processing is largely depend on knowing where the head is. By now, 
@@ -823,8 +810,8 @@ affected by illumination. Although merging the depth
 frame to the color frame is an advisable way to avoid 
 the drawbacks of both methods, it will be a complex 
 work that needs huge time to process. 
- 
-- 30 - ii) The most obvious disadvantage of Skeleton tracking 
+ - 31 - 
+ii) The most obvious disadvantage of Skeleton tracking 
 method is that, the scope of detection is rather small, 
 especially for objects that are close to the Kinect 
 camera, the depth value that Kinect returns would be -1, 
@@ -855,8 +842,8 @@ recognizing 6 people at most and tracking 2 people at the same time [20]. Figure
 shows skeleton of two people are tracked by Kinect. The two head points can be used 
 to track the corresponding two heads simultaneously, and then we can calculate the 
 feature value and do other processes for the two head zone respectively. 
- 
-- 31 -        
+ - 32 - 
+       
 (a). recognizing 6 people and tracking 2.     (b). tracking two people in an application. 
 Figure 3.10 (a) shows how Skeleton Tracking works with 
 multiple people, 3.10 (b) shows two people’s skeletons are 
@@ -868,9 +855,8 @@ All above in this section are the technic basis of this project and some alterna
 methods can be used in this project. The main purpose of this section is to describe 
 how the algorithm I used works, the implementation of each part will be discussed in 
 detail in Section 5. 
- 
-- 32 - rd
-4. Summary of 3 Party Hardware/Software 
+ - 33 - 
+4. Summary of 3rd Party Hardware/Software 
 1. XBOX 360 Kinect sensor. 
 * RGB VGA Camera with resolution of 640*480. 
 * IR depth sensor. 
@@ -894,16 +880,16 @@ Windows SDK, e.g. Face Tracking SDK.
 4. Coding4Fun Kinect Toolkit. 
 * http://c4fkinect.codeplex.com/. 
 * It provides several methods for programs on WPF and WinForm to 
- 
-- 33 - simplify the developing. 
+ - 34 - 
+simplify the developing. 
 5. Emgu CV 
 * http://file.emgu.com/wiki/index.php/Main_Page. 
 * Emgu CV is a cross platform .Net wrapper to the OpenCV image 
 processing library [22]. 
 * Emgu CV provides many image processing methods, image format 
 conversion methods are frequently used in this project. 
- 
-- 34 - 5. Implementation and Results 
+ - 35 - 
+5. Implementation and Results 
 5.1. Implementation 
 The technic basis, main method and the alternative methods in each part of this 
 project has been described in Section 3. The sequence of these methods is the 
@@ -915,8 +901,8 @@ manual intervention, the two places are: i) after building the whole forest, bef
 testing. ii) before the cross validation. Figure 5.1 shows the flow charts of the 3 parts. 
 In this section I will introduce all parts of them by execution order, i.e. training, 
 testing, and finally cross validation. 
+ - 36 - 
  
-- 35 -  
 Figure 5.1. Program flow chart. 
 The program is divided into 3 parts by time. First step is to 
 train the forest by training set. Second one is to estimate 
@@ -933,8 +919,8 @@ pre-selected position for testing people. I made some tags in this room and each
 represented a specific orientation. Thus, a correct head orientation was guaranteed 
 when a person was sitting on the chair and facing to a tag. Figure 5.2 shows the 
 position of the camera, the chair and 3 tags. 
+ - 37 - 
  
-- 36 -  
 Figure 5.2. Work environment. 
 This figure shows the room where the project was worked. 
 The three red circles are the position of three tags, as they 
@@ -950,8 +936,8 @@ degrees, “0” means frontal face. Figure 5.3 shows the 6 orientations in color im
    
 Figure 5.3. 6 Training orientations. 
 The images are: “ur45” (upper left), “br45” (lower left), “u0” 
- 
-- 37 - (middle and upper), “b0” (middle and lower), “ul45” (upper 
+ - 38 - 
+(middle and upper), “b0” (middle and lower), “ul45” (upper 
 right), “bl45” (lower right). 
 The size of the training set is determined by the balance between the training time and 
 accuracy, as I described in Section 3.2. 
@@ -973,23 +959,34 @@ gray levels.
 I have evaluated two methods for data storage in Section 3, i.e. saving RGB images 
 and saving depth value in files. Table 5.1 shows the comparison between these two 
 methods. 
+ - 39 - 
  
-- 38 -  
 Table 5.1 Comparison between saving images and files. 
  Saving RGB images. Saving depth value in 
 files. 
-Size of training 6 orientations and 6 orientations and 500 
-data. 500 images for each depth value files for 
-orientation. each orientation. 
+Size of training 
+data. 
+6 orientations and 
+500 images for each 
+orientation. 
+6 orientations and 500 
+depth value files for 
+each orientation. 
 Storage space. About 7.5 Mb About 170 Mb 
-Time for 2 ~ 3 hours 17 ~ 20 hours 
+Time for 
 calculating ?s. 
-Time for build About 10 minutes About 1 hour 
+2 ~ 3 hours 17 ~ 20 hours 
+Time for build 
 leaf nodes. 
-Testing result. Obviously inaccurate Estimation is not stable 
-in real-time testing, in real-time but almost 
-almost can not accurate, high 
-estimate. correctness in cross 
+About 10 minutes About 1 hour 
+Testing result. Obviously inaccurate 
+in real-time testing, 
+almost can not 
+estimate. 
+Estimation is not stable 
+in real-time but almost 
+accurate, high 
+correctness in cross 
 validation. 
 According to this table, the two methods used training sets with the same size, used 
 the same equation to calculate ?s and build lead nodes, while the time and storage 
@@ -1011,8 +1008,8 @@ drawing rectangles. The disadvantage of this solution is
 that testing people will not know where the head zone is. 
 ii) The image changes slightly when being saved or being 
 read. To exam this assumption, I saved the images and 
- 
-- 39 - then read it immediately, thus there will be no operation 
+ - 40 - 
+then read it immediately, thus there will be no operation 
 between saving and reading. I used Equals() method 
 provided by EmguCV to check whether the current frame 
 changed after saving and reading to the program again. 
@@ -1026,8 +1023,9 @@ led to undesirable results.
 iii) Color-level. Bgr32 images were used as training data. To 
 make the images only display gray color, I set the value 
 of blue, green and red equivalent. Since one color 
+occupies 8 bits, there would be 2
 8
-occupies 8 bits, there would be 2 levels of gray in total in 
+ levels of gray in total in 
 one image. As I mentioned before, the detection range of 
 Kinect’s depth camera is between 1000mm and 4000mm, 
 while the color-level is 256, so that every 11.7mm will be 
@@ -1053,8 +1051,8 @@ then the pose of testing person’s head was determined by
 the tags that I introduced before, and frames were saved 
 in the corresponding folder. One frame will create two 
 files, one records the depth value of every pixel in the 
- 
-- 40 - current frame, the other one records the position of the 
+ - 41 - 
+current frame, the other one records the position of the 
 reference point, the size of head zone and the position of 
 head zone. There will be 800 frames saved for each 
 orientation. Figure 5.5 shows a file-data example of one 
@@ -1077,8 +1075,8 @@ of such data. After the first 300 frames were deleted, the
 301st frame also needed to be checked to ensure that the 
 rest 500 frames were correct. If incorrectness occurred to 
 the 301st frame, it was necessary to re-collect data for 
- 
-- 41 - this orientation. 
+ - 42 - 
+this orientation. 
  
 Figure 5.6 A negative data. 
 This data was saved before the head was tracked. The 
@@ -1102,8 +1100,8 @@ array, the first dimension is trees, the second dimension is nodes of the trees,
 third dimension is the information in nodes. The left child of node “n” is “2n+1”, the 
 right child of node “n” is “2n+2”. Figure 5.7 shows the forest. 
  
+ - 43 - 
  
-- 42 -  
 Figure 5.7 Tree stored in array. 
 There is no empty node in the array when the trees are full 
 binary trees. Left and right child of node “n” are “2n+1” and 
@@ -1114,22 +1112,40 @@ have 15 leaf nodes. Then I tried to run the program with different sizes of fore
 Table 5.2 shows the result of different sizes of forests. 
 Table 5.2 Results of different sizes of forest. 
  30 trees 40 trees 50 trees 60 trees 
-Training Less than 15 17 ~ 19 hours 20 ~ 23 hours More than 25 
-time hours hours 
-Testing Fluent Fluent Lags only when Fluent only 
-situation the head is very when the head 
-close to the is far away 
-sensor from the 
+Training 
+time 
+Less than 15 
+hours 
+17 ~ 19 hours 20 ~ 23 hours More than 25 
+hours 
+Testing 
+situation 
+Fluent Fluent Lags only when 
+the head is very 
+close to the 
 sensor 
-Can estimate Accuracy Accuracy Not fluent so 
+Fluent only 
+when the head 
+is far away 
+from the 
+sensor 
+Accuracy Can estimate 
+the orientation 
+but not accurate 
 Accuracy 
-the orientation increases increases but that can not 
-but not accurate obviously not too much display results 
+increases 
+obviously 
+Accuracy 
+increases but 
+not too much 
+Not fluent so 
+that can not 
+display results 
 in real-time 
 As we can see from Table 5.2, setting the forest size as 40 trees and 50 trees are both 
 feasible. If I choose 40 trees, I still can’t afford the training time for 6-layer-trees, 
- 
-- 43 - which is because that one more layer of the trees doubles training time. Thus, I finally 
+ - 44 - 
+which is because that one more layer of the trees doubles training time. Thus, I finally 
 made the decision to use 50 trees in total. 
 By now, there were 50 trees and 31 nodes in each tree, but each of the 
 node-dimension of the three-dimensional array needed one more place to store the 
@@ -1164,8 +1180,8 @@ Picture on the right is the amplified head zone. The red
 rectangle is a patch. The upper left point of this patch is 
 randomly selected within the yellow dotted line rectangle, 
 and the side length of patch is half of that of the head zone. 
- 
-- 44 - ii) One node, two feature zones. Feature zones are similar to 
+ - 45 - 
+ii) One node, two feature zones. Feature zones are similar to 
 patch, only that they are two areas randomly selected 
 within the patch, and each node has its own feature zones. 
 The way to select these zones is similar to selecting patch, 
@@ -1177,37 +1193,71 @@ whether a frame should go to the left or right child. As
 mentioned in Section 3.2, I have tried 5 different 
 equations to calculate the threshold. Table 5.3 shows the 
 result of them respectively. Because it takes too many 
+words to describe which method it is, I just name them 1
 st
-words to describe which method it is, I just name them 1 
+ 
+to 5
 th
-to 5 here; same as the order I introduced them in Section 
+ here; same as the order I introduced them in Section 
 3.2. 
 Table 5.3 Ways to calculate threshold. 
-st nd rd th th
- 1 2 3 4 5 
-Training Less than 2 Less than 2 About 15 More than More than 
-time hours hours hours 15 hours 15 hours 
+ 1
+st
+ 2
+nd
+ 3
+rd
+ 4
+th
+ 5
+th
+ 
+Training 
+time 
+Less than 2 
+hours 
+Less than 2 
+hours 
+About 15 
+hours 
+More than 
+15 hours 
+More than 
+15 hours 
 Testing 
-Fluent Fluent Fluent  Fluent Fluent 
 situation 
-Could not Could not Worked but Higher The most 
-Accuracy 
-work work had strict accuracy accurate 
-requirements than 
-on head previous 
-position methods 
+Fluent Fluent Fluent  Fluent Fluent 
+Accuracy Could not 
+work 
+Could not 
+work 
+Worked but 
+had strict 
+requirements 
+on head 
+position 
+Higher 
+accuracy 
+than 
+previous 
+methods 
+The most 
+accurate 
 As we can see from the table, all of the five methods can 
 be done in 1/30 second in testing. The first two methods 
 were broken in result because they are based on image 
 training data that I have described and analyzed in 
 Section 3.2 and above in this section. The third one is 
 inaccurate because it did not take the average of pixels in 
- 
-- 45 - feature zones. The last two needed more training time 
+ - 46 - 
+feature zones. The last two needed more training time 
 than the third one because there were double variable 
 arithmetic and division operations that occupied more 
-th th
-time. The 5 one is more accurate than the 4 one 
+time. The 5
+th
+ one is more accurate than the 4
+th
+ one 
 because it used multiple feature channels (depth and 
 relative position instead of depth only). 
 Building leaf nodes was based on all completed non-leaf nodes. Training data were 
@@ -1217,16 +1267,17 @@ the highest proportion represents the node and record the number of occurrences 
 each orientation. Table 5.4 shows the comparison of the two methods. 
 Table 5.4 Comparison between two leaf nodes building 
 methods 
-Record all number of 
- Highest one 
+ Highest one Record all number of 
 occurrences 
-Time of building Less than 2 hours Less than 2 hours 
+Time of building 
 leaf nodes 
+Less than 2 hours Less than 2 hours 
 Testing situation Fluent Fluent 
-Could only estimate Much more accurate 
-Accuracy 
-2 or 3 orientations in than the other one 
+Accuracy Could only estimate 
+2 or 3 orientations in 
 real-time 
+Much more accurate 
+than the other one 
 The latter method is obviously better than the other one since it avoided the 
 interference of orientation-insensitive nodes. 
 5.1.2. Testing and Cross Validation 
@@ -1235,8 +1286,8 @@ testing is to estimate new, unseen frames with the completed forest. A testing f
 will arrive at one leaf node in each tree, so that there will be 50 leaf nodes supporting 
 the estimation of this frame. Sum up the proportion in each leaf node for each 
 orientation, and the orientation with the highest summation will be defined as the 
- 
-- 46 - estimation result of this frame. The key point of this part was the time interval 
+ - 47 - 
+estimation result of this frame. The key point of this part was the time interval 
 between two frames, i.e. 1/30 second. Making full use of this time can increase 
 accuracy, however, once the calculations cannot be completed within this time, the 
 fluency of the testing would be broken. In Section 3.4, I have fully described how to 
@@ -1264,8 +1315,8 @@ confuse the estimation. Figure 5.10 shows an example in this situation.
  
  
  
+ - 48 - 
  
-- 47 -  
 (c) 
 Figure 5.9 Real-time estimation with skeleton tracking. 
 Figure 5.9 (a) and Figure 5.9 (c) shows the person rotates 
@@ -1291,8 +1342,8 @@ people. All of the work I mentioned before is running in the expanded version. H
 tracking and increasing accuracy are fully described in the previous section and above 
 in this section. I will describe why and how to set feature value proportional to the 
 distance below. 
- 
-- 48 - The detection range was determined as 800mm to 1800mm. When the head is at the 
+ - 49 - 
+The detection range was determined as 800mm to 1800mm. When the head is at the 
 maximum distance, it can be framed by a 60*80 rectangle, while the head can be 
 framed by a 30*40 rectangle at the minimum distance. Mapping the detection range, 
 1000mm, to the incrementals of the width and height of head zone, which comes 
@@ -1311,8 +1362,8 @@ is in below.
 5.2. Testing Results 
 This section details the testing results in some different situations. These results will 
 be used to analyze the performance of the system of my program. 
- 
-- 49 - 5.2.1. User Interface 
+ - 50 - 
+5.2.1. User Interface 
 The development of the user interface in this program was based on WPF (Windows 
 Presentation Foundation) [23], which is developed by Microsoft, and provides 
 developers with a unified programming model for building rich Windows smart client 
@@ -1333,8 +1384,8 @@ set first, in addition, the testing object was not person but a static object. I
 program could not work well on this kind of training set and testing object, the 
 program would not work well on people’s head as well. The object was set in three 
 different poses. Figure 5.13 shows the testing object in three poses.  
- 
-- 50 -     
+ - 51 - 
+    
  
 Figure 5.13 Static testing object. 
 The three figures illustrate the three poses of static testing 
@@ -1348,8 +1399,8 @@ Firstly, I tested whether the program works with people’s head in only 3 orienta
 “m0”, “u0” and “b0”, as I have introduced “u0” and “b0”, similarly, “m0” means the 
 head is facing frontal to the camera. The cross validation result in this situation is 
 shown in Figure 5.14. The result of testing in real-time is shown in Table 5.5. 
+ - 52 - 
  
-- 51 -  
 Figure 5.14 Cross validation result of 3 orientations. 
 Table 5.5 Three Orientations real-time result. 
  u0 m0 b0 
@@ -1366,8 +1417,8 @@ I have tested my program with head in 3 orientations and it worked well. The nex
 work is to increase orientations. In this step I used 6 orientations, “bl45”, “b0”, “br45”, 
 “ul45”, “u0” and “ur45”. The cross validation result is shown in Figure 5.15. The 
 result of testing in real-time is shown in Table 5.6. 
+ - 53 - 
  
-- 52 -  
 Figure 5.15 Training result of 6 orientations. 
 Table 5.6 Six orientations real-time result. 
  ul45 ur45 u0 bl45 br45 b0 
@@ -1391,8 +1442,8 @@ This part used the same forest (the same thresholds of all non-leaf nodes and th
 information in leaf nodes) as the testing of 6 orientations. Table 5.7, 5.8 and 5.9 shows 
 the real-time testing results of testing people sat closer, higher and rightward than the 
 pre-selected position. The cross validation results are shown in Figure 5.16. 
- 
-- 53 - Table 5.7 Real-time testing result of moving closer to the 
+ - 54 - 
+Table 5.7 Real-time testing result of moving closer to the 
 camera. 
  ul45 ur45 u0 bl45 br45 b0 
 Correct 47 32 9 35 29 12 
@@ -1409,8 +1460,8 @@ from the pre-selected position.
  ul45 ur45 u0 bl45 br45 b0 
 Correct 44 39 33 39 39 40 
 Incorrect 6 11 17 11 11 10 
- 
-- 54 - Accuracy 0.88 0.78 0.66 0.78 0.78 0.80 
+ - 55 - 
+Accuracy 0.88 0.78 0.66 0.78 0.78 0.80 
  
  
 (a)                         (b) 
@@ -1427,8 +1478,8 @@ correctness of cross validation are 49%, 80% and 72% and the correctness of each
 orientation in real-time testing is shown in Table 5.7 – 5.9. When people sat in the 
 pre-selected position then kept moving the head, the cross validation correctness was 
 55%.  
- 
-- 55 - 6. Discussion and Future work 
+ - 56 - 
+6. Discussion and Future work 
 This section will discuss the testing results. In addition, it will review the aims and 
 objectives of the project to judge whether they have been achieved and if so how 
 successfully. Finally, I will list some future work based on the work I did and the 
@@ -1460,8 +1511,8 @@ methods: i) improve the way to select threshold or increase the number of thresh
 one node. ii) increase the size of training set. iii) increase the depth of each tree in the 
 forest. The last two methods may require more training time, so that how to reduce 
 the training time is another issue that can be listed in the future work. 
- 
-- 56 - 6.1.3. Moving People 
+ - 57 - 
+6.1.3. Moving People 
 The testing result of this part was shown in Section 5.2.5. The testing of this part was 
 divided into two steps. The first step was to test the head in several new, not 
 pre-selected positions. The main purpose of this step is to test whether the program 
@@ -1499,8 +1550,8 @@ tracking technology would widen this range and increase the accuracy of estimati
 though some limitations. Therefore, this objective can be considered achieved the 
 function with limitations. The problem and method may be helpful for improving this 
 part was introduced in the last section. 
- 
-- 57 - 6.2. Future Work 
+ - 58 - 
+6.2. Future Work 
 6.2.1. Speed and Depth 
 Although the program achieved estimation of head pose, the algorithm can be 
 improved in several aspects, most effective of which can be decreasing training time. 
@@ -1516,8 +1567,8 @@ zones when the depth value changes dramatically, ii) take the offset angle cause
 head’s movement into consideration. If these two methods work well and the 
 performance of moving head estimation improves significantly, then multiple head 
 estimation can be added by using Skeleton Tracking. 
- 
-- 58 - 7. Reference 
+ - 59 - 
+7. Reference 
 [1] X. Meng, “Robust Head Pose Estimation Algorithm for Embedding Video 
 System”, School of Electronics and Electric Engineering, Shanghai Jiao Tong 
 University, December 2010. 
@@ -1546,8 +1597,8 @@ http://www.vision.ee.ethz.ch/~gfanelli/head_pose/head_forest.html#db
 SIG-GRAPH '99. pp. 187-194 (1999). 
 [14] Li, H., Adams, B., Guibas, L.J., Pauly, M. “Robust single-view geometry and 
 mo-tion reconstruction”. ACM Trans. Graph. 28 (5) (2009). 
- 
-- 59 - [15] Weise, T., Wismer, T., Leibe, B., Van Gool, L. “In-hand scanning with online 
+ - 60 - 
+[15] Weise, T., Wismer, T., Leibe, B., Van Gool, L. “In-hand scanning with online 
 loop closure”. In: 3DIM. pp. 1630-1637 (2009). 
 [16] Besl, P., McKay, N. “A method for registration of 3-d shapes”. IEEE TPAMI 14 
 (2), 239-256 (1992). 
@@ -1562,5 +1613,3 @@ cking_Part1.html.
 -under-500-00. 
 [22] http://file.emgu.com/wiki/index.php/Main_Page. 
 [23] http://msdn.microsoft.com/en-us/library/ms754130.aspx. 
- 
-- 60 - 

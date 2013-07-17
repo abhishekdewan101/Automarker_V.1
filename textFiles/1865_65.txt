@@ -1,5 +1,7 @@
 Network Representations of Text 2012 
  
+iii | P a g e  
+ 
  
  
 EXECUTIVE SUMMARY 
@@ -39,105 +41,109 @@ four related Text summarizers versus our Text summarizer, see chapter 6.
  
  
   
-iii | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+v | P a g e  
  
  
 TABLE OF CONTENTS 
  
-Chapter 1: Introduction   ииииииии.иииииииииииииииииииииииииииииииии.. 1 
-1.1 Motivation  .ииииииииииииииииииииииииииииииииииииииииии 1 
-1.2 Aims and objectives  иииииииииииииииииииииииииииииииииииии 1 
-1.3 Thesis Outline иииииииииииииииииииииииииииииииииииииииии 2 
+Chapter 1: Introduction  ... 1 
+1.1 Motivation  . 1 
+1.2 Aims and objectives   1 
+1.3 Thesis Outline  2 
  
-Chapter 2: History иииииииииииииииииииииииииииииииииииииииииииии.. 3 
- 2.1 Introduction ииииииииииииииииииииииииииииииииииииииииии 3 
-2.2 Traditional Techniques ииииииииииииииииииииииииииииииииииии 3 
-2.2.1 Luhnуs Technique иииииииииииииииииииииииииииииииии. 3 
-2.2.2 H.P Edmundson Technique ииииииииииииииииииииииииии.... 4 
-2.2.3 Complex Network Approach ииииииииииииииииииииииииии.. 6 
-2.2.3.1 Basics of Graph Theory ииииииииииииииииииииииии 6 
-2.2.3.2 History иииииииииииииииииииииииииииииииии. 6 
-2.2.3.3 CN-Summ: A complex Network Approach ииииииииииии... 7 
-2.2.3.3.1 Degree strategy ииииииииииииииииииииии. 7 
-2.2.3.3.2 Shortest path strategy ииииииииииииииииии.. 8 
-2.2.3.3.3 Locality index strategy  ииииииииииииииииии. 8 
-2.2.3.3.4 d-Rings strategy ииииииииииииииииииииии. 9 
-2.2.3.3.5 k-cores strategy ииииииииииииииииииииии. 9 
-2.2.3.3.6 w-Cuts strategy ииииииииииииииииииииии.. 9 
-2.2.3.3.7 Voting strategy иииииииииииииииииииииии 10 
-2.3 Background Summary ииииииииииииииииииииииииииииииииииии..10 
+Chapter 2: History .. 3 
+ 2.1 Introduction  3 
+2.2 Traditional Techniques  3 
+2.2.1 Luhnуs Technique . 3 
+2.2.2 H.P Edmundson Technique .... 4 
+2.2.3 Complex Network Approach .. 6 
+2.2.3.1 Basics of Graph Theory  6 
+2.2.3.2 History . 6 
+2.2.3.3 CN-Summ: A complex Network Approach ... 7 
+2.2.3.3.1 Degree strategy . 7 
+2.2.3.3.2 Shortest path strategy .. 8 
+2.2.3.3.3 Locality index strategy  . 8 
+2.2.3.3.4 d-Rings strategy . 9 
+2.2.3.3.5 k-cores strategy . 9 
+2.2.3.3.6 w-Cuts strategy .. 9 
+2.2.3.3.7 Voting strategy  10 
+2.3 Background Summary ..10 
  
-Chapter 3: Community Detection Algorithm ииииииииииииииииииииииииииииии.. 11 
- 3.1 Introduction ииииииииииииииииииииииииииииииииииииииииии 11 
- 3.2 Types of Community detection algorithm иииииииииииииииииииииииии 11  
-  3.2.1 Graph Partitioning и..иииииииииииииииииииииииииииииии 12 
-  3.2.2 Hierarchical clustering ииииииииииииииииииииииииииииии. 12 
-  3.2.3 Girvan-Newman algorithm иииииииииииииииииииииииииии.. 13 
-  3.2.4 Modularity maximization ииииииииииииииииииииииииииии. 14 
-  3.2.5 Clique based methods ииииииииииииииииииииииииииииии. 15 
-  3.2.6 Surprise maximization ииииииииииииииииииииииииииииии. 15 
-  3.2.7 InfoMap ииииииииииииииииииииииииииииииииииииии. 16 
+Chapter 3: Community Detection Algorithm .. 11 
+ 3.1 Introduction  11 
+ 3.2 Types of Community detection algorithm  11  
+  3.2.1 Graph Partitioning .. 12 
+  3.2.2 Hierarchical clustering . 12 
+  3.2.3 Girvan-Newman algorithm .. 13 
+  3.2.4 Modularity maximization . 14 
+  3.2.5 Clique based methods . 15 
+  3.2.6 Surprise maximization . 15 
+  3.2.7 InfoMap . 16 
  
-Chapter 4: Traditional Automated Text Summarizers иииииииииииииииииииииииии.. 17 
- 4.1 Introduction ииииииииииииииииииииииииииииииииииииииииии 17 
-v | P a g e 
- Network Representations of Text 2012 
+Chapter 4: Traditional Automated Text Summarizers .. 17 
+ 4.1 Introduction  17 
+Network Representations of Text 2012 
  
- 4.2 List of Text Summarizers иииииииииииииииииииииииииииииииииии 17 
- 4.3 Design Framework ииииииииииииииииииииииииииииииииииииии. 17 
-4.3.1 Lexical Processing иииииииииииииииииииииииииииииииии 18 
-  4.3.2 Traditional Automated Text Summarizers иииииииииииииииииии. 18 
-   4.3.2.1 Automated Text Summarizer - Degree иииииииииииииии. 18 
-   4.3.2.2 Automated Text Summarizer - Betweenness иииииииииии.. 20 
-   4.3.2.3 Automated Text Summarizer - PageRank иииииииииииии.. 22 
-   4.3.2.4 Automated Text Summarizer - Clustering coefficient иииииии 24 
- 4.4 Conclusion иииииииииииииииииииииииииииииииииииииииииии 26 
+vi | P a g e  
+ 
+ 4.2 List of Text Summarizers  17 
+ 4.3 Design Framework . 17 
+4.3.1 Lexical Processing  18 
+  4.3.2 Traditional Automated Text Summarizers . 18 
+   4.3.2.1 Automated Text Summarizer - Degree . 18 
+   4.3.2.2 Automated Text Summarizer - Betweenness .. 20 
+   4.3.2.3 Automated Text Summarizer - PageRank .. 22 
+   4.3.2.4 Automated Text Summarizer - Clustering coefficient  24 
+ 4.4 Conclusion  26 
   
-Chapter 5: Automated Text Summarizer - Community Detection Algorithm иииииииииии.... 27 
- 5.1 Introduction ииииииииииииииииииииииииииииииииииииииииии 27 
- 5.2 Design Framework ииииииииииииииииииииииииииииииииииииии. 27 
-  5.2.1 Lexical Processing иииииииииииииииииииииииииииииииии 28 
-  5.2.2 Network Representations of Text ииииииииииииииииииииииии 30 
-  5.2.3 Abstract Generation иииииииииииииииииииииииииииииии.. 33 
- 5.3 Conclusion иииииииииииииииииииииииииииииииииииииииииии 34  
+Chapter 5: Automated Text Summarizer - Community Detection Algorithm .... 27 
+ 5.1 Introduction  27 
+ 5.2 Design Framework . 27 
+  5.2.1 Lexical Processing  28 
+  5.2.2 Network Representations of Text  30 
+  5.2.3 Abstract Generation .. 33 
+ 5.3 Conclusion  34  
  
-Chapter 6: Experiments and Results иииииииииииииииииииииииииииииииииии. 35 
- 6.1 Introduction ииииииииииииииииииииииииииииииииииииииииии 35 
- 6.2 Summarization Evaluation ииииииииииииииииииииииииииииииииии 35  
-  6.2.1 Types of Summary Evaluation ииииииииииииииииииииииииии. 35 
-  6.2.2 Intrinsic Summary Evaluation ииииииииииииииииииииииииии. 36 
-   6.2.2.1 Similarity Measure ииииииииииииииииииииииииии.. 36 
-   6.2.2.2 Text Similarity иииииииииииииииииииииииииииии. 37 
-   6.2.2.3 Abstract Similarity иииииииииииииииииииииииииии 38 
-   6.2.2.4 Precision & Recall and F-Measure ииииииииииииииииии 38 
-   6.2.2.5 Abstract Evaluation ииииииииииииииииииииииииии. 39 
-  6.2.3 Extrinsic Summary Evaluation ииииииииииииииииииииииииии. 40 
-   6.2.3.1 Question Game ииииииииииииииииииииииииииии.. 41 
-   6.2.3.2 Panel of Markers Approach иииииииииииииииииииии.. 41 
-    6.2.3.2.1 Experimental Framework иииииииииииииииии 41 
-    6.2.3.2.2 Rating and Feedback иииииииииииииииииии.. 42 
-    6.2.3.2.3 Experimental Results иииииииииииииииииии.. 42 
- 6.3 Summary ииииииииииииииииииииииииииииииииииииииииииии 42  
+Chapter 6: Experiments and Results . 35 
+ 6.1 Introduction  35 
+ 6.2 Summarization Evaluation  35  
+  6.2.1 Types of Summary Evaluation . 35 
+  6.2.2 Intrinsic Summary Evaluation . 36 
+   6.2.2.1 Similarity Measure .. 36 
+   6.2.2.2 Text Similarity . 37 
+   6.2.2.3 Abstract Similarity  38 
+   6.2.2.4 Precision & Recall and F-Measure  38 
+   6.2.2.5 Abstract Evaluation . 39 
+  6.2.3 Extrinsic Summary Evaluation . 40 
+   6.2.3.1 Question Game .. 41 
+   6.2.3.2 Panel of Markers Approach .. 41 
+    6.2.3.2.1 Experimental Framework  41 
+    6.2.3.2.2 Rating and Feedback .. 42 
+    6.2.3.2.3 Experimental Results .. 42 
+ 6.3 Summary  42  
  
-Chapter 7: Conclusions иииииииииииииииииииииииииииииииииииииииииии 45 
+Chapter 7: Conclusions  45 
  
-Chapter 8: Future Enhancements иииииииииииииииииииииииииииииииииииии 47 
+Chapter 8: Future Enhancements  47 
  
-Chapter 9: Bibliography ииииииииииииииииииииииииииииииииииииииииии. 49 
-vi | P a g e 
- Network Representations of Text 2012 
+Chapter 9: Bibliography . 49 
+Network Representations of Text 2012 
+ 
+vii | P a g e  
  
 Appendix: A  
-Sample Results ииииииииииииииииииииииииииииииииииииииииии.. 51  
-Network Workbench иииииииииииииииииииииииииииииииииииииии. 52 
+Sample Results .. 51  
+Network Workbench . 52 
  
 Appendix: B 
- Source Code ииииииииииииииииииииииииииииииииииииииииииии. 53  
+ Source Code . 53  
      
   
-vii | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+viii | P a g e  
  
  
 LIST OF FIGURES 
@@ -161,8 +167,9 @@ Figure 17: Pictographic representation of the statistical results obtained via P
 Figure 18: Statistical results obtained via Panel of Markers approach ...................................................... 42 
  
   
-viii | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+ix | P a g e  
  
  
 LIST OF TABLES 
@@ -178,8 +185,9 @@ Table 6: Statistical comparison of the summarizers .............................
  
  
  
-ix | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+1 | P a g e  
  
  
 CHAPTER 1 
@@ -220,8 +228,9 @@ networks, analyse these networks, especially using community detection algorithm
 extract the summary out of these networks and comparison of these results with the conventional 
 methods.   
  
-1 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+2 | P a g e  
  
 The following are the main objectives: 
 ? To convert large text documents to networks where the words represent a node and the adjacent 
@@ -257,8 +266,9 @@ Chapter 8: Portion which comment on further improving the summarizer.
  
  
  
-2 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+3 | P a g e  
  
      
 CHAPTER 2 
@@ -296,8 +306,9 @@ sentence. It is expected that keywords are high frequency words and they appear 
 document. The frequency of all the words are computed from the whole document and the significance 
 of the sentence are calculated based on the occurrence of these words in each sentence of the article. 
 Luhn exhibits relationship between the word significance and their frequency. A graph [1] is plotted with 
-3 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+4 | P a g e  
  
 the words across the X-axis and the frequency of the word across the Y-axis, now Luhn determines two 
 cut-offs C and D wherein the words to the left of C and the words to the right of D are excluded and the 
@@ -308,10 +319,8 @@ importance. And the words to the right of the threshold point D are the  least o
 article and are assumed to be insignificant.  
  
 ___ Resolving Power of Significant Words 
-         ___ Words frequency       
-   
-  
-Figure 1: Frequency versus Word 
+         ___        Words frequency
+     
   
 The summarizer developed by Luhn was not so efficient and did contain many not so important 
 sentences so a new technique gave into existence to better off the existing one by Edmundson. 
@@ -334,8 +343,10 @@ the sentence is computed by summation of the weights of the words in each senten
 3. Cue Words 
 A dictionary is created with the pragmatic words in advance. The dictionary words are classified into 3 
 categories. 1. Null words 2. Bonus words 3. Stigma words.  The words under each category are weighted 
-4 | P a g e 
- Network Representations of Text 2012 
+Figure 1: Frequency versus Word 
+Network Representations of Text 2012 
+ 
+5 | P a g e  
  
 differently and the weight of the sentence is computed by the summation of the weights of the cue 
 words in the sentence. 
@@ -363,26 +374,24 @@ constitute the Location weight of a sentence.
 The linear summation of all the 3 weights computed from the above 3 methods for a given sentence 
 forms the Final Weight, W.  
  
-W = p K + p T+ p L + p4C 
-1 2 3
  
-Where p , p , p , p are +ve coefficients assigned to the weights K, T and L and the values are 
-1 2 3 4
+Where p1, p2, p3, p4 are +ve coefficients assigned to the weights K, T and L and the values are 
 determined manually based on the generator performance. The sentences are then organized in 
 descending order on their weights and the top N sentences are taken which form the abstract, where N 
 was taken as 25% of the total sentences in the document. 
  
 Figure 2 : Comparison of methods 
-5 | P a g e 
- Network Representations of Text 2012 
+W = p1K + p2T+ p3L + p4C 
+Network Representations of Text 2012 
+ 
+6 | P a g e  
  
 Figure 2 [1] [3], illustrates the statistical results obtained while comparing abstracts generated by the 
 automated summarizers versus the manually generated one. The figure shows the mean % centages of 
 co selected sentences on a set of testing documents. The graph reveals the performance of the Key 
 word method does do well, while the combination Cue п Title п Location yield better performance out of 
 all the methods.  Overall the performance was reasonably good but leaving some drawbacks like the 
-determination of the coefficients p , p , p , p . 
-1 2 3 4
+determination of the coefficients p1, p2, p3, p4. 
 2.2.3 Complex Network Approach 
 The approach involves the concepts of Network theory to extract sentences for the abstract. The 
 approach involves conversion of large text document into networks and tries to exploit the network 
@@ -413,8 +422,9 @@ via an edge built on a similarly measure computed based on the number of words c
 them. The edges are weighted based on the number of common words in between them and with the 
 aid of the routing algorithm the most prominent paragraphs are extracted to compose the abstract. The 
 approach was evaluated and was found that the algorithm choose around 45% of the paragraphs that 
-6 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+7 | P a g e  
  
 were selected by the summarizers generated by humans. The approach had a negative side when it 
 comes to the compression rate, as the paragraphs appear as it is and cannot be split while composing 
@@ -446,8 +456,7 @@ complementary information about the topic, however the 2 may contain the same in
 The proposed technique comprises of 4 steps, Step 1. The pre-processing step: Lemmatization and 
 sentence boundary check. Step 2. The resultant text is transformed to network and adjacency matrix 
 and weight matrix are created. Adjacency matrix is an N * N matrix where N is the number of nodes 
-where the value at the position a = a = 1 if their exists an edge between the nodes i and j, in the 
-ij ji
+where the value at the position aij = aji = 1 if their exists an edge between the nodes i and j, in the 
 absence of an edge the value is 0. Similarly the weight matrix illustrates the weights assigned to the 
 edges. These are known by matrix A and W for simplicity. In Step 3, we employ one of the network 
 metrics to assign numerical weights and rank the network nodes. Step 4. The nodes are sorted in 
@@ -458,81 +467,65 @@ to 14 summarization strategies.
 The strategy tries to capture the most informative nodes based on the network metric тdegreeу. The 
 degree of the node denotes the number of edges connected to the node. We obtain the degree of a 
 node from the Adjacency matrix A as. 
-7 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
  
+8 | P a g e  
+ 
+?? =  ???
 ?
-?? = ? 
-??
-? = ?
-k is the degree of the node i and a corresponds to the position in the adjacency matrix A. If we consider 
-i ij 
+?=?
+ 
+ki is the degree of the node i and aij corresponds to the position in the adjacency matrix A. If we consider 
 the weight matrix in place of the adjacency matrix the formula deduces to  
  
+?? = ???
 ?
-=  ? 
-??
-? = ?
+?=?
  
-Where s denotes the strength of the node i, and w corresponds to the position in the weight matrix W. 
-i ij 
+ 
+Where si denotes the strength of the node i, and wij corresponds to the position in the weight matrix W. 
 The metrics degree and the strength are the simplest and most commonly used ones to analyse any 
 complex network. The nodes with high degree or high strength are referred to as the hubs. The 
-st
-sentences with top n highest k are extracted to compose an abstract which form the 1 summarization 
-i
-technique - known as CN-Degree. Likewise the sentences corresponding to the top n highest s is 
-i
-nd
-extracted which form the 2 summarization technique - known as CN-Strength. 
-wi wc 
-2.2.3.3.2 Shortest path strategies: CN-SP, CN-SP and CN-SP [8] 
+sentences with top n highest ki are extracted to compose an abstract which form the 1
+st summarization 
+technique - known as CN-Degree. Likewise the sentences corresponding to the top n highest si is 
+extracted which form the 2nd summarization technique - known as CN-Strength. 
+2.2.3.3.2 Shortest path strategies: CN-SP, CN-SPwi and CN-SPwc [8] 
 The approach focusses on the shortest path between the nodes. A path is defined as the collection of 
 non-recurring edges from one node to another. And the path length is defined as the number of edges 
 in a path. Unlike the network metric тdegreeу discussed earlier the shortest path approach takes into 
 consideration all the nodes in the graph. The shortest distance is computed for all the nodes in the 
 graph and the average distance is computed with respect to each node. With this information in hand 
-the sentence inter-relationship can be determined. We define d as the shortest distance or the path 
-ij
+the sentence inter-relationship can be determined. We define dij as the shortest distance or the path 
 between the nodes i and j that can be computed from the adjacency matrix A. We consider the mean 
-shortest path from a node to the rest of the nodes in the graph. The shortest path sp is calculated as 
-i
+shortest path from a node to the rest of the nodes in the graph. The shortest path spi is calculated as 
 follows. 
- 
-?
-? ╜ ? ??
-?? ? =  
+??? = 
+ ???? ╜?
 ? ? ?
  
-N is the total number of nodes in the graph and d is N if there do not exist an edge between the nodes i 
-ij 
+ 
+N is the total number of nodes in the graph and dij is N if there do not exist an edge between the nodes i 
 and j and this type of disconnection between the nodes are encountered in disconnected graphs. For the 
 weighted edges i.e. weighted graphs, we sum the weights of the edges with constitute the edges of a 
 path. Care should be taken as the shortest path algorithms neglect high weighted edges and consider 
 the lower ones for computing shortest path, so some kind of modifications are necessary to rectify this.  
 One way of rectification is by creating weights which are inversely proportional i.e. for the edges with 
 high weights are to be mapped to another set of values which are low and vice versa. We now create 
-wc wc
-another matrix W which is the modified version of W. The elements of the matrix w = 0 if w = 0 and 
-ij ij
-wc
-w = w - w + 1 if w > 0, now the modified matrix is employed for determing the shortest path and 
-ij max ij ij
-the mean shortest path sp .   
-i
-wi
-Another way of rectification is by determining matrix W which is the modified version of W where the 
-wi
-elements of the matrix is determined by taking the inverse of the weights of matrix W i.e.  w = 1/ w if 
-ij ij 
-wi
-w > 0 and w = 0 if w = 0. We now determine the shortest path and the mean shortest path sp using 
-ij ij ij i
-wi wc wi
-matrix W . With these matrices, 3 unique summarizers are developed i.e. CN-SP, CN-SP and CN-SP . 
-8 | P a g e 
+another matrix Wwc which is the modified version of W. The elements of the matrix wij
+wc = 0 if wij = 0 and 
+wij
+wc = wmax - wij + 1 if wij > 0, now the modified matrix is employed for determing the shortest path and 
+the mean shortest path spi.   
+Another way of rectification is by determining matrix Wwi which is the modified version of W where the 
+elements of the matrix is determined by taking the inverse of the weights of matrix W i.e.  wij
+wi = 1/ wij if 
+wij > 0 and wij
+wi = 0 if wij = 0. We now determine the shortest path and the mean shortest path spi using 
+matrix Wwi. With these matrices, 3 unique summarizers are developed i.e. CN-SP, CN-SPwc and CN-SPwi. 
+Network Representations of Text 2012 
  
-??Network Representations of Text 2012 
+9 | P a g e  
  
 2.2.3.3.3 Locality index strategy: CN-LI [8] 
 The strategy looks for connectivity pattern in the neighbourhood node. We say the neighbors of a node 
@@ -541,64 +534,48 @@ are said to have a localized connectivity pattern with node i. Nodes with higher
 are termed as the most prominent nodes and these sentences contribute in the composition of the 
 extract. 
 The locality index of a given node is computed as follows; 
+?? =
+??
 ???
-?
-?
-= 
-? ?? ? ? ?
-? + ?
-? ?
+??
+???  + ??
+???
+ 
 Primarily the locality index relates the number of internal connections between the neighbors of the 
 node i, with the number of connections that exists with the remaining nodes in the network. 
-   
-  = (Number of connections between k neighbors of node i) + (k edges from node i to k neighbours) 
-i
- 
-   
-  = Number of connection established by k neighbours with the remaining nodes in the network. 
-i
- 
-l k lk 
-2.2.3.3.4 d-Rings strategy: CN-Rings , CN-Rings and CN-Rings [8] 
+  
+    = (Number of connections between ki neighbors of node i) + (k edges from node i to k neighbours) 
+  
+    = Number of connection established by ki neighbours with the remaining nodes in the network. 
+2.2.3.3.4 d-Rings strategy: CN-Ringsl, CN-Ringsk and CN-Ringslk [8] 
 d-Ring is a subgraph of a graph G obtained from the morphological operation dilation. Dilation of a 
 graph yields      a subgraph that comprises of the nodes of g and the nodes that are connected to g. d-
 dilation is the process of recursive execution of dilation d times. 
  
-    
-? ( ? ) = ? ? и.. ? и..  
-d
+?d(?) = ? ?  . .  ?  . .    
                   d times 
-Nodes in  ( ) includes nodes that are present in  ( ) plus some nodes that are connected to the 
-d d-1
-nodes present in  ( ). D-Rings are known as hierarchical level d of subgraph g. Let us consider g as a 
-d-1
-graph with a single node, now the first level neighbour of node i comprises of k neighbour nodes which 
-i
-st nd
-form the 1 ring similarly the 2 ring form the next level consecutive nodes and so on. The number of 
+Nodes in  d( ) includes nodes that are present in  d-1( ) plus some nodes that are connected to the 
+nodes present in  d-1( ). D-Rings are known as hierarchical level d of subgraph g. Let us consider g as a 
+graph with a single node, now the first level neighbour of node i comprises of ki neighbour nodes which 
+form the 1st ring similarly the 2nd ring form the next level consecutive nodes and so on. The number of 
 rings decides the compression rate of the extract. The concept of concentric circles is important to 
 determine the central idea and extract the sentences which complement the main idea. Nodes of higher 
-degree k which are important are referred to as the hubs. With these 3 summarizers were developed. 
-i
-l
-1. CN-Rings , the strategy using the sentence location technique in sentence extraction, the sentences 
+degree ki which are important are referred to as the hubs. With these 3 summarizers were developed. 
+1. CN-Ringsl, the strategy using the sentence location technique in sentence extraction, the sentences 
 which appear at the first are selected when it becomes hard to include all the sentences from the 
 outermost layer of the hub. 
-k
-2. CN-Rings , based on the degree of a node the sentences with highest degree are selected, when it 
+2. CN-Ringsk, based on the degree of a node the sentences with highest degree are selected, when it 
 becomes hard to include all the sentences from the outermost layer of the hub. 
-lk
-3. CN-Rings , it is a combination of above 2, where the nodes above certain threshold values are 
+3. CN-Ringslk, it is a combination of above 2, where the nodes above certain threshold values are 
 selected plus the sentences that appear first in the source article, when the outermost layer i.e. the d-
 layer doesnуt fit in the abstract content.   
  
-9 | P a g e 
+Network Representations of Text 2012 
  
-??Network Representations of Text 2012 
+10 | P a g e  
  
 2.2.3.3.5 k-cores strategy [8] 
-The strategy involves generation of a subgraph core (G) of a graph G which comprises of a set of nodes 
-k
+The strategy involves generation of a subgraph corek(G) of a graph G which comprises of a set of nodes 
 whose sentences are closely related to each other. The nodes which are selected from the graph G are 
 the nodes with degree greater than some threshold value and based on these cores the prime set of 
 nodes are selected and are used in composition of the abstract.  
@@ -627,8 +604,9 @@ concept of machine learning, which employs a Naive Bayes classifier to determine
 sentence for its inclusion in Abstract formation. Finally the Complex Network approach which involved 
 the concept of network theory in determining the vital words in the document based on network 
 metrics. 
-10 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+11 | P a g e  
  
   
 CHAPTER 3  
@@ -659,8 +637,9 @@ Detecting communities in any network is a challenging task and there is numerous
 developed and employed despite several challenges like variable community sizes, unknown number of 
 communities in a network.   
  
-11 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+12 | P a g e  
  
 3.2.1 Graph Partitioning 
 In graph partitioning [4] we have many algorithms in which Minimum-cut [6] method is one of the most 
@@ -688,8 +667,9 @@ The technique introduces a similarity measure based on which a network is divide
 The similarity measure computes some sort of similarity between pairs of nodes based on which 
 clustering of nodes is done. We have several similarity measures for measuring similarity and below are 
 some. 
-12 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+13 | P a g e  
  
  1. Hamming distance between the rows of adjacency matrix.  
  2. Cosine similarity. 
@@ -721,27 +701,21 @@ The technique involves determining edges that link communities and get rid of th
 only the communities are left behind. The betweenness value for each edge in a network is computed 
 and the edges with high importance are determined and eliminated will we obtain desired number of 
 communities. 
-13 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+14 | P a g e  
  
  
-Algorithm [5] 
  
  
-              Step 1: Compute betweenness for each edge in the network. 
  
-              Step 2: Edge with highest betweenness value is removed. 
  
-              Step 3: Compute betweenness for the new network again. 
- 
-              Step 4: Jump to Step 2. 
  
  
  
  
 The results obtained from Girvan-Newman algorithm are reasonably good and the technique is not 
-2
-recommended for huge networks, as the complexity of the algorithm is O(m n) considering m as the 
+recommended for huge networks, as the complexity of the algorithm is O(m2n) considering m as the 
 number of edges and n to be the total node count in the network. 
  
 3.2.4 Modularity maximization [4] 
@@ -752,23 +726,15 @@ in a network into communities. The algorithm firstly computes the modularity for
 i.e. communities, in a network and the partition with highest modularity is chosen as communities. The 
 modularity Q is given by 
   
-? ? ?
-? ?
-Q =    ? ?  ? ? ?  
-?? ?? ? ?
-  
  
 Where, 
+  
  
-           Defines the number of edges that are connected internally (intracommunity).  
-( )
-      
+    
+ (           )   Defines the number of edges that are connected internally (intracommunity).  
     
   
-  
- Is expected value of   from the configuration model.  
-  
-  
+ Is expected value of     from the configuration model.  
 Employing modularity functionality Greedy technique was presented by Girvan and Newman. The 
 Greedy technique is an agglomerative hierarchical clustering technique which iteratively collates nodes 
 to form communities such that Q increases after merging. The technique kick starts with n clusters, 
@@ -778,17 +744,32 @@ combinations of nodes and the increase in modularity is computed. The combinatio
 modularity is considered and the nodes are paired. This procedure is repeated till desired number of 
 communities and size of communities are obtained. 
  
+ 
+ 
+ 
+  
+Q =  
+?
+??  
+  ??? ? 
+????
+??
+ ? ?? ?? ??  
 Algorithm [5] 
+              Step 1: Compute betweenness for each edge in the network. 
+              Step 2: Edge with highest betweenness value is removed. 
+              Step 3: Compute betweenness for the new network again. 
+              Step 4: Jump to Step 2. 
  
+Algorithm [5] 
               Step 1: Start with n communities and each community comprise of 1 node. 
-               Step 2: Connect each pair of communities and compute increase in modularity ф ? . 
-              Step 3: Communities with maximum ф ? are merged. 
- 
+              Step 2: Connect each pair of communities and compute increase in modularity ф?. 
+              Step 3: Communities with maximum ф? are merged. 
               Step 4: Jump to Step 2 till expected number of communities are obtained. 
-   
-14 | P a g e 
  
-?? ??Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+15 | P a g e  
  
 Since the algorithm is designed to try out all possible combinations the time taken is exponential and 
 henceforth is not recommended for networks with massive size/ density.  
@@ -800,16 +781,11 @@ and then start building on them. And from experiments it is proved that the resu
 employing CliqueMod algorithm are better than Greedy algorithm. 
  
  
-Algorithm [5] 
  
  
-Step 1: Determine cliques in the network which form the initial communities. 
  
-Step 2: Connect each pair with the existing communities and compute increase in modularity ф ? . 
  
-Step 3: Communities with maximum ф ? are merged. 
  
- Step 4: Jump to Step 2 till expected number of communities are obtained. 
  
  
  
@@ -831,8 +807,15 @@ hypergeometric distributionс. The difference between S and Q is that in Q the qu
 based on the density of the edges while S takes into consideration both the density of the edges plus the 
 density of nodes in a given network. And performance wise it was proved that S outperforms modularity 
 measure Q. 
-15 | P a g e 
- Network Representations of Text 2012 
+Algorithm [5] 
+Step 1: Determine cliques in the network which form the initial communities. 
+Step 2: Connect each pair with the existing communities and compute increase in modularity ф?. 
+Step 3: Communities with maximum ф? are merged. 
+Step 4: Jump to Step 2 till expected number of communities are obtained. 
+ 
+Network Representations of Text 2012 
+ 
+16 | P a g e  
  
 3.2.7 InfoMap [14] 
 InfoMap is the most efficient community detection algorithm which was developed by Rosvall and 
@@ -863,8 +846,9 @@ Further the technique is optimized through simulated annealing.
  
  
   
-16 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+17 | P a g e  
  
  
 CHAPTER 4 
@@ -910,8 +894,9 @@ Step 5: Sort the sentences in descending order of their significance.
  
 Step 6: Collate top N sentences which are rated high on significance which form the document Abstract, 
 where N depends on compression ratio.  
-17 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+18 | P a g e  
  
 4.3.1 Lexical Processing  
  
@@ -957,8 +942,9 @@ frequencies of all the words in the document are computed i.e. node degree and t
 significance is calculated based on the occurrence of these keywords in each sentence.  
  
  
-18 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+19 | P a g e  
  
  
  
@@ -973,27 +959,12 @@ Below is an example [10] which illustrates the way we convert text into a graph 
 keywords based on the concepts of network metric - Degree. 
  
  
-   
- 
-Original  Without stopwords  After Stemming 
-    
-рWhatуs that? asked Sally.  рasked Sally  рask Sally 
- 
-Pay my bill for last week, due this morning. pay bill last week 
-pay bill last week morning  
- 
-Sally got up quickly, and flitting down the morning Sally get 
-Sally got quickly flitting 
- 
-table, put her arm round her friendуs quickly flit 
-table put arm friend shoulder  
- 
-shoulder and whispered in her ear.с table put arm 
-whispered earс 
-friend shoulder whisper 
  
  
-earс 
+ 
+ 
+ 
+ 
  
  
  
@@ -1002,8 +973,36 @@ earс
  
 Figure 9 [10]: Network Representations of Text 
  
-19 | P a g e 
- Network Representations of Text 2012 
+ 
+Original  
+рWhatуs that? asked Sally.  
+Pay my bill for last week, due this morning. 
+Sally got up quickly, and flitting down the 
+table, put her arm round her friendуs 
+shoulder and whispered in her ear.с 
+ 
+ 
+Without stopwords  
+ 
+рasked Sally  
+pay bill last week morning  
+Sally got quickly flitting 
+table put arm friend shoulder  
+whispered earс 
+ 
+After Stemming 
+ 
+рask Sally 
+pay bill last week 
+morning Sally get 
+quickly flit 
+table put arm 
+friend shoulder whisper 
+earс 
+ 
+Network Representations of Text 2012 
+ 
+20 | P a g e  
  
  
  
@@ -1052,12 +1051,9 @@ order of their betweenness and the top 50% of the words are named keywords.
 top N significant sentences are collated which forms the document abstract. 
  
  
-20 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
  
- 
-0  0 
- 
+21 | P a g e  
  
  
  
@@ -1065,7 +1061,10 @@ top N significant sentences are collated which forms the document abstract.
  
  
  
-4 4 
+ 
+ 
+ 
+ 
  
  
 Figure 10: Simple Network: Nodes with betweenness as labels 
@@ -1075,7 +1074,6 @@ Betweenness computation of the marked node in the network is as follows:
  
  
  
-A C A C 
  
  
  
@@ -1085,15 +1083,12 @@ A C A C
  
  
  
-1 B 2 B 
  
  
               A -> Node -> B                    A -> Node -> C 
  
  
  
-A C 
-A C 
  
  
  
@@ -1102,15 +1097,34 @@ A C
  
  
  
-4 B 
-3 B 
  
  
             
 B -> Node -> A                    C -> Node -> A 
  
-21 | P a g e 
- Network Representations of Text 2012 
+0 
+4 
+0 
+4 
+A 
+1 
+C 
+B 
+A 
+4 
+C 
+B 
+A 
+3 
+C 
+B 
+A 
+2 
+C 
+B 
+Network Representations of Text 2012 
+ 
+22 | P a g e  
  
  
 Words Network metric п Betweenness 
@@ -1159,17 +1173,26 @@ node is connected to the network.
  
 2. Initially all the nodes in the network are weighted equal and later based on the number of links 
 connected to each of them the weights would vary. 
-22 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+23 | P a g e  
  
 3. Let us assume 4 nodes, P, Q, R and S in the network, and we kick start with an estimated equal 
 PageRank value of 0.25. Please note the PageRank of each node depends on the PageRank of 
 the node connected to it and the computation is given as below; 
  
  
- ?  ?  ? 
- ? = + + 
-? ? ? ? ? ? 
+?? ? =
+?? ? 
+? ? 
++
+?? ? 
+? ? 
++
+?? ? 
+? ?
+ 
+ 
                        
  
 Where PR - denotes PageRank value of the node and L - denotes the degree of the node in case 
@@ -1177,7 +1200,6 @@ of Undirected graph.
  
  
  
-.25 .25 
  
  
  
@@ -1187,12 +1209,9 @@ of Undirected graph.
  
  
  
-.25 
-.25 
  
  
  
-Figure 11: PageRank: Undirected graph 
  
  
 4. In case of directed graphs the way we compute PageRank varies a bit where L - denotes the 
@@ -1201,26 +1220,29 @@ number of outbound links.
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+.25 .25 
+.25 .25 
+Figure 11: PageRank: Undirected graph 
+.04 
 .41 .21 
- 
- 
- 
- 
- 
- 
- 
- 
-.34 .04 
- 
- 
- 
- 
+.34 
 Figure 12: PageRank: Directed Graph 
+Network Representations of Text 2012 
  
-23 | P a g e 
- 
-??
-?? ?? ??Network Representations of Text 2012 
+24 | P a g e  
  
  
 Words Network metric - PageRank 
@@ -1255,65 +1277,75 @@ are as follows.
 1. Clustering coefficient [9] is a measure of how close the nodes in a network are to form a cluster/ 
 complete graph.  
  
+                       =
                                        
-                       = 
                                                   
+ 
  
 Clustering coefficient in undirected graph 
  
  
                      
-          
-  
-                      = 
-     ?   
-  
+                      =
+            
+       ?    
+ 
                                                                     
        
+                                            = 
       
-                                            = =  
-  
+     
+=   
    
-   
  
-24 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
  
- 
+25 | P a g e  
  
  
  
-      
-                      = =  
-      
  
  
- 
+                      =
+     
+     
+=  
  
  
  
  
  
  
-      
-                      = = =  
+ 
+ 
+ 
+ 
+ 
+ 
+                      =
+     
+     
+=  
+ 
+ 
+=   
+ 
+ 
+ 
   
-    
- 
- 
- 
-  
  
  
  
  
  
  
-  
-    
-                      = = =  
-      
+                      =
+     
+     
+=  
  
+ 
+=   
  
  
  
@@ -1322,10 +1354,14 @@ Clustering coefficient in undirected graph
  
  
  
-      
-                      = = =   
-  
-    
+ 
+                      =
+     
+     
+=  
+ 
+ 
+=    
    
  
  
@@ -1334,8 +1370,9 @@ Clustering coefficient in undirected graph
 2. For every node in the network clustering coefficient is computed and the nodes with higher 
 measure as termed as keywords which aid in extraction of vital sentences from the document. 
  
-25 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+26 | P a g e  
  
 4.4 Conclusion 
  
@@ -1383,8 +1420,9 @@ which aid in extraction of vital sentences from the core document.
  
  
   
-26 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+27 | P a g e  
  
  
  
@@ -1429,8 +1467,9 @@ Step 5: Sort the sentences in descending order of their significance.
 Step 6: Collate top N sentences rated high on significance which form the document Abstract, where N 
 depends on compression ratio.  
  
-27 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+28 | P a g e  
  
 5.2.1 Lexical Processing 
  
@@ -1457,36 +1496,37 @@ Automated Pre-Processing
  
  
  
-Lexical Processing 
  
  
  
-Source .txt file  
  
  
-Delete environments 
- 
-Tokenization 
- 
-Extract main body 
  
  
-Stop words 
  
  
-Delete equations  
  
-Porter Stemming 
-Delete non - 
  
-alphanumeric 
  
-END  
  
  
 Figure 13 [1]: Lexical Processing 
-28 | P a g e 
- Network Representations of Text 2012 
+ 
+Source .txt file  
+Delete environments 
+Extract main body 
+Delete equations  
+Delete non - 
+alphanumeric 
+END  
+ 
+Tokenization 
+Stop words 
+Porter Stemming 
+Lexical Processing 
+Network Representations of Text 2012 
+ 
+29 | P a g e  
  
 1. Source .txt file 
  
@@ -1536,8 +1576,9 @@ vocabulary reduction. One drawback of stemming would be we cannot guarantee word
 correctly, for example, word - coming can be deduced to тcomу rather than тcomeу but however this 
 doesnуt disturb the outcome of the experiment as the transformation of all the words with same 
 meaning deduce to a single unique word [1]. NOTE: Existing porter stemmer code [15] is used.  
-29 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+30 | P a g e  
  
 5.2.2 Network Representation of Text 
  
@@ -1547,19 +1588,13 @@ analyse and determine keywords.
  
  
  
-Generate Input 
- 
-network file 
- 
- 
-Text network 
- 
- 
-representation  
  
  
  
-Detect Communities 
+ 
+ 
+ 
+ 
  
  
  
@@ -1594,8 +1629,15 @@ Number sequence Word
 6 Week 
 7 Morning 
 8 Get 
-30 | P a g e 
- Network Representations of Text 2012 
+ 
+Generate Input 
+network file 
+Text network 
+representation  
+Detect Communities 
+Network Representations of Text 2012 
+ 
+31 | P a g e  
  
 9 Quickly 
 10 Flit  
@@ -1645,8 +1687,9 @@ this content in a file as the network file.
   
  
  
-31 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+32 | P a g e  
  
 Text Network Representation  
  
@@ -1675,8 +1718,9 @@ communities.
 In our approach, the document abstract is formed by collating the most significant sentences from each 
 community and thus assuring the abstract covers all the major topics in the document.     
  
-32 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+33 | P a g e  
  
 For instance: If a document speaks about different topics such as Machine Learning, Cryptography and 
 Server software, then 3 communities are formed. 
@@ -1691,14 +1735,9 @@ An abstract is precise and concise information about a document and hence care s
 extracting sentences for the abstract from the document.  
  
  
-Compute sentence 
-significance 
- 
- Extract Top N 
-significant sentence 
  
  
-ABSTRACT 
+ 
  
  
  
@@ -1716,8 +1755,15 @@ Abstract Generation
  
 Vital sentences from each community are selected based on compression ratio and the collation of all 
 these sentences from different communities form the document Abstract.  
-33 | P a g e 
- Network Representations of Text 2012 
+ 
+Compute sentence 
+significance 
+Extract Top N 
+significant sentence 
+ABSTRACT 
+Network Representations of Text 2012 
+ 
+34 | P a g e  
  
  5.3 Conclusion 
  
@@ -1725,8 +1771,9 @@ The chapter covered detailed working of our summarizer which included a range of
 techniques and the way we check for keywords and extract vital sentences from the main document. 
 The version of summarizer we have developed is a basic version and in future the summarizer can be 
 made complex and advanced with many features embedded in them.  
-34 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+35 | P a g e  
  
  
 CHAPTER 6  
@@ -1769,8 +1816,9 @@ The evaluation is broadly classified into 2 methods,
  
 1. Intrinsic evaluation 
 2. Extrinsic evaluation 
-35 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+36 | P a g e  
  
 6.2.2 Intrinsic Summary Evaluation [12] 
  
@@ -1811,7 +1859,6 @@ Given 2 vectors X and Y, and the angle between the vectors be ?.
  
            z-axis 
  
-Figure 15 [1]: Vector representation 
  
  
 P.Q = |P| |Q| cos ? 
@@ -1820,20 +1867,21 @@ Similarity = cos ? =    P . Q
                                      |P| |Q| 
  
  
-36 | P a g e 
- Network Representations of Text 2012 
+Figure 15 [1]: Vector representation 
+Network Representations of Text 2012 
  
+37 | P a g e  
+ 
+Cos ? = 
+ ??  ?
 ?
- ?  ?
+?=1
+   ?? 2
 ?
-? =1
-Cos ? =  
-? ?
-2 2
-  ?     ?  
-  
-? ?
-? =1 ? =1
+?=1     ?? 
+2?
+?=1  
+ 
  
  
 6.2.2.2 Text Similarity [14] 
@@ -1850,54 +1898,53 @@ Let us assume 2 sentences a and b, let X, Y, Z, M and N represent words in the s
  
 Sentence a: 
  
-X Y Z X X Y Z M M N X Y M X Y Z Y X  
- 
  
  
 Sentence b:  
- 
-X Y Z X X Y Z M X Y Z Y X 
  
  
   
 TF - IDF Vector a: 
  
-X: 6  Y: 5 Z: 3  M: 3 N: 1 
- 
  
  
 TF - IDF Vector b: 
- 
-X: 5  Y: 4 Z: 3  M: 1 N: 0 
  
  
  
 Similarity Measure between sentences a and b: 
  
  
-        
-[ 6 5 + 5 4 + 3 3 + 3 1 + 1 0 ]
-  
-2 2 2 2 2 2 2 2 2 2
-6 +5 +3 +3 +1  5 +4 +3 +1 +0
-  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+X Y Z X X Y Z M M N X Y M X Y Z Y X  
+ 
+X Y Z X X Y Z M X Y Z Y X 
+ 
+X: 6  Y: 5 Z: 3  M: 3 N: 1 
+ 
+X: 5  Y: 4 Z: 3  M: 1 N: 0 
+ 
+[ 6  5  +  5  4 +  3  3 +  3  1 +  1  0 ]
+ 62 + 52 + 32 + 32 + 12   52 + 42 + 32 + 12 + 02
  
 Similarity Measure = 0.97 
- 
- 
 Note:  
- 
- 
 ? A Similarity measure of value 1 implies the sentences are similar. 
+?  0 implies the sentences are completely dissimilar. 
+?  0 - 1 implies partial similarity.  
+Network Representations of Text 2012 
  
-? 0 implies the sentences are completely dissimilar. 
- 
-? 0 - 1 implies partial similarity.  
- 
- 
-37 | P a g e 
- Network Representations of Text 2012 
+38 | P a g e  
  
 6.2.2.3 Abstract Similarity [1] 
  
@@ -1909,23 +1956,17 @@ auto generated abstract and find a matching sentence in the original abstract th
         Auto Generated Abstract              Original Abstract 
  
  
-Sentence 1 Sentence 1 
  
  
  
-Sentence 2 Sentence 2 
  
  
-Sentence 3 Sentence 3 
  
-Sentence 4 Sentence 4 
   
       :                : 
       :                : 
  
-Sentence p Sentence q 
  
-Figure 16 [1]: 1 - N Sentence Mapping 
  
 Figure 9, illustrates 1- N mapping between the sentences of the 2 Abstracts. The sentence together with 
 its matching sentence forms a рSentence pairс and it is the average cosine values of sentence pairs 
@@ -1944,8 +1985,20 @@ Precision = | {Original Abstract sentence} ? {Auto-Generated Abstract sentence} 
 Recall = | {Original Abstract sentence} ? {Auto-Generated Abstract sentence} | 
              Number of sentences in Original abstract 
  
-38 | P a g e 
- Network Representations of Text 2012 
+Sentence 1 
+Sentence 2 
+Sentence 3 
+Sentence p 
+Sentence 4 
+Sentence 1 
+Sentence 2 
+Sentence 3 
+Sentence q 
+Sentence 4 
+Figure 16 [1]: 1 - N Sentence Mapping 
+Network Representations of Text 2012 
+ 
+39 | P a g e  
  
  
 We combine the 2 measures to provide a single measure known as F1 Score or F-Measure. 
@@ -1958,33 +2011,29 @@ pairу based on the similarity measure between the sentences.
  
 The weighting mechanism is as below: 
  
-     0  cosine similarity (p , C(p )) < 0.4  
-i i
+     0  cosine similarity (pi, C(pi)) < 0.4  
  
-Weight (p , C(p )) =   0.5        0.4 < cosine similarity (p , C(p )) < 0.7 
-i i i i
+Weight (pi, C(pi)) =   0.5        0.4 < cosine similarity (pi, C(pi)) < 0.7 
     
-     1 0.7 < cosine similarity (p , C(p ))  
-i i
+     1 0.7 < cosine similarity (pi, C(pi))  
  
 For our experiment we modify the way we compute Precision and Recall as  
  
+Precision =  
+                   
  
-               
-    
  =1
-Precision =   
  
  
  
-               
-    
+Recall =  
+                   
+ 
  =1
-Recall =   
  
  
-Wherein the sentence p and its counterpart C(p ) form a sentence pair and the denominators M and N 
-i i
+ 
+Wherein the sentence pi and its counterpart C(pi) form a sentence pair and the denominators M and N 
 are the number of sentences in the Auto-Generated and Original abstract respectively [1]. 
  
 6.2.2.5 Abstract Evaluation 
@@ -2002,14 +2051,16 @@ CR =   Summary size     = 10%
      Actual text size 
  
  
-39 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+40 | P a g e  
  
  
-Community 
+SUMMARIZER Degree Betweenness PageRank 
 Clustering 
-SUMMARIZER Degree Betweenness PageRank Detection 
 Coefficient 
+Community 
+Detection 
 Algorithm 
 Precision 0.412 0.540 0.461 0.500 0.529 
 Recall 0.488 0.581 0.524 0.520 0.561 
@@ -2018,26 +2069,12 @@ F-Measure 0.447 0.560 0.481 0.510 0.545
 Table 6: Statistical comparison of the summarizers 
  
  
-0.7
-0.6
-0.5
-0.4
-Precision
-Recall
-0.3
-F-Measure
-0.2
-0.1
-0
-Degree Betweenness PageRank Clustering Community
-Coefficient Detection Algorithm
  
  
         Figure 17: Pictographic representation of the statistical results obtained via Precision and Recall 
  
 From the statistical results obtained, the summarizer built employing тCommunity Detection Algorithmу 
-nd
-performed well and stood 2 in performance, when the summarizers were put to test under Precision 
+performed well and stood 2nd in performance, when the summarizers were put to test under Precision 
 and Recall method. 
  
 6.2.3 Extrinsic Summary Evaluation [12] 
@@ -2050,8 +2087,24 @@ Shortcomings in Intrinsic Summary Evaluation
 main document and doesnуt matches with the actual summary of the document as the actual 
 summary is not mere selection of sentences from the main document but a simplified and 
 precise version. 
-40 | P a g e 
- Network Representations of Text 2012 
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+Degree Betweenness PageRank Clustering
+Coefficient
+Community
+Detection Algorithm
+Precision
+Recall
+F-Measure
+Network Representations of Text 2012 
+ 
+41 | P a g e  
  
 ? The evaluation technique employed above deals with computing similarity between the 
 abstracts through word matching, which doesnуt comment on the meaning of the abstracts. For 
@@ -2100,8 +2153,9 @@ the vital sentences from different parts of the core document and hence the summ
 or coherence when these vital sentences are collated.  
  
 Summary Informativeness: Is a measure of information retained in the condensed version. 
-41 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+42 | P a g e  
  
 6.2.3.2.2 Rating and Feedback 
  
@@ -2110,31 +2164,13 @@ Auto-Generated summaries for evaluation and comment on the quality of the summar
 process comprised of the following steps.  
  
  
-Step 1: Markers go through the papers and summaries thoroughly. 
  
-Step 2: Check for Summary coherence and Summary Informativeness. 
-Step 3: Feedback session: The markers were engaged in a questionnaire and the questions were 
  
-answered on a scale of 0 - 10, ranging from low to high. 
  
-               
 6.2.3.2.3 Experimental Results 
 In the Feedback session the markers answered questions on summary coherence and summary 
 informativeness on a scale of 0 - 10 and the results captured are as below.  
  
-16
-14
-12
-10
-0 <= Rating <= 3
-8
-3 < Rating < 7
-7 <= Rating <= 10
-6
-4
-2
-0
-Summary Coherence Summary Informativeness
  
 Figure 18: Statistical results obtained via Panel of Markers approach 
 Based on the experimental results we conclude summaries generated by the process of тExtractionу lack 
@@ -2144,8 +2180,27 @@ The chapter looked at 2 aspects of summary evaluation
 ? In the first approach we compared the performance of our text summarizer with 4 related text 
 summarizers and it was found the summarizer employing community detection algorithm 
 performed well when put to test under Precision and Recall technique. 
-42 | P a g e 
- Network Representations of Text 2012 
+0
+2
+4
+6
+8
+10
+12
+14
+16
+Summary Coherence Summary Informativeness
+0 <= Rating <= 3
+3 < Rating < 7
+7 <= Rating <= 10
+Step 1: Markers go through the papers and summaries thoroughly. 
+Step 2: Check for Summary coherence and Summary Informativeness. 
+Step 3: Feedback session: The markers were engaged in a questionnaire and the questions were 
+answered on a scale of 0 - 10, ranging from low to high. 
+               
+Network Representations of Text 2012 
+ 
+43 | P a g e  
  
 ? In the second approach i.e. the Panel of Markers approach proved to be an efficient way of 
 evaluation as the summaries generated are subjective and demands human intervention for 
@@ -2175,13 +2230,15 @@ algorithm proved to provide better results.
  
  
   
-43 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+44 | P a g e  
  
  
   
-44 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+45 | P a g e  
  
  
 CHAPTER 7  
@@ -2223,8 +2280,9 @@ to test under Precision and Recall technique.
 Based on the results obtained from the Panel of Markers technique, the summaries generated 
 employing our algorithm managed to retain core content of the document and further 
 improvisation can yield high performance, discussed in Chapter 7. 
-45 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+46 | P a g e  
  
 To conclude, the project covered an in depth research in the field of text summarization and an effort 
 made from our side to contribute in the field of Text summarization and from the results obtained we 
@@ -2235,8 +2293,9 @@ Summarization.
  
  
   
-46 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+47 | P a g e  
  
  
 CHAPTER 8 
@@ -2274,24 +2333,26 @@ in future.
  
  
   
-47 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+48 | P a g e  
  
  
   
-48 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+49 | P a g e  
  
  
 BIBLIOGRAPHY  
  
-[1] Yang Lei, рAutomatic Abstract Generator for scientific paper с, University of Bristol, Sept 2006. 
-[2] Hans Peter Luhn, рThe Automatic Creation of literature Abstract с, IBM Journal, April 1958.  
-[3] H. P. Edmundson, рNew Method in Automatic Extraction с, Journal of the association for computing 
+[1] Yang Lei, рAutomatic Abstract Generator for scientific paperс, University of Bristol, Sept 2006. 
+[2] Hans Peter Luhn, рThe Automatic Creation of literature Abstractс, IBM Journal, April 1958.  
+[3] H. P. Edmundson, рNew Method in Automatic Extractionс, Journal of the association for computing 
 Machinery, April 1969. 
-[4] Santo Fortunato, рCommunity detection in graphs с, Complex Networks and Systems Lagrange 
+[4] Santo Fortunato, рCommunity detection in graphsс, Complex Networks and Systems Lagrange 
 Laboratory, ISI Foundation, Viale S. Severo65, 10133, Torino, I, Italy. 
-[5] Steve Gregory, рCommunity structure in networks с, University of Bristol, Department of Computer 
+[5] Steve Gregory, рCommunity structure in networksс, University of Bristol, Department of Computer 
 science. 
 [6] M. E. J. Newman, рDetecting community structure in networksс, 2004. 
 [7] Rodrigo Aldecoa and Ignacio Mar▓n, рDeciphering network community structure by Surpriseс, 2011. 
@@ -2316,13 +2377,15 @@ Discovery Algorithmsс, Galatasaray University.
 http://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0CCMQFjAA&url=http%3
 A%2F%2Fwww.dbs.ethz.ch%2Feducation%2Fmmir%2FSS_01%2Fuebungen%2FPorterStemmer.java&ei=
 gDVkUKnFI8KGhQe2ooAg&usg=AFQjCNG78Rn7PZ-SiyPhH1TlEJljp4zN1Q   
-49 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+50 | P a g e  
  
  
   
-50 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+51 | P a g e  
  
  
 APPENDIX : A 
@@ -2331,51 +2394,52 @@ SAMPLE RESULTS
  
 Original Abstract 
  
-This paper provides theoretical foundations for the group signature primitive. We introduce strong, 
  
-formal definitions for the core requirements of anonymity and traceability. We then show that these 
  
-imply the large set of sometimes ambiguous existing informal requirements in the literature, thereby 
  
-unifying and simplifying the requirements for this primitive. Finally we prove the existence of a 
-construct meeting our definitions based only on the assumption that trapdoor permutations exist. 
  
  
  
 Auto Generated Abstract 
  
-              рGroup signatures are special type of signatures which allows individuals in a group to sign a 
  
-message anonymously on behalf of the group.  The paper defines a group signature scheme 
-constituting 4 polynomial time algorithms and the scheme is proved secure considering the above 2 
  
-security properties. A group is a collection of members and a group manager and are associated with a 
-pair of keys; a group public key, gpk (verification key) and all the members of the group is associated 
  
-with their secret key through which they generate digital signature of any given message. Full 
-Anonymity: We extend the security primitive of anonymity to Full anonymity by formalization under 
  
-which the Adversary choose a message and sent to 2 group members to produce a digital signature 
-and is returned with a signature of the message which is signed anonymously by one of the randomly 
  
-chosen group member. Full Traceability: Is a strong form of collusion resistance meaning even when a 
-group of members collude together by pooling their secret keys are unable to generate a valid 
  
-signature on behalf of another group member, and holds true even if the colluding group is aware of 
-the group manager уs secret key, gmsk. Collusion resistance: Group of members collude together by 
  
-pooling their secret keys are unable to generate a valid signature on behalf of another group member, 
-and is true even if the colluding group is aware of the group manager уs secret key, gmsk. The group 
  
-signature scheme, GS = (GKg, GSig, GVf, GOpen) basically has 4 algorithms.  Group verification 
-algorithm GVf, checks whether the signature on m is a valid signature or not and outputs 1 if the 
- 
-signature on m is valid else returns 0.с 
  
  
   
-51 | P a g e 
- Network Representations of Text 2012 
+This paper provides theoretical foundations for the group signature primitive. We introduce strong, 
+formal definitions for the core requirements of anonymity and traceability. We then show that these 
+imply the large set of sometimes ambiguous existing informal requirements in the literature, thereby 
+unifying and simplifying the requirements for this primitive. Finally we prove the existence of a 
+construct meeting our definitions based only on the assumption that trapdoor permutations exist. 
+              рGroup signatures are special type of signatures which allows individuals in a group to sign a 
+message anonymously on behalf of the group.  The paper defines a group signature scheme 
+constituting 4 polynomial time algorithms and the scheme is proved secure considering the above 2 
+security properties. A group is a collection of members and a group manager and are associated with a 
+pair of keys; a group public key, gpk (verification key) and all the members of the group is associated 
+with their secret key through which they generate digital signature of any given message. Full 
+Anonymity: We extend the security primitive of anonymity to Full anonymity by formalization under 
+which the Adversary choose a message and sent to 2 group members to produce a digital signature 
+and is returned with a signature of the message which is signed anonymously by one of the randomly 
+chosen group member. Full Traceability: Is a strong form of collusion resistance meaning even when a 
+group of members collude together by pooling their secret keys are unable to generate a valid 
+signature on behalf of another group member, and holds true even if the colluding group is aware of 
+the group managerуs secret key, gmsk. Collusion resistance: Group of members collude together by 
+pooling their secret keys are unable to generate a valid signature on behalf of another group member, 
+and is true even if the colluding group is aware of the group managerуs secret key, gmsk. The group 
+signature scheme, GS = (GKg, GSig, GVf, GOpen) basically has 4 algorithms.  Group verification 
+algorithm GVf, checks whether the signature on m is a valid signature or not and outputs 1 if the 
+signature on m is valid else returns 0.с 
+ 
+Network Representations of Text 2012 
+ 
+52 | P a g e  
  
  
 NETWORK WORKBENCH 
@@ -2399,29 +2463,15 @@ File format which provides comprehensive information on the network structure an
 follows:   
  
  
-  *Nodes 
- 
- Id*int label*string 
- 1 рword 1с 
-2 рword 2с 
- 
-1 2 
-3 рword 3с 
- 
-4 рword 4с 
  
  
  
-*UndirectedEdges 
-Source*int target*int 
  
-1  2 
- 3 4 
-2  3 
  
-3  4 
  
-1  4 
+ 
+ 
+ 
  
  
   
@@ -2435,8 +2485,27 @@ generated when the .nwb file is visualized employing Network Workbench.
  
  
  
-52 | P a g e 
- Network Representations of Text 2012 
+  *Nodes 
+ Id*int label*string 
+1 рword 1с 
+2 рword 2с 
+3 рword 3с 
+4 рword 4с 
+ 
+*UndirectedEdges 
+Source*int target*int 
+1  2 
+2  3 
+3  4 
+1  4 
+ 
+1 
+3 
+2 
+4 
+Network Representations of Text 2012 
+ 
+53 | P a g e  
  
  
 APPENDIX : B 
@@ -2452,8 +2521,8 @@ Abstract is generated.
                  
 while(outer < N)                         // N - Number of communities 
 { 
-      System.out.println("Community number ----------" + outer);               // To display community number 
-      eachCommunityKey = communityKeywords[outer];         // Store each community content in an array                      
+      System.out.println("Community number ----------" + outer);                // To display community number
+      eachCommunityKey = communityKeywords[outer];          // Store each community content in an array                     
       if(eachCommunityKey.length == 0) 
                 break;                 
                      
@@ -2489,8 +2558,9 @@ System.out.println ("Token   : " + token + "     community Keyword    :" +
 eachCommunityKey[keyCounter]); 
  
                             if(vital_Sentences.containsKey(sentCounter)) 
-53 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+54 | P a g e  
  
                              
 { 
@@ -2550,8 +2620,9 @@ sorted_Sentences = net.sortHashMapByValuesD(vital_Sentences);
     System.out.println(); 
                  
  
-54 | P a g e 
- Network Representations of Text 2012 
+Network Representations of Text 2012 
+ 
+55 | P a g e  
  
  
    // Display Abstract  
@@ -2575,5 +2646,3 @@ sorted_Sentences = net.sortHashMapByValuesD(vital_Sentences);
      }    
   } 
 } 
-55 | P a g e 
- 

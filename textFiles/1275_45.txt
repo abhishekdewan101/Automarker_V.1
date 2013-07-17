@@ -1,3 +1,5 @@
+1 
+ 
 ABSTRACT 
  
 As the number of images on the internet resources have grown enormously to a large 
@@ -37,8 +39,9 @@ closely matched images are displayed as an output to the application on an effec
 usefully designed user interface on .Net platform. 
  
  
-1 
-  
+3 
+ 
+ 
 TABLE OF CONTENTS 
 ABSTRACT .................................................................................................................................... 1 
 ACKNOWLEDGEMENTS ............................................................................................................ 2 
@@ -65,8 +68,9 @@ ACKNOWLEDGEMENTS ...............................................................
 2.7 Image Processing ............................................................................................................ 24 
 2.7.1 Image filtering .......................................................................................................... 25 
 2.7.2 High Pass Imaging Filters ........................................................................................ 25 
-3 
- 3 RESEARCH METHODOLOGY ......................................................................................... 29 
+4 
+ 
+3 RESEARCH METHODOLOGY ......................................................................................... 29 
 3.1 Introduction ..................................................................................................................... 29 
 3.2 Tools required ................................................................................................................. 30 
 3.2.1 Microsoft Visual Studio ........................................................................................... 30 
@@ -86,8 +90,9 @@ ACKNOWLEDGEMENTS ...............................................................
 8 APPENDIX ........................................................................................................................... 59 
  
   
-4 
- 1 INTRODUCTION 
+5 
+ 
+1 INTRODUCTION 
 1.1 Background 
 As the digital cameras and the use of internet technology has evolved and increased to an 
 unbelievable extent in the past couple of decades in everyday use, the number of images 
@@ -114,8 +119,7 @@ For example, when a tag named as Christmas, is searched along the internet on th
 sharing sites, the most common and important output is a large number of pictures that 
 have almost nothing to do with the event Christmas or its exact calibrations. At the same 
 time, the kind of texts to be searched have to follow certain criteria because number of 
-th
-pictures can be found on the data 25 of December regarding Christmas than by the work 
+pictures can be found on the data 25th of December regarding Christmas than by the work 
 Christmas itself. That is one reason that depicts accurately that the searching of the 
 images solely on the basis of text tags is not enough in any way at all, and there is a need 
 to make use of more than one type of features for the proper and effective searching of 
@@ -124,8 +128,9 @@ In this particular work, the focus has been shifted from the normal implementati
 such system solely on the basis of text to the searching with the help of a couple of 
 methods i.e. text based searching from tags and image based searching for the features. A 
 major effective future application of this type of project can be considered to use a 
-5 
- combination of both of the methods to detect similar images on the online databases 
+6 
+ 
+combination of both of the methods to detect similar images on the online databases 
 which can be much more effective and free of noise. 
 The focus in terms of the online repository is kept on Flickr. Flickr is one of the largest 
 online photos sharing websites and it contains over 3 Billion online photos shared from 
@@ -160,8 +165,9 @@ further improvements to develop very important and helpful future systems.
  
  
  
-6 
- 1.2 Motivation 
+7 
+ 
+1.2 Motivation 
 The internet has become a repository for the collection of several important things like 
 photos in the recent times. Recent estimates show that the number of online photos 
 available at present is in the range of tens of billions which is actually a very huge 
@@ -196,8 +202,9 @@ purposes of GPS as well as for the purposes of tourism.
  
  
  
-7 
- 1.3 Scope of the research 
+8 
+ 
+1.3 Scope of the research 
 In this project, different web techniques are under consideration to create a local database. 
 The tag clouds are used as a data source to discover the relationships between of different 
 tags. GPS information, user id and image description along with tag cloud is saved in the 
@@ -233,8 +240,9 @@ for the purpose of maintaining data for easy and quick retrieval and updating. T
 kept in another program in the database with all the images, tags, and image features plus 
 other relevant information, and all the algorithms are implemented with the help of 
 queries to the database. 
-8 
- 1.4 Aim of the project 
+9 
+ 
+1.4 Aim of the project 
 The aim of this project is to optimize the image searching techniques based on tag 
 clustering with most of the images on Flickr website. Using machine learning the 
 relationship between different images can easily be furnished which can make the tag 
@@ -270,8 +278,9 @@ The programming techniques used in the project are also explained in this chapte
 algorithms used to fetch images from flickr.com and searching for images on the basis of 
 tags online from the flickr.com is demonstrated in this chapter. Database design and 
 offline image search for the images stored in the database is also explained in this chapter. 
-9 
- Machine learning algorithm and the image processing part are also explained with 
+10 
+ 
+Machine learning algorithm and the image processing part are also explained with 
 complete explanation of the code is explained in this chapter. 
 Results 
 This chapter contains screen shots of application outputs. Step by Step working of the 
@@ -282,8 +291,9 @@ accuracy of the research.
 References 
 Complete list of references used in the dissertation is mentioned in this chapter. 
    
-10 
- 2 BACKGROUND 
+11 
+ 
+2 BACKGROUND 
 2.1 Introduction 
 The purpose of this chapter is to review the work and research done previously on the 
 related topic by other people. Different data and information on the implementation of tag 
@@ -304,27 +314,46 @@ website. Flickr does not limit their users to add only a specific set of images 
 images can be about a place, person, event, people and the images can also be the 
 personal pictures of the users uploading the images on Flickr website. Today, Flickr 
 contains more than 6 billion pictures on their website. 
-11 
-  
-F Fi ig gu ur re e  1 1..  T Th he e  w we eb bs si it te e  o of f  f fl li ik ke er r 
-The tag c cl lu us ste ter r  s sy ys ste tem m  im imp ple lem me en nte ted d  b by y  F Fli lic ck kr r  m ma ak ke es s  i it t  e ea as sy y  to to  c co on nn ne ec ct t d dif iff fe er re en nt t i im ma ag ge es s  
-uploaded by different people a an nd d  th thu us s  th the e  ta tag g  b ba as se ed d  s sy ys st te em m  are a a  k ke ey y  s su uc cc ce es ss s  f fa ac cto tor r of the 
-Flickr website. A A  ta tag g  is is n no ot t a a  c co oll lle ec cti tio on n  o of f  s se en nte ten nc ce es s  b bu ut t it it  c co on nta tai in ns s  a a  s sin ing gle le  w wo or rd d  th tha at t c ca an n  
-b be e  u us se ed d  to to  d de es sc cr ri ib be e  th the e  i im ma ag ge e,,  ta tag g  c cl lo ou ud d  o on n  t th he e  F Fli lic ck kr r  w we eb bs sit ite e  d do oe es s  n no ot t c co on nta tain in  o on nl ly y  1 1  o or r  
-2 2  ta tag gs s  b bu ut t i it t  m ma ay y  c co on nt ta ai in n  a as s  m ma an ny y  t ta ag gs s  a as s  required by the user. I It t n no ot t o on nl ly y  h he elp lps s  t th he e  F Fli lic ck kr r  
-website to easily connect r re ela late ted d  i im ma ag ge es s  b bu ut t  i it t  a al lso so  h he elp lps s  th the e  u us se er rs s  t to o  o or rg ga an niz ize e  th the eir ir  
-im ima ag ge es s  o on n  th the e  w we eb bs si it te e  i in n  a a  m mu uc ch h  e ea as si ie er r  w wa ay y. T Ta ag g  s sy ys st te em m  is is n no ot t  im imp ple lem me en nt te ed d  o on nl ly y  b by y  the 
-F F Fl li li ic c ck k kr r r   w w we e eb b bs s sit it ite e e   b b bu u ut t t  o o ov v ve e er r r   t t th h he e e   p p pa a as s st t t f f fe e ew w w   y y ye e ea a ar r rs s s   i i it t t  b b be e ec c ca a am m me e e   v v ve e er r ry y y   m m mu u uc c ch h h   p p po o op p pu u ula la lar r r   in i in n   m m ma a an n ny y y   o o oth th the e er r r   
-social sharing websites. T Th he e  t ta ag g  s sy ys ste tem m can not only b be e  u us se ed d  t to o  d de es sc cr rib ibe e  im ima ag ge es s  but many 
-o of f  t th he e  b blo log gg ge er rs s  a ar re e  a also lso  u us sin ing g  t th hi is s s sy ys st te em m  t to o  d de es sc cr rib ibe e  te tex xt t b ba as se ed d  b blo log gs s  w wh hic ich h  m ma ak ke es s  th the e  
-search process on their website e ea as sie ier r.   
+ Figure 1. The website of fliker
+The tag cluster system implemented by Flickr 
+uploaded by different people and thus the tag based system 
+Flickr website. A tag is not a collection of s
+be used to describe the image, tag cloud on the Flickr 
+2 tags but it may contain as many tags as 
+website to easily connect related images 
+images on the website in a much easier way
+Flickr website but over the past few years it became very much popular in many other 
+social sharing websites. The tag system
+of the bloggers are also using this system to describe 
+search process on their website easier
 2.3 Tag systems 
-Tag system is v ve er ry y  m mu uc ch h  c co om mm mo on n  today in the online world e es sp pe ec ci ia all lly y  in in  t th he e  s so oc ci ia al l  
-networking context...   T T Th h he e er r re e e   a a ar r re e e   d d dif if iff f fe e er r re e en n nt t t  m m me e et t th h ho o od d ds s s   a a an n nd d d   te te tec c ch h hn n niq i iq qu u ue e es s s   u u us s se e ed d d   b b by y y   d d dif if iff f fe e er r re e en n nt t t  p p pe e eo o op p pl l le e e   
-to organize and manage ta tag gs s  a ac cc co or rd din ing g  to to  th the ei ir r  r re eq qu uir ire em me en nt ts. s.  T Th he es se e  ta tag gs s  help other 
-people to view in inf fo or rm ma ati tio on n  a an nd d  r re es so ou ur rc ce es s  available on different websites. .  A All ll  th the e  s sh ha ar ri in ng g  
+Tag system is very much common 
+networking context. There are different methods and techniques used by different people 
+to organize and manage tags according to their 
+people to view information and resources 
+ 
+ 
+makes it easy to connect different images 
+are a key success factor
+entences but it contains a single word that can 
+website does not contain only 1 or 
+required by the user. It not only helps the Flickr 
+but it also helps the users to organize their 
+. Tag system is not implemented only by 
+ can not only be used to describe images 
+text based blogs which makes the 
+.   
+today in the online world especially in the social 
+requirements. These tags 
+available on different websites. All the sharing 
 12 
- patterns and folksonomy completely relies on the tags describing the relative data. 
+ of the 
+the 
+but many 
+help other 
+13 
+ 
+patterns and folksonomy completely relies on the tags describing the relative data. 
 Folksonomy is a classification system which is derived from collaborative tagging and 
 categorizing different tags. In sharing prospects on the internet on websites there are 
 usually two stakeholders involved. One is generally referred as the producer who is 
@@ -361,35 +390,61 @@ The result of unaware tagging, that is, the tags which are redundant, inaccurate
 is undesirable for tagging system. The disagreement of vocabulary of the tags will 
 introduce the inefficiency of the tagging system. The user interaction of the same 
 resource is also affected.  
-13 
-   
-Figure 2.t th he e concept model for tagging system  
-The concept model (Figure ) ) )   c c co o on n ns s sists ists ists  o o of f f   th th thr r re e ee e e   p p pa a ar r rti ti tie e es s s...   T T Th h he e e   u u us s se e er r r   c c ca a an n n   c c cr r re e ea a ate te te   a a a   t ta ta ag g g   a a an n nd d d   a a as s ss s si i ig g gn n n   
-it it it   to to to   a a a   s s sp p pe e ec c ci if if fic ic ic   r r re e es s so o ou u ur r rc c ce e e...   T T Th h he e e   ta ta tag g gs s s   a a ar r re e e   th th the e e   e e ed d dg g ge e e   o o of f f   th t th he e e   c c co o on n nn n ne e ec c ct ti ti io o on n n   b b be e et tw tw we e ee e en n n   u u us s se e er r rs s s   a a an n nd d d   
-r re es so ou ur rc ce es s..  T Th he e  r re es so ou ur rc ce es s  c ca an n  c co on nn ne ec ct t to to  e each other (f fo or r  e ex xa am mp ple le  li lin nk ks s  c co on nn ne ec ct t  t th he e  w we eb b  
-pages, but we do not use t th he es se e  r re ela lati tio on ns s in in  o ou ur r  p pr ro ob bl le em m,,  i. i.e e..  th the e  p pi ic ct tu ur re es s) )..  T Th he e  u us se er rs s  c ca an n  
-connect to each other as w we el ll l  ( (f fo or r  e ex xa am mp ple le  in in  s so oc cia ial l n ne etw two or rk k,,  th the e  u us se er rs s  m ma ay y  h ha av ve e  t th he e  
-r re ela lati tio on ns sh hi ip p  b be etw twe ee en n  e ea ac ch h  o ot th he er r..  W We e i ig gn no or re e  th this is c co on nn ne ec cti tio on n  to too o  f fo or r  t th he e  s sa ak ke e  o of f  t th he e  
+ Figure 2.the
+The concept model (Figure ) consists of three parties. The user can create a tag and assign 
+it to a specific resource. The tags are the edge of the connection between users and 
+resources. The resources can connect to e
+pages, but we do not use these relations
+connect to each other as well (
+relationship between each other. We
 simplicity of our problem). 
-2.3.1 Ta Tag gg gin ing g  i in n  s so oc cia ial l n ne et tw wo or rk kin ing g 
-Tagging allows the user to c ch ho oo os se e different words for their resources a ar rb bi itr tra ar ril ily y. . Thus if 
-the user lacks the r re el la at te ed d  k kn no ow wl le ed dg ge e  about the data to be uploaded t th he ey y  m ma ay y  n no ot t c ch ho oo os se e  
-th th the e e   c c co o or r rr r re e ec c ct t t   t ta ta ag g gs s s   o o or r r   ta ta tag g gs s s   m m ma a ay y y   h h ha a av v ve e e   v v vo o oc c ca a ab b bu u ula la lar r ry y y   m m mi i is s sta ta tak k ke e es s s   a a an n nd d d   th t th hu u us s s   th t th he e e   w w wh h ho o ol l le e e   ta ta tag g g   s s sy y ys s ste te tem m m   c c ca a an n n   
-fail to work if it does not f fo oll llo ow w some specified standards. T Th he e  p pr re ed de ef fi in ne ed d  taxonomic 
-s str tru uc ct tu ur re e  f fo or r  th the e  c co on nc ce ep pt t  o of f  r re es so ou ur rc ce e  m ma ay y  n no ot t be popular a am mo on ng gs st t a all ll  th the e  u us se er rs s  w wh ho o  c ca an n  
-tag the resource. For example, a a  p pic ictu tur re e  w wh hic ich h  d de ep pic icts ts t th he e  B Bi ig g  Be Ben n  c co ou uld ld  b be e  ta tag gg ge ed d  w wi it th h  
-Be Be Bell ll ll   T T To o ow w we e er r r, ,,   ta ta tall ll ll   b b bu u uil il ild d din in ing g g,,,   b b bu u uil il ild d din in ing g g   in in in   L L Lo o on n nd d do o on n n   o o or r r   l l la a an n nd d dm m ma a ar r rk k k   o o of f f   W W We e es s stm tm tmi in in ns s ste te ter r r...   T T Th h he e e   ta t ta ag g gs s s   a a ar r re e e   
-n no ot t t th he e  a ac cc cu ur ra at te e  d de es sc cr rip ipt tio ion n  f fo or r  th the e  p pic ictu tur re e,,  t thus troubles the complete t ta ag gg gi in ng g  s sy ys st te em m. 
-The result of unaware ta tag gg gin ing g, ,  th tha at t i is, s,  th the e  ta tag gs s  w wh hi ic ch h  a ar re e  redundant, ,  i in na ac cc cu ur ra at te e,,  m mista istak ke e,,  
-is undesirable f fo or r  ta tag gg gi in ng g  s sy ys ste tem m..  The disagreement of the vocabulary o of f  th the e  t ta ag gs s  w wil ill l  
-in in intr tr tro o od d du u uc c ce e e   th th the e e   in in ine e ef f ff f fic ic icie ie ien n nc c cy y y   o o of f f   th th the e e   ta ta tag g gg g gin i in ng g g   s s sy y ys s ste te tem m m...   T T Th h he e e   u u us s se e er r r   in in inte te ter r ra a ac c cti t ti io o on n n   o o of f f   t th th he e e   s s sa a am m me e e   
-r re es so ou ur rc ce e  is is a also lso  a af ff fe ec ct te ed d..  T Th he e  c co on nc ce ep ptual model of the tagging system c co on nta tain ins s. The user 
-c ca an n  c cr re ea ate te  a a  ta tag g  a an nd d  a as ss si ig gn n  it it  to to  a a  s sp pe ec ci if fic ic  r re es so ou ur rc ce e..  T Th he e  ta tag gs s  a ar re e  th the e  e ed dg ge e  o of f  th the e  
-c co on nn ne ec cti tio on n  b be et tw we ee en n  u us se er rs s  a an nd d  r re es so ou ur rc ce es s..  T Th he e  r re es so ou ur rc ce es s  c ca an n  c co on nn ne ec ct t to to  e ea ac ch h  o oth the er r  based 
-o on n  th the es se e  ta tag gs s  w wh hic ich h  m ma ak ke e  th the e  u us se er r  in inte ter ra ac ct tio ion n  lot easier. The c co on ntr trib ibu uti tio on n  o of f  th the e  u us se er rs s  i is s 
-mostly tags for resources. T Th he e  s st tu ud dy y  a ar ro ou un nd d  th the e  c co on nn ne ec ct ti io on n  o of f r re es so ou ur rc ce es s  is is m mo os st tl ly y  a ab bo ou ut t  
+2.3.1 Tagging in social networking
+Tagging allows the user to choose
+the user lacks the related knowledge 
+the correct tags or tags may have vocabulary mistakes and thus the whole tag system can 
+fail to work if it does not follow
+structure for the concept of resource may not
+tag the resource. For example, a picture which depicts
+Bell Tower, tall building, building in London or landmark of Westminster. The tags are 
+not the accurate description for the picture, t
+The result of unaware tagging, that is, the tags which are 
+is undesirable for tagging system. 
+introduce the inefficiency of the tagging system. The user interaction of the same 
+resource is also affected. The concep
+can create a tag and assign it to a specific resource. The tags ar
+connection between users and resources. The resources can connect to each 
+on these tags which make the user interaction 
+mostly tags for resources. The study around the connection of
+ 
+ concept model for tagging system  
+ach other (for example links connect the web 
+ in our problem, i.e. the pictures). The users can 
+for example in social network, the users may have the 
+ ignore this connection too for the sake of the 
+ 
+ different words for their resources arbitrarily.
+about the data to be uploaded they may not choose 
+ some specified standards. The predefined 
+ be popular amongst all the users who can 
+ the Big Ben could be tagged with 
+hus troubles the complete tagging system
+redundant, inaccurate, mistake, 
+The disagreement of the vocabulary of the tags will 
+tual model of the tagging system contains
+e the edge of the 
+other 
+lot easier. The contribution of the users is
+ resources is mostly about 
 14 
- web pages. The social networking study is focusing on the relationship between the users. 
+ Thus if 
+taxonomic 
+. 
+. The user 
+based 
+ 
+15 
+ 
+web pages. The social networking study is focusing on the relationship between the users. 
 It is helpful to apply the measurement development in social networking to tagging 
 system. If all the tags that are used to tag the pictures, the users may not continue to add 
 the synonyms of available tags to a specific picture. In some applications, the users are 
@@ -434,8 +489,9 @@ example, the users can express their habit, personality, preference or track of 
 publishing and tagging their resources on the online service. This is the incentives and 
 motivations based on the human nature. The basic incentives and motivation embedded in 
 the nature of online service is to provide sharing services for users to easily organize and 
-15 
- publish their resources. The two motivations, organizational and social, are the basics 
+16 
+ 
+publish their resources. The two motivations, organizational and social, are the basics 
 amongst all the motivations. These incentives and motivation drive the users to tag the 
 resources.  
 These taxonomies as mentioned by Trattner, Korner and Helic (2007) are as follows, 
@@ -478,28 +534,32 @@ publishing and tagging their resources on the online service. This is the incent
 motivations based on the human nature. The basic incentives and motivation embedded 
 in the nature of online service is to provide sharing services for users to easily organize 
 and publish their resources. The two motivations, organizational and social, are the 
-16 
- b b ba a as s si i ic c cs s s   a a am m mo o on n ng g gs s st t t  a a all l ll l   t th th he e e   m m mo o oti t ti iv v va a ati t ti io o on n ns s s...   T T Th h he e es s se e e   in in inc c ce e en n nt t ti iv iv ve e es s s   a a an n nd d d   m m mo o oti ti tiv v va a ati t tio io on n n   d d dr r ri iv iv ve e e   th th the e e   u u us s se e er r rs s s   to to to   
+ basics amongst all the motivations. These incentives and motivation drive the users to 
 tag the resources.  
  
  
  
  
 2.3.3 Tag cloud system 
-Tag c c clo lo lou u ud d ds s s,,,   o o or r r   w w we e ei i ig g gh h hte te ted d d   c c clo lo lou u ud d d,,,   a a ar r re e e   a a a   v v vi isu is su ua a al l l r r re e ep p pr r re e es s se e en n nt ta ta at ti ti io o on n n   o o of f f   t ta ta ag g gs s s...   T T Th h he e e   id id ide e ea a a   o o of f f   ta ta tag g g   c c clo lo lou u ud d ds s s   
-is is is to to to   e e em m mp p ph h ha a as s sis is is th th the e e   m m mo o os s st t t  i im im mp p po o or r rta ta tan n nt t t  ta ta tag g gs s s   a a an n nd d d   to t to o   u u un n nd d de e er r rs s sta ta tate te te   th th the e e   l le le es s ss s s   im im imp p po o or r rta t ta an n nt t t  t ta ta ag g gs s s...   T T Th h he e e   
-im im imp p po o or r rt ta ta an n nc c ce e e   o o of f f   a a a   t ta ta ag g g   i is is s b b ba a as s se e ed d d   o o on n n   th th the e e   f f fr r re e eq q qu u ue e en n nc c cy y y   o o of f f   i i its ts ts a a ap p pp p pe e ea a ar r ra a an n nc c ce e e   in in in   a a all ll ll   ta t ta ag g gs s s...   T T Ta a ag g g   c c cl l louds are 
-a a a   w w wa a ay y y   t to to o   s s st tr tr ra a ati ti tif f fy y y   th t th he e e   ta t ta ag g gs s s...   I I In n n   a a a   t t ty y yp p pic i ic ca a al l l   ta ta tag g g   c c clo lo lou u ud d d   d d de e ep p pic i ic ct, t t, ,   w w we e e   c c ca a an n n   e e ea a as s sil i il ly y y   n n no o ote t te e   th t th he e e   ta t ta ag g gs s s   w w wh h hi i ic c ch h h   
-a a ar r re e e   m m mo o or r re e e   p p po o op p pu u ula l la ar r r...   O O On n n   F F Fli li lic c ck k kr r r,,,   th th the e e   ta ta tag g g   c c clo lo lou u ud d ds s s   a a ar r re e e   s s so o or r rte te ted d d   a a al lp lp ph h ha a ab b be e eti ti tic c ca a all ll lly y y...   T T Th h he e e   w w we e ei i ig g gh h ht t t  o o of f f   
-p po op pu ul la ar ri it ty y  o of f  a a  ta tag g  is is e ex xp pr re es ss se ed d  b by y  th the e  f fo on nt t s siz ize e  o of f  th the e  ta tag g  n na am me e.. 
+Tag clouds, or weighted cloud, are a visual representation of tags. The idea of tag clouds 
+is to emphasis the most important tags and to understate the less important tags. The 
+importance of a tag is based on the frequency of its appearance in all tags. Tag cl
+a way to stratify the tags. In a typical tag cloud depict, we can easily note the tags which 
+are more popular. On Flickr, the tag clouds are sorted alphabetically. The weight of 
+popularity of a tag is expressed by the font size of the tag name.
+Figure 3.Tag cloud from flickr
+The study of the tag clouds helps us to learn the selection of top tags around a theme, a 
+topic and a picture. The work around tag clouds can also be used in recommendation list 
+for a certain set of key words.  
  
-F Fi ig gu ur re e  3 3..T Ta ag g  c cl lo ou ud d  f fr ro om m  f fl li ic ck kr r 
-T T Th h he e e   s s stu tu tud d dy y y   o o of f f   th th the e e   ta ta tag g g   c c clo lo lou u ud d ds s s   h h he e elp lp lps s s   u u us s s   to t to o   le l le ea a ar r rn n n   t t th h he e e   s s se e ele le lec c cti t ti io o on n n   o o of f f   t to to op p p   ta ta tag g gs s s   a a ar r ro o ou u un n nd d d   a a a   t th th he e em m me e e,,,   a a a   
-to to top p pi ic ic c   a a an n nd d d   a a a   p p pi ic ic ct tu tu ur r re e e...   T T Th h he e e   w w wo o or r rk k k   a a ar r ro o ou u un n nd d d   ta ta tag g g   c c clo lo lou u ud d ds s s   c c ca a an n n   a a al lso lso so   b b be e e   u u us s se e ed d d   i in in n   r r re e ec c co o om m mm m me e en n nd d da a at ti ti io o on n n   l l li ist ist st   
-for a certain set of key words.   
+ 
  
 17 
-  
+ouds are 
+ 
+18 
+ 
+ 
  
  
  
@@ -536,8 +596,9 @@ characteristic can be extended to the regions nearby, or the characteristics dim
 certain boundary. For one characteristic, the region which has these characteristics may 
 not overlap. For example, the income distribution is different than disease distribution in 
 a certain region. The last problem is to discover the correlation of the regions. Many 
-18 
- regions of one common characteristic could be neighbors in one area. We can use 
+19 
+ 
+regions of one common characteristic could be neighbors in one area. We can use 
 correlation tool to integrate small regions to a large one.  In addition, another aspect of 
 semantic analysis on tags is about the culture localization. Some places, like art or 
 museum is more correlated to a place instead of an abstract word. In order to identify 
@@ -580,8 +641,9 @@ identification method the cluster is not used by its total number in a certain r
 minimum spatial distance between clusters. 
 We make the assumption for place tags as follows: the spatial usage distribution of a 
 place tag should be the same in a cluster for all the scales. The method of cluster the tags 
-19 
- are proximity-based. For most of the scales the cluster is all the points within a certain 
+20 
+ 
+are proximity-based. For most of the scales the cluster is all the points within a certain 
 region of neighborhood could be merged before points are parted. The calculation of the 
 distance occurs after the points are merged. We define a threshold for merging method. 
 The tags can be measure differently in different types of threshold. There are three types 
@@ -598,13 +660,13 @@ tag. This method is based on the attribute of the cluster. That is the occurrenc
 set of tags tends to be a single cluster, which is stable and distinct to the other clusters. 
 The tags other than place tags almost have the multiple strong clusters. If we merge all of 
 these clusters, the final threshold computed should be larger than the first method. 
-á Measurement on accumulation of scale. In this method the measurement is calculated 
+ Measurement on accumulation of scale. In this method the measurement is calculated 
 by sum of a list of sample of scales chosen from exponential sample method. The tag 
 is place tag if the summed value is lower than the threshold. The value is entropy, 
 thus we select the value which is lower than threshold. The lower entropy is more 
 concentrated distribution for the tags. The strength of this measurement is to weight 
 the scales. We can include multiple scales for the tags. 
-á Measurement on occurrence of scale. We find the stable values from a set of 
+ Measurement on occurrence of scale. We find the stable values from a set of 
 calculation based on multiple scales. The qualifier stable is a standard to choose the 
 scale from the set of all scales. If the value is l0% more than any points of scale, the 
 tag can be classified as place tag. This method is based on the attribute of the cluster. 
@@ -615,7 +677,7 @@ computed should be larger than the first method.
 We also need the alternation in the significant test. Like the first method, we select 
 the tags which are lower than a threshold. We can also include multiple scales for the 
 tags. 
-á Measurement Mixed. We combine the previous two methods as this method of 
+ Measurement Mixed. We combine the previous two methods as this method of 
 measurement. Entropy we calculated after the sampling of the scales is the value we 
 need to tell if the tags are a place tag or not. The set of the scales should be ordered 
 in this scenario. In this method, the entropy should be close to zero, if the spatial 
@@ -626,8 +688,9 @@ which have computed value smaller than the threshold are considered to be the pl
 tags. We select those tags to mark the picture to be a spatial region, which is also 
 discovered by the measurement methods.  
  
-20 
-  
+21 
+ 
+ 
  
  
  
@@ -663,8 +726,9 @@ environment of a large area. Existing pictures on the web can also be taken as a
 of images and can be used for image recognition. Recently the usage of tagging system 
 and picture sharing service is booming on the web. According to the existing web 
 resources, it is easy to match a new picture to an existing one. The tagging system helps 
-21 
- people to mark a meaningful location to the picture, so matching picture will help us to 
+22 
+ 
+people to mark a meaningful location to the picture, so matching picture will help us to 
 discover the potential meaning of the picture as well.  
  
  
@@ -696,8 +760,9 @@ address drilled down to the town name.
  
  
  
-22 
-  
+23 
+ 
+ 
  
  
  
@@ -722,30 +787,35 @@ easy for the data mining process. Currently the commercial search engine and web
 services rely on the text mining, which is to associate the tags with images for better 
 indexing and retrieval. The semantic analysis used in tag library helps to discover the 
 relations between tags that are not explicit. 
-23 
   
- 
-F Fi ig gu ur re e  4 4..F Fl li ic ck kr r geo-tagging 
- 
+Figure 4.Flickr
 2.7 Image Processing 
-T T Th h he e er r re e e   a a ar r re e e   tw t tw wo o o   p p pr r ri im im ma a ar r ry y y   t t ty y yp p pe e es s s   o o of f f   d d di i ig g git it ita a al l l   im im ima a ag g ge e es s s   o o on n ne e e   m m ma a ay y y   b b be e e   c c ca a ate te teg g go o or r riz iz ize e ed d d   a a as s s   s s st ta ta at ti ti ic c c   im i im ma a ag g ge e es s s   
-a a an n nd d d   th th the e e   o o oth th the e er r r   a a as s s   d d dy y yn n na a am m mic ic ic   i im im ma a ag g ge e es s s...   I I In n n   s s sta ta tati ti tic c c   im im ima a ag g ge e es s s   t t th h he e e   s s sc c ce e en n ne e e   t to to o   b b be e e   c c ca a ap p pt tu tu ur r re e ed d d   is is is n n no o ot t t  m m mo o ov v vi i in n ng g g   
-a an nd d  th the e  c ca am me er ra a  is is a also lso  m mo ou un nte ted d  a at t  a a  f fix ixe ed d  p pl la ac ce e,,  t th hu us s  e ev ve er ry yth thin ing g  in inv vo olv lve ed d  in in  s sta tati tic c  i im ma ag ge es s  
-is is is s s sta ta tati ti tio o on n na a ar r ry y y...   W W Wh h hil i il le e e   d d dy y yn n na a am m mic ic ic   i im im ma a ag g ge e es s s   a a ar r re e e   th th tho o os s se e e   i i in n n   w w wh h hic i ic ch h h   e e eit it ith h he e er r r   m m mu u ult lt lti ip ip ple le le   c c ca a am m me e er r ra a a   le l le en n ns s se e es s s   a a ar r re e e   
-u u us s se e ed d d   to to to   c c ca a ap p ptu t tu ur r re e e   th th the e e   im i im ma a ag g ge e e   o o or r r   a a an n ny y y   o o on n ne e e   o o or r r   e e eit i ith th he e er r r   th th the e e   c c ca a am m me e er r ra a as s s   o o or r r   o o ob b bje j je ec c ct t t  is is is m m mo o ov v vin i in ng g g   a a as s s   s s st ta ta at te te ed d d   
-b by y  A Al la an n  ( (2 20 01 11 1) )..  A A  d di ig git ita al l  i im ma ag ge e  is is d de ef fin ine ed d  b by y  2 2  d di im me en ns sio ion na al l  m ma at tr rix ix  c co on nta tain inin ing g  p pi ix xe els ls a at t  x x  
-a a an n nd d d   y y y   s s sp p pa a at ti tia ia al l l c c co o oo o or r rd d din in ina a at te te es s s   a a an n nd d d   f f fu u un n nc c cti ti tio o on n n   o o of f f   t t th h his i is s x x x,,,   y y y   c c co o oo o or r rd d di in in na a at t te e es s s   c c ca a an n n   b b be e e   d d de e ef f fin i in ne e ed d d   a a as s s   t t th h he e e   
-in in inte te ten n ns s sit i it ty y y   o o or r r   g g gr r ra a ay y y   le le lev v ve e el l l o o of f f   th th the e e   im im ima a ag g ge e e   a a at t t  a a an n ny y y   s s sp p pe e ec c cif if ifi i ic c c   p p pix i ix xe e el l l p p po o os s si it it ti i io o on n n...   T T To o o   s s sc c ca a an n n   a a an n n   a a ar r rtw t tw wo o or r rk k k   it i it t   
-requires dynamic image proc c ce e es s ss s sin in ing g g   te te tec c ch h hn n niq iq iqu u ue e es s s   t t to o o   e e ef f ff f fe e ec c cti ti tiv v ve e el l ly y y   d d de e es s si i ig g gn n n   th th the e e   s s sc c ca a an n nn n ne e er r r   s s sy y ys s ste t te em m m...   
-A A A   s s sc c ca a an n nn n ne e er r r   c c co o on n nta ta tai in in ns s s   o o on n ne e e   o o or r r   m m mo o or r re e e   th t th ha a an n n   o o on n ne e e   c c ca a am m me e er r ra a a   le le len n ns s se e es s s   f f fo o oc c cu u us s sin in ing g g   a a at t t  d d dif i if ff f fe e er r re e en n nt t t  v v vie i ie ew w wp p po o oin in ints t ts s   
-a a an n nd d d   c c ca a am m me e er r ra a as s s   g g ge e en n ne e er r ra a all ll lly y y   m m mo o ov v ve e e   w w wit it ith h h   th th the e e   h h he e elp lp lp   o o of f f   d d di i ig g git it ita a al l l m m mo o ot to to or r rs s s   to to to   c c ca a ap p ptu tu tur r re e e   th th the e e   c c co o om m mp p ple le let t te e e   
-object to be scanned. Digit it ita a al l l  i i im m ma a ag g ge e e   p p pr r ro o oc c ce e es s ss s sin in ing g g   te t te ec c ch h hn n ni iq iq qu u ue e es s s   a a ar r re e e   u u us s se e ed d d   to to to   a a ac c cq q qu u ui ir ir re e e   a a an n nd d d   
-m m ma a an n nip ip ipu u ula la late te te   a a an n na a al lo lo og g g   i i im m ma a ag g ge e es s s   s s su u uc c ch h h   a a as s s   p p pa a ain in inti ti tin n ng g gs s s   o o or r r   d d dr r ra a aw w win in ing g gs s s   o o or r r   o o oth t th he e er r r   t t ty y yp p pe e es s s   o o of f f   a a ar r rt tw tw wo o or r rk k k   
-a a ac c cc c co o or r rd d di in in ng g g   t to to o   D D Da a av v vie ie ies s s   ( ( (2 2 20 0 01 1 12 2 2) ) )...   S S So o om m me e e   o o of f f   t t th h he e e   m m mo o os s st t t c c co o om m mm m mo o on n nl l ly y y   u u us s se e ed d d   i i im m ma a ag g ge e e   p p pr r ro o oc c ce e es s ss s sin i in ng g g   
-te tec ch hn niq iqu ue es s  a ar re e  s sc ca ali lin ng g  o of f  im ima ag ge es s,,  b ba ac ck kg gr ro ou un nd d  s su ub btr tra ac cti tio on n, ,  d di ig git ita al l  i im ma ag ge e  s su ub btr tra ac ct ti io on n,,  
-im im ima a ag g ge e e   n n no o or r rm m ma a ali li liz z za a ati ti tio o on n n,,,   p p pr r ro o of f fil i il li i in n ng g g   o o of f f   im i im ma a ag g ge e es s s,,,   f f fi i il lt lt te e er r rin in ing g g   o o of f f   i im im ma a ag g ge e es s s...   A A All l ll l   t th th he e es s se e e   c c co o on n nc c ce e ep p pt ts ts s i i in n n   t t th h he e e   
+There are two primary types of digital images one may be categorized as static images 
+and the other as dynamic images. In static images the scene to be captured is not moving 
+and the camera is also mounted at a fixed place, t
+is stationary. While dynamic images are those in which either multiple camera lenses are 
+used to capture the image or any one or either the cameras or object is moving as stated 
+by Alan (2011). A digital image is de
+and y spatial coordinates and function of this x, y coordinates can be defined as the 
+intensity or gray level of the image at any specific pixel position. To scan an artwork it 
+requires dynamic image processing techniques to effectively design the scanner system. 
+A scanner contains one or more than one camera lenses focusing at different viewpoints 
+and cameras generally move with the help of digital motors to capture the complete 
+object to be scanned. Digital image processing techniques are used to acquire and 
+manipulate analog images such as paintings or drawings or other types of artwork 
+according to Davies (2012). Some of the most commonly used image processing 
+techniques are scaling of images, backgrou
+image normalization, profiling of images, filtering of images. All these concepts in the 
+ geo-tagging 
+ 
+hus everything involved in static images 
+fined by 2 dimensional matrix containing pixels at x 
+nd subtraction, digital image subtraction, 
 24 
- digital image processing have their own purposes and can be utilized for different 
+ 
+25 
+ 
+digital image processing have their own purposes and can be utilized for different 
 purposes. 
 2.7.1 Image filtering 
 Often the images acquired from camera or other imaging devices are not in the form that 
@@ -787,74 +857,88 @@ approximations for the derivatives is calculated as mentioned by Hanno and Schaa
 (2007). Sobel operator can be calculated by defining a matrix value such as if we 
 consider A in the following formula as the source image grid and Gx and Gy as the two 
 sobel kernels then the convolution will take place as follows: 
-25 
-  
-A A As s s   th th the e e   tw tw two o o   S S So o ob b be e el l l k k ke e er r rn n ne e els ls ls   a a ar r re e e   s s se e ep p pa a ar r ra a ab b ble le le   f f fr r ro o om m m   o o on n ne e e   a a an n no o oth th the e er r r   a a an n nd d d   th t th he e ey y y   c c ca a an n n   b b be e e   d d de e ec c co o om m mp p po o os s se e ed d d   a a as s s   
-th th the e e   p p pr r ro o od d du u uc c cts ts ts o o of f f   a a a   d d di if if ff f fe e er r re e en n nti ti tia a al l l  k k ke e er r rn n ne e el l l a a an n nd d d   th th the e e   a a av v ve e er r ra a ag g gin in ing g g   k k ke e er r rn n ne e el. l. l.   I I If f f   d d de e ec c co o om m mp p po o os s sit it iti io io on n n   is is is   d d do o on n ne e e   
-th th the e en n n   t th th he e e   S S So o ob b be e el l l o o op p pe e er r ra a ato to tor r r   c c ca a alc lc lcu u ula l la ate t te es s s   th th the e e   g g gr r ra a ad d die ie ien n nt t t w w wit it ith h h   s s sm m mo o oo o oth th thi in in ng g g   o o of f f   th th the e e   i i im m ma a ag g ge e e...   T T Th h he e e   G G Gx x x   c c ca a an n n   
-n no ow w  b be e  d de ef fin ine ed d  a as s  f fo oll llo ow ws s  a ac cc co or rd di in ng g  to to  J Ja ah hn ne e  a an nd d  K Ko or rk ke el l ( (1 19 99 99 9) ): : 
- 
-T T Th h he e e   x x x   c c co o oo o or r rd d di in in na a at te te e   d d de e ef f fi in in ne e es s s   th th the e e   v v ve e er r rti t tic ic ca a al l l  m m mo o ov v ve e em m me e en n nt t t o o of f f   th t th he e e   f f fil i il lt te te er r r   d d du u ur r ri in in ng g g   th th the e e   c c co o on n nv v vo o ol lu lu uti ti tio o on n n   
-process, the Gy matr t tr rix ix ix   c c ca a an n n   a a also lso lso   b b be e e   d d de e ec c co o om m mp p po o os s se e ed d d   in in in   th th the e e   s s sa a am m me e e   m m ma a an n nn n ne e er r r...   T T Th h he e e   d d de e ec c co o om m mp p po o os s se e ed d d   
-m m ma a at tr tr rix ix ix   c c ca a an n n   e e en n nh h ha a an n nc c ce e e   th t th he e e   c c co o om m mp p pu u ut ta ta ati t tio io on n n   s s sp p pe e ee e ed d d   th th thu u us s s   m m ma a ak k kin in ing g g   th t th he e e   S S So o ob b be e el l l  o o op p pe e er r ra a ato t to or r r   m m mo o or r re e e   p p po o ow w we e er r rf f fu u ul l l   
-a a an n nd d d   u u us s se e ef f fu u ul l l i in in n   t th th he e e   d d di ig ig gi it ita ta al l l  im im ima a ag g ge e e   p p pr r ro o oc c ce e es s ss s si in in ng g g   te te tec c ch h hn n niq iq iqu u ue e es s s   a a as s s   th t th ho o ou u ug g gh h ht t t b b by y y   G G Gil il ilb b ba a ar r rg g g   ( ( (2 2 20 0 00 0 01 1 1) ) )...   T T To o o   
-calculate the exact m ma ag gn nit itu ud de e  o of f  th the e  g gr ra ad di ie en nt t  
- 
+ As the two Sobel kernels are separable from one another and they can be decomposed as 
+the products of a differential kernel and the averaging kernel. If decomposition is done 
+then the Sobel operator calculates the gradient with smoothing of the image. The Gx can 
+now be defined as follows according to Jahne and Korkel (1999):
+The x coordinate defines the vertical movement of the filter during the convolution 
+process, the Gy matrix can also be decomposed in the same manner. The decomposed 
+matrix can enhance the computation speed thus making the Sobel operator more powerful 
+and useful in the digital image processing techniques as thought by Gilbarg (2001). To 
+calculate the exact magnitude of the gradient 
 Laplace Operator 
-L L La a ap p pl l la a ac c ce e e   i is is s a a an n no o ot th th he e er r r   d d di if if ff f fe e er r re e en n nt ti ti ia a al l l o o op p pe e er r ra a at to to or r r   m m mo o os s stl tl tly y y   u u us s se e ed d d   I I I   d d di i ig g git it ita a al l l  i im im ma a ag g ge e e   p p pr r ro o oc c ce e es s ss s sin i in ng g g   f f fo o or r r   e e ed d dg g ge e e   
-d d de e ete te tec c cti ti tio o on n n   a a an n nd d d   i im im ma a ag g ge e e   s s sh h ha a ar r rp p pe e en n nin i in ng g g...   I I It t t a a al lso lso so   c c ca a alc lc lcu u ula la lat t te e es s s   th th the e e   g g gr r ra a ad d di ie ie en n nt t t  f f fu u un n nc c cti t tio io on n n   a a at t t  a a an n ny y y   g g gi iv iv ve e en n n   v v va a al l lu u ue e e   
-of the pixel. The Laplacian of f f   a a a   f f fu u un n nc c ct ti tio io on n n   a a at t t a a an n ny y y   g g gi i iv v ve e en n n   p p pix ix ixe e el l l  lo lo loc c ca a at ti ti io o on n n   i is is s c c ca a al lc lc cu u ula la late te ted d d   b b by y y   s s su u um m m   
-o o of f f   p p pa a ar r rti ti tia a al l l  d d di if if ff f fe e er r re e en n nti ti tia a al l l  e e eq q qu u ua a ati ti tio o on n ns s s   a a ac c cc c co o or r rd d din in ing g g   to to to   S S Sh h hu u ub b bin i in n   ( ( (2 2 20 0 00 0 01 1 1) ) )...   T T Th h he e e   L L La a ap p pla la lac c ce e e   f f fil i il lt t te e er r r   w w wa a as s s   f f fir i ir rs s st t t   
-d d de e es s si i ig g gn n ne e ed d d   b b by y y   a a a   F F Fr r re e en n nc c ch h h   s s sc c cie ie ien n nt ti ti ist s st t a a an n nd d d   m m ma a at t th h he e em m ma a ati ti tic c cia ia ian n n   S S Sim im imo o on n n   d d de e e   L L La a ap p pl l la a ac c ce e e   i i in n n   1 1 18 8 80 0 00 0 0Õ Õ Õs s s...   H H He e e   
-designed the operator in n ni i iti ti tia a al ll ll ly y y   to t to o   s s stu t tu ud d dy y y   c c ce e ele l le es s sti t ti ia a al l l m m me e ec c ch h ha a an n nic ic ics s s,,,   w w wh h he e er r re e e   th t th he e e   L L La a ap p pl la la ac c ce e e   o o op p pe e er r ra a ato to tor r rs s s   
-w w wh h he e en n n   a a ap p pp p pli li lie e ed d d   o o on n n   th th the e e   g g gr r ra a av v vit it ita a at ti tio io on n na a al l l p p po o ot te te en n nti ti tia a al l l  w w wil il ill l l r r re e es s su u ult l lt t   in in in   m m ma a as s ss s s   d d de e en n ns s sit it ity y y   a a as s s   m m me e en n nti t ti io o on n ne e ed d d   b b by y y   
-L L Lin in ind d de e eb b be e er r rg g g   ( ( (1 1 19 9 99 9 93 3 3) ) )...   L L La a ate te ter r r   t th th he e e   L L La a ap p pla la lac c ce e e   o o op p pe e er r ra a at t to o or r r   w w wa a as s s   e e ex x xte te ten n ns s si iv iv ve e el l ly y y   u u us s se e ed d d   i in in n   d d dig i ig gi it it ta a al l l  im im ima a ag g ge e e   
-processing specific c ca a all ll lly y y   in in in   e e ed d dg g ge e e   o o or r r   b b bl lo lo ob b b   d d de e ete t te ec c ct t ti io io on n n   a a al l lg g go o or r rit it ith h hm m ms s s...   M M Mo o os s st t t  o o of f f   t th th he e e   L L La a ap p pla la lac c ce e e   o o op p pe e er r ra a ato to tor r r   
-in in in   d d di i ig g git i it ta a al l l  im im ima a ag g ge e e   p p pr r ro o oc c ce e es s ss s si i in n ng g g   i is is s b b ba a as s se e ed d d   o o on n n   th t th he e e   L L La a ap p pl l la a ac c cia ia ian n n   o o of f f   G G Ga a au u us s ss s sia ia ian n n   f f fo o or r rm m mu u ula la las s s...   T T Th h he e e   in i in np p pu u ut t t  
-im im ima a ag g ge e e   is i is s  c c co o on n nv v vo o olv l lv ve e ed d d   w w wit it ith h h   b b by y y   a a a   G G Ga a au u us s ss s sia ia ian n n   m m ma a at t tr r rix ix ix   o o or r r   k k ke e er r rn n ne e el l l w w wh h hic ic ich h h   is is is b b ba a as s se e ed d d   o o on n n   th t th he e e   f f fo o ol ll ll lo o ow w win i in ng g g   
+Laplace is another differential operator mostly used I digital image processing for edge 
+detection and image sharpening. It also calculates the gradient function at any given value 
+of the pixel. The Laplacian of a function at any given pixel location is calculated by sum 
+of partial differential equations according to Shubin (2001). The Laplace filter was first 
+designed by a French scientist and mathematician Simon de Laplace in 1800Õs. He 
+designed the operator initially to study celestial mechanics, where the Laplace operators 
+when applied on the gravitational potential will result in mass density as mentioned by 
+Lindeberg (1993). Later the Laplace operator was extensively used in digital image 
+processing specifically in edge or blob detection algorithms. Most of the Laplace operator 
+in digital image processing is based on the Laplacian of Gaussian formulas. The input 
+image is convolved with by a Gaussian matrix or kernel which is based on the following 
 formula. 
+If we consider f(x,y) as the image function and g(x,y) as the Gaussian function then the 
+convolution of both can result in Laplace filter implementation according to the research 
+done by Bennett and Peng (2006).
  
-I I If f f   w w we e e   c c co o on n ns s sid i id de e er r r   f f f( ( (x x x, ,,y y y) ) )   a a as s s   th t th he e e   im i im ma a ag g ge e e   f f fu u un n nc c ct ti ti io o on n n   a a an n nd d d   g g g( ( (x x x,,,y y y) ) )   a a as s s   th th the e e   G G Ga a au u us s ss s sia ia ian n n   f f fu u un n nc c cti ti tio o on n n   th t th he e en n n   t t th h he e e   
-c c co o on n nv v vo o olu lu luti ti tio o on n n   o o of f f   b b bo o oth th th   c c ca a an n n   r r re e es s su u ult lt lt   in in in   L L La a ap p pl l la a ac c ce e e   f f fil il ilt te te er r r   i im im mp p ple l le em m me e en n nta ta tati ti tio o on n n   a a ac c cc c co o or r rd d di in in ng g g   to to to   th th the e e   r r re e es s se e ea a ar r rc c ch h h   
-d do on ne e  b by y  B Be en nn ne et tt t  a an nd d  P Pe en ng g  ( (2 20 00 06 6) ).. 
+ 
+ 
+ 
+ 
+ 
+ 
 .  
- 
 26 
- T T Th h he e e   L L La a ap p pl la la ac c cia ia ian n n   w w wh h he e en n n   c c co o om m mp p pu u ute te ted d d   g g ge e en n ne e er r ra a al ll ll ly y y   r r re e es s su u ul l lt ts ts s   in in in   s s str tr tro o on n ng g g   r r re e es s sp p po o on n ns s se e es s s   a a an n nd d d   d d da a ar r rk k k   o o ob b bje j je ec c ct t ts s s  u u up p p   
+ 
+ The Laplacian when computed generally results in strong responses and dark objects up 
 to the extent of  
- a a an n nd d d   s s str t tr ro o on n ng g g   n n ne e eg g ga a at ti tiv iv ve e e   r r re e es s sp p po o on n ns s se e es s s   a a ar r re e e   c c ca a alc lc lcu u ula l la at t te e ed d d   f f fo o or r r   b b br r ri i ig g gh h ht te te er r r   o o ob b bje je jec c cts. ts. ts.   L L La a ap p pla l la ac c ce e e   h h ha a av v ve e e   a a a   
-f fe ew w  p pr ro ob bl le em ms s  a as s  i it ts s r re es su ul lt t  a ar re e  h hi ig gh hl ly y  d de ep pe en nd de en nt t  o on n  s siz ize es s  o of f  o ob bje jec cts ts a an nd d  t th he e  r re el la at ti io on ns sh hip ip  
-b b be e etw tw twe e ee e en n n   th th the e em m m...   D D Di i if f ff f fe e er r re e en n nt t t   m m mu u ult lt lti i i  s s sc c ca a ale le le   a a ap p pp p pr r ro o oa a ac c ch h he e es s s   a a ar r re e e   u u uti ti til li li iz z ze e ed d d   to t to o   m m ma a ak k ke e e   L L La a ap p pa a al lc lc ce e e   o o op p pe e er r ra a ato to tor r r   
-in in ind d de e ep p pe e en n nd d de e en n nt t t  o o of f f   th th the e e   r r re e ela la lati t ti io o on n ns s sh h hip ip ips s s   b b be e etw tw twe e ee e en n n   d d dif if iff f fe e er r re e en n nt t t o o ob b bje je jec c cts ts ts a a an n nd d d   th th the e ei ir ir r   s s siz i iz ze e es s s   i i in n n   th th the e e   i im im ma a ag g ge e e... 
-T Th he e  g gr ra ad die ien nt t o op pe er ra ati tio on n  in in  th the e  L La ap pla lac ce e  o op pe er ra ato tor r  c ca an n  a al ls so o  b be e  u us se ed d  v ve er ry y  e ef ff fe ec cti tiv ve el ly y  to to  d de ete tec ct t  
-s s sh h ha a ar r rp p p   e e ed d dg g ge e es s s,,,   c c ch h ha a an n ng g gin i in ng g g   o o of f f   g g gr r ra a ay y y   le le lev v ve e els l ls s  o o ov v ve e er r r   s s sp p pa a ac c ce e e   v v ve e er r ry y y   r r ra a ap p pid id idl l ly y y   c c ca a an n n   in i in nd d dic ic ica a at te te e   t t th h he e e   p p pr r re e es s se e en n nc c ce e e   o o of f f   
-a a an n n   e e ed d dg g ge e e   i in in n   a a an n n   i i im m ma a ag g ge e e...   Bu Bu But t t w w wh h he e en n n   g g gr r ra a ay y y   le l le ev v ve e el l l a a ar r re e e   c c ch h ha a an n ng g ge e ed d d   v v ve e er r ry y y   s s slo l lo ow w wl l ly y y   in in in   th th the e e   i im im ma a ag g ge e e   u u us s su u ua a all l ll ly y y   
-w wh he en n  e ed dg ge es s  in in  t th he e  i im ma ag ge e  a ar re e  n no ot t  s sh ha ar rp p  e en no ou ug gh h  t to o  b be e d de ete tec ct te ed d  b by y  G Ga au us ss si ia an n  f fil ilt te er r  a al lo on ne e  
-a a ac c cc c co o or r rd d di in in ng g g   to to to   G G Go o on n nz z za a ale le lez z z,,,   Ra Ra Raf f fa a ae e el l l  a a an n nd d d   R Ri Ri ic c ch h ha a ar r rd d d   ( ( (2 2 20 0 00 0 06 6 6) ) )...   S S So o o,,,   it it it   i is is s b b be e ett tt tte e er r r   to to to   u u us s se e e   th th the e e   L L La a ap p pl l la a ac c ce e e   
-o o op p pe e er r ra a ato to tor r r   in in ins s st te te ea a ad d d   o o of f f   u u us s sin in ing g g   th th the e e   g g gr r ra a ad d di ie ie en n nt t t o o op p pe e er r ra a ato t to or r r   d d dir ir ire e ec c ctl tl tly y y   o o on n n   th t th he e e   im im ima a ag g ge e e...   T T Th h he e e   e e ed d dg g ge e es s s   in i in n   a a an n n   
-im ima ag ge e  c ca an n  b be e  o ob bta tain ine ed d  u us sin ing g  a a  s se ec co on nd d  o or rd de er r  d dif iff fe er re en nti tia al l  e eq qu ua ati tio on n  t to o  f fin ind d  th the e  z ze er ro o  
-c cr ro os ss sin ing gs s  in in  e ed dg ge es s  p pr re es se en nt t in in  a an n  im ima ag ge e.. 
-F F Fo o or r r   tw tw two o o   d d dim im ime e en n ns s sio io ion n na a al l l i im im ma a ag g ge e e   m m ma a atr tr trix i ix x   th t th he e e   L L La a ap p pl l la a ac c ce e e   m m ma a atr tr trix ix ix   o o or r r   w w wo o or r rk k kin in ing g g   k k ke e er r rn n ne e el l l  c c ca a an n n   b b be e e   d d de e ef f fin in ine e ed d d   
+ and strong negative responses are calculated for brighter objects. Laplace have a 
+few problems as its result are highly dependent on sizes of objects 
+between them. Different multi scale approaches are utilized to make Lapalce operator 
+independent of the relationships between different objects and their sizes in the image.
+The gradient operation in the Laplace operator can also be us
+sharp edges, changing of gray levels over space very rapidly can indicate the presence of 
+an edge in an image. But when gray level are changed very slowly in the image usually 
+when edges in the image are not sharp enough to be
+according to Gonzalez, Rafael and Richard (2006). So, it is better to use the Laplace 
+operator instead of using the gradient operator directly on the image. The edges in an 
+image can be obtained using a second order diffe
+crossings in edges present in an image.
+For two dimensional image matrix the Laplace matrix or working kernel can be defined 
 as  
  
-T T Th h his is is k k ke e er r rn n ne e el l l is is is u u us s se e ed d d   w w wh h he e en n n   o o on n nl l ly y y   th th the e e   h h ho o or r ri iz iz zo o on n nt t ta a al l l a a an n nd d d   v v ve e er r rti ti tic c ca a al l l n n ne e ei i ig g gh h hb b bo o or r rs s s   o o of f f   t th th he e e   c c cu u ur r rr r re e en n nt t t p p pix ix ixe e el l l  
-a a ar r re e e   in in inc c cl lu lu ud d de e ed d d   i in in n   t th th he e e   g g gr r ra a ad d di i ie e en n nt t t c c ca a alc lc lcu u ul l la a ati ti tio o on n ns s s...   T T To o o   i i in n nc c cl l lu u ud d de e e   th th the e e   d d dia i ia ag g go o on n na a als l ls s a a as s s   w w we e ell ll ll   in i in n   th t th he e e   L L La a ap p pl l la a ac c ce e e   
-o o op p pe e er r ra a ato to tor r r   c c ca a alc lc lcu u ula la lati ti tio o on n n   th th the e er r re e e   a a ar r re e e   m m ma a an n ny y y   d d dif if iff f fe e er r re e en n nt t t s s sa a am m me e e   s s siz iz ize e ed d d   k k ke e er r rn n ne e els l ls s a a av v va a ail il ila a ab b ble le le,,,   th th the e e   m m mo o os s st t t  
-c co om mm mo on nl ly y  u us se ed d  k ke er rn ne el l i in n  L La ap pl la ac ce e  o op pe er ra ato tor r  f fo or r  d di ia ag go on na als ls is is 
+This kernel is used when only the horizontal and vertical neighbors of the current pixel 
+are included in the gradient calculations. To include the diagonals as well in the Laplace 
+operator calculation there are many different same sized kernels available, the most 
+commonly used kernel in Laplace operator for diagonals is
   
  
 Gradient 
-Gradient o o of f f   a a an n n   i im im ma a ag g ge e e   is is is c c ca a at te te eg g go o or r riz iz ize e ed d d   a a as s s   d d dir ir ire e ec c cti ti tio o on n na a al l l c c ch h ha a an n ng g ge e e   o o of f f   c c co o olo l lo or r r   o o or r r   g g gr r ra a ay y y   l le le ev v ve e el l l  i in in nt te te en n ns s sit i it ty y y   
-in in in   a a an n n   i im im ma a ag g ge e e...   G G Gr r ra a ad d die i ie en n nt t t o o of f f   a a an n n   i im im ma a ag g ge e e   c c co o on n nta ta tain in ins s s   v v ve e er r ry y y   u u us s se e ef f fu u ul l l in i in nf f fo o or r rm m ma a at ti ti io o on n n   a a ab b bo o ou u ut t t th th the e e   i im im ma a ag g ge e e   a a an n nd d d   
-it it its s s   c c ca a alc lc lcu u ul la la at ti tio io on n n   c c ca a an n n   h h he e elp l lp p   in in in   a a an n na a al l ly y yz z zi in in ng g g   th th the e e   im i im ma a ag g ge e e   i i in n n   g g gr r re e ea a at t t  d d de e eta t ta ail i il l   a a as s s   m m me e en n nti ti tio o on n ne e ed d d   b b by y y   Ba Ba Bar r rr r rio i io o,,, 
-H H He e er r rr r re e er r ro o o   a a an n nd d d   S S Sa a an n nz z z   ( ( (2 2 20 0 00 0 09 9 9) ) )...   I I In n n   d d di i ig g git it ita a al l l  i im im ma a ag g ge e e   p p pr r ro o oc c ce e es s ss s sin in ing g g   c c co o on n nc c ce e ep p pts t ts s th th the e e   g g gr r ra a ad d di i ie e en n nt t t o o of f f   a a an n n   im im ima a ag g ge e e   
-g g gi i iv v ve e es s s   in in inf f fo o or r rm m ma a ati ti tio o on n n   a a ab b bo o ou u ut t t   g g gr r ra a ad d du u ua a al l l c c ch h ha a an n ng g ge e e   o o or r r   g g gr r ra a ad d du u ua a al l l b b ble l le en n nd d d   o o of f f   c c co o ol lo lo or r r   f f fr r ro o om m m   lo l lo ow w w   i in in nte te ten n ns s sit i it ty y y   
-p p pi i ix x xe e els ls ls t t to o o   h h hig i ig gh h h   in in inte te ten n ns s sit it ity y y   p p pix ix ixe e els l ls s f f fo o or r r   e e ex x xa a am m mp p ple le le   th th the e e   g g gr r ra a ad d du u ua a al l l  c c ch h ha a an n ng g ge e e   f f fr r ro o om m m   w w wh h hit it ite e e   c c co o olo l lo or r r   to t to o   b b black 
-c c co o olo lo lor r r   in in in   c c ce e er r rta ta tain in in   d d dir ir ire e ec c cti ti tio o on n n   in i in n   a a an n n   i i im m ma a ag g ge e e...   A A As s s   g g gr r ra a ad d di i ie e en n nt t t  is i is s th t th he e e   c c ca a alc l lc cu u ula l la ati t ti io o on n n   o o of f f   p p pr r ro o og g gr r re e es s ss s sio i io on n n   o o of f f   
-c c co o olo lo lor r r   f f fr r ro o om m m   o o on n ne e e   p p po o oin in int t t  t to to o   a a an n no o ot th th he e er r r   s s so o o   i it it t   i is is s   s s so o om m me e eti ti tim m me e es s s   a a al lso lso so   r r re e ef f fe e er r rr r re e ed d d   a a as s s   c c co o olo lo lor r r   p p pr r ro o og g gr r re e es s ss s sio i io on n n   o o of f f   a a an n n   
-im ima ag ge e..  T Th he e  g gr ra ad di ie en nt t o of f  a a  tw two o  d dim ime en ns si io on na al l i im ma ag ge e  a at t a an ny y  g giv ive en n  p pi ix xe el l lo loc ca ati tio on n  c ca an n  b be e  f fo ou un nd d  
+Gradient of an image is categorized as directional change of color or gray level intensity 
+in an image. Gradient of an image contains very useful information about the image and 
+its calculation can help in analyzing the image in great detail as mentioned by Barrio,
+Herrero and Sanz (2009). In digital image processing concepts the gradient of an image 
+gives information about gradual change or gradual blend of color from low intensity 
+pixels to high intensity pixels for example the gradual change from white color to b
+color in certain direction in an image. As gradient is the calculation of progression of 
+color from one point to another so it is sometimes also referred as color progression of an 
+image. The gradient of a two dimensional image at any given pixel loca
+and the relationship 
+ed very effectively to detect 
+ detected by Gaussian filter alone 
+rential equation to find the zero 
+ 
+ 
+tion can be found 
 27 
- by using a filter which calculates the intensities both in vertical and horizontal locations. 
+ 
+ 
+lack 
+28 
+ 
+by using a filter which calculates the intensities both in vertical and horizontal locations. 
 The gradient is given by the direction from that given point to the largest intensity pixel 
 in its neighbors and magnitude of the vector gives the rate of change in intensities from 
 one pixel to another. The intensities of pixels are unique to their discrete points and there 
@@ -871,8 +955,9 @@ different types of approximations and calculations of an image can be done using
 information provided by gradient calculations. 
   
   
-28 
- 3 RESEARCH METHODOLOGY  
+29 
+ 
+3 RESEARCH METHODOLOGY  
 3.1 Introduction 
 This chapter includes explanation of different methods and techniques used to design the 
 desktop application. The application design contains concepts from different fields of 
@@ -904,8 +989,9 @@ other relevant information, and all the algorithms are implemented with the help
 queries to the database. 
  
  
-29 
- 3.2 Tools required  
+30 
+ 
+3.2 Tools required  
 The application design will be implemented using Microsoft C++ .net framework to 
 design the interface for the application. Microsoft access will be used as the primary 
 database management system and SQL queries will be used for communication between 
@@ -934,8 +1020,9 @@ although it stores data in its own format which is based on the Microsoft Jet Da
 Engine. Access can also integrate data with other Microsoft products like Excel or Word. 
 Microsoft Access can communicate with .net developed applications using OLEDB data 
 library provide in the .net framework.   
-30 
- 4 APPLICATION DESIGN 
+31 
+ 
+4 APPLICATION DESIGN 
 4.1 Introduction 
 The application is designed in C++ using Microsoft Visual Studio 2010 (dot Net 
 framework version 4).  The database to store image URLs is designed in Microsoft 
@@ -970,8 +1057,9 @@ environment and can be accessed from .net framework 2.0 or above. The following
 functions from the Flickr.Net are used in the application.    
 #using <FlickrNet.dll> 
 private: Flickr ^ f; 
-31 
- private: PhotoSearchOptions^ o; 
+32 
+ 
+private: PhotoSearchOptions^ o; 
 private: PhotoCollection^ phCl; 
 o->Extras = PhotoSearchExtras::OriginalUrl | 
 PhotoSearchExtras::OwnerName | PhotoSearchExtras::Description | 
@@ -1006,26 +1094,40 @@ calculation at much greater speed and reliability.
  
  
  
-32 
  4.4 Database design  
-D Da ata tab ba as se e  f fo or r  th the e  a ap pp pl li ic ca at ti io on n  is is c co om mp pl le ete tel ly y  d de es si ig gn ne ed d  u us si in ng g  M Mi ic cr ro os so of ft t A Ac cc ce es ss s but the 
-d da ata tab ba as se e  is is o on nl ly y  u us se ed d  a as s  th the e  c ce en nt tr ra al l r re ep po os sit ito or ry y  o of f  d da ata ta  f fo or r  th the e  a ap pp pl li ic ca at ti io on n  a an nd d  n no o  
-a a ap p pp p pli li lic c ca a ati ti tio o on n n   in in inte te ter r rf f fa a ac c ce e e   i is is s  d d de e es s si i ig g gn n ne e ed d d   i in in n   M M Mi i ic c cr r ro o os s so o of f ft t t A A Ac c cc c ce e es s ss s s...   A A All ll ll   t th th he e e   m m ma a an n nip ip ipu u ula la lati ti tio o on n n,,,   d d de e ele le leti ti tio o on n n   a a an n nd d d   
-c cr re ea at ti io on n  o of f  d da at ta a  i in n  th the e  d da at ta ab ba as se e are d do on ne e  t th hr ro ou ug gh h  C+ C++ +  m ma an na ag ge ed d  a ap pp pli lic ca at tio ion n..  T Th he e  
-application uses SQL queries to to  c co om mm mu un nic ica ate te  w wit ith h  database f fil ile e  s sto tor re ed d  l lo oc ca all lly y  o on n  t th he e  
-computer. Database contains  d di if ff fe er re en nt t  ta tab ble les s  w wh hic ich h  a ar re e  u us se ed d  to to  s sto tor re e  d da ata ta  b by y  th the e  
-application a an nd d  s so om me e  t ta ab ble les s  a ar re e  u us se ed d  to to  p pe er rf fo or rm m  c ca alc lcu ula lati tio on ns s  to to  r re ea ac ch h  t th he e  d de es sir ire ed d  s se ea ar rc ch h  
-outputs. T T Th h he e e   im im ima a ag g ge e e   in in inf f fo o or r rm m ma a ati ti tio o on n n   r r re e etr tr tri i ie e ev v ve e ed d d   f f fr r ro o om m m   t t th h he e e   F F Fli li lic c ck k kr r r   w w we e eb b bs s sit i it te e e   is is is s s st to to or r re e ed d d   in i in n   th t th he e e   l lo lo oc c ca a al l l  
-database. T T Th h he e e   F F Fli l li ic c ck k kr r r   t t ta a ab b ble l le e   in in in   d d da a at ta ta ab b ba a as s se e e   c c co o on n nta ta tain in ins s s   a a an n n   I I ID D D   ( ( (d d da a ata ta tab b ba a as s se e e   p p pr r rim i im ma a ar r ry y y   k k ke e ey y y) ) ),,,   
-I IM MA AG GE EU UR RL L,,  T TI IT TL LE E,,  D DE ES SCR CRI IP PT TI IO ON N,,  U US SE ER RI ID D,,  L LA AT TI IT TU UD DE E, ,  L LO ON NG GI IT TU UD DE E,,  
-K KE EY YW WO ORD RDS S/ /T TA AG GS S,,  I IM MA AG GE EL LO OCA CAT TI IO ON N ( (i im ma ag ge e  U UR RL L  to to  d dir ire ec ctl tly y  f fe et tc ch h  im ima ag ge es s  f fr ro om m  
-th the e  F Fli lic ck kr r  w we eb bs si it te e) )  a an nd d  T TA AG G_ _CO COU UN NT T  ( (to to  s store to tota tal l n nu um mb be er r  o of f  ta tag gs s  a as ss so oc cia iate ted d  w wit ith h an 
-image). T T Th h he e er r re e e   a a ar r re e e   m m mo o or r re e e   t th th ha a an n n   2 2 25 5 50 0 00 0 0   i im im ma a ag g ge e es s s   s s sto to tor r re e ed d d   in i in n   th th the e e   d d da a ata ta tab b ba a as s se e e   f f fo o or r r   a a a   s s sin in ing g gle l le e   p p pl la la ac c ce e e   li li lik k ke e e   
-E Eif iff fe el l  to tow we er r,,  P Pisa isa  to tow we er r  e etc tc..  A A  to tota tal l o of f  m mo or re e  th tha an n  1 10 00 00 00 0  r ro ow ws s  o of f  t th hi is s d da ata ta  are s sto tor re ed d  in in  th the e  
-database. T T Th h he e e   d d da a ata ta tab b ba a as s se e e   d d de e es s si i ig g gn n n   is i is s a a as s s   f f fo o oll ll llo o ow w ws s s: : :  
+Database for the application is 
+database is only used as the central repository 
+application interface is designed in Microsoft Access. All the manipulation, deletion and 
+creation of data in the database
+application uses SQL queries to communicate with 
+computer. Database contains 
+application and some tables are used to per
+outputs. The image information retrieved from the Flickr website is stored in the local 
+database. The Flickr table in database contains an ID (database primary key), 
+IMAGEURL, TITLE, DESCRIPTION, USERID, LATITU
+KEYWORDS/TAGS, IMAGELOCATION
+the Flickr website) and TAG_COUNT (to s
+image). There are more than 2500 images stored in the database for a single place like 
+Eiffel tower, Pisa tower etc. A total of more than 10000 rows of this data 
+database. The database design is as follows:
+completely designed using Microsoft Access
+of data for the application and no 
+ are done through C++ managed application. The 
+database file stored locally on the 
+different tables which are used to store data by the 
+form calculations to reach the desired search 
+DE, LONGITUDE, 
+ (image URL to directly fetch images from 
+tore total number of tags associated with
+are stored in the 
 Figure 5. Database Design 
 33 
- Database contains five tables out of which four of the tables are connected with a central 
+ but the 
+ an 
+  
+34 
+ 
+Database contains five tables out of which four of the tables are connected with a central 
 table while the other table is used for calculations done in the application. The Flickr 
 table contains information about the image, it contains ID as the primary key for the table 
 and thus ID is unique for all the records saved in the application. SRESULT table is used 
@@ -1055,8 +1157,9 @@ information contains results after image processing on the database images.
  
  
  
-34 
- 4.5 Tag search distance calculation  
+35 
+ 
+4.5 Tag search distance calculation  
 When a user enters a tag or a collection of tags, the application searches through all the 
 images in the database and a distance is assigned to each of the found image. The 
 distance calculation is based on the tag difference between the entered tags and the total 
@@ -1094,8 +1197,9 @@ of the resultant image from the searched tags between 0 and 10. The distance
 values close to 0, or lower distance value means that the image is more close to 
 the desired image on the basis of tags entered.  
  
-35 
- The application searches the entered tags in these steps, first step results the images 
+36 
+ 
+The application searches the entered tags in these steps, first step results the images 
 where all the tags are found in the tag cloud of an image in the local database. This means 
 that images containing all the entered tags in its tag cloud are shown as a result of this 
 query. A minimum grade is given to these images which mean that it is most probable 
@@ -1141,8 +1245,9 @@ VALUES ("+ dataGridView1->Rows[j]->Cells[0]->Value->ToString() +", 0,
  
    if (strarray->Length>2) 
    { 
-36 
-     for (int i = 0; i < strarray->Length - 1; i++) 
+37 
+ 
+    for (int i = 0; i < strarray->Length - 1; i++) 
     { 
      for (int j = i + 1; j < strarray->Length; j++) 
      { 
@@ -1188,8 +1293,9 @@ dataGridView1->Rows[j]->Cells[0]->Value->ToString() +", 2, "+ td +", 4)
  
  
    if (strarray->Length >1) 
-37 
-    {  
+38 
+ 
+   {  
     for (int i=0;i<strarray->Length;i++) 
     { 
      
@@ -1235,8 +1341,9 @@ DESC",cn);
  
    dataGridView1->DataSource = ds->Tables[0]; 
  
-38 
-    cn->Open(); 
+39 
+ 
+   cn->Open(); 
  
    for (int j=0; j <dataGridView1->Rows->Count-1; j++) 
    { 
@@ -1273,8 +1380,9 @@ TOTAL_DISTANCE = "+ total_d +" where id = "+ dataGridView1-
  
  
  
-39 
-  
+40 
+ 
+ 
  
  
  
@@ -1315,8 +1423,9 @@ found as now each segment of an image is compared instead of the complete image
 which can lead to wrong results. This process is done on all the images in the local 
 database and the standard deviation and mean values of the entire six segments are stored 
 in the database for future calculations thus saving calculation time at runtime when user 
-40 
- actually inputs an image to search related images from the database. The following lines 
+41 
+ 
+actually inputs an image to search related images from the database. The following lines 
 of code perform this function in the application 
  
  
@@ -1358,8 +1467,9 @@ ImageStatistics(bmp1);
        
        
  
-41 
-       
+42 
+ 
+      
      }      
     } 
 When a user enters an image to search in the database, the same process is done on the 
@@ -1401,61 +1511,89 @@ CURRENTIMAGEDISTANCE (IMAGE_ID,DISTANCE) VALUES
     } 
  
    
-42 
- 5 RESULTS   
-T Th he e  d de es si ig gn ne ed d  a ap pp pl li ic ca at ti io on n  r re eq qu ui ir re es s  Microsoft Visual Studio 2010 with C++ to b be e  in ins sta talled 
-o on n  t th he e  c co om mp pu ut te er r  t to o  v vie iew w  a an nd d  e ed di it t  application..  A Ac cc ce es ss s  d da ata tab ba as se e  Ô Ôd db b1 1..m md db bÕ Õ  i is s  l lo oc ca ate ted d  in in  th the e  
-d de eb bu ug g  f fo ol ld de er r  o of f  th the e  a ap pp pli lic ca at ti io on n..  T Th he er re e  is is n no o  n ne ee ed d  to to  c ch ha an ng ge e  reference p pa ath ths s  i in n  th the e  
-p pr ro op pe er rti tie es s  o of f  th the e  p pr ro og gr ra am m  f fr ro om m  V Vi is su ua al l S Stu tud dio io..  A Al ll l references a ar re e  d dy yn na am mic ica al ll ly y  u updated and 
-r re ea ad dy y  to to  r ru un n  a at t a an ny y  c co om mp pu ute ter r..  F Fo oll llo ow wi in ng g  a ar re e  th the e  screenshots w wi it th h  b br rie ief f  d de et ta ail ils s  o of f  e ea ac ch h  s st te ep p  
+ 5 RESULTS  
+The designed application requires 
+on the computer to view and edit 
+debug folder of the application. There is no need to change 
+properties of the program from Visual Studio. All 
+ready to run at any computer. Following are the 
 to operate the application. 
-This is the main interface o of f  th the e  application and u us se er r  c ca an n  o on nl ly y  e en nte ter r  d da ata ta  i in n  th the e  T Ta ag gs s  f fie iel ld d  
-to search related results from th th the e e   d d da a at ta ta ab b ba a as s se e e...   T T Th h his is is f f fo o or r rm m m   o o on n nl l ly y y   s s se e ea a ar r rc c ch h h   i im im ma a ag g ge e es s s   f f fr r ro o om m m   th t th he e e   im i im ma a ag g ge e e   
+This is the main interface of the 
+to search related results from the database. This form only search images from the image 
 URLs stored in the database. 
  
+Microsoft Visual Studio 2010 with C++ to be insta
+application. Access database Ôdb1.mdbÕ is located in the 
+reference paths in the 
+references are dynamically u
+screenshots with brief details of each step 
+application and user can only enter data in the Tags field 
 43 
- Multiple tags should be s se ep pa ar ra at te ed d with a comma (,). Tags separated w wit ith h  a a  b bl la an nk k  s sp pa ac ce e  
-a a ar r re e e   c c co o on n ns s si id id de e er r r   a a as s s   a a a   s s si in in ng g gl le le e   ta ta tag g g   a a an n nd d d   t th th hu u us s s   s s se e ea a ar r rc c ch h h   th th the e e   im im ima a ag g ge e e   o o on n n   th t th he e e   b b ba a as s sis i is s o o of f f   a a a   s s sin in ing g gle le le   ta ta tag g g...   T T Th h he e e   
-application automatically s se ep pa ar ra ate tes s th the e  ta tag gs s  w wit ith h  a a  c co om mm ma a  b be et tw we ee en n  t th he em m  s so o  u us se er r  o on nl ly y  h ha as s  
-to to  s sp pe ec cif ify y  t ta ag gs s  w wi it th h  a a  c co om mm ma a  b be etw twe ee en n  m mu ult ltip iple le  ta tag gs s.. 
+lled 
+pdated and 
+ Multiple tags should be separated
+are consider as a single tag and thus search the image on the basis of a single tag. The 
+application automatically separates
+to specify tags with a comma between multiple tags.
+ with a comma (,). Tags separated with a blank space 
+ the tags with a comma between them so user only has 
  
 44 
- Once a all ll  th the e  d de es sir ire ed d  ta tag gs s  a ar re e  e en nte ter re ed d,,  s se ea ar rc ch h  b bu ut tt to on n  is is p pr re es ss se ed d  to to  lo loo ok k  f fo or r  r re el la at te ed d images 
-in the database. 
-O On nc ce e  th the e  s se ea ar rc ch h  is is c co om mp pl le et te e,,  a a  li list st is is displaced w wit ith h  im ima ag ge e  d de et ta ai il ls. s.  T Th he es se e  d de eta tail ils s  a ar re e  th the e  
-d di is st ta an nc ce e  f fr ro om m  s se ea ar rc ch he ed d  t ta ag gs s,,  ti tit tl le e  o of f  t th he e  s se ea ar rc ch he ed d  im ima ag ge e  a an nd d  Image Location i i..e e. .  U UR RL L  o of f  
-the image on Flickr network..  T Th he e  s se ele lec ct te ed d  i im ma ag ge e  is is d disp ispla lay ye ed d  in in  a a  p pic ictu tur re e b bo ox x  a ab bo ov ve e  th the e  
-li lis st. t.  O Oth the er r  d de et ta ai il ls s o of f  th the e  s se ele lec ct te ed d  i im ma ag ge e  in inc cl lu ud de e  d de es sc cr rip ipti tio on n  o of f  th the e  im ima ag ge e,,  a all ll  k ke ey yw wo or rd ds s  o of f  
-th th the e e   im im ima a ag g ge e e   t th th his i is s a a al lso ls so o   i in in nc c clu lu lud d de e es s s   k k ke e ey y yw w wo o or r rd d ds s s   w w wh h hic ic ich h h   a a ar r re e e   n n no o ot t t   m m ma a at t tc c ch h he e ed d d   w w wit i it th h h   t th th he e e   s s se e ea a ar r rc c ch h he e ed d d   ta ta tag g gs s s...   T T Th h he e e   
-in inte ter rf fa ac ce e  a al lso so  d disp ispla lay ys s  to tota tal l n nu um mb be er r  o of f  i im ma ag ge es s  f fo ou un nd d  f fr ro om m  th the e  d da ata tab ba as se e..   
-45 
- 46 
-  
  
+ Once all the desired tags are entered, search button is pressed to look for 
+in the database. 
+Once the search is complete, a list is 
+distance from searched tags, title of the searched image and 
+the image on Flickr network. The selected image is displayed in a picture
+list. Other details of the selected i
+the image this also includes keywords which are not matched with the searched tags. The 
+interface also displays total number of images found from the database. 
+related
+displaced with image details. These details are the 
+Image Location i.e. URL of 
+ box above the 
+mage include description of the image, all keywords of 
+ 
+45 
+ images 
+ 
+46 
+  
  
 47 
- T Th he e  a ab bo ov ve e  s se ea ar rc ch h  is is b ba as se ed d  o on n  t th he e  ta tag gs s..  O On nl ly y  t ta ag gs s  a ar re e  m ma at tc ch he ed d  t to o  g ge et t d de es sir ire ed d  o ou utp tpu ut. t. 
-I I Im m ma a ag g ge e es s s   c c ca a an n n   a a also l lso so   b b be e e   s s se e ea a ar r rc c ch h he e ed d d   b b by y y   s s se e ele le lec c cti t ti in n ng g g   d d de e es s sir ir ire e ed d d   im i im ma a ag g ge e e   w w wh h hic ic ich h h   i is is s to to to   b b be e e   s s se e ea a ar r rc c ch h he e ed d d   i i in n n   t th th he e e   
-d d da a ata ta tab b ba a as s se e e...   T T Th h his i is s s s se e ea a ar r rc c ch h h   u u us s se e es s s   b b ba a as s sic ic ic   i im im ma a ag g ge e e   p p pr r ro o oc c ce e es s ss s sin in ing g g   te te tec c ch h hn n niq iq iqu u ue e es s s   t to to o   g g ge e et t t th th the e e   r r re e es s su u ult lt lts s s... 
  
-Be Belo low w  th the e  ta tag gs s  f fil ile ed d,,  t th he er re e  i is s a a  c co om mb bo o  b bo ox x  w wh hic ich h  i in nc clu lud de es s  5 5  d dif iff fe er re en nt t i im ma ag ge es s  a an nd d  u us se er r  c ca an n  
-s s se e el le le ec c ct t t   o o on n nl l ly y y   o o on n ne e e   i i im m ma a ag g ge e e   a a at t t a a a   ti t ti im m me e e...   T T Th h he e e   s s se e el l le e ec c cte te ted d d   i i im m ma a ag g ge e e   is is is d d disp isp ispla la lay y ye e ed d d   in in in   a a a   p p pic ic ictu tu tur r re e e   b b bo o ox x x   b b blo lo low w w   t th th he e e   
-c c co o om m mb b bo o o   b b bo o ox x x. ..   W W Wh h he e en n n   s s se e ea a ar r rc c ch h h   is is is c c cli li lic c ck k ke e ed d d   t t th h he e e   a a ap p pp p pli li lic c ca a at t ti i io o on n n   s s sta ta tar r rts t ts s m m ma a atc t tc ch h hin in ing g g   th th the e e   i i im m ma a ag g ge e e   w w wit it ith h h   t t th h he e e   
-images stored in the databa a as s se e e...   T T Th h he e e   o o ou u utp tp tpu u ut t t  is is is p p po o op p pu u ula la late te ted d d   w w wit it ith h h   o o on n nl l ly y y   th th the e e   to t to op p p   5 5 5   r r re e es s su u ult l lt ts s s  f f fo o ou u un n nd d d   
-a an nd d  in in  w wh hic ich h  th the e  d dista istan nc ce e  f fr ro om m  i im ma ag ge e  is is le les ss s  th tha an n  8 80 0  p po oin int ts. s. 
+ The above search is based on the 
+Images can also be searched by selecting desired image which is to be searched in the 
+database. This search uses basic image processing techniques to get the results.
+Below the tags filed, there is a com
+select only one image at a time. The selected image is displayed in a picture box blow the 
+combo box. When search is clicked the application starts matching the image with the 
+images stored in the database. The output is populated with only the top 5 results found 
+and in which the distance from image is less than 80 points.
   
+tags. Only tags are matched to get desired output.
+bo box which includes 5 different images and user can 
+ 
 48 
- 49 
-  
-FLICKR form: 
-Flickr form can be accessed u u us s sin i in ng g g   th t th he e e   Ô Ô ÔF F Fli li lic c ck k kr r r   f f fo o or r rm m mÕ Õ Õ   b b bu u utt tt tto o on n n   o o on n n   m m ma a ain i in n   a a ap p pp p pli li lic c ca a ati ti tio o on n n   in in inte te ter r rf f fa a ac c ce e e...
  
+ 
+ 
+ 
+49 
+ FLICKR form: 
+Flickr form can be accessed using the ÔFlickr formÕ button on main application interface.
 50 
-    The user enters a t ta ag g  o or r  a a  c co oll lle ec cti tio on n  o of f  ta tag gs s  ( (c co om mm ma a  s se ep pa ar ra ate ted d) ) to to  s se ea ar rc ch h  r re es su ult lts s d dir ire ec ct tl ly y  
-f f fr r ro o om m m   t th th he e e   F F Fli li lic c ck k kr r r   w w we e eb b bs s sit it ite e e...   U U Us s se e er r r   c c ca a an n n   v v vie ie iew w w   a a all l ll l   th th the e e   p p pa a ag g ge e es s s   r r re e etu t tu ur r rn n ne e ed d d   f f fr r ro o om m m   F F Fli li lic c ck k kr r r   w w we e eb b bs s sit it ite e e with 
-in in inf f fo o or r rm m ma a ati t ti io o on n n   a a ab b bo o ou u ut t t th th the e e   ti ti titl tl tle e e   o o of f f   i i im m ma a ag g ge e e,,,   u u us s se e er r r   i i id d d   o o of f f   t t th h he e e   u u us s se e er r r   w w wh h ho o o   u u up p plo lo loa a ad d de e ed d d   th th the e e   i im im ma a ag g ge e e,,,   a a a   b b br r ri i ie e ef f f   
+ 
+ 
+    The user enters a tag or a collection of tags (comma separated)
+from the Flickr website. User can view all the pages returned from Flickr website
+information about the title of image, user id of the user who uploaded the image, a brief 
+ to search results directly 
 51 
- description of image and the complete set of tags associated with the image. If the user 
+ with 
+52 
+ 
+description of image and the complete set of tags associated with the image. If the user 
 presses the ÔAdd to databaseÕ button on Flickr form, the application automatically adds 
 the top 2500 results returned by the Flickr website these results are not shown to the user 
 and directly imported to the database. A total of 10000 images are currently imported in 
@@ -1485,8 +1623,9 @@ accuracy of results found related to images given by the user.
  
  
  
-52 
- 6 EVALUATION 
+53 
+ 
+6 EVALUATION 
 The project was aimed at the formation of a system for the detection of images 
 corresponding to the input tags or image data from the online resource for images and 
 labels named Flickr. The previous methods for solving these problems considered only 
@@ -1520,8 +1659,9 @@ library, and Flickr API.
 There are some limitations in the product development in terms of the implementation of 
 the project. The images stored in the database are around ten thousand images and they 
 are of around 5 different places. The implementation of the project on a large scale needs 
-53 
- a much bigger database of images which is hard to implement. The project is developed 
+54 
+ 
+a much bigger database of images which is hard to implement. The project is developed 
 in Microsoft Access which limits the number of entries to eight thousand. So, there is a 
 need to switch the application to other platforms for database management. The speed of 
 the calculations needs to be increased when the database size would increase. The project 
@@ -1548,8 +1688,9 @@ searching of a huge database, and for comparing the image to all the images stor
 database is huge. Therefore, the image features of the images stored in the databases have 
 been saved in the form of integers, but not all the features can be saved in this manner 
 which causes a huge limitation in the project.  
-54 
- 6.2 Further research 
+55 
+ 
+6.2 Further research 
 The mechanism developed for this particular project does not involve a supervised 
 learning and training phase before stepping into the testing phase. The training phase is 
 important in the implementation of the project in the domain of machine learning. The 
@@ -1580,8 +1721,9 @@ a large number of important applications in the future; therefore a lot of resea
 be focused on the image annotation of the unlabeled images. The project developed in 
 this report can provide the basis for conducting such researches to a large extent. 
   
-55 
- 7 REFRENCES 
+56 
+ 
+7 REFRENCES 
 1. Amazon Mechanical Turk. http://www.mturk.com/ 
 2. Erick Schonfeld. Who Has The Most Photos Of Them All? Hint: It Is Not 
 Facebook. TechCrunch, 2009. 
@@ -1589,8 +1731,7 @@ Facebook. TechCrunch, 2009.
 databases. In ICCV Õ03: Proceedings of the Ninth IEEE International Conference 
 on Computer Vision, page 90, 2003. 
 4. Ko and H. Byun. Probabilistic neural networks supporting multi-class relevance 
-th
-feedback in region-based image retrieval. In ICPR Õ02: Proceedings of the 16 
+feedback in region-based image retrieval. In ICPR Õ02: Proceedings of the 16th 
 international 
 5. Conference on Pattern Recognition (ICPRÕ02) Volume 4, page 40138, 2002. 
 6. Y. Rui and T. S. Huang. Relevance feedback techniques in image retrieval. 
@@ -1602,10 +1743,8 @@ on Multimedia, pages 107Ð118, 2001.
 Publishers, 2003. 
 9. Trattner, C., Korner, C., Helic, D., 2007, ÒEnhancing the Navigability of Social 
 Tagging Systems with Tag TaxonomiesÓ 
-th
-10. Davies E., 2012, ÒComputer and Machine VisionÓ, 4 Edition  
-nd
-11. Gonzalez and Woods, 2002, ÒDigital image processingÓ, 2 edition, Prentice Hall 
+10. Davies E., 2012, ÒComputer and Machine VisionÓ, 4th Edition  
+11. Gonzalez and Woods, 2002, ÒDigital image processingÓ, 2nd edition, Prentice Hall 
 12. McLean, G., and Jernigan, E., 1988, "Hierarchical edge detection, Computer 
 Vision, Graphics, and Image processÓ, vol. 44, pp. 350-366. 
 13. Scharr  and  Hanno, 2000,Ó Optimal Operators in Digital Image ProcessingÓ 
@@ -1616,8 +1755,9 @@ Computer Vision and ApplicationsÓ
 17. T. Rattenbury, M. Naaman, Methods for extracting place semantics from Flickr 
 tags, ACM TransWeb, Volume 3 Issue 1, January, ACM New York, NY, USA, 
 Article No.1, 2009. 
-56 
- 18. G. Schindler, P. Krishnamurthy, R. Lublinerman, Y. Liu, F. Dellaert, Detecting 
+57 
+ 
+18. G. Schindler, P. Krishnamurthy, R. Lublinerman, Y. Liu, F. Dellaert, Detecting 
 and matching repeated patterns for automatic geo-tagging in urban environments. 
 In Proceedings of IEEE CVPR, pp.1-7, 2008. 
 19. S. Lohmann, J. Ziegler, and L. Tetzla, Comparison of tag cloud layouts: Task-
@@ -1648,13 +1788,15 @@ New York , pp. 494-503,2006.
 the 
 30. Clouds: Toward Evaluation Studies of Tagclouds. In: Proc. of the SIGCHI 
 Conference on 
-57 
- 31. Human Factors in Computing Systems, ACM Press, New York , pp. 995Ð998, 
+58 
+ 
+31. Human Factors in Computing Systems, ACM Press, New York , pp. 995Ð998, 
 2007. 
  
   
-58 
- 8 APPENDIX  
+59 
+ 
+8 APPENDIX  
 Local Database Search: Code 
 private: System::Void button1_Click(System::Object^  sender, 
 System::EventArgs^  e) { 
@@ -1694,8 +1836,9 @@ FROM SRESULT");
  
    } 
  
-59 
-    OleDbDataAdapter ^ da = gcnew OleDbDataAdapter("SELECT 
+60 
+ 
+   OleDbDataAdapter ^ da = gcnew OleDbDataAdapter("SELECT 
 ID,TAG_COUNT FROM flickr where "+ keyw +" ",cn); 
     
    DataTable^ table = gcnew DataTable(); 
@@ -1741,8 +1884,9 @@ VALUES ("+ dataGridView1->Rows[j]->Cells[0]->Value->ToString() +", 0,
 DISTINCT flickr.ID,flickr.TAG_COUNT FROM flickr WHERE NOT 
 EXISTS(SELECT PHOTO_ID FROM SRESULT WHERE flickr.ID = 
 SRESULT.PHOTO_ID) AND "+ keyw +"  ",cn); 
-60 
-       table = gcnew DataTable(); 
+61 
+ 
+      table = gcnew DataTable(); 
       da->Fill(table); 
  
       dataGridView1->DataSource= table; 
@@ -1787,8 +1931,9 @@ dataGridView1->Rows[j]->Cells[0]->Value->ToString() +", 2, "+ td +", 4)
        
       da = gcnew OleDbDataAdapter("SELECT 
 DISTINCT flickr.ID,flickr.TAG_COUNT FROM flickr WHERE NOT 
-61 
- EXISTS(SELECT PHOTO_ID FROM SRESULT WHERE flickr.ID = 
+62 
+ 
+EXISTS(SELECT PHOTO_ID FROM SRESULT WHERE flickr.ID = 
 SRESULT.PHOTO_ID) AND "+ keyw +"  ",cn); 
        table = gcnew DataTable(); 
    da->Fill(table); 
@@ -1834,8 +1979,9 @@ DESC",cn);
     tg = ( (double) (int) dataGridView1->Rows[j]->Cells[1]-
 >Value) * (double) (4) / (double)(maxi); 
  
-62 
-     double total_d =0; 
+63 
+ 
+    double total_d =0; 
     total_d = (int) dataGridView1->Rows[j]->Cells->Value + 
 tg; 
  
@@ -1844,6 +1990,4 @@ OleDbCommand("UPDATE SRESULT SET T_GRADE = "+ tg +",
 TOTAL_DISTANCE = "+ total_d +" where id = "+ dataGridView1-
 >Rows[j]->Cells[0]->Value->ToString() +"  "); 
     com->Connection =cn; 
- 
-63 
  

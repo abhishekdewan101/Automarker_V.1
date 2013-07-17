@@ -36,7 +36,11 @@ to check whether weights are misleading.
 existence of community where as predator-prey network displayed modular structure 
 which is not good enough for it to be called a community. 
  
- Community Detection  in Food Webs 2012 
+ 
+Community Detection  in Food Webs 2012 
+ 
+ 
+3 
  
 Table of Contents 
 EXEUTIVE SUMMRY ................................................................................................................................. 1 
@@ -60,8 +64,7 @@ ACKNOWLEDGMENTS ................................................................
 2.6.3 Simulated Annealing ..................................................................................................... 16 
 3. FOOD WEB .................................................................................................................................... 16 
 3.1 Basics ..................................................................................................................................... 17 
-2
-3.1.1 Kinds of food-webs ...................................................................................................... 18 
+3.1.1 Kinds of food-webs2 ...................................................................................................... 18 
 3.1.2 Keystone species ........................................................................................................... 18 
 3.2 Types of food-web used for evaluation ................................................................................ 18 
 3.2.1 Plant-pollinator (bipartite) network ............................................................................. 18 
@@ -72,9 +75,10 @@ ACKNOWLEDGMENTS ................................................................
 5. CHOICE OF ALGORITHMS & MEASURES OF TESTING ................................................................... 23 
 5.1 For bipartite graphs .............................................................................................................. 23 
 5.1.1 Simulated Annealing ..................................................................................................... 23 
+Community Detection  in Food Webs 2012 
  
-3 
- Community Detection  in Food Webs 2012 
+ 
+4 
  
 5.1.2 BRIM .............................................................................................................................. 25 
 5.1.3 MAGA ............................................................................................................................ 25 
@@ -96,9 +100,10 @@ ACKNOWLEDGMENTS ................................................................
  
  
   
+Community Detection  in Food Webs 2012 
  
-4 
- Community Detection  in Food Webs 2012 
+ 
+5 
  
  
 1. INTRODUCTION 
@@ -139,9 +144,10 @@ in the stability of the network. Also any vertex protecting the boundaries of a 
 the work of gluing different modules together. Removing such vertices may result into two 
 clusters, completely isolating from eachother which further leads to a completely isolated 
 network. 
+Community Detection  in Food Webs 2012 
  
-5 
- Community Detection  in Food Webs 2012 
+ 
+6 
  
 1.1 Aims & Objectives 
 The aim of this project is to find inherent and natural communities in the food webs using an 
@@ -165,7 +171,7 @@ knowledge of Graph Theory. Section 3 acquaints the reader with food web and some
 terminologies. Section 4 discusses the previous work done in this area (i.e. different techniques 
 to find communities in food web). Section 5 discusses each algorithm used in the study briefly. In 
 section 6  method used for evaluation are discussed. Section 7 shows the results obtained and 
-comaprison & critical analysis for that is given in section Error! Reference source not found.. In 
+comaprison & critical analysis for that is given in section Error Reference source not found.. In 
 section 8 concluding remarks are given. Finally future directions are given in section 9. 
 2. COMMUNITY DETECTION 
 2.1 History 
@@ -178,9 +184,10 @@ interactions were taking place within and between group of people and the conseq
 removing members who were working with people of different groups. Results showed different 
 groups being isolated from one another. This very idea of removing the connectors of different 
 groups serves the basis for a few modern community detection techniques. 
+Community Detection  in Food Webs 2012 
  
-6 
- Community Detection  in Food Webs 2012 
+ 
+7 
  
 In 2002, Girvan and Newman [4] came up with an algorithm which was based on  the 
 same concept derived by Weiss and Jacobson, that is, identify those vertices acting as 
@@ -207,9 +214,10 @@ The interaction between the members of any real system is not necessarily recipr
 nature. There are many networks in which they are one-way or unidirectional. For example, 
 network of authors and article or paper they have written, where interaction can only happen 
 between different classes of vertices and not amongst them. (i.e. auther-to -article and not 
+Community Detection  in Food Webs 2012 
  
-7 
- Community Detection  in Food Webs 2012 
+ 
+8 
  
 auther-to-auther or article-to-article). Food web is  other example where interaction can only 
 occur between predator and prey. 
@@ -219,59 +227,62 @@ community has been universally accepted. The definitions vary with the specific 
 consideration. By seeing at Figure 1 one can clearly observe, there are more edges inside any of 
 the three communities than they are outside. This characteristic provides the basic reference 
 for formal definition of community. The definition given below is taken from [10]. 
-Assume that we have graph G with n vertices, which includes sub-graph g with vertices n . 
+Assume that we have graph G with n vertices, which includes sub-graph g with vertices n
 c
+. 
 Internal and external degrees (i.e. number of edge connecting vertex to any other vertex of the 
-int ext ext
-graph) of any vertex v ? g are defined as K and K respectively. If K = 0 then vertex 
-v v v
-v has visibility only within sub-graph g which is one of the characteristics of a good cluster. On 
-int
-the other hand, if K = 0 applies that vertex v should be part of sub-graph under evaluation. 
+graph) of any vertex v ? g are defined as K
 v
-g
-Similarly, internal degree of graph g, K , is the sum of internal degrees of all its member 
+int and K
+v
+ext respectively. If K
+v
+ext = 0 then vertex 
+v has visibility only within sub-graph g which is one of the characteristics of a good cluster. On 
+the other hand, if K
+v
+int = 0 applies that vertex v should be part of sub-graph under evaluation. 
+Similarly, internal degree of graph g, K
 int
-g
-vertices and external degree K is sum of the external degrees of all its member vertices. This 
+g, is the sum of internal degrees of all its member 
+vertices and external degree K
 ext
-g g g
-implies the total degree of sub-graph g :K = K + K . 
-int ext
-Finally we define intra-cluster density ? (g) for sub-graph g as the ratio between the 
+g is sum of the external degrees of all its member vertices. This 
+implies the total degree of sub-graph g :Kg = K
 int
+g + K
+ext
+g. 
+Finally we define intra-cluster density ?int(g) for sub-graph g as the ratio between the 
 number of internal edges of g andthe number of all possible internal edges: 
+    ( )   
+    
  
+[  (    )  Ú ]
  
-   
-( )
-     
-   
-[ (   )Ú ]
-  
            (1) 
-And inter-cluster density ? (g)  as the ratio between the number of external edges of  and 
-int
+And inter-cluster density ?int(g)  as the ratio between the number of external edges of  and 
 the number of possible external edges: 
+    ( )   
+    
  
+[  (    )]
  
-   
-( )
-     
-   
-[ (   )]
-  
            (2) 
-If ? (g) is substantially bigger than the average ?(g) and ? (g) is substantially smaller than 
-int ext
+If ?
+int
+(g) is substantially bigger than the average ?(g) and ?
+ext
+(g) is substantially smaller than 
 ?(g) we can call sub-graph g a community of the original graph G, where ?(G) is defined as ratio 
 between total number of edges and number of all possible edges n(n Ð 1)/2. 
 Please note providing formal definition of community like one given above does not make it 
 universal. It is defined with the aim to help the user understand community better in general. 
 Literature offers many other definitions of community. These are often based on degrees of 
+Community Detection  in Food Webs 2012 
  
-8 
- Community Detection  in Food Webs 2012 
+ 
+9 
  
 internal cohesion among vertices. Presenting those definitions is beyond the scope of this 
 document. 
@@ -302,16 +313,17 @@ community at the higher level.
  
  
  
-Figure 2: A Dendrogram of hierarchical organization (i.e. business firm). The cut through the graph represents 
  
-the partition of a graph into two clusters. Adapted from [4]. 
 2.4 Modularity : Quality function for partitioning 
 2.4.1 Null Model 
 Since the concept of modularity relies heavily on the term null model, it becomes 
 necessary to define the latter before defining the former one. As with the community detection, 
+Figure 2: A Dendrogram of hierarchical organization (i.e. business firm). The cut through the graph represents 
+the partition of a graph into two clusters. Adapted from [4]. 
+Community Detection  in Food Webs 2012 
  
-9 
- Community Detection  in Food Webs 2012 
+ 
+10 
  
 definition of null model is often considered arbitrary and varies according to the system at 
 hand. Our definition is based on Girvan and Newman [11] which is as follows: 
@@ -335,64 +347,50 @@ algorithms[10]. It is the key concept behind most of the modern graph clustering
 is often considered a global critearian for defining a community and its goodness. As an 
 example, any subgraph is called community if the total number of edges residing in sub-graph 
 exceeds its expected value that was derived from the same sub-graph in null model i.e. 
-  [                                    ]  
-[                                        ] 
+  [                                   ]   
+[                                       ] 
 This expected value is calculated by taking average over all possible realization of null 
 model (i.e. not from an arbitrary null model). Then modularity of graph is formally expressed as 
 follows: 
+   (
  
-   ( ) (   ) (   )          
-      
   
+) (       ) (     )          
    (3)  
-where sum is taken over all pair of vertices,   is the value for the vertices pair i and j of the 
-  
-adjacency matrix  , m is the size of the graph (i.e. total number of edges),   is the expected 
-  
+where sum is taken over all pair of vertices,     is the value for the vertices pair i and j of the 
+adjacency matrix , m is the size of the graph (i.e. total number of edges),     is the expected 
 value for the number of edges between vertices   and   in a null model and   is a function that 
-outputs 1 if     and 0 otherwise. Some null model requires that expected degree 
-  
+outputs 1 if       and 0 otherwise. Some null model requires that expected degree 
 sequence of the graph calculated by taking average over all possible configuration of the model, 
 matches the actual degree sequence of the graph. In this kind of arrangement, probability that 
-a vertex    with degree   is attached to any other vertex   with degree  of the graph can be 
+a vertex    with degree    is attached to any other vertex   with degree    of the graph can be 
+Community Detection  in Food Webs 2012 
  
-  
  
-10 
- Community Detection  in Food Webs 2012 
+11 
  
 calculated without problems. In order to create an edge between   and   one has to join two 
-half-edges that incident with   and  . The probability   for picking up random half edge 
- 
-incident with   is ( /   ), since there are  half edges that incident with   out of a total of 
- 
-  
-2m. The probability that different vertices   and   is connected is  given by the product   , as 
-  
-edges are placed independently of each other. Therefore,   becomes    *    and the 
-    
+half-edges that incident with   and  . The probability    for picking up random half edge 
+incident with   is (  /   ), since there are    half edges that incident with   out of a total of 
+2m. The probability that different vertices   and   is connected is  given by the product    , as 
+edges are placed independently of each other. Therefore,     becomes    *      and the 
 above expression thus becomes 
  
-   ( Ú  )·(   (     )) (   ) 
-      
+   (   Ú )·(     (       ))  (     ) 
  
- 
-( Ú ) Ú
-     ·(   (    )) (   ) 
-      
+  (   Ú )·(     (      
+ Ú ))  (     ) 
              (4) 
    
 In this expression vertex pairs lying in the same module are the one contributing to the sum. 
 We can aggregate this sum over pair of vertices to the sum over entire module, which gives 
 following expression. 
  
- 
- 
- 
-[( Ú ) ( Ú ) ]
-   ·        
+   ·[(   Ú )  (    Ú )
+ ]
   
    
+  
                    (5) 
   
 From to Eq. (5) one can infer that a subgraph is called a community if its contribution to 
@@ -414,9 +412,10 @@ The modularity of the graph taken as single entity, is zero, as in above equatio
 of the only summand becomes equal and opposite. Modularity is always smaller than one, and 
 may also be negative. Assume the partition in which each vertex represents community. In this 
 case the sum runs over all n vertices, which are all negative since the first term of each 
+Community Detection  in Food Webs 2012 
  
-11 
- Community Detection  in Food Webs 2012 
+ 
+12 
  
 summand is zero. This implies that, if there are no partitions with positive modularity, the graph 
 doesnÕt contain a community structure. On the other hand, if there exists partition with large 
@@ -448,9 +447,10 @@ structure of the Chesapeake Bay food web. It has 45 nodes representing different
 mainly in two groups, (A) pelagic (living on the surface of water) and (B) benthic (living in 
 sediments). The edge between two taxa represents their predator-prey relationship (predator 
 feeding on prey), where arrow originates from predator and ends towards prey. The thickness 
+Community Detection  in Food Webs 2012 
  
-12 
- Community Detection  in Food Webs 2012 
+ 
+13 
  
 of the edge shows rank of their interaction strength. A consist of 28 pelagic taxa and B consist of 
 17 benthic taxa and both are linked with each other through some weak interactions. Position 
@@ -460,9 +460,10 @@ such as 33, 41 and 21.
  
 Figure 4: Graphical display of community structure revealed in Chesapeake Bay food web. Units displayed on the graph 
 shows relative distances based on the inverse of the density of interaction. Image is taken from [13]. 
+Community Detection  in Food Webs 2012 
  
-13 
- Community Detection  in Food Webs 2012 
+ 
+14 
  
  
 2.6 Community Detection Algorithms 
@@ -491,12 +492,15 @@ process, we start from vertices as singleton clusters and end up with the graph 
 cluster. 
 Here we define a measure that estimates clusterÕs similarity from entries of the matrix 
 X. There exist several techniques for that. In single linkage clustering, the similarity between 
-two clusters is given by minimum element x , with i in one cluster and j in the other. In 
+two clusters is given by minimum element x
 ij
-complete linkage similarity, the same is given by maximum element x for vertices of different 
+, with i in one cluster and j in the other. In 
+complete linkage similarity, the same is given by maximum element x
 ij
-groups. In average linkage clustering, the average of the x is taken. Since the clusters are 
+ for vertices of different 
+groups. In average linkage clustering, the average of the x
 ij
+ is taken. Since the clusters are 
 properly nested they all can be represented by means of dendrograms like the one in Fig. 2 (See 
 Section 2.3).  
 Although this method looks simple and accurate at first glance, it has number of 
@@ -507,16 +511,15 @@ for those networks that may not have it at all. Fourth, the method often incorre
 many vertices, sometimes even those, on which other vertices are aggregated [14]. In a case, 
 where a vertex is connected to the rest of a network by only a single edge, it should obviously 
 be considered to belong to the community at the other end of that edge. This method often 
+Community Detection  in Food Webs 2012 
  
-14 
- Community Detection  in Food Webs 2012 
+ 
+15 
  
 classifies such vertices as isolated clusters. Fifth and the last, the hierarchical clustering method 
 doesnÕt scale well. Take an example where nodes are embedded in space and by using distance 
-2
-as (dis) similarity measure, the computational complexity turns out to be O(n ) for single 
-2
-linkage and O(n log n) for the complete and average linkage schemes. The only plus point 
+as (dis) similarity measure, the computational complexity turns out to be O(n2) for single 
+linkage and O(n2 log n) for the complete and average linkage schemes. The only plus point 
 hierarchical clustering has is that it does not require a preliminary knowledge on the number 
 and size of the clusters. These five drawbacks against one and the only advantage make the 
 hierarchical clustering method, although useful, far from being perfect. 
@@ -541,15 +544,15 @@ Girvan and Newman proposed four step simple algorithm based on the idea describe
 value, pick one at random. 
 3. Re-compute betweennesses for all edges affected by the removal. 
 4. Repeat from step 2 until there are no edges in the graph. 
+Community Detection  in Food Webs 2012 
  
-15 
- Community Detection  in Food Webs 2012 
+ 
+16 
  
 Edge betweenness of the graph can be computed using algorithm given by Newman [18]. The 
 algorithm computes the betweenness for graph with total m edges and n vertices in O(mn) 
 time. Since in step 3 we re-compute the edge betweenness the worst case running time for the 
-2
-algorithm becomes O(m n) . But the step says we only have to re-compute this for all edges 
+algorithm becomes O(m2n) . But the step says we only have to re-compute this for all edges 
 affected by the removal. This enables us to run the algorithm much faster than the worst case 
 scenario. This happens usually in the network with high community structure since, in such 
 networks, most of the edges are within the community and only edges exist between 
@@ -574,8 +577,7 @@ edges connecting the vertex to others in network are split between the copies of
 that they sum up the actual degree in the original graph. To do that, Gregory introduced a new 
 centrality measure called split betweenness defined as number of shortest paths that would run 
 between two parts of a vertex if the vertex were split. The method has a worst-case running 
-3 3
-time of O(m ), or O(n ) on a sparse graph. 
+time of O(m3), or O(n3) on a sparse graph. 
 2.6.3 Simulated Annealing 
   
 3. FOOD WEB 
@@ -584,9 +586,10 @@ terminologies. This is just to help imagine, what kind of network, a food-web co
 how any community detection algorithm exploits some of its properties. In section 3.2 we 
 explain the two types of graphs (networks) that most of the food-webs usually projects to. We 
 have considered only these two types of networks for evaluating different algorithms. 
+Community Detection  in Food Webs 2012 
  
-16 
- Community Detection  in Food Webs 2012 
+ 
+17 
  
 3.1 Basics 
 Plants and animals play a major role in maintaining the right ecological balance and further 
@@ -631,12 +634,12 @@ of species present. The only difference between a food web & food chain is that 
 represents only a part of food web connected by feeding links whereas food web shows a more 
 complete diagram of the feeding interlinks. 
  
+Community Detection  in Food Webs 2012 
  
-17 
- Community Detection  in Food Webs 2012 
  
-2
-3.1.1 Kinds of food-webs 
+18 
+ 
+3.1.1 Kinds of food-webs2 
 ? Source web - one or more node(s). It represents all predators and all food that is eaten by 
 them. 
 ? Sink web - one or more node(s), it shows all prey and their food. 
@@ -676,9 +679,10 @@ Pollinators (usually insects) visit plants in search of food. In return they hel
 carrying pollens from one flower to another [32]. They help each-other in a mutual way and 
 therefore these networks are often called mutualistic networks. Figure 6 shows the graphical 
 representation of a plant-pollinator network found in Wetland, United Kingdom. Some of the 
+Community Detection  in Food Webs 2012 
  
-18 
- Community Detection  in Food Webs 2012 
+ 
+19 
  
 vertices and edges are not shown and the names are shortened for the sake of clarity in 
 visualisation. 
@@ -695,16 +699,17 @@ prey for another predator) and the edges also exist within (as opposed to betwee
 animal. Figure 7 shows a predator Ðprey network found in Chesapeake Bay food web [25]. Some 
 of the vertices and edges are not shown for the sake of clarity in visualisation. 
  
+ 
+Figure 6 : WetlandÕs plant-pollinator network displaying bipartite structure. Names are shortened for the sake of clarity 
 Eupatorium 
 Peucedanum 
 Berula 
 Oenanthe 
 Sium 
+Community Detection  in Food Webs 2012 
  
-Figure 6 : WetlandÕs plant-pollinator network displaying bipartite structure. Names are shortened for the sake of clarity 
  
-19 
- Community Detection  in Food Webs 2012 
+20 
  
  
 Figure 7 : Chesapeake food web displaying directed-weighted structure 
@@ -725,9 +730,10 @@ represent larger groups of related species. Edges from one taxa to another are g
 directed and display trophic relationships (i.e predator feeding on prey) between them.The 
 algorithm, however, did not consider these directions. Graphical representation of community 
 structure of the Chesapeake Bay food web is shown in Figure 4. 
+Community Detection  in Food Webs 2012 
  
-20 
- Community Detection  in Food Webs 2012 
+ 
+21 
  
 Girvan and Newman applied their algorithm on this database of taxa and extracted two well 
 defined communities of almost equal size. The algorithm couldnÕt classify few taxa to either 
@@ -739,7 +745,7 @@ separation is not perfect in that a small number of benthic organisms find their
 in the pelagia. For example, clams  reprensented with vertices 27, 28 and 29  and oyster with 
 vertex 30 in Figure 4 physically reside in the benthos but because of their strong interaction with 
 bacteria (vertices 3, 4 and 5) and ciliates (vertices 7, 8 and 9) in group A they have become a part 
-of the same group. These species are often found to be ÒError! Reference source not found.Ó 
+of the same group. These species are often found to be ÒError Reference source not found.Ó 
 discussed in section 3 and play important role in maintaining diversity of the food web. From the 
 result one can deduce that simple traditional division of taxa as shown in Figure 4 may not be an 
 ideal classification in this case. The algorithm was also applied to number of other food webs 
@@ -752,9 +758,10 @@ J.M. Olesen et al [22] applied Simulated Annealing algorithm described in sectio
 pollination networks in order to find underlying community structure and to measure their 
 modularity. Networks consisted of almost 10000 species with 20000 links altogether. Algorithm 
 was used, also to classify species into different roles with respect to their position within and 
+Community Detection  in Food Webs 2012 
  
-21 
- Community Detection  in Food Webs 2012 
+ 
+22 
  
 among modules. The outcomes were (1) modularity index M, which was a measure of the 
 degree to which the network was organized into distinct modules. (2) The significance level of M 
@@ -780,9 +787,10 @@ showed (See Figure 9) that 85% of all species were specialists and only 15% were
 Out of 15%, 3% were module hubs, 11% were connectors and 1% was devoted to network hubs. 
  
 Figure 9: Distribution of pollinator and plant species according to their role in a network. 
+Community Detection  in Food Webs 2012 
  
-22 
- Community Detection  in Food Webs 2012 
+ 
+23 
  
 They also found that networks with less than 50 species were non modular and claimed that 
 this may be due to lack of module detecting power of Simulated Annealing algorithm. This 
@@ -800,8 +808,7 @@ analysed here. Few of them [28-29] are proven to be best overall in the field [3
 results. The rest is chosen because they are able to deal with the special kind of network that a 
 typical food web represents.  
 Here, while choosing, we have not considered the running time of an algorithm since food-
-4
-webs, in general, are small in size (Approximately 10 species at max.) and slower algorithms 
+webs, in general, are small in size (Approximately 104 species at max.) and slower algorithms 
 usually perform better [27]. The seven algorithms that are chosen here are broadly divided into 
 two categories i.e. those which work on bipartite (or bipartite-weighted) networks i.e. plant-
 pollinator network and the ones dealing with directed-weighted network i.e. predator-prey 
@@ -816,24 +823,22 @@ ever proposal to be able to deal with bipartite graph without converting it into
 partite graphs. Guimera emphasized that the widely used modularity expression (Eq. (5)) was 
 not ideal to detect modules in bipartite network and suggested a new expression for 
 modularity. In that, the vertices are divided into two classes, which they called actors and 
-teams. Each vertex i in the actor class has degree t and vertex a in the team class has degree 
-i
-m . Modularity is defined by following expression: 
-a
- 
- 
-     
-   ?      ?   
-   ·[  ] 
- 
- 
- ( ) ( )
-     
-     
+teams. Each vertex i in the actor class has degree ti and vertex a in the team class has degree 
+ma. Modularity is defined by following expression: 
+    ·[
+       ? 
+    (    )
+  
+        ? 
+(    ) 
+]
+  
    
  
-23 
- Community Detection  in Food Webs 2012 
+Community Detection  in Food Webs 2012 
+ 
+ 
+24 
  
            (6) 
 Simulated Annealing [30] is an optimization technique based on random variables that 
@@ -847,69 +852,62 @@ maximize its modularity and, therefore, the cost is C = ?M, where M is the modul
 defined in equation (5) (See section 2.4.2). For each values of temperature, we perform a 
 number of random updates and accept them with probability. 
  
-                                                    
-  
-(   )
-   { 
-  
-   ( )                
-  
+   {
+                                                      
+   ( 
+(     )
+ 
+)                   
  
             (7)   
    
-Where C is the cost prior to the update, C is the cost after the update. 
-i f
-We define two types of movements. 1) Node Movement: For each value of 
-2
-temperature total of n = fN vertices will be moved from one module to another, where N is 
+Where C
 i
-the total number of vertices in the network. 2) Collective Movement: n = fN which involve 
+ is the cost prior to the update, C
+f
+ is the cost after the update. 
+We define two types of movements. 1) Node Movement: For each value of 
+temperature total of n
+i
+ = fN2 vertices will be moved from one module to another, where N is 
+the total number of vertices in the network. 2) Collective Movement: n
 c
+ = fN which involve 
 mergers of two communities or splitting a community. Value of f is typically taken as 1. After 
 having evaluated the movements at a certain T, temperature is cooled down until it reaches the 
 running value for the global optimization. Splitting of community is carried out in several ways. 
 Collective movements reduce the risk of getting trapped in Òhigh costÓ local minima. 
-11
-This algorithm when tested on the small random network , performed better over 
+This algorithm when tested on the small random network11, performed better over 
 Girvan and NewmanÕs algorithm [4].In practice, it can be used for small graphs consisting of up 
-4
-to about10 vertices [10]. 
+to about104 vertices [10]. 
  
-                                                           
+                                                          
 1
 The Simulated Annealing algorithm [21] was tested on network comprised on 128 nodes, divided into 4 
 modules, each consisting of 32 nodes. The obtained results outperformed Girvan and NewmanÕs algorithm 
 significantly and also showed that it is able to identify community in a network with nodes having as many as 
 50% of their connection outside their own module. 
+Community Detection  in Food Webs 2012 
  
-24 
- Community Detection  in Food Webs 2012 
+ 
+25 
  
 5.1.2 BRIM 
  As pointed out by Guimera, M.J. Barber [34] also thought that the original expression of 
 modularity is not accurate for finding communities in bipartite network. He proposed a 
 different expression to calculate modularity suitable for bipartite network. 
 Let p be number of red and q be number of blue vertices that forms overall network.  The 
-degree of red vertex i is given by K and of blue vertex j is given by D . The adjacency matrix A of 
-i j
+degree of red vertex i is given by Ki and of blue vertex j is given by Dj. The adjacency matrix A of 
 the graph has all zero elements for same pair of vertices. From this fact, Barber concluded that 
 its equivalent null model (section 2.4.1) would have same structure i.e. zero likelihood of edges 
-existing between vertices with same color. So if P is null model matrix of A, every element p 
-ij
+existing between vertices with same color. So if P is null model matrix of A, every element pij 
 where i and j shares the same color will be zero. The null model matrix P is defined as follows: 
-?
-  
-      
-   [ ] 
- 
-?
-  
-      
+   [
+     ?   
+ ?        
+] 
                                                                                                              (8) 
-?
-Ú
-where   are all zero elements.       as in the null model of modularity. 
-        
+where      are all zero elements.  ?        Ú  as in the null model of modularity. 
 The modularity matrix B has the same block off-diagonal diagram as P. It can be computed with 
 following expression. B = A Ð P. 
 Barber then proposed a community finding algorithm using this definition of bipartite 
@@ -925,73 +923,78 @@ Zhan et al [40] came up with an idea that any uni-partite or directed network ca
 represented as a bipartite network and further claimed that, finding communities in uni-partite 
 and directed network could be transformed into finding communities in bipartite network. The 
 proposed transformation [40] of uni-partite into bipartite is as follows: 
-Each node    of uni-partite network is represented by two nodes   and  . Also each edge     
-  
-is converted into two edges   -   and    - . The new transformed bipartite network will 
-    
+Each node    of uni-partite network is represented by two nodes    and   . Also each edge     
+is converted into two edges    -    and     -  . The new transformed bipartite network will 
 have    vertices with    edges. Figure 10 shows the illustration. They went on to define, for 
 the transformed network, a new expression for modularity based on BarberÕs modularity 
 expression (Eq. (8)). BarberÕs matrix form expression can be represented as follows: 
+Community Detection  in Food Webs 2012 
  
-25 
- Community Detection  in Food Webs 2012 
  
-  
+26 
+ 
+    
+ 
+ 
+· · [ ?     
+    
+ 
+] (     )
+ 
+     
+ 
    
-  
-?
-   · · [   ] (   ) 
-      
-  
-        
+ 
             (9) 
 Where vertices   to   constitute class-1 set of vertices and      to   constitute class-2. 
 Adjacency matrix   is  
- 
-?
-  
-      
-   [ ] 
- 
- 
-  
-      
+    [
+     ?   
+         
+] 
                       (10) 
 Rest of the term are same as defined in section 2.4.2. Based on this equation they define new 
 bipartite modularity in next three equations: 
-   
-   
-  
-?
-   · · [   ] (   ) 
-      
-   
-        
-  
-   
+    
  
  
-   
-?
-     · · [    ] (    ) 
-         
- 
-   
-      
+· · [ ?     
+    
   
+]  (     )
   
- 
-  
-    · · [   ] (   )   
      
+ 
    
-      
+ 
+    
+ 
+ 
+· · [ ?       
+       
+  
+] (        )
+ 
+    
+ 
+   
+ 
+    
+ 
+ 
+· · [      
+    
+  
+]  (     )
+ 
+   
+ 
+   
+   
 The first expression is derived from equation 10 considering the fact that bipartite 
 transformation has    nodes and    edges. Second equation is standard change of indices and 
-the last one is obtain by converting   to   (by considering only right upper matrix of  ). In 
-  
+the last one is obtain by converting   to  (by considering only right upper matrix of   ). In 
 doing this they assumed that node   and   should have the same degree and lie in the same 
-  
 community.  
 They also demonstrated transformation of directed network into bipartite one and defined 
 identical expression for its bipartite. Further, they proposed an algorithm using this definition of 
@@ -999,9 +1002,10 @@ bipartite modularity to detect communities in bipartite network and called it Mo
 Genetic Algorithm (MAGA) which was based on the Mutation-Only Genetic Algorithm (MOGA). 
  
  
+Community Detection  in Food Webs 2012 
  
-26 
- Community Detection  in Food Webs 2012 
+ 
+27 
  
  
 Figure 10: Transformation of uni-partite graph into bipartite. Adapted from [40]. 
@@ -1020,31 +1024,28 @@ community.
 After several iterations, the algorithm tends to terminate, when all the vertices are 
 gradually assigned a label used by a maximum number of neighbour vertices. Gregory 
 thought if communities are of overlapping nature each vertex label should be allowed to 
-contain more than one community identifier. He labelled each vertex with pair ( ,  ) where 
-  and   are community identifier and belonging co-efficient (indicates the strength of vertex 
+contain more than one community identifier. He labelled each vertex with pair ( , ) where 
+  and  are community identifier and belonging co-efficient (indicates the strength of vertex 
   membership of community in way that it sums to 1) respectively. During each propagation 
 step label for each vertex   is updated to Ð union of its neighbourÕs labels i.e.  , the sum of 
 their belonging coefficient. This can be expressed as follows: 
- ( )
-    
- ? ( )   
- (   )   
- 
+  (   )   
+     (   ) ? ( )
 | ( )|
-  
  
-27 
- Community Detection  in Food Webs 2012 
+Community Detection  in Food Webs 2012 
+ 
+ 
+28 
  
            (9) 
-The term on the left hand side maps vertex   and   to its belonging coefficient in iteration 
+The term on the left hand side maps vertex  and   to its belonging coefficient in iteration 
    At the end of this step, all the pairs whose belonging co-efficient is smaller than some 
-Ú
-threshold are removed. The threshold is set as    where   is the parameter to the 
+threshold are removed. The threshold is set as   Ú  where   is the parameter to the 
 algorithm representing the maximum number of communities that a vertex can be part of. 
 In this process, it could be possible that more than one pair of vertices has the same 
 belonging co-efficient less than the set threshold. In that case a pair is randomly chosen 
-making the algorithm non-deterministic. With value of     the algorithm gives result as 
+making the algorithm non-deterministic. With value of    the algorithm gives result as 
 depicted in Figure 11. 
 Gregory also extended this algorithm to work on bipartite network. In that, for each 
 iteration, vertex label is propagated between two classes of vertices i.e. First labels are 
@@ -1055,13 +1056,13 @@ dense network.
  
 Figure 11: Label propagation with     
  
+Community Detection  in Food Webs 2012 
  
-28 
- Community Detection  in Food Webs 2012 
+ 
+29 
  
 5.2 For directed & weighted graphs 
-2
-5.2.1 Infomap 
+5.2.1 Infomap2 
 Infomap [28] is based on the idea of describing a graph by using information essentially less 
 than that encoded in the full adjacency matrix. It aims to compress the required information to 
 describe the process of information diffusion across the graph. It uses random walk as an 
@@ -1086,28 +1087,29 @@ level descriptions become nearly futile.
 graphs. We have used only directed version both with and without weights in our analysis. 
 5.2.2 Louvain 
 Blondel et al [29] proposed a fast algorithm called Louvain which is able to deal with 
-3
-weighted graph. The algorithm also gives qualitative results in terms of modularity .  Blondel et 
+weighted graph. The algorithm also gives qualitative results in terms of modularity3.  Blondel et 
 al extended the definition of modularity to handle weights which is as follows: 
+      (
   
+   
+) (      
+    
   
-  
-     ( ) (   ) (   )    
-         
-     
+)  (     )       
 (10) 
  The algorithm starts by placing all the vertices into separate clusters. In the first phase, all 
 vertices of the graph are put in different communities. The first step consists of a sequential 
 sweep over all vertices and for each node i, it considers the neighbours j of i and calculates the 
 gain in weighted modularity (Eq. (6)) that would take place by removing i from its community 
-                                                           
+                                                          
 2
  The description is adopted from [10] 
 3
  When tested on Belgian mobile phone network involving 2.6 million users [29] 
+Community Detection  in Food Webs 2012 
  
-29 
- Community Detection  in Food Webs 2012 
+ 
+30 
  
 and by placing it into jÕs community. The gain has to be positive. After repeating this procedure 
 for all the nodes until there are no improvements, it brings out first level partition. In the 
@@ -1132,9 +1134,10 @@ community as well as hierarchical community dynamics. We have described the algo
 abstract fashion without going into in-depth technicalities, since OSLOM accommodates three 
 sub algorithms and we feel providing details of each component would be of very little 
 importance. The algorithm is as follows: 
+Community Detection  in Food Webs 2012 
  
-30 
- Community Detection  in Food Webs 2012 
+ 
+31 
  
 1. Search for significant cluster until convergence. 
 2. Analyse the cluster received from step 1 then try to detect their internal structure or 
@@ -1159,29 +1162,30 @@ When we know the community structure, the best way to test the performance is to
 compare the real communities with the communities identified by the algorithm. Again there 
 are multiple criterions for measuring similarity of two communities or partition. One of them is 
 Normalized Mutual information which was first discovered by Fred et al [26] and later adopted 
-by Danon et al [26] in his study. The measure is derived from a confusion matrix   which has as 
+by Danon et al [26] in his study. The measure is derived from a confusion matrix  which has as 
 many rows as number of real communities and as many columns as number of identified 
-communities by an algorithm. Each element   of the matrix represents the number of nodes 
-   
+communities by an algorithm. Each element     of the matrix represents the number of nodes 
 incorrectly classified the algorithm i.e. nodes classified in community   by the given algorithm, 
 when they belong to real community  . When the algorithm doesnÕt deliver correct number of 
 communities, the matrix takes the rectangular shape. 
   
-           (     (      (  ))
-        
-     
- 
+    
+            (       (       (    ))
+         ((  
   
  
-         ((  )          ((  ) 
+)           ((  
   
-  
+ 
+) 
+ 
            (11) 
 The value of NMI ranges from 0 to 1. It is 1, if the communities are identical, 0 if they are 
 independent or fractional, if there is some similarity. 
+Community Detection  in Food Webs 2012 
  
-31 
- Community Detection  in Food Webs 2012 
+ 
+32 
  
 When we donÕt know the underlying community structure of the system, the only way to 
 predict it, is through quality function, as it is the case in food web networks. Modularity is the 
@@ -1196,7 +1200,7 @@ depends largely on underlying null model (see section 2.4.1) which assumes that 
 graph can directly interact with every other vertex, since it randomly distributes all edges 
 between pair of vertices. In reality, this is very unlikely or not possible. For example, how likely it 
 is for person living in London, United Kingdom to know or interact with person living in 
-Antarctica! Ideally each vertex should be able to interact with all the vertices in its vicinity.  
+Antarctica Ideally each vertex should be able to interact with all the vertices in its vicinity.  
 However, the food webs we have used in this study are considerably smaller in size as compared 
 to other real world system and thus measured value of modularity in those shall deliver 
 expected results.  
@@ -1223,18 +1227,17 @@ applied the same algorithms onto the network of pollinators. Each algorithm exce
 run 10 times on the same dataset and the highest value of modularity was noted. Due to the 
 large fluctuation in results delivered by COPRA, it was considered for running it 100 times. In 
 addition to modularity, we also took note of number of communities found in each network for 
+Community Detection  in Food Webs 2012 
  
-32 
- Community Detection  in Food Webs 2012 
+ 
+33 
  
 each algorithm. This extra constraint was undertaken to check the consistency of algorithmÕs 
 performance. 
 Algorithms falling in second category (i.e. for directed- weighted) were initially applied on 
 three datasets namely Chesapeake Bay Masohaline Net [25], Florida Bay [41] and Mangrove 
-4
-Estuary, dry season . Weights in these networks displays exchange flow of carbon from donor to 
-4
-recipient i.e. from prey to predator. There are other ways of describing these weights as well. 
+Estuary, dry season4. Weights in these networks displays exchange flow of carbon from donor to 
+recipient4 i.e. from prey to predator. There are other ways of describing these weights as well. 
 For example, Krause et al [13] in their study considered interaction strength as weights. Weight 
 could also represent interaction frequency of animals.  
 These three algorithms were also applied on the un-weighted version of the same datasets. 
@@ -1262,34 +1265,19 @@ modularity of pollinatorsÕ communities.
  The most consistent results were delivered by Simulated Annealing. Due to the stochastic 
 nature of this algorithm, the algorithm is expected to yield different results in each run. 
 However, since we used same seed for random number generation in all runs, the resultant 
-                                                           
+                                                          
 4
  Formal reference not found. Dataset were downloaded from URL < http://vlado.fmf.uni-
 lj.si/pub/networks/data/bio/foodweb/foodweb.htm > 
+Community Detection  in Food Webs 2012 
  
-33 
- Community Detection  in Food Webs 2012 
+ 
+34 
  
 communities were always constant in size and contents.  BRIM delivered comparatively poor 
-5
-results .  
+results5.  
  These values are summarised in Table 1  and the column chart above it presents the 
 graphical view of it. 
-1
-Wetland
-0.9
-Heathland
-0.8
-Aston Court
-0.7
-0.6
-0.5
-0.4
-0.3
-0.2
-0.1
-0
-BRIM SA MAGA COPRA
  
  
  
@@ -1307,44 +1295,68 @@ also showed significant decline in modularity values, except COPRA, which gives 
 results. Even number of communities were different in this case. 
  These values are summarised in Table 2 and the column chart above it, presents the 
 graphical view of it. 
-                                                           
+                                                          
 5
  We have derived these values using the executable code for MAGA which also incorporates BRIM algorithms 
 as addition functionality.  
- 
-34 
- Community Detection  in Food Webs 2012 
- 
-1 Wetland
-0.9
-Heathland
-0.8
-Aston Court
-0.7
-0.6
-0.5
-0.4
-0.3
-0.2
-0.1
 0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
 BRIM SA MAGA COPRA
+Wetland
+Heathland
+Aston Court
+Community Detection  in Food Webs 2012 
+ 
+ 
+35 
+ 
  
  
  
 Table 2: Comparisons of 4 algorithms in terms of Modularity (Q) and Number of Communities found (M). Algorithms 
 were applied on one mode projection of original bipartite networks. 
-SA BRIM MAGA COPRA 
-          
+  
+SA 
+  
+BRIM 
+  
+MAGA 
+  
+COPRA 
+  
   M Q M Q M Q M Q 
-WETLAND 
-3 0.171 6 0.309 3 0.173 2 0.474 
+WETLAND 3 0.171 6 0.309 3 0.173 2 0.474 
 HEATHLAND 2 0.18 5 0.033 3 0.277 2 0.516 
 ASHTON COURT 3 0.339 6 0.05 3 0.346 2 0.711 
  
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+BRIM SA MAGA COPRA
+Wetland
+Heathland
+Aston Court
+Community Detection  in Food Webs 2012 
  
-35 
- Community Detection  in Food Webs 2012 
+ 
+36 
  
  
 Figure 13: Communities structure found in HEATHLAND using MAGA. 
@@ -1360,60 +1372,50 @@ interaction strength were used as weights between edges as opposed to carbon flo
 why it is hard to say the chances of existence of these well-defined communities in Chesapeake 
 bay. Modularity values are summarised in Table 3 and the column chart above it, presents the 
 graphical view of it. 
+Community Detection  in Food Webs 2012 
  
-36 
- Community Detection  in Food Webs 2012 
  
-0.5
-Chesapeak Bay
-0.45
-Florida Bay
-0.4
-Mangrove Bay
-0.35
-0.3
-0.25
-0.2
-0.15
-0.1
-0.05
-0
-OSLOM2 infomap Louvain
+37 
+ 
  
  
 Table 3: Comparisons of 3 algorithms in terms of Modularity (Q) and Number of Communities found (M). Algorithms 
 were applied on one mode projection of original directed & weighted networks 
   OSLOM Infomap Louvain 
   M Q M Q M Q 
-Chesapeak Bay 
-7 0.171 4 0.129 10 0.090 
-Florida Bay 
-6 0.180 2 0.065 8 0.109 
+Chesapeak Bay 7 0.171 4 0.129 10 0.090 
+Florida Bay 6 0.180 2 0.065 8 0.109 
 Mangrove Bay 4 0.339 6 0.046 5 0.124 
  
 It was thought that the weights placed on the edges could be misleading for algorithms, 
 because weights are used to refer to different characteristics of interaction between species and 
 moreover it could be very hard for any community detection algorithm to conceptualize the 
-meaning behind these weights. (Algorithms cannot think!!).  
+meaning behind these weights. (Algorithms cannot think).  
 Hence we removed the weights and considered only directions while applying the same 
 algorithms for the second time. Unfortunately, no improvements were observed even in the un-
 weighted version of all three algorithms. Modularity values are summarised in Table 3 and the 
 column chart above it, presents the graphical view of it. 
  
- 
-37 
- Community Detection  in Food Webs 2012 
- 
-Chesapeak Bay
-0.5
-Florida Bay
-0.4
-Mangrove Bay
-0.3
-0.2
-0.1
 0
+0.05
+0.1
+0.15
+0.2
+0.25
+0.3
+0.35
+0.4
+0.45
+0.5
 OSLOM2 infomap Louvain
+Chesapeak Bay
+Florida Bay
+Mangrove Bay
+Community Detection  in Food Webs 2012 
+ 
+ 
+38 
+ 
  
 Table 4: Comparisons of 3 algorithms in terms of Modularity (Q) and Number of Communities found (M). Algorithms 
 were applied on one mode projection of original directed & un-weighted networks 
@@ -1423,9 +1425,20 @@ Chesapeak Bay 4 0.073 10 0.121 7 0.034
 Florida Bay 2 0.055 8 0.023 6 0.040 
 Mangrove Bay 6 0.062 5 0.057 4 0.056 
  
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+OSLOM2 infomap Louvain
+Chesapeak Bay
+Florida Bay
+Mangrove Bay
+Community Detection  in Food Webs 2012 
  
-38 
- Community Detection  in Food Webs 2012 
+ 
+39 
  
  
 Figure 14: Community Stucture found in Florida Bay food web using infomap 
@@ -1443,9 +1456,10 @@ the results obtained in different runs were fluctuating. MAGA and Simulated Anne
 delived good results. These results strongly justified the existence of community in plant-
 pollinator networks, althought itÕs still not possible to draw exact boundaries between identified 
 community. 
+Community Detection  in Food Webs 2012 
  
-39 
- Community Detection  in Food Webs 2012 
+ 
+40 
  
 In predator-prey network, the values obtained for modularity is very low for all three 
 algorithms. However, these values are not sufficient enough  in order to show that communities 
@@ -1480,9 +1494,10 @@ The interest of use of such measure can shed additional light on the present eva
  
  
  
+Community Detection  in Food Webs 2012 
  
-40 
- Community Detection  in Food Webs 2012 
+ 
+41 
  
  
 10. REFERENCES 
@@ -1516,9 +1531,10 @@ food-web structure, Nature 426 (2003) 282 Ð 285.
 [16] M. Vellend, Conceptual synthesis in community ecology. Q. Rev. Biol., 85(2) (2010)183 Ð 206. 
 [17] L.C. Freeman, A set of measures of centrality based on betweenness, Sociometry 40 (1977) 35 Ð 
 41. 
+Community Detection  in Food Webs 2012 
  
-41 
- Community Detection  in Food Webs 2012 
+ 
+42 
  
 [18] M.E.J. Newman, Fast algorithm for detecting community structure in networks, Phys. Rev. E 69 
 (6) (2004) 066133. 
@@ -1554,9 +1570,10 @@ Journal of Convergence Information Technology 6(11)(2011) 283-292.
 [32] J. Memmott. The structure of a plant-pollinator food web. Ecology Letters  2 (1999) 276Ð280 
 [33] S. Gregory. Finding overlapping communities in networks by label propagation. New J. Phys. 12 
 (2010) 103018  
+Community Detection  in Food Webs 2012 
  
-42 
- Community Detection  in Food Webs 2012 
+ 
+43 
  
 [34] M. J. Barber. Modularity and community detection in bipartite networks. Phys. Rev. E 76, (2007) 
 066102. 
@@ -1575,6 +1592,3 @@ bipartite networks Phys. Rev. E 83 (2011) 066120
 [41] R.E. Ulanowicz, C. Bondavalli and M.S. Egnotovich. Network Analysis of Trophic Dynamics in 
 South Florida Ecosystem, FY 97: The Florida Bay Ecosystem. Ref. No. [UMCES]CBL 98-123. 
 Chesapeake Biological Laboratory, Solomons, MD 20688-0038 USA (1998). 
- 
-43 
- 

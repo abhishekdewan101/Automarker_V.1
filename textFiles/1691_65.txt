@@ -1,5 +1,7 @@
                                                     
  
+2 | A M S E  
+ 
  
 EXECUTIVE SUMMARY: 
 Due to the effect of process variation, SRAM cell reliability is one of the major concerns in SRAM 
@@ -29,185 +31,188 @@ to study their stability and consistency in terms of read time, write time and p
 ? Multiple bit error correction using Hamming Code has been implemented, along with the 
 evaluation of other error correction coding techniques available. 
  
-2 | A M S E 
-                                                     
+                                                    
+ 
+5 | A M S E  
  
 TABLE OF CONTENTS 
-EXECUTIVE SUMMARYиииииииииииииииииииииииииииии1 
-DECLARATIONиииииииииииииииииииииииииииииииии2 
-ACKNOWLEDGEMENTSииииииииииииииииииииииииииии..3 
-LIST OF FIGURESиииииииииииииииииииииииииииииии...7 
-LIST OF TABLESииииииииииииииииииииииииииииииии.9 
-CHAPTER 1: INTRODUCTIONиииииииииииииииииииииииии..10 
-1.1 Aimsиииииииииииииииииииииииииииииииии10 
-1.2 Objectives ииииииииииииииииииииииииииииии....10 
-1.3 Background and contextиииииииииииииииииииииииии.10 
-1.4 Thesis Outlineиииииииииииииииииииииииииииии..11 
-CHAPTER 2: SRAM ARCHITECTUREиииииииииииииииииииии.и12 
- 2.1 About SRAMsиииииииииииииииииииииииииииии..12 
-2.2 Types of SRAMииииииииииииииииииииииииииии...12 
- 2.3 Power Consumptionииииииииииииииииииииииииии.....12 
- 2.4 Reliability ииииииииииииииииииииииииииииии....12 
- 2.5 Securityиииииииииииииииииииии.ииииииииии...13 
- 2.6 Process Variations иииииииииииииииииииииииииии....13 
- 2.7 Support Circuitry иииииииииииииииииииииииииии....14 
- 2.8 Embedded SRAM memory cellsиииииииииииииииииииии.и15 
-CHAPTER 3: DEVICE MODELSииииииииииииииииииииииии.и15 
- 3.1 Semiconductor device modelingииииииииииииииииииииии..15 
- 3.2 SRAM scalingиииииииииииииииииииииииииииии..16 
-CHAPTER 4:  STANDARD SIX TRANSISTOR (6T) SRAMиииииииииииии....18 
- 4.1 6T SRAM cell architectureииииииииииииииииииииииии.18 
-5 | A M S E 
-                                                     
+EXECUTIVE SUMMARY1 
+DECLARATION2 
+ACKNOWLEDGEMENTS..3 
+LIST OF FIGURES...7 
+LIST OF TABLES.9 
+CHAPTER 1: INTRODUCTION..10 
+1.1 Aims10 
+1.2 Objectives ....10 
+1.3 Background and context.10 
+1.4 Thesis Outline..11 
+CHAPTER 2: SRAM ARCHITECTURE.12 
+ 2.1 About SRAMs..12 
+2.2 Types of SRAM...12 
+ 2.3 Power Consumption.....12 
+ 2.4 Reliability ....12 
+ 2.5 Security....13 
+ 2.6 Process Variations ....13 
+ 2.7 Support Circuitry ....14 
+ 2.8 Embedded SRAM memory cells.15 
+CHAPTER 3: DEVICE MODELS.15 
+ 3.1 Semiconductor device modeling..15 
+ 3.2 SRAM scaling..16 
+CHAPTER 4:  STANDARD SIX TRANSISTOR (6T) SRAM....18 
+ 4.1 6T SRAM cell architecture.18 
+                                                    
  
- 4.2 Standby modeииииииииииииииииииииииииии.ии.и.18  
-4.3 Reading mode иииииииииииииииииииииииииииии..19 
-4.4 Writing mode иииииииииииииииииииииииииииии..19 
-4.5 Layout of a standard 6T SRAM cellииииииииииииииииииии....20 
-4.6 Peripheral Circuitryиииииииииииииииииииииииииии..21 
-4.7 Sense Amplifier and bit-line pre-chargeиииииииииииииииииии..21 
-4.8 Word Pre-charge..ииииииииииииииииииииииииииии22 
-4.9 Write Driverииииииииииииииииииииииииииииии.23 
-CHAPTER 5: SIZING REQUIREMENTS IN SRAM CELLииииииииии иии...24 
-5.1 Sizing and its effectsииииииииииииииииииииииииии....24 
- 5.2 Trade-offs in SRAM designииииииииииииииииииииииии.25 
-               5.2.1 Area vs. yield иииииииииииииииииииииииииии....25 
-    5.2.2 Hold margin ииииииииииииииииииииииииииии..25 
-    5.2.3 Read marginииииииииииииииииииииииииииии...26 
-    5.2.4 Write margin  ииииииииииииииииииииииииииии26 
-    5.2.5 Access time ииииииииииииииииииииииииииии...26 
-5.3 SRAM bit cell topologies ииииииииииииииииииииииии...26 
-CHAPTER 6: SRAM CELL IMPLEMENTATIONииииииииииииииииии27 
- 6.1 7T SRAM Memory Cell иииииииииииииииииииииииии.27 
-    6.1.1 Write иииииииииииииииииииииииииииииии.27 
-    6.1.2 Hold иииииииииииииииииииииииииииииии..27 
-    6.1.3 Read иииииииииииииииииииииииииииииии..28 
- 6.2 8T SRAM Memory Cellиииииииииииииииииииииииии..29 
-    6.2.1 Write иииииииииииииииииииииииииииииии.29 
-    6.2.2 Hold иииииииииииииииииииииииииииииии..30 
-6 | A M S E 
-                                                     
+6 | A M S E  
  
-  6.2.3 Read иииииииииииииииииииииииииииииии..30 
- 6.3 9T SRAM Memory Cellиииииииииииииииииииииииии..31 
-    6.3.1 Write иииииииииииииииииииииииииииииии.31 
-    6.3.2 Hold иииииииииииииииииииииииииииииии..31 
+ 4.2 Standby mode...18  
+4.3 Reading mode ..19 
+4.4 Writing mode ..19 
+4.5 Layout of a standard 6T SRAM cell....20 
+4.6 Peripheral Circuitry..21 
+4.7 Sense Amplifier and bit-line pre-charge..21 
+4.8 Word Pre-charge..22 
+4.9 Write Driver.23 
+CHAPTER 5: SIZING REQUIREMENTS IN SRAM CELL ...24 
+5.1 Sizing and its effects....24 
+ 5.2 Trade-offs in SRAM design.25 
+               5.2.1 Area vs. yield ....25 
+    5.2.2 Hold margin ..25 
+    5.2.3 Read margin...26 
+    5.2.4 Write margin  26 
+    5.2.5 Access time ...26 
+5.3 SRAM bit cell topologies ...26 
+CHAPTER 6: SRAM CELL IMPLEMENTATION27 
+ 6.1 7T SRAM Memory Cell .27 
+    6.1.1 Write .27 
+    6.1.2 Hold ..27 
+    6.1.3 Read ..28 
+ 6.2 8T SRAM Memory Cell..29 
+    6.2.1 Write .29 
+    6.2.2 Hold ..30 
+                                                    
+ 
+7 | A M S E  
+ 
+  6.2.3 Read ..30 
+ 6.3 9T SRAM Memory Cell..31 
+    6.3.1 Write .31 
+    6.3.2 Hold ..31 
                6.3.3 Read................................................................................................................................31 
- 6.4 10T SRAM Memory Cell ииииииииииииииииииииииии....33 
-    6.4.1 Writeииииииииииииииииииииииииииииии.и..33 
-    6.4.2 Hold иииииииииииииииииииииииииииииии...33 
-    6.4.3 Read иииииииииииииииииииииииииииииии...33 
+ 6.4 10T SRAM Memory Cell ....33 
+    6.4.1 Write...33 
+    6.4.2 Hold ...33 
+    6.4.3 Read ...33 
 CHAPTER 7: PERFORMANCE EVALUATION AND COMPARISION OF  
-DIFFERENT SRAM CELLS ..................................ииииииииииииииииии...35 
- 7.1 Stability of SRAM cellsиииииииииииииииииииииииии...35 
- 7.2 Process Variations ииииииииииииииииииииииииииии35 
- 7.3 Static Noise Margin curves of SRAM cellsиииииииииииииииии.....37 
-     7.3.1 Hold SNMиииииииииииииииииииииииииииии37 
-     7.3.2 Read SNM ииииииииииииииииииииииииииии...39 
-     7.3.3 Write SNM ииииииииииииииииииииииииииии...40 
- 7.4 SNM variation with the supply voltage scale-downиииииииииииииии43 
-CHAPTER 8: EFFECT OF PROCESS VARIATIONиииииииииииииииии45 
- 8.1 Effect on read and write operationsииииииииииииииииииии.....45 
- 8.2 Numerical analysisиииииииииииииииииииииииииии..49 
-CHAPTER 9: ERROR CORRECTION CODINGииииииииииииииииии..52 
- 9.1 HAMMING CODEиииииииииииииииииииииииииии.52 
- 9.2 MODIFIED HAMMING SEC-DED CODES иииииииииииииииии57 
- 9.3 COMBINATORIAL REPRESENTATION MATRICESииииииииииии..57  
-    9.3.1 Optimal odd-weight column codes иииииииииииииииииии...57 
-7 | A M S E 
-                                                     
+DIFFERENT SRAM CELLS .....................................35 
+ 7.1 Stability of SRAM cells...35 
+ 7.2 Process Variations 35 
+ 7.3 Static Noise Margin curves of SRAM cells.....37 
+     7.3.1 Hold SNM37 
+     7.3.2 Read SNM ...39 
+    7.3.3 Write SNM ...40 
+ 7.4 SNM variation with the supply voltage scale-down43 
+CHAPTER 8: EFFECT OF PROCESS VARIATION45 
+ 8.1 Effect on read and write operations.....45 
+ 8.2 Numerical analysis..49 
+CHAPTER 9: ERROR CORRECTION CODING..52 
+ 9.1 HAMMING CODE.52 
+ 9.2 MODIFIED HAMMING SEC-DED CODES 57 
+ 9.3 COMBINATORIAL REPRESENTATION MATRICES..57  
+    9.3.1 Optimal odd-weight column codes ...57 
+                                                    
  
-    9.3.2 Construction Procedureииииииииииииииииииииииии.58 
- 9.4 PRODUCT CODE иииииииииииииииииииииииииии..60 
- 9.5 MATRIX CODEииииииииииииииииииииииииииии..62 
-CHAPTER 10: CONCLUSIONS AND FUTURE WORKиииииииииииииии..64 
-APPENDICESиииииииииииииииииииииииииииииииии..67 
+8 | A M S E  
+ 
+    9.3.2 Construction Procedure.58 
+ 9.4 PRODUCT CODE ..60 
+ 9.5 MATRIX CODE..62 
+CHAPTER 10: CONCLUSIONS AND FUTURE WORK..64 
+APPENDICES..67 
  
 List of Figures 
-Figure1: Basic SRAM cell иииииииииииииииииииииииииии.и...14 
-Figure2: Experimentally fabricated SRAM cell size trendиииииииииииииииии17 
-Figure3: 6T SRAM cellиииииииииииииииииииииииииииии..и18 
-Figure4: Simulation of 6T SRAM cellиииииииииииииииииииииии.и.19 
-Figure5: Standard 6T SRAM cell layoutииииииииииииииииииииии.и..20 
-Figure6: Modified latch-type voltage sense amplifierииииииииииииииииии...21 
-Figure7: Layout of the pre-charge circuit иииииииииииииииииииииии.22 
-Figure8: NMOS-type write driver circuitиииииииииииииииииии.ииии.23 
-Figure9: Layout of the write driver иииииииииииииииииииии.ии.ии23 
+Figure1: Basic SRAM cell ....14 
+Figure2: Experimentally fabricated SRAM cell size trend17 
+Figure3: 6T SRAM cell..18 
+Figure4: Simulation of 6T SRAM cell..19 
+Figure5: Standard 6T SRAM cell layout...20 
+Figure6: Modified latch-type voltage sense amplifier...21 
+Figure7: Layout of the pre-charge circuit .22 
+Figure8: NMOS-type write driver circuit..23 
+Figure9: Layout of the write driver ..23 
 Figure10: Normalized read SNM and WNM of a standard 6T SRAM cell for different cell ratios 
- (CR), while pull-up ratio (PR) was fixed to иииииииииииииииииии.иии24 
+ (CR), while pull-up ratio (PR) was fixed to .24 
  
 Figure11: Normalized read SNM and WNM of a standard 6T SRAM cell for different pull-up 
-Ratios (PR), while cell ratio (CR) is were fixed to 2иииииииииииииииииии.24 
+Ratios (PR), while cell ratio (CR) is were fixed to 2.24 
 Figure12: Butterfly plot represents the voltage-transfer characteristics of the cross-coupled inverters 
- in the SRAM cell и.иииииииииииииииииииииииииииии.и..25 
+ in the SRAM cell ....25 
  
-Figure13: The schematic of a 7T SRAM bit cellииииииииииииии.ииииии.27 
-Figure14: Simulation of 7T SRAM cellиииииииииииииииииии..ииии..28 
-Figure15: The schematic for 8T SRAM cellиииииииииииииииии..ииии...29 
-Figure16: Simulation of 8T SRAM cellиииииииииииииииииииии..ии...30 
-8 | A M S E 
-                                                     
+Figure13: The schematic of a 7T SRAM bit cell..27 
+Figure14: Simulation of 7T SRAM cell....28 
+Figure15: The schematic for 8T SRAM cell.....29 
+Figure16: Simulation of 8T SRAM cell.....30 
+                                                    
  
-Figure17: Schematic representation of a 9T SRAM cellииииииииииииии.иии..31 
-Figure18: Simulation of 9T SRAM cellиииииииииииииииии..ииииии..32 
-Figure19: Schematic representation of a 10T SRAM cellииииииииииииииии.....33 
-Figure20: Simulation of 7T SRAM cellииииииииииииииииииии.ииии34 
+9 | A M S E  
+ 
+Figure17: Schematic representation of a 9T SRAM cell...31 
+Figure18: Simulation of 9T SRAM cell....32 
+Figure19: Schematic representation of a 10T SRAM cell.....33 
+Figure20: Simulation of 7T SRAM cell.34 
 Figure21: Measurement of read static noise margin (SNM) at VDD=0.9V for 45nm technology  
-node (a) standard 6T SRAM cell, and (b) read SNM free 8T SRAM cell иииииииии...и.36 
+node (a) standard 6T SRAM cell, and (b) read SNM free 8T SRAM cell ....36 
  
 Figure22: Measurement of read static noise margin (SNM) at VDD=0.3V for 45nm technology 
- node (a) standard 6T SRAM cell, and (b) read SNM free 8T SRAM cellиииииииииии36 
+ node (a) standard 6T SRAM cell, and (b) read SNM free 8T SRAM cell36 
  
-Figure23: Circuit for hold state SNM measurementиииииииииииииииииии..37 
-Figure24: Hold state SNM curves of 6T to 10T SRAM cellsиииии.ииииииииии..38 
-Figure25: Circuit used for measuring the read state SNM of 6T SRAM cell и.ииииии..ии.39 
-Figure26: Read state SNM curves of 6T to 10T SRAM cellsиииииии.ииииииии...40 
-Figure27: Circuit used for measuring the read state SNM of 6T SRAM cell ииииииииии41 
-Figure28: Read state SNM curves of 6T to 10T SRAM cellsииииииииииииииии42 
-Figure29: Hold SNM variation of a 6T SRAM cell, with variation in V ииииииииии...43 
-DD
-Figure30: Hold SNM variation of a 7T SRAM cell, with variation in V ииииииииии...43 
-DD
-Figure31: Hold SNM variation of an 8T SRAM cell, with variation in V ииииии.ииии44 
-DD
-Figure32: Hold SNM variation of a 10T SRAM cell, with variation in V ииииииииии44 
-DD
-Figure33: Power dissipation, read time, write time variation of 6T SRAM cellииииии.ии..45 
-Figure34: Power dissipation, read time, write time variation of 7T SRAM cellиииии.иии..46 
-Figure35: Power dissipation, read time, write time variation of 8T SRAM cellииииии.ии..47 
-Figure36: Power dissipation, read time, write time variation of 9T SRAM cellииииии.ии..48 
-Figure37: Power dissipation, read time, write time variation of 10T SRAM cellииииииии.48 
-Figure38: Read time variation on 6T-10T SRAM cellsииииииииииииииии.........49 
-Figure39: Read time variation on 6T-10T SRAM cellsииииииииииииииии.........50 
-9 | A M S E 
-                                                     
+Figure23: Circuit for hold state SNM measurement..37 
+Figure24: Hold state SNM curves of 6T to 10T SRAM cells...38 
+Figure25: Circuit used for measuring the read state SNM of 6T SRAM cell ....39 
+Figure26: Read state SNM curves of 6T to 10T SRAM cells....40 
+Figure27: Circuit used for measuring the read state SNM of 6T SRAM cell 41 
+Figure28: Read state SNM curves of 6T to 10T SRAM cells42 
+Figure29: Hold SNM variation of a 6T SRAM cell, with variation in VDD...43 
+Figure30: Hold SNM variation of a 7T SRAM cell, with variation in VDD...43 
+Figure31: Hold SNM variation of an 8T SRAM cell, with variation in VDD.44 
+Figure32: Hold SNM variation of a 10T SRAM cell, with variation in VDD44 
+Figure33: Power dissipation, read time, write time variation of 6T SRAM cell...45 
+Figure34: Power dissipation, read time, write time variation of 7T SRAM cell...46 
+Figure35: Power dissipation, read time, write time variation of 8T SRAM cell...47 
+Figure36: Power dissipation, read time, write time variation of 9T SRAM cell...48 
+Figure37: Power dissipation, read time, write time variation of 10T SRAM cell.48 
+Figure38: Read time variation on 6T-10T SRAM cells.........49 
+Figure39: Read time variation on 6T-10T SRAM cells.........50 
+                                                    
  
-Figure40: Read time variation on 6T-10T SRAM cellsиииииииииииииии.иии51 
-Figure41: Hamming Cubeиииииииииииииииииииииииииии...и...52 
-Figure42: Parity bits generationииииииииииииииииииииииииии....54 
-Figure43: Data bits (0100)ииииииииииииииииииииииииии.ии...55 
-Figure44: Parity Bits generated by modulo 2 additions (101)иииииииииииииии...55 
-Figure45: Data read from the array of SRAMsиииииииииииииииии..ииии56 
-Figure46: Syndrome bitsииииииииииииииииииииииииииииии56 
-Figure47: Parallel Decoding Circuit [30]иииииииииииииииииииииии..59 
-Figure48: Array of a product code [31]ииииииииииииииииииии..иии..60 
-Figure49: Syndrome array for received array [31]иииииииииииииии.ииии..61 
+10 | A M S E  
+ 
+Figure40: Read time variation on 6T-10T SRAM cells.51 
+Figure41: Hamming Cube......52 
+Figure42: Parity bits generation....54 
+Figure43: Data bits (0100)....55 
+Figure44: Parity Bits generated by modulo 2 additions (101)...55 
+Figure45: Data read from the array of SRAMs..56 
+Figure46: Syndrome bits56 
+Figure47: Parallel Decoding Circuit [30]..59 
+Figure48: Array of a product code [31]....60 
+Figure49: Syndrome array for received array [31]...61 
  
 List of Tables 
-Table1: Ideal scaling method proposed by Dennardиииииииииииииии..ииии15 
-Table2: Relation between тxx nmу and ITRS parameter values for тxx nmу logic CMOSиииии16 
-Table3: Variation of threshold voltage with the increase along the feature scalingиииии..........35 
-Table4: Static Noise Margins of various SRAM cell designsиииииииииииии..ии.42 
-Table5: Mean and standard deviations for the read time variation of all the memory cellsииии..49 
-Table6: Mean and standard deviations for the write time variation of all the memory cellsииии.50 
-Table7: Mean and standard deviations for the power consumption of all the memory cellsииии.51 
-Table8: Numerical Analysis of different Hamming codesиииииииииииииииии57 
-Table9: A 16 bit data word with check bits and parity bitsииииииииииииииии...62 
+Table1: Ideal scaling method proposed by Dennard..15 
+Table2: Relation between тxx nmу and ITRS parameter values for тxx nmу logic CMOS16 
+Table3: Variation of threshold voltage with the increase along the feature scaling..........35 
+Table4: Static Noise Margins of various SRAM cell designs...42 
+Table5: Mean and standard deviations for the read time variation of all the memory cells..49 
+Table6: Mean and standard deviations for the write time variation of all the memory cells.50 
+Table7: Mean and standard deviations for the power consumption of all the memory cells.51 
+Table8: Numerical Analysis of different Hamming codes57 
+Table9: A 16 bit data word with check bits and parity bits...62 
  
  
  
-10 | A M S E 
-                                                     
+                                                    
+ 
+11 | A M S E  
  
  
  1. INTRODUCTION 
@@ -249,8 +254,9 @@ Memories, on-chip communications, and embedded computing systems based on the co
 shrinking CMOS processes will therefore need to include fault tolerant (FT) techniques to improve 
 their reliability. Therefore, careful incorporation of fault tolerant techniques in reliable system design 
 is necessary in order to avoid degrading the system speed or increasing the power consumption. 
-11 | A M S E 
-                                                     
+                                                    
+ 
+12 | A M S E  
  
 Hence, efficient active and leakage power saving SRAM designs should be explored in order to 
 increase the reliability and lifetime of the battery powered applications. There are mainly three areas 
@@ -294,8 +300,9 @@ and Matrix codes are explained and evaluated.
 Chapter 10 presents thesis conclusion and future work.  
   
  
-12 | A M S E 
-                                                     
+                                                    
+ 
+13 | A M S E  
  
 2. SRAM ARCHITECTURE  
  
@@ -339,8 +346,9 @@ service for a given interval of time, considering its proper functionality at th
 intervalс [32] CMOS reliability is affected by a number of physical failure mechanisms, owing to the 
 variation in temperature, voltage, current density, etc. Furthermore, with the development of CMOS 
 technology, the area per bit has been scaled down and more and more transistors are fabricated in a 
-13 | A M S E 
-                                                     
+                                                    
+ 
+14 | A M S E  
  
 die, which in turn scales down the supply voltage. This results in the node charge reduction linearly 
 with the channel length. рAs early as 1962 [Chinese dissertation], it was pointed out that, if channel 
@@ -386,8 +394,9 @@ Hence, depending on the input address, the combination of the row and block deco
 single memory cell is selected for information transfer. As the memory size gets larger, word-lines 
 and bit-lines get extremely long. Also, since they have large capacitances and resistances, a great deal 
 of delay is caused in charging and discharging these lines.  
-14 | A M S E 
-                                                     
+                                                    
+ 
+15 | A M S E  
  
  
  
@@ -407,8 +416,9 @@ specified.
 other control activities on the chip.  
 ╔ Clock circuitry to regulate the timing of the various read and write operations. [24]  
  
-15 | A M S E 
-                                                     
+                                                    
+ 
+16 | A M S E  
  
 2.8 Embedded SRAM memory cells:  
 Embedded memory is an integrated on-chip memory. It is highly acclaimed of late because of the 
@@ -440,8 +450,9 @@ provided the chip area is maintained constant.
  
 Table1: Ideal scaling method proposed by Dennard [34] 
  
-16 | A M S E 
-                                                     
+                                                    
+ 
+17 | A M S E  
  
 рTable2 shows typical technology generations for logic LSIs since early 1970s towards future 
 expected limit.с [34] 
@@ -470,8 +481,9 @@ reduction rate of 1/2 to 2/3 for every generation until the 22nm node [34]. New 
 introduced to realize 32nm and 22nm SRAM cells. The process of double lithography is employed to 
 realize square endcap of the gate pattern and to reduce the supply voltage variation high-k/metal gate 
 stack is used. 
-17 | A M S E 
-                                                     
+                                                    
+ 
+18 | A M S E  
  
  
 Figure2: Experimentally fabricated SRAM cell size trend [34] 
@@ -491,8 +503,9 @@ models.
  
  
  
-18 | A M S E 
-                                                     
+                                                    
+ 
+19 | A M S E  
  
 4. STANDARD SIX TRANSISTOR (6T) SRAM 
 4.1 6T SRAM cell architecture: Two cross-coupled CMOS inverters together constitute the core of 
@@ -517,8 +530,9 @@ other, unless they are disconnected from the supply voltage.
  
  
  
-19 | A M S E 
-                                                     
+                                                    
+ 
+20 | A M S E  
  
 4.3 Reading mode:  
  
@@ -544,22 +558,21 @@ the output waveforms at BL, BLу, Q and QB. To study read and write operation in 
 cell has been designed along with a write driver, pre-charge circuit and a sense amplifier. 
  
 Figure4: Simulation of 6T SRAM cell 
-20 | A M S E 
-                                                     
+                                                    
+ 
+21 | A M S E  
  
 PC signal is used to pre-charge the bit-lines to the supply voltage value. It is made high only when the 
 bit-lines are not connected to the memory cell. The data to be written into the memory is represented 
 by the signal тdу. WE signal is used to enable the write driver circuit. WL is set high just before the 
-beginning of a write operation, when both the bit-lines are pre-charged to V . Sense Amplifier 
-DD
+beginning of a write operation, when both the bit-lines are pre-charged to VDD. Sense Amplifier 
 Enable (SAE) is used to drive the sensing operation. Pulsed voltage sources are used to trigger these 
 inputs.  
 4.5 Layout of a standard 6T SRAM cell: 
 Increasing limitations in lithography, design and process technology, and the mechanisms which lead 
 to mismatches in device parameters, can be well understood by building the layout of the standard 6T 
 SRAM cell. Memory constitutes an important part of digital electronics. In low power designs, 
-suppressing the leakage currents is a primary requirement. By reducing the supply voltage V , 
-DD
+suppressing the leakage currents is a primary requirement. By reducing the supply voltage VDD, 
 significant reduction of the leakage currents can be achieved. This reduced supply voltage is termed as 
 the Data Retention Voltage (DRV). IT defines the minimum supply voltage under which the data in 
 the memory is preserved.  There has been an effective evolution in the 6T SRAM cell topology owing 
@@ -571,8 +584,9 @@ Figure5: Standard 6T SRAM cell layout [2]
 Figure shows the layout of a conventional 6T SRAM cell, drawn using 90nm technology. Transistors 
 used are of minimum feature size. It can be seen that the cell structure is symmetrical and the layout is 
 quite easy to be implemented.  
-21 | A M S E 
-                                                     
+                                                    
+ 
+22 | A M S E  
  
 4.6 Peripheral Circuitry: 
 In order to simulate the read, write and hold states of the memory cell operation, we require a few 
@@ -594,15 +608,15 @@ recovered once it begins until the circuit is brought back to the meta-stable po
 the two output nodes are equal.  
  
 Figure6: Modified latch-type voltage sense amplifier 
-22 | A M S E 
-                                                     
+                                                    
+ 
+23 | A M S E  
  
 M7 and M8 are kept on during the OFF state, to keep the output nodes SO and SON at logic 1. Once 
 the sense amplifier enable (SAE) signal is driven, transistor m9 is enabled and the sensing operation 
 starts. When transistors M5 and M6 are on, the voltage at node тCOMу is pulled down to zero. 
 Difference in voltage between the transistors M5 and M6 triggers the discharging of nodes SO and 
-SON. Once the output voltage reaches V -V , transistors M2 and M4 are turned ON. Following this, 
-DD tp
+SON. Once the output voltage reaches VDD-Vtp, transistors M2 and M4 are turned ON. Following this, 
 one of the NMOS transistors comprising the latch circuit is turned off. As soon as the sensing 
 operation is completed, the current flow cuts off and hence there is no static power dissipation.  
  
@@ -616,12 +630,12 @@ the read enable goes high.
 Figure7: Layout of the pre-charge circuit [26] 
  
  
-23 | A M S E 
-                                                     
+                                                    
+ 
+24 | A M S E  
  
 4.9 Write Driver: 
-Write driver is used to pull-down the bit-lines from V to zero once the data to be written into the 
-DD
+Write driver is used to pull-down the bit-lines from VDD to zero once the data to be written into the 
 cell is known. Once the write driver is ready to function, it enables the word-line. The write driver 
 used here is an NMOS combined driver since NMOS passes a good zero, it can efficiently perform the 
 discharge operation. If the data to be written is logic т1у, the bit line is pulled up to logic т1у through 
@@ -633,8 +647,9 @@ sufficient to speed up the write operation.
 Figure8: NMOS-type WRITE driver circuit 
  
 Figure9: Layout of the write driver [26] 
-24 | A M S E 
-                                                     
+                                                    
+ 
+25 | A M S E  
  
 5. SIZING REQUIREMENTS IN SRAM CELL 
 5.1 Sizing and its effects: Due to lowering the supply voltage, there is a continuous diminution in 
@@ -654,8 +669,9 @@ Ratios (PR), while cell ratio (CR) is were fixed to 2. [1]
  
 Normalized read SNM and WNM of a standard 6T SRAM cell for different pull-upratios (PR), while cell 
 ratio (CR) is was fixed to 2. [1] 
-25 | A M S E 
-                                                     
+                                                    
+ 
+26 | A M S E  
  
 Increase in SNM, with the increase in cell ratio can be observed by simulating read SNM and write 
 noise margin (WNM) for various cell ratios and pull up ratios. Figure below shows the normalized 
@@ -690,13 +706,14 @@ SRAM cell represents the minimum DC-voltage disturbance necessary to upset the c
 be quantified by the length of the side of the maximum square that can fit inside the lobes of the 
 butterfly plot formed by the transfer characteristics of the cross-coupled inverters (Figure).с [1] 
  
+ 
 Figure12: Butterfly plot represents the voltage-transfer 
 characteristics of the cross-coupled inverters in the SRAM 
 cell [1] 
  
+                                                    
  
-26 | A M S E 
-                                                     
+27 | A M S E  
  
 5.2.3 Read margin:  
  
@@ -742,8 +759,9 @@ different memory cells under Nano-CMOS technology and evaluate them against Nano
 variations.  
  
  
-27 | A M S E 
-                                                     
+                                                    
+ 
+28 | A M S E  
  
 6. SRAM CELL IMPLEMENTATION  
  
@@ -768,8 +786,9 @@ two inverters augment each other to retain the data stored in the data node, wit
 between Q2 and QB.  
  
  
-28 | A M S E 
-                                                     
+                                                    
+ 
+29 | A M S E  
  
 6.1.3 Read:  
 The read operations of 6T and 7T SRAMS are identical. The only difference being, 7T SRAM takes a 
@@ -791,8 +810,9 @@ find the same use as those in 6T SRAM cell.
  
  
  
-29 | A M S E 
-                                                     
+                                                    
+ 
+30 | A M S E  
  
 6.2 8T SRAM Memory Cell: 
  
@@ -809,8 +829,9 @@ read word line remains turned off, while the write word line is asserted and M5 
 Q and QB are complimentary to each other so that, if logic 1 has to be written into the cell, Q starts 
 charging, which enables the transistor M1 and a 0 is stored on the data node QB. This is followed by 
 turning on M4 to facilitate the storage of a good logic 1 into Q.  
-30 | A M S E 
-                                                     
+                                                    
+ 
+31 | A M S E  
  
 6.2.2 Hold:  
 Hold cycle involves concealing the bit line from the three inverters. In order to decrease the hold 
@@ -832,8 +853,9 @@ memory.
  
  
  
-31 | A M S E 
-                                                     
+                                                    
+ 
+32 | A M S E  
  
 6.3 9T SRAM Memory Cell: 
  
@@ -855,8 +877,9 @@ lines while the word line and read line are turned off.
 6.3.3 Read: 
 When the read cycle begins, the read word line is turned on while the write word line is kept off. 
 Suppose a logic 1 is stored at data node Q2, the transistor M6 is turned on, allowing current flow from 
-32 | A M S E 
-                                                     
+                                                    
+ 
+33 | A M S E  
  
 BLу to ground through the transistors M6 and M7. The sense amplifier detects the difference in 
 voltage between BL and BL, which is then followed by the data read operation. 
@@ -878,8 +901,9 @@ memory cells.
  
  
  
-33 | A M S E 
-                                                     
+                                                    
+ 
+34 | A M S E  
  
 6.4 10T SRAM Memory Cell: 
  
@@ -904,8 +928,9 @@ bit lines, this improves the read SNM.
 The graphs obtained from the simulation of the 10T SRAM cell are shown in the figure below. It 
 shows the output waveforms at BL, BLу, WL, WWL, and VGND.  
  
-34 | A M S E 
-                                                     
+                                                    
+ 
+35 | A M S E  
  
  
 Figure20: Simulation of 7T SRAM cell 
@@ -926,8 +951,9 @@ signal is used to trigger a read cycle. During a write operation, the signals WL
  
  
  
-35 | A M S E 
-                                                     
+                                                    
+ 
+36 | A M S E  
  
 7.  PERFORMANCE EVALUATION AND COMPARISION OF DIFFERENT SRAM CELLS 
 Several custom designed SRAM cells were simulated, evaluated and compared against other possible 
@@ -935,10 +961,16 @@ designs. All simulations and design were performed using HSPICE with 22, 32 and 
 Predictive Technology Model to study their power consumption, access time variation, with the 
 variation in supply voltage, metal oxide layer thickness, and threshold voltage. Threshold voltage and 
 Oxide thickness variations are realized using the Gaussian Parameter distribution AGAUSS function 
-o 
-in HSPICE. All the leakage values are calculated under 4 different values of temperature, -40 C, 27
-o o o
-C, 100 C and 125 C.  
+in HSPICE. All the leakage values are calculated under 4 different values of temperature, -40
+o
+C, 27
+ 
+o
+C, 100
+ o
+C and 125
+ o
+C.  
 7.1 Stability of SRAM cells: 
 The cell stability is an important aspect of SRAM cell design, which arbitrates the sensitivity of the 
 memory to external conditions and process variations and determines the soft error rate. Static Noise 
@@ -949,8 +981,7 @@ The challenge is to design an SRAM cell, which under all operating conditions, h
 margin to combat disturbances caused by cross talk, thermal noise, supply voltage noise and alpha 
 particle disturbances. SNM value is estimated by means of a circuit simulator. Detailed procedure is 
 explained in the following section.  
-A DC noise voltage source (V ) is placed in series with the cross-coupled inverters with the internal 
-n
+A DC noise voltage source (Vn) is placed in series with the cross-coupled inverters with the internal 
 nodes of the cell being assigned with the worst case polarity. SNM is obtained by locating the largest 
 square within the butterfly characteristic curve. Measurement of SNM for a 6T SRAM cell has been 
 explained in detail in the section to follow.  
@@ -970,8 +1001,9 @@ Table3: Variation of threshold voltage with the increase along the feature scali
  
  
  
-36 | A M S E 
-                                                     
+                                                    
+ 
+37 | A M S E  
  
 Studying the butterfly curves obtained by the voltage transfer characteristics and inverse voltage 
 transfer characteristics (VTC and VTC-1) gives us a good understanding of the stability of a 
@@ -989,8 +1021,9 @@ technology node (a) standard 6T SRAM cell, and (b) read SNM free 8T SRAM cell. [
  
 Figure22: Measurement of read static noise margin (SNM) at VDD=0.3V for 45nm 
 technology node (a) standard 6T SRAM cell, and (b) read SNM free 8T SRAM cell. [1] 
-37 | A M S E 
-                                                     
+                                                    
+ 
+38 | A M S E  
  
  
 7.3 Static Noise Margin curves of SRAM cells: 
@@ -999,10 +1032,8 @@ Figure shows the equivalent circuit for hold state SNM measurement. The correspo
 curves for each of the memory cell designed are attached below. Hold state is when the memory is not 
 being accessed, but the data has to be retained. Hold margin determines the minimum supply voltage 
 or delta retention voltage in standby mode. The static noise margin in hold state is generally used to 
-evaluate the hold stability, the word line being set to zero voltage. A static noise V , the maximum 
-n
-value of which is V , is introduced using a DC voltage source and DC analysis is performed for 
-DD 
+evaluate the hold stability, the word line being set to zero voltage. A static noise Vn, the maximum 
+value of which is VDD, is introduced using a DC voltage source and DC analysis is performed for 
 output voltage QB measurement and then the output Q is mirrored to it. Extensive simulations are 
 performed using HSPICE, and the output binary file obtained is then compiled by the C compiler, 
 after which MATLAB tool is used to plot the voltage transfer characteristic curve.  
@@ -1014,15 +1045,17 @@ through 10T). It can be observed that as the number of transistors within the SR
 SNM for hold state goes on improving and 10T SRAM cell has the best SNM in hold state. Still, we 
 cannot conclude that 10T SRAM cell is the most stable circuit among all others because, the SNM 
 that has been measured, is at minimum operating voltage for every cell.   
-38 | A M S E 
-                                                     
+                                                    
+ 
+39 | A M S E  
  
  
  
  
 Figure24: Hold state SNM curves of 6T to 10T SRAM cells 
-39 | A M S E 
-                                                     
+                                                    
+ 
+40 | A M S E  
  
 Figure below shows the hold state SNM variation of a 6T SRAM cell for variation in supply voltage.  
 7.3.2 Read SNM:  
@@ -1031,15 +1064,15 @@ a logic т0у which has been written into the memory cell has to be stored in the 
 voltage at the node Q will be higher than zero during the read cycle, and this may change the data 
 stored at node QB. Cell ratio is a parameter given by the ratio of pull-down transistors and access 
 transistors. Cell ratio determines the read state static noise margin. In the circuit for calculating the 
-read SNM, the DC voltage source V sweeps from 0 to V in the read mode. This voltage is given to 
-n DD
+read SNM, the DC voltage source Vn sweeps from 0 to VDD in the read mode. This voltage is given to 
 the logic т0у data node and the relevant voltage transfer curve is drawn. 
  
 Figure25: Circuit used for measuring the read state SNM of 6T SRAM cell [2] 
 The read state SNM curves simulated for 6T-10T designs is shown below. 
  
-40 | A M S E 
-                                                     
+                                                    
+ 
+41 | A M S E  
  
  
  
@@ -1054,18 +1087,19 @@ butterfly VTC curves obtained for different SRAM cells are also attached. The ma
 the bit-line needed to flip the cell content is termed as the тwrite trip voltageу. Write state SNM 
 depends largely on this write trip voltage. It is determined by the pull up ratio of the memory cell. To 
 reduce power consumption, the bit-lines are generally pre-charged to a certain voltage level less than 
-the supply voltage V . The DC voltage source in the circuit setup to compute the write SNM is used 
-DD
+the supply voltage VDD. The DC voltage source in the circuit setup to compute the write SNM is used 
 to simulate the write trip voltage. . 
-41 | A M S E 
-                                                     
+                                                    
+ 
+42 | A M S E  
  
  
 Figure27: Circuit used for measuring the read state SNM of 6T SRAM cell [2] 
  
  
-42 | A M S E 
-                                                     
+                                                    
+ 
+43 | A M S E  
  
  
 Figure28: Read state SNM curves of 6T to 10T SRAM cells 
@@ -1076,8 +1110,14 @@ influence on power consumption during the write cycle. Hence, it is advantageous
 trip voltage to its minimum value. 
 The numerical results are tabulated in the table below. The supply voltage was kept constant at 1V 
 during these simulations.  
-SRAM Hold State Read State Write State 
-Cell SNM SNM SNM 
+SRAM 
+Cell 
+Hold State 
+SNM 
+Read State 
+SNM 
+Write State 
+SNM 
 6T 0.0601v 0.2516v 0.0809v 
 7T 0.1078v 0.1502v 0.2296v 
 8T 0.3255v 0.3304v 0.3297v 
@@ -1092,52 +1132,46 @@ two cross coupled inverters. Although cell complexity, cell area and power consu
 designs is more compared to the standard 6T SRAM cell, the trade-off can be chosen as per the design 
 requirement. 
  
-43 | A M S E 
-                                                     
+                                                    
+ 
+44 | A M S E  
  
 7.4 SNM variation with the supply voltage scale-down:  
 Stability of the SRAM cells is studied by varying the supply voltage. Lowering the supply voltage is 
 one of the best techniques that can be employed to reduce energy consumption for ultra-low power 
 operations. However, the performance of an SRAM array is highest when the supply voltage is at its 
 fullest value. As the supply voltage reduces, the cells tend to lose their stability and data retention 
-properties. For our analysis, V was varied from 0.4V to 1V. Figure shows the variation in hold state 
-DD
-static noise margin with varying supply voltage V . It is clear that the SRAM cell is more stable at 
-DD
+properties. For our analysis, VDD was varied from 0.4V to 1V. Figure shows the variation in hold state 
+static noise margin with varying supply voltage VDD. It is clear that the SRAM cell is more stable at 
 higher values of supply voltage. Graphs below show the variation of the hold state static noise margin 
-of the SRAM cells designed by varying V . The 9T SRAM cell performs data retention only when 
-DD
+of the SRAM cells designed by varying VDD. The 9T SRAM cell performs data retention only when 
 the supply voltage is at its maximum value that is 1V.  
  
-Figure29: Hold SNM variation of a 6T SRAM cell, with variation in V . 
-DD
+Figure29: Hold SNM variation of a 6T SRAM cell, with variation in VDD. 
  
-44 | A M S E 
-                                                     
+                                                    
  
-Figure30: Hold SNM variation of a 7T SRAM cell, with variation in V . 
-DD
+45 | A M S E  
  
-Figure31: Hold SNM variation of an 8T SRAM cell, with variation in V . 
-DD
+Figure30: Hold SNM variation of a 7T SRAM cell, with variation in VDD. 
  
-Figure32: Hold SNM variation of a 10T SRAM cell, with variation in V . 
-DD
+Figure31: Hold SNM variation of an 8T SRAM cell, with variation in VDD. 
+ 
+Figure32: Hold SNM variation of a 10T SRAM cell, with variation in VDD. 
  
  
  
-45 | A M S E 
-                                                     
+                                                    
+ 
+46 | A M S E  
  
 8. EFFECT OF PROCESS VARIATION 
 Read stability, write stability, hold stability, access time, and power consumption are the parameters 
 used for evaluating the performance of the SRAM cells under the effect of process variation.  
 8.1 Effect on read and write operations: 
 Write time is the delay between the first rise of the WL signal to 50% of the supply voltage and the 
-rise or fall of voltage at the data node Q to 50% of V . Read Time is the delay between the second 
-DD
-rise of WL to 50% of V and fall of voltage at one of the bit lines to 10% of V . Time consumed 
-DD DD
+rise or fall of voltage at the data node Q to 50% of VDD. Read Time is the delay between the second 
+rise of WL to 50% of VDD and fall of voltage at one of the bit lines to 10% of VDD. Time consumed 
 for writing data into a memory cell and reading it back is referred to as Access Time. It is important to 
 decide on the minimum operating supply voltage for each of the memory cells as Access Time 
 depends greatly on the supply voltage. Extensive Monte Carlo Simulations were performed in order to 
@@ -1151,8 +1185,9 @@ The figures clearly conclude that the read operation in a 6T SRAM cell has a hig
 the write operation at a supply voltage as low as 0.5 volts. Dynamic power is also high because, one 
 of the two bit-lines has to be discharged during every read and write operation. 
  
-46 | A M S E 
-                                                     
+                                                    
+ 
+47 | A M S E  
  
 Figure below shows the failure rate for the 7 transistor SRAM memory cell. Similar Monte Carlo 
 simulations were performed with 1000 iterations varying the oxide thickness and threshold voltage. 
@@ -1163,8 +1198,9 @@ lower supply voltages. Write operation is significantly accurate and the write t
 the effect of process variation.  
 Failure rate of 8T SRAM cell is shown in the figures below. The simulation techniques are similar to 
 those used for 6T and 7T SRAM cells. 
-47 | A M S E 
-                                                     
+                                                    
+ 
+48 | A M S E  
  
  
 Figure35: Power dissipation, read time, write time variation of 8T SRAM cell 
@@ -1175,8 +1211,9 @@ write operation, the write access transistor has to be very efficient.
 Failure rate of 9T SRAM cell for read time, write time and power consumption parameters are shown 
 in the figures below.  
  
-48 | A M S E 
-                                                     
+                                                    
+ 
+49 | A M S E  
  
  
 Figure36: Power dissipation, read time, write time variation of 9T SRAM cell 
@@ -1191,8 +1228,9 @@ Figure37: Power dissipation, read time, write time variation of 10T SRAM cell
 The read and write operations of the 10T SRAM cell are very similar to that of the 9T SRAM cell as 
 explained above. It is evident that the write operation of the 10T SRAM cell is more reliable than that 
 of the 9T SRAM cell.  
-49 | A M S E 
-                                                     
+                                                    
+ 
+50 | A M S E  
  
 8.2 Numerical analysis: 
  Numerical analysis of the read time, write time and power consumption parameters for the proposed 
@@ -1202,10 +1240,13 @@ performance of the cells better.
 Table below shows the mean and standard deviations for the read time variation of all the memory 
 cells, and the figure following shows the Matlab simulations for read time variation for all the five 
 designs of memory cells.  
-45nm READ 
-CMOS TIME VDD=0.5v 
+45nm 
+CMOS 
+READ 
+TIME VDD=0.5v 
+  MEAN 
 STANDARD 
-  MEAN DEVIATION 
+DEVIATION 
 6T 5.27E-09 1.46E-10 
 7T 1.46E-07 3.52E-11 
 8T 1.05E-07 5.26E-10 
@@ -1215,8 +1256,9 @@ STANDARD
 Table5: Mean and standard deviations for the read time variation of all the memory cells 
  
 Figure38: Read time variation on 6T-10T SRAM cells 
-50 | A M S E 
-                                                     
+                                                    
+ 
+51 | A M S E  
  
 From the results of simulation and the graphs, we can conclude that apart from the standard 6T SRAM 
 cell, the read time of 9 and 10T SRAM cells are minimum and stable when compared to other cells. 
@@ -1226,10 +1268,13 @@ Mean and standard deviations for the write time variation of all the memory cell
 shown by the table below, and the figure that follows shows the write time variation as obtained by 
 matlab simulations. It can be seen that 7T and 9T SRAM cells have best write times without much 
 variations and the write time mean values for these cells are also minimum.   
-45nm WRITE 
-CMOS TIME VDD=0.5v 
+45nm 
+CMOS 
+WRITE 
+TIME VDD=0.5v 
+  MEAN 
 STANDARD 
-  MEAN DEVIATION 
+DEVIATION 
 6T 8.52E-12 1.68E-11 
 7T 4.44E-08 3.67E-12 
 8T 5.02E-10 5.55E-11 
@@ -1239,17 +1284,21 @@ STANDARD
 Table6: Mean and standard deviations for the write time variation of all memory cells 
  
 Figure39: Read time variation on 6T-10T SRAM cells 
-51 | A M S E 
-                                                     
+                                                    
+ 
+52 | A M S E  
  
 Table below shows the mean and standard deviation values computed for the power consumed by the 
 5 SRAM cell designs. It can be seen that 7T SRAM cell consumes least power when compared to all 
 other memory cells, and the variation is also reasonable.  
  
-45nm POWER 
-CMOS CONSUMPTION VDD=0.5v 
+45nm 
+CMOS 
+POWER 
+CONSUMPTION VDD=0.5v 
+  MEAN 
 STANDARD 
-  MEAN DEVIATION 
+DEVIATION 
 6T 3.42E-01 1.14E-02 
 7T 2.31E-01 7.72E-03 
 8T 3.42E-01 1.15E-02 
@@ -1261,8 +1310,9 @@ Table7: Mean and standard deviations for the power consumption of all the memory
 Figure40: Read time variation on 6T-10T SRAM cells 
  
  
-52 | A M S E 
-                                                     
+                                                    
+ 
+53 | A M S E  
  
 9. ERROR CORRECTION CODING: (ALGORITHM LEVEL) 
 9.1 HAMMING CODE:  
@@ -1274,74 +1324,58 @@ approach is very appropriate because the occurrence of single bit errors is more
 two or more bits. A hamming code word is comprised of data bits and parity bits. Hamming distance 
 is defined as the number of bits that differ between two words. Minimum hamming distance is the 
 least bit difference between all possible word pairs in a set of words. A hamming code with a 
-minimum distance d equal to 3 and the length of the parity bits j greater than or equal to 3 can be 
-min 
+minimum distance dmin equal to 3 and the length of the parity bits j greater than or equal to 3 can be 
 defined using the following parameters: 
-Error correction capability: ? = [( ? ? ? ? ?1)/2] = 1  
+Error correction capability: ? = [(?????1)/2] = 1  
 Data-word length: k  
-Parity bits length: ? = [log2 ? ] + 1  
-Code-word length: ? = ? + ? 
+Parity bits length: ? = [log2?] + 1  
+Code-word length: ? = ?+? 
 For instance if there are 4 data bits and 3 check bits, then the total length of the encoded word is 7 bits 
 and this has a single bit error correction capability.  
  
 Figure41: Hamming Cube 
 The design mechanism can be classified into three steps: 
 I) For every n data bits, k bits of parity are inserted so that the following equation is satisfied: 
-k 
-2 Ё n + k +1 
-(k-1)
-Parity bits are inserted at positions 1, 2, 4и.2 , to elongate the original data word. The remaining 
+2
+k Ё n + k +1 
+Parity bits are inserted at positions 1, 2, 4.2(k-1), to elongate the original data word. The remaining 
 positions are occupied by the actual data bits.  
 II) Parity bits are determined using modulo 2 addition of selected bits in the (n+k) word 
-53 | A M S E 
-                                                     
+                                                    
  
-P ? B ? B ? ...= 0 
-x x,1 x,2
-Where P stands for the Parity Bit, and the data bits that are to be selected are represented by B уs. 
-x x
+54 | A M S E  
+ 
+Px? Bx,1? Bx,2? ...= 0 
+Where Px stands for the Parity Bit, and the data bits that are to be selected are represented by Bxуs. 
 The data bits on which modulo 2 addition is to be performed are selected based on the position of the 
-parity bit P . The following method is applied to determine the data bits to be XORed. 
-x
+parity bit Px. The following method is applied to determine the data bits to be XORed. 
 For P1 (parity bit at the first position): skip 0 bits, mark 1 bit, skip 1 bit, mark 1 bit; 
 For P2 (parity bit at the second position): skip 1 bit, mark 2 bits, skip 2 bits, mark 2 bits; 
 For P4 (parity bit at the fourth position): skip 3 bits, mark 4 bits, skip 4 bits, mark 4 bits; [27] 
 In general, for a Parity bit at the xth position, skip (x-1) bits, mark x bits, skip x bits, mark x bits; 
 III) Decoding an encoded hamming word also uses the parity check equation and the process 
 explained in step II.  
-A = P ? B ? B ? ... 
-0 1 1,1 1,2
-A = P ? B ? B ? ... 
-1 2 2,1 2,2
-A = P ? B ? B ? ... 
-2 4 4,1 4,2
-A = P ? B ? B ? ... 
-log2(x ) x x,1 x,2 
-The address word A = A3A2A1A0 identifies the location of the error bit. 
-log2(x)
+A0 = P1 ? B1,1 ? B1,2 ? ... 
+A1 = P2 ? B2,1 ? B2,2 ? ... 
+A2 = P4 ? B4,1 ? B4,2 ? ... 
+Alog2(x ) = Px? Bx,1? Bx,2 ? ... 
+The address word Alog2(x) = A3A2A1A0 identifies the location of the error bit. 
 Let us consider an example to illustrate the use of hamming code to encode a 4 bit data. [28] 
-k 
-I) 2 Ё 4 + k +1= 5 + k 
+I) 2k Ё 4 + k +1= 5 + k 
 Hence, k = 3. Parity bits occupy positions 1, 2 and 4 in the encoded word. So, the remaining bit 
 positions 3, 5, 6 and 7 are occupied by the original data bits. So, the sequence of bits in the 
 encoded word is P1P2D3P4D5D6D7. 
-II) Parity check equation for P is  
-1
-P ? B ? B ? B = 0 
-1 3 5 7
+II) Parity check equation for P1 is  
+P1 ? B3 ? B5 ? B7 = 0 
 Supposing the original data is D3D5D6D7 = 1010, 
-Then, P = 0 
-1
-Similarly, parity equation for P and P are 
-2 3 
-P ? B ? B ? B = 0; 
-2 3 6 7
-P ? B ? B ? B = 0; 
-3 5 6 7
-For the data bits 1010, P = 0 and P = 1 as illustrated by the table below: 
-2 3
-54 | A M S E 
-                                                     
+Then, P1 = 0 
+Similarly, parity equation for P2 and P3 are 
+P2 ? B3 ? B6 ? B7 = 0; 
+P3 ? B5 ? B6 ? B7 = 0; 
+For the data bits 1010, P2 = 0 and P3 = 1 as illustrated by the table below: 
+                                                    
+ 
+55 | A M S E  
  
  
 Figure42: Parity bits generation 
@@ -1351,11 +1385,11 @@ the decoder determines the location of the error as follows:
 A0 = P1 ? B3 ? B5 ? B7 = 0 ? 0 ? 1 ? 0 = 1 (Parity check failed) 
 A1 = P2 ? B3 ? B6 ? B7 = 0 ? 0 ? 0 ? 0 = 1 (Parity check failed) 
 A2 = P3 ? B5 ? B6 ? B7 = 1 ? 1 ? 0 ? 0 = 0 (Parity check passed) 
+A2A1A0 = 011 = 3, pointing to the 3
 rd
-A2A1A0 = 011 = 3, pointing to the 3 bit as the location of the error. 
+ bit as the location of the error. 
  
-H = [P : I]               D D D D P P P
-3  2 1  0  2  1  0 
+H = [P : I]               D3  D2  D1  D0  P2  P1  P0 
      1 1 1 0 1 0 0 
   H =         1 1 0 1 0 1 0 
      1 0 1 1 0 0 1 
@@ -1365,29 +1399,39 @@ H = [P : I]               D D D D P P P
  
  
  
-55 | A M S E 
-                                                     
+                                                    
+ 
+56 | A M S E  
  
 Figures below show the simulation waveforms of (7,4) hamming code circuit 
  
 Figure43: Data bits (0100) 
  
 Figure44: Parity Bits generated by modulo 2 additions (101) 
-56 | A M S E 
-                                                     
+                                                    
+ 
+57 | A M S E  
  
  
 Figure45: Data read from the array of SRAMs 
  
 Figure46: Syndrome bits 
-57 | A M S E 
-                                                     
+                                                    
+ 
+58 | A M S E  
  
 Table below shows the different combinations of hamming weight circuits simulated and the time 
 each one of them took for error detection, write operation and syndrome bits generation.  
+  
+No. of SRAM cells 
+required (seconds) 
 Write 
-No. of SRAM cells Time Syndrome time Time for error 
-  required (seconds) (seconds) delay (seconds) detection (seconds) 
+Time 
+(seconds) 
+Syndrome time 
+delay (seconds) 
+Time for error 
+detection (seconds) 
 7,4,3 7 17.5602n 627.3036p 10.54444n 
 8,4,4 8 17.5553n 629.6965p 10.54444n 
 11,8,3 11 17.5271n 1.4894n 11.1261n 
@@ -1395,8 +1439,7 @@ No. of SRAM cells Time Syndrome time Time for error
  
 Table8: Numerical Analysis of different Hamming codes 
 9.2 MODIFIED HAMMING SEC-DED CODES:  
-Hamming code with minimum distance d = 4 can detect double bit errors along with correcting 
-min
+Hamming code with minimum distance dmin = 4 can detect double bit errors along with correcting 
 single bit errors (Single error correction and double error detection). This can be achieved by 
 extending a distance-3 hamming code with an extra parity bit that checks on all the symbols. The code 
 thus obtained is known as modified hamming SEC-DED code. Multiple soft errors can be efficiently 
@@ -1418,36 +1461,29 @@ iii) Every column contains an odd number of 1's (hence odd weight).с
 First two constraints are satisfied by a distance-3 code. Fourth constraint requires the resulting 
 code to have a minimum distance 4. The logic behind is that the modulo two addition of any odd 
 number of odd-weight vectors always results in an odd-weight vector, and modulo-two addition of 
-58 | A M S E 
-                                                     
+                                                    
+ 
+59 | A M S E  
  
 any even number of odd-weight vectors always results in an even-weight vector which includes 
 the weight-0 vector. This is particularly useful for double error detection. Furthermore, the total 
 number of 1уs in every row of the Hamming matrix is proportional to the number of logic levels 
 needed for the check bit and syndrome bit generation of that row. For instance, if the total number 
-of 1уs in the ith row is t , and the check bit and syndrome bit corresponding to the ith row of the 
-i 
-H-matrix are C and S respectively, then, 
-i i
-lc = [log (t -1)] 
-i v i
-ls = [log (t )] 
-i v i
+of 1уs in the ith row is ti , and the check bit and syndrome bit corresponding to the ith row of the 
+H-matrix are Ci and Si respectively, then, 
+lci = [logv(ti-1)] 
+lsi = [logv(ti)] 
 Where, 
-lc id the number of logic levels needed to generate the checkbit C if a v-input modulo-2 adder is 
-i i
+lci id the number of logic levels needed to generate the checkbit Ci if a v-input modulo-2 adder is 
 used, 
-ls is the number of logic levels needed to generate the syndrome bit S if a v-input modulo-2 adder 
-i i
+lsi is the number of logic levels needed to generate the syndrome bit Si if a v-input modulo-2 adder 
 is used, 
 and [X] is the smallest integer greater than or equal to X. 
-Number of inputs for the modulo-two adder is generally fixed. Hence, to reduce ls , t has to be 
-i i
+Number of inputs for the modulo-two adder is generally fixed. Hence, to reduce lsi, ti has to be 
 reduced to its minimum value. If all values of ti (i = 1,2,...,r) are minimum and equal, the process 
 of encoding and error detection in decoding, the two most critical processes in the memory 
 operation, will consume very less time. This is advantageous also because it requires less 
-hardware for implementation, which naturally implies higher reliability. Hence, minimizing t for 
-i
+hardware for implementation, which naturally implies higher reliability. Hence, minimizing ti for 
 all i is important from implementation perspective. [29]  
 9.3.2 Construction Procedure: 
 The construction procedure can be very clearly understood in terms of the parity-check matrix H. 
@@ -1463,8 +1499,9 @@ parity-check bits, the following equation has to be satisfied:
  
  
  
-59 | A M S E 
-                                                     
+                                                    
+ 
+60 | A M S E  
  
 The number of check bits used by this code is same as that used by Hamming SEC-DED code. 
 The H-matrix is constructed as follows:  
@@ -1487,111 +1524,95 @@ special bit generated by an all-1 row in the H-matrix. Encoding and decoding pro
 detection can be accelerated by eliminating the all-1 row in the H-matrix. In case of the parity 
 check matrix, number of 1уs in the H-matrix is much less than that in Hamming codes. 
  
-60 | A M S E 
-                                                     
+                                                    
+ 
+61 | A M S E  
  
 9.4 PRODUCT CODE:  
 Product codes are one of the well-known mechanisms employed for error correction since they 
-provide protection against both random and burst errors. рFigure below illustrates a typical (n x n ) 
-v h
-array ? over a field F = GF(q) that is encoded by a product code consisting of two linear codes: an [n , 
-h
-k = n п r , d ] column code C over F.с [Quote ref] This procedure of construction of product codes 
-h v v v v
+provide protection against both random and burst errors. рFigure below illustrates a typical (nv x nh) 
+array ? over a field F = GF(q) that is encoded by a product code consisting of two linear codes: an [nh, 
+kh = nv п rv, dv] column code Cv over F.с [Quote ref] This procedure of construction of product codes 
 will be referred to as Construction 0 going forward. The total redundancy encountered during the 
 process is given by 
-n r + n r п r r
-h v v h h v 
+nhrv + nvrh п rhrv 
 рA maximum distance separable code is a matrix which depicts a function, with certain diffusion 
 properties. Technically, an m?n matrix A over a finite field K is an MDS matrix if it is 
 the transformation matrix of a linear transformation f(x)=Ax from Kn to Km such that no two 
 different (m+n)-tuples of the form (x,f(x)) coincide in n or more components.с [wiki] In most of the 
-applications, the codes C and C are considered to be maximum distance separable codes, for which, 
-h v
-the equations d = r + 1 and d = r + 1 hold good. The requirement is that, the code lengths n and n 
-h h v v h v
+applications, the codes Ch and Cv are considered to be maximum distance separable codes, for which, 
+the equations dh = rh + 1 and dv = rv + 1 hold good. The requirement is that, the code lengths nh and nv 
 should not exceed q+1. This condition would be met by default if the codes were to be naturally 
 symbol-oriented, where the primary objective would be burst correction. Burst error or error burst is 
 nothing but a contiguous sequence of symbols. Let us assume that the array transmitted is ?. The traits 
 of the burst errors are such that, the erroneous entries in the received array ?у is limited to тTу number 
 of rows, where T is dependent on some probability measure, which is controlled by the channel and 
-the choice of n and n . A corrupt row in the received array ?у is the one that contains at least 1 
-h v
+the choice of nh and nv. A corrupt row in the received array ?у is the one that contains at least 1 
 erroneous entry. Assuming that the ith row in ?у is affected, the corresponding error vector is obtained 
 by the ith row of the error array E. Only if a row in ?у is erroneous, the respective error vector is non-
 zero.  
 Figure48: Array of a product code [31] 
-61 | A M S E 
-                                                     
+                                                    
+ 
+62 | A M S E  
  
 Decoding technique: 
-First, the corrupted rows are loacted using the code C . Once the erroneous rows are found, coulmn by 
-h
-column application of the decoder of C is performed, considering the corrupt entries in each of the 
-v
+First, the corrupted rows are loacted using the code Ch. Once the erroneous rows are found, coulmn by 
+column application of the decoder of Cv is performed, considering the corrupt entries in each of the 
 columns as тerasuresу. Array decoding failure occurs when the originally encoded array is not 
 accurately reconstituted by the decoder. Let тpу be the accepted probability of array decoding failure. 
-Half of this probability has to be kept aside for the case where the correction capability of C is 
-v
-exceeded by the number of errors. To be more specific, if C is an MDS code, then r can be 
-v v
+Half of this probability has to be kept aside for the case where the correction capability of Cv is 
+exceeded by the number of errors. To be more specific, if Cv is an MDS code, then rv can be 
 considered such that 
-Prob{T> r } <=  p/2. [31] 
-v
-This is to ensure that the erasure correction capability of C is acceptable. Corrupt rows are detected 
-v
-by the code C by computing syndrome for each row, based on the corresponding C . Supposing the 
-h h
-number of affected entries in a corrupt row is тlу, then l should be less than d =r +1, such that the 
-h h
+Prob{T> rv} <=  p/2. [31] 
+This is to ensure that the erasure correction capability of Cv is acceptable. Corrupt rows are detected 
+by the code Ch by computing syndrome for each row, based on the corresponding Ch. Supposing the 
+number of affected entries in a corrupt row is тlу, then l should be less than dh=rh+1, such that the 
 syndrome calculated for that row must be a non-zero if the row is erroneous. In any parity check 
-matrix of order r x n , every r column is linearly independent owing to C being MDS. The 
-h h h h
+matrix of order rh x nh, every rh column is linearly independent owing to Ch being MDS. The 
+probability that all the syndromes of such a row being zero is q
 -rh
-probability that all the syndromes of such a row being zero is q . Additionally, the probability of the 
--rh -l -rh
-row being corruptand having an all-zero syndrome is            q - q < q . Hence, the probability of 
+. Additionally, the probability of the 
+row being corruptand having an all-zero syndrome is            q
 -rh
-misdetecting an erroneous row is less than q , number of affected entries in the erroneous row being 
+- q
+-l
+< q
+-rh
+. Hence, the probability of 
+misdetecting an erroneous row is less than q
+-rh
+, number of affected entries in the erroneous row being 
 inadvertant. This implies that the probability that a row is both misdetected and corrupt has to be 
--rh -rh 
-? Prob{T=t}.t.q = ? q
-t
-Where ? is the expected value E {T}. This ensures that the overall probability of misdetecting a row 
-T
+?t Prob{T=t}.t.q
+-rh
+ = ? q-rh 
+Where ? is the expected value ET{T}. This ensures that the overall probability of misdetecting a row 
 will not be greater than p/2. 
  
 Figure49: Syndrome array for received array [31] 
-62 | A M S E 
-                                                     
+                                                    
+ 
+63 | A M S E  
  
 9.5 MATRIX CODE:  
 The name originates from the fact that the check bits are used in a matrix format. n-bits of data is 
-divided into k number of words of width k . A matrix of dimension [k ,k ] is formed, where k and k 
-1 2 1 2 1 2
+divided into k1 number of words of width k2. A matrix of dimension [k1,k2] is formed, where k1 and k2 
 represent the number of rows and number of columns respectively. One check-bit is added for each of 
-these k rows for single error correction and double error detection. An additional k number of bits 
-1 2
+these k1 rows for single error correction and double error detection. An additional k2 number of bits 
 are added as vertical parity bits. The technique is explained in detail by taking example of a 16 bit 
 word length memory.  
-The 16-bit data word is partitioned into a 4x4 matrix as illustrated in the figure below, so k =k =4. 
-1 2
+The 16-bit data word is partitioned into a 4x4 matrix as illustrated in the figure below, so k1=k2=4. 
 Each row is assigned with its corresponding Hamming code. For a data bit of length 4, number of 
 check bits required for Hamming code are 3, hence, at the end of the data bits, 3 check bits are added.  
-X X X X C C C 
-1 2 3 4 1 2 3
-X X X X C C C 
-5 6 7 8 4 5 6
-X X X X C C C 
-9 10 11 12 7 8 9
-X X X X C C C 
-13 14 15 16 10 11 12
-P P P P       
-1 2 3 4
+X1 X2 X3 X4 C1 C2 C3 
+X5 X6 X7 X8 C4 C5 C6 
+X9 X10 X11 X12 C7 C8 C9 
+X13 X14 X15 X16 C10 C11 C12 
+P1 P2 P3 P4       
  
 Table9: A 16 bit data word with check bits and parity bits 
-C , C , and C are the Hamming check bits for the first row. Following equations are used to calculate 
-1 2 3
+C1, C2, and C3 are the Hamming check bits for the first row. Following equations are used to calculate 
 the check bits: 
 C1 = X2 ? X3 ? X4 
 C2 = X1 ? X3 ? X4  
@@ -1603,25 +1624,21 @@ P2 = X2 ? X6 ? X10 ? X14
 P3 = X3 ? X7 ? X11 ? X15 
 P4 = X4 ? X8 ? X12 ? X16 
 Summarizing, 
-X to X comprise the data bits, C through C are the check bits, P -P are parity bits.  
-1 16 1 12 1 4
+X1 to X16 comprise the data bits, C1 through C12 are the check bits, P1-P4 are parity bits.  
 Each row is decoded is using a hamming decoder. Two steps are used for decoding: 
-63 | A M S E 
-                                                     
+                                                    
+ 
+64 | A M S E  
  
 1) Syndrome bit calculation is done and data bits are used for check bits generation and the 
-generated check bits are compared with the syndrome bits using modulo 2 addition C ? C у = 
-1 1
-S . The method is called syndrome bit generation and S is called the syndrome bit of the 
-1 1
+generated check bits are compared with the syndrome bits using modulo 2 addition C1 ? C1у = 
+S1. The method is called syndrome bit generation and S1 is called the syndrome bit of the 
 check bit т1у.  
 2) These syndrome bits are used to generate Single Error Detection (SED)/Double Error 
 Detection (DED)/No Error (NE) signals for every row.  
-If the parity syndrome bits S of every bit, and the saved value of the bit is used to generate DED 
-pi
+If the parity syndrome bits Spi of every bit, and the saved value of the bit is used to generate DED 
 signal, any single or double erroneous bits can be corrected using the equation below: 
-X = X ? O ? DED ? S [31] 
-i_correct i i j p 
+Xi_correct = Xi ? Oi ? DEDj ? Sp  [31] 
 If more than two errors are present in the code word, two errors in each row can be corrected by 
 matrix code assuming that each column has only one error. However, when there are only 2 errors, 
 they can be corrected without any constraints.  
@@ -1642,8 +1659,9 @@ they can be corrected without any constraints.
  
  
  
-64 | A M S E 
-                                                     
+                                                    
+ 
+65 | A M S E  
  
 10. CONCLUSIONS AND FUTURE WORK 
 Scaling in standard CMOS technology has been extremely advantageous in terms of speed of 
@@ -1685,8 +1703,9 @@ induced gate rupture where the damage is irreversible. This is an area where mor
 to find a practical solution while determining the cost incurred for ensuring a high level of yield and 
 protection. Also, the error correction technique described, to handle soft-errors in the memory, can 
 still be extended for other error correcting codes like Reed-Solomon codes etc.  
-65 | A M S E 
-                                                     
+                                                    
+ 
+66 | A M S E  
  
 References 
 [1] Jawar Singh and Balwinder Raj рSRAM Cells for Embedded Systemsс  
@@ -1732,8 +1751,9 @@ high-performance multiple-input XOR/XNOR circuits and its application in Advance
 Standard (AES)," Next-Generation Electronics (ISNE), 2010 International Symposium on pp.77-80, 
 18-19 Nov. 2010  
 [19] Hsin-I Liu, рOn-Chip ECC for Low-Power SRAM Designс  
-66 | A M S E 
-                                                     
+                                                    
+ 
+67 | A M S E  
  
 [20] Horiguchi, M. рRedundancy techniques for high-density DRAMs,с Innovative Systems in 
 Silicon, 1997. Proceedings. Second Annual IEEE International Conference on , pp. 22-29, 8-10 Oct 
@@ -1749,91 +1769,109 @@ Systems, IEEE Transactions on , vol. 13, no. 1, pp. 27- 38, Jan. 2005.
 [26] http://www.eeweb.com/project/joel_abraham/vlsi 
 [27] http://bwrc.eecs.berkeley.edu/classes/icdesign/ee141_s09/Project/EE141_s09_project1.pdf 
 [28] http://www.butingtech.com/explained-how-error-detection-and-correction-works/ 
-[29] M. Y. Hsiao, рA Class of Optimal Minimum Odd-weight-column SEC-DED Codes,с IBM J.  
+[29] M. Y. Hsiao, рA Class of Optimal Minimum Odd-weight-column SEC-DED Codes,с IBM J. 
 RES. Develop., Vol.14, pp. 395-401, July 1970. 
 [30] E. Fujiwara, Code Design for Dependable Systems, Theory and Practical Applications, 
 Wiley-interscience, 2006. 
-[31] R. M. Roth and G. Seroussi, рReduced-redundancy product codes for burst error correction,с 
  
+ 
+[31] R. M. Roth and G. Seroussi, рReduced-redundancy product codes for burst error correction,с 
 IEEE Trans. Inform. Theory, vol. 44, pp. 1395п1406, July 1998. 
 [32] Error Correcting Codes, lecture slide, Professor Dhiraj.K.Pradhan 
 [33] http://en.wikipedia.org/wiki/Semiconductor_device_modeling 
 [34] H. Iwai рRoadmap for 22 nm and beyondс 
-67 | A M S E 
-                                                     
+                                                    
+ 
+68 | A M S E  
  
 APPENDICES 
 Appendix A 
 IMPLEMENTATION OF 6T SRAM CELL IN HSPICE: 
- *Simulation of 6T SRAM Cell 
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+*Simulation of 6T SRAM Cell 
 *definition 
- 
 .PARAM 
- 
 $ Number of sweeps for Montecarlo 
- +val=2000 
- $Load Capacitance 
- 
++val=2000 
+$Load Capacitance 
 +cload=5pf 
- 
 +vdd=1 
- 
 $ Transistor sizing 
- +l=45n 
- +w=90n 
- 
++l=45n 
++w=90n 
 $ Threshold voltage variation 
- 
 *+nvt= 0.3423 
- 
 *+pvt= -0.23122v 
- +nvt= agauss(0.342v,0.034v,3) 
- +pvt= agauss(-0.342v,0.034v,3) 
- 
++nvt= agauss(0.342v,0.034v,3) 
++pvt= agauss(-0.342v,0.034v,3) 
 $ Gate Oxide Critical Dimensions 
- 
 *+ntox=1.25n 
- 
 *+ptox=1.3n 
- *+ntox= agauss(1.25n,0.25n,3) 
- *+ptox= agauss(1.3n,0.26n,3) 
- 
- 
+*+ntox= agauss(1.25n,0.25n,3) 
+*+ptox= agauss(1.3n,0.26n,3) 
  
 .GLOBAL 1 
  
- 
- *Initial Conditions 
- .IC V(Q)=0 
- 
+*Initial Conditions 
+.IC V(Q)=0 
 .IC V(QB)='vdd' 
  
- 
- 
 VCC 1 0 'vdd' 
- Vcharge Charge 0 'vdd' 
- *---------------------------------------LOAD CAPACITANCES-----------------------------------* 
- 
+Vcharge Charge 0 'vdd' 
+*---------------------------------------LOAD CAPACITANCES-----------------------------------* 
 CBL BL 0 cload 
- 
 CBLB BLB 0 cload 
- 
 *---------------------------------------PRECHARGE CIRCUIT------------------------------------* 
- XIPC PC PCB INV 
- MG2 BLB PCB Charge Charge PMOS W='18*w' L='l' 
- 
+XIPC PC PCB INV 
+MG2 BLB PCB Charge Charge PMOS W='18*w' L='l' 
 MG3 BL PCB Charge Charge PMOS W='18*w' L='l' 
- 
 *-----------------------------------------VOLTAGES-------------------------------------------------* 
- 
 VW W 0 pwl 0n 0v, 29n 0v, 30n 'vdd', 50n 'vdd', 51n 0v,  
  
-68 | A M S E 
-                                                     
+                                                    
+ 
+69 | A M S E  
+ 
  
 +154n 0v ,155n 'vdd', 175n 'vdd', 176n 0v,245n 0v,R 0 
- 
  
 VPC PC 0 pwl 0n 0v, 1n 'vdd', 21n 'vdd', 22n 0v, 69n 0v, 70n 'vdd',  
 +90n 'vdd', 91n 0v, 129n 0v, 130n 'vdd', 150n 'vdd', 151n 0v, 194n 0v,  
@@ -1878,281 +1916,285 @@ MI3 out1 in 0 0 NMOS W='w' L='l'
 + targ v(QB) VAL='0.5*vdd' Fall=1 
 .option nopage nomod post  
  
-69 | A M S E 
-                                                     
+                                                    
+ 
+70 | A M S E  
  
 Appendix B 
 IMPLEMENTATION OF (7, 4) HAMMING CODE ALGORITHM IN HSPICE 
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 $ECC (7,4) for 4 data bits 
- 
 $Definition 
- 
 .PARAM 
- 
 +vdd=1.0v 
- 
 +cload=5pf 
- 
 +l=45n 
- 
 +w=90n 
- 
 +nvt= 0.46893 
- 
 +pvt= -0.49158v 
- 
 +nvt= agauss(0.469v,0.046v,3) 
- 
 *+pvt= agauss(-0.469v,0.046v3) 
- 
 +ntox=1.25n 
- 
 +ptox=1.3n 
- 
 *+ntox= agauss(1.25n,0.25n,3) 
- 
 *+ptox= agauss(1.3n,0.26n,3) 
- 
- 
  
 .GLOBAL 1 
  
- 
- 
 $Initial Conditions 
- 
 .IC  
- 
 +V(Q1)=0 
- 
 +V(QB1)='vdd' 
- 
 +V(Q2)=0 
- 
 +V(QB2)='vdd' 
- 
 +V(Q3)=0 
- 
 +V(QB3)='vdd' 
- 
 +V(Q4)=0 
- 
 +V(QB4)='vdd' 
- 
 +V(Q5)=0 
- 
 +V(QB5)='vdd' 
- 
 +V(Q6)=0 
- 
 +V(QB6)='vdd' 
- 
 +V(Q7)=0 
- 
 +V(QB7)='vdd' 
  
- 
- 
 VCC 1 0 'vdd' 
- 
 Vcharge Charge 0 'vdd' 
- 
 *------------------------------------------------------------------------------------------------------------* 
- 
 *supply voltage source define  
- 
- 
  
 VPC1 PC1 0 pwl 0n 0v, 1n 'vdd', 21n 'vdd', 22n 0v, 69n 0v, 70n 'vdd',  
  
-70 | A M S E 
-                                                     
+                                                    
+ 
+71 | A M S E  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 +90n 'vdd', 91n 0v, 150n 0v,R 0 
- 
  
 VPC2 PC2 0 pwl 0n 0v, 1n 'vdd', 21n 'vdd', 22n 0v, 69n 0v, 70n 'vdd',  
- 
 +90n 'vdd', 91n 0v, 150n 0v,R 0 
- 
- 
  
 VPC3 PC3 0 pwl 0n 0v, 1n 'vdd', 21n 'vdd', 22n 0v, 69n 0v, 70n 'vdd',  
- 
 +90n 'vdd', 91n 0v, 150n 0v,R 0 
- 
- 
  
 VPC4 PC4 0 pwl 0n 0v, 1n 'vdd', 21n 'vdd', 22n 0v, 69n 0v, 70n 'vdd',  
- 
 +90n 'vdd', 91n 0v, 150n 0v,R 0 
- 
- 
  
 VPC5 PC5 0 pwl 0n 0v, 1n 'vdd', 21n 'vdd', 22n 0v, 69n 0v, 70n 'vdd',  
- 
 +90n 'vdd', 91n 0v, 150n 0v,R 0 
- 
- 
  
 VPC6 PC6 0 pwl 0n 0v, 1n 'vdd', 21n 'vdd', 22n 0v, 69n 0v, 70n 'vdd',  
- 
 +90n 'vdd', 91n 0v, 150n 0v,R 0 
- 
- 
  
 VPC7 PC7 0 pwl 0n 0v, 1n 'vdd', 21n 'vdd', 22n 0v, 69n 0v, 70n 'vdd',  
- 
 +90n 'vdd', 91n 0v, 150n 0v,R 0 
- 
- 
- 
  
  
 VWL WL 0 pwl 0n 0v, 29n 0v, 30n 'vdd', 50n 'vdd', 51n 0v ,100n 0v , 101n 'vdd', 
- 
 +120n 'vdd', 121n 0v,150n 0v, R 0 
- 
- 
  
 VWL_P WL_P 0 pwl 0n 0v, 31n 0v, 32n 'vdd', 52n 'vdd', 53n 0v ,100n 0v , 101n 'vdd', 
- 
 +120n 'vdd', 121n 0v,150n 0v, R 0 
- 
- 
  
 VWE WE 0 pwl 0n 0v, 31n 0v, 32n 'vdd', 52n 'vdd', 53n 0v, 150n 0v,R 0 
  
- 
- 
 VRE RE 0 pwl 0n 'vdd', 99n 'vdd' , 100n 0v,120n 0v, 121n 'vdd' ,151 'vdd',R 0 
  
- 
- 
 *-----------------------------Data Bits"0101100"---------------------------------------------------------* 
- 
 **********1234567*********** 
- 
 VD3 D3 0 0 
- 
 VDB3 DB3 0 pwl 0n 0v, 29n 0v, 30n 'vdd', 50n 'vdd', 51n 0v, 150n 0v,R 0 **************0 
  
- 
- 
 VD5 D5 0 pwl 0n 0v, 29n 0v, 30n 'vdd', 50n 'vdd', 51n 0v, 150n 0v,R 0***************1 
- 
 VDB5 DB5 0 0 
  
- 
- 
 VD6 D6 0 0  
- 
 VDB6 DB6 0 pwl 0n 0v, 29n 0v, 30n 'vdd', 50n 'vdd', 51n 0v, 150n 0v,R 0***************0 
- 
 VD7 D7 0 0 
- 
 VDB7 DB7 0 pwl 0n 0v, 29n 0v, 30n 'vdd', 50n 'vdd', 51n 0v, 150n 0v,R 0***************0 
+                                                    
+ 
+72 | A M S E  
  
  
  
-71 | A M S E 
-                                                     
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 VSA SAE 0 pwl 119n 0v , 120n 0v, 121n 'vdd', 141n 'vdd', 142n 0v, 145n 0v, R 0 
 *------------------------------------------------------------------------* 
- 
 **Pre-Charge ckt1** 
- 
 XIPC1 PC1 PCB1 INV 
- 
 MG21 BLB1 PCB1 Charge Charge PMOS W='18*w' L='l' 
- 
 MG31 BL1 PCB1 Charge Charge PMOS W='18*w' L='l' 
- 
 *------------------------------------------------------------------------* 
- 
 **Pre-Charge ckt2** 
- 
 XIPC2 PC2 PCB2 INV 
- 
 MG22 BLB2 PCB2 Charge Charge PMOS W='18*w' L='l' 
- 
 MG32 BL2 PCB2 Charge Charge PMOS W='18*w' L='l' 
- 
 *------------------------------------------------------------------------* 
- 
 **Pre-Charge ckt3** 
- 
 XIPC3 PC3 PCB3 INV 
- 
 MG23 BLB3 PCB3 Charge Charge PMOS W='18*w' L='l' 
- 
 MG33 BL3 PCB3 Charge Charge PMOS W='18*w' L='l' 
- 
 *------------------------------------------------------------------------* 
- 
 **Pre-Charge ckt4** 
- 
 XIPC4 PC4 PCB4 INV 
- 
 MG24 BLB4 PCB4 Charge Charge PMOS W='18*w' L='l' 
- 
 MG34 BL4 PCB4 Charge Charge PMOS W='18*w' L='l' 
- 
 *------------------------------------------------------------------------* 
- 
 **Pre-Charge ckt5** 
- 
 XIPC5 PC5 PCB5 INV 
- 
 MG25 BLB5 PCB5 Charge Charge PMOS W='18*w' L='l' 
- 
 MG35 BL5 PCB5 Charge Charge PMOS W='18*w' L='l' 
- 
 *------------------------------------------------------------------------* 
- 
 **Pre-Charge ckt6** 
- 
 XIPC6 PC6 PCB6 INV 
- 
 MG26 BLB6 PCB6 Charge Charge PMOS W='18*w' L='l' 
- 
 MG36 BL6 PCB6 Charge Charge PMOS W='18*w' L='l' 
- 
 *------------------------------------------------------------------------* 
- 
 **Pre-Charge ckt7** 
- 
 XIPC7 PC7 PCB7 INV 
- 
 MG27 BLB7 PCB7 Charge Charge PMOS W='18*w' L='l' 
- 
 MG37 BL7 PCB7 Charge Charge PMOS W='18*w' L='l' 
- 
 *------------------------------------------------------------------------* 
- 
 CBL1 BL1 0 cload 
- 
 CBLB1 BLB1 0 cload 
  
- 
- 
 CBL2 BL2 0 cload 
- 
 CBLB2 BLB2 0 cload 
  
- 
- 
 CBL3 BL3 0 cload 
+                                                    
  
+73 | A M S E  
  
-72 | A M S E 
-                                                     
  
 M54 Q4 WL BL4 0 NMOS W='w' L='l' 
 M64 QB4 WL BLB4 0 NMOS W='w' L='l' 
- 
 *------------------------------------------------------------------------* 
 *6T SRAM_5 netlist 
 M15 Q5 QB5 1 1 PMOS W='w' L='l' 
@@ -2195,26 +2237,27 @@ X2 PB WE BL2 BLB2 WriteP
 X3 D3 DB3 BL3 BLB3 Write 
 X4 PC WE BL4 BLB4 WriteP 
 X5 D5 DB5 BL5 BLB5 Write 
-73 | A M S E 
-                                                     
+                                                    
+ 
+74 | A M S E  
+ 
+ 
+ 
+ 
+ 
+ 
  
  
 X6 D6 DB6 BL6 BLB6 Write 
- 
 X7 D7 DB7 BL7 BLB7 Write 
 *---------------------------------------------------------------------------------------------* 
- 
 *Data being read through the Sense Amplfier 
 XSA1 BL1 BLB1 SAE SON1 SO1 SA  
- 
 XSA2 BL2 BLB2 SAE SON2 SO2 SA 
- 
 XSA3 BL3 BLB3 SAE SON3 SO3 SA 
 XSA4 BL4 BLB4 SAE SON4 SO4 SA 
- 
 XSA5 BL5 BLB5 SAE SON5 SO5 SA 
 XSA6 BL6 BLB6 SAE SON6 SO6 SA 
- 
 XSA7 BL7 BLB7 SAE SON7 SO7 SA 
 *---------------------------------------------------------------------------------------------* 
 XCretError SON3 SONB3 INV 
@@ -2249,8 +2292,9 @@ MR Qw DB 0 0 NMOS W='10*w' L='l'
 MXOR1 2 A 1 1 PMOS W='4*w' L='l' 
 MXOR2 3 B 2 0 PMOS W='4*w' L='l' 
 MXOR3 3 B A 1 NMOS W='1*w' L='l' 
-74 | A M S E 
-                                                     
+                                                    
+ 
+75 | A M S E  
  
  
 MXOR4 3 A B 0 NMOS W='1*w' L='l' 
@@ -2292,5 +2336,3 @@ MI3 out1 in 0 0 NMOS W='2*w' L='l'
 .MEASURE WriteTime trig v(WL_P) VAL='0.5*vdd' Rise=1 
 + targ v(Q2) VAL='0.1*vdd' Rise=1 
 .option nopage nomod post  
-75 | A M S E 
- 

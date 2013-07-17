@@ -1,3 +1,5 @@
+1 
+ 
  
 Executive summary 
  
@@ -38,8 +40,9 @@ I created an algorithm to model and locate the bay windows by separating the gro
 floor into two parts, see pages 39. 
  
  
-1 
- Table of Content: 
+3 
+ 
+Table of Content: 
 Executive summary ............................................................................................................. 1 
 Acknowledgements .............................................................................................................. 2 
 1 Introduction ................................................................................................................. 4 
@@ -48,7 +51,7 @@ Acknowledgements ...............................................................
 1.3 Language and Environment ................................................................................. 6 
 2 Framework and Work Flow ........................................................................................ 6 
 3 Architecture Research ................................................................................................. 9 
-4 Basic theoretical research of procedural modeling of architecture.......................... 13 
+4 Basic theoretical research of procedural modeling of architecture .......................... 13 
 4.1 Segment Definition .............................................................................................. 13 
 4.2 Vertex Definition ................................................................................................. 14 
 4.3 Grammars ............................................................................................................ 14 
@@ -69,8 +72,9 @@ Acknowledgements ...............................................................
 8 Further Work ............................................................................................................ 57 
 Bibliography ...................................................................................................................... 58 
 Appendices - Essential Source Code ................................................................................. 60 
-3 
-  
+4 
+ 
+ 
 1 Introduction 
 1.1 Aims and Objectives 
  
@@ -109,16 +113,18 @@ and real city map.
 Commercial Viability 
  
 From the report of ESA( entertainment software association), in 2010, consumer spent 
-4 
- 15.90 billion dollars on Video Games content totally. And the 1.4 billion box office of 
+5 
+ 
+15.90 billion dollars on Video Games content totally. And the 1.4 billion box office of 
 Hollywood animation movie in 2010 was double as in 2009. This amazing 
 development of video games and animation industry is obvious. However, the 
 difficulty and risk of development is increasing, not only because of the requirement 
 of high quality, but also because more and more grand scenes are wanted. The effort 
 paid by a typical Game/Animation developer is in the Table1 
  
- Content Admin Music Programming 
+ Content 
 Creation 
+Admin Music Programming 
 Effort(Percentage) 60% 10% 10% 20% 
 Table 1 
  
@@ -154,8 +160,9 @@ intellectual property.” That means this project has its own clear commercial val
 besides the academic meaning.  
  
  
-5 
-  
+6 
+ 
+ 
 1.3 Language and Environment 
  
  
@@ -180,17 +187,19 @@ Voronoi City Map Creation can generate the data of Voronoi map.
 Maya plug-in Creation translates these data into Maya plug-in. 
 .mll file will be created then imported in Maya. 
  
-.mll 
- Maya plug-in 
- Voronoi City 
-plug-in 
-Map Creation Creation 
-file 
- 
  
 Figure 1 FrameWork C++ 
-6 
-  
+ 
+ Voronoi City 
+Map Creation 
+ Maya plug-in 
+Creation 
+.mll 
+plug-in 
+file 
+7 
+ 
+ 
  
  
 Each rectangle stands for a MEL script file. All other scripts are based on the Single 
@@ -203,19 +212,8 @@ Building Modeling with randomly attributes
 bricks. 
 ? Model Roof by Tiles replaces primitives of a building roof with tiles. 
  
-Single Building 
-Modeling  
- 
-Multiple 
-Single  
-Building Building Model Buildings 
-Model Roof by 
-Attribute Numbers by Bricks 
-Tiles 
-Control Window Control Window 
  
  
-Figure 2 Framework MEL 
  
 Work Flow 
  
@@ -225,42 +223,67 @@ times. The attributes of each building can be modified by the input from users o
 Single Building Attribute Window. On the other side, in a MFC application, users can 
 draw some points which stand for the positions of buildings. These points then are 
 used to create Voronoi Diagram which is treated as a map. The data of this map will 
-7 
- be recorded and translated to a .mll plug-in file. Finally, this plug-in will be imported 
+ 
+Single Building 
+Modeling  
+Figure 2 Framework MEL 
+Single  
+Building 
+Attribute 
+Control Window 
+Multiple 
+Building 
+Numbers 
+Control Window 
+Model Buildings 
+by Bricks 
+Model Roof by 
+Tiles 
+8 
+ 
+be recorded and translated to a .mll plug-in file. Finally, this plug-in will be imported 
 and buildings will be located according to the map.  
  
+ 
+ 
+ 
+Figure 3 Work Flow(Flow Chart) 
  
  
 Start
 Input 
 Building 
 Number n
-Create Input 
-Map&Assgin Multiple Building Building 
-Buildings into Window Attributes
-positions
-n
-Single Building 
+Multiple Building 
+Window
 Model Single 
-Attributes Attribute 
 Building  i
-Window 
-Import plug-in
+n
+if(i<=n)
 y
-.mll if(i<=n)
-Create Maya 
-plug-in
+Single Building 
+Attribute 
+Window 
+Input 
+Building 
+Attributes
+Attributes
+Start
+Input 
+Positions
 Draw Voronoi 
 Map
-Input 
-Start
-Positions
+Create Maya 
+plug-in
+Import plug-in
+Create 
+Map&Assgin 
+Buildings into 
+positions
+.mll
+9 
  
-Figure 3 Work Flow(Flow Chart) 
  
- 
-8 
-  
  
 3 Architecture Research 
  
@@ -301,11 +324,13 @@ Pilasters: are built-in wall or attached to the wall surface. They are slightly 
 pillars. Normally, the pilaster is in a flat or rectangular shape, but sometimes also in 
 the semicircular columnar shape or other arbitrary shape of the true column, including 
 a helical column.  
-9 
-  
-Figure 4 Architecture Structure 
 10 
- D.K. Ching states that a roof can be flat, sloping or curved. Lean-to is a kind of roof 
+ 
+ 
+Figure 4 Architecture Structure 
+11 
+ 
+D.K. Ching states that a roof can be flat, sloping or curved. Lean-to is a kind of roof 
 which only has one slope. A hip can be defined as roofs intersect in an inclined line 
 when their two walls make a projecting angle. A valley is the inclined line of 
 intersection if the walls meet in a reentering angle. Domical or conical roofs should be 
@@ -349,8 +374,9 @@ building.
  
  
  
-11 
-  
+12 
+ 
+ 
  
  
  
@@ -394,8 +420,9 @@ building
  
  
  
-12 
-  
+13 
+ 
+ 
  
  
  
@@ -435,8 +462,9 @@ when a quarter is created or modified.
 The Quad Splines can be used as a constraint in the single building modeling part of 
 the project. It will cut design time for the creation of symmetrical objects. 
  
-13 
-  
+14 
+ 
+ 
 4.2 Vertex Definition 
  
 A list of vertices is held by each spline. A curve is defined by four vertices, one point 
@@ -470,8 +498,9 @@ a design by creating more and more details.
 If we want to build models with grammars, two aspect problems should be recognized. 
 Firstly, encoding architectural design knowledge needs a powerful framework. 
 Secondly, the architectural design knowledge should be presented appropriately by 
-14 
- the rules. 
+15 
+ 
+the rules. 
  
  
  
@@ -503,8 +532,9 @@ Figure 6. Shape grammars
 In this part, the shape grammars are appropriate to most cases that I have met in the 
 project, however, some polygonal buildings are hard to build only in this way. The 
 later part like generate mesh modeling must be combined flexibility.  
-15 
-  
+16 
+ 
+ 
  
 Production process:  
  
@@ -548,8 +578,9 @@ Actually, a considerable part of procedural modeling work is implemented under t
 grammar. 
  
 Basic Split rules: 
-16 
-  
+17 
+ 
+ 
 Muller (2006) provides an explanation of the basic split rule. The basic split rule splits 
 the current scope along one axis.  
  
@@ -575,8 +606,9 @@ pushed and pop by the modules [  ]. l(Objld) adds a geometric primitive “Objld” 
 point P to create geometry. According to the current state of the scope, the primitive is 
 scaled and rotated. Besides typical objects like a cube, a quad, a cylinder, any 
 three-dimensional model can be used. 
-17 
-  
+18 
+ 
+ 
 Before use this scope grammar in the project, how to generate a couple of buildings 
 should be considered, because the translation is the absolute position of coordination 
 but the distances between each other are relative to their scales.  
@@ -586,7 +618,7 @@ To allow for larger scale changes in the split rules, we often want to tile a sp
 element. For example: 
 1: floor;Repeat(”X”,2){ B } 
 The floor will be tiled into as many elements of type B along the x-axis of the scope 
-as there is space. The number of repetitions is computed as repetitions = ?Scope.sx/2 ? 
+as there is space. The number of repetitions is computed as repetitions = ?Scope.sx/2? 
 and we adjust the actual size of the element accordingly. Component split: Up until 
 this point all shapes (scopes) have been three-dimensional. The following command 
 allows it to be split into shapes of lesser dimensions: 
@@ -609,8 +641,9 @@ Figure 9. Split walls from windows and doors
  
 To summary the flow about how the grammars work, Peter Wonka (2006) gives a 
 chart  
-18 
-  
+19 
+ 
+ 
 Figure 10. Grammar Work Flow 
  
 In this project, the chart could be a very important reference to build basic meshes. 
@@ -625,8 +658,9 @@ Figure 11. Limitations of Split Grammars
  
 Generative Modeling Language: 
  
-19 
-  
+20 
+ 
+ 
 Figure 12. Generative Modeling Language 
  
 1: Parameters of the quad operator are the midpoint (0,0,-2) and extension (1,1,0) of 
@@ -649,8 +683,9 @@ be provided by Generative Mesh Modeling.
  
  
 Figure 13. Different Sharpness Flags 
-20 
-  
+21 
+ 
+ 
 In the Figure 11, the only differences of all columns are the sharpness of the edges 
 and each of the columns have an identical control mesh. By combining smooth 
 transitions with sharp creases, different shapes can be created in various ways. 
@@ -674,15 +709,16 @@ Figure 14. Planar models of Euler operators
 makeVFS: Make Vertex, Face, Shell creates the minimal 2-complex, the pointed 
 sphere. It provides one connected component (a shell) that consists of just a face and a 
 vertex attached to it, to initialize the modeling process. The planar model actually 
-consists of the vertex alone, the face is the (unbounded) plane around it. 
+consists of the vertex alone, the face is the (unbounded) plane around it.  
  
 makeEV: Make Edge & Vertex is the vertex split operator. It allows to split any 
 vertex into a pair of separate vertices connected by a new edge. Thus it introduces one 
 edge and one vertex, which explains the name. 
  
 makeEF: Make Edge & Face is the face split operator. It is dual to makeEV as it 
-21 
- splits a given face in two, introducing a new face and a new edge. 
+22 
+ 
+splits a given face in two, introducing a new face and a new edge. 
  
 makeEkillR: Make Edge, Kill Ring connects a ring with the outer face boundary. 
 This creates just a single edge to decrease the number of face boundaries by 1. 
@@ -710,8 +746,9 @@ While, to use Eular operators, many math knowledge should be involved.
 Implementation 
 5.1 Basis 
  
-22 
-  
+23 
+ 
+ 
 Figure 15 Basis 
  
 Some elements can be produced from simple primitives. P.J.Birch, S.P.Browne, V.J. 
@@ -729,28 +766,8 @@ normal. This principle leads these limited actions:
 Figure 16 Simple Shell with directional constrains 
  
 In this project, cubes are mainly used in generating floors. The main step is:  
-23 
- start
-Users input:
-Floor Number
-Floor Height
-Floor Width
-Foor Depth
-Model single 
-cube with the 
-If(Id i!=1)
-attributes: 
-random*h,w,d
-Model single Move 
-cube with these cubes by 
-h,w,d attributes their IDs
-y
-Move all cubes group 
-If(Id i<Cube 
-to the building 
-number n)
-property position
-End
+24 
+ 
  
 Figure 17 Flow Chart of Basis 
  
@@ -775,11 +792,37 @@ In the multiple building modeling, if we use this formula directly for each buil
 one problem will occur, the random number can make their height of Ground Floors 
 look very different which is unreality. In this case, the height of Ground Floor of first 
 building will be assigned to the rest of buildings as well after another limited random 
-24 
- 
+start
+Model single 
+cube with these 
+h,w,d attributes
+Users input:
+Floor Number
+Floor Height
+Floor Width
+Foor Depth
+`
+Move 
+cubes by 
+their IDs
+If(Id i<Cube 
+number n)
+y
+If(Id i=1)
+y
+u
+Model single 
+cube with the 
+attributes: 
+random*h,w,d
+Move all cubes group 
+to the building 
+property position
+End
 n
-y `
-unumber multiplied to it. 
+25 
+ 
+number multiplied to it. 
  
  
 Figure 18 Unify height of Ground Floor 
@@ -816,8 +859,9 @@ It is useful for objects attached to the floors like windows, doors, roofs. In t
 roofs, windows, doors are moved, the height, width and depth of the cubes will be 
 changed with them. 
  
-25 
-  Lock to lower shell – This constraint uses top plane of the up cube as the new top 
+26 
+ 
+ Lock to lower shell – This constraint uses top plane of the up cube as the new top 
 plane and uses bottom plane of the bottom cube as the new bottom plane. In this way. 
 The roofs should be produced up to the top plane and ground should be produced 
 bottom to the bottom plane. 
@@ -852,8 +896,9 @@ which may not be a perfect cube transparent inside. However, the other requireme
 can be fulfilled if we use them appropriately. 
 5.2 Roofs 
  
-26 
-  
+27 
+ 
+ 
 Figure 19 Roofs 
  
 P.J.Birch, S.P.Browne and V.J. Jennings (2002) present if we want to add a roof on a 
@@ -867,24 +912,8 @@ In this project, there are four kind of roof style produced in total:
 Figure 20 Four kind of Roof 
  
 The main step of the roof modeling is: 
-27 
- Start
-Input 
-Building 
-Number n
-Random a 
-number r
-i++
-Produce a roof of 
-Input roof 
-Building i in style 
-Height
-r with the Height 
-y
-Moved to a 
-approperat
-e height 
-If(i<=n)
+28 
+ 
  
 Figure 21 Flow Chart of Roof 
 Figure 23 indicates the process of producing roofs. Firstly, as mentioned before, users 
@@ -907,24 +936,40 @@ Style number 1 is based on a Pyramid. The size of bottom plane is little bigger 
 of the building in order to covers everything below the roof. However, there is a problem 
 when we move the roof to the appropriate place: In Maya, the Scale Y (Height of the Pyramid) 
 is the length of hypotenuse but not the distance from the top vertex to the center of the bottom 
-plane. In this case, we can`t use 1/2*Scale Y + HeightOfBasis as the number in axis Y of the 
+plane. In this case, we can t` use 1/2*Scale Y + HeightOfBasis as the number in axis Y of the 
 roof. Looks like this: 
-28 
- Height
-Width
-Scale Y
+Start
+Produce a roof of 
+Building i in style 
+r with the Height 
+Input 
+Building 
+Number n
+Random a 
+number r
+i++
+Input roof 
+Height
+If(i<=n)
+Moved to a 
+approperat
+e height 
+y
+29 
+ 
  
 Figure 22 Pyramid Scale Y 
 Therefore, we need to calculate the Height of the Pyramid using Pythagorean 
 proposition twice: 
-Scale Y
  
 Figure 23 Calculation of Pyramid Height 
  
-2 2
-T = sqrt((Width/2) +(Depth) ) 
-2 2
-Height = sqrt((Scale Y/2) -(T) ) 
+T = sqrt((Width/2)2+(Depth)2) 
+Height = sqrt((Scale Y/2)
+2
+-(T)
+2
+) 
 Then the roof should be translated along Y with Height/2 + HeightOfBasis.  
  
 Style 2 
@@ -937,10 +982,18 @@ Figure 24 Weird Plane Roof
 Style 3 
 In this roof, it composed by double cubes for the outside planes, double cubes for the 
 middle planes, and one Prism for the bottom base. 
-29 
- 
+Scale Y
+Scale Y
+Width De
+pth
+H
+e
+ig
+h
+t
 T
-DepthHeight
+30 
+ 
  
 Figure 25 Component of Roof Style 3 
  
@@ -948,28 +1001,17 @@ The base of the roof is created as roof style 1: the width and depth are depende
 the size of building and the height is decided by users. To calculate the position, size 
 and direction of middle and top planes, trigonometric function need to be used. 
  
-Length
-a
-Depth/2
  
 Figure 26 Trigonometric function of Style 3 
  
-a Arctan(Height/(Depth/2)) 
-rad = 
-a = rad_to_deg(a ) 
-deg rad
-Roof = Rotate(a ) 
-left deg
-Roof = Rotate(-a ) 
-right deg
-Roof = Translate Y(HeightOfBasis+Height/2) 
-left 
-Roof = Translate Y(HeightOfBasis+Height/2) 
-right 
-Roof = Translate Z(Depth/4) 
-left
-Roof = Translate Z(-Depth/4) 
-right
+arad = Arctan(Height/(Depth/2)) 
+adeg = rad_to_deg(arad) 
+Roofleft = Rotate(adeg) 
+Roofright = Rotate(-adeg) 
+Roofleft = Translate Y(HeightOfBasis+Height/2) 
+Roofright = Translate Y(HeightOfBasis+Height/2) 
+Roofleft = Translate Z(Depth/4) 
+Roofright = Translate Z(-Depth/4) 
  
 Style 4 
 The roof of style 4 is same to style 3 after rotated 90 degree. However, the width and 
@@ -983,10 +1025,18 @@ Constrains:
 accepted and a too thin roof will be treated as a plane roof. 
   
  Bottom Size – The size of bottom plane is depend on the size of the basis. The 
-bottom size should be a little bit larger because the roof should cover the whole basis. 
+bottom size should be a little bit larger because the roof should cover the whole basis.  
  
-30 
-  Probability – A good probability for each kind of roof style should be assigned. 
+H
+e
+ig
+ht
+Depth/2
+Length
+a
+31 
+ 
+ Probability – A good probability for each kind of roof style should be assigned. 
 The standard of the assignment includes the truth and aesthetics. The probabilities in 
 this project are 1/8, 1/8, 3/8, 3/8 respectively. 
  
@@ -999,12 +1049,15 @@ bottom plane. In this way, the roof can be located in the coordinate much easier
 Figure 27 Windows 
  
 The main steps for window modeling are: 
+ 
+Figure 28 Flow Chart of Window 
+ 
 Start
+Create Floor j
 Input Building 
 Number n
 Input Floor 
 Number fn,i++
-Create Floor j
 Input Window 
 Number wn and 
 window width and 
@@ -1012,12 +1065,6 @@ height,j++
 Create a single 
 Window k with 
 attributes,k++
-y
-Move to 
-appropriate 
-y
-y
-position 
 If(window 
 k<=wn)
 If(Floor j
@@ -1025,11 +1072,15 @@ If(Floor j
 If
 (Building 
 i <=n)
+y
+y
+y
+Move to 
+appropriate 
+position 
+32 
  
-Figure 28 Flow Chart of Window 
- 
-31 
- As showed in Figure 30, the process of producing a window is in three loops. Firstly, 
+As showed in Figure 30, the process of producing a window is in three loops. Firstly, 
 like before, the project receives the amount of buildings. In each building producing 
 process, floors are created one by one. After users input how many windows they 
 want, this number of windows will be generated in each floor. The position of them 
@@ -1038,8 +1089,7 @@ will be calculated when the number of them are confirmed.
 The formula of position calculation is like this: 
  
 Gap = (FloorWidth – WindowWidth * WindowNumber) / (WindowNumber + 1) 
-Window Position = -FloorWidth / 2 + Window * Gap + (Window – 1) * 
-i i i  
+Windowi Position = -FloorWidth / 2 + Windowi * Gap + (Windowi – 1) * 
 WindowWidth + 0.5 * WindowWidth 
  
 In these formulas, the gap stands for the distance between two windows or between 
@@ -1070,8 +1120,9 @@ Moreover, the texture of window should be very matched with the texture of basis
 but obviously, it is not that easy to be achieved, the degree of coupling is high. Finally, 
 one major feature of this project is the dynamic effect can be used easily, but the 
 texture window will ruin it.  
-32 
-  
+33 
+ 
+ 
 Figure 29 3D Window 
  
 “The underlying thread was that any window had an outer frame and internal to this 
@@ -1096,16 +1147,14 @@ window is not in a rectangle shape but in an irregular shape which is difficult 
 subdivide it, this algorithm seems can`t work anymore. 
  
  
-33 
- Part 4
+34 
+ 
 In this project, the window is produced in the way introduced above. 
  
 One window can be divided into these 4 parts as showed in Figure 33. The part 1 and 
 part 4 are the frames, part 3 is the window and part 2 is the grid: 
  
  
-Part 3
-Part 2
  
 Figure 31 Component of Window  
 P.J.Birch, S.P.Browne, V.J. Jennings (2002) argue that, to define spline segments, a 
@@ -1121,9 +1170,13 @@ required, we need only add some splines. If the shape is not satisfied, we need 
 change some of the splines by changing the vertexes on them: 
  
 Part 1 is created with these steps specifically: Firstly, produce a flat Cylinder and 
-34 
+Part 1
+Part 2
+Part 3
+Part 4
+35 
  
-Part 1rotate it to let the up plane faces to front. And then use Maya tool “Boolean difference” 
+rotate it to let the up plane faces to front. And then use Maya tool “Boolean difference” 
 to get the edge by cutting a smaller Cylinder in the original Cylinder.  
  
 The up half of part 3 is an half of a flat Cylinder window and the bottom half is a flat 
@@ -1159,31 +1212,17 @@ windows is from 0.5 * Floor Width to 0.7 * Floor Width.
 The door is only exist on the Ground Floor, so in each building generation, the door 
 will be created only first time in the loop. Then project will use the input to model the 
 door. 
-35 
-  
+36 
+ 
+ 
  
 Figure 34 Doors 
 The main steps in modeling doors: 
-Start
-Input Building 
-Number n
-Model a single 
-Building j,j++
-Produce a 
-Floor i
-If (i==1)
-y
-y
-Input size and 
-position of the door
-Create a Door 
-with Attributes
-If (i<=n)
  
 Figure 35 Flow Chart of Door 
  
 The position of doors can be changed by the user input. The axis Z is controlled by a 
-percentage of the floor width and the axis Y is a fixed percentage of the floor height. 
+percentage of the floor width and the axis Y is a fixed percentage of the floor height.  
 The formulas of position are like here: 
 posZ = percentage * Floor Width 
 posY = Ground Floor Position – Floor Height /2 + Door Height * 0.5 
@@ -1192,8 +1231,23 @@ For one door, overall, it can be divided into 4 parts as showed below. Part 1 is
 window and the shell of the window which is created with the same technic as in the 
 Chapter of Windows. Part 2 is the shell of the door with some pattern. Part 3 are the 
 pillows with pattern. Part 4 is the main body of the door.  
-36 
- Part 4
+Start
+Input Building 
+Number n
+Model a single 
+Building j,j++
+Produce a 
+Floor i
+If (i==1)
+Create a Door 
+with Attributes
+Input size and 
+position of the door
+If (i<=n)
+y
+y
+37 
+ 
  
 Figure 36 Components of the Door  
  
@@ -1207,14 +1261,12 @@ which are defined by the vertexes they attached. For example, the Cylinder below
 defined by the vertexes vtx[120] and vtx[36]. The length of this Cylinder is the 
 distance between these two vertexes and the slope is calculated by Trigonometric 
 function with this fomula: 
-a = arctan(vtx[120].Y – vtx[36].Y / vtx[36].Z – vtx[120].Z) 
-rad
-a = rad_to_deg(a ) 
-deg rad
+arad = arctan(vtx[120].Y – vtx[36].Y / vtx[36].Z – vtx[120].Z) 
+adeg = rad_to_deg(arad) 
  
 Figure 37 Grid of Door Window 
  
-Part 2 is the result of using Boolean difference to this shell, the window and the part 4. 
+Part 2 is the result of using Boolean difference to this shell, the window and the part 4.  
 The pattern is made by moving vertexes, line by line: 
 Translate X vtx[45], vtx[44], vtx[75], vtx[151], vtx[121], vtx[120], vtx[186], vtx[48], 
 vtx[181], vtx[187] = 0.1 
@@ -1222,12 +1274,18 @@ Translate X vtx[156], vtx[182], vtx[157], vtx[170], vtx[183:184], vtx[169], vtx[
 = 0.08 
 Translate X vtx[161], vtx[158], vtx[159], vtx[163], vtx[172], vtx[175], vtx[171], 
 vtx[174] = 0.06 
-… 
-37 
  
+P
+ar
+t 3
 Part 2
-Part 1
-Part 3P.J.Birch, S.P.Browne and V.J. Jennings introduce the top-profile is used to define the 
+P
+ar
+t 1
+Part 4
+38 
+ 
+P.J.Birch, S.P.Browne and V.J. Jennings introduce the top-profile is used to define the 
 body of the object. In Figure 28 volutes is created by adding a series of indents in the 
 top-profile. 
  
@@ -1259,8 +1317,9 @@ HeightOfGroundFloor/1.5, HeightOfDoor/2<= WidthOfDoor<= 1.5 * HeightOfDoor.
  
  Locked to GroundFloor – The door should be changed when the Ground Floor changed. 
 The size of door should be changed when the size of Ground Floor changed. The door should 
-38 
- be translated when the Ground Floor is translated. 
+39 
+ 
+be translated when the Ground Floor is translated. 
  
 5.5 Bay Window 
  
@@ -1268,26 +1327,6 @@ The size of door should be changed when the size of Ground Floor changed. The do
  
 Figure 40 Bay Window 
 The main steps of Bay Window modeling are showed below: 
-Start
-Input Building 
-Number n
-Model a single 
-Building j
-Produce a 
-Floor i
-If (i==1)
-y
-y
-Calculate the amount 
-of Bay Window bn
-Create a Bay 
-Window k
-Move to 
-appropriate 
-y
-position
-If(k<=bn)
-If (i<=n)
  
 Figure 41 Flow Chart of Bay Window 
 As showed on this diagram, the Bay Window only exists on the Ground Floor. In the 
@@ -1296,8 +1335,29 @@ Bay Window should be calculated. After that, these Bay Windows will be located a
 appropriate position.  
  
 To calculate the amount of the Bay Window, the width of floor, the width of bay 
-39 
- window, the width of the door, the position of the door and the gap should be taken 
+Start
+Input Building 
+Number n
+Model a single 
+Building j
+Produce a 
+Floor i
+If (i==1)
+Create a Bay 
+Window k
+Calculate the amount 
+of Bay Window bn
+If (i<=n)
+y
+y
+Move to 
+appropriate 
+position
+If(k<=bn)
+y
+40 
+ 
+window, the width of the door, the position of the door and the gap should be taken 
 into calculatioin. The calculation formulas are: 
 gap = 0.3 * GroundFloorHeight 
 windNumL = (doorPosition+FloorWidth/2-BayWindowWidth/2-0.2)/(gap+ 
@@ -1316,8 +1376,6 @@ sum of gap and bay window width. If the usable width is not enough for a bay
 window, nothing will be created. 
  
 For one bay window, it can be divided into these parts: 
-Part 2
-Part 3
  
 Figure 42 Components of Bay Window 
 Part 1 is the shell of the bay window. Part 2 is the pattern of the shell and part 3 is the 
@@ -1335,9 +1393,12 @@ themselves.
  
  Size – the size of the bay window is connected with the size of ground floor. The 
 edge of the bay window should not be over the edge of ground floor 
-40 
+P
+ar
+t 1Part 2
+Part 3
+41 
  
-Part 1Attributes
 Locked to GroundFloor – The bay window should be changed when the Ground Floor 
 changed. The size of bay window should be changed when the size of Ground Floor 
 changed. The bay window should be translated when the Ground Floor is translated. 
@@ -1349,28 +1410,6 @@ changed. The bay window should be translated when the Ground Floor is translated
 Figure 43 Bricks 
  
 The brick is optional when modeling a single building: 
-Start
-Input 
-Building 
-Number n
-Multiple Building 
-Window
-n
-Input 
-Model Single Building 
-Attributes
-Building  i with y If(Use Bricks)
-bricks
-n
-y
-Model Single 
-Single Building 
-Building  i
-if(i<=n) Attribute 
-Window 
-Attributes
-y
-if(i<=n)
  
 Figure 44 Flow Chart of brick 
  
@@ -1378,59 +1417,72 @@ There is an option before a single building is produced, users can decide to use
 or cubes to create the whole building. If bricks are used, the cubes will be replaced.  
  
 The calculation of amount of bricks is different for even and odd rows. 
-41 
-  
+Start
+Input 
+Building 
+Number n
+Multiple Building 
+Window
+Model Single 
+Building  i
+n
+if(i<=n)
+y
+Single Building 
+Attribute 
+Window 
+Input 
+Building 
+Attributes
+Attributes
+If(Use Bricks)
+n
+Model Single 
+Building  i with 
+bricks
+if(i<=n)
+y
+y
+Attributes
+42 
+ 
+ 
 The amount of bricks in each odd row is calculated by these formulas: 
-TepNum = Floor Width / Brick Width 
-r
-Remainder = Floor Width – Brick Width * TepNum
-r r 
-Num = TepNum + 1 
-r r 
+TepNumr = Floor Width / Brick Width 
+Remainderr = Floor Width – Brick Width * TepNumr 
+Numr = TepNumr + 1 
  
 The result of Floor Width / Brick Width cannot always be an integer. In Maya, the 
 division will only calculate out an integer, so here, the TepNum is the number of full 
 size bricks. The remainder is the width of that rest brick. Therefore, the total number 
-of bricks in a row will be TepNum + 1 
-r 
+of bricks in a row will be TepNumr + 1 
  
 For the even rows, the formulas are different: 
-TepNum = (Floor Width – Brick Width/2) / Brick Width 
-r
-Remainder = Floor Width – Brick Width * TepNum
-r r 
-Num = TepNum + 2 
-r r 
+TepNumr = (Floor Width – Brick Width/2) / Brick Width 
+Remainderr = Floor Width – Brick Width * TepNumr 
+Numr = TepNumr + 2 
 To make the displacement between two rows, in the even rows, half of one brick is 
 created firstly, then the rest floor width will use the odd row`s algorithm to get the 
-brick number. As a result, the total number could be TepNum + 2 
-r 
+brick number. As a result, the total number could be TepNumr + 2 
  
 The amount of bricks in each column is calculated by this formula: 
-TepNum = Floor Height * Floor Number / Brick Height 
-c
-Remainder = Floor Height – Brick Height * TepNum
-c r 
-Num = TepNum + 1 
-c c 
+TepNumc = Floor Height * Floor Number / Brick Height 
+Remainderc = Floor Height – Brick Height * TepNumr 
+Numc = TepNumc + 1 
  
 The calculation of one column bricks is same as the calculation of one row bricks. 
  
 The calculation of position of bricks is different for even and odd rows: 
 For even rows 
-BrickPosition = (Brick -1)*BrickWidth+ BrickWidth /2 
-i
-RestBrickPosition = (Brick -1)*BrickWidth+ BrickWidth /2+Remainder/2+ BrickWidth /2- 
-i
+BrickPosition = (Bricki-1)*BrickWidth+ BrickWidth /2 
+RestBrickPosition = (Bricki-1)*BrickWidth+ BrickWidth /2+Remainder/2+ BrickWidth /2- 
 BrickWidth /2 
 HalfBrickPosition = RestBrickPosition + Remainder /2+ BrickWidth/4; 
  
  
 For odd rows 
-BrickPosition = (Brick -1)*BrickWidth+ BrickWidth /2 
-i
-RestBrickPosition = (Brick -1)*BrickWidth+ BrickWidth /2+Remainder/2+ BrickWidth /2 
-i
+BrickPosition = (Bricki-1)*BrickWidth+ BrickWidth /2 
+RestBrickPosition = (Bricki-1)*BrickWidth+ BrickWidth /2+Remainder/2+ BrickWidth /2 
  
 The BrickPosition is position for the full size brick. HalfBrckPosition is the positon of 
 an half of brick in even rows as mentioned before. The RestBrickPosition is the 
@@ -1438,8 +1490,9 @@ position of the remainder size brick. The BrickPosition is the total width of pr
 bricks plus a half of brick because the pivot is at the center of the brick. The 
 RestBrickPosition is the total BrickPosition add half of itself. The HalfBrickPosition 
 is the total BrickPosition add half of itself. 
-42 
-  
+43 
+ 
+ 
 Figure 45 Brick Model 
 For one brick, it is based on a cube. The sharp edges of it are beveled with the offset = 
 0.02 
@@ -1466,28 +1519,13 @@ requirement, for example, dynamic effect.
  
 5.7 Tiles 
  
-43 
-  
+44 
+ 
+ 
 Figure 47 Tiles 
  
 The reason why separate the tiles from the roofs is the tile is optional. The main steps 
 of modeling tiles are: 
-Start
-Input 
-Building 
-Number n
-Producing 
-one Building
-n
-Model one 
-n
-If(Use Tiles) roof without 
-Tiles
-y
-y
-Model one 
-roof with Tiles
-if(i<=n)
  
 Figure 48 Flow Chart of Tile 
 As an optional choice, if users select to use tiles, the project will produce tiles up to 
@@ -1495,13 +1533,31 @@ the roofs. It happens after roof modeling. The tile is not used on the plane roo
  
 The amount of tiles is depend on the width of roof, the width of tile, the depth of tile, 
 the depth of slope of roof.  
-RoofHeight
-slope
  
 Figure 49 Pythagorean proposition of Roof 
-44 
+Start
+Input 
+Building 
+Number n
+Producing 
+one Building
+Model one 
+roof with Tiles
+n
+if(i<=n)
+If(Use Tiles)
+y
+Model one 
+roof without 
+Tiles
+n
+y
+RoofHeight
+RoofDepth/2
+slope
+45 
  
-RoofDepth/2The formulas are:  
+The formulas are:  
 slope = sqrt(RoofDeepth/2*RoofDeepth/2+RoofHeight*RoofHeight) 
 TrowNum = RoofWidth / TileWidth 
 TcolNum = slope / TileDepth 
@@ -1532,18 +1588,16 @@ moveX = (TileDepth/2+(i-1)*TileDepth) + TileDepth /2 + RemainderX/2
  
 After that, we rotate the whole group of tiles. The degree of rotation is calculated by 
 the trigonometric function 
-RoofHeight
-a RoofWidth/2
  
 Figure 50 Trigonometric function of Tile 
-a = atan(height/(deepth/2) 
-rad
-a = rad_to_deg(a ) 
-deg rad
-Rotate a 
-deg
-45 
- Then move the tile group to the appropriate position 
+arad = atan(height/(deepth/2) 
+adeg = rad_to_deg(arad) 
+Rotate adeg 
+RoofHeight
+RoofWidth/2a
+46 
+ 
+Then move the tile group to the appropriate position 
 Move FrontTiles = depth/4 
 Move BackTiles = -depth/4 
  
@@ -1567,21 +1621,8 @@ When the roof is moved or rotated, the tiles should be followed.
 Figure 51 Other Components 
  
 These components are generated automatically and not optional: 
-46 
- Start
-Input Building 
-Number n
-Model a single If(Producing a 
-Building j Roof)
-If(Producing 
-Create a 
-Ground 
-Chimney
-FLoor)
-Model the Wall Create a 
-y
-Line Skylight
-If (i<=n)
+47 
+ 
  
 Figure 52 Flow Chart of Other Component 
 These components are the accessory of a building. When the ground floor is 
@@ -1601,10 +1642,8 @@ Line 3 Y = First Floor Height/16 + 0.2
 Above to these lines, there are a row of decorative bricks. The number of bricks is 
 calculated as: 
 TepNum = Floor Width / Brick Width 
-Remainder = Floor Width – Brick Width * TepNum
- 
+Remainder = Floor Width – Brick Width * TepNum 
 Num = TepNum + 1 
- 
 The position is calculated by these formulas: 
 for($i=1;$i<=$brickNumZ;$i++) 
 { 
@@ -1613,8 +1652,27 @@ for($i=1;$i<=$brickNumZ;$i++)
  Move Z = FloorWidth/2+BrickWidth/2+(i-1)*BrickWidth 
 } 
  
-47 
- On one roof, one chimney and one or two skylights will be created.  
+Start
+Input Building 
+Number n
+Model a single 
+Building j
+If (i<=n)
+y
+Model the Wall 
+Line
+If(Producing 
+Ground 
+FLoor)
+If(Producing a 
+Roof)
+Create a 
+Chimney
+Create a 
+Skylight
+48 
+ 
+On one roof, one chimney and one or two skylights will be created.  
  
 For the skylight, it can be divided into these parts: 
  
@@ -1639,13 +1697,19 @@ For the chimney, it can be divided into these parts:
 Figure 54 Components of Chimney 
  
 The part 1 is based on a Cylinder and some vertexes are modified. The part2 is based 
-48 
- 
+Pa
+rt1
+P
+ar
+t2
+Part
+3
+Par
+t1
 Part2
-Part3
-Part1
-Part1
-Part2on a cube and up edges and some vertexes are modified. 
+49 
+ 
+on a cube and up edges and some vertexes are modified. 
  
 Constrains: 
  Lock to Wall – When the wall is moved or rotated, the wall lines should be 
@@ -1688,8 +1752,9 @@ meaning, Delaunay triangulation network is the triangulation network which
 closest to the regularization. 
  
 Delaunay triangulation network characters also can be expressed as the following 
-49 
- features: 
+50 
+ 
+features: 
  
 ? In the Delaunay triangulation network, within the circumcircle of the triangle no 
 other point, known as empty circle features; 
@@ -1707,6 +1772,8 @@ two triangles would not be getting larger ;
 Figure 55 Voronoi Diagram 
  
 The generating of the map is based on the Voronoi Diagram. The main step is: 
+ 
+Figure 56 Flow Chart of City Map 
 Start
 Input 
 Positions
@@ -1714,18 +1781,17 @@ Draw Voronoi
 Map
 Create Maya 
 plug-in
-.mll
 Import plug-in
 Create 
-Multiple 
 Map&Assgin 
 Buildings into 
-Buildings
 positions
+.mll
+Multiple 
+Buildings
+51 
  
-Figure 56 Flow Chart of City Map 
-50 
- The Voronoi Diagram part is implemented in the Maya C++ API. There are two C++ 
+The Voronoi Diagram part is implemented in the Maya C++ API. There are two C++ 
 projects: the first one is used for users to draw the location points. The second one is 
 used for creating Maya plug-in by these data. Then we use this plug-in to create the 
 City Map in Maya. Finally, put these buildings on the map.  
@@ -1748,8 +1814,9 @@ a perpendicular bisector of a straight line connecting two adjacent points.
 The data of these position points and the lines will be recorded in a file. 
  
 Figure 59 Data of Voronoi Diagram 
-51 
-  
+52 
+ 
+ 
 Then the data will be read in another C++ project and a Maya plug-in file (.mll) will 
 be created. After that, Maya will import this plug-in and execute it. An exactly same 
 map will be created in Maya. Each original point is represented by a small sphere and 
@@ -1770,8 +1837,9 @@ polygon will be rejected.
  
 5.10 User Interface 
  
-52 
- The user interface is simple but covers almost all functions of this project. 
+53 
+ 
+The user interface is simple but covers almost all functions of this project. 
  
 Figure 62 Window of Attributes of Single Building  
 In this window, user can modify various attributes of one single building. When any 
@@ -1790,8 +1858,9 @@ when the input changed.
  
  
 Figure 64 Single Building Result 
-53 
- For one building, the final effect of it looks reasonable and detailed. All components 
+54 
+ 
+For one building, the final effect of it looks reasonable and detailed. All components 
 are in logical sizes and stay at appropriate position. All constrains mentioned before 
 can be reflected here. Every basic element of architecture is implemented in this 
 building. 
@@ -1821,8 +1890,9 @@ put force fields near it and the building then can be destroyed into bricks.
 The consumption is the only problem of it. Only one or two these brick-building can 
 be created in the laptop because of the memory limitation. 
  
-54 
-  
+55 
+ 
+ 
 Figure 66 Result of Multiple Buildings 
  
 The performance of multiple building is also good. All buildings are in logical even 
@@ -1841,8 +1911,9 @@ For the Voronoi Diagram, users can draw as many points as they want at any posit
 on the board. The Diagram will be draw no matter how complex the input points are. 
 And all the data of this diagram are recorded successfully. 
  
-55 
-  
+56 
+ 
+ 
 Figure 68 Result of Creating map and assign buildings on it 
  
 Buildings can assign to the map appropriately and the constraints introduced above 
@@ -1872,8 +1943,9 @@ The second object was multiple building creations which also have been done. A
 number of buildings could be produced with random attributes and this number is 
 given by the users. As the attributes are assigned randomly for each building, all 
 buildings should be different. This object is also a core object which has to be 
-56 
- achieved.  
+57 
+ 
+achieved.  
  
 The third object was “build architecture with bricks”. The project has also achieved 
 this object, although the efficiency of execution is a problem can`t be solved. Several 
@@ -1904,25 +1976,26 @@ should be optional. A good method for solving the low efficiency of execution wh
 the bricks involved is necessary. Moreover, the function of the city map should be 
 completed.  
   
-57 
- Bibliography 
+58 
+ 
+Bibliography 
  
 (1) Entertainment software Association 2011, “Essential Facts About The Com
 puter And Video Game Industry”, [Online]  http://www.theesa.com/facts/pdf
 s/ESA_EF_2011.pdf. 
-(2) Mü ller, P., Tijl Vereenooghe 2006, “Procedural 3D Reconstruction of Puuc 
-Buildings in Xkipché , The 7th International Symposium on Virtual Reality”, 
+(2) Müller, P., Tijl Vereenooghe 2006, “Procedural 3D Reconstruction of Puuc 
+Buildings in Xkipché, The 7th International Symposium on Virtual Reality”, 
 Archaeology and Cultural Heritage VAST. 
-(3) Havemann ,S. 2005, “Generative Mesh Modeling”, Institut fü r 
+(3) Havemann ,S. 2005, “Generative Mesh Modeling”, Institut für 
 ComputerGraphik,. 
-(4) Yoav I H Parish, Mü ller ,P. 2001, Procedural Modeling of Cities, SIGGRAPH 
+(4) Yoav I H Parish, Müller ,P. 2001, Procedural Modeling of Cities, SIGGRAPH 
 , Pages 301-308. 
 (5) Birch, P.J.& Browne, S.P.& Jennings, V.J. & Day, A.M. 2002, “Rapid 
 Procedural-Modelling of Architectural Structures”, ACM Inc. 
 (6) D.K. Ching 1995, “A Visual Dictionary Of Architecture”, John Wiley & Sons, 
 Inc. 
 (7) Focillon, H& Kubler, G 1992, “The Life of Forms in Art”, Zone Books. 
-(8) Havemann, S 2005, “Generative Mesh Modeling”, Institut fü r ComputerGraphik. 
+(8) Havemann, S 2005, “Generative Mesh Modeling”, Institut für ComputerGraphik. 
 (9) Kandinsky, W 1991, “Compositions, by the Museum of Modern Art”. 
 (10) Muller,P&Wonka, P&Haegler,S&Ulmer,A&Gooll,V2006,”Procedural modeling 
 of buildings”, SIGGRAPH 2006: ACMSIGGRAPH 2006 Papers,pp. 614–623. 
@@ -1930,7 +2003,7 @@ of buildings”, SIGGRAPH 2006: ACMSIGGRAPH 2006 Papers,pp. 614–623.
 ACM Inc. 
 (12) Wonka, P 2006, “Procedural Modeling of Architecture”, Siggraph. 
 (13) Lanier,L 2011, “Maya studio projects : Texturing and lighting”, Sybex. 
-(14) McKinley, M 2010,”Maya studio projects : game environments and props” 
+(14) McKinley, M 2010,”Maya studio projects : game environments and props”  
 Sybex. 
 (15) Mark R., Kazmier, C 2005,“MEL scripting for Maya animators”, Morgan 
 Kaufmann.  
@@ -1946,411 +2019,806 @@ Applications”, SIGGRAPH,
 Computational Geometry 22(4):569-592. 
 (21) William ,M. 1944, “The Logic of Architecture”, Massachusetts Institute of 
 Technology. 
-58 
- (22) Lechner, T. 2003, “Procedural City Modeling”, Midwestern Graphics.  
 59 
- Appendices - Essential Source Code 
-CreateFloors_cube8.mel: 
-global proc creatFloors(int $buildNo,float scale -r $deepth $fheight $width; 
-$firstFloorH,int $floors,float $width,float move -r 0 $mfheight 0 $name1; 
-$h,float $deepth, float $doorsPos = 
-int $windNum,float $windWidth,float creatDoors($buildNo,$doorWidth,$doorHeight,$
-$windHeight, width,$fheight, 
-float $doorWidth,float $doorHeight,float $deepth/2,$mfheight,$doorPos); 
-$doorPos, creatBayWindows($buildNo,$windNum,$wind
-float $roofHeight) Width,$deepth/2,$width,$firstFloorH,$doorsPos,
-{ $doorWidth); 
-int $i; creatFootline($buildName,$fheight,$mfheight,$
-string $name1; width,$deepth);  
-string $buildName = "ZY"+$buildNo; } 
-group -em -name $buildName; FreezeTransformations; 
-if($buildNo!=1) } 
-{ }; 
-$firstFloorH = $firstFloorH*rand(0.9,1.5);  
-}  
-$height = $h*($floors-1)+$firstFloorH; 
-CreateFloors_brick1.mel 
-creatRoofs($buildNo,$width,$deepth,$roofHeig
-ht,$height,$h,$windHeight); global proc creatBrickFloors(string 
-for($i = 1;$i <= $floors; $i++) $buildName,float $width,float $height,float 
-{ $deepth) 
-$name1 = $buildName+"_floors"+$i; { 
-polyCube -name $name1; int $brickYNum = $height/0.3; 
-parent $name1 $buildName ; float $brickYspace = $height-$brickYNum*0.3; 
-hyperShade -assign lambert2 $name1; int $brickZNum = $width/0.54; 
-float $m = ($i-1.5)*$h+$firstFloorH; float $brickZspace = $width-$brickZNum*0.54; 
-if($i>1) int $brickXNum = $deepth/0.54; 
-{ float $brickXspace = 
-scale -r $deepth $h $width; $deepth-$brickXNum*0.54; 
-move -r 0 $m 0 $name1;  float $brickY = 0.15; 
-creatWindows($buildNo,$windNum,$windWidt float $brickZ = 0.27; 
-h,$windHeight,$width,$h,$deepth/2,$m,$name1 float $brickX = 0.27; 
-); float $moveX = $deepth/2-0.1; 
-} float $moveNX = -$deepth/2+0.1; 
-else float $moveZ = $width/2-0.1; 
-{ float $moveNZ = -$width/2+0.1; 
-$fheight = $firstFloorH; $groupnameF = $buildName+"_brickFront"; 
-$mfheight = $fheight/2; group -em -name $groupnameF; 
+ 
+(22) Lechner, T. 2003, “Procedural City Modeling”, Midwestern Graphics.  
 60 
- parent $groupnameF $buildName; { 
-$groupnameB = $buildName+"_brickBack"; for($bZ=1;$bZ<=$brickZNum;$bZ++) 
-group -em -name $groupnameB; { 
-parent $groupnameB $buildName; $brickName = 
-$groupnameL = $buildName+"_brickLeft"; $buildName+"_brick_front"+($bY-1)*$brickZN
-group -em -name $groupnameL; um+$bZ; 
-parent $groupnameL $buildName; duplicate -name $brickName brickExample; 
-$groupnameR = $buildName+"_brickRight"; parent $brickName $groupnameF; 
-group -em -name $groupnameR; $brickZ = ($bZ-1)*0.54+0.27; 
-parent $groupnameR $buildName; move -r $moveX $brickY $brickZ; 
-float $polyBeveloffset = 0.02; if($bY%2==0) 
-polyCube -w 0.2 -h 0.3 -d 0.54 -name { 
-brickExample; move -r 0 0 -0.27; 
-polyCube -w 0.2 -h 0.3 -d $brickZspace -name if($bZ==1) 
-brickExampleZ; { 
-polyCube -w 0.2 -h $brickYspace -d 0.54 -name setAttr ($brickName+".scaleZ") 0.5; 
-brickExampleY; move -r 0 0 0.135 $brickName; 
-polyCube -w 0.2 -h $brickYspace -d } 
-$brickZspace -name brickExampleYZ; if($bZ==$brickZNum) 
-polyCube -w 0.54 -h 0.3 -d 0.2 -name { 
-brickExample1; $brickName = 
-polyCube -w $brickXspace -h 0.3 -d 0.2 -name $buildName+"_brick_front"+($bY-1)*$brickZN
-brickExample1X; um+$bZ+1; 
-polyCube -w 0.54 -h $brickYspace -d 0.2 -name duplicate -name $brickName brickExampleZ; 
-brickExample1Y; parent $brickName $groupnameF; 
-polyCube -w $brickXspace -h $brickYspace -d $brickZ = 
-0.2 -name brickExample1XY; ($bZ-1)*0.54+0.27+$brickZspace/2+0.27-0.27; 
-polyBevel -offset $polyBeveloffset -segments 2 move -r $moveX $brickY $brickZ; 
-brickExample; $brickName = 
-polyBevel -offset $polyBeveloffset -segments 2 $buildName+"_brick_front"+($bY-1)*$brickZN
-brickExampleZ; um+$bZ+2; 
-polyBevel -offset $polyBeveloffset -segments 2 polyCube -w 0.2 -h 0.3 -d 0.27 -name 
-brickExampleY; $brickName; 
-polyBevel -offset $polyBeveloffset -segments 2 polyBevel -offset $polyBeveloffset -segments 2 
-brickExampleYZ; $brickName; 
-polyBevel -offset $polyBeveloffset -segments 2 parent $brickName $groupnameF; 
-brickExample1; $brickZ = $brickZ+$brickZspace/2+0.135; 
-polyBevel -offset $polyBeveloffset -segments 2 move -r $moveX $brickY $brickZ; 
-brickExample1X; } 
-polyBevel -offset $polyBeveloffset -segments 2 } 
-brickExample1Y; else 
-polyBevel -offset $polyBeveloffset -segments 2 { 
-brickExample1XY; if($bZ==$brickZNum) 
-for($bY=1;$bY<=$brickYNum;$bY++) { 
+ 
+Appendices - Essential Source Code 
+CreateFloors_cube8.mel: 
+global proc creatFloors(int $buildNo,float 
+$firstFloorH,int $floors,float $width,float 
+$h,float $deepth, 
+int $windNum,float $windWidth,float 
+$windHeight, 
+float $doorWidth,float $doorHeight,float 
+$doorPos, 
+float $roofHeight) 
+{ 
+int $i; 
+string $name1; 
+string $buildName = "ZY"+$buildNo; 
+group -em -name $buildName; 
+if($buildNo=1) 
+{ 
+$firstFloorH = $firstFloorH*rand(0.9,1.5); 
+} 
+$height = $h*($floors-1)+$firstFloorH; 
+creatRoofs($buildNo,$width,$deepth,$roofHeig
+ht,$height,$h,$windHeight); 
+for($i = 1;$i <= $floors; $i++) 
+{ 
+$name1 = $buildName+"_floors"+$i; 
+polyCube -name $name1; 
+parent $name1 $buildName ; 
+hyperShade -assign lambert2 $name1; 
+float $m = ($i-1.5)*$h+$firstFloorH; 
+if($i>1) 
+{ 
+scale -r $deepth $h $width; 
+move -r 0 $m 0 $name1;  
+creatWindows($buildNo,$windNum,$windWidt
+h,$windHeight,$width,$h,$deepth/2,$m,$name1
+); 
+} 
+else 
+{ 
+$fheight = $firstFloorH; 
+$mfheight = $fheight/2; 
+scale -r $deepth $fheight $width; 
+move -r 0 $mfheight 0 $name1; 
+float $doorsPos = 
+creatDoors($buildNo,$doorWidth,$doorHeight,$
+width,$fheight, 
+$deepth/2,$mfheight,$doorPos); 
+creatBayWindows($buildNo,$windNum,$wind
+Width,$deepth/2,$width,$firstFloorH,$doorsPos,
+$doorWidth); 
+creatFootline($buildName,$fheight,$mfheight,$
+width,$deepth);  
+} 
+FreezeTransformations; 
+} 
+}; 
+ 
+ 
+CreateFloors_brick1.mel 
+global proc creatBrickFloors(string 
+$buildName,float $width,float $height,float 
+$deepth) 
+{ 
+int $brickYNum = $height/0.3; 
+float $brickYspace = $height-$brickYNum*0.3; 
+int $brickZNum = $width/0.54; 
+float $brickZspace = $width-$brickZNum*0.54; 
+int $brickXNum = $deepth/0.54; 
+float $brickXspace = 
+$deepth-$brickXNum*0.54; 
+float $brickY = 0.15; 
+float $brickZ = 0.27; 
+float $brickX = 0.27; 
+float $moveX = $deepth/2-0.1; 
+float $moveNX = -$deepth/2+0.1; 
+float $moveZ = $width/2-0.1; 
+float $moveNZ = -$width/2+0.1; 
+$groupnameF = $buildName+"_brickFront"; 
+group -em -name $groupnameF; 
 61 
- $brickName = { 
-$buildName+"_brick_front"+($bY-1)*$brickZN for($bZ=1;$bZ<=$brickZNum;$bZ++) 
-um+$bZ+1; { 
-duplicate -name $brickName brickExampleZ; $brickName = 
-parent $brickName $groupnameF; $buildName+"_brick_back"+($bY-1)*$brickZN
-$brickZ = um+$bZ; 
-($bZ-1)*0.54+0.27+$brickZspace/2+0.27; duplicate -name $brickName brickExample; 
-move -r $moveX $brickY $brickZ; parent $brickName $groupnameB; 
-} $brickZ = ($bZ-1)*0.54+0.27; 
-} move -r $moveNX $brickY $brickZ; 
-} if($bY%2==0) 
-$brickZ = 0.27; { 
-$brickY = ($bY)*0.3+0.15; move -r 0 0 -0.27; 
-if($bY==$brickYNum) if($bZ==1) 
-{ { 
-$brickY = setAttr ($brickName+".scaleZ") 0.5; 
-($bY-1)*0.3+0.15+$brickYspace/2+0.15; move -r 0 0 0.135 $brickName; 
-for($bZ=1;$bZ<=$brickZNum;$bZ++) } 
-{ if($bZ==$brickZNum) 
-$brickName = { 
-$buildName+"_brick_front"+($bY)*$brickZNu $brickName = 
-m+$bZ; $buildName+"_brick_back"+($bY-1)*$brickZN
-duplicate -name $brickName brickExampleY; um+$bZ+1; 
-parent $brickName $groupnameF; duplicate -name $brickName brickExampleZ; 
-$brickZ = ($bZ-1)*0.54+0.27; parent $brickName $groupnameB; 
-move -r $moveX $brickY $brickZ; $brickZ = 
-if($bZ==$brickZNum) ($bZ-1)*0.54+0.27+$brickZspace/2+0.27-0.27; 
-{ move -r $moveNX $brickY $brickZ; 
-$brickName = $brickName = 
-$buildName+"_brick_front"+($bY)*$brickZNu $buildName+"_brick_back"+($bY-1)*$brickZN
-m+$bZ+1; um+$bZ+2; 
-duplicate -name $brickName brickExampleYZ; polyCube -w 0.2 -h 0.3 -d 0.27 -name 
-parent $brickName $groupnameF; $brickName; 
-$brickZ = polyBevel -offset $polyBeveloffset -segments 2 
-($bZ-1)*0.54+0.27+$brickZspace/2+0.27; $brickName; 
-move -r $moveX $brickY $brickZ; parent $brickName $groupnameB; 
-} $brickZ = $brickZ+$brickZspace/2+0.135; 
-} move -r $moveNX $brickY $brickZ; 
-} } 
-} } 
-move -r 0 0 $moveNZ $groupnameF; else 
-$brickY = 0.15; { 
-$brickZ = 0.27; if($bZ==$brickZNum) 
-for($bY=1;$bY<=$brickYNum;$bY++) { 
+ 
+parent $groupnameF $buildName; 
+$groupnameB = $buildName+"_brickBack"; 
+group -em -name $groupnameB; 
+parent $groupnameB $buildName; 
+$groupnameL = $buildName+"_brickLeft"; 
+group -em -name $groupnameL; 
+parent $groupnameL $buildName; 
+$groupnameR = $buildName+"_brickRight"; 
+group -em -name $groupnameR; 
+parent $groupnameR $buildName; 
+float $polyBeveloffset = 0.02; 
+polyCube -w 0.2 -h 0.3 -d 0.54 -name 
+brickExample; 
+polyCube -w 0.2 -h 0.3 -d $brickZspace -name 
+brickExampleZ; 
+polyCube -w 0.2 -h $brickYspace -d 0.54 -name 
+brickExampleY; 
+polyCube -w 0.2 -h $brickYspace -d 
+$brickZspace -name brickExampleYZ; 
+polyCube -w 0.54 -h 0.3 -d 0.2 -name 
+brickExample1; 
+polyCube -w $brickXspace -h 0.3 -d 0.2 -name 
+brickExample1X; 
+polyCube -w 0.54 -h $brickYspace -d 0.2 -name 
+brickExample1Y; 
+polyCube -w $brickXspace -h $brickYspace -d 
+0.2 -name brickExample1XY; 
+polyBevel -offset $polyBeveloffset -segments 2 
+brickExample; 
+polyBevel -offset $polyBeveloffset -segments 2 
+brickExampleZ; 
+polyBevel -offset $polyBeveloffset -segments 2 
+brickExampleY; 
+polyBevel -offset $polyBeveloffset -segments 2 
+brickExampleYZ; 
+polyBevel -offset $polyBeveloffset -segments 2 
+brickExample1; 
+polyBevel -offset $polyBeveloffset -segments 2 
+brickExample1X; 
+polyBevel -offset $polyBeveloffset -segments 2 
+brickExample1Y; 
+polyBevel -offset $polyBeveloffset -segments 2 
+brickExample1XY; 
+for($bY=1;$bY<=$brickYNum;$bY++) 
+{ 
+for($bZ=1;$bZ<=$brickZNum;$bZ++) 
+{ 
+$brickName = 
+$buildName+"_brick_front"+($bY-1)*$brickZN
+um+$bZ; 
+duplicate -name $brickName brickExample; 
+parent $brickName $groupnameF; 
+$brickZ = ($bZ-1)*0.54+0.27; 
+move -r $moveX $brickY $brickZ; 
+if($bY%2==0) 
+{ 
+move -r 0 0 -0.27; 
+if($bZ==1) 
+{ 
+setAttr ($brickName+".scaleZ") 0.5; 
+move -r 0 0 0.135 $brickName; 
+} 
+if($bZ==$brickZNum) 
+{ 
+$brickName = 
+$buildName+"_brick_front"+($bY-1)*$brickZN
+um+$bZ+1; 
+duplicate -name $brickName brickExampleZ; 
+parent $brickName $groupnameF; 
+$brickZ = 
+($bZ-1)*0.54+0.27+$brickZspace/2+0.27-0.27; 
+move -r $moveX $brickY $brickZ; 
+$brickName = 
+$buildName+"_brick_front"+($bY-1)*$brickZN
+um+$bZ+2; 
+polyCube -w 0.2 -h 0.3 -d 0.27 -name 
+$brickName; 
+polyBevel -offset $polyBeveloffset -segments 2 
+$brickName; 
+parent $brickName $groupnameF; 
+$brickZ = $brickZ+$brickZspace/2+0.135; 
+move -r $moveX $brickY $brickZ; 
+} 
+} 
+else 
+{ 
+if($bZ==$brickZNum) 
+{ 
 62 
- $brickName = { 
-$buildName+"_brick_back"+($bY-1)*$brickZN for($bX=1;$bX<=$brickXNum;$bX++) 
-um+$bZ+1; { 
-duplicate -name $brickName brickExampleZ; $brickName = 
-parent $brickName $groupnameB; $buildName+"_brick_left"+($bY-1)*$brickXNu
-$brickZ = m+$bX; 
-($bZ-1)*0.54+0.27+$brickZspace/2+0.27; duplicate -name $brickName brickExample1; 
-move -r $moveNX $brickY $brickZ; parent $brickName $groupnameL; 
-} $brickX = ($bX-1)*0.54+0.27; 
-} move -r $brickX $brickY $moveZ; 
-} if($bY%2==0) 
-$brickZ = 0.27; { 
-$brickY = ($bY)*0.3+0.15; move -r -0.27 0 0 ; 
-if($bY==$brickYNum) if($bX==1) 
-{  { 
-$brickY = setAttr ($brickName+".scaleX") 0.5; 
-($bY-1)*0.3+0.15+$brickYspace/2+0.15; move -r 0.135 0 0 $brickName; 
-for($bZ=1;$bZ<=$brickZNum;$bZ++) } 
-{ if($bX==$brickXNum) 
-$brickName = { 
-$buildName+"_brick_back"+($bY)*$brickZNu $brickName = 
-m+$bZ; $buildName+"_brick_left"+($bY-1)*$brickXNu
-duplicate -name $brickName brickExampleY; m+$bX+1; 
-parent $brickName $groupnameB; duplicate -name $brickName brickExample1X; 
-$brickZ = ($bZ-1)*0.54+0.27; parent $brickName $groupnameL; 
-move -r $moveNX $brickY $brickZ; $brickX = 
-if($bZ==$brickZNum) ($bX-1)*0.54+0.27+$brickXspace/2+0.27-0.27; 
-{ move -r $brickX $brickY $moveZ; 
-$brickName = $brickName = 
-$buildName+"_brick_back"+($bY)*$brickZNu $buildName+"_brick_left"+($bY-1)*$brickXNu
-m+$bZ+1; m+$bX+2; 
-duplicate -name $brickName brickExampleYZ; polyCube -w 0.27 -h 0.3 -d 0.2 -name 
-parent $brickName $groupnameB; $brickName; 
-$brickZ = polyBevel -offset $polyBeveloffset -segments 2 
-($bZ-1)*0.54+0.27+$brickZspace/2+0.27; $brickName; 
-move -r $moveNX $brickY $brickZ; parent $brickName $groupnameL; 
-} $brickX = $brickX+$brickXspace/2+0.135; 
-} move -r $brickX $brickY $moveZ; 
-} } 
-} } 
-move -r 0 0 $moveNZ $groupnameB; else 
-$brickY = 0.15; { 
-$brickX = 0.27; if($bX==$brickXNum) 
-for($bY=1;$bY<=$brickYNum;$bY++) { 
+ 
+$brickName = 
+$buildName+"_brick_front"+($bY-1)*$brickZN
+um+$bZ+1; 
+duplicate -name $brickName brickExampleZ; 
+parent $brickName $groupnameF; 
+$brickZ = 
+($bZ-1)*0.54+0.27+$brickZspace/2+0.27; 
+move -r $moveX $brickY $brickZ; 
+} 
+} 
+} 
+$brickZ = 0.27; 
+$brickY = ($bY)*0.3+0.15; 
+if($bY==$brickYNum) 
+{ 
+$brickY = 
+($bY-1)*0.3+0.15+$brickYspace/2+0.15; 
+for($bZ=1;$bZ<=$brickZNum;$bZ++) 
+{ 
+$brickName = 
+$buildName+"_brick_front"+($bY)*$brickZNu
+m+$bZ; 
+duplicate -name $brickName brickExampleY; 
+parent $brickName $groupnameF; 
+$brickZ = ($bZ-1)*0.54+0.27; 
+move -r $moveX $brickY $brickZ; 
+if($bZ==$brickZNum) 
+{ 
+$brickName = 
+$buildName+"_brick_front"+($bY)*$brickZNu
+m+$bZ+1; 
+duplicate -name $brickName brickExampleYZ; 
+parent $brickName $groupnameF; 
+$brickZ = 
+($bZ-1)*0.54+0.27+$brickZspace/2+0.27; 
+move -r $moveX $brickY $brickZ; 
+} 
+} 
+} 
+} 
+move -r 0 0 $moveNZ $groupnameF; 
+$brickY = 0.15; 
+$brickZ = 0.27; 
+for($bY=1;$bY<=$brickYNum;$bY++) 
+{ 
+for($bZ=1;$bZ<=$brickZNum;$bZ++) 
+{ 
+$brickName = 
+$buildName+"_brick_back"+($bY-1)*$brickZN
+um+$bZ; 
+duplicate -name $brickName brickExample; 
+parent $brickName $groupnameB; 
+$brickZ = ($bZ-1)*0.54+0.27; 
+move -r $moveNX $brickY $brickZ; 
+if($bY%2==0) 
+{ 
+move -r 0 0 -0.27; 
+if($bZ==1) 
+{ 
+setAttr ($brickName+".scaleZ") 0.5; 
+move -r 0 0 0.135 $brickName; 
+} 
+if($bZ==$brickZNum) 
+{ 
+$brickName = 
+$buildName+"_brick_back"+($bY-1)*$brickZN
+um+$bZ+1; 
+duplicate -name $brickName brickExampleZ; 
+parent $brickName $groupnameB; 
+$brickZ = 
+($bZ-1)*0.54+0.27+$brickZspace/2+0.27-0.27; 
+move -r $moveNX $brickY $brickZ; 
+$brickName = 
+$buildName+"_brick_back"+($bY-1)*$brickZN
+um+$bZ+2; 
+polyCube -w 0.2 -h 0.3 -d 0.27 -name 
+$brickName; 
+polyBevel -offset $polyBeveloffset -segments 2 
+$brickName; 
+parent $brickName $groupnameB; 
+$brickZ = $brickZ+$brickZspace/2+0.135; 
+move -r $moveNX $brickY $brickZ; 
+} 
+} 
+else 
+{ 
+if($bZ==$brickZNum) 
+{ 
 63 
- $brickName = { 
-$buildName+"_brick_left"+($bY-1)*$brickXNu for($bX=1;$bX<=$brickXNum;$bX++) 
-m+$bX+1; { 
-duplicate -name $brickName brickExample1X; $brickName = 
-parent $brickName $groupnameL; $buildName+"_brick_right"+($bY-1)*$brickXN
-$brickX = um+$bX; 
-($bX-1)*0.54+0.27+$brickXspace/2+0.27; duplicate -name $brickName brickExample1; 
-move -r $brickX $brickY $moveZ; parent $brickName $groupnameR; 
-} $brickX = ($bX-1)*0.54+0.27; 
-} move -r $brickX $brickY $moveNZ; 
-} if($bY%2==0) 
-$brickX = 0.27; { 
-$brickY = ($bY)*0.3+0.15; move -r -0.27 0 0 ; 
-if($bY==$brickYNum) if($bX==1) 
-{ { 
-$brickY = setAttr ($brickName+".scaleX") 0.5; 
-($bY-1)*0.3+0.15+$brickYspace/2+0.15; move -r 0.135 0 0 $brickName; 
-for($bX=1;$bX<=$brickXNum;$bX++) } 
-{ if($bX==$brickXNum) 
-$brickName = { 
-$buildName+"_brick_left"+($bY)*$brickXNum $brickName = 
-+$bX; $buildName+"_brick_right"+($bY-1)*$brickXN
-duplicate -name $brickName brickExample1Y; um+$bX+1; 
-parent $brickName $groupnameL; duplicate -name $brickName brickExample1X; 
-$brickX = ($bX-1)*0.54+0.27; parent $brickName $groupnameR; 
-move -r $brickX $brickY $moveZ; $brickX = 
-if($bX==$brickXNum) ($bX-1)*0.54+0.27+$brickXspace/2+0.27-0.27; 
-{ move -r $brickX $brickY $moveNZ; 
-$brickName = $brickName = 
-$buildName+"_brick_left"+($bY)*$brickXNum $buildName+"_brick_right"+($bY-1)*$brickXN
-+$bX+1; um+$bX+2; 
-duplicate -name $brickName brickExample1XY; polyCube -w 0.27 -h 0.3 -d 0.2 -name 
-parent $brickName $groupnameL; $brickName; 
-$brickX = polyBevel -offset $polyBeveloffset -segments 2 
-($bX-1)*0.54+0.27+$brickXspace/2+0.27; $brickName; 
-move -r $brickX $brickY $moveZ; parent $brickName $groupnameR; 
-} $brickX = $brickX+$brickXspace/2+0.135; 
-} move -r $brickX $brickY $moveNZ; 
-} } 
-} } 
-move -r $moveNX 0 0 $groupnameL; else 
-$brickY = 0.15; { 
-$brickX = 0.27; if($bX==$brickXNum) 
-for($bY=1;$bY<=$brickYNum;$bY++) { 
-64 
- $brickName = delete brickExampleYZ; 
-$buildName+"_brick_right"+($bY-1)*$brickXN delete brickExample1; 
-um+$bX+1; delete brickExample1X; 
-duplicate -name $brickName brickExample1X; delete brickExample1Y; 
-parent $brickName $groupnameR; delete brickExample1XY; 
-$brickX = select -r $groupnameF; 
-($bX-1)*0.54+0.27+$brickXspace/2+0.27; sets -e -forceElement lambert2SG;  
-move -r $brickX $brickY $moveNZ; select -r $groupnameB; 
-} sets -e -forceElement lambert2SG;  
-} select -r $groupnameL; 
-} sets -e -forceElement lambert2SG;  
-$brickX = 0.27; select -r $groupnameR; 
-$brickY = ($bY)*0.3+0.15; sets -e -forceElement lambert2SG;  
-if($bY==$brickYNum) } 
+ 
+$brickName = 
+$buildName+"_brick_back"+($bY-1)*$brickZN
+um+$bZ+1; 
+duplicate -name $brickName brickExampleZ; 
+parent $brickName $groupnameB; 
+$brickZ = 
+($bZ-1)*0.54+0.27+$brickZspace/2+0.27; 
+move -r $moveNX $brickY $brickZ; 
+} 
+} 
+} 
+$brickZ = 0.27; 
+$brickY = ($bY)*0.3+0.15; 
+if($bY==$brickYNum) 
 {  
 $brickY = 
-Voronoi.cpp 
 ($bY-1)*0.3+0.15+$brickYspace/2+0.15; 
-for($bX=1;$bX<=$brickXNum;$bX++) int CVoronoiView::Triangulate(int nver) 
-{ { 
-$brickName =  bool Complete[maxtriangle]; 
-$buildName+"_brick_right"+($bY)*$brickXNu int Edges[2][ maxtriangle * 3]; 
-m+$bX;  int Nedge; 
-duplicate -name $brickName brickExample1Y;  int ntri; 
-parent $brickName $groupnameR;  int nedge; 
-$brickX = ($bX-1)*0.54+0.27;  vertex edge[2][maxtriangle]; 
-move -r $brickX $brickY $moveNZ;  int xmin,xmax,ymin,ymax,xmid,ymid; 
-if($bX==$brickXNum)  double dx,dy,dmax; 
-{  
-$brickName =  int i,j,k; 
-$buildName+"_brick_right"+($bY)*$brickXNu int temp; 
-m+$bX+1;  double xc=0.0,yc=0.0,r=0.0; 
-duplicate -name $brickName brickExample1XY;  bool inc=false; 
-parent $brickName $groupnameR;  for(i=0;i<2;i++) 
-$brickX =  { for(j=0;j<maxtriangle * 3;j++) 
-($bX-1)*0.54+0.27+$brickXspace/2+0.27;    Edges[i][j]=-1; 
-move -r $brickX $brickY $moveZ;  } 
-}  
-}  xmin = Vertex[0].x; 
-}  ymin = Vertex[0].y; 
-}  xmax = xmin; 
-move -r $moveNX 0 0 $groupnameR;  ymax = ymin; 
-delete brickExample;  for (i=1;i<nver;i++) 
-delete brickExampleZ;  { 
-delete brickExampleY;   if (Vertex[i].x < xmin)  xmin = 
+for($bZ=1;$bZ<=$brickZNum;$bZ++) 
+{ 
+$brickName = 
+$buildName+"_brick_back"+($bY)*$brickZNu
+m+$bZ; 
+duplicate -name $brickName brickExampleY; 
+parent $brickName $groupnameB; 
+$brickZ = ($bZ-1)*0.54+0.27; 
+move -r $moveNX $brickY $brickZ; 
+if($bZ==$brickZNum) 
+{ 
+$brickName = 
+$buildName+"_brick_back"+($bY)*$brickZNu
+m+$bZ+1; 
+duplicate -name $brickName brickExampleYZ; 
+parent $brickName $groupnameB; 
+$brickZ = 
+($bZ-1)*0.54+0.27+$brickZspace/2+0.27; 
+move -r $moveNX $brickY $brickZ; 
+} 
+} 
+} 
+} 
+move -r 0 0 $moveNZ $groupnameB; 
+$brickY = 0.15; 
+$brickX = 0.27; 
+for($bY=1;$bY<=$brickYNum;$bY++) 
+{ 
+for($bX=1;$bX<=$brickXNum;$bX++) 
+{ 
+$brickName = 
+$buildName+"_brick_left"+($bY-1)*$brickXNu
+m+$bX; 
+duplicate -name $brickName brickExample1; 
+parent $brickName $groupnameL; 
+$brickX = ($bX-1)*0.54+0.27; 
+move -r $brickX $brickY $moveZ; 
+if($bY%2==0) 
+{ 
+move -r -0.27 0 0 ; 
+if($bX==1) 
+{ 
+setAttr ($brickName+".scaleX") 0.5; 
+move -r 0.135 0 0 $brickName; 
+} 
+if($bX==$brickXNum) 
+{ 
+$brickName = 
+$buildName+"_brick_left"+($bY-1)*$brickXNu
+m+$bX+1; 
+duplicate -name $brickName brickExample1X; 
+parent $brickName $groupnameL; 
+$brickX = 
+($bX-1)*0.54+0.27+$brickXspace/2+0.27-0.27; 
+move -r $brickX $brickY $moveZ; 
+$brickName = 
+$buildName+"_brick_left"+($bY-1)*$brickXNu
+m+$bX+2; 
+polyCube -w 0.27 -h 0.3 -d 0.2 -name 
+$brickName; 
+polyBevel -offset $polyBeveloffset -segments 2 
+$brickName; 
+parent $brickName $groupnameL; 
+$brickX = $brickX+$brickXspace/2+0.135; 
+move -r $brickX $brickY $moveZ; 
+} 
+} 
+else 
+{ 
+if($bX==$brickXNum) 
+{ 
+64 
+ 
+$brickName = 
+$buildName+"_brick_left"+($bY-1)*$brickXNu
+m+$bX+1; 
+duplicate -name $brickName brickExample1X; 
+parent $brickName $groupnameL; 
+$brickX = 
+($bX-1)*0.54+0.27+$brickXspace/2+0.27; 
+move -r $brickX $brickY $moveZ; 
+} 
+} 
+} 
+$brickX = 0.27; 
+$brickY = ($bY)*0.3+0.15; 
+if($bY==$brickYNum) 
+{ 
+$brickY = 
+($bY-1)*0.3+0.15+$brickYspace/2+0.15; 
+for($bX=1;$bX<=$brickXNum;$bX++) 
+{ 
+$brickName = 
+$buildName+"_brick_left"+($bY)*$brickXNum
++$bX; 
+duplicate -name $brickName brickExample1Y; 
+parent $brickName $groupnameL; 
+$brickX = ($bX-1)*0.54+0.27; 
+move -r $brickX $brickY $moveZ; 
+if($bX==$brickXNum) 
+{ 
+$brickName = 
+$buildName+"_brick_left"+($bY)*$brickXNum
++$bX+1; 
+duplicate -name $brickName brickExample1XY; 
+parent $brickName $groupnameL; 
+$brickX = 
+($bX-1)*0.54+0.27+$brickXspace/2+0.27; 
+move -r $brickX $brickY $moveZ; 
+} 
+} 
+} 
+} 
+move -r $moveNX 0 0 $groupnameL; 
+$brickY = 0.15; 
+$brickX = 0.27; 
+for($bY=1;$bY<=$brickYNum;$bY++) 
+{ 
+for($bX=1;$bX<=$brickXNum;$bX++) 
+{ 
+$brickName = 
+$buildName+"_brick_right"+($bY-1)*$brickXN
+um+$bX; 
+duplicate -name $brickName brickExample1; 
+parent $brickName $groupnameR; 
+$brickX = ($bX-1)*0.54+0.27; 
+move -r $brickX $brickY $moveNZ; 
+if($bY%2==0) 
+{ 
+move -r -0.27 0 0 ; 
+if($bX==1) 
+{ 
+setAttr ($brickName+".scaleX") 0.5; 
+move -r 0.135 0 0 $brickName; 
+} 
+if($bX==$brickXNum) 
+{ 
+$brickName = 
+$buildName+"_brick_right"+($bY-1)*$brickXN
+um+$bX+1; 
+duplicate -name $brickName brickExample1X; 
+parent $brickName $groupnameR; 
+$brickX = 
+($bX-1)*0.54+0.27+$brickXspace/2+0.27-0.27; 
+move -r $brickX $brickY $moveNZ; 
+$brickName = 
+$buildName+"_brick_right"+($bY-1)*$brickXN
+um+$bX+2; 
+polyCube -w 0.27 -h 0.3 -d 0.2 -name 
+$brickName; 
+polyBevel -offset $polyBeveloffset -segments 2 
+$brickName; 
+parent $brickName $groupnameR; 
+$brickX = $brickX+$brickXspace/2+0.135; 
+move -r $brickX $brickY $moveNZ; 
+} 
+} 
+else 
+{ 
+if($bX==$brickXNum) 
+{ 
 65 
- Vertex[i].x;  Vertex[nver + 1].y = ymid + 2*dmax; 
-  if (Vertex[i].x > xmax ) xmax =  Vertex[nver + 2].x = xmid + 2* dmax; 
-Vertex[i].x;  Vertex[nver + 2].y = ymid - dmax; 
-  if (Vertex[i].y < ymin)  ymin =  Triangle[0].vv0 = nver ; 
-Vertex[i].y;  Triangle[0].vv1 = nver + 1; 
-  if (Vertex[i].y > ymax)  ymax =  Triangle[0].vv2 = nver + 2; 
-Vertex[i].y;  Complete[0] = false; 
- }  ntri=1; 
-   for( i = 0;i<nver;i++) 
- dx = xmax - xmin;  { 
- dy = ymax - ymin;   Nedge = 0; 
- if (dx > dy)   for(j = 0;j<ntri;j++) 
-  dmax = dx;   { 
- else    if(!Complete[j]) 
-  dmax = dy;    { 
-      inc=incircle(Vertex[i].x, 
- xmid = (xmax + xmin) / 2; Vertex[i].y, 
- ymid = (ymax + ymin) / 2; Vertex[Triangle[j].vv0].x,Vertex[Triangle[j].v
- v0].y, Vertex[Triangle[j].vv1].x, 
- temp=nver; Vertex[Triangle[j].vv1].y, 
- for(i=0;i<nver-1;i++) Vertex[Triangle[j].vv2].x, 
- { Vertex[Triangle[j].vv2].y, xc, yc, r); 
-  for(j=i+1;j<nver;j++)     if(xc+r<Vertex[i].x) 
-  {      Complete[j]=true; 
-   if(Vertex[j].x<Vertex[i].x)     if (inc) 
-   {     { 
-        Edges[0][ Nedge + 0] 
- Vertex[temp].x=Vertex[i].x; = Triangle[j].vv0; 
-        Edges[1][ Nedge + 0] 
- Vertex[temp].y=Vertex[i].y; = Triangle[j].vv1; 
-    Vertex[i].x=Vertex[j].x;      Edges[0][ Nedge + 1] 
-    Vertex[i].y=Vertex[j].y; = Triangle[j].vv1; 
-        Edges[1][ Nedge + 1] 
- Vertex[j].x=Vertex[temp].x; = Triangle[j].vv2; 
-        Edges[0][ Nedge + 2] 
- Vertex[j].y=Vertex[temp].y; = Triangle[j].vv2; 
-   }      Edges[1][ Nedge + 2] 
- = Triangle[j].vv0; 
-  }      Nedge = Nedge + 3; 
- }      Triangle[j].vv0 = 
- Triangle[ntri-1].vv0; 
- Vertex[nver].x = xmid - 2*dmax;      Triangle[j].vv1 = 
- Vertex[nver].y = ymid - dmax; Triangle[ntri-1].vv1; 
- Vertex[nver + 1].x = xmid;      Triangle[j].vv2 = 
+ 
+$brickName = 
+$buildName+"_brick_right"+($bY-1)*$brickXN
+um+$bX+1; 
+duplicate -name $brickName brickExample1X; 
+parent $brickName $groupnameR; 
+$brickX = 
+($bX-1)*0.54+0.27+$brickXspace/2+0.27; 
+move -r $brickX $brickY $moveNZ; 
+} 
+} 
+} 
+$brickX = 0.27; 
+$brickY = ($bY)*0.3+0.15; 
+if($bY==$brickYNum) 
+{ 
+$brickY = 
+($bY-1)*0.3+0.15+$brickYspace/2+0.15; 
+for($bX=1;$bX<=$brickXNum;$bX++) 
+{ 
+$brickName = 
+$buildName+"_brick_right"+($bY)*$brickXNu
+m+$bX; 
+duplicate -name $brickName brickExample1Y; 
+parent $brickName $groupnameR; 
+$brickX = ($bX-1)*0.54+0.27; 
+move -r $brickX $brickY $moveNZ; 
+if($bX==$brickXNum) 
+{ 
+$brickName = 
+$buildName+"_brick_right"+($bY)*$brickXNu
+m+$bX+1; 
+duplicate -name $brickName brickExample1XY; 
+parent $brickName $groupnameR; 
+$brickX = 
+($bX-1)*0.54+0.27+$brickXspace/2+0.27; 
+move -r $brickX $brickY $moveZ; 
+} 
+} 
+} 
+} 
+move -r $moveNX 0 0 $groupnameR; 
+delete brickExample; 
+delete brickExampleZ; 
+delete brickExampleY; 
+delete brickExampleYZ; 
+delete brickExample1; 
+delete brickExample1X; 
+delete brickExample1Y; 
+delete brickExample1XY; 
+select -r $groupnameF; 
+sets -e -forceElement lambert2SG;  
+select -r $groupnameB; 
+sets -e -forceElement lambert2SG;  
+select -r $groupnameL; 
+sets -e -forceElement lambert2SG;  
+select -r $groupnameR; 
+sets -e -forceElement lambert2SG;  
+} 
+ 
+Voronoi.cpp 
+int CVoronoiView::Triangulate(int nver) 
+{ 
+ bool Complete[maxtriangle]; 
+ int Edges[2][ maxtriangle * 3]; 
+ int Nedge; 
+ int ntri; 
+ int nedge; 
+ vertex edge[2][maxtriangle]; 
+ int xmin,xmax,ymin,ymax,xmid,ymid; 
+ double dx,dy,dmax; 
+ 
+ int i,j,k; 
+ int temp; 
+ double xc=0.0,yc=0.0,r=0.0; 
+ bool inc=false; 
+ for(i=0;i<2;i++) 
+ { for(j=0;j<maxtriangle * 3;j++) 
+   Edges[i][j]=-1; 
+ } 
+ 
+ xmin = Vertex[0].x; 
+ ymin = Vertex[0].y; 
+ xmax = xmin; 
+ ymax = ymin; 
+ for (i=1;i<nver;i++) 
+ { 
+  if (Vertex[i].x < xmin)  xmin = 
 66 
- Triangle[ntri-1].vv2;      Triangle[ntri].vv0 = 
-     Complete[j] = Edges[0][j]; 
-Complete[ntri-1];      Triangle[ntri].vv1 = 
-     j = j - 1; Edges[1][j]; 
-     ntri = ntri - 1;      Triangle[ntri].vv2 = 
-    } i; 
-           
-   }      Complete[ntri] = 
-  } false; 
-      ntri = ntri + 1; 
-     } 
-  for (j = 0; j< Nedge-1;j ++)   } 
-  {   } 
-   for( k = j + 1;k< Nedge;k++)   for(j=0;j<ntri;j++) 
-   {   { 
-     
- if(Edges[0][j]==Edges[1][k]&&Edges[1][j] center[j]=circlecenter(Vertex[Triangle[j]
-==Edges[0][k]) .vv0].x,Vertex[Triangle[j].vv0].y, 
-    { Vertex[Triangle[j].vv1].x, 
-     Edges[0][j] = -1; Vertex[Triangle[j].vv1].y, 
-     Edges[1][j] = -1; Vertex[Triangle[j].vv2].x, 
-     Edges[0][k] = -1; Vertex[Triangle[j].vv2].y); 
-     Edges[1][k] = -1;   } 
-    }   nedge=0; 
-     for(i=0;i<ntri-1;i++) 
- if(Edges[0][j]==Edges[0][k]&&Edges[1][j]  { 
-==Edges[1][k])    for(j=i+1;j<ntri;j++) 
-    {    { 
-     Edges[0][j] = -1;     if(Triangle[i].vv0 >=nver|| 
-     Edges[1][j] = -1; Triangle[i].vv1>= nver|| Triangle[i].vv2 >= 
-     Edges[0][k] = -1; nver) 
-     Edges[1][k] = -1;     { 
-    }     
-   }  if(Triangle[j].vv0 >=nver|| 
-  } Triangle[j].vv1>= nver|| Triangle[j].vv2 >= 
-       nver) 
-         continue; 
-          
-  for(j = 0;j< Nedge;j++)  if(Triangle[i].vv0==Triangle[j].vv0||Triangl
-  { e[i].vv0==Triangle[j].vv1||Triangle[i].vv0==Tria
-    if ( Edges[0][j] >= 0 && ngle[j].vv2) 
-Edges[1][j] >= 0)      {  
-    {      
-       if(Triangle[i].vv1==Triangle[j].vv0||Triangl
+ 
+Vertex[i].x; 
+  if (Vertex[i].x > xmax ) xmax = 
+Vertex[i].x; 
+  if (Vertex[i].y < ymin)  ymin = 
+Vertex[i].y; 
+  if (Vertex[i].y > ymax)  ymax = 
+Vertex[i].y; 
+ } 
+  
+ dx = xmax - xmin; 
+ dy = ymax - ymin; 
+ if (dx > dy) 
+  dmax = dx; 
+ else 
+  dmax = dy; 
+  
+ xmid = (xmax + xmin) / 2; 
+ ymid = (ymax + ymin) / 2; 
+ 
+ temp=nver; 
+ for(i=0;i<nver-1;i++) 
+ { 
+  for(j=i+1;j<nver;j++) 
+  { 
+   if(Vertex[j].x<Vertex[i].x) 
+   { 
+   
+ Vertex[temp].x=Vertex[i].x; 
+   
+ Vertex[temp].y=Vertex[i].y; 
+    Vertex[i].x=Vertex[j].x; 
+    Vertex[i].y=Vertex[j].y; 
+   
+ Vertex[j].x=Vertex[temp].x; 
+   
+ Vertex[j].y=Vertex[temp].y; 
+   } 
+ 
+  } 
+ } 
+ 
+ Vertex[nver].x = xmid - 2*dmax; 
+ Vertex[nver].y = ymid - dmax; 
+ Vertex[nver + 1].x = xmid; 
+ Vertex[nver + 1].y = ymid + 2*dmax; 
+ Vertex[nver + 2].x = xmid + 2* dmax; 
+ Vertex[nver + 2].y = ymid - dmax; 
+ Triangle[0].vv0 = nver ; 
+ Triangle[0].vv1 = nver + 1; 
+ Triangle[0].vv2 = nver + 2; 
+ Complete[0] = false; 
+ ntri=1; 
+ for( i = 0;i<nver;i++) 
+ { 
+  Nedge = 0; 
+  for(j = 0;j<ntri;j++) 
+  { 
+   if(Complete[j]) 
+   { 
+    inc=incircle(Vertex[i].x, 
+Vertex[i].y, 
+Vertex[Triangle[j].vv0].x,Vertex[Triangle[j].v
+v0].y, Vertex[Triangle[j].vv1].x, 
+Vertex[Triangle[j].vv1].y, 
+Vertex[Triangle[j].vv2].x, 
+Vertex[Triangle[j].vv2].y, xc, yc, r); 
+    if(xc+r<Vertex[i].x) 
+     Complete[j]=true; 
+    if (inc) 
+    { 
+     Edges[0][ Nedge + 0] 
+= Triangle[j].vv0; 
+     Edges[1][ Nedge + 0] 
+= Triangle[j].vv1; 
+     Edges[0][ Nedge + 1] 
+= Triangle[j].vv1; 
+     Edges[1][ Nedge + 1] 
+= Triangle[j].vv2; 
+     Edges[0][ Nedge + 2] 
+= Triangle[j].vv2; 
+     Edges[1][ Nedge + 2] 
+= Triangle[j].vv0; 
+     Nedge = Nedge + 3; 
+     Triangle[j].vv0 = 
+Triangle[ntri-1].vv0; 
+     Triangle[j].vv1 = 
+Triangle[ntri-1].vv1; 
+     Triangle[j].vv2 = 
 67 
- e[i].vv1==Triangle[j].vv1||Triangle[i].vv1==Tria e[i].vv1==Triangle[j].vv1||Triangle[i].vv1==Tria
-ngle[j].vv2||Triangle[i].vv2==Triangle[j].vv0||Tr ngle[j].vv2||Triangle[i].vv2==Triangle[j].vv0||Tr
-iangle[i].vv2==Triangle[j].vv1||Triangle[i].vv2= iangle[i].vv2==Triangle[j].vv1||Triangle[i].vv2=
-=Triangle[j].vv2) =Triangle[j].vv2) 
+ 
+Triangle[ntri-1].vv2; 
+     Complete[j] = 
+Complete[ntri-1]; 
+     j = j - 1; 
+     ntri = ntri - 1; 
+    } 
+     
+   } 
+  } 
+ 
+ 
+  for (j = 0; j< Nedge-1;j ++) 
+  {  
+   for( k = j + 1;k< Nedge;k++) 
+   { 
+   
+ if(Edges[0][j]==Edges[1][k]&&Edges[1][j]
+==Edges[0][k]) 
+    { 
+     Edges[0][j] = -1; 
+     Edges[1][j] = -1; 
+     Edges[0][k] = -1; 
+     Edges[1][k] = -1; 
+    } 
+   
+ if(Edges[0][j]==Edges[0][k]&&Edges[1][j]
+==Edges[1][k]) 
+    { 
+     Edges[0][j] = -1; 
+     Edges[1][j] = -1; 
+     Edges[0][k] = -1; 
+     Edges[1][k] = -1; 
+    } 
+   } 
+  } 
+       
+   
+      
+  for(j = 0;j< Nedge;j++) 
+  { 
+    if ( Edges[0][j] >= 0 && 
+Edges[1][j] >= 0) 
+    { 
+      
+     Triangle[ntri].vv0 = 
+Edges[0][j]; 
+     Triangle[ntri].vv1 = 
+Edges[1][j]; 
+     Triangle[ntri].vv2 = 
+i; 
+      
+     Complete[ntri] = 
+false; 
+     ntri = ntri + 1; 
+    } 
+  } 
+ } 
+  for(j=0;j<ntri;j++) 
+  { 
   
-      {       { 
-            
- edge[0][nedge]=center[i];  edge[0][nedge]=center[i]; 
-            
- edge[1][nedge]=center[j];  edge[1][nedge]=center[j]; 
-       nedge++;        nedge++; 
-      }       } 
-     }      } 
-              
-if(Triangle[i].vv1==Triangle[j].vv0||Triangle[i]. if(Triangle[i].vv1==Triangle[j].vv0||Triangle[i].
-vv1==Triangle[j].vv1||Triangle[i].vv1==Triangl vv1==Triangle[j].vv1||Triangle[i].vv1==Triangl
-e[j].vv2) e[j].vv2) 
-     {      { 
-          
- if(Triangle[i].vv0==Triangle[j].vv0||Triangl if(Triangle[i].vv0==Triangle[j].vv0||Triangl
-e[i].vv0==Triangle[j].vv1||Triangle[i].vv0==Tria e[i].vv0==Triangle[j].vv1||Triangle[i].vv0==Tria
-ngle[j].vv2||Triangle[i].vv2==Triangle[j].vv0||Tr ngle[j].vv2||Triangle[i].vv2==Triangle[j].vv0||Tr
-iangle[i].vv2==Triangle[j].vv1||Triangle[i].vv2= iangle[i].vv2==Triangle[j].vv1||Triangle[i].vv2=
-=Triangle[j].vv2) =Triangle[j].vv2) 
-  
-      {       { 
-            
- edge[0][nedge]=center[i];  edge[0][nedge]=center[i]; 
-            
- edge[1][nedge]=center[j];  edge[1][nedge]=center[j]; 
-       nedge++;        nedge++; 
-      }       } 
-     }      } 
-           } 
-    }    } 
-    else   } 
-    {   this->nedge=nedge; 
-      for(i=0;i<2;i++) 
- if(Triangle[i].vv0==Triangle[j].vv0||Triangl  { 
-e[i].vv0==Triangle[j].vv1||Triangle[i].vv0==Tria   for(j=0;j<nedge;j++) 
-ngle[j].vv2)     this->edge[i][j]=edge[i][j]; 
-     {    } 
-      return ntri; 
- if(Triangle[i].vv1==Triangle[j].vv0||Triangl } 
+ center[j]=circlecenter(Vertex[Triangle[j]
+.vv0].x,Vertex[Triangle[j].vv0].y, 
+Vertex[Triangle[j].vv1].x, 
+Vertex[Triangle[j].vv1].y, 
+Vertex[Triangle[j].vv2].x, 
+Vertex[Triangle[j].vv2].y); 
+  } 
+  nedge=0; 
+  for(i=0;i<ntri-1;i++) 
+  { 
+   for(j=i+1;j<ntri;j++) 
+   { 
+    if(Triangle[i].vv0 >=nver|| 
+Triangle[i].vv1>= nver|| Triangle[i].vv2 >= 
+nver) 
+    { 
+    
+ if(Triangle[j].vv0 >=nver|| 
+Triangle[j].vv1>= nver|| Triangle[j].vv2 >= 
+nver) 
+      continue; 
+    
+ if(Triangle[i].vv0==Triangle[j].vv0||Triangl
+e[i].vv0==Triangle[j].vv1||Triangle[i].vv0==Tria
+ngle[j].vv2) 
+     {  
+     
+ if(Triangle[i].vv1==Triangle[j].vv0||Triangl
 68 
  
+e[i].vv1==Triangle[j].vv1||Triangle[i].vv1==Tria
+ngle[j].vv2||Triangle[i].vv2==Triangle[j].vv0||Tr
+iangle[i].vv2==Triangle[j].vv1||Triangle[i].vv2=
+=Triangle[j].vv2) 
+ 
+      { 
+      
+ edge[0][nedge]=center[i]; 
+      
+ edge[1][nedge]=center[j]; 
+       nedge++; 
+      } 
+     } 
+       
+if(Triangle[i].vv1==Triangle[j].vv0||Triangle[i].
+vv1==Triangle[j].vv1||Triangle[i].vv1==Triangl
+e[j].vv2) 
+     { 
+     
+ if(Triangle[i].vv0==Triangle[j].vv0||Triangl
+e[i].vv0==Triangle[j].vv1||Triangle[i].vv0==Tria
+ngle[j].vv2||Triangle[i].vv2==Triangle[j].vv0||Tr
+iangle[i].vv2==Triangle[j].vv1||Triangle[i].vv2=
+=Triangle[j].vv2) 
+ 
+      { 
+      
+ edge[0][nedge]=center[i]; 
+      
+ edge[1][nedge]=center[j]; 
+       nedge++; 
+      } 
+     } 
+       
+    } 
+    else 
+    { 
+    
+ if(Triangle[i].vv0==Triangle[j].vv0||Triangl
+e[i].vv0==Triangle[j].vv1||Triangle[i].vv0==Tria
+ngle[j].vv2) 
+     {  
+     
+ if(Triangle[i].vv1==Triangle[j].vv0||Triangl
+e[i].vv1==Triangle[j].vv1||Triangle[i].vv1==Tria
+ngle[j].vv2||Triangle[i].vv2==Triangle[j].vv0||Tr
+iangle[i].vv2==Triangle[j].vv1||Triangle[i].vv2=
+=Triangle[j].vv2) 
+ 
+      { 
+      
+ edge[0][nedge]=center[i]; 
+      
+ edge[1][nedge]=center[j]; 
+       nedge++; 
+      } 
+     } 
+       
+if(Triangle[i].vv1==Triangle[j].vv0||Triangle[i].
+vv1==Triangle[j].vv1||Triangle[i].vv1==Triangl
+e[j].vv2) 
+     { 
+     
+ if(Triangle[i].vv0==Triangle[j].vv0||Triangl
+e[i].vv0==Triangle[j].vv1||Triangle[i].vv0==Tria
+ngle[j].vv2||Triangle[i].vv2==Triangle[j].vv0||Tr
+iangle[i].vv2==Triangle[j].vv1||Triangle[i].vv2=
+=Triangle[j].vv2) 
+ 
+      { 
+      
+ edge[0][nedge]=center[i]; 
+      
+ edge[1][nedge]=center[j]; 
+       nedge++; 
+      } 
+     } 
+    } 
+   } 
+  } 
+  this->nedge=nedge; 
+  for(i=0;i<2;i++) 
+  { 
+   for(j=0;j<nedge;j++) 
+    this->edge[i][j]=edge[i][j]; 
+  } 
+ return ntri; 
+} 

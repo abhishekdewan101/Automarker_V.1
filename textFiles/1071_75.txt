@@ -1,5 +1,7 @@
   
  
+i 
+ 
 Abstract 
 This project deals with approaches that automatically extract opinions from plain text a 
 process known as Opinion Extraction. Supervised machine learning techniques have been 
@@ -45,8 +47,8 @@ measure that extracts generalized features with a cleverer way, as proposed by
 researchers in Transfer Learning area, which shows that methods in this field would 
 be useful in order to transfer knowledge between conferences. 
  
-i 
-  
+ iii 
+ 
 Table of Contents 
  
 Abstract ...................................................................................................................................... i 
@@ -84,8 +86,8 @@ List of Tables .................................................................
 5.1 Feature extraction .................................................................................................... 18 
 5.2 Machine learning algorithms and parameters .......................................................... 19 
 5.3 Evaluation methodology and baselines ................................................................... 20 
-iii 
-  
+ iv 
+ 
 5.3.1 Evaluation measures and analysis ................................................................... 22 
 5.3.2 Statistical testing .............................................................................................. 24 
 5.4 Summary ................................................................................................................. 25 
@@ -125,8 +127,8 @@ APPENDIX G Opinion features and competitive models .............................
 APPENDIX H Code ................................................................................................................ 76 
  
  
-iv 
-  
+ v 
+ 
 List of Figures 
 Figure 1 Feature vector construction. ........................................................................................ 6 
 Figure 2 Different learning processes between Transfer learning approaches (a) and 
@@ -166,8 +168,8 @@ Figure 18 Best models regarding the classification. ............................
 Figure 19 Best models regarding regression (left) and ranking (right). .................................. 74 
  
  
-v 
   
+vi 
  
 List of Tables 
 Table 1 Patterns of POS tags for extracting two-word phrases (taken from Turney( 2002)) .... 7 
@@ -222,8 +224,9 @@ Table 28 The common words between the most similar reviews for KDD and ECML that
 express the most positive opinion as ranked using  SMOreg ﾐ Unigrams ranker. 
 KDDtoECML corresponds to the reviews, which were first or last in the rank when the ranker 
 is trained and tested on KDD and when the same ranker is tested on ECML. ECMLtoKDD 
-vi 
-   
+  
+ 
+vii 
  
 correspond to the reviews which were first or last in the rank when the ranker is trained and 
 tested on KDD and when the same ranker is tested on ECML (ID: for In Domain evaluation, 
@@ -261,9 +264,10 @@ Unigrams 4 score range. ........................................................
 Table 49 Bigrams with the highest and lowest FCE. .............................................................. 75 
  
  
-vii 
- I n t r o d u c t i o n | 1 
+I n t r o d u c t i o n | 1 
   
+ 
+ 
  
 1 Introduction 
 Opinion mining or Sentiment analysis (Pang & Lee 2006a) focuses on techniques that detect 
@@ -312,17 +316,21 @@ available and existing methods have been adopted in order to extract opinions an
 them. The most of researchers have focused on product and movie reviews as they have more 
 practical interest and can easily been obtained. This study is among the first that combines 
 existing methods in this different kind of reviews. 
- 
- I n t r o d u c t i o n | 2 
+I n t r o d u c t i o n | 2 
   
+ 
+ 
  
 The rest of this section underlines the aims and objectives of this project and also the outline 
 of the dissertation. 
 1.1 Aims and objectives 
 A project has been developed that focuses on opinion extraction from reviews of research 
 papers submitted to two different major international conferences. The first conference is the 
-1 2
-KDD - 2009 and the second conference is the ECML - 2012 . International conferences have 
+KDD - 2009
+1
+ and the second conference is the ECML - 2012
+2
+. International conferences have 
 a common process which deals with the acceptance or rejection of scientific papers. I briefly 
 explain this process here and the reader can refer to section 4.1, where the complete process is 
 extensively described. According to peer review process, authors send their scientific papers 
@@ -357,15 +365,16 @@ versa.
 ? Investigate which models and which of the three learning problems (classification, 
 regression and ranking) can easier be transferred. 
 ? Search for alternative techniques in order to achieve a better performance. 
-                                                      
+                                                     
 1
  Knowledge Discovery and Data Mining (KDD) 
 2
  European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in 
 Databases (ECML PKDD) 
- 
- I n t r o d u c t i o n | 3 
+I n t r o d u c t i o n | 3 
   
+ 
+ 
  
 1.2 Outline 
 This dissertation consists of eight sections that are organized as follows: 
@@ -390,9 +399,10 @@ evaluates this project by noting in what extent aims and objectives have finally
 completed. 
 Section 8 presents conclusions and recommendations for future work. 
  
- 
- O p i n i o n E x t r a c t i o n a n d S e n t i m e n t A n a l y s i s | 4 
+O p i n i o n  E x t r a c t i o n  a n d  S e n t i m e n t  A n a l y s i s | 4 
   
+ 
+ 
  
 2 Opinion Extraction and Sentiment Analysis 
 This section and the next one are dedicated to background material. I explain the areas related 
@@ -430,38 +440,33 @@ The field of Machine Learning is referred to classification as the task of class
 to one or more categories, to regression as the task of predicting a real value for an object and 
 to ranking as the task of ordering a number of objects starting from the most preferable to the 
 least preferable (Witten & Frank 2005). This section shows how these problems are 
-interpreted by the Sentiment Analysis area. Let          ,       denote a set of  m reviews 
-  
-or training examples, where each input vector       is a different review while             
-    
-where         is the value of the ordinal target variable, in other words the score 
-   
+interpreted by the Sentiment Analysis area. Let           ,       denote a set of  m reviews 
+or training examples, where each input vector       is a different review while                
+where            is the value of the ordinal target variable, in other words the score 
 that the reviewer gives to review  . Researchers use machine learning in order to extract 
 opinions and solve the upper mentioned learning problems. 
 Classification based on the sentiment is known as Sentiment classification or Polarity 
 classification and can be further separated into binary classification and multi-class 
 classification. Furthermore, Sentiment classification can be achieved in three different levels: 
 Sentence-level classification, word-level classification and document-level classification. 
- 
- O p i n i o n E x t r a c t i o n a n d S e n t i m e n t A n a l y s i s | 5 
+O p i n i o n  E x t r a c t i o n  a n d  S e n t i m e n t  A n a l y s i s | 5 
   
+ 
+ 
  
 Different approaches have been developed for each of these levels. However, even if these are 
 studied as three different areas, advances in word and sentence level classification are used 
 for document-level classification (Tang et al. 2009). Assuming that 
-                          then binary sentiment classification is to classify every 
-   
+                             then binary sentiment classification is to classify every 
 review   to one of these two categories. On the other hand, if there are more than two 
-categories like                                     then multi-class 
-    
+categories like                                         then multi-class 
 sentiment classification is to be used. As far as the number of classes increases, classification 
 becomes a very difficult problem. For example, predicting the score for each review can be 
 treated as a classification problem if the initial score range is known, however, regression is a 
 more sensible solution. 
 Researchers use regression schemes in order to predict review ratings for example the number 
 of stars that the reviewer gives to his review (Pang & Lee 2006b, Zhang & Varadarajan 2006, 
-Baccianella et al. 2009b). Regression schemes assume that     which is less restrictive 
- 
+Baccianella et al. 2009b). Regression schemes assume that      which is less restrictive 
 compared to the assumption of classification schemes.  
 Ranking a set of reviews can be enough for particular applications. In this case, we are 
 interested in extracting a list of shorted reviews from those with positive polarity to those with 
@@ -476,21 +481,15 @@ latter unsupervised learning to rank approaches have been developed in order to 
 unlabeled training data (F殲nkranz & Hullermeier 2011: 3-7). Sentiment analysis field has 
 mainly focused on regression and classification schemes but ranking is also required by some 
 applications. 
-To sum up, both regression and classification schemes train a function f with f(     ) =   . 
-  
-Classification approaches try to map                and regression approaches try to map 
-   
-        . Ranking methods take into account that class label indicates a preference (   is 
-  
-more preferable than  ) and given a set of  reviews with score values according to this:   
-  
->   >  , they return scores where f(      ) > f(      ) > f(      ) which indicate that                     . 
-        
+To sum up, both regression and classification schemes train a function f with f(     ) =    . 
+Classification approaches try to map                  and regression approaches try to map 
+        . Ranking methods take into account that class label indicates a preference (    is 
+more preferable than   ) and given a set of  reviews with score values according to this:    
+>    >   , they return scores where f(      ) > f(      ) > f(      ) which indicate that                     . 
 The symbol   implies preference (Duh 2008). The way that ranking methods are evaluated is 
 also different compared to classification and regression methods. The simplest way to 
 evaluate a ranker on the test set is to consider a ranking error as the one where the ranker has 
-rank             while    . So, the number of ranking errors is the number of pairs that have 
-    
+rank             while      . So, the number of ranking errors is the number of pairs that have 
 been ranked wrongly. Regression methods can be evaluated by calculating the mean square 
 error which is the distance between the true label and the label that the regression function 
 assigns. Finally, classification can be evaluated by counting the number of correct and 
@@ -503,9 +502,10 @@ a ranker then there is not error as the three new reviews have been shorted perf
 example illustrates that a ranker learns the relative order and not specific numbers. This is a 
 different point of view that probably is easier to be solved. 
  
- 
- O p i n i o n E x t r a c t i o n a n d S e n t i m e n t A n a l y s i s | 6 
+O p i n i o n  E x t r a c t i o n  a n d  S e n t i m e n t  A n a l y s i s | 6 
   
+ 
+ 
  
 2.3 Feature extraction and vector representation 
 Different approaches have been used in order to solve the sentiment learning problems that 
@@ -515,12 +515,6 @@ As a result, the most of the researchers follow a very similar preparation phase
 linguistic analysis processes are taking place as presented in Figure 1. The output of this 
 process is a form, which is known as feature vectors. Reviews are run through a parser, 
 features are extracted and then each review is represented by a vector.  
-Review Feature Feature 
-Feature vector 
-Reviews 
-parsing extraction selection 
-representation 
-Figure 1 Feature vector construction. 
 2.3.1 Review Parsing 
 Starting with a raw document some preprocessing techniques are applied to it, for example it 
 is separated into sentences and these sentences are run through a parser, they are further split 
@@ -550,12 +544,23 @@ superlative (RBS), the second one is an adjective (JJ) but the third one is not 
 (NN) or plural (NNS). Ng et al., (2006) note that the most of researchers focus on JJ-NN 
 pattern. Reader can refer to Santorini (1995) who gives a complete description for all of these 
 tags.  
- 
- O p i n i o n E x t r a c t i o n a n d S e n t i m e n t A n a l y s i s | 7 
+Reviews 
+Review 
+parsing 
+Feature 
+extraction 
+Feature 
+selection 
+Feature vector 
+representation 
+Figure 1 Feature vector construction. 
+O p i n i o n  E x t r a c t i o n  a n d  S e n t i m e n t  A n a l y s i s | 7 
   
  
-Third word (Not 
+ 
+ 
 First word Second word 
+Third word (Not 
 Extracted) 
 1. JJ NN or NNS JJ anything 
 2. RB, RBR, or RBS JJ not NN nor NNS 
@@ -604,9 +609,10 @@ Pang et al. (2002) and Kennedy & Inkpen, (2006) concluded that feature presence 
 better results compared to feature frequency for particular algorithms which is opposite as 
 they maintain to other works on topic-based classification. On the other hand, Baccianella, 
 Esuli, & Sebastiani, (2009) applied the TF x IDF (Term Frequency times inverse document 
- 
- O p i n i o n E x t r a c t i o n a n d S e n t i m e n t A n a l y s i s | 8 
+O p i n i o n  E x t r a c t i o n  a n d  S e n t i m e n t  A n a l y s i s | 8 
   
+ 
+ 
  
 frequency) weighting scheme from information retrieval which also has predicted to be very 
 robust. 
@@ -627,9 +633,7 @@ approaches in sentiment analysis are Mutual Information (Wen Fan et al. 2011) an
 Information Gain. Information Gain shows the discriminating power of every feature which is 
 the amount of information that a particular feature can give for a specific class. The entropy 
 for a binary classification is defined as: 
-    
-          
-                                   
+                                                 
 The information gain for a word is defined as: 
                                                               
 In order to compute the information gain of a term we can divide the dataset to two subsets 
@@ -652,9 +656,10 @@ learning algorithm is trained in order to build a model and during the test phas
 unlabeled reviews are classified by this model. The most competitive approaches, as proposed 
 by other researchers, are presented in this section.  APPENDIX A includes more details for 
 those algorithms that have also been used in the experimental section. 
- 
- O p i n i o n E x t r a c t i o n a n d S e n t i m e n t A n a l y s i s | 9 
+O p i n i o n  E x t r a c t i o n  a n d  S e n t i m e n t  A n a l y s i s | 9 
   
+ 
+ 
  
 2.4.1 Machine learning algorithms for classification 
 Many different supervised machine learning algorithms have been proposed for sentiment 
@@ -702,18 +707,22 @@ models output a numerical prediction regarding each test instance. This predicti
 can be used in order to rank the data. On the other hand, probabilistic classifiers like 
 MNB output posterior probabilities over the classes. The output can be converted to a 
 score which can be used in order to treat the classifier as a ranker. As proposed by 
- 
- O p i n i o n E x t r a c t i o n a n d S e n t i m e n t A n a l y s i s | 10 
+O p i n i o n  E x t r a c t i o n  a n d  S e n t i m e n t  A n a l y s i s | 10 
   
+ 
+ 
  
 (Lachiche & Flach 2003) probabilities can be converted into scores using the 
 following formula: 
-                          
-          
-                             
+       
+             
+             
  
-  
-Where             (              ) corresponds to the probability of this 
+             
+                
+ 
+ 
+Where               (              ) corresponds to the probability of this 
 review to be positive (negative). Of course, this formula can be applied only to 
 classifiers that have been trained in order to solve binary classification problems. 
 ? Approaches for Learning To Rank problems: RankNet is a pair wise ranking method, 
@@ -755,9 +764,10 @@ reason, different feature extraction methods that are more likely to capture opi
 been presented in this section. Little research has performed in combination of more 
 classifiers and probably ensembles of classifiers would give better results in this field. 
  
- 
- C o m p a r e c o n f e r e n c e s , T r a n s f e r L e a r n i n g | 11 
+C o m p a r e  c o n f e r e n c e s ,  T r a n s f e r  L e a r n i n g | 11 
   
+ 
+ 
  
 3 Compare conferences, Transfer Learning 
 The second aim of this project is to compare the two conferences. In order to do that models 
@@ -804,9 +814,10 @@ is the same for both domains but the domains are different, which means that eit
 feature space is different, for example different language is used between the two domains, or 
 the marginal distributions are different which means that the source and target domain focus 
 on different topics. Figure 2 shows the assumptions that the two areas do. 
- 
- C o m p a r e c o n f e r e n c e s , T r a n s f e r L e a r n i n g | 12 
+C o m p a r e  c o n f e r e n c e s ,  T r a n s f e r  L e a r n i n g | 12 
   
+ 
+ 
  
 3.2 Related work 
 Sentiment classification is a very domain specific problem. Classifiers trained on one domain 
@@ -831,10 +842,8 @@ meaning for the source domain.
 Two methods that try to extract generalizable features from source and target domain 
 proposed by Blitzer et al.( 2007) and Tan et al. (2009). Methods in this category are based on 
 two main observations that were nicely described by Raina et al. (2006): 
-1) The presence of a word w in a document with label Y might make it more likely that 
-1
-words similar to w will occur in other documents with the same label Y. 
-1
+1) The presence of a word w1 in a document with label Y might make it more likely that 
+words similar to w1 will occur in other documents with the same label Y. 
 2) Some rare words are possible to be more or less informative about a document label 
 than common words. 
 An algorithm which can be trained on a single source domain and adapt knowledge to a target 
@@ -854,9 +863,10 @@ version of Na夫e Bayes classifier. More specifically, firstly features are extra
 Frequently co-occurring entropy and then an extension of Expectation Maximization Na夫e 
 Bayes algorithm is proposed, which deals with both labeled and unlabeled instances. 
  
- 
- C o m p a r e c o n f e r e n c e s , T r a n s f e r L e a r n i n g | 13 
+C o m p a r e  c o n f e r e n c e s ,  T r a n s f e r  L e a r n i n g | 13 
   
+ 
+ 
  
 3.3 Summary 
 To sum up, applying traditional machine learning approaches to a different domain results to 
@@ -877,19 +887,22 @@ methods have been proposed that add some labeled data from the target domain in 
 domain, which can lead to improved performance as experiments performed by Blitzer, 
 (2007) indicate.  
  
-(a) 
-(b) 
  
-Training and Test data can be Training and Test data must be 
  
-from different domains. from the same domain. 
  
 Figure 2 Different learning processes between Transfer learning approaches (a) and traditional Machine learning 
 (b) when transfer learning is applied. Figures are adapted from (Pan & Q. Yang 2010)  
  
- 
- T h e P r o p o s e d S t r a t e g y | 14 
+(b) 
+Training and Test data must be 
+from the same domain. 
+(a) 
+Training and Test data can be 
+from different domains. 
+T h e  P r o p o s e d  S t r a t e g y | 14 
   
+ 
+ 
  
 4 The Proposed Strategy 
 This section introduces the reader to the various problems that this project aims to solve, the 
@@ -920,33 +933,76 @@ score has been used as the ground truth.
  
  
 Figure 3 Peer review process diagram. 
-530 
-600 
-473 
-423 
-500 
-387 
-355 
-400 
-296 
-300 
-171 
-200 
-91 91 
-42 
-100 
-0 
-1   2   3   4   5   6    1  2   3  4   
-strong reject weak weak accept strong strong reject accept strong 
-reject reject accept accept reject accept 
-KDD   2009 ECML 2012 
-Score rating 
  
 Figure 4 Details of data sets: Conference, Score rating for this conference, number of reviews per score.   
+91 
+423 
+530 
+355 
+171 
+42 
+296 
+473 
+387 
+91 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+1   
+strong 
+reject 
+2   
+reject 
+3   
+weak 
+reject 
+4   
+weak 
+accept 
+5   
+accept 
+6    
+strong 
+accept 
+1  
+strong 
+reject 
+2   
+reject 
+3  
+accept 
+4   
+strong 
+accept 
+KDD   2009 ECML 2012 N
+u
+m
+b
+e
+r 
+o
+f 
+re
+vi
+e
+w
+s 
+ p
+e
+r 
+sc
+o
+re
  
- 
-Number of reviews  per score T h e P r o p o s e d S t r a t e g y | 15 
+Score rating 
+T h e  P r o p o s e d  S t r a t e g y | 15 
   
+ 
+ 
  
 4.2 Learning problems applied to the datasets 
 Three learning problems included their sub problems, as described in section 2.2, have been 
@@ -997,9 +1053,10 @@ score they will refer to some limitations. In order to deal with this challenge 
 with many different feature extraction methods and also different learning problems 
 (classification, regression, ranking). I chose the state-ofﾐthe art learning algorithms and 
 opinion feature extraction approaches as proposed by other researchers.  
- 
- T h e P r o p o s e d S t r a t e g y | 16 
+T h e  P r o p o s e d  S t r a t e g y | 16 
   
+ 
+ 
  
 Even if the features that reveal opinions are extracted, a big challenge is the meaning that the 
 same words have for different authors. Two documents written from two different reviewers 
@@ -1041,47 +1098,54 @@ experimental phase. Moreover, it offered an introduction to the problems that wi
 and remarked the main challenges and the way they have been handled. The next section 
 describes in details the processes and the algorithms that have been chosen, before the results 
 of this research are presented. 
- 
- T h e P r o p o s e d S t r a t e g y | 17 
+T h e  P r o p o s e d  S t r a t e g y | 17 
   
  
-･ Try different feature 
-･ Evaluation measures 
-extraction methods 
-for imbalanced classes 
-･ Solve different learning 
-･Merging of scores 
-problems 
-based on the class 
-･ Choose the state-of -the-
-distributions 
-art learning algorithms. 
-Opinion Imbalanced 
-mining datasets 
-Different 
-Big number 
-conferences 
-of 
-and score 
-experiments 
-ratings 
-･ Transfer many problems, ･ Develop a common 
-investigate which is learning framework 
-easier. 
-･ Design the evaluation 
-･ Find which scores from process. 
-KDD correspond to 
-･ Find ways to analyse the 
-ECML. 
-resuls. 
+ 
+ 
  
 Figure 5 Main challenges regarding the project and steps that have been taken in order to handle them. 
  
  
  
- 
- E x p e r i m e n t a l S e t u p | 18 
+･  Develop a common 
+learning framework 
+･ Design the evaluation 
+process. 
+･ Find ways to analyse the 
+resuls. 
+･ Transfer many problems, 
+investigate which is 
+easier. 
+･ Find which scores from 
+KDD correspond to 
+ECML. 
+･  Evaluation measures 
+for imbalanced classes 
+･Merging of scores 
+based on the class 
+distributions 
+･ Try different feature 
+extraction methods 
+･ Solve different learning 
+problems 
+･ Choose the state-of -the-
+art learning algorithms. 
+Opinion 
+mining 
+Imbalanced 
+datasets 
+Big number 
+of 
+experiments 
+Different 
+conferences 
+and score 
+ratings 
+E x p e r i m e n t a l  S e t u p | 18 
   
+ 
+ 
  
 5 Experimental Setup 
 This section provides an overview of the software and machine learning algorithms that have 
@@ -1115,8 +1179,9 @@ syntactic analysis of a sentence, which is provided by parsing the text using St
 dependency parser (Marneffe et al. 2006). The parser returns pairs of words that reveal typed 
 dependencies based on grammatical relations like subject or indirect object. This is a more 
 clever way compared to simply extracting pairs or triples of sequential words. Finally, I 
+experimented with features extracted by opinion lexicons. The General Inquirer lexicon
 3
-experimented with features extracted by opinion lexicons. The General Inquirer lexicon is 
+ is 
 used in order to replace every word that is detected to be an overstatement or understatement 
 with a single tag: OVS for overstatement and UND for understatement. Finally, I obtain some 
 first statistical results regarding the polarity of each review by using the SentiWordNet 
@@ -1128,13 +1193,14 @@ specifically, it offers a choice of the way that the vectors will be represented
 counts, tf-itf) and also performs some simple preprocessing like the exclusion of very 
 frequent words or stop words. APPENDIX C summarizes all of the feature sets that have been 
 extracted regarding this project and some more annotations. 
-                                                      
+                                                     
 3
  GI is a dictionary that annotates English word senses. It includes tags that label them as positive, 
 negative, overstatement understatement etc. 
- 
- E x p e r i m e n t a l S e t u p | 19 
+E x p e r i m e n t a l  S e t u p | 19 
   
+ 
+ 
  
 5.2 Machine learning algorithms and parameters 
 I experimented with different learning schemes suitable for the different learning tasks. I 
@@ -1188,9 +1254,10 @@ reduced the number of trained epochs to 10 and I let 10 nodes per layer instead 
 default values, which were 40 and 20 respectively. For each of the 10 train/test splits, 
 the training set is further split in order to have a validation fold the final model is the 
 one that performs best on the validation data. 
- 
- E x p e r i m e n t a l S e t u p | 20 
+E x p e r i m e n t a l  S e t u p | 20 
   
+ 
+ 
  
 5.3 Evaluation methodology and baselines 
 Evaluation of the different methods is the most important aspect of solving machine learning 
@@ -1238,55 +1305,65 @@ in-domain evaluation 10 different models have been built, one for every repetiti
 fold cross validation. These 10 models are separately used to classify, rank or predict 
 numerical score on the whole dataset of the second domain. The final performance is the 
 average over the 10 repetitions.  
- 
- E x p e r i m e n t a l S e t u p | 21 
+E x p e r i m e n t a l  S e t u p | 21 
   
  
  
-Conference 1 Conference 2 
-  1) "...an important problem..", 1   1) "...results are disappointing..", D 
+ 
+ 
   
-  2) ".. with intresting contributions...",   6   2) ".. novel and intresting...", A 
-  3) .......   3) ........ 
-Out-of domain evaluation 
-Training set Test set 
-In-domain 
-evaluation 
 Feature vector representation (see Figure 1): Normalize, extract features and represent to 
 feature vectors 
-Training phase 
-Machine Learning Choose a machine learning 
-- MNB, SMO algorithm based on the opinion 
-- SMOreg, AR, Bag mining problem you want to 
-- RN solve: 
+Machine Learning 
+- MNB, SMO 
+- SMOreg, AR, Bag 
+- RN 
+Trained Model 
+-  
+-Classify 
+- Predict score 
+- Rank 
+ 
+- Accuracy 
+- Macro MAE 
+- Rank error rate 
+Conference 1 
+  1) "...an important problem..", 1 
+  2) ".. with intresting contributions...",   6 
+  3) ....... 
+Training set Test set 
+Conference 2 
+  1) "...results are disappointing..", D 
+  2) ".. novel and intresting...", A 
+  3) ........ 
+Figure 6 The learning framework 
+Choose a machine learning 
+algorithm based on the opinion 
+mining problem you want to 
+solve: 
 CLASSIFICATION  
 REGRESSION  
 RANKING 
-Trained Model 
-Review (1) negative 
+Evaluate the model based on the 
+problem it solves. 
+Out-of domain evaluation 
+In-domain 
+evaluation 
+Training phase 
 Make prediction 
-Review (2) positiveﾉ.. 
--  
+Evaluation 
+Review (1) negative 
+Review (2) positive.. 
  
 Review (1) 6 
--Classify 
-Review (2) 3ﾉ. 
+Review (2) 3. 
  
-- Predict score 
 Review(2) > Review(2) > 
-- Rank 
-Review(3)ﾉ 
- 
-Evaluation 
-Evaluate the model based on the 
-- Accuracy 
-problem it solves. 
-- Macro MAE 
-- Rank error rate 
-Figure 6 The learning framework 
- 
- E x p e r i m e n t a l S e t u p | 22 
+Review(3) 
+E x p e r i m e n t a l  S e t u p | 22 
   
+ 
+ 
  
 The decision regarding the in-domain evaluation was an easy task as much of bibliography is 
 available regarding the appropriate way of performing machine learning experiments and 
@@ -1336,25 +1413,29 @@ negative classification instead of trying to classify positive reviews better th
 this project the aim is to optimize accuracy but weighted recall and confusion matrix are 
 calculated in order to explain the performance of every model. Weighted recall is the recall 
 multiplied by the prior of this class. 
- 
- E x p e r i m e n t a l S e t u p | 23 
+E x p e r i m e n t a l  S e t u p | 23 
   
+ 
+ 
  
 Table 2 Confusion matrix and weighted recall. 
  
-    
 a b c ?Classified as 
-                             
-   
 (na) * * a                 Na 
-ni: The # of instances that belong to class i and 
-* (nb) * 
-b                 Nb 
-correctly have been classified to this class. 
+* (nb) * b                 Nb 
 * * (nc) c                 Nc 
+Total # of instances: Na+Nb+Nc = N 
+                   
+  
+  
+ 
+  
+ 
+         
+ni: The # of instances that belong to class i and 
+correctly have been classified to this class. 
 Ni: The total # of instances belonging to class i. 
 N: The total # of instances. 
-Total # of instances: Na+Nb+Nc = N 
  
 In regression the experimental objective is to find those models that predict numerical scores, 
 whose predictions are as close as possible to the ground truth. There exist many measures 
@@ -1365,25 +1446,19 @@ recommended by Baccianella et al. (2009a) to be more suitable for imbalanced dat
 The final learning problem is ranking. The experimental objective here is to find those models 
 that make the least rank errors. The rate of the rank error is estimated based on the utility-
 based rank loss as proposed by F殲nkranz & Hullermeier (2011: p.227 - 229): 
-                                     
-  
-    
-   
- 
-                 
-                                               
       
-                
+                                         
+                                                   
             
+          
+   
+                
+ 
 This loss function gives different penalties which are proportional to the importance of the 
 error. For example, bigger penalty will be given if the model gives a score                     
-  
-when the true labels are     and smaller penalty if the model predicts that            
-   
-         .      are the ground truth review scores and                     are the scores that the 
-     
-ranker assigns to the instances                   . 
-  
+when the true labels are       and smaller penalty if the model predicts that            
+         .        are the ground truth review scores and                     are the scores that the 
+ranker assigns to the instances                  . 
 A different experimental objective is to investigate if regression models perform better as 
 rankers. Pearsonﾕs correlation is the measure that counts the linear relation between two 
 variables. Spearmanﾕs correlation is the non-parametric alternative that uses the ranks instead 
@@ -1395,22 +1470,32 @@ systematic way to analyze the results in order to be easily understood by the re
 process will be described during the experimental section.  
 Table 3 Evaluation measures per learning problem. 
 LEARNING 
-CLASSIFICATION REGRESSION RANKING 
 PROBLEM 
-1) Correct prediction 1) Rank error 
-Experimental 1) Correct classification 
-2) Comparison with 2) Comparison with 
-objective 2) Modelﾕs failure 
-ranking regression 
+CLASSIFICATION REGRESSION RANKING 
+Experimental 
+objective 
+1) Correct classification 
+2) Modelﾕs failure 
+1) Correct prediction 
+2) Comparison with 
+ranking 
+1) Rank error 
+2) Comparison with 
+regression 
+Evaluation 
+measure 
+1) Accuracy 
+2) Weighted recall 
+1) macroMAE 
+2) Pearsonﾕs correlation 
 1) rate of Rank Error 
-Evaluation 1) Accuracy 1) macroMAE 
 2) Spearmanﾕs 
-measure 2) Weighted recall 2) Pearsonﾕs correlation 
 correlation 
  
- 
- E x p e r i m e n t a l S e t u p | 24 
+E x p e r i m e n t a l  S e t u p | 24 
   
+ 
+ 
  
 5.3.2 Statistical testing 
 Evaluation measures are able to show a good view of the performance of a learning scheme. 
@@ -1460,32 +1545,21 @@ same datasets are used which means that the folds are not independent. On the ot
 each fold is evaluated with a different model which results to independent measures even if 
 the data are not independent. Within cross validation folds we can assume that the errors are 
 normally distributed. One could argue that the second assumption is not satisfied because the 
- 
- E x p e r i m e n t a l S e t u p | 25 
+E x p e r i m e n t a l  S e t u p | 25 
   
  
+ 
+ 
 in-domain and out-of domain datasets are not independent however; they are evaluated by 
+independent models
 4
-independent models so the measures are independent and the test is applicable. 
+ so the measures are independent and the test is applicable. 
 Wilcoxon signed rank test: Wilcoxon signed rank test compares two algorithms over 
 multiple datasets (Demsar 2006). One example that this test has been used is to compare 
 SVM versus MNB over different feature extraction approaches. Over multiple datasets we 
 cannot assume that the errors are normally distributed, so paired t-test is not safe here. 
 Wilcoxon signed rank test is the non-parametric alternative of paired t-test which leads to 
 more robust results if its normality assumptions are violated (Demsar 2006). 
-In-domain evaluation 
-2 models 
-Paired t-test 
-1 dataset (same 
-conference) 
-Out-of domain 
-2 models 
-All problems Unpaired t-test 
-1 dataset (different 
-conference) 
-In-domain evaluation 
-2 models Wilcoxon signed rank test 
-Multiple datasets 
  
 Figure 7 Summarization of the statistical tests used in experimental section. 
 Finally, as baselines for classification problems I use the majority class and for regression the 
@@ -1503,13 +1577,29 @@ order to create the learning framework that has been used for experiments regard
 of this project. Finally, APPENDIX B summarizes the list of software adopted for this 
 project.  
  
-                                                      
+                                                     
 4
  Models trained on KDD and applied to ECML are independent of models trained on ECML and 
 tested on ECML. 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 26 
+All problems 
+In-domain evaluation 
+2 models 
+1 dataset (same 
+conference) 
+Paired t-test 
+Out-of domain 
+2 models 
+1 dataset (different 
+conference) 
+Unpaired t-test 
+In-domain evaluation 
+2 models 
+Multiple datasets 
+Wilcoxon signed rank test 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 26 
   
+ 
+ 
  
 6 Experiments and Evaluation 
 The whole experiment process has been divided into four parts. Firstly (Section 6.1), I present 
@@ -1558,60 +1648,45 @@ based on the review text. In section 6.2.2 some early experiments, using MNB, sh
 similarity between reviews with specific scores. Added to this, I tried to merge scores in order 
 to have the same number of instances to the corresponding classes between the two 
 conferences. 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 27 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 27 
   
+ 
+ 
  
 Table 4 This table shows how the reviewing scores have been merged in order to solve different learning 
 problems. KDD contains reviews with a score range from 1 to 6 while, ECML contains reviews with a score range 
 from 1 to 4. In order to avoid confusion I will refer to the scores in ECML with the letters D to A. 
  Reviews with scores  are treated as 
-(Nominal (Continuous 
-(KDD) (ECML) 
-Learning problem  
-class label) class label) 
-1,2,3 D,C  
-negative - 
-? 
+Learning problem (KDD) (ECML)  
+(Nominal 
+class label) 
+(Continuous 
+class label) 
 Binary 
-classification 4,5,6 B,A 
-positive - 
-? 
-1,2  D 
-negative 1 
-? 
+classification 
+1,2,3 D,C  ? negative - 
+4,5,6 B,A ? positive - 
 Three class 
 classification 
-3,4 C,B 
-neutral 2 
-? 
 Three-score 
-5,6 A 
 regression/ ranking 
-positive 3 
-? 
-Strong 
-1,2 D 
-1 
-? 
-negative 
+1,2  D ? negative 1 
+3,4 C,B ? neutral 2 
+5,6 A ? positive 3 
 Four class 
-3  C 
-negative 2 
-? 
 classification 
 Four-score 
-4 B 
-Weak positive 3 
-? 
 regression/ ranking 
-5,6 A 
-positive 4 
-? 
+1,2 D ? 
+Strong 
+negative 
+1 
+3  C ? negative 2 
+4 B ? Weak positive 3 
+5,6 A ? positive 4 
 Full-score 
-1 - 6 D - A - The real scores 
-? 
 regression/ ranking 
+1 - 6 D - A ? - The real scores 
  
 6.1 Feature vector construction 
 The first step of the experiment phase was to convert every review to its feature vector 
@@ -1636,9 +1711,10 @@ for every learning problem and feature set. The cardinality of vocabulary corres
 KDD. 
 It should be noted that the initial vocabulary for the 2 class problem including all unigrams is 
 equal to 15046. This number will be huge if we try to extract bigrams. However, according to 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 28 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 28 
   
+ 
+ 
  
 Table 5, if we remove words that occur less than two times per class then the vocabulary 
 reduces to 4235 words. These simple methods lead to a vocabulary size which is reasonable 
@@ -1650,40 +1726,42 @@ that all of the reviews have initially ran through different parsers as discusse
 and after that preprocessing techniques have been applied as the parsers are sensitive to some 
 techniques like stemming.  
 Table 5 The number of infrequent words removed per learning problem and per feature set. 
+Learning 
+problem 
+unigrams or unigrams with 
+POS tags 
 bigrams or 
-Learning unigrams or unigrams with Stanford 
 bigrams with POS 
-problem POS tags dependencies 
 tags 
-k value for 2 class  2 4 2 
+Stanford 
+dependencies 
+k value for 2 class  
 Vocabulary size 
+2 4 2 
 4235 8850 21248 
 k value for 3 
-2  2 2 
 classes /scores 
+Vocabulary size 
+2  2 2 
 4097  23554 19417 
-Vocabulary size 
 k value for 4 
-2  2 2 
 classes /scores 
-4129 24081 20064 
 Vocabulary size 
+2  2 2 
+4129 24081 20064 
 6.1.2 Feature vector representation 
 In section 2.3 I referred different ways of representing the data space. The conclusion was that 
 the most suitable depends both on the machine learning algorithm and on the dataset. The 
 data representation, chosen for this project, is the term frequency. According to the formula 
 below, each feature is represented by a weight based on its relative frequency in the 
 document, normalized by the length of the document.  
-                                  
-          
+               
+            
+           
   
-  
-                 
+                                    
                               
-          
- 
-                        
- 
+                         
  
 Frequency term representation was chosen after experiments among different feature vector 
 representations: Term presence, Term Frequency times Inverse Document Frequency (TF-
@@ -1702,9 +1780,10 @@ ECML would be better described by different representations. However, for this w
 this strategy different ways could be investigated in the future. 
 A final observation here is the low performance of SMO, which is opposite to what one 
 would expect based on the findings of other researchers. The problem is that default 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 29 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 29 
   
+ 
+ 
  
 parameters have been used which are suboptimal. Parameter tuning is really essential for 
 SVM and it has been taken into consideration during the next experiments. 
@@ -1753,41 +1832,15 @@ and sometimes reduces it. The number of k depends on the learning algorithm and 
 feature set. Furthermore, feature space reduction is mainly performed to decrease the time 
 complexity. There were not time performance issues as the feature space was quiet small and 
 the algorithms could be trained and tested very fast. Finally, SMO is a classifier known to be 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 30 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 30 
   
+ 
+ 
  
 robust with high dimensions. For these reasons, machine learning algorithms were left to take 
 care of the whole feature space. 
-68.00% 
-67.00% 
-66.00% 
-65.00% 
-64.00% 
-63.00% 
-62.00% 
-61.00% 
-KDDtoKDD KDDtoECML 
-60.00% 
-59.00% 
-500 1000 2000 3000 default 500 1000 2000 3000 default 
-MNB SMO 
-UNIGRAMS 
  
 Figure 8 Accuracy percentage for different cutoffs of unigrams with the highest information gain. 
-69.00% 
-68.00% 
-67.00% 
-66.00% 
-65.00% 
-64.00% 
-63.00% 
-62.00% 
-61.00% 
-KDDtoKDD KDDtoECML 
-60.00% 
-MNB SMO 
-BIGRAMS 
  
 Figure 9 Accuracy percentage of different cutoffs of bigrams with the highest information gain. 
 6.2 Corpus annotation 
@@ -1800,27 +1853,131 @@ difficult opinion extraction from reviews of research papers is. Last but not le
 Kim et al. (2006) different classes of features are analyzed that are most possible to capture 
 opinions like structural (number tags, review length), lexical (n-grams), syntactic  (Pos, 
 percentage of verbs and nouns, Stanford dependencies) and sentiment (terms with their 
+59.00% 
+60.00% 
+61.00% 
+62.00% 
+63.00% 
+64.00% 
+65.00% 
+66.00% 
+67.00% 
+68.00% 
+500 1000 2000 3000 default 500 1000 2000 3000 default 
+MNB SMO 
+UNIGRAMS 
+A
+cc
+u
+ra
+cy
+ %
  
+KDDtoKDD KDDtoECML 
+60.00% 
+61.00% 
+62.00% 
+63.00% 
+64.00% 
+65.00% 
+66.00% 
+67.00% 
+68.00% 
+69.00% 
+1
+0
+0
+0
  
-Accuracy % 
-Accuracy % 
-1000 
-2000 
-3000 
-4000 
-5000 
-6000 
-7000 
-default 
-1000 
-2000 
-3000 
-4000 
-5000 
-6000 
-7000 
-default E x p e r i m e n t s a n d E v a l u a t i o n | 31 
+2
+0
+0
+0
+ 
+3
+0
+0
+0
+ 
+4
+0
+0
+0
+ 
+5
+0
+0
+0
+ 
+6
+0
+0
+0
+ 
+7
+0
+0
+0
+ 
+d
+ef
+au
+lt
+ 
+1
+0
+0
+0
+ 
+2
+0
+0
+0
+ 
+3
+0
+0
+0
+ 
+4
+0
+0
+0
+ 
+5
+0
+0
+0
+ 
+6
+0
+0
+0
+ 
+7
+0
+0
+0
+ 
+d
+ef
+au
+lt
+ 
+MNB SMO 
+BIGRAMS 
+A
+cc
+u
+ra
+cy
+ %
+ 
+KDDtoKDD KDDtoECML 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 31 
   
+ 
+ 
  
 polarity). The outcomes resulted to the final decision about the feature sets that have been 
 preferred in the next section. 
@@ -1849,25 +2006,24 @@ increases.
 Table 7 Statistical results regarding reviews from research papers submitted to KDD. 
 SCORE 1 2 3 4 5 6 Av  ag ｱSTD  
 Review length 212.84 231.47 213.55 197.62 163.93 155.36 195.80ｱ30.11  
-5.95% 6.56% 6.85% 6.95% 7.51% 8.01% 6.97ｱ0.72%  
-adjectives 
+adjectives 5.95% 6.56% 6.85% 6.95% 7.51% 8.01% 6.97ｱ0.72%  
 adverbs 6.52% 7.02% 6.93% 6.57% 6.36% 6.50% 6.65ｱ0.26%  
-14.41% 14.00% 14.20% 13.99% 13.19% 12.84% 13.77ｱ0.62%  
-verbs 
+verbs 14.41% 14.00% 14.20% 13.99% 13.19% 12.84% 13.77ｱ0.62%  
 nouns 19.54% 21.11% 21.05% 20.60% 20.72% 19.69% 20.45ｱ0.68%  
 overstatements 3.52% 3.87% 3.73% 3.48% 3.49% 3.15% 3.54ｱ0.25%  
 understatements 2.85% 2.62% 2.75% 2.81% 2.89% 2.13% 2.68ｱ0.28%  
-1.81% 2.22% 2.42% 2.44% 2.18% 2.48% 2.26ｱ0.25%  
-numbers 
+numbers 1.81% 2.22% 2.42% 2.44% 2.18% 2.48% 2.26ｱ0.25%  
+polarity
 5
-polarity -0.15 0.23 0.33 0.41 0.65 1.22 -  
+ -0.15 0.23 0.33 0.41 0.65 1.22 -  
  
-                                                      
+                                                     
 5
  SentiWordNet lexicon has been used in order to assign a polarity value to each review. 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 32 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 32 
   
+ 
+ 
  
 Table 8 Statistical results regarding reviews from research papers submitted to ECML. 
 SCORE D C B A AverageｱSTD 
@@ -1879,39 +2035,10 @@ nouns 21.74% 21.57% 21.43% 21.49% 21.56ｱ0.13%
 overstatements 3.59% 3.67% 3.62% 3.97% 3.71ｱ0.17% 
 understatements 2.58% 2.93% 2.90% 2.42% 2.71ｱ0.25% 
 numbers 2.19% 2.32% 2.08% 1.59% 2.05ｱ0.32% 
+polarity
 5
-polarity 0.28 0.62 1.07 1.12 - 
+ 0.28 0.62 1.07 1.12 - 
  
-ECML 
-KDD 
-adverbs 
-adverbs 
-7.1% 
-6.7% 
-adjectives 
-adjectives 
-7.4% 
-7.0% 
-other 
-other 
-verbs 
-verbs 
-41.8% 
-43.7% 
-13.8% 
-13.7% 
-nouns 
-nouns 
-20.5% 
-21.6% 
-numbers 
-numbers 
-2.3% 
-2.1% 
-OVST 
-UNDR UNDR OVST 
-3.5% 
-2.7% 2.7% 3.7% 
  
 Figure 10 Statistical results per conference. 
 6.2.2 Simpler problems 
@@ -1931,9 +2058,44 @@ reviews with scores 3,4 have been excluded. Similarly, for ECML D, C are treated
 and B, A as positive. The rest of the columns show the performance of every model when 
 evaluated on different domains (columns with labels KDDtoKDD, KDDtoECML, 
 ECMLtoECML, ECMLtoKDD). Finally, columns with the R label rank the models according 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 33 
+adjectives 
+7.4% 
+adverbs 
+7.1% 
+verbs 
+13.7% 
+nouns 
+21.6% 
+OVST 
+3.7% 
+UNDR 
+2.7% 
+numbers 
+2.1% 
+other 
+41.8% 
+ECML 
+adjectives 
+7.0% 
+adverbs 
+6.7% 
+verbs 
+13.8% 
+nouns 
+20.5% 
+OVST 
+3.5% 
+UNDR 
+2.7% 
+numbers 
+2.3% 
+other 
+43.7% 
+KDD 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 33 
   
+ 
+ 
  
 to their performance within the corresponding domain. The reader can refer to this column in 
 order to find easier the more or less difficult problems. 
@@ -1947,39 +2109,51 @@ MNB with unigrams successfully classifies the reviews to the two categories and 
 versus 4 and C versus B, which reaches the last position in the rank. 
 Table 9. Results regarding different kinds of problems. Percentage of accuracy and rank of the different problems 
 when MNB is trained using unigrams or bigrams and evaluated on each conferences combination.  
-KDD to KDD to ECML to ECML to 
-model R R R R 
-KDD ECML ECML KDD 
+model 
+KDD to 
+KDD 
+R 
+KDD to 
+ECML 
+R 
+ECML to 
+ECML 
+R 
+ECML to 
+KDD 
+R 
 Bigrams 12vs56 
+(DCvsBA) 
 73.6% 5.5 65.89% 6.0 69.93% 6.0 72.86% 5.0 
-(DCvsBA) 
 Bigrams 12vs56 
+(DvsA) 
 73.6% 5.5 81.81% 1.0 81.65% 2.5 74.13% 1.0 
-(DvsA) 
 Bigrams 1vs6 
+(DvsA) 
 75.22% 2.0 79.35% 2.0 81.65% 2.5 73.16% 4.0 
-(DvsA) 
 Bigrams 3vs4 
+(CvsB) 
 57.96% 9.0 58.09% 9.0 62.67% 9.0 58.52% 10.0 
-(CvsB) 
 Unigrams 12vs56 
+(DCvsBA) 
 74.15% 3.5 63.0% 8.0 70.09% 5.0 72.1% 6.0 
-(DCvsBA) 
 Unigrams 12vs56 
+(DvsA) 
 74.15% 3.5 78.01% 3.0 81.65% 2.5 73.69% 2.0 
-(DvsA) 
 Unigrams 1vs6 
-75.49% 1.0 77.26% 4.0 81.65% 2.5 73.31% 3.0 
 (DvsA) 
+75.49% 1.0 77.26% 4.0 81.65% 2.5 73.31% 3.0 
 Unigrams 3vs4 
-57.74% 10.0 56.84% 10.0 58.14% 10.0 58.92% 9.0 
 (CvsB) 
+57.74% 10.0 56.84% 10.0 58.14% 10.0 58.92% 9.0 
 Bigrams 
-123vs456 67.62% 7.0 66.5% 5.0 65.52% 8.0 69.93% 8.0 
+123vs456 
 (DCvsBA) 
+67.62% 7.0 66.5% 5.0 65.52% 8.0 69.93% 8.0 
 Unigrams 
-123vs456 65.94% 8.0 64.76% 7.0 66.01% 7.0 70.09% 7.0 
+123vs456 
 (DCvsBA) 
+65.94% 8.0 64.76% 7.0 66.01% 7.0 70.09% 7.0 
  
 Regarding the out-of domain evaluation, the highest accuracy corresponds to the model 
 trained using bigrams and reviews with scores 12vs56 and applied to reviews with scores 
@@ -1997,9 +2171,10 @@ reviews with score 1 do not correspond to reviews with score D and reviews with 
 not correspond to reviews with score A.  
 Finally, the outcomes show that ECML can easier been learned compared to KDD. Accuracy, 
 achieved by the models when they are trained and evaluated on ECML is higher compared to 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 34 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 34 
   
+ 
+ 
  
 KDD for all of the problems examined in this section. However, this outcome is further 
 investigated in the next section. 
@@ -2041,77 +2216,121 @@ While different patterns capture different amounts of opinions the analysis of t
 shows that using the whole review annotated by the POS or Stanford dependencies gives 
 more information than isolated patterns. This observation resulted to the final decision about 
 the feature sets that have been preferred in the next section. 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 35 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 35 
   
  
-In-domain POS 
-0 
-BigramsPOS UnigramsPOS 
-2 
-JJ RB 
-4 
-NN 
-VB_NN 
-RB_VB 
-6 
-VB 
-PRP_NN 
-8 
-10 
-VB_RB 
-JJ_NN 
-RB_JJ 
-12 
-NN_RB 
-14 
+ 
+ 
  
 Figure 11 Ranking of the POS that are more likely to capture opinions when evaluated within the same domain 
 (KDDtoKDD or ECMLtoECML). 
-Out-of domain POS 
-0 
-BigramsPOS UnigramsPOS 
-2 
-JJ 
-4 
-RB_VB RB 
-PRP_NN 
-VB_NN 
-6 
-8 RB_JJ 
-VB 
-VB_RB 
-10 
-JJ_NN NN 
-12 
-NN_RB 
-14 
  
 Figure 12 Ranking of the POS that are more likely to capture opinions when source and target domain are different 
 (KDDtoECML or ECMLtoKDD). 
-In-domain Stanford dependencies Out-of domain dependencies 
-0 0 
-SDep SDep 
-1 1 
-MOD MOD 
-2 2 
-SUBJ SUBJ 
-3 3 
-NEG NEG 
-COMP COMP 
-4 4 
-5 5 
  
 Figure 13 Stanford dependencies that are more likely to capture opinions when evaluated within the same domain 
 (left figure) when source and target domain are different (right figure). 
+BigramsPOS 
+JJ_NN 
+NN_RB 
+PRP_NN 
+RB_JJ 
+RB_VB 
+VB_NN 
+VB_RB 
+UnigramsPOS 
+JJ 
+NN 
+RB 
+VB 
+0 
+2 
+4 
+6 
+8 
+10 
+12 
+14 
+A
+ve
+ra
+ge
+ r
+an
+k 
+In-domain POS 
+BigramsPOS 
+JJ_NN 
+NN_RB 
+PRP_NN 
+RB_JJ 
+RB_VB 
+VB_NN 
+VB_RB 
+UnigramsPOS 
+JJ 
+NN 
+RB 
+VB 
+0 
+2 
+4 
+6 
+8 
+10 
+12 
+14 
+A
+ve
+ra
+ge
+ r
+an
+k 
+Out-of domain POS 
+SDep 
+COMP 
+MOD 
+NEG 
+SUBJ 
+0 
+1 
+2 
+3 
+4 
+5 
+A
+ve
+ra
+ge
+ r
+an
+k 
  
- 
-Average rank 
- 
-Average rank 
-Average rank 
-Average rank E x p e r i m e n t s a n d E v a l u a t i o n | 36 
+In-domain Stanford dependencies 
+SDep 
+COMP 
+MOD 
+NEG 
+SUBJ 
+0 
+1 
+2 
+3 
+4 
+5 
+A
+ve
+ra
+ge
+ r
+an
+k 
+Out-of domain dependencies 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 36 
   
+ 
+ 
  
 6.3 Extract opinions, apply transfer learning 
 In this section machine learning algorithms have been trained and evaluated, using different 
@@ -2161,9 +2380,10 @@ ECMLtoKDD). Finally, columns with the R label rank the models according to their
 performance within the corresponding domain. The reader can refer to this column in order to 
 find easier the more or less competitive models. APPENDIX F contains results from different 
 statistical tests that have been performed during this section. 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 37 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 37 
   
+ 
+ 
  
 6.3.1 Classification 
 The first problem under investigation is the opinion classification. Different algorithms using 
@@ -2206,20 +2426,22 @@ Sdep is the only model that can be transferred on both directions. At the same t
 models that can be applied from KDD to ECML but not the opposite (from ECML to KDD) 
 and vice versa. Finally, SMO could never been transferred independent of the feature set. 
 Regarding the two learning algorithms, MNB and SMO perform equally within the same 
+domain if averaged over all feature sets
 6
-domain if averaged over all feature sets . Furthermore, regarding the feature sets, for KDD 
+. Furthermore, regarding the feature sets, for KDD 
 any feature set that consists of pairs of words (tagged with more information or not) 
 outperform those that consist of isolated words. On the contrary, in-domain evaluation for 
 ECML reveals that models perform similarly independent of the feature set. For example, 
 feature sets of valence shifters do not really capture more opinions compared to extracting 
-                                                      
+                                                     
 6
  I performed the Wilcoxon signed ranks test between these two algorithms. The test gave a p-value 
 higher than 0.05, indicating not a significant difference with 95% certainty. (p-value for KDD = 
 0.5781, p-value for ECML = 0.1094) 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 38 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 38 
   
+ 
+ 
  
 simple Unigrams or Bigrams.  Across domains sometimes Bigrams-pos and sometimes 
 Stanford dependencies capture more opinions. However, the only feature set that could be 
@@ -2259,21 +2481,20 @@ m4 67.99ｱ3.05% 1.0 66.54ｱ0.45% 2.0 69.45ｱ4.35% 3.0 66.77ｱ0.48% 1.0
 m5 66.19ｱ3.26% 10.0 64.37ｱ0.52% 9.0 68.65ｱ2.41% 6.0 65.18ｱ0.36% 4.0 
 m6 66.31ｱ4.02% 9.0 63.38ｱ0.55% 14.0 67.28ｱ2.24% 12.5 64.84ｱ0.44% 6.0 
 m7 67.62ｱ2.95% 3.0 66.5ｱ0.55% 3.0 69.93ｱ4.24% 2.0 65.52ｱ0.77% 3.0 
-65.94ｱ4.0% 12.0 64.76ｱ0.74% 6.0 70.09ｱ2.47% 1.0 66.01ｱ0.63% 2.0 
-m8 
+m8 65.94ｱ4.0% 12.0 64.76ｱ0.74% 6.0 70.09ｱ2.47% 1.0 66.01ｱ0.63% 2.0 
 m9 66.75ｱ2.29% 6.5 64.07ｱ0.94% 11.0 67.28ｱ3.67% 12.5 63.83ｱ0.41% 11.0 
 m10 66.13ｱ3.63% 11.0 63.52ｱ0.73% 12.0 66.89ｱ4.19% 14.0 63.37ｱ0.39% 13.0 
 m11 65.63ｱ2.11% 13.5 64.59ｱ0.65% 7.0 68.01ｱ4.06% 11.0 63.95ｱ0.7% 9.0 
 m12 66.75ｱ2.58% 6.5 64.87ｱ0.84% 5.0 69.21ｱ4.55% 4.0 63.93ｱ0.78% 10.0 
-66.69ｱ2.15% 8.0 64.42ｱ1.03% 8.0 68.65ｱ4.02% 6.0 62.76ｱ0.4% 15.0 
-m13 
+m13 66.69ｱ2.15% 8.0 64.42ｱ1.03% 8.0 68.65ｱ4.02% 6.0 62.76ｱ0.4% 15.0 
 m14 67.8ｱ3.32% 2.0 63.47ｱ0.66% 13.0 68.32ｱ4.04% 8.0 65.08ｱ0.85% 5.0 
 m15 65.63ｱ4.39% 13.5 64.12ｱ0.89% 10.0 68.24ｱ3.25% 9.5 62.95ｱ0.64% 14.0 
  
  
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 39 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 39 
   
+ 
+ 
  
 Three-class classification 
 The next step was to classify the reviews into three different categories, negative, neutral and 
@@ -2324,9 +2545,10 @@ mind that the models probably have been affected by the fact that the classes ar
 In the future it would be interesting to investigate if this is a problem. A useful source of 
 information can be found in Chawla et al. (2004) where numerous methods that deal with the 
 imbalance-class problem are summarized. 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 40 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 40 
   
+ 
+ 
  
 To sum up, three class classification is a more difficult problem compared to binary 
 classification. This is obvious by the lowest accuracy of all models and also by the fact that 
@@ -2339,35 +2561,28 @@ model KDDtoKDD R KDDtoECML R ECMLtoECML R ECMLtoKDD R
 m1 54.9ｱ0.36% 13.0 68.97ｱ0.0% 1.0 68.97ｱ0.27% 8.5 54.9ｱ0.0% 13.0 
 m2 55.27ｱ3.54% 10.0 68.2ｱ0.51% 2.5 69.05ｱ0.98% 6.5? 54.47ｱ0.25% 15.0 
 m3 55.52ｱ4.48% 9.0 68.2ｱ0.53% 2.5 69.37ｱ0.45% 4.5? 54.85ｱ0.23% 14.0 
-55.15ｱ2.11% 11.0 66.29ｱ0.38% 8.0 68.17ｱ1.66% 14.5 55.47ｱ0.37% 9.0 
-m4 
+m4 55.15ｱ2.11% 11.0 66.29ｱ0.38% 8.0 68.17ｱ1.66% 14.5 55.47ｱ0.37% 9.0 
 m5 57.13ｱ2.97% 2.0 67.47ｱ0.75% 5.0 69.05ｱ1.46% 6.5? 55.67ｱ0.34% 8.0 
 m6 57.07ｱ2.9% 3.0 67.11ｱ0.76% 7.0 69.61ｱ1.22% 2.5? 55.43ｱ0.38% 11.0 
 m7 55.58ｱ2.53% 8.0 68.15ｱ0.25% 4.0 69.37ｱ1.49% 4.5? 54.93ｱ0.31% 12.0 
 m8 56.01ｱ3.13% 5.0 67.19ｱ0.27% 6.0 70.17ｱ2.39% 1.0? 55.73ｱ0.36% 7.0 
 m9 54.96ｱ3.05% 12.0 62.62ｱ0.87% 13.0 69.61ｱ2.56% 2.5? 55.93ｱ0.38% 5.0 
-54.4ｱ3.52% 14.0 62.37ｱ0.88% 14.0 68.57ｱ2.32% 11.0 55.91ｱ0.4% 6.0 
-m10 
+m10 54.4ｱ3.52% 14.0 62.37ｱ0.88% 14.0 68.57ｱ2.32% 11.0 55.91ｱ0.4% 6.0 
 m11 53.72ｱ2.4% 15.0 60.58ｱ0.86% 15.0 68.41ｱ2.18% 12.0 55.44ｱ0.39% 10.0 
 m12 55.71ｱ2.55% 7.0 63.64ｱ0.66% 10.0 68.97ｱ2.18% 8.5? 56.9ｱ0.52% 1.0 
 m13 55.77ｱ2.63% 6.0 63.1ｱ0.75% 11.0 68.17ｱ2.17% 14.5 56.0ｱ0.22% 3.0 
-56.27ｱ3.14% 4.0 62.85ｱ0.61% 12.0 68.33ｱ2.63% 13.0 55.99ｱ0.29% 4.0 
-m14 
-57.94ｱ3.21% 1.0 65.53ｱ0.88% 9.0 68.72ｱ1.97% 10.0 56.4ｱ0.29% 2.0 
-m15 
+m14 56.27ｱ3.14% 4.0 62.85ｱ0.61% 12.0 68.33ｱ2.63% 13.0 55.99ｱ0.29% 4.0 
+m15 57.94ｱ3.21% 1.0 65.53ｱ0.88% 9.0 68.72ｱ1.97% 10.0 56.4ｱ0.29% 2.0 
  
 Table 13 Confusion matrix for model m15 when trained and evaluated on KDD. 
 a b c ? classified as 
-188.0 325.0 1.0 
-a = Negative 
-137.0 740.0 8.0 
-b = Neutral 
+188.0 325.0 1.0 a = Negative 
+137.0 740.0 8.0 b = Neutral 
 32.0 175.0 6.0 c = Positive 
  
 Table 14 Confusion matrix for model m8 when trained and evaluated on ECML. 
 a b c ? classified as 
-45.0 251.0 0.0 
-a = Negative 
+45.0 251.0 0.0 a = Negative 
 29.0 830.0 1.0 b = Neutral 
 2.0 89.0 0.0 c = Positive 
  
@@ -2381,9 +2596,10 @@ predict all of the classes. Similar to the previous problem models m2, 3, 5, 6, 
 to classify reviews that belong to the strong positive class (the weighted recall is equal to 
 zero). Regardless of these models, learning the four-class classification problem is possible 
 for both conferences. 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 41 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 41 
   
+ 
+ 
  
 When we apply the models from KDD to ECML only four models perform better than the 
 baseline. The best models is MNB-Bigrams, which can apply transfer learning, in contrast to 
@@ -2424,9 +2640,10 @@ accuracy (40.63ｱ2.76%), and this is statistically significant compared to some o
 competing models, but not all. Within ECML, SMO-BigramsPOS reaches the highest 
 accuracy (46.43ｱ4.32%). Transfer learning is possible only from KDD to ECML and the only 
 model that could be transferred was MNB-Bigrams. 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 42 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 42 
   
+ 
+ 
  
 Table 15 Results regarding the four-class classification problem. Percentage of accuracy and rank of the competing 
 models when trained and evaluated on each conferences combination 
@@ -2452,23 +2669,18 @@ a b c d ?classified as
 279.0 188.0 30.0 17.0 a = Strong negative 
 167.0 306.0 35.0 22.0 b = Negative 
 105.0 190.0 48.0 12.0 c = Positive 
-60.0 94.0 37.0 22.0 
-d = Strong positive 
+60.0 94.0 37.0 22.0 d = Strong positive 
  
 Table 17 Confusion matrix for model m4 when trained on ECML and evaluated on KDD. 
 a b c d ?classified as 
-71.0 342.0 100.0 1.0 
-a = Strong negative 
+71.0 342.0 100.0 1.0 a = Strong negative 
 39.0 350.0 140.0 1.0 b = Negative 
 15.0 227.0 113.0 0.0 c = Positive 
-12.0 106.0 91.0 4.0 d = Strong positive 
-  
+12.0 106.0 91.0 4.0 d = Strong positive   
 Table 18 Confusion matrix for model m9 when trained and evaluated ECML. 
 a b c d ?classified as 
-88.0 163.0 45.0 0.0 
-a=Strong negative 
-64.0 302.0 107.0 0.0 
-b = Negative 
+88.0 163.0 45.0 0.0 a=Strong negative 
+64.0 302.0 107.0 0.0 b = Negative 
 24.0 174.0 188.0 1.0 c = Positive 
 4.0 38.0 48.0 1.0 d = Strong positive 
  
@@ -2476,15 +2688,14 @@ Table 19 Confusion matrix for model m7 when trained on KDD and evaluated on ECML
 a b c d ?classified as 
 158.0 133.0 5.0 0.0 a = Strong negative 
 189.0 266.0 18.0 0.0 b = Negative 
-137.0 210.0 33.0 7.0 
-c = Positive 
-27.0 44.0 13.0 7.0 
-d = Strong positive 
+137.0 210.0 33.0 7.0 c = Positive 
+27.0 44.0 13.0 7.0 d = Strong positive 
  
  
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 43 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 43 
   
+ 
+ 
  
 6.3.2 Regression 
 For this learning problem I trained four different regression algorithms for each domain, using 
@@ -2534,9 +2745,10 @@ corresponding models, which are trained and evaluated within the same domain. Th
 difference has been calculated as statistically significant. Even if we use regression models 
 for predicting numerical scores, there still the need of having the same score range between 
 the two conferences.  
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 44 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 44 
   
+ 
+ 
  
 Experiments performed by Pang & Lee (2006b) show that for the three-score regression 
 problem classifiers perform better than regression models and as far as the number of classes 
@@ -2576,8 +2788,9 @@ SMOreg - Bigrams are able to perform equally well. On the other hand, AR ﾐ 1000U
 shows the best performance regarding the out-of domain evaluation but can this model really 
 been applied to a different domain? Two-tailed t-test returns a p-value bigger than 0.05 
 independent of the direction that transfer learning is applied only when the two conferences 
+have the same score-range
 7
-have the same score-range . As a result, the difference between the in-domain and out-of 
+. As a result, the difference between the in-domain and out-of 
 domain evaluation is not statistically significant and the model successfully applies transfer 
 learning. 
 To sum up, similar to classification regression reveals that ECML is an easier conference to 
@@ -2587,13 +2800,14 @@ the findings, we did not conclude to a specific model that can be used for in-do
 of domain learning and achieves the best performance for the both cases. My 
 recommendation would be to use SMOrbf ﾐ Unigrams in order to learn within the same 
 domain and AR ﾐ Unigrams in order to apply transfer learning to different domains. In the 
-                                                      
+                                                     
 7
  AR - 1000Unigrams for four-score range: unpaired t-test between KDDtoECML and ECMLtoECML 
 p-value = 0.08360, ECMLtoKDD and KDDtoKDD p-value = 0.39396. 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 45 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 45 
   
+ 
+ 
  
 latter case, it should be considered that neither the source nor the target domain will reach the 
 best possible performance but the performance will be equal to the performance if each of 
@@ -2602,29 +2816,33 @@ problem of having the same score range between the two conferences in order to b
 apply transfer learning. Models trained and evaluated by using the full score for both 
 conferences completely fail to be applied to a different domain. 
 Table 20 Machine learning algorithms and feature set combinations regarding the regression problem. 
-Model id 
-Model 
-m1 
-Baseline ﾐ mean score 
+Model id Model 
+m1 Baseline ﾐ mean score 
 m2 AR - 1000Bigrams 
-m3 
-AR - 1000Unigrams 
+m3 AR - 1000Unigrams 
 m4 Bag - 1000Bigrams 
-m5 
-Bag - 1000Unigrams 
+m5 Bag - 1000Unigrams 
 m6 SMOreg - Bigrams 
-m7 
-SMOrbf - Bigrams 
+m7 SMOrbf - Bigrams 
 m8 SMOrbf - Unigrams 
-m9 
-SMOreg - Unigrams 
+m9 SMOreg - Unigrams 
  
 Table 21 In-domain evaluation regarding the regression problem. Rank and average rank based on the macroMAE 
 of the competing models when trained and evaluated within the same conference for different regression sub-
 problems. 
-3KDD 3ECML 4KDD 4ECML 6KDD Average 
 model 
-toKDD toECML toKDD toECML toKDD rank 
+3KDD 
+toKDD 
+3ECML 
+toECML 
+4KDD 
+toKDD 
+4ECML 
+toECML 
+6KDD 
+toKDD 
+Average 
+rank 
 m1 9.0 9.0 9.0 9.0 9.0 9 
 m2 8.0 8.0 8.0 6.0 8.0 7.6 
 m3 7.0 3.0 2.0 3.0 1.0 3.2 
@@ -2638,9 +2856,21 @@ m9 1.0 4.0 7.0 2.0 5.0 3.8
 Table 22 Out-of domain evaluation regarding the regression problem. Rank and average rank based on the 
 macroMAE of the competing models when trained on one conference and evaluated on a different conference for 
 different regression sub-problems. 
-3KDDto 3ECMLto 4KDDto 4ECMLto 6KDDto 6ECMLto Average  
 model 
-ECML KDD ECML KDD ECML KDD rank 
+3KDDto 
+ECML 
+3ECMLto 
+KDD 
+4KDDto 
+ECML 
+4ECMLto 
+KDD 
+6KDDto 
+ECML 
+6ECMLto 
+KDD 
+Average  
+rank 
 m1 9.0 9.0 9.0 9.0 9.0 9.0 9.0 
 m2 7.0 6.0 7.0 8.0 8.0 2.0 6.3 
 m3 1.0 3.0 1.0 5.0 6.0 1.0 2.8 
@@ -2652,9 +2882,10 @@ m8 2.0 5.0 3.0 3.0 2.0 5.0 3.3
 m9 3.0 2.0 4.0 2.0 1.0 6.0 3.0 
  
  
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 46 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 46 
   
+ 
+ 
  
 6.3.3 Ranking 
 Predicting review scores from reviews of research papers is not really required and is not 
@@ -2705,9 +2936,10 @@ trained for suboptimal parameters. More specifically, the neural network was tra
 fewer rounds and hidden nodes compared to the recommended (Burges et al. 2005). 
 Unfortunately, the fact that it is time consuming to train neural networks and the limitation of 
 time did not give the opportunity to optimize its parameters. 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 47 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 47 
   
+ 
+ 
  
 SMOreg ﾐ Unigrams presents the best performance both regarding the in-domain evaluation 
 and the out-of domain evaluation. But is this model statistically significant compared to the 
@@ -2728,31 +2960,47 @@ Table 23 Machine learning algorithms and feature set combinations regarding the 
 Model id Model 
 m1 AR - 1000Unigrams 
 m2 MNB - Unigrams 
-m3 
-RN - 1000Unigrams 
-m4 
-SMOreg - Unigrams 
+m3 RN - 1000Unigrams 
+m4 SMOreg - Unigrams 
  
 Table 24 In-domain evaluation regarding the ranking problem. Rank and average rank based on the rank error of 
 the competing models when trained and evaluated within the same conference for different ranking sub-problems. 
-3KDDto 3ECMLto 4KDDto 4ECMLto 6KDDto Average 
 model 
-KDD ECML KDD ECML KDD rank 
-3.0 3.0 3.0 3.0 2.0 2.8 
-m1 
-1.0 1.0 2.0 2.0 3.0 1.8 
-m2 
-4.0 4.0 4.0 4.0 4.0 4.0 
-m3 
-2.0 2.0 1.0 1.0 1.0 1.4 
-m4 
+3KDDto 
+KDD 
+3ECMLto 
+ECML 
+4KDDto 
+KDD 
+4ECMLto 
+ECML 
+6KDDto 
+KDD 
+Average 
+rank 
+m1 3.0 3.0 3.0 3.0 2.0 2.8 
+m2 1.0 1.0 2.0 2.0 3.0 1.8 
+m3 4.0 4.0 4.0 4.0 4.0 4.0 
+m4 2.0 2.0 1.0 1.0 1.0 1.4 
  
 Table 25 Out-of domain evaluation regarding the regression problem. Rank and average rank based on the rank 
 error of the competing models when trained on one conference and evaluated on a different conference for 
 different ranking sub-problems. 
-3KDDto 3ECMLto 4KDDto 4ECMLto 6KDDto 6ECMLto Average 
 model 
-ECML KDD ECML KDD ECML KDD rank 
+3KDDto 
+ECML 
+3ECMLto 
+KDD 
+4KDDto 
+ECML 
+4ECMLto 
+KDD 
+6KDDto 
+ECML 
+6ECMLto 
+KDD 
+Average 
+rank 
 m1 3.0 2.0 3.0 2.0 2.0 2.0 2.3 
 m2 2.0 3.0 2.0 3.0 3.0 3.0 2.7 
 m3 4.0 4.0 4.0 4.0 4.0 4.0 4.0 
@@ -2764,9 +3012,10 @@ solve, transfer and compare three different learning problems: classification, r
 ranking. The analysis of the results revealed the best model per learning problem. However, 
 before we are able to find these models we came across with many different categories of 
 them like models that could not learn the problem but could be applied to a different domain 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 48 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 48 
   
+ 
+ 
  
 and models that could not be applied to a different domain but could learn the problem within 
 a specific domain. 
@@ -2787,24 +3036,18 @@ measure proposed by Tan et al. (2009) in order to extract generalized features. 
 the methods in Transfer learning area focus on finding generalized features between the 
 different domains and they develop methods that use these features. 
 Frequently Co-occurring Entropy is formalized as: 
+            
+                 
+                    
+        
+              
+      
+         
+             
                
-  
-                
-    
-                  
-  
-      
-     
-    
-  
-                     
-      
-      
-       
-                                                                                     
+                                                                                  
 In this formula n is referred to the new domain and o is referred to the old domain. So, 
-                are the probabilities of the word in the old and in the new domain 
-  
+                  are the probabilities of the word in the old and in the new domain 
 respectively. This measure returns words that occur frequently between the two domains and 
 at the same time they have similar occurring probability. The measure can be used without 
 need of having labeled data for the target domain.  
@@ -2824,21 +3067,11 @@ that could not be transferred now present improved performance. On the other han
 that could be transferred perform worse.  
 More experiments are needed but these first results indicate that simple techniques from 
 Transfer Learning area can be useful in order to transfer models that could not be transferred. 
- 
- E x p e r i m e n t s a n d E v a l u a t i o n | 49 
+E x p e r i m e n t s  a n d  E v a l u a t i o n | 49 
   
  
-72.00% 
-70.00% 
-68.00% 
-66.00% 
-64.00% 
-62.00% 
-60.00% 
-KDDtoKDD KDDtoECML ECMLtoECML ECMLtoKDD 
-58.00% 
-500 1000 2000 CW default 500 1000 2000 CW default 
-MNB2 Unigrams SMO2 Unigrams 
+ 
+ 
  
 Figure 14 Accuracy percentage of different cutoffs of unigrams with the highest frequently co-occurring entropy. 
 This is a binary classification problem, reviews that have been rejected/accepted are treated as negative/positive.  
@@ -2850,10 +3083,27 @@ led to recommendations about the best models within and across domains. The next
 summarizes the outcomes, the most interesting similarities between the two conferences and 
 further interprets some observations. 
  
+58.00% 
+60.00% 
+62.00% 
+64.00% 
+66.00% 
+68.00% 
+70.00% 
+72.00% 
+500 1000 2000 CW default 500 1000 2000 CW default 
+MNB2 Unigrams SMO2 Unigrams 
+A
+cc
+u
+ra
+cy
  
- 
-Accuracy D i s c u s s i o n | 50 
+KDDtoKDD KDDtoECML ECMLtoECML ECMLtoKDD 
+D i s c u s s i o n | 50 
   
+ 
+ 
  
 7 Discussion 
 In the previous section I have examined various methods that can solve and transfer the three 
@@ -2904,9 +3154,10 @@ specifically, all models failed to learn the three-class classification problem 
 reviews from ECML. Confusion matrices showed that the problem is mainly between the 
 adjacent classes. The most of the predictions converge to the mean scores. Two assumptions 
 have been made here regarding the algorithms:  
- 
- D i s c u s s i o n | 51 
+D i s c u s s i o n | 51 
   
+ 
+ 
  
 1) The learning algorithms are affected by the majority class. This is known in the 
 bibliography as the imbalanced dataset problem, for which various methods have 
@@ -2958,9 +3209,10 @@ compared to multi-class classification based on the accuracy that models could r
 class classification predicted to be a very difficult task with the majority of models failing not 
 only to be transferred but also to be learned. On contrast, score prediction is an easier problem 
 if it is treated as a regression problem instead of multi-class classification, as the models 
- 
- D i s c u s s i o n | 52 
+D i s c u s s i o n | 52 
   
+ 
+ 
  
 always outperform the baseline and many of them are equivalent with the in-domain models. 
 AR and SMO trained using simple unigrams turned out to be very promising schemes 
@@ -3003,42 +3255,64 @@ more discriminative within each conference. A final interesting observation is t
 has the lowest overlap of features between the two conferences but it was able to achieve the 
 best performance and be applied to both directions. This shows that the common features are 
 the most discriminative for both conferences. 
- 
- D i s c u s s i o n | 53 
+D i s c u s s i o n | 53 
   
  
+ 
+ 
 Table 26 Correlation of parameters between different models. 
+Model 
+id 
+Model 
+Learning 
+problem 
 Performance 
-Model Learning Vocabulary 
-Model when Correlation 
-id problem overlap (%) 
+when 
 transferred 
+Correlation 
+Vocabulary 
+overlap (%) 
+m1 MNB - SDep 
 Binary 
-m1 MNB - SDep successful 0.96/0.92 39.64 
 classification 
+successful 0.96/0.92 39.64 
+m2 SMO - SDep 
 Binary 
-m2 SMO - SDep unsuccessful 0.10 39.64 
 classification 
-MNB - Binary 
-m3 one way transfer 0.98/0.96 62.29 
-bigramsPOS classification 
+unsuccessful 0.10 39.64 
+m3 
+MNB - 
+bigramsPOS 
+Binary 
+classification 
+one way transfer 0.98/0.96 62.29 
+m4 MNB - Unigrams 
 Four class 
-m4 MNB - Unigrams unsuccessful 0.99/0.99/0.99/0.97 65.52 
 classification 
+unsuccessful 0.99/0.99/0.99/0.97 65.52 
+m5 SMO ﾐ Bigrams 
 Four class 
-m5 SMO ﾐ Bigrams unsuccessful 0.04 49.51 
 classification 
-SMOreg - 3-score range 
-m6 successful 0.15 66.16 
-unigrams regression 
-SMOreg - 4-score range 
-m7 one way transfer 0.23 65.52 
-Unigrams regression 
-full-score 
+unsuccessful 0.04 49.51 
+m6 
 SMOreg - 
-m8 range unsuccessful 0.21 66.00 
-Unigrams 
+unigrams 
+3-score range 
 regression 
+successful 0.15 66.16 
+m7 
+SMOreg - 
+Unigrams 
+4-score range 
+regression 
+one way transfer 0.23 65.52 
+m8 
+SMOreg - 
+Unigrams 
+full-score 
+range 
+regression 
+unsuccessful 0.21 66.00 
  
 The last objective of this project was to search for alternative techniques in order to achieve a 
 better performance. Frequently co-occurring entropy was the measure used in order to extract 
@@ -3051,23 +3325,32 @@ domain. Similar to the previous analysis I calculated the correlation coefficien
 models for different fractions of FCE words Figure 15. We observe that for MNB correlation 
 is always very high, while for SMO correlation increases as far as a model can transfer the 
 problem in a better way. 
-1.2 
-1 
-0.8 
-0.6 
-0.4 
-0.2 
-0 
-500 1000 2000 DEFAULT 500 1000 2000 DEFAULT 
-MNB SMO 
  
 Figure 15 Correlation coefficient for different fractions of features with high FCE. 
 Many models have been trained on reviews from KDD, applied to reviews from ECML and 
 vice versa. Generally, if we want to apply machine learning models across different domains 
+0 
+0.2 
+0.4 
+0.6 
+0.8 
+1 
+1.2 
+500 1000 2000 DEFAULT 500 1000 2000 DEFAULT 
+MNB SMO 
+C
+o
+rr
+e
+la
+ti
+o
+n
  
- 
-Correlation D i s c u s s i o n | 54 
+D i s c u s s i o n | 54 
   
+ 
+ 
  
 then almost always we have to scarify the performance either in source or in target domain. 
 Similar to other researchers, I assumed that the distribution of the features in the second 
@@ -3078,17 +3361,18 @@ does not, this has been interpreted as similarities and differences between the 
 conferences. The tables and figures below summarize the most interesting of them. 
 Table 27 Statistical similarities and differences (Section 6.2.1) 
 Score rating KDD = 6 score range ECML = 4 score range 
-Reviews from KDD have smaller length than reviews from ECML 
 Review Length 
+Reviews from KDD have smaller length than reviews from ECML 
 (195.80ｱ30.11 versus 251.94ｱ46.78) 
+Parts Of Speech 
 The same fraction of JJ, NN, RB, VB for both conferences. 
-Parts Of Speech The higher the score the higher the fraction of adjectives for both 
+The higher the score the higher the fraction of adjectives for both 
 conferences. 
-The smaller the score the lower the polarity as estimated using 
 Polarity 
+The smaller the score the lower the polarity as estimated using 
 SentiWordNet lexicon. 
-Reviewers use overstatements more frequently than understatements for 
 Valence shifters 
+Reviewers use overstatements more frequently than understatements for 
 both conferences. 
  
 Table 28 The common words between the most similar reviews for KDD and ECML that express the most positive 
@@ -3097,113 +3381,134 @@ or last in the rank when the ranker is trained and tested on KDD and when the sa
 ECMLtoKDD correspond to the reviews which were first or last in the rank when the ranker is trained and tested 
 on KDD and when the same ranker is tested on ECML (ID: for In Domain evaluation, TL: for Transfer Learning 
 or out-of domain evaluation, Score: the ground truth score). 
+Direction:ID?TL Rank 
 Score    
-Direction:ID ?TL Rank Common words between these reviews 
 ID -TL 
+Common words between these reviews 
+ECMLtoKDD First A - 5 
 for,of,a,i,method,to,would,and,have,paper,ada
-ECMLtoKDD First A - 5 pt,with,it,problem,the,in,term,an,approach,imp
+pt,with,it,problem,the,in,term,an,approach,imp
 rov 
+ECMLtoKDD Last D - 3 
 need,for,of,on,limit,onli,-,ha,not,thei,-rrb-
 ,?,data,-lrb-
-ECMLtoKDD Last D - 3 ,do,a,us,should,i,what,to,but,been,experiment,
+,do,a,us,should,i,what,to,but,been,experiment,
 such,and,compar,TAGNUMBER,valu,with,it,
 at,ar,the,in,veri,thi 
+KDDtoECML First 2 - C 
 for,set,show,algorithm,of,could,-lrb-
-KDDtoECML First 2 - C ,find,with,it,a,the,and,thi,exampl,-rrb-
+,find,with,it,a,the,and,thi,exampl,-rrb-
 ,approach,propos,go 
+KDDtoECML Last 2 - D 
 particular,these,ha,-,-rrb-
 ,hard,a,i,what,to,emploi,requir,be,behind,learn
 ,and,that,author,ar,veri,there,claim,why,for,no,
 languag,of,on,or,onli,not,thei,then,algorithm,c
-KDDtoECML Last 2 - D 
 lear,-lrb-
 ,accuraci,should,experi,exampl,method,previo
 u,but,function,howev,formal,have,state,TAGN
 UMBER,it,the,in,thi,their,also 
- 
- D i s c u s s i o n | 55 
+D i s c u s s i o n | 55 
   
+ 
+ 
  
 Table 29 Similarities and differences based on the performance of machine learning models. 
 PROBLEM DESCRIPTION 
 The most similar 
+scores (Section 
+6.2.2, Table 9) 
 Reviews with scores 1 and 2 correspond to the reviews with score D 
-scores (Section 
 Reviews with scores 5 and 6 correspond to the reviews with score A 
-6.2.2, Table 9) 
 Not similar 
-Reviews with score 1 are not similar to the reviewers with score D. 
 scores (Section 
-Reviews with score 6 are not similar to the reviewers with score A 
 6.2.2, Table 9) 
+Reviews with score 1 are not similar to the reviewers with score D. 
+Reviews with score 6 are not similar to the reviewers with score A 
+Which learning 
+problem is 
+easier? 
 Binary classification is easier than multi-class classification. 
-Which learning Regression more sensible for review score prediction. 
-problem is Ranking the only problem that can be learned and transfer independent the 
-easier? score range. 
+Regression more sensible for review score prediction. 
+Ranking the only problem that can be learned and transfer independent the 
+score range. 
  
+Which 
+conference can 
+easier be 
+learned? 
 ECML is easier than KDD based on the performance of the models per task: 
 Binary Classification Best model for KDD: 67.99ｱ3.05% (MNB-Sdep) 
 Binary Classification Best model for ECML: 69.45ｱ4.35% (MNB-Sdep) 
 4 class Classification Best model for KDD: 40.63ｱ2.76 (MNB-Unigrams) 
-Which 
 4 class Classification Best model for ECML: 46.43ｱ4.32% (SMO-
-conference can 
 BigramsPOS) 
-easier be 
 Regression Best model for KDD: 1.3515ｱ0.05 (SMOrbf-Unigrams) 
-learned? 
 Regression Best model for ECML: 0.8328ｱ0.03 (SMOrbf-Unigrams) 
 Ranking Best model for KDD: 0.3636ｱ0.03 (SMOreg-Unigrams) 
 Ranking Best model for ECML: 0.2922ｱ0.02 (SMOreg-Unigrams) 
   
+Binary 
+classification 
+(Section 6.3.1, 
+Table 11) 
 MNB ﾐ Sdep the best performance within KDD and ECML, the only model 
 that could be transferred in both directions. 
  
-Binary MNB trained using any other feature set shows that common features are 
-classification used with a similar way (high correlation between the likelihood of common 
-(Section 6.3.1, features) but other domain specific features are more discriminative for 
-Table 11) every conference (transfer learning fails). 
+MNB trained using any other feature set shows that common features are 
+used with a similar way (high correlation between the likelihood of common 
+features) but other domain specific features are more discriminative for 
+every conference (transfer learning fails). 
  
 SMO always fail when transferred to different domains independent of the 
 feature set. 
+Multi-class 
+classification 
+(Section 6.3.1, 
+Table 12) 
 Learning the 3-class classification completely fails for ECML and transfer 
 learning fails from KDD to ECML. Probably reviewers in ECML do not 
-Multi-class 
 express their enthusiasm for the papers they accept with the same manner 
-classification 
 that reviewers in KDD do. 
-(Section 6.3.1, 
 4-class classification is possible only within a domain but fails across 
-Table 12) 
 domains. 
 Transfer learning is possible only if we have the same number of classes.  
-Regression Transfer learning is possible only if we have the same score range. AR ﾐ 
-(Section 0, Table 1000Unigrams the best model for applying knowledge to a different 
-22) domain. 
-Ranking (Section The only problem that can be transferred between the two conferences 
-0, Table 25) independent of the score range. SMOreg ﾐ Unigrams the best ranker. 
+Regression 
+(Section 0, Table 
+22) 
+Transfer learning is possible only if we have the same score range. AR ﾐ 
+1000Unigrams the best model for applying knowledge to a different 
+domain. 
+Ranking (Section 
+0, Table 25) 
+The only problem that can be transferred between the two conferences 
+independent of the score range. SMOreg ﾐ Unigrams the best ranker. 
 The best models 
 that can be 
-transferred both Binary Classification: MNB-Sdep 
-from Regression: AR ﾐ 1000Unigrams 
-KDDtoECML Ranking: SMOreg-Unigrams 
+transferred both 
+from 
+KDDtoECML 
 and from 
 ECMLtoKDD 
+Binary Classification: MNB-Sdep 
+Regression: AR ﾐ 1000Unigrams 
+Ranking: SMOreg-Unigrams 
  
- 
- D i s c u s s i o n | 56 
+D i s c u s s i o n | 56 
   
+ 
+ 
  
 The tables below present opinion features that are more likely to present negative and positive 
 sentiment as extracted by MNB-Sdep during the binary classification problem. APPENDIX G 
 presents many more phrases that reveal opinions as extracted by different models. In addition 
 to that, it summarizes the best model per learning problem and conference. Features have 
 been ordered based on the ratio: 
+       
               
-         
               
-  
-Where              (               ) corresponds to the likelihood of this feature to 
+ 
+Where                (               ) corresponds to the likelihood of this feature to 
 predict negative (positive) review as calculated by MNB. 
 Table 30 Top 10 Stanford dependencies with high probability of predicting negative as estimated by MNB ﾐ Sdep 
 (Binary classification problem) 
@@ -3214,8 +3519,8 @@ nsubj(is contribution) root(ROOT questionable)
 dobj(see points) cop(questionable is) 
 nsubj(lacks paper) det(contribution no) 
 num(TAGNUMBER.TAGNUMBER 
-nn(set training) 
 TAGNUMBER.TAGNUMBER) 
+nn(set training) 
 aux(introduce to) cop(significant is) 
 nsubj(lacks it) aux(compare does) 
 root(ROOT lacks) advmod(limited very) 
@@ -3240,9 +3545,10 @@ aux(written could) amod(paper good)
  
  
  
- 
- D i s c u s s i o n | 57 
+D i s c u s s i o n | 57 
   
+ 
+ 
  
 7.3 Performance 
 Finally, this section discusses the time and space requirements regarding the training of 
@@ -3259,17 +3565,17 @@ the neurons and converge to the appropriate values, a process which resulted to 
 of training. The experiments have been performed on a laptop with characteristics as 
 summarized in the table below. 
 Manufacturer Samsung Electronics 
-Windows 7 Home Premium (64 - Bit) 
-Operating system 
-Inter(R) Core(TM) i7-2670QM CPU @ 
+Operating system Windows 7 Home Premium (64 - Bit) 
 Processor 
+Inter(R) Core(TM) i7-2670QM CPU @ 
 2.20GHz 
 RAM 4.00GB 
  
  
- 
- C o n c l u s i o n s a n d F u t u r e W o r k | 58 
+C o n c l u s i o n s  a n d  F u t u r e  W o r k | 58 
   
+ 
+ 
  
 8 Conclusions and Future Work 
 This project was developed using supervised machine learning techniques in order to extract 
@@ -3320,9 +3626,10 @@ performed very poor, however, many other rankers exist, that one could experimen
 Transductive transfer learning or inductive transfer methods from transfer learning area 
 could probably transfer the learning better compared to traditional machine learning 
 approaches.  
- 
- B i b l i o g r a p h y | 59 
+B i b l i o g r a p h y | 59 
   
+ 
+ 
  
 9 Bibliography 
 Aue, A. & Gamon, M., 2005. Customizing Sentiment Classifiers to New Domains?: a Case 
@@ -3362,9 +3669,10 @@ Fan, Wen, Sun, S. & Song, G., 2011. Probability Adjustment Na夫e Bayes Algorithm
 on Nondomain-Specific Sentiment and Evaluation Word for Domain-Transfer 
 Sentiment Analysis. In Eighth International Conference on Fuzzy Systems and 
 Knowledge Discovery (FSKD). IEEE, pp. 1043ﾐ1046. 
- 
- B i b l i o g r a p h y | 60 
+B i b l i o g r a p h y | 60 
   
+ 
+ 
  
 Flach, P., Machine learning experiments, to appear in the forthcoming Encyclopedia of 
 Machine Learning (Springer), 
@@ -3377,7 +3685,7 @@ Perspective, New York, NY, USA: Cambridge University Press.
 Kennedy, A.K. & Inkpen, D.I., 2006. Sentiment classification of movie reviews using 
 contextual valence shifters. Computational Intelligence, 22(2). 
 Kim, S. et al., 2006. Automatically Assessing Review Helpfulness. In Proc. Conference on 
-Empirical Methods in Natural Language Processing (EMNLP  ﾕ 06). pp. 423ﾐ430. 
+Empirical Methods in Natural Language Processing (EMNLP  ﾕ06). pp. 423ﾐ430. 
 Lachiche, N. & Flach, P., 2003. Improving accuracy and cost of two-class and multi-class 
 probabilistic classifiers using ROC curves. In ICML. 
 Lin, Z., Tan, S. & Cheng, X., 2011. Using Key Sentence to Improve Sentiment Classification. 
@@ -3402,9 +3710,10 @@ IEEE, 22(10).
 Pang, B. & Lee, L., 2004. A sentimental education: Sentiment analysis using subjectivity 
 summarization based on minimum cuts. In Proceedings of the Association for 
 Computational Linguistics. Cornell University Library, pp. 271ﾐ278. 
- 
- B i b l i o g r a p h y | 61 
+B i b l i o g r a p h y | 61 
   
+ 
+ 
  
 Pang, B. & Lee, L., 2006a. Opinion Mining and Sentiment Analysis. Foundations and Trends 
 in Information Retrieval, 1(2), pp.91ﾐ231. 
@@ -3435,7 +3744,7 @@ classification of reviews. In Proceedings of the 40th Annual Meeting of the Asso
 for Computational Linguistics (ACL). Philadelphia, pp. 417ﾐ424. 
 Wang, H. et al., 2003. Mining concept-drifting data streams using ensemble classifiers. 
 Proceedings of the ninth ACM SIGKDD international conference on Knowledge 
-discovery and data mining - KDD  ﾕ 03, p.226. 
+discovery and data mining - KDD  ﾕ03, p.226. 
 Witten, I. & Frank, E., 2005. Data Mining Practical Machine Learning Tools and Techniques 
 Second edi., Morgan Kaufmann. 
 Zhang, Z. & Varadarajan, B., 2006. Utility scoring of product reviews. In Proceedings of the 
@@ -3445,16 +3754,14 @@ Zhou, L. & Chaovalit, P., 2005. Movie Review Mining?: a Comparison between Super
 and Unsupervised. In Proceedings of the 38th Hawaii International Conference on 
 System Sciences (HICSS). IEEE, pp. 1ﾐ9. 
  
- 
- A P P E N D I X A | 62 
+A P P E N D I X  A | 62 
   
+ 
+ 
  
 APPENDIX A Machine learning algorithms 
-  
-Let        ,       denote a set of  m training examples, where each input vector       is a 
-   
-different review which consists of k features                while            is the 
-          
+Let           ,       denote a set of  m training examples, where each input vector       is a 
+different review which consists of k features                      while               is the 
 class label.     is a new test instance with unknown class label C. 
 Na夫e Bayes and Multinomial Na夫e Bayes 
 Na夫e Bayes is a probabilistic classifier which has been widely used in many different fields 
@@ -3465,55 +3772,45 @@ features. This assumption is made in order to simplify the difficult calculation
 learning requires. After a Na夫e Bayes classifier is trained it can describe the probability of 
 any new test instance to belong in every possible class according to the classification task. 
 This can be defined as: 
-                       
-    
+                         
  
-                                                                   
-      
+  
+                                                                        
 So during the training phase the probability of every attribute belonging to a class cj has to 
 been calculated for all of the classes according to:  
-   
-    
-     
-   
-  
-   
-  
-Where   is the number of training examples with class  and attribute   and   is the 
          
-number of training examples with class     m is the number of possible values of attribute   . 
-  
+       
+     
+ 
+Where       is the number of training examples with class    and attribute    and     is the 
+number of training examples with class      m is the number of possible values of attribute    . 
 This term is used in order to avoid zeros and is known as the Laplace correction. Note here 
 that when Na夫e Bayes is used in text documents or when the attributes are represented by 
-their frequence (also known as Multinomial Na夫e Bayes) then   is the number of times 
-    
-attribute   occurred in documents of class  and   is the total number of words in 
-     
-documents of class  . The term m is replaced by the |Vocabulary| which is the number of all 
- 
+their frequence (also known as Multinomial Na夫e Bayes) then       is the number of times 
+attribute    occurred in documents of class    and     is the total number of words in 
+documents of class   . The term m is replaced by the |Vocabulary| which is the number of all 
 distinct words in all of the documents in the training set. Finally if an attribute corresponds to 
 continuous values for example an attribute that represents the age. Then it can be 
 approximated by a probabilistic function. In the most of the probability density of Gaussian 
 distribution is used, so, the aim is to calculate the mean and standard deviation for this 
 attribute. 
 The priors have also to been calculated and they are simply the probability of every class 
-defined as: the number of training examples belonging to class  . divided by the total number 
- 
-                                     
+defined as: the number of training examples belonging to class   . divided by the total number 
 of training examples:       
- 
+                                     
                                  
+ 
 During the test phase. A new unlabeled test instance is preprocessed in order to contain only 
 attributes that have been appeared during the training phase or for text documents, terms that 
 belong to the Vocabulary. The final class that Na夫e Bayes will assign to the test instance (or 
 document) x is simple the one that has the highest value according to: 
-                    
- 
- 
- 
- 
- A P P E N D I X A | 63 
+      
   
+               
+A P P E N D I X  A | 63 
+  
+ 
+ 
  
 As we said in the beginning this classifier makes the assumption that the probability of one 
 attribute appearing does not change the probabilities for any other attribute to appear after 
@@ -3535,17 +3832,12 @@ defined for the two classes then all of the other instances can be omitted. The 
 assumption of SVMs is that a general model which will perform well in future data is the one 
 that separates the training data as far as possible. The relation that describes the hyperplane 
 and can be used in order to classify new test instances can be defined according to: 
-        
-                
-  
+                         
                      
-Where   and b are numeric parameters that the algorithm has to determine,    is a vector that 
  
-        
-represents a test instance     is a vector that represents one of the support vectors   is the 
- 
-        
-class value for this support vector and         is the dot product of the test instance with the 
+Where    and b are numeric parameters that the algorithm has to determine,    is a vector that 
+represents a test instance             is a vector that represents one of the support vectors    is the 
+class value for this support vector and                 is the dot product of the test instance with the 
 support vector i. 
 An extension of linear SVM which is able to create nonlinear class boundaries by using linear 
 models has also been proposed. In order to find a good hyperplane SVMs transform the 
@@ -3562,16 +3854,16 @@ makes them to create very stable models that perform well for new data. Moreover
 difficult to overfit the training data. Disadvantage is that algorithms of this group have higher 
 computational complexity compared to other classifiers especially the non linear approach. 
 However, fast implementations have been proposed that reduce the complexity. 
- 
- A P P E N D I X A | 64 
+A P P E N D I X  A | 64 
   
+ 
+ 
  
       
 Figure 16 The figure in the left  (taken from Witten & Frank, (2005: 216)) shows the maximum margin hyperplane 
 and support vector machines for a binary classification task where the filled and open circles correspond to the two 
 classes. The hyperplane is in the middle and orthogonal to the dashed line which  indicates the minimum distance 
-8
-of the two classes. The figure in the left (taken from ) shows the transformation of the original feature space(left) 
+of the two classes. The figure in the left (taken from 8) shows the transformation of the original feature space(left) 
 to a new feature space (right) where linear separation is performed by a SVM. 
 Additive Regression 
 Ensemble methods (Dietterich 2000) combine many models, known as experts, in order to 
@@ -3604,82 +3896,73 @@ RankNet is a pairwise ranking methods. The general concept in pairwise ranking m
 to take pairs of documents and decide which of the two should be preferred. This implies a 
 binary classification problem. It is obvious that after a ranker is trained if a new unlabeled 
 document has to be rank then the error will always be equal to 0. Pairwise ranking methods 
-                                                      
+                                                     
 8
  http://en.wikipedia.org/wiki/File:Kernel_Machine.png 
- 
- A P P E N D I X A | 65 
+A P P E N D I X  A | 65 
   
+ 
+ 
  
 are meaningful only in cases that a set of at least 2 unlabeled documents have to be shorted. 
 RankNet is a neural network ranking model proposed by Burges et al. (2005) and used for 
 document retrieval by search engines. This is a probabilistic method which uses neural 
 networks as models and gradient descent as the algorithm in order to optimise the loss 
 function. During the training phase a probability is assigned to every pair of documents             , 
-  
 where     according to (1).   
-                         
-    
- 
- 
-    
-                                   
-   
-      
+                
+                           
+                            
              
+  
 (1) 
- 
-We denote with   the true probability for a pair of documents. This is the probability that       
- 
+We denote with    the true probability for a pair of documents. This is the probability that       
 is higher in the rank than      . 
- 
 A neural network is used in order to model probabilities between every pair of documents 
 during the training phase according to (2). 
-  
-                     
-  
-   
-            
-  
-  
+              
                        
-  
+                         
+ 
 (2) 
 Where          is the score that maps the neural network to the document      . 
-  
+              is compared with the true  
  
-  is compared with the true   and cross entropy is used as the loss function that gives 
-                        
-    
+             and cross entropy is used as the loss function that gives 
 a penalty for incorrect ranking (3). This loss function gives different penalties which are 
 proportional to the importance of the error. For example, bigger penalty will be given if the 
-model predicts that                     when the true labels are     and smaller penalty if the 
-    
+model predicts that                     when the true labels are       and smaller penalty if the 
 model predicts that                     . The reader can refer to Burges, Renshaw, & Deeds, 
-  
 (1998)  where an extensive proof for the properties of the loss function is given. 
-   
-                                      
-                                                                        
-            
+                    
+ 
+                 
+ 
+                                     
+ 
+                                    
 (3) 
 Finally, the aim is to optimise the cross-entropy loss. So, after the cost is calculated the 
 modelﾕs parameters (weights in neural networks) are updated via stochastic gradient descent 
 in order to reduce the cost.  
 I presented RankNet which is a commonly used pairwise ranking algorithm however, many 
-9 10
-more algorithms are available in the bibliography. RankLib  and SVM-RANK are two open 
+more algorithms are available in the bibliography. RankLib
+9
+  and SVM-RANK
+10
+ are two open 
 source libraries that have implementations of both pairwise and listwise ranking algorithms 
 the first one has been used for the scope of this project. 
  
-                                                      
+                                                     
 9
  http://people.cs.umass.edu/~vdang/ranklib.html 
 10
  http://www.cs.cornell.edu/people/tj/svm_light/svm_rank.html 
- 
- A P P E N D I X B | 66 
+A P P E N D I X  B | 66 
   
+ 
+ 
  
  
 APPENDIX B Software and libraries 
@@ -3694,8 +3977,7 @@ based on grammatical relations like subject or indirect object.
 supports a collection of machine learning algorithms for data mining tasks. More 
 specifically, it supports data pre-processing, classification, regression, clustering, 
 association rules, and visualization. 
-11
-? RankLib (v. 2.0) is an open source JAVA library, developed by Van Dang , that has 
+? RankLib (v. 2.0) is an open source JAVA library, developed by Van Dang11, that has 
 implementations of both pairwise and listwise learning to rank algorithms. The 
 library is available on: http://people.cs.umass.edu/~vdang/ranklib.html 
 ? Snowball is a popular package to perform stemming process, which reduces inflected 
@@ -3707,47 +3989,47 @@ It is publicly available for research purposes.
 ? General Inquirer (Stone et al. 1966) is a dictionary that annotates English word 
 senses. It includes tags that label them as positive, negative, overstatement 
 understatement etc. 
-12
-? Commons Math (v. 3.0) :  Commons Math is an open source JAVA library that 
+? Commons Math (v. 3.0)12:  Commons Math is an open source JAVA library that 
 contains statistics and mathematics components like classes for Pearson and 
 Spearmanﾕs correlation. 
  
  
-                                                      
+                                                     
 11
  PhD student supervised by Professor W. Bruce Croft at Center for Intelligent Information Retrieval 
 (CIIR), Department of Computer Science, University of Massachusetts Amhers. 
 12
  Developers, C. M. (2010). Apache Commons Math, Release 3.0. The Apache Software Foundation. 
 Retrieved from http://commons.apache.org/math/index.html 
- 
- A P P E N D I X C | 67 
+A P P E N D I X  C | 67 
   
+ 
+ 
  
 APPENDIX C Feature Sets 
 Table 32 and Table 33 summarize the feature sets that have been created during the 
 experimental phase in section 6.  
 Table 32 Feature sets 
 Feature set Description 
-Bigrams tagged with their Part Of 
 bigramsPOS 
+Bigrams tagged with their Part Of 
 Speech. 
+bigramsPOSVal 
 Bigrams tagged with their Part Of 
 Speech and Valence shifters replaced by 
-bigramsPOSVal 
 tags the OVS for overstatements and 
 UND for understatements. 
 SDep Stanford dependencies 
-Unigrams tagged with their Part Of 
 unigramsPOS 
+Unigrams tagged with their Part Of 
 Speech 
+unigramsPOSVal 
 Bigrams tagged with their Part Of 
 Speech and Valence shifters replaced by 
-unigramsPOSVal 
 tags the OVS for overstatements and 
 UND for understatements. 
-Simple bigrams (pairs of sequential 
 Bigrams 
+Simple bigrams (pairs of sequential 
 words) 
 Unigrams Simple unigrams (isolated words) 
  
@@ -3755,56 +4037,60 @@ Table 33 Patterns as extracted using the Stanford Log-linear Part-Of-Speech Tagg
 the Stanford typed dependency parser (Marneffe et al. 2006). The first is used in order to tag words with their Parts 
 Of Speech. The latter returns pairs of words that reveal typed dependencies based on grammatical relations like 
 subject or indirect object.  
+Parts Of Speech Description 
 Stanford 
-Parts Of Speech Description Description 
 Dependencies 
+Description 
 JJ Isolated Adjectives MOD Modifier 
 NN Isolated Nouns COMP Complement 
 RB Isolated Adverbs SUBJ Subject 
 VB Isolated Verbs NEG Negation 
-Sequential 
 JJ_NN 
+Sequential 
 Adjective/Noun pairs 
-Sequential Noun/Adverb 
+ 
 NN_RB 
+Sequential Noun/Adverb 
 pairs 
 PRP_NN Sequential Prp/Noun pairs 
+RB_JJ 
 Sequential  Adv/Adjective 
-RB_JJ  
 pairs 
-Sequential  Adverb/Verb 
 RB_VB 
+Sequential  Adverb/Verb 
 pairs 
-Sequential  Verb/Noun 
 VB_NN 
+Sequential  Verb/Noun 
 pairs 
-Sequential Verb/Adverb 
 VB_RB 
+Sequential Verb/Adverb 
 pairs 
  
 Table 34 shows an example of a review when it is ran through different parsers. In the first 
 case I use Stanford Part of Speech tagger in order to tag every word with its parts of speech 
 and also General Inquirer lexicon in order to replace every word that is detected to be an 
- 
- A P P E N D I X C | 68 
+A P P E N D I X  C | 68 
   
+ 
+ 
  
 overstatement or understatement with a single tag: OVS for overstatement and UND for 
 understatement. In the second case the text is parsed using Stanford typed dependency parser. 
 The parser returns pairs of words that reveal typed dependencies based on grammatical 
 relations like subject or indirect object.  
 Table 34 Example of a review when it is annotated using different parsers.  
-ﾒﾉExperiments are of very good quality and strongly 
 Initial review 
-supports the paperﾉﾓ. 
-ﾒexperi/NNS ar/VBP of/IN veri/RB OVS qualiti/NN 
+ﾒExperiments are of very good quality and strongly 
+supports the paperﾓ. 
 Review annotated with POS and 
-valence shifters and/CC strongli/RB support/VBZ the/DT paper/NN ./.'ﾓ 
+valence shifters 
+ﾒexperi/NNS ar/VBP of/IN veri/RB OVS qualiti/NN 
+and/CC strongli/RB support/VBZ the/DT paper/NN ./.'ﾓ 
+Review is parsed using Stanford typed 
+dependency parser. 
 ﾒnsubj(are,experiments) nsubj(supports,experiments) 
 root(ROOT,are) advmod(good,very) amod(quality,good) 
-Review is parsed using Stanford typed 
 prep_of(are,quality) advmod(supports,strongly) 
-dependency parser. 
 conj_and(are,supports) det(paper,the) 
 dobj(supports,paper)ﾓ 
  
@@ -3814,42 +4100,43 @@ where reviews with scores 1, 2, 3 (D, C) have been treated as negative and revie
 the average ranks (the last two columns) regarding the in-domain(ID) and out-of domain(TL) 
 evaluation for all of the extracted patterns and all domain combinations. 
 Table 35 POS patterns 
-ID TL 
-KDDto KDDto ECMLto ECMLto 
-model Average Average 
-KDD ECML ECML KDD 
-rank rank 
-67.13% 67.82% 68.24% 64.76% 1.5 1.5 
-BigramsPOS 
-64.02% 61.97% 61.75% 61.35% 12 11.5 
-JJ_NN 
-64.33% 61.31% 60.95% 62.82% 12 11.5 
-NN_RB 
-64.39% 62.05% 62.23% 64.52% 9 6.5 
-PRP_NN 
-64.76% 61.96% 61.91% 64.56% 9.5 7 
-RB_JJ 
-64.83% 63.08% 62.72% 64.03% 6.5 5.5 
-RB_VB 
-65.7% 62.07% 62.15% 64.26% 6 7 
-VB_NN 
-63.53% 62.54% 62.07% 63.19% 11.5 7.5 
-VB_RB 
-66.19% 64.37% 68.65% 65.18% 1.5 1.5 
-UnigramsPOS 
-65.14% 62.69% 66.55% 64.45% 4 5 
-JJ 
-64.95% 61.51% 63.11% 62.52% 5.5 11.5 
-NN 
-65.69% 63.38% 63.92% 63.81% 4 5.5 
-RB 
-64.45% 62.32% 62.47% 62.26% 8 9.5 
-VB 
+model 
+KDDto 
+KDD 
+KDDto 
+ECML 
+ECMLto 
+ECML 
+ECMLto 
+KDD 
+ID 
+Average 
+rank 
+TL 
+Average 
+rank 
+BigramsPOS 67.13% 67.82% 68.24% 64.76% 1.5 1.5 
+JJ_NN 64.02% 61.97% 61.75% 61.35% 12 11.5 
+NN_RB 64.33% 61.31% 60.95% 62.82% 12 11.5 
+PRP_NN 64.39% 62.05% 62.23% 64.52% 9 6.5 
+RB_JJ 64.76% 61.96% 61.91% 64.56% 9.5 7 
+RB_VB 64.83% 63.08% 62.72% 64.03% 6.5 5.5 
+VB_NN 65.7% 62.07% 62.15% 64.26% 6 7 
+VB_RB 63.53% 62.54% 62.07% 63.19% 11.5 7.5 
+UnigramsPOS 66.19% 64.37% 68.65% 65.18% 1.5 1.5 
+JJ 65.14% 62.69% 66.55% 64.45% 4 5 
+NN 64.95% 61.51% 63.11% 62.52% 5.5 11.5 
+RB 65.69% 63.38% 63.92% 63.81% 4 5.5 
+VB 64.45% 62.32% 62.47% 62.26% 8 9.5 
  
 Table 36 Stanford dependencies patterns 
-ID TL 
-model KDDtoKDD KDDtoECML ECMLtoECML ECMLtoKDD Average Average 
-rank rank 
+model KDDtoKDD KDDtoECML ECMLtoECML ECMLtoKDD 
+ID 
+Average 
+rank 
+TL 
+Average 
+rank 
 SDep 67.99% 66.54% 69.45% 66.77% 1 1 
 COMP 63.77% 60.75% 58.78% 62.34% 4.5 4.5 
 MOD 66.19% 64.51% 66.96% 64.03% 2.25 2.25 
@@ -3858,36 +4145,22 @@ SUBJ 64.33% 63.59% 63.92% 62.96% 3.5 3.5
  
  
  
- 
- A P P E N D I X D | 69 
+A P P E N D I X  D | 69 
   
  
+ 
+ 
 APPENDIX D Regression results 
-The Table in the right shows all of the competing models 
 Model id Model 
-regarding the regression problem.  
-m1 
-Baseline ﾐ mean score 
-Table 37, Table 38 and Table 39 show the mean 
+m1 Baseline ﾐ mean score 
 m2 AR - 1000Bigrams 
-absolute error and the rank of the competing models 
-m3 
-AR - 1000Unigrams 
-for all domain combinations regarding the 3-score, 4-
+m3 AR - 1000Unigrams 
 m4 Bag - 1000Bigrams 
-score and full-score regression problem respectively. 
-m5 
-Bag - 1000Unigrams 
-The models that could be applied to a different 
-domain without having statistically significant 
+m5 Bag - 1000Unigrams 
 m6 SMOreg - Bigrams 
-difference with the corresponding in-domain models 
-m7 
-SMOrbf - Bigrams 
-are underlined. 
+m7 SMOrbf - Bigrams 
 m8 SMOrbf - Unigrams 
-m9 
-SMOreg - Unigrams 
+m9 SMOreg - Unigrams 
  
 Table 37 three-score regression problem 
 model KDDtoKDD R KDDtoECML R ECMLtoECML R ECMLtoKDD R 
@@ -3926,33 +4199,31 @@ m8 1.3515ｱ0.05 2.0 0.9706ｱ0.01 2.0 0.8328ｱ0.03 1.0 1.6504ｱ0.0 5.0
 m9 1.3717ｱ0.05 5.0 0.9589ｱ0.0 1.0 0.8396ｱ0.02 2.0 1.6511ｱ0.0 6.0 
  
  
- 
- A P P E N D I X E | 70 
+The Table in the right shows all of the competing models 
+regarding the regression problem.  
+Table 37, Table 38 and Table 39 show the mean 
+absolute error and the rank of the competing models 
+for all domain combinations regarding the 3-score, 4-
+score and full-score regression problem respectively. 
+The models that could be applied to a different 
+domain without having statistically significant 
+difference with the corresponding in-domain models 
+are underlined. 
+A P P E N D I X  E | 70 
   
  
+ 
+ 
 APPENDIX E Ranking results 
-The Table in the right shows all of the 
 Model id Model 
-competing models regarding the ranking 
 m1 AR - 1000Unigrams 
-problem. Table 40, Table 41 and Table 42 
 m2 MNB - Unigrams 
-show the rank error and the rank of the 
-m3 
-competing models for all domain RN - 1000Unigrams 
-combinations regarding the 3-score 4-score 
-m4 
-SMOreg - Unigrams 
-and full-score ranking problem respectively. 
+m3 RN - 1000Unigrams 
+m4 SMOreg - Unigrams 
  
-The models that could be applied to a 
-different domain without having statistically 
  
-significant difference with the corresponding 
  
-in-domain models are underlined. 
 Table 40 three-score ranking problem 
- 
 model KDDtoKDD R KDDtoECML R ECMLtoECML R ECMLtoKDD R 
 m1 0.3869ｱ0.04 3.0 0.3484ｱ0.02 3.0 0.3361ｱ0.05 3.0 0.3699ｱ0.02 2.0 
 m2 0.358ｱ0.04 1.0 0.3322ｱ0.0 2.0 0.3007ｱ0.04 1.0 0.3847ｱ0.01 3.0 
@@ -3961,14 +4232,10 @@ m4 0.3668ｱ0.03 2.0 0.3207ｱ0.01 1.0 0.317ｱ0.04 2.0 0.3691ｱ0.0 1.0
  
 Table 41 four-score ranking problem 
 model KDDtoKDD R KDDtoECML R ECMLtoECML R ECMLtoKDD R 
-0.3696ｱ0.03 3.0 0.3494ｱ0.01 3.0 0.3249ｱ0.03 3.0 0.3734ｱ0.01 2.0 
-m1 
-0.3694ｱ0.03 2.0 0.3482ｱ0.01 2.0 0.3158ｱ0.02 2.0 0.3927ｱ0.01 3.0 
-m2 
-0.4035ｱ0.03 4.0 0.3789ｱ0.02 4.0 0.3557ｱ0.02 4.0 0.4102ｱ0.01 4.0 
-m3 
-0.3624ｱ0.03 1.0 0.3183ｱ0.0 1.0 0.2922ｱ0.02 1.0 0.366ｱ0.0 1.0 
-m4 
+m1 0.3696ｱ0.03 3.0 0.3494ｱ0.01 3.0 0.3249ｱ0.03 3.0 0.3734ｱ0.01 2.0 
+m2 0.3694ｱ0.03 2.0 0.3482ｱ0.01 2.0 0.3158ｱ0.02 2.0 0.3927ｱ0.01 3.0 
+m3 0.4035ｱ0.03 4.0 0.3789ｱ0.02 4.0 0.3557ｱ0.02 4.0 0.4102ｱ0.01 4.0 
+m4 0.3624ｱ0.03 1.0 0.3183ｱ0.0 1.0 0.2922ｱ0.02 1.0 0.366ｱ0.0 1.0 
  
 Table 42 full-score ranking problem 
 model KDDtoKDD R KDDtoECML R ECMLtoECML R ECMLtoKDD R 
@@ -3978,9 +4245,22 @@ m3 0.4045ｱ0.04 4.0 0.3659ｱ0.01 4.0 0.3557ｱ0.02 4.0 0.4138ｱ0.01 4.0
 m4 0.3636ｱ0.03 1.0 0.3234ｱ0.0 1.0 0.2922ｱ0.02 1.0 0.3694ｱ0.0 1.0 
  
  
+The Table in the right shows all of the 
+competing models regarding the ranking 
+problem. Table 40, Table 41 and Table 42 
+show the rank error and the rank of the 
+competing models for all domain 
+combinations regarding the 3-score 4-score 
+and full-score ranking problem respectively. 
+The models that could be applied to a 
+different domain without having statistically 
+significant difference with the corresponding 
+in-domain models are underlined. 
  
- A P P E N D I X F | 71 
+A P P E N D I X  F | 71 
   
+ 
+ 
  
 APPENDIX F Statistical Tests 
 The tables below summarize all of the significance tests performed in order to find: A. if the 
@@ -3988,160 +4268,274 @@ best model per domain and learning problem is significantly better compared to t
 models B. what are those models that can really been transferred across domains. 
 A. Significance test for the best model regarding the in-domain evaluation 
 Table 43 Classification (binary classification on the left, four-class classification on the right) 
-Paired t-test Paired t-test Paired t-test Paired t-test 
 TEST (DOMAIN) 
-(KDD) (ECML)  (KDD) (ECML) 
+Paired t-test 
+(KDD) 
+Paired t-test 
+(ECML)  
+Paired t-test 
+(KDD) 
+Paired t-test 
+(ECML) 
+Best model ?   MNBSdep  MNB-Unigrams 
+ 
+MNB-Unigrams 
  SMO-
-Best model ?   MNBSdep  MNB-Unigrams MNB-Unigrams 
- BigramsPOS 
-MNB-bigramsPOS 0.450106877 0.199757357 0.023478 0.256616 
+BigramsPOS 
+MNB-bigramsPOS 0.450106877 0.199757357 
  
-MNB-bigramsPOSVal 0.467056973 0.414459608 0.035955 0.19718 
+0.023478 0.256616 
+MNB-bigramsPOSVal 0.467056973 0.414459608 
  
-MNB-SDep #DIV/0! 0.713982118 0.009691 0.075964 
+0.035955 0.19718 
+MNB-SDep #DIV/0 0.713982118 
  
-MNB-unigramsPOS 0.309869821 0.091409264 0.106894 0.154811 
+0.009691 0.075964 
+MNB-unigramsPOS 0.309869821 0.091409264 
  
-MNB-unigramsPOSVal 0.394189732 0.009052859 0.164111 0.137204 
+0.106894 0.154811 
+MNB-unigramsPOSVal 0.394189732 0.009052859 
  
-MNB-Unigrams 0.2547063 #DIV/0! #DIV/0! 0.205729 
+0.164111 0.137204 
+MNB-Unigrams 0.2547063 #DIV/0 
  
-MNB-Bigrams 0.765638066 0.909629672 0.007926 0.496865 
+#DIV/0 0.205729 
+MNB-Bigrams 0.765638066 0.909629672 
  
-SMO-bigramsPOS 0.317346589 0.052210018 0.032841 #DIV/0! 
+0.007926 0.496865 
+SMO-bigramsPOS 0.317346589 0.052210018 
  
-SMO-bigramsPOSVal 0.225232733 0.05661842 0.006623 0.018941 
+0.032841 #DIV/0 
+SMO-bigramsPOSVal 0.225232733 0.05661842 
  
-SMO-SDep 0.006299444 0.145116503 0.000622 0.032399 
+0.006623 0.018941 
+SMO-SDep 0.006299444 0.145116503 
  
-SMO-unigramsPOS 0.199010638 0.601244279 0.002033 0.055146 
+0.000622 0.032399 
+SMO-unigramsPOS 0.199010638 0.601244279 
  
-SMO-unigramsPOSVal 0.328817646 0.388272652 0.069784 0.022106 
+0.002033 0.055146 
+SMO-unigramsPOSVal 0.328817646 0.388272652 
  
-SMO-Unigrams 0.181560125 0.145690068 0.142511 0.162038 
+0.069784 0.022106 
+SMO-Unigrams 0.181560125 0.145690068 
  
-SMO-Bigrams 0.897983946 0.156656501 0.027126 0.28576 
+0.142511 0.162038 
+SMO-Bigrams 0.897983946 0.156656501 
  
+0.027126 0.28576 
  
 Table 44 Full-score regression (left) and ranking (right). 
-TEST Paired t-test Paired t-test TEST Paired t-test 
+TEST 
+(DOMAIN) 
+Paired t-test 
+(KDD) 
+Paired t-test 
+(ECML)  
+TEST 
+(DOMAIN) 
 Paired t-test (KDD) 
-(DOMAIN) (KDD) (ECML)  (DOMAIN) (ECML) 
- SMOrbf- SMOrbf-
-Best model ?  Best model ? SMOreg-Unigrams  SMOreg-Unigrams 
-Unigrams Unigrams  
-AR- AR-
-0.11744557 0.47728238 0.800555 0.389159 
-1000Unigrams  1000Unigrams 
-AR- MNB-
-0.00688228 0.02968747 0.305198 0.711554 
-1000Bigrams  Unigrams 
-Bag- RN-
-0.2490836 0.01385006 0.008219 0.000405 
-1000Unigrams  1000Unigrams 
-Bag- SMO-
-0.00106974 0.00430035 #DIV/0! #DIV/0! 
-1000Bigrams  Unigrams 
-SMOrbf-
-#DIV/0! #DIV/0! 
+Paired t-test 
+(ECML) 
+Best model ?  
+ SMOrbf-
+Unigrams 
+ SMOrbf-
 Unigrams  
+Best model ? SMOreg-Unigrams  SMOreg-Unigrams 
+AR-
+1000Unigrams 
+0.11744557 0.47728238 
+ 
+AR-
+1000Unigrams 
+0.800555 0.389159 
+AR-
+1000Bigrams 
+0.00688228 0.02968747 
+ 
+MNB-
+Unigrams 
+0.305198 0.711554 
+Bag-
+1000Unigrams 
+0.2490836 0.01385006 
+ 
+RN-
+1000Unigrams 
+0.008219 0.000405 
+Bag-
+1000Bigrams 
+0.00106974 0.00430035 
+ 
+SMO-
+Unigrams 
+#DIV/0 #DIV/0 
 SMOrbf-
+Unigrams 
+#DIV/0 #DIV/0 
+ 
+ 
+SMOrbf-
+Bigrams 
 0.01802444 0.00053354 
-Bigrams  
-SMOreg- 
-0.00333895 0.11499562 
-Unigrams  
+ 
 SMOreg-
+Unigrams 
+0.00333895 0.11499562 
+ 
+SMOreg-
+Bigrams 
 0.16838443 0.13340221 
-Bigrams  
  
  
  
  
  
- A P P E N D I X F | 72 
+A P P E N D I X  F | 72 
   
+ 
+ 
  
 B. Significance test regarding out-of domain evaluation. 
 Table 45 Classification (left) and ranking (right). 
-Problem Binary classification Full-score ranking 
+Problem Binary classification 
   
+Full-score ranking 
+Unpaired t-test KDDtoECML ECMLtoKDD 
+ 
 Full-score 
-Unpaired t-test KDDtoECML ECMLtoKDD KDDtoECML ECMLtoKDD 
- ranking 
-MNB- AR - 
-0.72319964 0.03766439 0.09106 0.147313 
-bigramsPOS  1000Unigrams 
-MNB- MNB - 
-0.11863687 0.00088081 0.000426 0.084518 
-bigramsPOSVal  Unigrams 
-RN - 
-MNB-SDep 0.06410138 0.24014427 0.112841 0.447802 
- 1000Unigrams 
-MNB- SMOreg - 
-0.00028622 0.35581396 0.052346 0.564882 
-unigramsPOS  Unigrams 
+ranking 
+KDDtoECML ECMLtoKDD 
 MNB-
+bigramsPOS 
+0.72319964 0.03766439 
+ 
+AR - 
+1000Unigrams 
+0.09106 0.147313 
+MNB-
+bigramsPOSVal 
+0.11863687 0.00088081 
+ 
+MNB - 
+Unigrams 
+0.000426 0.084518 
+MNB-SDep 0.06410138 0.24014427 
+ 
+RN - 
+1000Unigrams 
+0.112841 0.447802 
+MNB-
+unigramsPOS 
+0.00028622 0.35581396 
+ 
+SMOreg - 
+Unigrams 
+0.052346 0.564882 
+MNB-
+unigrPOSVal 
 0.00031301 0.28054543 
-unigrPOSVal  
+ 
+ 
 MNB-Unigrams 5.07419E-05 0.95686683 
  
 MNB-Bigrams 0.03109718 0.05389798 
  
 SMO-
+bigramsPOS 
 0.02307777 0.00292870 
-bigramsPOS  
+ 
 SMO-
+bigramsPOSVal 
 0.03253793 0.0402981 
-bigramsPOSVal  
  
 SMO-SDep 0.02642811 0.03608088 
  
 SMO-unigrPOS 0.01466253 0.00722113 
  
 SMO-
+unigrPOSVal 
 0.00892817 0.000234843 
-unigrPOSVal  
+ 
 SMO-Unigrams 0.00291323 0.08693071 
  
 SMO-Bigrams 0.00418236 0.03050103 
  
  
 Table 46 Regression. 
-Problem Full-score regression 4-score regression 3-score regression 
-  
+Problem Full-score regression 
+ 
+4-score regression 
+ 
+3-score regression 
 Unpaired t-
-KDDtoECML ECMLtoKDD KDDtoECML ECMLtoKDD KDDtoECML ECMLtoKDD 
-test  
+test 
+KDDtoECML ECMLtoKDD 
+ 
+KDDtoECML ECMLtoKDD KDDtoECML ECMLtoKDD 
 AR-
-3.68611E-05 7.51629E-09 0.083600846 0.393963 0.498879 0.033843 
-1000Unigrams   
+1000Unigrams 
+3.68611E-05 7.51629E-09 
+ 
+0.083600846 0.393963 
+ 
+0.498879 0.033843 
 AR-
-0.000612635 3.36944E-05 0.071194192 0.179609 0.74972 0.107395 
-1000Bigrams   
+1000Bigrams 
+0.000612635 3.36944E-05 
+ 
+0.071194192 0.179609 
+ 
+0.74972 0.107395 
 Bag-
-2.31015E-08 6.79114E-12 0.006895964 0.057164 0.043803 0.46895 
-1000Unigrams   
+1000Unigrams 
+2.31015E-08 6.79114E-12 
+ 
+0.006895964 0.057164 
+ 
+0.043803 0.46895 
 Bag-
-0.000181093 2.81711E-07 0.176127442 0.004513 0.390479 0.010768 
-1000Bigrams   
+1000Bigrams 
+0.000181093 2.81711E-07 
+ 
+0.176127442 0.004513 
+ 
+0.390479 0.010768 
 SMOrbf-
-1.76706E-08 2.89851E-08 1.47305E-05 0.0428 0.054999 0.616473 
-Unigrams   
+Unigrams 
+1.76706E-08 2.89851E-08 
+ 
+1.47305E-05 0.0428 
+ 
+0.054999 0.616473 
 SMOrbf-
-3.15884E-07 8.60596E-12 0.000410237 0.483738 0.000785 0.192925 
-Bigrams   
+Bigrams 
+3.15884E-07 8.60596E-12 
+ 
+0.000410237 0.483738 
+ 
+0.000785 0.192925 
 SMOreg-
-2.3767E-08 9.23098E-09 5.97729E-07 0.000942 0.148135 0.681565 
-Unigrams   
+Unigrams 
+2.3767E-08 9.23098E-09 
+ 
+5.97729E-07 0.000942 
+ 
+0.148135 0.681565 
 SMOreg-
-4.41099E-09 9.92488E-11 4.05817E-06 0.019126 0.000459 0.0862 
-Bigrams   
+Bigrams 
+4.41099E-09 9.92488E-11 
+ 
+4.05817E-06 0.019126 
+ 
+0.000459 0.0862 
  
  
- 
- A P P E N D I X G | 73 
+A P P E N D I X  G | 73 
   
+ 
+ 
  
 APPENDIX G Opinion features and competitive 
 models 
@@ -4149,105 +4543,95 @@ This section summarizes the best models as recommended in the experimental secti
 also what we can finally learn by these models regarding the phrases that capture opinions in 
 reviews of research papers. 
 The figures below present the most competitive models per learning problem and conference. 
-X 
-90.00% 
-X X 
-80.00% 
-X 
-70.00% 
-60.00% 
-50.00% 
-40.00% 
-30.00% 
-20.00% 
-10.00% 
-0.00% 
-MNB MNB 
+ 
+Figure 17 The most similar scores13 (Section 6.2.2, Table 8). 
+ 
+Figure 18 Best models regarding the classification13. 
+                                                     
+13 X: Transfer learning is successful (outperforms the baseline) but it is not statistically significant compared to the 
+in-domain performance. 
 MNB 
-Bigrams Bigrams 
 Bigrams 
-12vs56 12vs56 
+12vs56 
+(DCvsBA) 
+MNB 
+Bigrams 
+12vs56 
+(DvsA) 
+MNB 
+Bigrams 
 1vs6 (DvsA) 
-(DCvsBA) (DvsA) 
 KDDtoKDD 73.60% 73.60% 75.22% 
 KDDtoECML 65.89% 81.81% 79.35% 
 ECMLtoECML 69.93% 81.65% 81.65% 
 ECMLtoKDD 72.86% 74.13% 73.16% 
- 
-13
-Figure 17 The most similar scores (Section 6.2.2, Table 8). 
-80.00% 
 X 
-70.00% 
-60.00% 
-50.00% X 
-X 
-40.00% 
-30.00% 
-20.00% 
-10.00% 
+X X X 
 0.00% 
-MNB Sdep (Best for MNB Unigrams SMO bigramsPOS 
-all combinations) (Best for KDD) (Best for ECML) 
+10.00% 
+20.00% 
+30.00% 
+40.00% 
+50.00% 
+60.00% 
+70.00% 
+80.00% 
+90.00% 
+A
+cc
+u
+ra
+cy
+ 
+MNB Sdep (Best for 
+all combinations) 
+MNB Unigrams 
+(Best for KDD) 
+SMO bigramsPOS 
+(Best for ECML) 
 binary classification 4-class classification 
-KDDtoKDD 
-67.99% 40.63% 36.10% 
+KDDtoKDD 67.99% 40.63% 36.10% 
 KDDtoECML 66.54% 37.97% 36.54% 
 ECMLtoECML 69.45% 43.86% 46.43% 
 ECMLtoKDD 66.77% 35.01% 65.62% 
- 
-13
-Figure 18 Best models regarding the classification . 
-                                                      
-13
- X: Transfer learning is successful (outperforms the baseline) but it is not statistically significant compared to the 
-in-domain performance. 
- 
- 
-Accuracy 
-Accuracy A P P E N D I X G | 74 
-  
- 
+X X 
 X 
-1.8000 0.4000 
-1.6000 
-0.3500 
-1.4000 
-1.2000 
-X 0.3000 
-1.0000 
-0.2500 
-0.8000 
-0.6000 
-0.2000 
-0.4000 
-0.1500 
-0.2000 
-0.0000 
-0.1000 
-AR 1000Unigrams SMOrbf Unigrams 
-(Best for transfer (Best within the 0.0500 
-learning) same domain) 
-0.0000 
-SMOreg Unigrams 
-4-score 
-regression 
-regression ranking 
-KDDtoKDD KDDtoKDD 
-0.9325 1.3515 0.3636 
-KDDtoECML 0.8889 0.9706 ECMLtoECML 0.2922 
-ECMLtoECML 0.8489 0.8328 KDDtoECML 0.3234 
-ECMLtoKDD 0.9217 1.6504 ECMLtoKDD 0.3694 
+0.00% 
+10.00% 
+20.00% 
+30.00% 
+40.00% 
+50.00% 
+60.00% 
+70.00% 
+80.00% 
+A
+cc
+u
+ra
+cy
+ 
+A P P E N D I X  G | 74 
   
+ 
+ 
+ 
+  
+Figure 19 Best models regarding regression (left) and ranking (right)
 13
-Figure 19 Best models regarding regression (left) and ranking (right) . 
+. 
 The tables below present some examples of opinion features as extracted by different models 
 during the experimental phase. 
 Table 47 Top 10 unigrams with the highest weight as estimated for regression SMOReg ﾐ Unigrams (4-score 
 regression problem). 
-SCORE SCORE SCORE 
-KDD ECML SCORE KDD 
-KDD ECML ECML 
+KDD 
+SCORE 
+KDD 
+SCORE 
+ECML 
+ECML SCORE KDD 
+SCORE 
+ECML 
 like 0.1053 0.0132 nice 0.098 0.0907 
 bit 0.1049 0.0379 well 0.0635 0.0904 
 nice 0.098 0.0907 would 0.0816 0.0796 
@@ -4273,11 +4657,69 @@ lack -0.0696 mani -0.0734
 claim -0.0691 unfortun -0.0708 
 compar -0.067 english -0.0678 
  
+AR 1000Unigrams 
+(Best for transfer 
+learning) 
+SMOrbf Unigrams 
+(Best within the 
+same domain) 
+4-score 
+regression 
+regression 
+KDDtoKDD 0.9325 1.3515 
+KDDtoECML 0.8889 0.9706 
+ECMLtoECML 0.8489 0.8328 
+ECMLtoKDD 0.9217 1.6504 
+X 
+X 
+0.0000 
+0.2000 
+0.4000 
+0.6000 
+0.8000 
+1.0000 
+1.2000 
+1.4000 
+1.6000 
+1.8000 
+M
+a
+cr
+o
+ M
+A
+E
  
+SMOreg Unigrams 
+ranking 
+KDDtoKDD 0.3636 
+ECMLtoECML 0.2922 
+KDDtoECML 0.3234 
+ECMLtoKDD 0.3694 
+0.0000 
+0.0500 
+0.1000 
+0.1500 
+0.2000 
+0.2500 
+0.3000 
+0.3500 
+0.4000 
+R
+a
+n
+k
+ e
+r
+ro
+r 
+ra
+te
  
-Macro MAE 
-Rank error rate A P P E N D I X G | 75 
+A P P E N D I X  G | 75 
   
+ 
+ 
  
 Table 49 Bigrams with the highest and lowest FCE. 
 HIGH FCE SCORE LOW FCE SCORE 
@@ -4292,195 +4734,277 @@ to understand 1.787131 i = -6.24836
 has a 1.677677 p = -6.24836 
 is better 1.677677 page TAGNUMBER -6.24836 
 as the 1.51479 the encoding -6.24836 
+a -rrb- 1.478939 
 TAGNUMBER 
-a -rrb- 1.478939 -6.22339 
 paragraph 
+-6.22339 
 experimental section 1.478939 couldn t -6.14223 
  
 . 
- 
   
-       
  
-           
 APPENDIX H Code 
  
  
-This section contains a part of the Java code regarding the feature vector representation and the in-domain evaluation process. 
  
+/** 
+     * This method creates the data needed to train a classifier and calls 
+     * the method ProduceModels to train and validate the classifier. This 
+     * method implements stratified 10 fold cross validation to the dataset. 
+     * 
+     * 
+     */ 
+    public void CreateData(String dataset, String SourcePath, String SourcePathecml, String TargetPath, 
+String targetPathStatistics, String datasetStringFormat, String datasetStringFormatecml) { 
+ 
+        if (this.modelChoice.equals("SMO")) { 
+            this.modelChoice = "SVMTuneC"; 
+        } 
+        try { 
+            //Prepare arrays for the evaluation measures 
+            double accuracy[] = new double[10]; 
+            {}// CODE OMITTED 
+            double recallPerClass[][] = new double[10][numOfClasses]; 
+            double weightedrecallPerClass[][] = new double[10][numOfClasses]; 
+            double precisionPerClass[][] = new double[10][numOfClasses]; 
+            double overallAccuracy = 0.0; 
+            double accuracyCV = 0.0; 
+             
+            //Find the optimal parameters for SVM 
+            if (modelChoice.equals("SVM_80")) { 
+                initialiseStatistics(); 
+            } 
+            Instances Data = null; 
+            Instances Dataecml = null; 
+ 
+            if (firstRun) { 
+                if (useFilter) { 
+                    Data = LoadArff(SourcePath + datasetStringFormat + ".arff"); 
+                } else { 
+                    Data = LoadArff(SourcePath + dataset + ".arff");} 
+                 
+ 
+       
+ 
+           
  
  
  
  
                Data.setClassIndex(Data.numAttributes() - 1); 
-/** 
                 Data.randomize(new Random(seed)); 
-     * This method creates the data needed to train a classifier and calls 
                 if (Data.classAttribute().isNominal()) { 
-     * the method ProduceModels to train and validate the classifier. This 
                     Data.stratify(10); 
-     * method implements stratified 10 fold cross validation to the dataset. 
                 } 
-     * 
             } 
-     * 
  
-     */ 
             //Stratified 10-fold cross validation 
-    public void CreateData(String dataset, String SourcePath, String SourcePathecml, String TargetPath, 
             for (int j = 0; j < 10; j++)  
-String targetPathStatistics, String datasetStringFormat, String datasetStringFormatecml) { 
             { 
- 
                 experiment = j; 
-        if (this.modelChoice.equals("SMO")) { 
  
-            this.modelChoice = "SVMTuneC"; 
  
-        } 
                 //Feature extraction and feature vector representation if the  
-        try { 
                 // the dataset is not in a feature vector form.                
-            //Prepare arrays for the evaluation measures 
                 if (firstRun) { 
-            double accuracy[] = new double[10]; 
                     Dataecml = LoadArff(SourcePathecml + datasetStringFormatecml + ".arff"); 
-            {ﾉ}// CODE OMITTED 
  
-            double recallPerClass[][] = new double[10][numOfClasses]; 
                     Instances trainInit = null; 
-            double weightedrecallPerClass[][] = new double[10][numOfClasses]; 
                     Instances testInit = null; 
-            double precisionPerClass[][] = new double[10][numOfClasses]; 
                     Instances testInitECML = null; 
-            double overallAccuracy = 0.0; 
  
-            double accuracyCV = 0.0; 
                     // Merge reviews with specific scores from KDD to ECML 
-             
                     if (convertToDifClass) { 
-            //Find the optimal parameters for SVM 
                         Data.setClassIndex(0); //wrongly initialise class 
-            if (modelChoice.equals("SVM_80")) { 
                         trainInit = NewFeatures.convertToClass(Data.trainCV(10, j), bigrams);  
-                initialiseStatistics(); 
                         testInit = NewFeatures.convertToClass(Data.testCV(10, j), bigrams); 
-            } 
  
-            Instances Data = null; 
                        testInitECML = NewFeaturesECML.convertToClass(Dataecml, bigrams); 
-            Instances Dataecml = null; 
- 
  
                    // Merge reviews with specific scores from ECML to KDD 
-            if (firstRun) { 
                     } else if (convertToDifClassReverse) { 
-                if (useFilter) { 
  
-                    Data = LoadArff(SourcePath + datasetStringFormat + ".arff"); 
                         Data.setClassIndex(0); //wrongly initialise class 
-                } else { 
                         trainInit = NewFeaturesECML.convertToClass(Data.trainCV(10, j), bigrams);   
-                    Data = LoadArff(SourcePath + dataset + ".arff");} 
                         testInit = NewFeaturesECML.convertToClass(Data.testCV(10, j), bigrams); 
-                 
                         testInitECML = NewFeatures.convertToClass(Dataecml, bigrams); 
- 
                          
+This section contains a part of the Java code regarding the feature vector representation and the in-domain evaluation process. 
+  
+ 
+                    // Do not merge anything use the full score range 
+                    } else { 
+                        trainInit = Data.trainCV(10, j); 
+                        testInit = Data.testCV(10, j); 
+                        testInitECML = Dataecml; 
+ 
+                    } 
+                    trainInit.setClassIndex(trainInit.numAttributes() - 1); 
+                    testInit.setClassIndex(testInit.numAttributes() - 1); 
+                    testInitECML.setClassIndex(testInitECML.numAttributes() - 1); 
+ 
+                    // Feature extraction and vector representation 
+                    if (useFilter) { 
+                        Instances trainInitECML = new Instances(trainInit); 
+                        WekaTrainingSets cDatasets = new WekaTrainingSets(); 
+                        Instances[] newData = cDatasets.CreadDataCV(trainInit, testInit); 
+                        Instances filteredTrain = newData[0]; 
+                        Instances filteredTest = newData[1]; 
+                        cDatasets = new WekaTrainingSets(); 
+ 
+                        Instances[] newDataECML = cDatasets.CreadDataCV(trainInitECML, testInitECML); 
+                        Instances filteredTestECML = newDataECML[1]; 
+                        if (furtherPreprocess) { 
+                            Instances filteredTrainECML = new Instances(filteredTrain); 
+                            WekaTrainingSets cDatasets2 = new WekaTrainingSets(); 
+                            Instances[] furtherFeatures = cDatasets2.CreadDataCVfurther(filteredTrain, 
+filteredTest); 
+                            SaveArff(TargetPath + j + "/" + dataset + "_train.arff", furtherFeatures[0]); 
+                            SaveArff(TargetPath + j + "/" + dataset + "_test.arff", furtherFeatures[1]); 
+                            cDatasets2 = new WekaTrainingSets(); 
+                            Instances[] furtherFeaturesECML = 
+cDatasets2.CreadDataCVfurther(filteredTrainECML, filteredTestECML); 
+                            SaveArff(TargetPath + j + "/" + dataset + "_ECML.arff", furtherFeaturesECML[1]); 
+                        } else { 
+                            SaveArff(TargetPath + j + "/" + dataset + "_train.arff", filteredTrain); 
+                            SaveArff(TargetPath + j + "/" + dataset + "_test.arff", filteredTest); 
+                            SaveArff(TargetPath + j + "/" + dataset + "_ECML.arff", filteredTestECML); 
+                        } 
+                    } else { 
+ 
+                        SaveArff(TargetPath + j + "/" + dataset + "_train.arff", trainInit); 
+                        SaveArff(TargetPath + j + "/" + dataset + "_test.arff", testInit); 
+                        SaveArff(TargetPath + j + "/" + dataset + "_ECML.arff", testInitECML); 
+ 
+                    } 
+ 
+                } // End of feature extraction and feature vector representation 
+ 
+                if (this.FCE && j == 0) { 
+                    dataset = dataset + "FCE" + this.attributesToSelect; 
+                } 
+ 
+                // Load the training set of the source domain. 
+                Train = LoadArff(TargetPath + j + "/" + dataset + "_train.arff"); 
+                Train.setClassIndex(Train.numAttributes() - 1); 
+                // Load the test set of the same domain for in-domain evaluation. 
+                Test = LoadArff(TargetPath + j + "/" + dataset + "_test.arff"); 
+                Test.setClassIndex(Test.numAttributes() - 1); 
+                 
+                if (this.featureSelection) { 
+                    TestECML = LoadArff(TargetPath + j + "/" + dataset + "_ECML.arff"); 
+                    TestECML.setClassIndex(TestECML.numAttributes() - 1); 
+                } 
+ 
+                //Train a model and apply it to the test set. 
+                Classifier cls = buildModelINIT(modelChoice, Train, Test, TargetPath + j + 
+"/Predictions/final/", true); 
+ 
+                if (this.featureSelection) { 
+ 
+                    SaveArff(TargetPath + j + "/" + dataset + "IG" + this.attributesToSelect + "_train.arff", 
+Train); 
+                    SaveArff(TargetPath + j + "/" + dataset + "IG" + this.attributesToSelect + "_test.arff", 
+Test); 
+                    SaveArff(TargetPath + j + "/" + dataset + "IG" + this.attributesToSelect + "_ECML.arff", 
+TestECML); 
+                } 
+ 
+                System.out.println("Experiment :" + j + " finished."); 
+ 
+ 
+                // Save the model in order to be able to apply it to a different 
+                // domain 
+                if (featureSelection) { 
+                    SerializationHelper.write(TargetPath + j + "/" + modelChoice + "exp" + j + "IG" + 
+this.attributesToSelect + ".model", cls); 
+                } else if (FCE) { 
+                    SerializationHelper.write(TargetPath + j + "/" + modelChoice + "exp" + j + "FCE" + 
+this.attributesToSelect + ".model", cls); 
  
   
-                    // Do not merge anything use the full score range  
-                    } else {                 } // End of feature extraction and feature vector representation 
-                        trainInit = Data.trainCV(10, j);  
-                        testInit = Data.testCV(10, j);                 if (this.FCE && j == 0) { 
-                        testInitECML = Dataecml;                     dataset = dataset + "FCE" + this.attributesToSelect; 
-                 } 
-                    }  
-                    trainInit.setClassIndex(trainInit.numAttributes() - 1);                 // Load the training set of the source domain. 
-                    testInit.setClassIndex(testInit.numAttributes() - 1);                 Train = LoadArff(TargetPath + j + "/" + dataset + "_train.arff"); 
-                    testInitECML.setClassIndex(testInitECML.numAttributes() - 1);                 Train.setClassIndex(Train.numAttributes() - 1); 
-                 // Load the test set of the same domain for in-domain evaluation. 
-                    // Feature extraction and vector representation                 Test = LoadArff(TargetPath + j + "/" + dataset + "_test.arff"); 
-                    if (useFilter) {                 Test.setClassIndex(Test.numAttributes() - 1); 
-                        Instances trainInitECML = new Instances(trainInit);                  
-                        WekaTrainingSets cDatasets = new WekaTrainingSets();                 if (this.featureSelection) { 
-                        Instances[] newData = cDatasets.CreadDataCV(trainInit, testInit);                     TestECML = LoadArff(TargetPath + j + "/" + dataset + "_ECML.arff"); 
-                        Instances filteredTrain = newData[0];                     TestECML.setClassIndex(TestECML.numAttributes() - 1); 
-                        Instances filteredTest = newData[1];                 } 
-                        cDatasets = new WekaTrainingSets();  
-                 //Train a model and apply it to the test set. 
-                        Instances[] newDataECML = cDatasets.CreadDataCV(trainInitECML, testInitECML);                 Classifier cls = buildModelINIT(modelChoice, Train, Test, TargetPath + j + 
-                        Instances filteredTestECML = newDataECML[1]; "/Predictions/final/", true); 
-                        if (furtherPreprocess) {  
-                            Instances filteredTrainECML = new Instances(filteredTrain);                 if (this.featureSelection) { 
-                            WekaTrainingSets cDatasets2 = new WekaTrainingSets();  
-                            Instances[] furtherFeatures = cDatasets2.CreadDataCVfurther(filteredTrain,                     SaveArff(TargetPath + j + "/" + dataset + "IG" + this.attributesToSelect + "_train.arff", 
-filteredTest); Train); 
-                            SaveArff(TargetPath + j + "/" + dataset + "_train.arff", furtherFeatures[0]);                     SaveArff(TargetPath + j + "/" + dataset + "IG" + this.attributesToSelect + "_test.arff", 
-                            SaveArff(TargetPath + j + "/" + dataset + "_test.arff", furtherFeatures[1]); Test); 
-                            cDatasets2 = new WekaTrainingSets();                     SaveArff(TargetPath + j + "/" + dataset + "IG" + this.attributesToSelect + "_ECML.arff", 
-                            Instances[] furtherFeaturesECML = TestECML); 
-cDatasets2.CreadDataCVfurther(filteredTrainECML, filteredTestECML);                 } 
-                            SaveArff(TargetPath + j + "/" + dataset + "_ECML.arff", furtherFeaturesECML[1]);  
-                        } else {                 System.out.println("Experiment :" + j + " finished."); 
-                            SaveArff(TargetPath + j + "/" + dataset + "_train.arff", filteredTrain);  
-                            SaveArff(TargetPath + j + "/" + dataset + "_test.arff", filteredTest);  
-                            SaveArff(TargetPath + j + "/" + dataset + "_ECML.arff", filteredTestECML);                 // Save the model in order to be able to apply it to a different 
-                        }                 // domain 
-                    } else {                 if (featureSelection) { 
-                     SerializationHelper.write(TargetPath + j + "/" + modelChoice + "exp" + j + "IG" + 
-                        SaveArff(TargetPath + j + "/" + dataset + "_train.arff", trainInit); this.attributesToSelect + ".model", cls); 
-                        SaveArff(TargetPath + j + "/" + dataset + "_test.arff", testInit);                 } else if (FCE) { 
-                        SaveArff(TargetPath + j + "/" + dataset + "_ECML.arff", testInitECML);                     SerializationHelper.write(TargetPath + j + "/" + modelChoice + "exp" + j + "FCE" + 
- this.attributesToSelect + ".model", cls); 
-                    }  
  
-  
-                } else {                 totalEvaluation = totalEvaluation + summary + summary2 + summary3; 
-                    SerializationHelper.write(TargetPath + j + "/" + modelChoice + "exp" + j + ".model", cls);  
-                 auc[j] = eval.weightedAreaUnderROC(); 
-                }                 precision[j] = eval.weightedPrecision(); 
-                // The model has been saved.                 recall[j] = eval.weightedRecall(); 
-                 tpRate[j] = eval.weightedTruePositiveRate(); 
-                if (featureSelection) {                 {ﾉ.} //CODE OMITTED 
-                    Test.deleteAttributeAt(0);                 int numClasses = Test.numClasses(); 
-                    Train.deleteAttributeAt(0);  
-                    Train.setClassIndex(Train.numAttributes() - 1);                 for (int classIndex = 0; classIndex < numClasses; classIndex++) { 
-                    Test.setClassIndex(Test.numAttributes() - 1);                     weightedrecallPerClass[j][classIndex] = eval.weightedRecall(classIndex); 
-                }                 } 
-                 for (int classIndex = 0; classIndex < numClasses; classIndex++) { 
-                // In-domain evaluation                     recallPerClass[j][classIndex] = eval.recall(classIndex); 
-                Evaluation eval = new Evaluation(Train);                     precisionPerClass[j][classIndex] = eval.precision(classIndex); 
-                eval.evaluateModel(cls, Test);                 } 
-  
-                //Save Confusion Matrix                 accuracy[j] = (eval.correct() / eval.numInstances()) * 100; 
-                double[][] cMatrix = eval.confusionMatrix();                 overallAccuracy = overallAccuracy + accuracy[j]; 
-                try {                  
-                    String pathForMatrix = "";                 // Statistical results for this fold of 10-fold CV have been updated. 
-                    if (this.featureSelection) {  
-                        pathForMatrix = TargetPath + j + "/" + this.modelChoice + "IG" +             } 
- this.attributesToSelect + experiment + "_cMatrix.ser";              
-                    } else {             //Save the statistics from every fold to a .txt file 
-                        pathForMatrix = TargetPath + j + "/" + this.modelChoice + experiment +             accuracyCV = overallAccuracy / 10.0; 
- "_cMatrix.ser";             System.out.println("FinalAccuracy = " + accuracyCV); 
-                    }             saveStatistics(accuracy, targetPathStatistics, dataset); 
-                    FileOutputStream fileOut =             {ﾉ.} 
-                            new FileOutputStream(pathForMatrix);  
-                    ObjectOutputStream out =             } 
-                            new ObjectOutputStream(fileOut);             // Statistics have been saved 
-                    out.writeObject(cMatrix);              
-                    out.close();         } catch (Exception ex) { 
-                    fileOut.close();             System.out.println(ex); 
-                } catch (IOException i) {             ex.printStackTrace(); 
-                    i.printStackTrace();         } 
-                }     } 
+                } else { 
+                    SerializationHelper.write(TargetPath + j + "/" + modelChoice + "exp" + j + ".model", cls); 
+ 
+                } 
+                // The model has been saved. 
+ 
+                if (featureSelection) { 
+                    Test.deleteAttributeAt(0); 
+                    Train.deleteAttributeAt(0); 
+                    Train.setClassIndex(Train.numAttributes() - 1); 
+                    Test.setClassIndex(Test.numAttributes() - 1); 
+                } 
+ 
+                // In-domain evaluation 
+                Evaluation eval = new Evaluation(Train); 
+                eval.evaluateModel(cls, Test); 
+ 
                 //Save Confusion Matrix 
- 
+                double[][] cMatrix = eval.confusionMatrix(); 
+                try { 
+                    String pathForMatrix = ""; 
+                    if (this.featureSelection) { 
+                        pathForMatrix = TargetPath + j + "/" + this.modelChoice + "IG" + 
+ this.attributesToSelect + experiment + "_cMatrix.ser"; 
+                    } else { 
+                        pathForMatrix = TargetPath + j + "/" + this.modelChoice + experiment + 
+ "_cMatrix.ser"; 
+                    } 
+                    FileOutputStream fileOut = 
+                            new FileOutputStream(pathForMatrix); 
+                    ObjectOutputStream out = 
+                            new ObjectOutputStream(fileOut); 
+                    out.writeObject(cMatrix); 
+                    out.close(); 
+                    fileOut.close(); 
+                } catch (IOException i) { 
+                    i.printStackTrace(); 
+                } 
+                //Save Confusion Matrix 
  
                 //Save the statistical results for this fold. 
  
                 String summary = eval.toSummaryString("\nResults\n\n", false); 
                 String summary2 = eval.toClassDetailsString(); 
                 String summary3 = eval.toMatrixString(); 
+                totalEvaluation = totalEvaluation + summary + summary2 + summary3; 
  
+                auc[j] = eval.weightedAreaUnderROC(); 
+                precision[j] = eval.weightedPrecision(); 
+                recall[j] = eval.weightedRecall(); 
+                tpRate[j] = eval.weightedTruePositiveRate(); 
+                {.} //CODE OMITTED 
+                int numClasses = Test.numClasses(); 
+ 
+                for (int classIndex = 0; classIndex < numClasses; classIndex++) { 
+                    weightedrecallPerClass[j][classIndex] = eval.weightedRecall(classIndex); 
+                } 
+                for (int classIndex = 0; classIndex < numClasses; classIndex++) { 
+                    recallPerClass[j][classIndex] = eval.recall(classIndex); 
+                    precisionPerClass[j][classIndex] = eval.precision(classIndex); 
+                } 
+ 
+                accuracy[j] = (eval.correct() / eval.numInstances()) * 100; 
+                overallAccuracy = overallAccuracy + accuracy[j]; 
+                 
+                // Statistical results for this fold of 10-fold CV have been updated. 
+ 
+            } 
+             
+            //Save the statistics from every fold to a .txt file 
+            accuracyCV = overallAccuracy / 10.0; 
+            System.out.println("FinalAccuracy = " + accuracyCV); 
+            saveStatistics(accuracy, targetPathStatistics, dataset); 
+            {.} 
+ 
+            } 
+            // Statistics have been saved 
+             
+        } catch (Exception ex) { 
+            System.out.println(ex); 
+            ex.printStackTrace(); 
+        } 
+    } 
  

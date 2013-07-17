@@ -1,4 +1,4 @@
- 
+  
 Abstract 
  
 There are many community detection algorithms nowadays, but no hiding community 
@@ -37,6 +37,7 @@ pages 48-49.
  
  
   
+ 
 Contents 
  
 I. Introduction ..................................................................................................................... 1 
@@ -72,8 +73,8 @@ B. Erd?s–Rényi model ...........................................................
 C. Barabási–Albert model ........................................................................................ 35 
 4. The relationship between the real networks and hiding methods in infomap ....... 37 
 A. Zachary's karate club ........................................................................................... 37 
- 
   
+ 
 B. American College football ................................................................................... 39 
 C. Neural network .................................................................................................... 41 
 5. The relationship between the random graphs and hiding methods in infomap .... 43 
@@ -92,8 +93,8 @@ VI. Bibliography ...............................................................
  
  
  
+ 1 
  
-  
 I. Introduction 
 There is a variety type of networks in the world. According to different topics, 
 network can be divided into social network, biological network such as food web, 
@@ -109,7 +110,7 @@ and Newman, 2008). (See Fig2)
  
 Figure1. Community Structure (Newman and Girvan, 2004, p.1) 
   
-Figure2. Hierarchical structure (Lancichinetti, Fortunato, and Kert´esz, 2009, p.3) 
+Figure2. Hierarchical structure (Lancichinetti, Fortunato, and Kert e´sz, 2009, p.3) 
 Vertices or communities which are grouped in the same clusters often share the same 
 common properties. They have more interaction with each other than other clusters. For 
 instance, in biological network, proteins in the cells are clustered together with the same 
@@ -117,8 +118,8 @@ function. In the citation network, pages are in the same group because they have
 related topic (Girvan and Newman, 2002). In social networks, bar associations are a set 
 of people they are all lawyers. 
   
-1 
-  
+ 2 
+ 
 In networks, communities have become more important because they can improve the 
 efficiency and contribute to the better performance. For example, in social networks, if 
 customers are classified based on their interests in online bookstores, websites can 
@@ -154,8 +155,8 @@ Systems” is classified in “Physics” community. It represents a serious problem. 
 networks, it will expose security department to dangerous situation since hackers can 
 easily malfunction the networks through attacking this community. As a result, 
 communities are not safe anymore. They confront security and privacy problems.  
-2 
-  
+ 3 
+ 
  
 Figure3. Community Structure Example ((Rosvall and Bergstrom, 2008, p.1121)  
 In order to solve the problems, if we can block or hide specific and important 
@@ -175,26 +176,11 @@ We have to detect communities before using hiding methods. Thus, we choose two
 different already-known community detection algorithms at first. Then, we implement 
 four hiding methods to the communities after the division of the network. Next, we use 
 this modified network as an input data of the detection algorithm, and apply such 
-3 
-  
+ 4 
+ 
 algorithm again. Finally, we compare the original community structure with the latest 
 community structure to check if the specified community still exists. (See Fig5 and 
 Fig6) 
-Hiding Programme 
-Community Detection 
-Hiding Methods Testing 
-Algorithms 
-Method 1  
-OSLOM Jaccard Index (Ji) 
-(adding by degree) 
-Method 2  
-Infomap Fowlkes-Mallows (fm) 
-(removing redundant ) 
-Method 3   
-(adding by degree and 
-random) 
-Method 4  
-(adding randomly) 
  
 Figure5. Simple System Framework 
  
@@ -216,8 +202,26 @@ also introduce some background information of hiding methods, the way to check
 results, and some properties of networks. Section III is going to state the ideas of each 
 hiding method in detail. Section IV is devoted to analysing the experimental data of each 
 hiding method in each network in each community detection algorithm, and then doing 
-4 
-  
+Hiding Programme 
+Community Detection 
+Algorithms 
+OSLOM 
+Infomap 
+Hiding Methods 
+Method 1  
+(adding by degree) 
+Method 2  
+(removing redundant ) 
+Method 3   
+(adding by degree and 
+random) 
+Method 4  
+(adding randomly) 
+Testing 
+Jaccard Index (Ji) 
+Fowlkes-Mallows (fm) 
+ 5 
+ 
 comparison and evaluation between them. In section V, we are going to summarize the 
 hiding approaches and what we are going to implement in the future.  
 II. Related Work 
@@ -247,18 +251,17 @@ of vertices. One feature of this model is that there are no multiple edges
 between nodes. (Holme, Kim, Yoon, and Han, 2002) Besides, the degree of 
 each node is similar. (See Fig7(a)) 
   
-Figure7(a). The formation of ER model (b) The formation of WS model (Barab´asi, Albert, 
+Figure7(a). The formation of ER model (b) The formation of WS model (Barab a´si, Albert, 
 and Jeong, 1999, p.5) 
-5 
-  
+ 6 
+ 
 b. BA model 
  Barabási–Albert model (BA model) is a scale-free network which is the 
 network with power-law tail. It means that most of the nodes have few 
 neighbours. (Barabási–Albert, 1999) (See Fig8) play important roles in 
 scale-free network. (Albert, Jeong, and Barabási, 2000) The network is 
 generated by the process of preferential attachment. (Dekker, and Colbert, 
-2004) At first, there are no edges but m nodes. At each time step, a node is 
-0 
+2004) At first, there are no edges but m0 nodes. At each time step, a node is 
 added progressively, and the edges are added according to the degree of 
 nodes that they connect. The BA model leads to low clustering in networks. 
 (Holme, Kim, Yoon, and Han, 2002) It definitely affects the result of 
@@ -274,31 +277,35 @@ each cluster is really high and there are some shortcuts between clusters.
 Therefore, one of the features of this model is that the connection between 
 nodes in the same clusters is much higher than that between clusters. (Liu, 
 2012)  
-1 1
- 
-q q
-1 1
-1 1
-1
-q
-1
-1
-q
-1
-1
-1
-1
-1
-q
-q
-1
-1
-1
-1
  
 Figure9. WS model (Liu, 2012, p.1)  
-6 
-  
+1
+q
+1
+1
+1
+q
+1
+1
+1
+q
+1
+1
+1
+q
+1
+1
+1
+q
+1
+1
+1
+q
+1
+1
+ 
+ 7 
+ 
 B. Real network 
   On the contrary, compared to random graph, real networks are inhomogeneous 
 distribution. There are huge differences between the degrees of vertices. The 
@@ -327,8 +334,8 @@ mentioned in section I., we cannot remove edges randomly because it might
 cause the disconnection between pairs of nodes. Consequently, after using this 
 hiding method, the ability of nodes should not have a huge impact. Moreover, if 
 communities suffer from low level of attack (the small fractions of 
-7 
-  
+ 8 
+ 
 vertices/edges removed), rewiring some edges can increase robustness 
 effectively against the attack. (Beygelzimer, Grinstein, Linsker, and Rish, 2005) 
 In brief, we can infer that there is a connection between hiding method about 
@@ -366,8 +373,8 @@ name of each node in different group is reused. Because of the names of clusters
 the random walk can be shown with a series code again but the size is much 
 smaller than previous one. Finally, it represents only the modules name. (Rosvall, 
 and Bergstrom, 2008)  
-8 
-  
+ 9 
+ 
  
 Figure11. The process of Infomap community detection algorithm  
                    (Rosvall and Bergstrom, 2008, p.1119) 
@@ -390,8 +397,8 @@ significance of clusters is decided by fitness measure. Because of a parameter P
 which is set as constant in initial and indicates, it is difficult to detect random 
 networks. In other words, the result might just contain few clusters. Second one is 
 “homeless vertices”. If the input network is a random network, most of the nodes 
-9 
-  
+ 10 
+ 
 are seen as homeless. That is to say, nodes are not divided into any communities. 
 The third is “overlapping communities”. The communities might intersect with 
 each other and share some nodes. These nodes could be classified into numbers of 
@@ -422,23 +429,24 @@ parameters: N11, N00, N10, and N01.
   N11 is the number of pairs of nodes that in the same clusters (C1, C1) 
   N00 is the number of pairs of nodes that in the same clusters (C2, C2)  
 N10 is the number of pairs of nodes that in the different clusters (C1, C2) 
-10 
-  
+ 11 
+ 
 N01 is the number of pairs of nodes that in the different clusters (C2, C1) 
-  
-    
-                   
+                 
+      
+ 
  
                       
 A. Jaccard Index 
+                                 
    
-                                        
             
+       
 B. Fowlkes-Mallows Index 
+                                 
    
-                                        
-     
-              
+                   
+       
 Since understanding the construction of different networks and their features, we can 
 find their weakness and then develop the efficient hiding strategies based on these points. 
 Furthermore, the robustness provides a new direction of devising hiding methods. 
@@ -467,8 +475,8 @@ the different clusters, we add inter-communities edges, and remove the intra-com
 edges to hide community. Moreover, we set parameters to control the performance of 
 each method in order to hide efficiently.  
   Before introducing hiding methods, we divide them into two classes based on 
-11 
-  
+ 12 
+ 
 different main ideas. Besides, in this section, if we mentioned community 0 or the 
 targeted community, it indicates the community we would like to hide.   
  
@@ -492,8 +500,8 @@ Figure14. (a)(b) The example of add inter-communities edge based on lower degree
 based on lower degree of node. 
 (b) After using community detection algorithm, the node1 is classified into the other 
 community. The structure of community1 and community2 has changed. 
-12 
-  
+ 13 
+ 
   On the other hand, if the node with higher degree, we usually have to add more 
 inter-community edges to break the community structure than the nodes with lower 
 degree, since the higher degree can be one of criteria to judge the importance of point. 
@@ -523,8 +531,8 @@ If the node in the other community satisfies following condition,
  
 Then, we link the edge from x to y 
 Following is the example, 
-13 
-  
+ 14 
+ 
   
         Figure16. The example of range 
   As we just mentioned above, the algorithm starts from the node with the lowest 
@@ -539,8 +547,8 @@ numbers of nodes should be selected. It is defined by,
 Figure17. The example of using percentage. 
 Following provides the simple process of method 0 and its pseudo code. (See Fig18 
 and Fig19) 
-14 
-  
+ 15 
+ 
  
 Figure18. Simple Process Diagram for method 0 
  
@@ -554,8 +562,8 @@ different from destroying, deleting edges without definite plan might result in
 disconnection in the community. Accordingly, researching the redundant edges to 
 delete is the main idea of this method. 
   As we mentioned in II.2., robustness represents the edge tolerance which means 
-15 
-  
+ 16 
+ 
 that community keeps original even though suffering from attack. The measure of 
 robustness is related to edge connectivity which is the minimum number of 
 removing edges causes the independence between nodes. In the other words, we 
@@ -575,8 +583,8 @@ cycle. So, we can delete the edge between this point and last point. (See Fig22)
   
 Figure21.BFS                Figure22. An example of deleting edge in BFS 
  
-16 
-  
+ 17 
+ 
 Since we realize how to find the paths, there is a question that how many times 
 BFS should run. Therefore, in this method, we also set a parameter called 
 percentage_1 to decide how many edges we would like to delete.   
@@ -594,8 +602,8 @@ no intra-communities edge, it is impossible to use this method.
 seem to be a efficient method compared with method 0 and method 1. However, it is a 
 good way to do even if the efficiency might not so high. Such approach is direct, and 
 common. According to Holme, Kim, Yoon, and Han(2002), they use two different ways 
-17 
-  
+ 18 
+ 
 to design the attack strategies. One is targeted attack. The other is random failure. The 
 former one attacks the community based on some properties such as degree. The latter 
 one attacks nodes or edges randomly. But the hiding result is excellent. This is one of 
@@ -616,8 +624,8 @@ Fig27)
 Figure26. The process of method 2 
  
 Figure27. Pseudo Code for method 2 
-18 
-  
+ 19 
+ 
 The limitation of method 2 is that it cannot use in the network that only contains 
 one community since the total edges in the targeted community is zero.  
 B. Method 3 
@@ -636,8 +644,8 @@ Figure30. Pseudo Code for method 3
 Method 3 does not have any limitation. It might add both inter-communities edges 
 and intra-communities edge.  
  
-19 
-  
+ 20 
+ 
 C. Modified methods 
   We designed modified method 2 and modified method 3 after doing the testing. Since 
 the number of adding and removing edges was not enough in some cases, the similar 
@@ -676,8 +684,8 @@ graphs. This part can be divided into three types, BA, ER, and WS model. Due to 
 different formation, we can examine if all hiding methods can be used in these networks 
 and which method is the most helpful. Furthermore, because the structure of random 
 graphs is quite distinct from real networks, we can compare the result of random graphs 
-20 
-  
+ 21 
+ 
 to real networks, 
   Besides, as mentioned in II.3., we introduced two community detection algorithms. 
 One is OSLOM, and the other is infomap. It is notable that these two methods will 
@@ -716,8 +724,8 @@ community we would like to hide.
  
  
  
-21 
-  
+ 22 
+ 
 1. The Relationship between Percentage and Range in Method 0 
   Since there are two parameters that have an impact on the hiding result, we are going 
 to test which one is more significant. Following are the experiment data: (See Figure31) 
@@ -725,37 +733,8 @@ to test which one is more significant. Following are the experiment data: (See F
 OSLOM, 
 Assuming range is constant, and equal to 1, (See Fig31(a)) 
 Assuming percentage_0 is constant, and equal to 0.1, (See Fig31(b)) 
-0.05 
-0.1 
-100 100 
-0.2 
-0.4 
-0.3 0.3  
-0.5 
-80 0.6 80 
-0.7 0.8 0.9  
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm Fm 
-0 0 
-0 0.5 1 0 2 4 6 
-Percentage_0 Range 
-(b) 
-(a) 
   
 Figure31(a)(b). Find the relation between percentage_0 and range 
-100 
-80 
-60 
-Ji 
-40 
-Fm 
-20 
-0 
-1 3 5 7 9 
-(percentage,range) 
  
 Figure31(c). Find the relation between percentage_0 and range  
 These charts show the connection between percentage_0 and range. There was a 
@@ -770,11 +749,60 @@ Fi and Rm fell down dramatically. As a result, if percentage_0 and range both go
 efficient for hiding.  
 To summarize, the percentage to controls how many nodes in the targeted community 
 should link is more important than the range that controls the number of nodes to be linked 
-22 
+0.05 .1 0.2 
+0.3 0.4 
+0.6 0.7 0.8 0.9 0.5 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.5 1 
+P
+e
+rc
+e
+n
+t 
+Percentage_0 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 2 4 6 
+P
+e
+rc
+e
+n
+t 
+Range 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 3 5 7 9 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Ji 
+Fm 
+(a) (b) 
+ 23 
  
-Percent 
-Percent 
-Percent  
 in other communities. Besides, range cannot be use alone. Furthermore, if both parameters 
 increased, it is more powerful and efficient than only one increased. 
 2. The Relationship between Real Networks and Hiding Methods in OSLOM 
@@ -786,78 +814,87 @@ edges (M. Girvan and M. E. J. Newman, 2002), and neural network with 297 nodes a
 small, medium, and big size of networks.  
 As described above, percentage_0 and range have to increase simultaneously. 
 Accordingly, we select nine pairs of parameters for method 0 to test such as (0.1,1), 
-(0.2,2), (0.3,3) …. to (0.9,9).  
+(0.2,2), (0.3,3) . to (0.9,9).  
  Following are the results of different hiding methods applying in different networks. 
 We will analyse the feature of each methods at first, and then compare methods in each 
 networks. Finally, we will select the most efficient method for each size of networks. 
 A. Zachary's karate club 
-Method 0 Method 1 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 
-20 
-Fm Fm 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-Method 2 Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm Fm 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure32. The hiding results of each method in Zachary's karate club in OSLOM 
-23 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Method 0 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 1 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 3 
+Ji 
+Fm 
+ 24 
  
-Percent Percent 
-Percent Percent  
-Method 0 Method 1 
-300 300 
-250 250 
-200 200 
-150 150 
-100 100 
-size size 
-50 50 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-Method 2 Method 3 
-300 300 
-250 250 
-200 200 
-150 150 
-100 100 
-size size 
-50 50 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure33. The size of each method in Zachary's karate club in OSLOM 
-Modified Method 2 Modified Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 
-20 
-Fm Fm 
-0 0 
-1 501 1001 1501 1 2001 4001 6001 
-times times 
  
 Figure34. The hiding results of modified method 2 and modified method 3 in 
 Zachary's karate club in OSLOM 
@@ -872,11 +909,98 @@ doing this. (See Fig32 and Fig33)
  In method 1, this method can easily hide the targeted community when the 
 percentage is 0.1. One of the reasons might be that Zachary's karate club is a small 
 network. Thus, the possibility to have cycles inside the community is smaller. 
-24 
+0 
+50 
+100 
+150 
+200 
+250 
+300 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
  
-Percent Size Size 
-Size Size 
-Percent  
+(percentage,range) 
+Method 0 
+size 
+0 
+50 
+100 
+150 
+200 
+250 
+300 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 1 
+size 
+0 
+50 
+100 
+150 
+200 
+250 
+300 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 2 
+size 
+0 
+50 
+100 
+150 
+200 
+250 
+300 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 3 
+size 
+0 
+20 
+40 
+60 
+80 
+100 
+1 501 1001 1501 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2001 4001 6001 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 3 
+Ji 
+Fm 
+ 25 
+ 
 Furthermore, the number of rewiring edges is defined by the percentage to the 
 number of nodes in the community, so it is hard to see the change for Ji and Fm in 
 this method. (See in section IV.2.B.) Besides, we found that it seems stable even if 
@@ -915,8 +1039,8 @@ times than the total edges in the network. Therefore, there is no difference bet
 these methods in this case.   
 After examining the result in each method, we are going to evaluate which 
 method is the most efficient in this network. In terms of hiding result, we are going 
-25 
-  
+ 26 
+ 
 to design a table. If the hiding results of each method achieve one of the goals that 
 Ji is less than 65% and Fm is less than 70%, we will select the best hiding results 
 with the minimum of the size in the scattered graph. Finally, we take the other aim 
@@ -942,84 +1066,170 @@ Ji and Fm, it removed 172 edges which are 20 times as many as method 2.
 Therefore, in this case, the performance from the best to the worst is: Method 2 > 
 Modified Method 2 > Method 3 > Method 1 > Method 0 > Modified Method 3    
 B. American College football 
-Method 0 Method 1 
-100 80 
+ 
+0 
+20 
+40 
+60 
 80 
-60 
-60 
-40 
-40 
-Ji Ji 
-20 
-20 
-Fm Fm 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
- 
-26 
- 
-Percent 
-Percent  
-Method 2 Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm Fm 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
-Figure35. The hiding results of each method in American College football  
-Method 0 Method 1 
-30 
-500 
-400 
-20 
-300 
-200 
-10 
-size size 
 100 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
+1 2 3 4 5 6 7 8 9 10 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Method 0 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 1 
+Ji 
+Fm 
+ 27 
  
-Method 2 Method 3 
-500 500 
-400 400 
-300 300 
-200 200 
-size size 
-100 100 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
+Figure35. The hiding results of each method in American College football  
+ 
  
 Figure36. The size of each method in American College football  
-Modified Method 2 Modified Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji 
-Ji 
-20 20 
-Fm Fm 
-0 0 
-1 501 1001 1501 1 2001 4001 6001 
-times times 
 Figure37. The hiding results of modified method 2 and method 3 in American 
 College football  
  From figure35, in method 1, as we described above, even if method 1 could still 
 reach the target at percentage 0.1 as in Zachary's karate club, there was a slight 
-27 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 3 
+Ji 
+Fm 
+0 
+100 
+200 
+300 
+400 
+500 
+1 2 3 4 5 6 7 8 9 10 
+Si
+ze
  
-Percent Size Size Percent 
-Size Size Percent 
-Percent  
+(percentage,range) 
+Method 0 
+size 
+0 
+10 
+20 
+30 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 1 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 2 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 3 
+size 
+0 
+20 
+40 
+60 
+80 
+100 
+1 501 1001 1501 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2001 4001 6001 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 3 
+Ji 
+Fm 
+ 28 
+ 
 difference. Method 1 fell from (42.36%, 62.87%) to (28.84%, 47.14%) at percentage 
 0.4 compared to (Ji, Fm) remained constant from the beginning to the end in 
 Zachary's karate club. In other words, this method kept deleting edges from 
@@ -1058,8 +1268,8 @@ in the network, there is a doubt if using total edges in the network is a right 
 hide community.  
   After the analysis of hiding methods in the American College football network, we 
 are going to compare hiding results. Because there is no percentage in method 2 and 
-28 
-  
+ 29 
+ 
 method 3 which meet the hiding target that Ji is less than 65% and Fm is less than 
 70%, such methods cannot compare with other methods.  
 Method (Percentage, Range) (Ji, Fm) size note 
@@ -1078,71 +1288,82 @@ hiding goal and removed at least number of edges in networks. Consequently, in
 American College football, the performance from the best to the worst is: method 1 > 
 method 0 > modified method 2 > modified method 3. 
 C. Neural network 
-Method 0 Method 1 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 
-20 
-Fm Fm 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-Method 2 Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm Fm 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure38. The hiding results of each method in neural network in OSLOM 
-29 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Method 0 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 1 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 3 
+Ji 
+Fm 
+ 30 
  
-Percent Percent 
-Percent Percent  
-Method 0 Method 1 
-500 500 
-400 400 
-300 300 
-200 200 
-size size 
-100 100 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-Method 2 Method 3 
-500 500 
-400 400 
-300 300 
-200 200 
-size size 
-100 100 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure39. The size of each method in neural network in OSLOM 
-Modified Method 2 Modified Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 
-20 
-Fm Fm 
-0 0 
-1 501 1001 1501 1 2001 4001 6001 
-times times 
  
 Figure40. The hiding results of modified method 2 and method 3 in neural network 
 in OSLOM 
@@ -1157,11 +1378,94 @@ larger, the connection in networks is more complex. For example, the nodes we li
 with might build several edges with other nodes we connect to as well. Hence, the 
 more edges to be added have the higher possibility to the worse result. (See Fig35, 
 Fig37. Fig38 and Fig40),  
-30 
+0 
+100 
+200 
+300 
+400 
+500 
+1 2 3 4 5 6 7 8 9 10 
+Si
+ze
  
-Percent Size Size 
-Size Size 
-Percent  
+(percentage,range) 
+Method 0 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 1 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 2 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 3 
+size 
+0 
+20 
+40 
+60 
+80 
+100 
+1 501 1001 1501 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2001 4001 6001 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 3 
+Ji 
+Fm 
+ 31 
+ 
   In method 1, the result is similar to implement in the Zachary's karate club that had 
 removed all possible edges at percentage 0.1. 
   In method 2 and method 3, the hiding results are good. Both of them seem to be 
@@ -1200,8 +1504,8 @@ Modified method 3  (54.39%, 69.31%) 500
 threshold is like the best performance that each method can achieve when employing 
 in this network. In other words, the value means the network has reached the 
 saturated situation. In method 0, method 2 and method 3, the threshold happened 
-31 
-  
+ 32 
+ 
 because the nodes in other communities have been almost linked. The number of 
 edges is enough to combine the targeted community into other communities. In 
 method 1, the reason is that intra-community edges have been removed by previous 
@@ -1240,8 +1544,8 @@ the property of OSLOM and the complication in networks.
 ones because latter ones always add thousand times than former ones. However, it is 
 not the truth if method 2 and method 3 are useless. Therefore, original methods and 
 modified methods both have valid contributions towards different networks.    
-32 
-  
+ 33 
+ 
   In these real networks, method 2 is most useful in Zachary's karate club and neural 
 network and method 1 is the best in American College football. 
 3. The relationship between the random graphs and hiding methods in OSLOM 
@@ -1260,49 +1564,80 @@ adds inter-community edges based on the number of edges in the community but the
 number of edges is zero. Due to these causes, it is impossible to run the methods in this 
 kind of network.  
 A. Watts–Strogatz model  
-Method 0 Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 
-20 
-Fm Fm 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
 Figure41. The hiding results of method 0 and method 3 in WS model  
-Modified Method 2 Modified Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji 
-Ji 
-20 20 
-Fm Fm 
-0 0 
-0 500 1000 1500 1 2001 4001 6001 
-times times 
  
 Figure42. The hiding results of modified methods in WS model  
-33 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Method 0 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 3 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 500 1000 1500 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2001 4001 6001 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 3 
+Ji 
+Fm 
+ 34 
  
-Percent Percent 
-Percent 
-Percent  
-Method 0 Method 3 
-500 500 
-400 400 
-300 300 
-200 200 
-size size 
-100 100 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
 Figure43. The size of method 0 and method 3 in WS model  
   From figure 41 and 42, through observing the data of method 0 and modified method 
@@ -1322,46 +1657,73 @@ point that even if modified method 3 added around 4500 edges, there was no big
 difference in hiding results. We guess it because the community structure of WS model 
 is too hard to break.  
 B. Erd?s–Rényi model 
-Method 0 Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji 
-Ji 
-20 20 
-Fm Fm 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
 Figure44. The hiding results of method 0 and method 3 in ER model  
-34 
+0 
+100 
+200 
+300 
+400 
+500 
+1 2 3 4 5 6 7 8 9 10 
+Si
+ze
  
-Percent Size 
-Percent Sisze  
-Modified Method 2 Modified Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
+(percentage,range) 
+Method 0 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+0 0.2 0.4 0.6 0.8 1 
+Si
+sz
+e
+ 
+percentage 
+Method 3 
+size 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Method 0 
+Ji 
 Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 3 
+Ji 
 Fm 
-0 0 
-0 500 1000 1500 1 2001 4001 6001 
-times times 
+ 35 
+ 
  
 Figure45. The hiding results of modified methods in ER model  
-Method 0 Method 3 
-6000 6000 
-4000 4000 
-2000 2000 
-size size 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
 Figure46. The size of method 0 and method 3 in ER model  
   From figure 44 and figure 45, we discovered that method 3 is the most powerful 
@@ -1369,46 +1731,102 @@ because Ji and Fm sometimes decreased more than other methods with no change of
 percentage. Even though method 3 added 4500 edges, the result remained steady as WS 
 model.  
 C. Barabási–Albert model 
-Method 0 Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm Fm 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
 Figure47. The hiding results of method 0 and method 3 in BA model  
-35 
+0 
+20 
+40 
+60 
+80 
+100 
+0 500 1000 1500 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2001 4001 6001 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 3 
+Ji 
+Fm 
+0 
+2000 
+4000 
+6000 
+1 2 3 4 5 6 7 8 9 10 
+Si
+ze
  
-Percent Size Percent 
-Percent Size 
-Percent  
-Modified Method 2 Modified Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
+(percentage,range) 
+Method 0 
+size 
+0 
+2000 
+4000 
+6000 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 3 
+size 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Method 0 
+Ji 
 Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 3 
+Ji 
 Fm 
-0 0 
-0 500 1000 1500 1 2001 4001 6001 
-times times 
+ 36 
+ 
  
 Figure48. The hiding results of modified methods in BA model  
-Method 0 Method 3 
-6000 6000 
-4000 4000 
-2000 2000 
-size size 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
 Figure49. The size of method 0 and method 3 in BA model  
   From figure 49, in modified method 2, we could find some drops of Ji and Fm around 
@@ -1431,83 +1849,172 @@ community. Finally, we guessed this only difference is because BA model has a sl
 different structure from ER and WS model.  
  
  
-36 
+0 
+20 
+40 
+60 
+80 
+100 
+0 500 1000 1500 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2001 4001 6001 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 3 
+Ji 
+Fm 
+0 
+2000 
+4000 
+6000 
+1 2 3 4 5 6 7 8 9 10 
+Si
+ze
  
-Size Percent 
-Size 
-Percent  
+(percentage,range) 
+Method 0 
+size 
+0 
+2000 
+4000 
+6000 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 3 
+size 
+ 37 
+ 
 4. The relationship between the real networks and hiding methods in infomap  
 In section II.3., we understood the formation of infomap, and OSLOM. Therefore, in 
 this section, we are going to use infomap as a community detection algorithm to test the 
 relationship between the size of real networks, and then compare the results with 
 OSLOM.  
 A. Zachary's karate club 
-Method 0 Method 1 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm 
-Fm 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-Method 2 Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm Fm 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure50. The hiding results of each method in Zachary's karate club in infomap 
-Method 0 Method 1 
-500 500 
-400 400 
-300 300 
-200 200 
-size 
-size 
-100 100 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-37 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Method 0 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 1 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 3 
+Ji 
+Fm 
+0 
+100 
+200 
+300 
+400 
+500 
+1 2 3 4 5 6 7 8 9 10 
+Si
+ze
  
-Size Percent Percent 
-Size Percent Percent  
-Method 2 Method 3 
-500 500 
-400 400 
-300 300 
-200 200 
-size size 
-100 100 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
+(percentage,range) 
+Method 0 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 1 
+size 
+ 38 
+ 
  
 Figure51. The size of each method in Zachary's karate club in infomap  
-Modified Method 2 Modified Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm 
-Fm 
-0 0 
-0 500 1000 1500 1 2001 4001 6001 
-times times 
  
 Figure52. The hiding results of modified methods in Zachary's karate club in infomap 
   From figure50, in method 0, there is no hiding result that meets the aim. On the 
@@ -1530,83 +2037,176 @@ Table4. The comparison between hiding methods for Zachary's karate club in infom
 In general, the best hiding result of each hiding method in OSLOM is 
 approximately four times than in infomap. However, the size of each method in 
 OSLOM is usually worse than in infomap. To sum up, through analysing table1 and 
-38 
+0 
+100 
+200 
+300 
+400 
+500 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
  
-Percent Size 
-Size 
-Percent  
+percentage 
+Method 2 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 3 
+size 
+0 
+20 
+40 
+60 
+80 
+100 
+0 500 1000 1500 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2001 4001 6001 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 3 
+Ji 
+Fm 
+ 39 
+ 
 table4, we can found that, method 0 and method 1 in infomap are better than OSLOM 
 due to the fewer number of size. On the contrary, remaining methods in OSLOM are 
 more efficient than in infomap. Modified methods are both better used in OSLOM 
 than infomap assuming the number of adding edges is the same. Besides, the method 
 1 is the most powerful and effective one in infomap, while it is method 2 in OSLOM.  
 B. American College football 
-Method 0 Method 1 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm 
-Fm 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-Method 2 Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm Fm 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure53. The hiding results of each method in American College football in infomap 
-Method 0 Method 1 
-500 500 
-400 400 
-300 300 
-200 200 
-size 
-size 
-100 100 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-39 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Method 0 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 1 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 3 
+Ji 
+Fm 
+0 
+100 
+200 
+300 
+400 
+500 
+1 2 3 4 5 6 7 8 9 10 
+Si
+ze
  
-Size Percent Percent 
-Size Percent Percent  
-Method 2 Method 3 
-500 500 
-400 400 
-300 300 
-200 200 
-size size 
-100 100 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
+(percentage,range) 
+Method 0 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 1 
+size 
+ 40 
+ 
  
 Figure54. The size of each method in American College football in infomap 
-Modified Method 2 Modified Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm 
-Fm 
-0 0 
-0 500 1000 1500 1 2001 4001 6001 
-times times 
  
 Figure55. The hiding results of modified methods in American College football in 
 infomap 
@@ -1629,85 +2229,208 @@ Through comparing figure 53 with figure 33, we found that method 0 was useless i
 infomap but useful in OSLOM. Neither method 2 nor method 3 is useful in both 
 community detection algorithms. Moreover, relating to method 1, infomap have to 
 remove more edges than OSLOM in this case, so method 1 in OSLOM is better than in 
-40 
+0 
+100 
+200 
+300 
+400 
+500 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
  
-Percent Size 
-Size 
-Percent  
+percentage 
+Method 2 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 3 
+size 
+0 
+20 
+40 
+60 
+80 
+100 
+0 500 1000 1500 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2001 4001 6001 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 3 
+Ji 
+Fm 
+ 41 
+ 
 infomap. Besides, assuming the same number of adding edges, the hiding results of 
 modified methods in OSLOM are still better than in infomap. Finally, method 1 is the 
 most suitable one in the both community detection algorithms.  
 C. Neural network 
-Method 0 Method 1 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm 
-Fm 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-Method 2 Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm Fm 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure56. The hiding results of each method in neural network in infomap 
-Method 0 Method 1 
-700 700 
-600 600 
-500 500 
-400 400 
-300 300 
-200 200 
-size 
-size 
-100 100 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-Method 2 Method 3 
-700 700 
-600 600 
-500 500 
-400 400 
-300 300 
-200 200 
-size size 
-100 100 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure57. The size of each method in neural network in infomap 
-41 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Method 0 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 1 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 3 
+Ji 
+Fm 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+1 2 3 4 5 6 7 8 9 10 
+Si
+ze
  
-Size Size Percent Percent 
-Size Size Percent Percent  
-Modified Method 2 Modified Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm 
-Fm 
-0 0 
-0 500 1000 1500 1 2001 4001 6001 
-times times 
+(percentage,range) 
+Method 0 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 1 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 2 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 3 
+size 
+ 42 
+ 
  
 Figure58. The hiding results of modified methods in neural network in infomap 
 From figure 56, there is an interesting point that except for method 0, the remaining 
@@ -1739,10 +2462,42 @@ cannot demonstrate such method is also the most proper one in the same case in i
 Besides, under the same assumption that the size is the same, OSLOM is usually better 
 than infomap in the most of the cases. Therefore, we infer that the community structure 
 in infomap is harder and more complete than in OSLOM. (Discussed in the next section)  
-42 
+0 
+20 
+40 
+60 
+80 
+100 
+0 500 1000 1500 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2001 4001 6001 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 3 
+Ji 
+Fm 
+ 43 
  
-Percent 
-Percent  
 5. The relationship between the random graphs and hiding methods in infomap  
   The experimental data is the same as VI.3. It is notable that there must be significant 
 differences between the OSLOM and infomap since OSLOM classified the networks 
@@ -1753,76 +2508,112 @@ going to show the table and figure of hiding methods, and then analyse if there 
 unexpected data in each hiding methods. Finally, we will do comparison with the results 
 of real network in infomap, and random graphs in OSLOM.  
 A. WS model 
-Method 0 Method 1 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm 
-Fm 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-Method 2 Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm Fm 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure59. The hiding results of each method in WS model in infomap  
-Method 0 Method 1 
-700 700 
-600 600 
-500 500 
-400 400 
-300 300 
-200 200 
-size 
-size 
-100 100 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-43 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Method 0 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 1 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 3 
+Ji 
+Fm 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+1 2 3 4 5 6 7 8 9 10 
+Si
+ze
  
-Size Percent Percent 
-Size Percent Percent  
-Method 2 Method 3 
-700 700 
-600 600 
-500 500 
-400 400 
-300 300 
-200 200 
-size size 
-100 100 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
+(percentage,range) 
+Method 0 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 1 
+size 
+ 44 
+ 
  
 Figure60. The size of each method in WS model in infomap 
-Modified Method 2 Modified Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm 
-Fm 
-0 0 
-0 500 1000 1500 1 2001 4001 6001 
-times times 
  
 Figure61. The hiding results of modified methods in WS model in infomap  
 From figure60, we found there is a weird trend that the percentage became higher 
@@ -1834,8 +2625,9 @@ accidentally. However, this phenomenon seldom happened in previous cases.
 Following is the table that presents their performance. From this table, the rank of the 
 performance from the best to the worst: Method 2 > Method 0 > Method 3 > Method 1 > 
 Modified method 2 > Modified method 3 
-Method (Percentage, (Ji, Fm) size 
+Method (Percentage, 
 Range) 
+(Ji, Fm) size 
 0 (1, 0.1) (38.89%, 56.32%) 3 
 1 (0.1) (24.11%, 41.34%) 4.3 
 2 (0.1) (38.30%, 56%) 1 
@@ -1845,83 +2637,210 @@ Modified method 3  (10.37%, 30.69%) 500
 Table7. The comparison between hiding methods for WS model in infomap 
  
  
-44 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
  
-Percent Size 
-Size 
-Percent  
+percentage 
+Method 2 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 3 
+size 
+0 
+20 
+40 
+60 
+80 
+100 
+0 500 1000 1500 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2001 4001 6001 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 3 
+Ji 
+Fm 
+ 45 
+ 
 B. ER model 
  
-Method 0 Method 1 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm 
-Fm 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-Method 2 Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm Fm 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure62. The hiding results of each method in ER model in infomap  
-Method 0 Method 1 
-700 700 
-600 600 
-500 500 
-400 400 
-300 300 
-200 200 
-size 
-size 
-100 100 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-Method 2 Method 3 
-700 700 
-600 600 
-500 500 
-400 400 
-300 300 
-200 200 
-size size 
-100 100 
-0 0 
-0 0.5 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure63. The size of each method in ER model in infomap 
-45 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Method 0 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 1 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 3 
+Ji 
+Fm 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+1 2 3 4 5 6 7 8 9 10 
+Si
+ze
  
-Size Size Percent Percent 
-Size Size Percent Percent  
-Modified Method 2 Modified Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm 
-Fm 
-0 0 
-0 500 1000 1500 1 2001 4001 6001 
-times times 
+(percentage,range) 
+Method 0 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 1 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+0 0.5 1 
+Si
+ze
+ 
+percentage 
+Method 2 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 3 
+size 
+ 46 
+ 
  
 Figure64. The hiding results of modified methods in ER model in infomap  
   From figure 63, in method 0, the trend is just like WS model. Therefore, we 
@@ -1929,8 +2848,9 @@ speculated that it is influenced by the community detection algorithm of infomap
 This has been proved in the next section.  
   Following is the compared table. The rank of performance: method 2 > method 0 > 
 method 3> modified method 2 > method 1> modified method 3. 
-Method (Percentage, (Ji, Fm) size 
+Method (Percentage, 
 Range) 
+(Ji, Fm) size 
 0 (1, 0.1) (41.35%, 59.08%) 2.73 
 1 (0.1) (18.94%, 36.52%) 20.65 
 2 (0.1) (48.50%, 65.67%) 1 
@@ -1939,89 +2859,222 @@ Modified method 2  (36.94%, 54.83%) 10
 Modified method 3  (14.2%, 37.56%) 500 
 Table8. The comparison between hiding methods for ER model in infomap  
 C. BA model 
-Method 0 Method 1 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm Fm 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-46 
+0 
+20 
+40 
+60 
+80 
+100 
+0 500 1000 1500 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2001 4001 6001 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 3 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+P
+e
+rc
+e
+n
+t 
+(percentage,range) 
+Method 0 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 1 
+Ji 
+Fm 
+ 47 
  
-Percent Percent 
-Percent 
-Percent  
-Method 2 Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji Ji 
-20 20 
-Fm Fm 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure65. The hiding results of each method in BA model in infomap 
-Method 0 Method 1 
-700 700 
-600 600 
-500 500 
-400 400 
-300 300 
-200 200 
-size size 
-100 100 
-0 0 
-1 2 3 4 5 6 7 8 9 10 0 0.2 0.4 0.6 0.8 1 
-(percentage,range) percentage 
  
-Method 2 Method 3 
-700 700 
-600 600 
-500 500 
-400 400 
-300 300 
-200 200 
-size size 
-100 100 
-0 0 
-0 0.2 0.4 0.6 0.8 1 0 0.2 0.4 0.6 0.8 1 
-percentage percentage 
  
 Figure66. The size of each method in BA model in infomap 
-Modified Method 2 Modified Method 3 
-100 100 
-80 80 
-60 60 
-40 40 
-Ji 
-Ji 
-20 20 
-Fm Fm 
-0 0 
-0 500 1000 1500 1 2001 4001 6001 
-times times 
  
 Figure67. The hiding results of modified methods in BA model in infomap 
   Through observing three random graphs, we think this trend is caused by infomap, 
 since this did not occur in real networks. 
   Following is the table about the performance, and the rank of these hiding methods in 
-47 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+0 0.2 0.4 0.6 0.8 1 
+P
+e
+rc
+e
+n
+t 
+percentage 
+Method 3 
+Ji 
+Fm 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+1 2 3 4 5 6 7 8 9 10 
+Si
+ze
  
-Percent Size Size Percent 
-Size Size Percent 
-Percent  
+(percentage,range) 
+Method 0 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 1 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 2 
+size 
+0 
+100 
+200 
+300 
+400 
+500 
+600 
+700 
+0 0.2 0.4 0.6 0.8 1 
+Si
+ze
+ 
+percentage 
+Method 3 
+size 
+0 
+20 
+40 
+60 
+80 
+100 
+0 500 1000 1500 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 2 
+Ji 
+Fm 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2001 4001 6001 
+P
+e
+rc
+e
+n
+t 
+times 
+Modified Method 3 
+Ji 
+Fm 
+ 48 
+ 
 BA model is: method 2 > method 0 > method 3 > modified method 2 > method 1 > 
 modified method 3 
-Method (Percentage, (Ji, Fm) size 
+Method (Percentage, 
 Range) 
+(Ji, Fm) size 
 0 (1, 0.1) (40.43%, 57.377%) 5 
 1 (0.1) (17.73%, 33.95%) 23.6 
 2 (0.1) (38.53%, 55.97%) 1.13 
@@ -2056,8 +3109,8 @@ methods in this size and types of random graph in infomap.
 football is the most similar one to the size of these random graphs modes, we take 
 American College football as a criterion to compare. In method 0, it is no use in 
 American College football even if we added 66 edges. On the other hand, the results 
-48 
-  
+ 49 
+ 
 could be reached by adding 3 edges in WS model. In method 1, the hiding results in WS 
 model are better than American College football. In method 2 and method 3, the 
 percentage of Ji and Fm decreased gradually if we added more number of edges in 
@@ -2096,8 +3149,8 @@ problems can be solved in the future work.
  
  
  
-49 
-  
+ 50 
+ 
 VI. Bibliography  
  
 Ahn, Y. Y., Bagrow, J. P., and Lehmann, S., 2010. Link communities reveal multiscale 
@@ -2136,8 +3189,8 @@ http://link.aps.org/doi/10.1103/PhysRevE.69.045104
 Crucitti, P., Latora, V., Marchiori, M., and Rapisarda, A., 2004. Error and Attack 
 Tolerance of Complex Networks. Physica A: Statistical Mechanics and its Applications 
 [e-journal] 340(1-3), pp.388-394 Available through: www.sicencedirect.com 
-50 
-  
+ 51 
+ 
  
 Dekker, Anthony H. and Colbert, Bernard D., 2004. Network robustness and graph 
 topology. Australasian Computer Science Conference [e-journal] 26, pp.359-368 
@@ -2176,8 +3229,8 @@ detection. Phys. Rev. E. [e-journal] 84(6) Available through: arXiv:1107.1155v2
 Lancichinetti, A., Fortunato, S., and Kertész, J., 2009. Detecting the overlapping and 
 hierarchical community structure in complex networks. New Journal of Physics 
 [e-journal] 11(3) Available through: http://iopscience.iop.org/1367-2630/11/3/033015/  
-51 
-  
+ 52 
+ 
  
 Lancichinetti, A., Fortunato, S., and Radicchi, F., 2008. Benchmark graphs for testing 
 community detection algorithms. Physical Review [e-journal] 78(4) Available through: 
@@ -2216,8 +3269,8 @@ Discovery in Databases - Part I, pp.408–423, September 2008
  
  
  
-52 
-  
+ 53 
+ 
 Traud, A. L., Kelsic, E. D., Mucha, P. J., and Porter, M. A., 2008. Comparing 
 Community Structure to Characteristics in Online Collegiate Social Networks. SIAM 
 Review [e-journal] 53, pp.426-543 Available through: arXiv:0809.0690v3 
@@ -2229,6 +3282,4 @@ through: http://www.nature.com/nature/journal/v406/n6794/full/406353a0.html
 Yang, Q. and Lonardi S., 2005. A Parallel Algorithm for Clustering Protein-Protein 
 Interaction Networks. In: CSBW '05 Proceedings of the 2005 IEEE Computational 
 Systems Bioinformatics Conference – Workshops. 
- 
-53 
  

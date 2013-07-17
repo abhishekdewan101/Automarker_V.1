@@ -54,6 +54,8 @@ public class pdf_to_text {
    									}
 				} catch (IOException e) {
 					e.printStackTrace();
+				} catch(java.lang.IllegalArgumentException e){
+					System.out.println("File Not converted ..."+thesisFiles[i].getName());
 				}
 			}
 		}

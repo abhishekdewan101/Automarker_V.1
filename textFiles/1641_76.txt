@@ -1,31 +1,33 @@
+ 3 
  
 Executive Summary 
  
 Modelling and analysing complex cellular pathways that underly biological activity 
 is essential for improving our understanding of health and disease. Pathway Logic 
+(PL)
 1
-(PL) is a symbolic approach for reasoning about biological entities and processes 
+ is a symbolic approach for reasoning about biological entities and processes  
 based on the rewriting logic system Maude [1]. The Pathway Logic Assistant (PLA) 
 is a tool developed by SRI International for browsing and analysing PL models 
 using various symbolic analysis methods. PL has proven useful for modelling a 
-variety of biological processes including signal transduction, metabolic pathways, 
+variety of biological processes including signal transduction,  metabolic pathways, 
 and protease networks. 
 In order to effectively exploit the inferential power of PLA, users are 
 currently required to have a good understanding of the underlying rewrite logic. 
 This project produces a graphical rule editor that could be used with integration to 
 PLA to make it more accessible to users with no background in formal logic, 
-allowing them to express rules using a natural graphical representation, which is 
+allowing them to express rules using a natural graphical representation, which i s 
 automatically mapped to the underlying logic.  
 To achieve a successful implementation, this project has explored and 
 researched the following main areas: 
 Pathway Logic and Maude: PL and Maude are the core logic that the new 
 graphical editor needs to communicate with. PL and Maude can be considered the 
 conceptual layer of the new system architecture. 
-Model representation languages and Interoperability tools: IOP is the current 
+Model representation languages and Interoperability tools:  IOP is the current 
 interoperability platform used for exchanging models and connecting various PL 
-tools in PLA. The new tool has been implemented with full integration to the 
-current platform to ensure reliability. 
-Pathway visualisation tools: This project has explored the opportunity to utilize 
+tools in PLA. The new tool has been implemented with full integration to  the 
+current platform to ensure reliability.  
+Pathway visualisation tools:  This project has explored the opportunity to utilize 
 and integrate one of the available powerful pathway visualization tools to aid the 
 analysis process to the utmost. This investigation has resulted in integration 
 unfeasibility which has led to developing a fully tailored graphical editor solution 
@@ -33,32 +35,31 @@ for PLA. User interface represents the presentation layer of the new system.
 In this project:  
 - I have created an intuitive graphical editor that will make PLA more accessible 
 to users with no formal logic background. This will make PLA a unique 
-reasoning facility with the aid of powerful graphical visualisation which other 
+reasoning facility with the aid of powerful graphical visualisat ion which other 
 systems lack. It will reduce the time required for modelling biological networks 
-dramatically with models as closest as possible to biologists mental model. 
+dramatically with models as closest as possible to biologists mental model.  
 - I explored the opportunity to integrate a number of available pathway 
 visualisation tools which resulted in the production of a new graphical tool. 
 - I exploited Java Swing and AWT GUI toolkits to represent biological entities 
 with most flexibility. The classes developed for this editor can be generalised to 
 be used in other graphical-based applications. 
                                                              
-1
- See pl.csl.sri.com 
-3 
-  
+1 See pl.csl.sri.com 
+ 4 
+ 
 Acknowledgments 
  
 I would like to thank my project supervisor, Dr Oliver Ray, for the valuable 
-information, guidance and support during this project. Thanks and appreciation 
+information, guidance and support during this project . Thanks and appreciation 
 also goes to my personal tutor, Dr Tim Kovacs, for his encouragement and 
 support. Special thanks goes to Dr Carolyn Talcott, program director of the 
-symbolic systems biology group at SRI International and others in her team for 
+symbolic systems biology group at SRI International  and others in her team for 
 their great cooperation and support to make the integration between the new 
 editor and PLA system a success. My deepest thanks go to my family, for their 
 love, understanding and continuous support. 
  
-4 
-  
+ 5 
+ 
 Table of Contents 
  
 Executive Summary ......................................................................................................... 3 
@@ -107,7 +108,7 @@ Table of Contents ..............................................................
 4.7 Planning the integration with PLA ................................................................. 37 
 5 Implementing the Editor ....................................................................................... 39 
 5.1 Development box setup ................................................................................. 39 
-5 
+ 6 
   
 5.2 JLambda for Integration ................................................................................ 39 
 5.3 Building the GUI ........................................................................................... 40 
@@ -146,18 +147,19 @@ Appendix V– Ant xml script for building PLA rule editor ........................
 Appendix VI– Survey Samples and Result Statistics ................................................... 68 
 Appendix VII– Rule Editor Source Code .................................................................. 78 
  
-6 
-   
+ 7 
+ 
 1 Introduction 
  
 Analysing biological processes like metabolism and signal transduction has 
 become a critical necessity for making inferences and proving experimental 
 hypotheses. Pathway Logic (PL), is a symbolic approach for reasoning about 
-biological entities and processes based on rewriting logic formalism called Maude 
+biological entities and processes based on rewriting logic formalism called Maude  
 [1]. PL is used mainly to formalise biologists’ mental models and analyse 
 experiments outcomes. Pathway Logic Assistant (PLA) is a tool created by SRI 
+International
 1
-International for working on PL model by applying various symbolic systems 
+ for working on PL model by applying various symbolic systems 
 analysis methods. PLA has become a handful tool for many biologists as it 
 provides reasoning and inferences power using rewrite theories. With all of its 
 great advantages, both biologists users and SRI International have proposed a 
@@ -170,13 +172,13 @@ that simplifies working with PLA to the utmost.
 The aims and objectives, deliverables and added values of this project are 
 summarised in the following sections, followed by the scope of this report and 
 how this document is structured. 
-1.1 Aims and Objectives 
+1.1  Aims and Objectives  
 The project aims to assist scientists – mainly biologists – to prove and test 
 biological hypotheses and to provide the incentive to propose new hypotheses. 
 This may lead to significant discoveries and innovations in the field of biology in 
 particular, and science in general. 
 To achieve this target, the project will provide an integrated, intuitive, and 
-easy to use graphical tool to assist biologists in editing logical rules for Pathway 
+easy to use graphical tool to assist biologists  in editing logical rules for Pathway 
 Logic networks. This would make the Pathway Logic approach more accessible to 
 users with no background in formal logic and would facilitate the construction and 
 modification of large models. 
@@ -186,28 +188,28 @@ adapt intuitive graphical representation of rules for more enhanced visualizatio
 The tool will act as a powerful aid for reasoning to better understand complex 
 biological systems and accelerate the design of experiments. The new rule editor 
 will be part of the current PLA and thus it will require to integra te and 
-communicate to PLA environment seamlessly. 
+communicate to PLA environment seamlessly.  
 The project will evaluate the current process and modelling procedures 
 practiced by biologists and will undergo evaluation process to make sure biologists 
 concerns and demands are all addressed. 
                                                              
-1
- SRI International is an independent research institute founded in the US and is specialised in 
-conducting R&D for both government and business agencies, website: www.sri.com. 
-7 
- CHAPTER ?1 INTRODU CTION 
+1 SRI International is an independent research institute founded in the US and is specialised in 
+conducting R&D for both government and business agencies , website: www.sri.com. 
+CHAPTER ?1 INTRODU CTION 
  
-1.2 Deliverables and Added Value 
+8 
+  
+1.2  Deliverables and Added Value 
 The project provides a graphical user interface software system that works with 
 integration to the current system (PLA). The software is built on the existent PLA 
 tool with the trend to improve and address it limitations. The software will be 
 delivered with some important documentation like user manual and technical 
-specifications. Training sessions might be produced depending on user demands. 
+specifications. Training sessions might be produced depending on user demands.  
 This project will offer a unique reasoning facility with the aid of powerful 
 graphical visualisation which other systems lack. It will allow biologists to more 
 easily harness the advanced reasoning capabilities offered by Pathway Logic and 
 visualise the solutions that are computed. This will make results more 
-understandable to biologists. It will reduce the time required for modelling 
+understandable to biologists. I t will reduce the time required for modelling 
 biological networks dramatically with models as closest as possible to biologists 
 mental model. Thus it will accelerate experiments and hence approaching 
 anticipated results more quickly. This way hypotheses can be simpler to prove 
@@ -218,10 +220,10 @@ science like chemistry where chemical reactions could be edited graphically. The
 new tool has been developed using Java graphical toolkits. The created classes 
 and packages can be also generalised and adopted for other graphical 
 applications. 
-1.3 This Report 
+1.3  This Report 
 This document aims at providing the necessary background and walks through the 
 graphical editor implementation lifecycle in order to provide a clear drive towards 
-the real value of this project via evaluation and conclusion. 
+the real value of this project via evaluation and conclusion.  
 The report starts by reviewing the literature to gain better understanding. 
 PLA is the main concern in this project, so before reviewing the literature for 
 PLA, a number of important concepts are reviewed to better understand PLA. 
@@ -229,20 +231,21 @@ Since PLA combines logic and graphical interface aspects, Background chapter
 has been broken down into three main areas of interest: logic (the core PL), 
 interoperation (connecting logic to visualisation), visualisation (graphical part). 
 Some other important concepts are discussed like model representation formats 
-and biology data sources. After reviewing all these pre-requisite knowledge, PLA 
-is discussed in the last section of Background chapter. 
-Understanding PLA will make it easier to present the project motivation. 
+and biology data sources. After reviewing all these pre -requisite knowledge, PLA 
+is discussed in the last section of Background chapter.  
+Understanding PLA will make it  easier to present the project motivation. 
 Motivation chapter spotlights the current PLA representations; Petri nets and 
-Maude. It then motivates the project by outlining use cases of some PLA usage 
+Maude. It then motivates the project  by outlining use cases of some PLA usage 
 scenarios. This chapter ends by discussing some initiatives for improving the 
 current PLA representation methods. 
 The design steps of the new editor is then discussed in the Designing a 
 Graphical Rule Editor chapter. This chapter charts the current and proposed 
 processes of creating and editing rules, it then designs the architecture of the 
 system. Detailed design specifications and a proposed GUI design with 
-8 
-  CHAPTER ?1 INTRODUCTION 
+CHAPTER ?1 INTRODUCTION 
  
+9 
+  
 preliminary UML class diagram are then explained. Critical planning 
 considerations are finally discussed regarding the development environment and 
 integration with PLA requirements. 
@@ -251,13 +254,13 @@ through the implementation steps; starting from setting up the development
 environment, to implementing the PLA integration, and finally building the GUI. 
 Analysis of results chapter provides a detailed procedures for application 
 scenarios each of which is followed by a discussion on results obtained. The 
-chapter ends with a summary of the results obtained. 
+chapter ends with a summary of the results obtained.  
 The developed tool is evaluated by surveying current PLA users and new 
 editor potential users. Some other evaluation methods are also outlined. The 
 report ends with a conclusion and a discussion on future directions. 
  
-9 
-   
+ 10 
+ 
 2 Background 
 Pathway Logic Assistant is a graphical tool that assists biologists in analysing 
 biological models and applying reasoning by exploiting the underlying symbolic 
@@ -267,10 +270,10 @@ decode these concepts, it is important to categorise them into broader areas to 
 where each concept rests. In the following sections, PLA is explained after 
 understanding its logic part, model exchange formats, how its internal components 
 are interoperated, its visualisation part, and biology data sources it links to.  
-2.1 Logic in Systems Biology 
+2.1  Logic in Systems Biology  
 Pathway logic is the underlying logic of PLA. Pathway Logic is a symbolic systems 
 biology formalism based on rewriting logic called Maude. 
-2.1.1 Symbolic Systems Biology and Rewriting Logic 
+2.1.1  Symbol ic Systems Biology and Rewriting Logic  
 Traditional research methods in biology involve studying biological processes as 
 isolated parts. In contrast, Systems biology is a research field were biological 
 processes – with different levels of abstractions – and multiple viewpoints are 
@@ -283,7 +286,7 @@ reasoning in terms of logical abstractions obtained from algebraic and
 computational frameworks [2] by applying formal logic-based methods. In recent 
 years, symbolic systems biology has been applied to natural systems, particularly 
 for modelling molecular networks [3]. 
-A sample of SSB formalisms, which include Petri nets, statecharts, pi-
+A sample of SSB formalisms, which include Petri nets, statecharts, pi -
 calculus, life sequence charts, membrane calculi, hybrid systems and Rewriting 
 Logic, is discussed in [4]. As an example, Petri nets are a mathematical formalism, 
 with a natural graphical representation, initially proposed for modelling 
@@ -299,13 +302,14 @@ systems from one state to another.
 Thus, rewriting logic consists of two parts: equational logic that specifies 
 system data types and functions; and rewrite rules that specifies how systems may 
 change. 
-10 
- CHAPTER ?2 BACKGROUND 
+CHAPTER ?2 BACKGROUND 
  
+11 
+  
 Rewriting logic provides both a logical framework (a metalogic) for 
 representing and implementing other logics; and a semantic framework (a 
 metalanguage) for specifying systems and languages [6]. This makes it a suitable 
-logic for executable specification and analysis of concurrent, distributed, and also 
+logic for executable specification and analysis of concurrent, distr ibuted, and also 
 mobile systems. One of its valuable capabilities is that rewriting logic supports 
 reflection; where it expresses its metatheory at the object level and manipulates its 
 future behaviour while examining intermediate results. [7] gives a detailed proof 
@@ -316,15 +320,15 @@ better understand PL.
 According to [4], Pathway Logic is “a symbolic systems biology 
 approach to the modeling and analysis of molecular and cellular 
 processes based on rewriting logic”. 
-The rewriting logic formalism used by PL is Maude language. Maude and PL are 
-discussed in more details in later sections. 
-2.1.2 Executable Models and Symbolic Analysis 
+The rewriting logic formalism used by PL is Maude language. Maude and PL  are 
+discussed in more details in later sections.  
+2.1.2  Executable Models and Symbolic Analys is  
 In order to get a better intuition about Maude and PL before moving into their 
 details, it is useful to understand the symbolic systems models and the various 
 kinds of model analysis methods available. 
 Developing symbolic systems models requires selecting the suitable 
 abstractions – to represent biological networks – and to combine models into 
-integrated systems. This can be achieved by adopting well-defined semantics 
+integrated systems. This can be achieved by adopting well -defined semantics 
 languages that produce executable models. These models describe biological 
 systems as states and rules from which transition graphs can be derived. 
 Consequently, different ways of system evolvement can be discovered by finding 
@@ -344,102 +348,107 @@ is used for verification of models in relation to a specified property. [8] simp
 defined model checking as following: 
  
 “Given a model   and a property  , an algorithm is defined that 
-verifies whether   is a property of    (denoted        ).” 
-11 
-  CHAPTER ?2 BACKGROUND 
+verifies whether   is a property of    (denoted      ).” 
+CHAPTER ?2 BACKGROUND 
  
+12 
+  
 In systems biology, model checking is used to determine reachable pathways 
-that satisfy a property starting from a given initial state. Counter examples are 
+that satisfy a property starting from a given initial state. Counter  examples are 
 returned if verification failed. An example of a property might be: molecule   is 
 never produced after molecule  . A counter example is: a pathway in which 
 molecule   is produced before  . 
 Understanding symbolic analysis methods of executable models makes it easier  
 to understand the core logic of PL; Maude. 
-2.1.3 Maude as Equational and Rewriting Logic 
+2.1.3  Maude as Equational and Rewrit ing Logic  
 Maude is a high-level, formal language that provides a high-performance 
 environment and a set of tools for modelling based on rewriting logic (which 
 contains equational logic). 
 The formal language of equational logic – supported by Maude – is 
 constituted of terms. Terms build up the sides of equations. A term can be a 
-variable, a constant symbol, or a function symbol (operation) applied to terms. 
-Each function has an arity that indicates the number of arguments. 
+variable, a constant symbol, or a function symbol (operation) applied to terms . 
+Each function has an arity that indicates the number of arguments.  
 To get some intuition about rewriting using equational logic, the following 
 example helps understand the basic concepts and terminologies. 
-Example: term with no variables. 
+Example: 
  
 A language   with constant symbols       
-This data term can be rewritten – using 
 and function symbols        , having: 
-equations 1 and 2 – until a canonical 
-representation is achieved; i.e. getting a 
   : addition function 
-term with constants and constructors only. 
 (takes 2 arguments; arity = 2, it is binary) 
-Matching this term with equation 2, we get 
   : next 2-multiple function 
-( ( ))
-       and     ( ) 
 (takes 1 arguments; arity = 1, it is unary) 
-By substituting the sub-terms   and   in the 
 Note that constants and functions that 
-right-hand side of equation 2, we obtain: 
 assign a value to terms are called 
-( ) ( )
- (  )  (  ), repeating the same 
 constructors, where 
-process: 
-( ) ( ) ( )
-    (  )  ( (  )) … means 2,4,6,… 
-   ( )  and     ( ( )) 
-( )
- ( )  ( (  ))  
+ ( )  ( ( ))  ( ( ( )))  means 2,4,6, 
 Then this language can be expressed in 
 terms of its constant and function symbols 
-( ( ( )))
-     and         
 as following:  
-( ( ( ( ))))
-         
           
 Some possible terms are: 0,  ( ),  ,  ( ), 
-Matching and applying equation 1: 
-   , and  ( )    ( ) 
-( )
-   ( ( (  )))   
+   , and  ( )     ( ) 
 Let us assume the equations: 
- 
          (1) 
-and the term becomes: 
-( )
-        ( )   (2) 
- ( ( ( ( ))))  
-The term:   ( ( ( )))  ( )  
-(which corresponds to 8) 
+ ( )       ( )   (2) 
+The term:   ( ( ( )))   ( )  
 corresponding to (   ) is a data term; a 
-12 
-  CHAPTER ?2 BACKGROUND 
+term with no variables. 
+This data term can be rewritten – using 
+equations 1 and 2 – until a canonical 
+representation is achieved; i.e. getting a 
+term with constants and constructors only. 
+Matching this term with equation 2, we get 
+   ( ( ))  and     ( ) 
+By substituting the sub-terms   and   in the 
+right-hand side of equation 2, we obtain: 
+ ( ( ))   ( ( )), repeating the same 
+process: 
+   ( )  and     ( ( )) 
+ ( )   ( ( ( )))  
+     and     ( ( ( ))) 
+   ( ( ( ( ))))  
+Matching and applying equation 1: 
+   ( ( ( ( ))))   
+ 
+and the term becomes: 
+ ( ( ( ( ))))  
+(which corresponds to 8) 
+CHAPTER ?2 BACKGROUND 
+ 
+13 
+ 
+fmod POS is 
+ sort Pos . 
+ op 1 : -> Pos . 
+ op p_ : Pos -> Pos . 
+ op _*_ : Pos Pos -> Pos . 
+ vars X Y : Pos . 
+ eq 1 * X = X . 
+ eq p X * Y = p (X * Y) . 
+endfm 
  
 Data types used in equations are called sorts and functions are called 
 operations. Sorts, operations, and equations compose the equational theory or 
 system signature which describes system data types and state. Subsequently, a 
-rewrite theory is composed of system signature, labels and rules. 
-  
-A rewrite rule takes the form:                          , where   and    
+rewrite theory is composed of system signature, labels and rules.  
+A rewrite rule takes the form:                           , where   and     
 are terms, and condition is a boolean term to be satisfied. Rewriting with rules 
 follows the same procedure applied in rewriting with equations. But rules 
 rewriting has the advantage that it is used to describe system evolution over time. 
-In addition, rules rewiring provides the ability to handle infinite and non-
+In addition, rules rewiring provides the ability to handle infinite and non -
 deterministic behaviours, while equational rewriting is used to calculate values of 
 functions and - therefore – it should terminate.  
 [9] considered the equational logic – supported by Maude – influenced by 
-OBJ3; a high-level declarative specification, prototyping, and functional language 
+OBJ3; a high-level declarative specification, prototyping, and functional language  
 [10]. Maude is used to express models – like biological processes – as rewrite 
 theories in the context of the semantic framework of the rewriting logic. It offers 
 the model analysis methods supported by symbolic systems like search, model 
 checking, and reflection. In addition, Maude features Associativity, 
 Commutativity, and Identity (or Idempotence) axioms (ACI property) that can be 
+easily adopted in its notation. Maude language
 1
-easily adopted in its notation. Maude language is based on defining modules.  
+ is based on defining modules.  
 The equational part; signature, is specified in functional modules; (a code 
 block that starts with fmod and ends with endfm). The system behaviour; rules, is 
 specified in system modules (a code block that starts with mod and ends with 
@@ -447,23 +456,13 @@ endm). [4] introduces Maude notation via a simple example; Magic Marbles. The
 example gives an intuition about how representation and analysis of concurrent 
 systems’ structure is performed using Maude. 
 Following is a simple Maude module on positive numbers: 
-fmod POS is 
 Where sort defines a data type, op 
- sort Pos . 
 defines an operation, vars define 
- op 1 : -> Pos . 
- op p_ : Pos -> Pos . 
 variables of type Pos, and eq defines the 
- op _*_ : Pos Pos -> Pos . 
 equations to be applied on terms. 1 is a 
- vars X Y : Pos . 
- eq 1 * X = X . 
 constant because it takes no arguments. 1 
- eq p X * Y = p (X * Y) . 
 and p are constructors as they generate 
-endfm 
 data. 
- 
 This module can be used to reduce a term. For instance, if following is typed in 
 Maude:  
 Maude> reduce p(1) + p(p(1)) . 
@@ -472,38 +471,39 @@ reduce in POS : p 1 * p p 1 .
 rewrites: 2 in 0ms cpu (0ms real) (~ rewrites/second) 
 result Pos: p p p 1 
                                                              
-1
- Maude manual, documentation and publications are available from the official website 
-maude.cs.uiuc.edu 
-13 
- CHAPTER ?2 BACKGROUND 
+1 Maude manual, documentation and publications are avai lable from the official website 
+maude.cs.uiuc.edu  
+CHAPTER ?2 BACKGROUND 
+ 
+14 
  
 Having had a fair idea about Maude language and rewriting logic, let us see 
-how Maude is exploited in Pathway Logic for modelling biological processes. 
-2.1.4 Pathway Logic 
+how Maude is exploited in Pathway Logic for modelling biological processes.  
+2.1.4  Pathway Logic  
 PL has been defined as one symbolic systems biology approach for modelling 
 biological processes using the rewriting-logic-based formalism Maude [4]. It can 
 be seen as a general framework for representing and reasoning about complex 
-biological interactions from metabolic networks to signalling pathways and genetic 
+biological interactions from metabolic networks to signalling pathways and  genetic 
 interactions. Each network defines a set of basic transformations, called reactions, 
-between a set of basic biochemical entities, called occurrences in PL (but called 
+between a set of basic biochemical entities, called occurrences in PL  (but called 
+species or physical entities in some other modelling languages like BioPAX
 1
-species or physical entities in some other modelling languages like BioPAX ). 
+). 
 Depending on the biological context, occurrences may denote enzymes or 
 metabolites, molecules or ions, ligands or receptors, proteins in various states of 
 posttranscriptional modification, or complexes formed from other occurrences. 
 Rules represent biochemical transformations and dependencies between 
-occurrences and they transform (rewrite) systems from one state to another. 
+occurrences and they transform (rewrite) systems from one state to another.  
 Recall that Rewriting Logic is a symbolic formalism in which system states are 
-represented as algebraic terms and transitions between states are determined by 
+represented as algebraic terms and transitions between states are determined by  
 rewrite rules. Referring to the rule matching computations performed in rewriting 
 logic, in biological processes context, initial data terms represent initial system 
 states, and the computations (transformations) applied by matching with sub-terms 
 in rule sides represent pathways. Biological systems' behaviour and their response 
 to physiological transformations and stimuli are handled by altering genes and 
 protein activities. Collectively, these modifications (i.e. interactions or concurrent 
-computations) form what is called a signalling network. Finding signalling 
-pathways and regulation methods on such networks is a key effort in biomedical 
+computations) form what is called a signalling network. Finding signal ling 
+pathways and regulation methods on such networks is a key e ffort in biomedical 
 research [11]. 
 PL can be used to model both biological molecules and processes in different 
 abstraction levels. For example, assume two protein molecules; protein A and 
@@ -513,30 +513,50 @@ required to model the internal structure of proteins A and B to study in depth
 how the interaction is regulated [2]. 
 PL uses a variety of available symbolic 
 analysis methods; like model execution, 
-Pathway Logic System 
 model checking, search, and mapping to 
 other formalisms such as Petri nets for 
-PL Knowledge Base 
 further analysis. Biological processes like 
-Equational part 
 signal transduction or metabolism are 
-Rules 
 modelled in PL as collections of rules 
-sorts and molecular 
-operations components 
 representing process steps. A PL 
 knowledge base (KB) is composed of these 
-Figure 1 Components of a Pathway Logic 
 rewrite rules together with data type 
-Model System 
 specifications and evidences to justify each 
                                                              
 1
- BioPAX and other biological model representation languages are discussed in section 2.2 
-14 
+ BioPAX and other biological model representation languages are discussed in section 2.2  
+Pathway Logic System 
+Q
+u
+er
+ie
+s 
  
-Queries  
-(Initial state or dish) CHAPTER ?2 BACKGROUND 
+(I
+n
+it
+ia
+l s
+ta
+te
+ o
+r 
+d
+is
+h
+) 
+PL Knowledge Base 
+Rules 
+Equational part 
+sorts and 
+operations 
+molecular 
+components 
+Figure 1 Components of a Pathway Logic 
+Model System 
+CHAPTER ?2 BACKGROUND 
+ 
+15 
  
 rule. PL uses information from the KB to generate models from a given initial 
 state (called a “dish"). Figure 1 illustrates the different components of a PL model 
@@ -545,7 +565,7 @@ The equational part determines a controlled vocabulary for representing
 basic biological entities, modifications and locations. Biological entities – like 
 proteins and chemicals – interact with each other in various locations with respect 
 to the cell resulting in assembled complexes. In this context, entities sort s in PL 
-include: Cell, Location, Chemical, Protein, and Complex. Equational part also 
+include: Cell, Location, Chemical, Protein, and Complex.  Equational part also 
 provides operations for representing molecular and cellular states. For example 
 the term [Raf1 - act] represents the protein Raf1 in an activated state. 
  
@@ -555,90 +575,114 @@ Examples of such components are proteins, genes, and chemicals. Each
 component is declared by a sort and metadata that can be linked to standard 
 database. Following example is from [4] showing metadata:  
  The heart of the system is the rules 
-op EgfR : -> Protein [metadata "(\ 
-part, which contains the rewrite rules 
-(spname EGFR_HUMAN)\ 
+part, which contains the rewrite rules  
 representing reaction steps. These 
-(spnumber P00533)\ 
 rules are curated from literature with 
-(hugosym EGFR)\ 
-(category Receptor)\ 
 evidence to justify each rule. Queries 
-(synonyms \"Epidermal growth factor 
 contain terms representing initial 
-receptor precursor\" \ 
 system states (i.e. dishes) of interest. 
-\"Receptor tyrosine-protein kinase 
 An initial state is often used to model 
-ErbB-1, ERBB1 \"))"] . 
 an experimental setup – the state of a 
 cell and any external stimuli. 
- 
 Understanding these concepts is very important to provide the best features 
-and functionalities to serve biologists in a satisfactory way. 
-2.2 Biological Model Representation 
-PL models need to be visualised in an interactive user-friendly format. Thus, 
+and functionalities to serve biologists in a satisfactory way.  
+2.2  Biological Model Representation  
+PL models need to be visualised in an interactive user -friendly format. Thus, 
 there is a demand for a unified language for representing and exchanging PL 
-models between the modelling tools and visualisation/analysis tools. Figure 2 
-illustrates the popular standards for pathway representation. 
- 
-Annotates 
-Visualized in 
-MI 
-SBGN 
-Interactions 
- 
-Diagrams 
+models between the modelling tools and visualisation/analysis tools . Figure 2 
+illustrates the popular standards for pathway representation.  
  
  
-Visualized in 
-SO 
-BioPAX 
-Sequence 
- 
-Pathway 
  
  
-Annotates 
-GO 
-SBML 
-used by 
-Cellular 
-Model 
-  
-component 
-PSI-MI 
- 
-Molecular 
-CellML  
-Molecular 
-function 
- 
-interaction Biological 
-Model 
  
  
-process 
+op EgfR : -> Protein [metadata "(\ 
+(spname EGFR_HUMAN)\ 
+(spnumber P00533)\ 
+(hugosym EGFR)\ 
+(category Receptor)\ 
+(synonyms \"Epidermal growth factor 
+receptor precursor\" \ 
+\"Receptor tyrosine-protein kinase 
+ErbB-1, ERBB1 \"))"] . 
  
-Instructs Instructs 
-MIASE 
-MIMIx 
-PATO 
-Simulation Molecular 
- 
- Phenotype 
- 
-experiment interaction 
- 
-Minimal requirements 
 Figure 2 – Popular pathway standard formats and their relationships,  
 from [14] 
-15 
+SBGN 
+SBML 
+CellML 
+MIASE MIMIx 
+PSI-MI 
+BioPAX 
+MI 
+SO 
+GO 
+PATO 
+Visualized in 
+Visualized in Annotates 
+Annotates 
+Instructs Instructs 
+used by 
+ Diagrams 
+ Model 
+ Model 
+ Pathway 
+ Molecular 
+interaction 
+ Simulation 
+experiment 
+ Molecular 
+interaction 
+ Interactions 
+ Sequence 
+ Cellular component 
+ Molecular function 
+ Biological process 
+ Phenotype 
+V
+is
+u
+al
+iz
+at
+io
+n
  
-Simulation 
-Visualization 
-Integration 
-Controlled vocabulary CHAPTER ?2 BACKGROUND 
+Si
+m
+u
+la
+ti
+o
+n
+ 
+In
+te
+gr
+at
+io
+n
+ 
+C
+o
+n
+tr
+o
+lle
+d
+ v
+o
+ca
+b
+u
+la
+ry
+ 
+Minimal requirements 
+CHAPTER ?2 BACKGROUND 
+ 
+16 
  
 Systems Biology Markup Language (SBML) is a standardized exchange 
 format for systems biology models. SBML is formally defined using UML, the 
@@ -651,12 +695,13 @@ connectivity  between the various tools by talking to each other a common
 language. Thus it is important to get an intuition about the various modelling 
 languages. 
  
-2.2.1 SBML 
+2.2.1  SBML 
+Systems Biology Markup Language
 1
-Systems Biology Markup Language is a modelling language that is formally 
+ is a modelling language that is formally 
 defined by the Unified Modelling Language UML. UML definition is in turn used 
 to define an eXtensible Markup Language XML representation for models to be 
-seamlessly exchanged between analysis and visualisation tools taking advantage of 
+seamlessly exchanged between analysis and visual isation tools taking advantage of 
 the portability of XML. This language addresses interoperability problems 
 discussed in [12]. SBML serves as a standard for model information exchange in 
 computational biology and specifically in molecular pathways. Reaction networks 
@@ -678,10 +723,7 @@ illustration of a biological model.
  
  
  
-Figure 3 - A two-compartment model of a hypothetical 
  
-single-gene oscillatory circuit in a eukaryotic cell 
-from [12] 
  
  
 The corresponding SBML model looks something like following (code 
@@ -690,75 +732,119 @@ snippets collected from [12] and upgraded to SBML level 3):
                                                              
 1
  SBML specification is available from http://www.sbml.org 
-16 
- CHAPTER ?2 BACKGROUND 
+Figure 3 - A two-compartment  model of a hypothetical  
+single-gene oscillatory circuit in a eukaryotic cel l  
+from [12] 
+CHAPTER ?2 BACKGROUND 
  
-<?xml version="1.0" encoding="UTF-8"?> </listOfParameters> 
-<sbml  
-xmlns="http://www.sbml.org/sbml/level3/versi    <listOfRules> 
-on1/core" level="3" version="1">      <rateRule variable="src"> 
-  <model id="gene_network_model">       <math xmlns="... " xmlns:sbml="..."> 
-  <apply> 
-    <listOfUnitDefinitions>  <divide/> 
-     <unitDefinition id="mmls">    <ci> Vi </ci> 
-      <listOfUnits>    <apply> 
- <unit kind="mole" scale="-3"/>    <plus/> 
- <unit kind="litre" exponent="-1"/>      <cn sbml:units="conc"> 1 </cn> 
- <unit kind="second" exponent="-1"/>      <apply> 
-      </listOfUnits>      <divide/> 
-     </unitDefinition>        <ci> P </ci> 
-     ...        <ci> Ki </ci> 
-    </listOfUnitDefinitions>      </apply> 
-    </apply> 
-    <listOfCompartments>  </apply> 
-     <compartment id="Cyt" size="1.5" />       </math> 
-     <compartment id="Nuc" outside="Cyt" />      </rateRule> 
-    </listOfCompartments>     ... 
-     </listOfRules> 
-    <listOfSpecies>  
-     <species id="mRNA_nuc"            <listOfReactions> 
- compartment="Nuc"      <reaction id="R1" reversible="false"> 
- initialAmount="0.0032834" />       <listOfReactants> 
-     <species id="RNA_nuc"  <species Reference species="src" /> 
- compartment="Nuc"       </listOfReactants> 
- initialAmount="96.117" />       <listOfProducts> 
-     <species id="src" compartment="Nuc"  <species Reference species="RNAP"/> 
- initialAmount="1"       </listOfProducts> 
- boundaryCondition="true" />       <kineticLaw formula="Vi/(1+P/Ki)" /> 
-     <species id="P" compartment="Cyt"      </reaction> 
- initialAmount="22.035" />     ... 
-     ...     </listOfReactions> 
-    </listOfSpecies>  
-  </model> 
-    <listOfParameters>  
-      <parameter name="Vi" value="10" /> </sbml> 
+17 
+ 
+<?xml version="1.0" encoding="UTF-8"?> 
+<sbml 
+xmlns="http://www.sbml.org/sbml/level3/versi
+on1/core" level="3" version="1"> 
+  <model id="gene_network_model"> 
+ 
+    <listOfUnitDefinitions> 
+     <unitDefinition id="mmls"> 
+      <listOfUnits> 
+ <unit kind="mole" scale="-3"/> 
+ <unit kind="litre" exponent="-1"/> 
+ <unit kind="second" exponent="-1"/> 
+      </listOfUnits> 
+     </unitDefinition> 
+     ... 
+    </listOfUnitDefinitions> 
+ 
+    <listOfCompartments> 
+     <compartment id="Cyt" size="1.5" /> 
+     <compartment id="Nuc" outside="Cyt" /> 
+    </listOfCompartments> 
+ 
+    <listOfSpecies> 
+     <species id="mRNA_nuc"        
+ compartment="Nuc" 
+ initialAmount="0.0032834" /> 
+     <species id="RNA_nuc" 
+ compartment="Nuc" 
+ initialAmount="96.117" /> 
+     <species id="src" compartment="Nuc" 
+ initialAmount="1" 
+ boundaryCondition="true" /> 
+     <species id="P" compartment="Cyt" 
+ initialAmount="22.035" /> 
+     ... 
+    </listOfSpecies> 
+ 
+    <listOfParameters> 
+      <parameter name="Vi" value="10" /> 
       <parameter name="Ki" value="0.6"/> 
     ...    
+</listOfParameters> 
+ 
+    <listOfRules> 
+     <rateRule variable="src"> 
+      <math xmlns="... " xmlns:sbml="..."> 
+ <apply> 
+ <divide/> 
+   <ci> Vi </ci> 
+   <apply> 
+   <plus/> 
+     <cn sbml:units="conc"> 1 </cn> 
+     <apply> 
+     <divide/> 
+       <ci> P </ci> 
+       <ci> Ki </ci> 
+     </apply> 
+   </apply> 
+ </apply> 
+      </math> 
+     </rateRule> 
+    ... 
+    </listOfRules> 
+ 
+    <listOfReactions> 
+     <reaction id="R1" reversible="false"> 
+      <listOfReactants> 
+ <species Reference species="src" /> 
+      </listOfReactants> 
+      <listOfProducts> 
+ <species Reference species="RNAP"/> 
+      </listOfProducts> 
+      <kineticLaw formula="Vi/(1+P/Ki)" /> 
+     </reaction> 
+    ... 
+    </listOfReactions> 
+ 
+ </model> 
+ 
+</sbml> 
 Assuming the rule representing the reaction rate equation:  
-   (        ) for the reaction            
-  
+    (        ) for the reaction           
 Readers can refer to SBML language specification for details. 
  
-2.2.2 BioPAX 
+2.2.2  BioPAX 
+Biological PAthways eXchange
 1
-Biological PAthways eXchange is a standard biological model exchange format. 
+ is a standard biological model exchange format. 
 BioPAX aims at defining a unified framework for exchanging pathway 
 information. It is defined as an ontology of concepts and attributes [13]. The 
-main class used in BioPax is Entity. Entity has three subclasses: PhysicalEntity 
+main class used in BioPax is Entity. Entity has three subclasses: Phys icalEntity 
 (interacting objects), Interaction, and Pathway (a model of interactions). 
 PhysicalEntity itself has five subclasses: complex, small molecule, protein, DNA 
 and RNA. Modifications performed on physical entities like activation, relocation, 
 or phosphorylation are called features in BioPAX. This format requires tools that 
 are capable of handling reasoning with inheritance of such class extendable 
 hierarchy. 
-BioPAX covers all major pathway concepts familiar to biologists; like 
+BioPAX covers all major pathway concepts familiar to biologists ; like 
 molecular interactions, gene regulatory networks, genetic interactions and 
 metabolic and signalling pathways [14]. 
                                                              
 1
  Available from http://www.biopax.org 
-17 
- CHAPTER ?2 BACKGROUND 
+CHAPTER ?2 BACKGROUND 
+ 
+18 
  
 Figure 4 illustrates a high level view of the BioPAX ontology showing class 
 hierarchy. 
@@ -768,16 +854,16 @@ hierarchy.
  
  
  
-Figure 4 - BioPAX ontology, from [14] 
 In addition to the constructs illustrated in Figure 4, BioPAX is provide other 
+constructs like cross-references (called xref classes) to biological databases
 1
-constructs like cross-references (called xref classes) to biological databases . It is 
+. It is 
 also capable of reusing and linking to vocabularies in other ontologies, like PSI -
 MI which is discussed in the following section. Appendix I shows how graphical 
 models are expressively represented in BioPAX language. 
  
-2.2.3 Other Systems Biology 
-Modelling Languages 
+2.2.3  Other Systems Biology 
+Model ling Languages 
 Finding a common format for 
 describing and exchanging biological 
 models has become a demand 
@@ -795,16 +881,19 @@ biological processes. Figure 5
 illustrates an example of a CellML 
 model showing the language elements 
 and their relationships. 
-Figure 5 – an illustration of CellML model showing 
-language elements, from [15] 
                                                              
 1
- Such databases are discussed in Systems Biology data sources section), 
-18 
- CHAPTER ?2 BACKGROUND 
+ Such databases are discussed in Systems Biology data sources section),  
+Figure 4 - BioPAX ontology, from [14] 
+Figure 5 – an illustration of Cel lML model showing 
+language elements, from [15] 
+CHAPTER ?2 BACKGROUND 
  
+19 
+ 
+CellML
 1
-CellML is an open development project with on-going efforts to broaden its 
+ is an open development project with on-going efforts to broaden its 
 scope and provide tools for working with the language efficiently. These tools 
 include the CellML Model Repository [16] which provides free access to over 520 
 biological models. Repository models are under on-going model curation process 
@@ -823,16 +912,18 @@ general.
 interactions. Remarkably, ML-Rules provides the facility to represent high level 
 organisation like cells and organelles; i.e. it provides the ability to represent 
 objects as a collection of other objects. Systems Biology Graphical Notation 
+Markup Language SBGNML
 2
-Markup Language SBGNML and Biological Connection Markup Language 
-BCML [20] are also other biological model description languages. 
+ and Biological Connection Markup Language 
+BCML [20] are also other biological model description languages.  
 Despite all specific advantages that each language provide, they all share the 
 aim to provide a standard format for describing biological models to address the 
 incompatibility between available tools and seamlessly exchange information 
 between them. A lot of efforts have been accomplished to make SBML a 
 compatible and easy to use standard. These efforts include developing APIs and 
+libraries like JSBML
 3
-libraries like JSBML [21]; and developing interfaces and toolboxes for other 
+ [21]; and developing interfaces and toolboxes for other 
 software such as MATLAB. Furthermore, lots of other formats like CellML are 
 now finding ways to seamlessly convert to SBML format and CellML2SBML [22] 
 is one of these suites. In 2007, an online survey was conducted by [23] and found 
@@ -843,22 +934,22 @@ availability of languages providing such standard, it is important to understand
 how the standard format is exchanged between the tools. The standardised-format 
 (understandable) models are required to be supplied to the visualisation tools in a 
 compatible way to provide a complete interactive experience. There are tools like 
-the InterOperability Platform IOP,  JAMES II, and the Systems Biology 
+the InterOperability Platform IOP,  JAMES II, and the Systems  Biology 
 Workbench SBW that features such functionality and offers a high level of 
 interoperability and communication interfaces with formal tools like Maude. 
-These platforms are explained in the following section. 
+These platforms are explained in the following section.  
  
                                                              
-1
- The CellML Project resources can be accessed from http://www.cellml.org  
+1 The CellML Project resources can be accessed from http://www.cellml.org   
 2
  Specification available from http://www.sbgn.org 
 3
  JSBML is a Java-based library for SBML available from http://sbml.org/Software/JSBML 
-19 
- CHAPTER ?2 BACKGROUND 
+CHAPTER ?2 BACKGROUND 
  
-2.3 Systems Biology Tools Interoperability 
+20 
+ 
+2.3  Systems Biology Tools Interoperability  
 Many Systems biology tools have emerged providing a variety of features and 
 functionalities to work with biological models. Among all, it is hard to find one 
 application that combines all tools a researcher would require. The key here is to 
@@ -874,8 +965,7 @@ platforms with the feature of being a development framework in its own.
 Following sections provide a brief overview about each of these platforms with a 
 more focus on IOP for its motivation of communicating Maude to other tools 
 within PLA. 
-1
-2.3.1 SBW 
+2.3.1  SBW1 
 The Systems Biology 
 Workbench [24] is a modular 
 framework that connects modelling 
@@ -887,28 +977,26 @@ native format. SBW employs a
 message-passing mechanism to 
 implement the connectivity using a 
 binary formatted messages for 
-Figure 6 - SBW communication flow, from [24] 
 better performance. 
 SBW is a language-neutral architecture providing binding libraries for a 
 variety of common languages (to become SBW-enabled) like C, C++, C# (.NET 
 languages), Java, Matlab, Perl, Delphi, and Python. In SBW, an SBW-enabled 
 application is a module. Figure 6 illustrates the SBW communication flow. SBW 
 comes with its own modules like: utility modules which provide the core features 
-for SBML analysis;  simulator; and analysis tools. Today, there are many SBW-
+for SBML analysis;  simulator; and analysis tools.  Today, there are many SBW-
 enabled tools in the fields of modelling, analysis, simulation and visualisation of 
 biological molecules and processes. 
-2
-2.3.2 JAMES II 
+2.3.2  JAMES II2 
 JAva-based Multipurpose Environment for Simulation II (formerly known as Java -
 based Agent Modeling Environment for Simulation) is an open framework for 
                                                              
-1
- SBW is an open source. Free downloads and resources are available from the project website 
+1 SBW is an open source. Free downloads and resources are available from the project website 
 http://www.sys-bio.org 
-2
- JAMES II is an open framework available from http://www.jamesii.org  
-20 
- CHAPTER ?2 BACKGROUND 
+2 JAMES II is an open framework available from http://www.jamesii.org  
+Figure 6 - SBW communication flow, from [24] 
+CHAPTER ?2 BACKGROUND 
+ 
+21 
  
 developing and integrating the diversity of modelling and simulation 
 methodologies in a flexible plugin-based development environment. 
@@ -922,8 +1010,7 @@ exploitation of dry-lab (simulated) experimentation by featuring repeatability a
 reuse [26].  ML-Rules are realised within JAMES II with a set of plugins to work 
 on ML-Rules models [19]. 
  
-1
-2.3.3 IOP 
+2.3.3  IOP1 
 Formal tools – like Maude – need to interact with other tools to make benefit of 
 its features with a user friendly means of interaction. Maude current interaction 
 method is via a command line interpreter. The InterOperability Platform IOP has 
@@ -934,9 +1021,10 @@ communicate with another instance of Maude.
 Similar to SBW, IOP adopts a message passing interaction paradigm with a 
 registry (corresponds to Broker in SBW) that acts as a communication centre for 
 routing messages to the intended tools. Each tool is represented by an actor 
-(module bindings in SBW). IOP comes with some built-in actors like Maude 
+(module bindings in SBW). IOP comes with some built -in actors like Maude 
+actor (interactive extension of Maude, also called IMaude
 2
-actor (interactive extension of Maude, also called IMaude ); Graphics actor (used 
+); Graphics actor (used 
 for visualisations and interactive graphs); PVS actor, and other actors for 
 executing programs, accessing file system, and supporting communication sockets. 
 Interestingly, further actors for communicating to other tools can be added easily 
@@ -949,45 +1037,37 @@ working on biological models and cellular networks. Figure 7 illustrates the PLW
 architecture and the role of IOP in communicating between the different tools. 
 PLW integrates fundamental tools like Maude and Pathway Logic Assistant 
 (an IMaude program), with other supporting tools like BioNet Petri net tool and 
-the Dot graph tool (explained in a later section). [28] sketched two more 
+the Dot graph tool (explained in a later section).  [28] sketched two more 
 applications which also have driven IOP development: Mobile Maude and 
 SCRover. Figure 8 shows actor communication in IOP. 
                                                              
 1
  IOP binaries and resources are available from http://jlambda.com/~iop   
 2
- IMaude code available from http://www.csl.sri.com/users/clt/IMaudeWeb 
-21 
- CHAPTER ?2 BACKGROUND 
+ IMaude code available from http://www.csl.sri.com/users/clt/IMaudeWeb  
+CHAPTER ?2 BACKGROUND 
+ 
+22 
  
  
 Figure 7 – IOP role in Pathway Logic Workbench Architecture, from [28] 
  
 In IOP, actors are either 
+a single UNIX-style process
 1
-a single UNIX-style process An Actor 
+ 
 or dual processes. For 
 example, Maude and PVS 
- 
-An Actor 
-The 
 actors consists of two 
- 
-An Actor 
-Registry 
 processes: one for running 
- 
 the tool and the other for 
 facilitating the communication 
-A Two Process Actor 
 with the message centre; i.e. 
-An Actor 
 the registry.  There are three 
 other independent non-actor 
-Figure 8 - IOP Interaction Architecture, reproduced from [28] 
 processes interacting in IOP: 
 first for system creation and configuration (called main), second is the registry, 
-and the third is the GUI which is written in  Java’s Swing platform. 
+and the third is the GUI which is written in  Java’s Swing platform.  
 IOP registry maintains three forms of communication in the platform; inter -
 actor, meta-actor, and interface communication [28]. Following is an example, 
 from [28], of a messages sent from the Graphics actor  to the Maude actor:  
@@ -1001,16 +1081,28 @@ PLW to connect to other platforms like SBW.
                                                              
 1
  A process is a running program instance 
-22 
- CHAPTER ?2 BACKGROUND 
  
-2.4 Model Visualisation Tools 
+An Actor 
+An Actor 
+An Actor 
+A Two Process Actor 
+An Actor 
+ 
+The 
+Registry 
+ 
+Figure 8 - IOP Interaction Architecture,  reproduced from [28] 
+CHAPTER ?2 BACKGROUND 
+ 
+23 
+ 
+2.4  Model Visualisation Tools  
 PL models represent networks of biological entities and complex reactions in 
 living cells. This huge and diverse amount of data need to be analysed in an 
 intuitive visualised way to enable biologists to make inferences about the 
 underlying biological processes. The new system needs to utilize one of the 
 available pathway visualization tools if it is feasible. An alternative would be to 
-develop a totally new visualisation and model editing features tailored for PLA. 
+develop a totally new visualisation and model editing features tailored for PLA.  
 [29] examined a variety of pathway visualisation systems and analysed the 
 end-user perceptions of such systems as evaluated by domain experts. It proposed 
 an agenda for visualisation systems requirements: (i) systems need to im plement 
@@ -1024,16 +1116,18 @@ about biological processes by integrating necessary logic formalisms.
 There are a variety of tools in the literature and each has its own strengths 
 and weaknesses. We are going to discuss some of the popular tools in the field 
 like GraphViz, CellDesigner, CytoScape, and few others. 
+Graph Visualization Software GraphViz
 1
-Graph Visualization Software GraphViz is an open-source package of tools 
+ is an open-source package of tools 
 for drawing graphs written in dot language. Dot language is a text -based 
 specification language used for describing hierarchical directed graphs. Do t 
 graphs are utilised for visualising protein interaction pathways and applied in 
 many applications including PLA. Dot graphs beauty lies in exposing hierarchical 
 structure in a balanced and symmetrical favour keeping edges between nodes as 
 short as possible while avoiding crossings and sharp bends [30]. 
+CellDesigner
 2
-CellDesigner is a free biochemical networks modelling and simulation tool. 
+ is a free biochemical networks modelling and simulation tool. 
 It uses systems biology graphical notation SBGN and standard markup language 
 SBML for describing models. CellDesigner provides references to litera ture 
 databases and it is Java-based, which makes it 
@@ -1041,42 +1135,44 @@ platform independent. Moreover, CellDesigner is
 able to integrate any SBW-enabled module [31] 
 which makes it a flexible tool for connecting and 
 integrating with other tools.  
+Cytoscape
 3
-Cytoscape is another open-source pathway 
+ is another open-source pathway 
 visualisation platform that is capable of visualising 
 and integrating complex networks. Cytoscape 
 provides the provision of representing biological 
-Figure 9 – Human Interactome 
 properties of pathway elements via manipulating 
-visualized in Cytoscape, from 
-http://www.cytoscape.org  
 graphical nodes properties like color, size, and 
                                                              
 1
  Available from http://www.graphviz.org 
-2
- Available from http://celldesigner.org  
-3
- Available from http://www.cytoscape.org  
-23 
- CHAPTER ?2 BACKGROUND 
+2 Available from http://celldesigner.org   
+3 Available from http://www.cytoscape.org   
+Figure 9 – Human Interactome 
+visualized in Cytoscape,  from 
+http://www.cytoscape.org   
+CHAPTER ?2 BACKGROUND 
+ 
+24 
  
 shape [29]. This tool can handle large scale networks such as human interactome 
 (interactions of genes) or social network datasets. Figure 9 illustrates a human 
 interactome network visualised in Cytoscape. Some scientists finds Cytoscape 
 models complex to understand according to [29]. 
+Ondex
 1
-Ondex , the data integration and visualisation application is yet another tool 
+, the data integration and visualisation application is yet another tool 
 used in analysing experiment data in relation to a variety of databa ses and 
 formats. Ondex is used in systems biology as well as other applications that 
 require graphical representations and data analysis. Text and data mining are also 
 one of the provided functionalities for its power in information retrieval and 
 integrating data from diverse sources.  
+Other visualisation tools include PathVisio
 2
-Other visualisation tools include PathVisio which is a Java-based 
+ which is a Java-based 
 implementation that mimics GenMAPP tool [32]. PathCase [33] is another tool 
 used for store, query, visualise and analyse metabolic pathways at different levels 
-of abstraction ranging from gene level to organism level. 
+of abstraction ranging from gene level to organism level.  
 Apart from all the available spectrum of pathway visualisation tools, and in 
 addition to all the strengths these tools provide, a good pathway visualisation tool 
 needs – at the first place – to satisfy biologists’ requirements in a simple and 
@@ -1084,21 +1180,24 @@ intuitive way to be able to integrate their mental models as well as analysing
 experiments data effectively. For this project, visualisation tools are explored for 
 integration feasibility to achieve the intended objectives of the new rule graphical 
 editor. 
-2.5 Systems Biology Data Sources 
+2.5  Systems Biology Data Sources  
 Proteins and other molecules normally have naming variations depending on 
 biologists or curators naming style. To prevent ambiguity, these names need to be 
 referred to unique entities.  Thus many standard databases have emerged to 
 maintain standard knowledge bases to provide appropriate conventions of these 
 concepts and terminologies with detailed descriptions. 
+In PLA, all protein names have links to entries in the UniProt
 3
-In PLA, all protein names have links to entries in the UniProt database; a 
-biological database of manually curated protein sequences. PLA links other non-
+ database; a 
+biological database of manually curated protein sequences. PLA links other non -
 protein molecules – like lipids and sugars – to entries in the Kyoto Encyclopedia 
+of Genes and Genomes KEGG
 4
-of Genes and Genomes KEGG ; a database resource for biological systems. 
+; a database resource for biological systems. 
 Additionally, BioCyc; a collection of metabolic pathway databases, is exploited in 
+the PL Workbench. Another extensive database source is PANTHER
 5
-the PL Workbench. Another extensive database source is PANTHER (Protein 
+ (Protein 
 ANalysis THrough Evolutionary Relationships) system for gene classification 
 based on experimental evidence publications. Other available sources include – 
 but not limited to – Reactome,  PubChem, HUGO, and BioCarta (an interactive 
@@ -1106,51 +1205,40 @@ source for pathway and cellular information). [34] describes MetaBase, another
 resource database that serves as  a hub for the most commonly used biological 
 databases. 
                                                              
-1
- A free open source application available from http://www.ondex.org  
-2
- Available from http://www.pathvisio.org  
-3
- Available from http://www.uniprot.org  
-4
- Available from http://www.genome.jp/kegg  
-5
- Browsable database from http://www.pantherdb.org   
-24 
- CHAPTER ?2 BACKGROUND 
+1 A free open source application available from http://www.ondex.org  
+2 Available from http://www.pathvisio.org   
+3 Available from http://www.uniprot.org   
+4 Available from http://www.genome.jp/kegg   
+5 Browsable database from http://www.pantherdb.org    
+CHAPTER ?2 BACKGROUND 
+ 
+25 
  
 Linking to any of these curated databases becomes a demand for sharing a 
 common understanding and to prevent any ambiguity that might arise while 
 developing the new tool. 
-2.6 Pathway Logic Assistant 
+2.6  Pathway Logic Assistant  
 Understanding all previous concepts builds the ground for having a more clear 
 intuition about the current system; PLA. PLA is a Java based tool that provides an 
 interactive graphical interface to PL models [4]. It provides a means of 
-performing logical computations on PL models (also called PLMaude models) in 
+performing logical computations on PL models (also called PLMaude model s) in 
 response to user requests. 
-Reactant components 
-(consumed or control occurrences) 
 In PLA, models are visualised as Petri 
 nets with nodes representing components 
 (occurrences) or rules, and edges connect 
 reactant occurrences to rules and rules to 
 reaction product occurrences (see Figure 
-edge 
 10). In a PL knowledge base, rules are 
 stored in Maude syntax. 
-rule 
 Each PLA occurrence (analogous to 
 physical entities in BioPAX); is constituted 
-Product component 
 from an entity, modifications, and location. 
-(produced occurrence) 
 Table 1 outlines these three components 
-Figure 10 – Petri net representation of rules  
 with possible values of each. 
  
-Table 1 – PLA occurrence components with some possible values. 
-(Values are obtained from http://pl.csl.sri.com) 
-Component Possible values 
+Table 1 –  PLA occurrence components  with some possible values .  
+(Values  are obtained from http://pl.csl.s ri.com) 
+Component Poss ible  va lues  
 Entity protein, small molecule, RNA, or DNA 
 Modifications Yphos  – phosphorylated on a tyrosine 
  act    – activated 
@@ -1163,7 +1251,7 @@ Location   Out – outside the cell, the medium or supernatant
   CLi – attached to the inside of the cell membrane 
   CLc – in the cytoplasm 
  
-PLA provides biologists with the ability to study and explore available dishes 
+PLA provides biologists with the ability to study and explore available dishes  
 (initial system states) as well as creating or modifying existing dishes. Biologists 
 can display signalling reactions networks of specific model. They can find and 
 compare pathways. Additionally, Gene expression data can be visualised with 
@@ -1171,8 +1259,16 @@ color-coded scheme [4].
 In addition to the above, PLA enables users to access PL Knowledge Base 
 interactively by means of Petri net interaction. With Petri nets, PLA visualises 
 reactants and products, as well as reaction controls (or modifiers) which are 
-25 
- CHAPTER ?2 BACKGROUND 
+Figure 10 –  Petri net representation of rules   
+Reactant components 
+(consumed or control occurrences) 
+rule 
+edge 
+Product component 
+(produced occurrence) 
+CHAPTER ?2 BACKGROUND 
+ 
+26 
  
 compulsory for the reaction to take place but are unchanged after the reaction. 
 Controls can be enzymes, catlysts, scaffolds, or any other controlling substance. 
@@ -1187,54 +1283,56 @@ the controls unchanged.
 In PLA, each PLMaude model maps to a Petri net model; [35] defines this 
 model as following: 
 “A Petri net model is a pair (    ) consisting of a set of 
-transitions  , and an initial state   (a set of occurrences).” 
+transitions  , and an initial state   (a set of occurrences).”  
 Where transition is a rule long with its connected occurrences. The petri net 
 model can be executed then by firing ‘rewrite’ rules that becomes enabled upon 
 user selection (by putting tokens on occurrences to indicate their presence in the 
 current state). Users then can perform analysis tasks like setting some ‘goal’ or 
 ‘avoid’ occurrences to find a subnet from the full network that leads to this goal 
-and avoiding the avoids. A Petri subnet is defined as following:  
+and avoiding the avoids. A Petri subnet is defined as following:   
 “A Petri subnet is a tuple (        ) consisting of a set of transitions, 
  , an initial marking,   a goal marking  , and an avoids set  .” [35] 
 Subnet results can also be further analysed. PLA also finds knockouts which 
 are “omissions from the initial state that prevent reaching a goal” [4]. Figure 11 
-illustrates the process sequence and some of PLA model analysis features. 
-3 
-•Analysis: 
-2 
-•finding subnets 
-•Convert it to 
-1 
-•finding pathways 
-Petri net TKB 
-•comparing subnets or pathways 
-•Convert dishes to 
-•Start with 
-occurrence sets •finding knockouts 
-PL KB 
-•exploring rules 
+illustrates the process sequence and some of PLA model analysis features.  
+Figure 11 - PLA process and analysis features  overview  
  
-Figure 11 - PLA process and analysis features overview 
+2.6.1  PLA GUI front end 
  
- 
-2.6.1 PLA GUI front end 
- 
-As mentioned, PLA is a Java based application (Figure 12 shows a screen shot 
+As mentioned, PLA is a Java based application (Figure 12  shows a screen shot 
+from PLA). In fact, GUI creation in PLA is driven by JLambda
 1
-from PLA). In fact, GUI creation in PLA is driven by JLambda : a Java-based 
+: a Java-based 
 language for interactive visualisation with syntax close to Scheme language [36].  
 “JLambda is an untyped Scheme-like lexically scoped interpreted 
 language, that provides a runtime interface to available Java classes, 
 using Java's built-in reflective capabilities.” [37] 
                                                              
-1
- Available from http://www.jlambda.com  
-26 
- CHAPTER ?2 BACKGROUND 
+1 Available from http://www.jlambda.com   
+1 
+•Start with 
+PL KB 
+2 
+•Convert it to 
+Petri net TKB 
+•Convert dishes to 
+occurrence sets 
+3 
+•Analysis: 
+•finding subnets 
+•finding pathways 
+•comparing subnets or pathways 
+•finding knockouts 
+•exploring rules 
  
  
-Figure 12 - Screen shot of the PLA. It provides features like zooming, searching occurrences and rules, 
-exploring, finding pathways, and other features. 
+CHAPTER ?2 BACKGROUND 
+ 
+27 
+ 
+ 
+Figure 12 - Screen shot  of the PLA. It provides features  like zooming, searching occurrences and rules,  
+exploring,  finding pathways, and other features.  
 JLambda is a core component (actor) in IOP (the interoperability platform 
 implemented in PLA). JLambda comes with a parser, an interpreter, and a java 
 class hierarchy called Glaphish hierarchy used for run time construction of 
@@ -1245,33 +1343,6 @@ in progress. Appendix II shows an example of an SBML format exported from
 PLA. 
 Figure 13 illustrates PLA architecture showing technologies integrated in this 
 architecture.  
-JLambda 
-Petri net 
-SBML 
-Maude JLambda 
-IOP (BioPax  
-(GUI front end) 
-in progress) 
- 
- 
-(with efforts 
-Export formats 
-PL Knowledge 
- 
-to integrate 
-Base 
- 
-Biology Database 
-with SBW) 
- Links to 
- 
-(Petri nets displayed 
-UniProt – KEGG – 
- 
-through GraphViz Dot) 
-BioCyc – PANTHER – 
-Reactome, … 
-Figure 13 - PLA architecture 
  
 PLA tool and all related technologies included in its architecture provide a 
 framework for biologists to create and analyse biological models. Improving such 
@@ -1280,9 +1351,39 @@ developers to understand the current framework very well. This will make the
 integration much easier and the implementation a success. PLA is explored for 
 improvement opportunities in order to achieve higher user satisfaction level and 
 hence better throughputs. Motivation section spots the light on these prospects 
-and is driven by examples to better understand the requirements. 
-27 
+and is driven by examples to better understand the requirements . 
+ 
+Biology Database 
+UniProt – KEGG – 
+BioCyc – PANTHER – 
+Reactome,  
+Maude 
+PL Knowledge 
+Base 
+JLambda 
+(GUI front end) 
+ 
+ 
+ 
+ 
+(Petri nets displayed 
+through GraphViz Dot) 
+IOP 
+(with efforts 
+to integrate 
+with SBW) 
+Export formats 
+JLambda 
+Petri net 
+SBML 
+(BioPax  
+in progress) 
+ 
+Links to 
+ 
+Figure 13 - PLA architecture  
   
+ 
 3 Motivation 
  
 This project aims at providing a more user-friendly interface for the symbolic 
@@ -1292,17 +1393,18 @@ users with no background in formal logic. Such graphical tool would simplify and
 accelerate the construction as well as modification of large models. This chapter 
 focuses on In this section, I motivate my approach using a small example and, in a 
 following section, I describe the methodology for achieving this goal. 
-3.1 A spotlight on the current representation 
-3.1.1 Taking PLA guided tours 
+3.1  A spotlight on the current representat ion 
+3.1.1  Taking PLA guided tours  
 SRI International provides a number of online guided tours in some PL models 
+for familiarising users with PLA. STM6
 1
-for familiarising users with PLA. STM6 is one model used to study the changes 
+ is one model used to study the changes 
 to cell proteins as a result of stimulating the cell by binding some ligands to some 
 protein receptors on the surface.  To motivate the methods in this project, and 
 after taking the STM6 guided tour, we select one of the many rules (reactions) in 
 this model. This rule is then studied to better understand its PLA rep resentation. 
-3.1.2 The Rule - Reaction Background 
-Living cells encompass protein molecules on their surface to receive extracellular 
+3.1.2  The Rule -  Reaction Background 
+Living cells encompass protein molecules on their surface to receive extracellular  
 signal or stimulations that would change the state of the cell. These molecules are 
 called Receptors, and EgfR is one of these receptors that receive signals from Egf 
 (Epidermal Growth Factor) protein family.  When an Egf protein is located 
@@ -1316,17 +1418,17 @@ which is an inclination for cancer [39].
 Figure 14 illustrates EgfR in complex with 
 Egf. 
  
-Figure 14 - Egf receptor in complex with Egf 
-outside the cell, from [46] 
-3.1.3 Maude and Petri net representations 
+3.1.3  Maude and Petri net representations 
 To represent the above rule in Maude, required ‘sorts’ need to be defined to be 
 used in the rule code. The rule is coded as following: 
  
                                                              
-1
- This tour is available from http://pl.csl.sri.com/stm6-guide.html 
+1 This tour is available from http://pl.csl.sri.com/stm6 -guide.html 
+Figure 14 - Egf receptor in complex with Egf 
+outside the cell,  from [46]  
+CHAPTER ?3 MOTIVATION 
  
- CHAPTER ?3 MOTIVATION 
+29 
  
    
 vars out clm : Soup . 
@@ -1340,55 +1442,63 @@ rl[001.EgfR.irt.Egf]:
  
 PLA visualises rules as Petri nets as we  
 realised. The Egf rule is represented in Petri  
-Figure 15 – Petri net transition of rule 
 net as in figure 14.  
-001.EgfR.irt.Egf obtained from PLA 
-software 
-3.2 The weak link 
+3.2  The weak link 
 Unfortunately, once drawn as Petri net, the rule cannot be modified unless the 
-Maude code is modified and the dot graph is re-drawn again. Although PLA 
+Maude code is modified and the dot graph is re -drawn again. Although PLA 
 assists biologists to explore and analyse biological models, yet it lacks the power 
-of editing its knowledge bases graphically. SRI International, the creators of PLA, 
+of editing its knowledge bases graphically.  SRI International, the creators of PLA, 
 are working on improving PLA by seeking integration opportunities with other 
 platforms and standards like SBW and BioPax. Nonetheless, PLA remains a very 
 useful tool for biologists and curators. I will not emphasis more on what 
 functionalities PLA provides, as the previous chapter elaborated all these aspects. 
 Rather, the focus here will be on the situations where the biologists find PLA 
-complicated or not able to meet their requirements. 
-3.2.1 Motivating use cases 
+complicated or not able to meet their requirements.  
+3.2.1  Motivating use cases 
 In a series of private communications with SRI International, we agreed to have 
 biologist curators to perform some reality checks on PLA to find out what might 
-prevent PLA from meeting their requirements. 
+prevent PLA from meeting their requirements.  
 Table 2 outlines three scenarios of biologists working in the context of a PL 
 network in PLA GUI editor. This network could be specific to a dish, a subnet 
-resulted from finding pathways to goal(s), or even it could be a Knowledge Base. 
-Table 2 – PLA use scenarios, from SRI International 
+resulted from finding pathways to goal(s), or even it could be a Knowledge Base.  
+Table 2 –  PLA use scenarios, from SRI International  
 Scenario 1 Scenario 2 Scenario 3 
-A biologist studying a A curator adding new The biologist of 
-particular pathway segment, information to an existing scenario 1 decides to 
-is building a little network network, either updating an integrate his little 
-from scratch, to represent existing rule, or adding new network into a larger 
-his/her interpretation of rules to expand coverage of network (in PLA or 
-experiments. the network. external database). 
+A biologist studying a 
+particular pathway segment, 
+is building a little network 
+from scratch, to represent 
+his/her interpretation of 
+experiments. 
+A curator adding new 
+information to an existing 
+network, either updating an 
+existing rule, or adding new 
+rules to expand coverage of 
+the network. 
+The biologist of 
+scenario 1 decides to 
+integrate his little 
+network into a larger 
+network (in PLA or 
+external database). 
 The biologist in scenario 3 is required to be unambiguous about protein names, 
 terms used for location, and modification.  Currently, biologists have to resolve all 
-29 
- CHAPTER ?3 MOTIVATION 
+Figure 15 –  Petri net transition of rule 
+001.EgfR.irt.Egf obtained from PLA 
+software  
+CHAPTER ?3 MOTIVATION 
+ 
+30 
  
 names by hand. PLA needs to provide an automated mechanism to ensure 
-unambiguity without biologist’s intervention. 
-3.3 Initiatives for improvement 
-3.3.1 Biologists- friendly Representation 
+unambiguity without biologist’s intervention.  
+3.3  Initiat ives for improvement  
+3.3.1  Biologists -  friendly Representation 
 SRI International has provided a graphical idea of how a rule would look like in a 
 more biologist friendly form based on encoding occurrence locations inside the 
 cell visually. Figure 15 illustrates how a petri net representation would be 
 represented in this biologist-friendly form. The friendly form is drawn by Merrill 
-Knapp from SRI International (private communication). 
-EgfR-EgfRC Egf-Out 
-cellular environment 
-plasma membrane 
-Figure 16 - Rule representation in petri net (drawn by dot) and biologist -friendly form 
-(from SRI International) 
+Knapp from SRI International (private communication).  
  
 Rule 001 shows Egf (consumed occurrence) moving from the outside to the 
 EgfR Complex (consumed occurrence) resulting in binding Egf to the Egf 
@@ -1398,20 +1508,26 @@ Therefore, to achieve the discussed specifications, the new system would be
 developed as an integrated solution that is capable of connecting a suitable 
 graphical representation to the conceptual layer (PLMaude) via the interoperation 
 layer. 
-3.3.2 Rule Paraphrase 
+3.3.2  Rule Paraphrase 
 In another attempt to make PLA more user friendly in representing rules, SRI has 
 proposed a textual representation of rules as in figure 16: 
-30 
- CHAPTER ?3 MOTIVATION 
+Figure 16 - Rule representation in petri net (drawn by dot) and biologist -friendly form 
+(from SRI International)  
+cellular environment 
+plasma membrane 
+Egf-Out EgfR-EgfRC 
+CHAPTER ?3 MOTIVATION 
+ 
+31 
  
  
-Figure 17 - Paraphrase of rule 001 in figure 15 
+Figure 17 - Paraphrase of rule 001 in figure 15  
  
-3.4 The essence 
+3.4  The essence 
 It can be concluded from these scenarios and initiatives that the main 
-requirement is – in fact – the ability to create new rules or update existing ones in 
+requirement is – in fact – the ability to create new rules or update existing ones  in 
 a user friendly way. Creating or updating rules will require manipulating 
-occurrences. PLA needs to provide the relevant features in its GUI for editing 
+occurrences. PLA needs to provide the relevant fea tures in its GUI for editing 
 rules as well as the internal knowledge base. 
 In addition to these requirements, there is a need for custom software to 
 visually project back the complex reasoning outputs generated by Pathway Logic 
@@ -1427,8 +1543,8 @@ Following chapter discusses and plans for building a graphical rule editor to
 address the issues with the current PLA system. 
  
  
-31 
   
+ 
 4 Designing a Graphical Rule Editor 
  
 It is critical to plan for any software development carefully in order to achieve 
@@ -1438,38 +1554,21 @@ improved. This chapter reviews the current process for adding/editing rules to
 PLA KB, and moves forward to planning for developing a new graphical editor 
 with all design aspects to achieve successful implementation that would meet the 
 pre-defined objectives. 
-4.1 Charting the Process 
+4.1  Charting the Process  
 Adding or editing rules in PLA knowledge bases would require Maude 
 programming background and would involve working on code level. Current PLA 
 users (either with or without Maude programming skills) would require to create 
 rules to model their experiments data or to map curated models from the 
 literature. Figure 18 sketches the process a biologist would follow to model his 
 knowledge in PLA. 
-Should be aware of 
-where to store it 
-Very few know… 
-Yes 
  
- 
-No 
- 
-Figure 18 - Current rule creation and editing process 
+Figure 18 - Current rule creation and editing process  
 In all cases, Maude code needs to be added or modified in a specific file 
 stored in a specific location in order to maintain any PLA KB. 
-The new tool is planned on the following improved process: 
+The new tool is planned on the following improved process:  
 From user perspective: Technical perspective: 
  
  
-PLA 
- 
-KB object from PLA 
-1 
- 
- 
-Export 
-3 
-2 
- to PLA 
  
  
  
@@ -1480,41 +1579,53 @@ Export
  
 In the new process, users are not required to have any programming skills for 
 modelling PLA networks. They would be able to maintain their rules through a 
-graphical interface supported by all features required for adding or editing rules. 
+graphical interface supported by all features required for adding or editing rules.  
+Yes 
  
- CHAPTER ?4 DESIGNING A GRAPHICAL RULE EDITOR 
+ 
+Very few know 
+Should be aware of 
+where to store it 
+No 
+  
+KB object from PLA 
+  
+PLA 
+Export 
+to PLA 
+1 
+2 
+3 
+CHAPTER ?4 DESIGNING A GRAPHICAL RULE EDITOR 
+ 
+33 
  
 From technical perspective, the new tool will be linked to PLA through 
-maintaining an object that contains all information of a KB. 
-4.2 Layered-Object-Oriented Architectural Style 
+maintaining an object that contains all information o f a KB. 
+4.2  Layered-Object-Oriented Architectural Sty le  
 Architectural style (or pattern) is a set of principles combining a group of systems 
+in one abstract framework
 1
-in one abstract framework . Layered Architectural Style is the concept of grouping 
+. Layered Architectural Style is the concept of grouping 
 related functionalities in an application into vertically stacked layers. Realising the 
 diverse technologies integrated in PLA, which has inspired the idea of visualising 
 PLA – with all its auxiliaries – as layers. The main rule I devised and followed 
 with this style is defined as follows:  
-With a system   consisting of interacting layers  , a layer     needs 
- 
-only to interact directly to its adjacent layers   and  . 
-      
+With a system   consisting of interacting layers  , a layer      needs 
+only to interact directly to its adjacent layers      and     . 
 I call this the Adjacency Interaction Rule (AIR). 
-Thus, any layer needs not to bypass an adjacent layer to interact to non-
+Thus, any layer needs not to bypass an adjacent layer to interact to non -
 adjacent layer. Building on AIR rule, the system consists of three logical layers as 
 illustrated in Figure 19. 
 Any work involved would 
-Presentation Layer (Java GUI/visualization tools) 
 be in one of these layers or 
 interfaces between them. 
 According to AIR, green ovals 
-Interoperation Layer (IOP/SBW) 
 represent valid interactions, 
 while the red oval is an invalid 
 interaction. Practically, an 
-Conceptual Layer (PLMaude KB) 
 example would be that any 
 attempt to modify or update 
-Figure 19 - Proposed system logical architecture 
 the KB should not be done 
 directly to the conceptual 
 layer (as the case currently), instead, the system should provide the necessary 
@@ -1527,20 +1638,25 @@ flexibility while dealing with system components as objects. With this style, we
 exploit all object-oriented programming benefits like Abstraction, Encapsulation, 
 Polymorphism, and Inheritance to achieve a reusable and highly cohesive 
 architecture. Combining these two styles into one application would acquire the 
-advantages of both architectural styles. 
+advantages of both architectural styles.  
                                                              
+1 Chapter 3: Architectural Patterns and Styles, Microsoft Application Architecture Guide, 2
 nd
-1
- Chapter 3: Architectural Patterns and Styles, Microsoft Application Architecture Guide, 2 
+ 
 Edition, 2009, MSDN Library on http://msdn.microsoft.com/en-us/library  
-33 
- CHAPTER ?4 DESIGNING A GRAPHICAL RULE EDITOR 
+Interoperation Layer (IOP/SBW) 
+Conceptual Layer (PLMaude KB) 
+Presentation Layer (Java GUI/visualization tools) 
+Figure 19 -  Proposed system logical  architecture  
+CHAPTER ?4 DESIGNING A GRAPHICAL RULE EDITOR 
+ 
+34 
  
 Thus a properly designed user interface should consider all the modules in 
 this architecture. The aim is to improve PLA in each of these layers whenever 
 feasible, and/or develop new software modules that can be plugged or integrated 
 seamlessly into PLA. 
-4.3 Design Specification 
+4.3  Design Specification 
 In PLA, the process of creating or editing rules needs to be compatible with 
 internal representation of PLA. Each rule should have a unique name. Recall that 
 a rule has participants: consumed and produced occurrence, and controls. Each 
@@ -1551,39 +1667,10 @@ structures specs (short for specifications). The intent is that a spec has all t
 information needed by the editor to provide choices and information to the user. 
 Figure 20 summarises data structures’ specifications to be considered while 
 developing the new editor.  
-Modification 
-Simple Occurrence KB 
-Name 
-Entity Name 
-Modifications Rule map Description 
-Type:  
-Location Predefined entities 
-one of: AAMOD, ACT, 
- Predefined modifications 
-FRAG, MBIND, OTHER 
-Predefined locations 
- 
- 
-Complex Occurrence 
-Controlled vocabulary 
-triples (db, id, term) 
-Simple occurrences Rule 
- 
-Location 
- Id 
-Description 
-Consumed occurrences Location 
-Produced occurrences 
-Name 
-Control occurrences 
-Figure 20 - PLA data structures 
-Evidence Description 
-specifications 
- 
  
 Additionally, table 3 outlines some design specifications thought of in 
 coordination with SRI team.  
-Table 3 - PLA rule design specification, as agreed with PLA creators. 
+Table 3 -  PLA rule design specification,  as agreed with PLA creators.  
 Rule data Specification 
 Name Mandatory field specified by user 
 Unique in current context 
@@ -1593,8 +1680,48 @@ Evidence - Can be specified by a pubmed id (a code for life sciences
 and biomedical articles) 
 - Can have fields to specify article table or figure numbers 
 - Text string for description and remarks 
-34 
- CHAPTER ?4 DESIGNING A GRAPHICAL RULE EDITOR 
+Simple Occurrence 
+Entity 
+Modifications 
+Location 
+ 
+Complex Occurrence 
+Simple occurrences 
+Location 
+ 
+Rule 
+Id 
+Description 
+Consumed occurrences 
+Produced occurrences 
+Control occurrences 
+Evidence 
+Modification 
+Name 
+Description 
+Type:  
+one of: AAMOD, ACT, 
+FRAG, MBIND, OTHER  
+ 
+Controlled vocabulary 
+triples (db, id, term) 
+ 
+Location 
+Name 
+Description 
+ 
+KB 
+Name 
+Rule map 
+Predefined entities 
+Predefined modifications 
+Predefined locations 
+ 
+Figure 20 - PLA data st ructures  
+specifications  
+CHAPTER ?4 DESIGNING A GRAPHICAL RULE EDITOR 
+ 
+35 
  
 Rule Participants data Specification 
 Occurrences & roles User should specify occurrences of each role: consumed, 
@@ -1608,13 +1735,13 @@ Occurrence name Short and long name. long name is computed so that
 occurrence with same parts has same long names 
  
 Initially, an occurrence has an entity, location, and empty set 
-of modifications (if not specified at creation). 
+of modifications (if not specified at creation).  
 Entity - User can create entities 
 - Has unique name 
 - Has link to external standard database entry (like UniProt) 
 - Link is optional:  
-- No link required for families, composites, and complexes 
-- Other database links or synonyms can be specified by user 
+- No link required for families, composites, and complexes  
+- Other database links or synonyms can be specified by user  
 - User can select known entities from a list 
 Location - User can create locations 
 - Has unique name 
@@ -1623,7 +1750,7 @@ Modifications - User can create modifications
 - Has unique name 
 - Known modifications can be selected from a list 
  
-4.4 Designing the GUI 
+4.4  Designing the GUI 
 Having it as its visual representation of models, Petri net representation is one 
 possible candidate that might be used as the graphical notation in the new 
 graphical tool for adding and editing rules. Although would have been consistent 
@@ -1640,12 +1767,13 @@ visualising locations graphically. This design has been accepted by PLA creators
 and efforts were paid to come up with the final acceptable interface through 
 continuous feedback adoption. The figure shows an intermediate stage in building 
 one rule; i.e. 529. 
-35 
- CHAPTER ?4 DESIGNING A GRAPHICAL RULE EDITOR 
+CHAPTER ?4 DESIGNING A GRAPHICAL RULE EDITOR 
+ 
+36 
  
  
  
-Figure 21 – A proposed design for the rule editor 
+Figure 21 –  A proposed design for the rule editor  
 The GUI is based on a guided procedure approach to make the whole 
 process more intuitive for biologists. This interface guides the user through the 
 process as following: 
@@ -1666,46 +1794,35 @@ rule.
 4. Evidenc: to specify links to literature evidences. 
 5. Save to KB: to add the created rule to the PL knowledge base. 
  
-4.5 UML class diagrams 
+4.5  UML class diagrams 
 Having a design proposal would enable the decision of Java classes required for 
 building the tool. The aim is to achieve a proper design that would maintain the 
 main object-oriented programming principles. A high-level UML class diagram is 
 used to plan the main data structures and classes that would be required for 
 building the editor – see figure 22.  
-36 
- CHAPTER ?4 DESIGNING A GRAPHICAL RULE EDITOR 
+CHAPTER ?4 DESIGNING A GRAPHICAL RULE EDITOR 
+ 
+37 
  
 The diagram might have to be changed 
-RuleEditor 
-JPanel 
 according to the programming decisions taken while 
 implementing the system. 
  
-Rule 
-CellPanel 
-4.6 Planning the development 
+4.6  Planning the development 
 environment 
 PLA uses a diversity of technologies for building, 
-Membrane Occurrence 
 analysing, and visualising biological networks. To 
 develop a new tool that can integrate and 
 communicate to PLA, the same set of tools used 
-Modification 
-<< enum >> 
 need to be setup to simulate the real environment. 
-Position 
 Therefore all software instructed to be installed and 
 any configuration required to run these software 
 need to be applied in the development 
-MouseMotionListener MouseListener 
 environment. Documentation and instructions on 
 downloading these tools are all available from 
 Pathway Logic official web site 
-JLayeredPane 
 http://pl.csl.sri.com/software.html.  
 As it is important to setup a development 
-  Figure 22 - High level UML 
-class  diagram 
 environment very close to the real one, selecting 
 the right development technologies is also 
 important for the success of this project. 
@@ -1714,20 +1831,32 @@ thus selecting Java as the development programming language is the right
 decision. This decision supports the decision to have an object -oriented 
 architectural style. Eclipse would be a suitable development suite for Java 
 programming. 
-4.7 Planning the integration with PLA 
+4.7  Planning the integrat ion with PLA 
 As it would be part of the PLA tool, integration should be planned carefully to 
 achieve success. All integration will be through a KB which would be 
 encapsulated in its API (see figure 23). 
-KB API 
  
 Figure 23 - Integration with PLA 
  
-The plan is to integrate with PLA on three stages: 
+The plan is to integrate with PLA on three stages:  
 Stage 1: Creating rules in a blank KB 
 Editing starts by passing a blank KB to the editor. Rules occurrences are created 
 from predefined vocabularies for entities, modifications, and locations based on 
-37 
- CHAPTER ?4 DESIGNING A GRAPHICAL RULE EDITOR 
+KB API 
+RuleEditor 
+CellPanel 
+Membrane Occurrence 
+Modification << enum >> 
+Position 
+JPanel 
+JLayeredPane 
+MouseListener MouseMotionListener 
+Rule 
+  Figure 22 - High level UML 
+class  diagram 
+CHAPTER ?4 DESIGNING A GRAPHICAL RULE EDITOR 
+ 
+38 
  
 the PL KB. Rules are then added to the KB through a PLA java class that 
 provides methods to query the KB. There will also be a function to export a KB 
@@ -1743,92 +1872,94 @@ One technical prerequisite to make the integration with PLA possible is to
 have a certain folder structure in the context of PLA various tools. Figure 24 
 illustrates the required folder structure and where the new editor executable file 
 (Jar file) should be located; i.e. ruleEd.jar. 
-KBEd 
+ 
+ 
+ 
+ 
  Jars 
- PLA 
 PLA jars 
  
- PLALib 
 ruleEd.jar 
-Models 
-Sample model 
+KBEd 
  
 JLambda scripts 
-Figure 24 - Planned folder structure 
- 
- 
- 
- 
-38 
+ PLA 
+ PLALib 
+Models 
+Sample model 
+Figure 24 - Planned folder structure  
   
+ 
 5 Implementing the Editor 
  
-5.1 Development box setup 
+5.1  Development box setup 
 As planned, the development environment needs to be prepared in such a way to 
 simulate the real PLA environment. On a Linux machine, all software required to 
 run PLA were installed and any required configuration were applied. Following 
 the online guide for PLA installation including pre-requisite software like IOP 
-and GraphViz dot, I have prepared a light version of guidelines to easily follow-up 
+and GraphViz dot, I have prepared a light version of guidelines to easily follow -up 
 with installation steps. This installation guide is available in appendix IV. 
 From programming perspective, eclipse was used - as planned - for 
 developing the new tool. To enrich the development experience, and to focus 
 more on the editor functionality rather than positioning and aligning things on the 
+interface, I installed an eclipse Java GUI designer called WindowBuilder
 1
-interface, I installed an eclipse Java GUI designer called WindowBuilder . I used 
+. I used 
 WindowBuilder for initial positioning of panels and components on the screen. It 
 reduced the time required for implementing such non-core parts of the editor. 
 In addition to having all 
-KBEd 
 software setup on the development 
 box, the program needs to be run 
- Jars 
- PLA 
 within a certain folder structure as 
-bp2pl.jar 
 planned. Folders were created as 
-iop.jar 
- PLALib 
-ruleEd.jar 
 illustrated in figure 25 with all 
 JLambda scripts and executable Jars 
-JLambda scripts 
-Models 
- 
 placed properly. bp2pl.jar is a 
-init-kbed.lsp 
-TinyKBMaude 
-package supplied by SRI for keeping kb-addrulebyspec.lsp 
-jkb2graph.lsp 
+package supplied by SRI for keeping 
 all PLA internal java representation 
-export-jl.lsp …. 
 to facilitate the  integration. iop.jar is 
 the package containing binaries of 
-Figure 25 - Implemented folder structure 
 IOP. PLALib and TinyKBMaude 
 model are required for running 
 PLA. JLambda scripts provided by SRI are used to initialise the KB object, 
 adding rules to KB through shell terminal, drawing dot graphs, exporting to PLA, 
-and some other useful functionalities. 
+and some other useful functionalities.  
  
-5.2 JLambda for Integration 
+5.2  JLambda for Integrat ion 
 In the simulated environment, some process needs to invoke the new editor as of 
 being in a real PLA application. Layered architectural style and the AIR rule 
 suggest an intermediate layer that would communicate with PLA and pass a KB 
 object from PLA to the graphical editor for creating or editing KB rules. The 
 layer needs to return back the updated KB object to PLA to apply required 
-network analysis. 
+network analysis.  
                                                              
-1
- Available from http://www.eclipse.org/windowbuilder 
+1 Available from http://www.eclipse.org/windowbuilder  
+ Jars 
+bp2pl.jar 
+iop.jar 
+ruleEd.jar 
+KBEd 
  
- CHAPTER ?5 IMPLEMENTING THE EDI TOR 
+init-kbed.lsp 
+kb-addrulebyspec.lsp 
+jkb2graph.lsp 
+export-jl.lsp . 
+ PLA 
+ PLALib 
+Models 
+TinyKBMaude 
+Figure 25 - Implemented folder structure  
+JLambda scripts 
+CHAPTER ?5 IMPLEMENTING THE EDI TOR 
+ 
+40 
  
 JLambda - a core IOP actor - initialises a KB object with empty rules map 
 and all other specifications included. This action can be invoked by calling the 
-following script on shell terminal: 
+following script on shell terminal:  
 ./kbed init-kbed.lsp 
 The command execution output shows all actions performed by JLambda for 
-initialising the KB object as following:  
+initialising the KB object as following:   
 bash-4.1$ ./kbed init-kbed.lsp 
 query.lsp loaded 
 coloring.lsp loaded 
@@ -1852,46 +1983,33 @@ Some rules can also be added using JLambda script - an example of which is
 provided below:  
 (define r1id (invoke kbed "addRule"  r1spec)) 
 (define r172id (invoke kbed "addRule"  r172spec)) 
-Then the editor can be instantiated using the following code on shell:  
+Then the editor can be instantiated using the following code on shell:   
 (define kbedGui (object ("ruleEditor.RuleEditor" kbed) )) 
 Following the folder structure and having the editor Jar file ready in Jars 
 folder, this JLambda command would bring up the editor window having the KB 
 data ready for use. 
-Now we have everything ready for implementing the new editor. 
+Now we have everything ready for implementing the new editor.  
  
-5.3 Building the GUI 
-5.3.1 Editor foundation 
+5.3  Building the GUI 
+5.3.1  Editor foundation 
 As discussed earlier, each time the editor is started, it will be invoked as a new 
 object with a KB object (of empty rules map) passed as a parameter. By creating 
-40 
- CHAPTER ?5 IMPLEMENTING THE EDI TOR 
+CHAPTER ?5 IMPLEMENTING THE EDI TOR 
+ 
+41 
  
 the editor object, all included objects, structures, or fields will be configured for 
 fresh use. To have an intuition of all the objects involved, figure 26 sketches an 
 updated UML class diagram illustrating programming decisions made for 
 implementing the editor. For details about each class fields and methods, refer to 
 the source code in appendix VII. 
-MouseMotionListener 
-JLayeredPane MouseListener 
-JPanel 
-RuleEditor 
-<abstract> 
-MovableLayeredPane 
-CellPanel 
-<< enum >> Rule 
-Role 
-OccurrenceOval ComplexOccGraphic 
-Membrane 
-OccGraphic 
-<< enum >> 
-Position 
  
 Figure 26 - Detailed UML class diagram 
-5.3.2 Rule Identifier 
+5.3.2  Rule Identifie r 
  
-Figure 27 - Rule Identifier screen 
+Figure 27 - Rule Identi fier screen  
 Basically, this section is the first page displayed for users for starting the process 
-of editing rules. In this view, the user can either select an existing rule for editing 
+of editing rules. In this view, the user can either select an  existing rule for editing 
 or select New Rule for creating a new one. These options are provided through a 
 drop-down list that is populated with rule names from the KB object passed to the 
 editor on instantiation. The list is retrieved from the KB as following:  
@@ -1899,16 +2017,31 @@ kb.ruleIds()
 Selecting to create a new rule would refresh all rule information and clear the 
 content of the rule object and all other data structures used for storing editor 
 information while working. 
-41 
- CHAPTER ?5 IMPLEMENTING THE EDI TOR 
+RuleEditor 
+OccurrenceOval 
+<< enum >> 
+Position 
+JLayeredPane MouseListener MouseMotionListener 
+Rule CellPanel 
+Membrane 
+JPanel 
+<< enum >> 
+Role 
+ComplexOccGraphic 
+<abstract> 
+MovableLayeredPane 
+OccGraphic 
+CHAPTER ?5 IMPLEMENTING THE EDI TOR 
+ 
+42 
  
 In contrast, selecting an existing rule from the drop-down list would bring up 
-all the information related to this rule from the KB object as following:  
+all the information related to this rule from the KB object as following:   
 kb.ruleSpecById(ruleid) 
 Rule information would then be placed in the corresponding fields on the 
 editor and the user then enters or modifies information in the fields as 
 appropriate. 
-5.3.3 Rule Builder 
+5.3.3  Rule Builder 
 The main purpose of this editor lies in this part. When users selects wish to start 
 building the rule, two graphical cell spaces (panels) would be provided for 
 representing the cell states before and after the reaction. These spaces are 
@@ -1919,34 +2052,35 @@ populated with rules occurrences and the panels will display the rule name. Thes
 are drawn as a result of retrieving rule graphics entry from kbGraphics hash map 
 when selecting the rule to be edited. In the case that a rule graphics entry is not 
 found in the hash map, which means that this is the first time this rule is brought 
-to the editor, a default graphics orientation will be created and the consumed, 
+to the editor, a default graphics orientation will be created and the consumed , 
 produced, and controls occurrences will be distributed in default locations on the 
-before and after panels appropriately. 
+before and after panels appropriately.  
 The builder provides the following components to facilitate creating and editing 
 rules: 
-Sample occurrence: 
+Sample occurrence:  
 For convenience, a sample occurrence for demonstrating user 
 selections is implemented to assist users while creating 
- 
-Figure 28 - 
 occurrences. A sample is illustrated in figure 28.  
-Occurrence sample 
-Entity list: 
+Entit y l ist :  
 This list reads its items from predefined entity names stored in the KB object.  
 The list is currently limited to proteins which are the most commonly used type of 
 entities. This would be extended in future to include other entities like chemicals. 
 This field is mandatory and selecting any entity would display its name in the 
 sample occurrence. 
-Modifications bubbles: 
+Modif icat ions bubbles:  
 The builder provides a list of predefined modifications (obtained from the KB) to 
 be selected to describe the state of each entity. Multiple selections are allowed 
 and can be done via clicking on the required bubbles. Modifications can be de-
 selected as required by clicking on the corresponding bubble again (see figure 29). 
-42 
- CHAPTER ?5 IMPLEMENTING THE EDI TOR 
+ 
+Figure 28 - 
+Occurrence sample  
+CHAPTER ?5 IMPLEMENTING THE EDI TOR 
+ 
+43 
  
  
-Figure 29 - Occurrence modifications multiple selection 
+Figure 29 - Occurrence modifications  multiple selection  
 Selecting modification makes the entity oval surrounded by the small 
 bubbles. For convenience and much clarity, modifications that can be visible at a 
 time around an entity can be up to eight. This decision has been made based on 
@@ -1955,16 +2089,14 @@ modifications at a time in practical. However, there is no
 restriction on adding modifications to occurrences and - 
 technically - there is no problem of adding any number of 
 modifications. The only issue would be that modification 
-Figure 30 - A demo of 
-bubbles will be displayed overlapping each other due to an occurrence with 8 
-modifications 
+bubbles will be displayed overlapping each other due to 
 shortage of space. Just for demonstration, an occurrence 
 with eight modifications is illustrated in figure 30.  
-Locations list: 
+Locations l ist :  
 A predefined list of locations is obtained from the KB object to aid user selection. 
 This field is mandatory as it will determine where each occurrence should be 
 located on the cell panels. 
-Occurrence role: 
+Occurrence role:  
 A role for each occurrence is specified through a radio button list. Selecting the 
 role will determine to which panel the occurrence should be added; consumed 
 added to Before panel, produced added to After panel, and control added to both 
@@ -1972,7 +2104,7 @@ of the panels as these substances do not change during reactions. The role also
 controls the colour of the occurrence; i.e. red for consumed and produced 
 occurrences, and green for controls. This colour coding would assist in 
 recognising the main change in the reaction especially for complex rules.  
-Adding occurrences: 
+Adding occurrences:  
 When the user is done with designing his occurrence, it can be easily added to the 
 proper panel (based on its role) with a button press. This action would add the 
 occurrence to the corresponding occurrence list of the rule obj ect. It also adds the 
@@ -1980,17 +2112,21 @@ graphics objects to the rule graphics map. The graphics entry is added with
 occurrence long name as a key for easy retrieval. Long names can be obtained by 
 requesting the KB object for the name through mkSOccLongName method. This 
 method would require occurrence specification as a parameter. 
-Enjoying playing around! 
+Enjoying playing around  
 Once an occurrence is added to the proper panel, it can be dragged smoothly with 
 mouse motion as required and dropped wherever appropriate. This way user 
 would have the control over occurrence locations inside the cell and would have 
 much comfort and flexibility to work on their models. Complex occurrences 
 (group of simple occurrences) can also be dragged around together in the same 
 smooth motion. Constructing complex occurrences is discussed below. 
-43 
- CHAPTER ?5 IMPLEMENTING THE EDI TOR 
+Figure 30 - A demo of 
+an occurrence with 8 
+modifications  
+CHAPTER ?5 IMPLEMENTING THE EDI TOR 
  
-Occurrences tree: 
+44 
+ 
+Occurrences tree:  
 A tree listing all occurrences in the rule grouped by role is implemented to give 
 the user better insight about his created rule. Additionally, this tree is used to 
 multi-select occurrences to create a complex occurrence as required using create 
@@ -2001,9 +2137,9 @@ All components contained in the rule builder are illustrated in figure 31.
  
 Figure 31 - Rule Builder screen 
  
-5.3.4 Rule Paraphrase and Rule Evidence 
+5.3.4  Rule Paraphrase  and Rule Evidence 
 These two sections are kept for future work as agreed with SRI in order to make 
-more focus on the creation of the rules. Nevertheless, design specifications have 
+more focus on the creation of the rules. Nevertheless , design specifications have 
 been already agreed for evidence as outlined in design specification section. For 
 paraphrase, the implementation would follow SRI initiative for the textual 
 representation. As an example, please refer to figure 17. 
@@ -2022,8 +2158,9 @@ Public static string getParaphrase()
   paraphrase + = “the ” + occurrenceLocation + “ contains ”  
     +  entityName + modificationsDescriptions 
  end loop 
-44 
- CHAPTER ?5 IMPLEMENTING THE EDI TOR 
+CHAPTER ?5 IMPLEMENTING THE EDI TOR 
+ 
+45 
  
  paraphrase + = “Then:” + newline 
   
@@ -2036,7 +2173,7 @@ Public static string getParaphrase()
 } 
 These two sections are in the “to do list” agreed with SRI that would start 
 immediately after submitting this report. 
-5.3.5 Save to KB 
+5.3.5  Save to KB 
 Through the KB object API, the new created rule can be added to the KB rules 
 collection by invoking the addRule instance method.  This method requires the 
 new rule specification to be passed as a parameter. This would secure having the 
@@ -2047,11 +2184,12 @@ graphics object (including before and after) needs to be added to kbGraphics has
 map. The new Graphics entry is stored with rule name as its key to avoid 
 overlapping with other rules. The hash map is serialised and stored as a .ser file 
 in the KB folder to become one of its data sources. On retrieval, this .ser fi le is 
-loaded into the hash map again as described in the Editor Foundation section. 
-5.3.6 Apache Ant JAR builder 
+loaded into the hash map again as described in the Editor Foundation section.  
+5.3.6  Apache Ant JAR builder 
+Apache Ant
 1
-Apache Ant is a well-known Java library commonly used for building Java 
-applications. Eclipse has a built-in Ant standard feature for facilitating application 
+ is a well-known Java library commonly used for building Java 
+applications. Eclipse has a built -in Ant standard feature for facilitating application 
 building. Developing the new tool would not be possible without simulating a 
 PLA environment. The specific folder structure requires the built Jar file of the 
 new tool to be stored a specific location in order to work. Building the application 
@@ -2059,7 +2197,7 @@ to the specified location (each time a code needs to be tested) is not practical
 especially with this kind of application. Ant facility provides an automatic building 
 of the application which was very useful for saving time. Ant xml script is available 
 in appendix V. 
-5.4 Exporting to PLA 
+5.4  Export ing to PLA 
 The KB object - with all rules stored in it - needs to be exported as Maude 
 code so PLA can invoke it as one of the available KBs in the PLA KB Manager 
 (the first window that appears when running PLA). As one of the integration 
@@ -2072,34 +2210,33 @@ script:
                                                              
 1
  http://ant.apache.org 
-45 
   
+ 
 6 Analysis of results 
  
 To test the new editor and analyse the results obtained, following scenarios with 
-detailed procedures were conducted and results were noted and discussed. These 
-procedures serve as a good resource for prospective users. Although most are, 
+detailed procedures were conducted and results were  noted and discussed. These 
+procedures serve as a good resource for prospective users.  Although most are, 
 some reactions may not be real ones and they are created just for demonstration 
 purposes. 
  
-6.1 Invoking the editor 
-1
-1. From shell terminal , cd to KBEd folder (containing JLambda scripts) 
+6.1  Invoking the editor  
+1. From shell terminal1, cd to KBEd folder (containing JLambda scripts)  
 2. Execute the command:  
 ./kbed init-kbed.lsp 
  
-3. Enter the following command to check the KB rule map (should be empty 
+3. Enter the following command to check the KB rule map (should be empty  
 on start):  
 (lookup jkb "rulemap") 
  
-4. Now, enter the following statement to invoke the editor:  
+4. Now, enter the following statement to invoke the editor:   
 (define kbedGui (object ("ruleEditor.RuleEditor" 
 kbed) )) 
  
-This procedure would be required for every scenario. 
+This procedure would be required for every scenario.  
  
  
-6.2 Creating rules with simple occurrences 
+6.2  Creating rules with simple occurrences  
 Rule: 
  Sos1-Clc + Egf-Clm ? Sos1-act-Cli 
 Procedure: 
@@ -2115,30 +2252,32 @@ d. Click Add and watch the Before cell panel
 e. Repeat the process for adding Egf with selecting Clm as location 
 and control as role – watch both cell panels 
 f. For Sos-act-Cli, follow the same process but this time: click on + 
-bubble under Modifications, and select produced as role and Cli as 
+bubble under Modifications, and select produced as role  and Cli as 
 location – watch the After cell panel 
 6. Click Save to KB (see section 6.6) 
                                                              
 1
  The new editor runs on Linux Operating system, for resources and tutorials about Linux, you 
 can refer to http://linuxsurvival.com/ 
+CHAPTER ?6 ANALYSIS  OF RESULTS 
  
- CHAPTER ?6 ANALYSIS OF RESULTS 
+47 
  
 Results discussion: 
 ? The occurrences get added to the appropriate cell panels: consumed in 
 Before, produced in After, and control in both.  
-? Occurrences are added to same default position on top of each other 
+? Occurrences are added to same default posit ion on top of each other 
 (selecting default positions to reflect the selected location is kept for 
 future work) 
 ? Sample occurrence reflects user selections correctly and occurrences tree 
 gets updated correctly. 
+Figure 32 shows the outcome of this scenario
 1
-Figure 32 shows the outcome of this scenario . 
+. 
  
-Figure 32 - Creating rules with simple occurrences 
+Figure 32 - Creating rules with simple occurrences  
  
-6.3 Creating rules with complex occurrences 
+6.3  Creating rules with complex occurrences  
 Rule: 
  Sos1-Clc + Egf:EgfR-Yphos-Clm ? Sos1-act-Cli 
 Procedure: 
@@ -2149,7 +2288,7 @@ should be created as two separate simple occurrences Egf-Clm and EgfR-
 Yphos-Clm 
 3. From the occurrences tree, multi-select the two occurrences included in 
 the complex occurrence (multiple selection is performed by holding the 
-shift key while selecting nodes by mouse or keyboard arrows). 
+shift key while selecting nodes by mouse or keyboard arrows).  
 4. Click Group button - watch cell panels 
 5. Click Save to KB (see section 6.6) 
 Results discussion: 
@@ -2158,18 +2297,18 @@ appropriately on the cell panels
 ? The occurrence entries in the tree get replaced by one entry representing 
 the new complex occurrence 
                                                              
-1
- For clarity, all occurrence graphics in this chapter were dragged and re-positioned as required so 
+1 For clarity, all occurrence graphics in this chapter were dragged and re -positioned as required so 
 they do not overlap. 
-47 
- CHAPTER ?6 ANALYSIS OF RESULTS 
+CHAPTER ?6 ANALYSIS  OF RESULTS 
  
-? The new complex occurrence is positioned in a default location. 
+48 
+ 
+? The new complex occurrence is positioned in a default location.  
 Figure 33 shows the outcome of this scenario. 
  
-Figure 33 - Creating rules with complex occurrences 
+Figure 33 - Creating rules with complex occurrences  
  
-6.4 Multiple modification occurrences 
+6.4  Multiple modif ication occurrences  
 Rule: 
  Sos1-Clc + Egf-ubq-Yphos-Clm ? Sos1-act-Cli 
 Procedure: 
@@ -2185,12 +2324,13 @@ Before, produced in After, and control in both.
 updated correctly. 
 Figure 34 shows the outcome of this scenario. 
  
-Figure 34 - Rules with multi-modification occurrences 
+Figure 34 - Rules with multi -modification occurrences  
  
-48 
- CHAPTER ?6 ANALYSIS OF RESULTS 
+CHAPTER ?6 ANALYSIS  OF RESULTS 
  
-6.5 Selecting and relocating occurrences 
+49 
+ 
+6.5  Selecting and relocating occurrences  
 ? Clicking on any occurrence would make the occurrence highlighted with 
 red border. This applies to both simple and complex occurrences. 
 ? The border shows on all components on the occurrence (i.e. entity ovals 
@@ -2204,11 +2344,11 @@ occurrences graphics. De-selecting works similarly.
 ? Dragging a complex occurrence works properly as the whole complex 
 moves together. 
  
-6.6 Saving rules 
+6.6  Saving rules 
 1. After completing each rule, click Save to KB 
 2. Check Find Rule list under Rule Identifier, your new rule id should 
 appear 
-3. To make sure your rule gets saved to the KB, do the following: 
+3. To make sure your rule gets saved to the KB, do the following:  
 a. In JLambda already open in shell terminal, invoke the rule map 
 again and the output becomes:  
 (lookup jkb "rulemap") 
@@ -2219,18 +2359,19 @@ graph (g3 is the graph name and can be any name):
 (apply displayJKB jkb "g3") 
 The dot graphs of some created rules are illustrated in figure 35. 
  
-Figure 35 - Dot graph of some rules in the KB created from JLambda 
-49 
- CHAPTER ?6 ANALYSIS OF RESULTS 
+Figure 35 - Dot graph of some rules in the KB created from JLambda  
+CHAPTER ?6 ANALYSIS  OF RESULTS 
  
-6.7 Exporting rules 
+50 
+ 
+6.7  Export ing rules 
 After completing all rules in the model, do the following to export your model to 
 PLA: 
-1. In JLambda already open in shell terminal, run the following command:  
+1. In JLambda already open in shell terminal, run the following command:   
  
 (apply exportRules (lookup jkb "rulemap") "PLA/Models/TinyKBMaude/rules.maude") 
 2. Leave the terminal, and go to the TinyKBMaude folder  
-3. Open rules.maude file and see the code of your created rules. 
+3. Open rules.maude file and see the code of your created rules.  
 4. The Maude code created as a result of exporting the rule map of some 
 created rules is shown below:  
 rl[172.Pi3k.irt.Egf]: 
@@ -2269,11 +2410,12 @@ tinyDish
 8. PLA window with the new created rules shows as one dot network – see 
 figure 36. 
  
-Figure 36 - A model created in the editor loaded into PLA 
-50 
- CHAPTER ?6 ANALYSIS OF RESULTS 
+Figure 36 - A model created in the editor loaded into PLA  
+CHAPTER ?6 ANALYSIS  OF RESULTS 
  
-6.8 Retrieving rules 
+51 
+ 
+6.8  Retrieving rules 
 Retrieving a rule with saved graphics information 
  
 Rule: 
@@ -2314,8 +2456,9 @@ the occurrences positions and the tree entries.
 7. You can drag some occurrences around and save, then retrieve the rule 
 again and watch the graphics. 
 Results discussion: 
-51 
- CHAPTER ?6 ANALYSIS OF RESULTS 
+CHAPTER ?6 ANALYSIS  OF RESULTS 
+ 
+52 
  
 ? The rule is retrieved correctly with correct Id and description populated in 
 the corresponding fields 
@@ -2324,8 +2467,8 @@ the corresponding fields
 ? Occurrences graphics are created correctly and positioned in default 
 positions 
  
-6.9 Conclusion on results 
-? Users can create rules with both simple and complex occurrences. 
+6.9  Conclusion on results  
+? Users can create rules with both simple and complex occurrences.  
 ? The created rules get saved successfully to the KB and the KB rule map 
 becomes updated.  
 ? Rules can be viewed using JLambda as dot graphs and the graphs reflect 
@@ -2333,17 +2476,17 @@ the rules correctly.
 ? Users can open existing rules that are not created in the editor. The editor 
 creates the graphics in default positions. Users can modify the graphics 
 and save it. 
-? Exporting the updated rule map to PLA as Maude updates the rules code 
+? Exporting the updated rule map to PLA as Maude updates the rul es code 
 of the PLA model with the new rules code.  
 ? Invoking the PLA model through IOP shows the Petri net network with 
 the newly created rules appropriately. 
-? Now, the network is ready for PLA analysis… 
+? Now, the network is ready for PLA analysis  
  
  
  
  
-52 
   
+ 
 7 Evaluation 
  
 The current PLA system has a number of biologist curators as key users. It is thus 
@@ -2351,41 +2494,42 @@ important to involve these users in the development life cycle including evaluat
 stage. To achieve user satisfaction, a series of evaluation procedures need to take 
 place after releasing the system. Following are the procedures used for evaluating 
 the new system:  
-7.1 User surveys and usability checks 
+7.1  User surveys and usabili ty checks  
 Two surveys were conducted to be in a better position to evaluate this system; one 
 for assessing user satisfaction with the current approach, and the other to evaluate 
-to which extent the approach of the new system would add value. 
+to which extent the approach of the new system would add value.  
+Surveys were conducted online through SurveyMonkey
 1
-Surveys were conducted online through SurveyMonkey . Survey samples and 
+. Survey samples and 
 result statistics are available in appendix VI. 
-7.1.1 Evaluation of the PLA Model Creation Approach Survey 
+7.1.1  Evaluation of the PLA Model Creat ion  Approach Survey 
 Objectives 
 This survey is intended to measure the level of satisfaction with the current 
 approach used by PLA system for building and manipulating PL networks; i.e. 
 rules.  
 Participants 
-SRI International development team members, biologists, and biological models 
+SRI International development team members, biologist s, and biological models 
 curators. 
 Results 
 The respondents of the survey were mostly model creators with some being PLA 
 developer with moderate to extensive use of PLA. One third of them thinks rated 
 the complexity of creating PLA network to be 3. Another one third rated 5, while 
-the rest rated the complexity of performing this task as 8 out of 10. 
+the rest rated the complexity of performing this task as 8 out of 10.  
 The time taken for creating PLA networks were specified from being few 
 minutes to more than a week. Respondents’ response to clarity of Petri net 
 representation also ranged from being very clear to confusing. 
 Two third of the respondents know how to program in Maude, while the rest 
-are welling to learn. However, all of them are able to understand the language. 
+are welling to learn. However, all of them are able to understand the language.  
 Some respondents think that it is very critical to have a graphical editor for 
 creating rules, others find it not important. Respondents ranged in their view 
 about creating their own models; some of them find it important for 
 understanding particular cell phenomena. Others don not create other than those 
 in PLA. 
                                                              
-1
- www.surveymonkey.com 
+1 www.surveymonkey.com 
+CHAPTER ?7 EVALUATION 
  
- CHAPTER ?7 EVALUATION 
+54 
  
 It would have been very valuable to have a wider range of respondents to this 
 survey. However, the acquired results show some limitations in PLA and the 
@@ -2393,18 +2537,18 @@ willingness to improve specially regarding the clarity of the Petri net
 representation. The dependency on Maude to create models is a weakness in its 
 own.  This makes PLA restricted only to Maude developers and model creators. 
 Users willingness to learn Maude for creating rules proves the high demand for 
-having a way to edit knowledge bases. 
+having a way to edit knowledge bases.  
 Next, we will see how users find the new tool and to which extent it meets 
 their expectations. 
  
-7.1.2 New editor satisfaction survey 
+7.1.2  New editor satisfaction survey  
 The system can be evaluated (from user perspective) in terms of whether it is easy 
 to use, easy to install, easy to understand and learn, and any other measure that 
 relates to using the system. 
-This survey reviews all these impressions. 
+This survey reviews all these impressions.  
 Objective 
 This survey is aimed at discovering how satisfying the new graphical editor is and 
-how successful it is in achieving the intended objectives. Results of this survey 
+how successful it is in achieving the intended objectives. Results  of this survey 
 would assist also in enhancing the tool and seeking new opportunities to improve 
 PLA innovatively. 
 Participants 
@@ -2425,8 +2569,9 @@ expanding the user community and possibly leading to more comprehensive
 models. 
 Others see that this tool would allow users with no Maude background to 
 make rules. 
-54 
- CHAPTER ?7 EVALUATION 
+CHAPTER ?7 EVALUATION 
+ 
+55 
  
 Finally, respondents suggested to have some more features in the tool like 
 search facility. 
@@ -2434,12 +2579,12 @@ Although there are many opportunities to improve the new tool, responses
 proves its importance in serving those users with no logic programming 
 background and this itself shows the achievement of the main project objective.  
 Software evaluation methodologies may not be limited to the strategy above, 
-other new methodologies can be adopted after releasing the system to ensure up-
+other new methodologies can be adopted after releasing the system to ensure up -
 to-date and high standard compliance. Some possible methods would be possible 
 after releasing the final system and starting using it in reality. A plan is 
 communicated to SRI International for performing these methods and getting 
 feedbacks from users.  
-7.2 Health check:  
+7.2  Health check:  
 Performing a system health check while running the new system would be a 
 sensible check since the software runs diverse technologies that might put 
 overhead on any system. This check will help monitoring system information like 
@@ -2451,33 +2596,33 @@ running PLA with and without the graphical editor. These tools are described in
 [40]. 
 This method would not be valid in the context of a simulated environment 
 (like the one implemented in this project). This is due to the differences from the 
-real PLA system setup environment and in the IOP implementation. 
-7.3 Parallel run 
+real PLA system setup environment and in the IOP implementation.  
+7.3  Paral lel run 
 Running both systems in parallel after completion (the current PLA and the new 
 one) would be a practical method for evaluating the new system. Key users can be 
 involved to use both systems: current PLA as normal, and the new system as pilot. 
 This way, users can figure out the pros and cons of the new system. Another 
 advantage of this parallel run is to help user migrate from the old to the new 
 system without interruption of their work.  
-7.4 Specification compliance evaluation 
+7.4  Speci ficat ion compliance evaluation 
 Since the proposed system integrates diverse technologies and standards, external 
 audit would be useful to ensure compliance to standards and specifications. One 
 way would be to involve representatives from each field for evaluation (like IOP 
 and JLambda).  
  
  
-55 
   
+ 
 Conclusion and Further Work 
  
 I enjoyed abstracting over problems while programming. Just like an interesting 
 game, whenever I find a functionality that needs to be coded to proceed, I just 
-assume it and continue ignoring its details for later… this simplified the work 
+assume it and continue ignoring its details for later this simplified the work 
 significantly.  
  
 Rewrite  
 Pathway Logic (PL) is a symbolic systems biology formalism based on rewriting 
-logic Maude. PL models are analysed through a graphical Java-based tool PLA. 
+logic Maude. PL models are analysed through a graphical Java -based tool PLA. 
 PLA represents biological networks in Petri net representation where each rule 
 (reaction) in the network has an underlying Maude code in the PL Knowledge 
 Base. Creating or editing rules - the fundamental cells in any PL network – 
@@ -2489,7 +2634,7 @@ editing rules graphically. I reviewed the literature to provide the necessary
 background for understanding the related underlying concepts and technologies. 
 These concepts mainly included SSB, PL, PLA, IOP and other alternatives in 
 each field of application. I motivated my method by reviewing the current PLA 
-representation methods followed by some real-world use cases and initiatives for 
+representation methods followed by some real -world use cases and initiatives for 
 improvement. I then planned - from all perspectives - the graphical editor with 
 integration to PLA as a basis. I went through the implementation details of the 
 new tool with all stages involved. 
@@ -2497,25 +2642,27 @@ The new editor was evaluated for verifying its reliability and for revisiting th
 objectives for assessing achievements. Evaluation methods included surveys 
 conducted with PLA users. Other evaluation methods applicable to a real 
 production environment were also proposed. 
-Build knowledge bases graphically would assist biologists in documenting and 
-analysing experiments outcomes with no background requirement in formal logic. 
+Build knowledge bases graphically would assist biologists in documenting  and 
+analysing experiments outcomes with no background requirement in formal  logic. 
 The graphical representation can extend to include dishes as well. This would 
-improve PLA accessibility to a wider range of users, which in turn could lead to 
+improve PLA accessibility to a wider range of users, which in turn could  lead to 
 new insights and discoveries in the field of biology. The importance of this project 
 were realised by SRI as well as the University of Bristol. A position paper [41] 
 were presented in the Workshop on Learning and Discovery in Symbolic Systems 
 Biology  LDSSB’12 conducted in the University of Bristol, UK, September 2012. 
+The paper discusses the motivation and methodology of this project
 1
-The paper discusses the motivation and methodology of this project . 
+. 
 This project has big opportunities for future work as it has some parts with 
 on-going work like paraphrase and evidence. Some improvement can be applied 
-on the Rule Builder screen like reflecting location graphically while adding 
+on the Rule Builder screen like reflecting location graphically while add ing 
                                                              
 1
  This report may include information presented in this paper. Those were already included in the 
 original research review 
+ CONCLUSION AND FURTH ER WORK 
  
-  CONCLUSION AND FURTH ER WORK 
+57 
  
 occurrences. The rule editor completed two stages of the planned integration with 
 PLA; creating and editing rules in new or existing KB. The last stage of this 
@@ -2523,26 +2670,26 @@ integration would be a good future direction were rules are required to be edite
 on online basis while they are loaded in the PLA. 
 From programming perspective, the classes developed in this editor for 
 representing objects graphically are a good basis for developing a general graphics 
-Java package. Possible future application might include using such library to 
+Java package. Possible future application might include using  such library to 
 create a simulated environment of chemical reactions where substances can be 
 represented graphically and chemical reactions take place when substances are 
 brought together by dragging. 
 In another context, rule editor aims at developing a visual representation 
 compliant with SBGN [20]. There are effort by SRI for exploring the possibility 
 of semi-automation of the process of inferring rules from the datum knowledge 
+base
 1
-base . Biologists could use the rule editor as an interface to develop rules by 
+. Biologists could use the rule editor as an interface to develop rules by 
 working with the Datum inference engine. 
  
  
  
  
                                                              
-1
- Searchable databases for collecting datums (formalisms of simulation models inferred on 
+1 Searchable databases for collecting datums (formalisms of simulation models  inferred on 
 experimental evidence) 
-57 
   
+ 
 Bibliography 
  
 [1]  M. Clavel, F. Durán, S. Eker and C. Talcott, All About Maude - A High-
@@ -2564,10 +2711,10 @@ Notes in Theoretical Computer Science, p. v(4), 1996.
 [8]  P. Ballarini, R. Guido, T. Mazza and D. Prandi, "Taming the complexity of 
 biological pathways through parallel computing," Briefings in Bioinformatics, pp. Vol 
 10. No 3. 278 - 288, 2009.  
-[9]  M. Clavel, F. Duran, S. Eker, P. Lincoln, N. Marti-Oliet, J. Meseguer and J. F. 
+[9]  M. Clavel, F. Duran, S. Eker, P. Lincoln, N. Marti -Oliet, J. Meseguer and J. F. 
 Quesada, "Maude: specification and programming in rewriting logic," Theoretical 
 Computer Science 285, p. 187 – 243, 2002.  
-[10]  J. A. Goguen, T. Winkler, J. Meseguer, K. Futatsugi and J.-P. Jouannaud, Software 
+[10]  J. A. Goguen, T. Winkler, J. Meseguer, K. Futa tsugi and J.-P. Jouannaud, Software 
 Engineering With OBJ: Algebraic Specification in Action, Dordrecht: Kluwer 
 Academic Publishers, 2000, p. 3 – 167. 
 [11]  A. Paz, Z. Brownstein, Y. Ber, S. Bialik, E. David, D. Sagir, I. Ulitsky, R. Elkon, A. 
@@ -2582,8 +2729,9 @@ evaluation of SBML, PSI MI and BioPAX," bioinformatics, pp. Vol. 21 no. 24,
 pages 4401–4407, 2005.  
 [14]  E. Demir, M. P. Cary, S. Paley, K. Fukuda, C. Lemer, I. Vastrik, G. Wu, P. 
 D’Eustachio, C. Schaefer, J. Luciano, F. Schacherer and I. Martinez -Flores, "The 
+ BIBLIOGRAPHY 
  
-  BIBLIOGRAPHY 
+59 
  
 BioPAX community standard for pathway data sharing," Nature Biotechnology, pp. 
 V(28), No. 9, pp 935 - 942, 2010.  
@@ -2598,10 +2746,10 @@ Physiome Model Repository 2," Bioinformatics, pp. V(27), No. 5, pp 743–744, 2011
 [18]  A. K. Miller, J. Marsh, A. Reeve, A. Garny, R. Britten, M. Halstead, J. Cooper, D. 
 P. Nickerson and P. F. Nielsen, "An overview of the CellML API and its 
 implementation," BMC Bioinformatics, p. 11:178, 2010.  
-[19]  C. Maus, S. Rybacki and A. M. Uhrmacher, "Rule-based multi-level modeling of cell 
+[19]  C. Maus, S. Rybacki and A. M. Uhrmacher, "Rule -based multi-level modeling of cell 
 biological systems," BMC Systems Biology, p. 5:166, 2011.  
 [20]  L. Beltrame, E. Calura, R. R. Popovici, L. Rizzetto, D. R. Guedez, M. Donato, C. 
-Romualdi, S. Draghici and D. Cavalieri, "The Biological Connection Markup 
+Romualdi, S. Draghici and D. Cavalieri, "The Biological Connection Markup  
 Language: a SBGN-compliant format for visualization, filtering and analysis of 
 biological pathways," Bioinformatics, pp. V(27), No.15, pp 2127 – 2133, 2011.  
 [21]  A. Dräger, N. Rodriguez, M. Dumousseau, A. Dörr, C. Wrzodek, N. Le Novère, A. 
@@ -2613,20 +2761,21 @@ Bioinformatics, pp. V(27), No. 15, pp 2167 – 2168, 2011.
 [23]  E. Klipp, W. Liebermeister, A. Helbig, A. Kowald and J. Schaber, "Systems biology 
 standards—the community speaks," Nature Biotechnology, pp. 25, 390 - 391, 2007.  
 [24]  F. T. Bergmann and H. M. Sauro, "SBW – A MODULAR FRAMEWORK FOR 
-SYSTEMS BIOLOGY," in Proceedings of the 2006 Winter Simulation Conference, 
+SYSTEMS BIOLOGY," in Proceedings of the 2006 Winter Simulation Conference , 
 2006.  
 [25]  J. Himmelspach and A. Uhrmacher, "The JAMES II framework for modeling and 
 simulation," IEEE Computer Society, International Workshop on High Performance 
 Computational Systems Biology, pp. 101 - 102, 2009.  
 [26]  R. Ewald, J. Himmelspach, M. Jeschke, S. Leye and A. M. Uhrmacher, "Flexible 
-experimentation in the modeling and simulation framework JAMES II- implications 
+experimentation in the modeling and simulation framework JAMES II - implications 
 for computational systems biology," Briefings in Bioinformatics, pp. VOL 11. NO 3. 
 290-300, 2010.  
 [27]  S. Owre, J. M. Rushby and N. Shankar, "PVS: A Prototype Verification System," 
 11th International Conference on Automated Deduction (CADE), pp. 748 - 752, 
 1992.  
-59 
-  BIBLIOGRAPHY 
+ BIBLIOGRAPHY 
+ 
+60 
  
 [28]  I. A. Mason and C. L. Talcott, "IOP: The InterOperability Platform & IMaude: An 
 Interactive Extension of Maude," Electronic Notes in Theoretical Computer Science 
@@ -2634,7 +2783,7 @@ Interactive Extension of Maude," Electronic Notes in Theoretical Computer Scienc
 [29]  P. Saraiya, C. North and K. Duca, "Visualizing biological pathways: requirements 
 analysis, systems evaluation and research agenda," Information Visualization, pp. 1-
 15, 2005.  
-[30]  E. R. Gansner, E. Koutsofios, S. C. North and K.-P. Vo, "A Technique for Drawing 
+[30]  E. R. Gansner, E. Koutsofios, S. C. North and K. -P. Vo, "A Technique for Drawing 
 Directed Graphs," IEEE Transactions on Software Engineering, pp. 214 - 230, 1993.  
 [31]  A. Funahashi, Y. Matsuoka, A. Jouraku, M. Morohashi, N. Kikuchi and H. Kitano, 
 "CellDesigner 3.5: A Versatile Modeling Tool for Biochemical Networks," 
@@ -2642,7 +2791,7 @@ Proceedings of the IEEE, pp. V(96), No. 8, pp. 1254 - 1265, 2008.
 [32]  M. Iersel, T. Kelder, A. R. Pico, K. Hanspers, S. Coort, B. R. Conklin and C. 
 Evelo, "Presenting and exploring biological pathways with PathVisio," BMC 
 Bioinformatics, p. 9:399, 2008.  
-[33]  B. Elliott, M. Kirac, A. Cakmak, G. Yavas, S. Mayes, E. Cheng, Y. Wang, C. Gupta, 
+[33]  B. Elliott, M. Kirac, A. Cakmak, G. Yavas, S. Mayes, E. Cheng, Y . Wang, C. Gupta, 
 G. Ozsoyoglu and Z. M. Ozsoyoglu, "PathCase: pathways database system," 
 Bioinformatics, pp. Vol. 24 no. 21, pages 2526–2533, 2008.  
 [34]  D. M. Bolser, P.-Y. Chibon, N. Palopoli, S. Gong, D. Jacob, V. D. D. Angel, D. 
@@ -2668,8 +2817,9 @@ Cancer to Gefitinib," New England Journal of Medicine, pp. 2129-2139, 2004.
 StrongMail Systems, 2009.  
 [41]  A. Y. Abbas, C. Talcott, M. Knapp and O. Ray, "Towards a graphical rule editor for 
 the Pathway Logic Assistant," ECML/PKDD 2012 Workshop on Learning and 
-60 
-  BIBLIOGRAPHY 
+ BIBLIOGRAPHY 
+ 
+61 
  
 Discovery in Symbolic Systems Biology (LDSSB'12), 2012.  
 [42]  J. R. Faeder, "Toward a comprehensive language for biological systems," BMC 
@@ -2694,26 +2844,27 @@ Lemmon, "EGF Activates Its Receptor by Removing Interactions that Autoinhibit
 Ectodomain Dimerization," Molecular Cell, p. 507–517, 2003.  
  
  
-61 
   
+ 
 Appendices 
  
-Appendix I – BioPAX representation of AKT protein signalling pathway 
+Appendix I –  BioPAX representat ion of AKT protein signall ing pathway  
  
 Figure from [14] 
-BioPAX language representation 
-Traditional representation from 
-http://www.biocarta.com 
-SBGN diagram from 
-http://www.sbgn.org 
  
   
+Traditional representation from 
+http://www.biocarta.com 
+BioPAX language representation 
+SBGN diagram from 
+http://www.sbgn.org 
+ APPENDICES 
  
-  APPENDICES 
+63 
  
-Appendix II– SBML model as exported from PLA 
+Appendix II–  SBML model as exported from PLA 
 Below representation corresponds to the SmallKB model ; a small part of a model 
-of the response to Egf stimulation in epithelial-like cells (SmallKB is available 
+of the response to Egf stimulation in epithelial -like cells (SmallKB is available 
 from http://pl.csl.sri.com). 
 <?xml version="1.0" encoding="UTF-8"?> 
 <sbml level="2" version="1" xmlns="http://www.sbml.org/sbml/level2"> 
@@ -2793,18 +2944,20 @@ from http://pl.csl.sri.com).
 </model> 
 </sbml> 
 </xml> 
-63 
-  APPENDICES 
+ APPENDICES 
  
-Appendix III – Additional example of biologists friendly rule 
+64 
+ 
+Appendix III  –  Addit ional example of biologist s fr iendly rule  
 Figures drawn by Merrill Knapp from SRI International (private communication) 
 – the creators of PLA. 
  
   
-64 
-  APPENDICES 
+ APPENDICES 
  
-Appendix IV – PLA installation guide 
+65 
+ 
+Appendix IV –  PLA insta l la t ion guide 
 This guide is based on the procedure provided on http://pl.csl.sri.com/install.html 
 (Installing the Pathway Logic Assistant (PLA)). 
 1. Maude 
@@ -2820,17 +2973,18 @@ PLA requires Core Maude 2.2 or higher.
 ? Move bin folder under Maude, the path is: 
 ~\Maude\bin 
  
-? Set the MAUDE_LIB environment variable to include the folder above, 
+? Set the MAUDE_LIB environment variable to include the folder above,  
 In .bashrc file: 
 export MAUDE_LIB=$HOME/Maude/bin 
 export PATH=$PATH:$HOME/Maude/bin  
 maude command can now be called from a terminal anywhere in linux – 
-try it! 
+try it 
 2. The IOP Platform 
 Download and install the binary for your platform from the IOP Binaries page. 
 You will need version 1167 or higher for this release of PLA.  
-65 
-  APPENDICES 
+ APPENDICES 
+ 
+66 
  
  
 ? Download IOP-v1167-linux.zip 
@@ -2855,20 +3009,21 @@ Now:
 To run PLA on a particular model, e.g. SmallKB, just cd into the model's 
 directory, e.g  "cd Models/SmallKB", and type "iop". This will start IOP 
 running PLA, there will be an IOP control window which you can ignore, 
-and the PLA KB Manager window, which you should use to interact with 
+and the PLA KB Manager window, which you should use to interact  with 
 PLA. 
  
   
-66 
-  APPENDICES 
+ APPENDICES 
  
-Appendix V– Ant xml script for building PLA rule editor 
-The code is generated from the Runnable JAR Export Wizard built-in 
+67 
+ 
+Appendix V–  Ant xml script  for building PLA rule editor  
+The code is generated from the Runnable JAR Export Wizard built -in 
 functionality in Eclipse. The file is called PLAjar.xml 
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
 <project default="create_run_jar" name="Create Runnable Jar for Project PLA_Editor"> 
-    <!--this file was created by Eclipse Runnable JAR Export Wizard--> 
-    <!--ANT 1.7 is required                                        --> 
+    <--this file was created by Eclipse Runnable JAR Export Wizard--> 
+    <--ANT 1.7 is required                                        --> 
     <target name="create_run_jar"> 
         <jar 
 destfile="/home/masters/2011/aa1641/linux/Desktop/project/KBEd/Jars/ruleEd.jar" 
@@ -2890,736 +3045,873 @@ src="/home/masters/2011/aa1641/linux/Desktop/project/KBEd/Jars/iop.jar"/>
  
  
   
-67 
-  APPENDICES 
+ APPENDICES 
  
-Appendix VI– Survey Samples and Result Statistics 
-Survey 1: Evaluation of the PLA Model Creation Approach Survey 
+68 
+ 
+Appendix VI– Survey Samples and Result  Stati st ic s  
+Survey 1:  Evaluation of the PLA Model Creation Approach Survey  
 Objective: 
 This survey is intended to measure the level of satisfaction with the current approach used by PLA system 
-for building and manipulating PL networks; i.e. rules.  
+for building and manipulating PL networks;  i.e.  rules.  
  
 PLA Usage: 
-1. Describe your category with respect to PLA usage: 
-a. Normal user 
+1.  Describe your category with respect to PLA usage:  
+a.  Normal user 
 b. Model creator 
-c. Developer, analyst, or designer 
-d. Other, specify: _____ 
-(Please select more than one when appropriate) 
-2. How frequently you work with PLA: 
-a. Extensively 
-b. moderate 
-c. Very rare 
-d. I don’t use it 
-Assessing PLA model creation 
-3. In a scale of 10, 1 being simple and 10 as complex, how do you find creating PLA networks? 
+c. Developer, analyst, or designer  
+d.  Other,  specify: _____ 
+(Please select more than one when appropriate)  
+2.  How frequently  you work with PLA:  
+a.  Extensively 
+b. moderate  
+c. Very rare  
+d.  I don’t use it  
+Assessing  PLA model creation 
+3.  In a scale of 10, 1 being simple and 10 as  complex,  how do you find creating  PLA networks?  
  
-4. How long it takes normally to create a small network of no more than 10 rules in PLA? 
-a. Very long time (more than a week) 
-b. Fair (less than a week) 
-c. Fast (less than a day) 
-d. No time (in few minutes) 
+4.  How long it takes normally to create a small network of no more than 10 rules in PLA?  
+a.  Very long time (more than a week)  
+b. Fair (less than a week)  
+c. Fast (less than a day)  
+d.  No time (in few minutes)  
 (If you don’t create networks yourself, please select the time the process would take when you 
-request for such network to be created) 
+request for such network to be created)  
  
-5. In PLA, each rule is represented graphically by a Petri -net where reactants, products, and controls 
-are specified by name, modification and location. How clear is this representation specially in a 
-context of a huge network: 
-a. Confusing 
+5.  In PLA, each rule is  represented graphically  by a Petri -net where reactants, products, and controls  
+are specif ied by name, modification and loca tion. How clear is  this representation special ly in a  
+context of a huge network:  
+a.  Confusing  
 b. Fair 
 c. Very clear 
  
-6. In PLA, there is an option for viewing Maude code when you click on any rule in the network, do 
-you understand Maude? 
-a. Yes 
+6.  In PLA, there is an option for viewing Maude code when you click on any rule in the network, do  
+you understand Maude?  
+a.  Yes 
 b. No 
-c. I don’t know about this option 
+c. I don’t know about this  option 
  
-7. In PLA, you need to know how to program in a programming language called Maude in order to 
-create your own models, how confident you find yourself to learn this programming language: 
-a. Welling to learn 
-b. Not confident 
-c. I prefer not to 
-d. I already know Maude 
-Opportunities for improvement 
-8. To which extent you find it important to have facilities for creating your own models in PLA (like 
-having a simple graphical tool within PLA for creating your rules): 
-a. Very critical and would add much value 
-b. Important, but not insisting 
-c. Not important 
-d. I don’t know 
+7.  In PLA, you need to know how to program in a programming language called Maude in order to  
+create your own models,  how confident you find yourself to learn this programming language:  
+a.  Welling to learn  
+b. Not confident  
+c. I prefer not to  
+d.  I already know Maude 
+Opportunities for improvement  
+8.  To which extent you find it important to have facilities for creating your own models in PLA (like 
+having  a simple graphical tool within PLA for creating your rules):  
+a.  Very critical and would add much value  
+b. Important, but  not insisting  
+c. Not important  
+d.  I don’t know  
  
-9. Why do you think it is important to create your own models? 
-(those that you cannot create with PLA) 
+9.  Why do you think it  is important to create your own models?  
+(those that  you cannot create with PLA)  
  
-10. In your view, what might make PLA more accessible to users?  
-Please list all what you think would make PLA a more user-friendly tool. 
-68 
-  APPENDICES 
- 
- 
+10.  In your v iew,  what might  make PLA more accessible to users?  
+Please l ist all  what you think would make PLA a more user-friendly tool.  
+ APPENDICES 
  
 69 
-  APPENDICES 
  
+ 
+ 
+ APPENDICES 
  
 70 
-  APPENDICES 
+ 
+ 
+ APPENDICES 
  
 71 
-  APPENDICES 
+ 
+ APPENDICES 
+ 
+72 
  
  
  
  
  
   
-72 
-  APPENDICES 
+ APPENDICES 
  
-Survey 2: New editor satisfaction survey 
+73 
+ 
+Survey 2:  New editor satis faction survey  
 Objectives: 
 This survey is aimed at discovering how satisfying the new graphical editor is and how successful it is in 
-achieving the intended objectives. Results of this survey would assist also in enhancing the tool and seeking 
-new opportunities to improve PLA innovatively. 
+achieving the intended objectives. Results of this survey  would ass ist also in enhancing the tool and seeking  
+new opportunities  to improve PLA innovatively.  
  
 PLA Usage 
  
-1. Describe your category with respect to PLA usage: 
-a. Normal user 
+1.  Describe your category with respect to PLA usage:  
+a.  Normal user 
 b. Model creator 
-c. Developer, analyst, or designer 
-d. Other, specify: _____ 
-(Please select more than one when appropriate) 
-2. How frequently you work with PLA: 
-a. Extensively 
-b. moderate 
-c. Very rare 
-d. I don’t use it 
-Assessing the new graphical editor for model creation 
-3. In a scale of 10, how do you find creating PL networks using the new tool? 
+c. Developer, analyst, or designer  
+d.  Other,  specify: _____ 
+(Please select  more than one when appropriate)  
+2.  How frequently  you work with PLA:  
+a.  Extensively 
+b. moderate  
+c. Very rare  
+d.  I don’t use it  
+Assessing  the new graphical editor for model creation 
+3.  In a scale of 10, how do you find creating PL networks using the new tool?  
  
-4. How long does it take to create a small network of no more than 10 rules in using the new tool? 
-a. Very long time (more than a week) 
-b. Fair (less than a week) 
-c. Fast (less than a day) 
-d. No time (in few minutes) 
-(If you don’t create networks yourself, please select the time the process would take if you request 
-for such network to be created) 
+4.  How long does it take to create a small  network of no more than 10 rules in using the new tool?  
+a.  Very long time (more than a week)  
+b. Fair (less than a week)  
+c. Fast (less than a day)  
+d.  No time (in few minutes)  
+(If you don’t create networks yourself, please select the time the process would take if you request  
+for such network to be created)  
  
-5. In comparison to Petri net representation, how clear is the new Rule Builder representation 
-(Before and After panels with the graphical representation of locations and modifications): 
-e. Confusing 
-f. Fair 
+5.  In comparison to Petri net representation, how clear is the new Rule Builder representation  
+(Before and After panels with the graphical representation of locations and modifications):  
+e. Confusing  
+f.  Fair 
 g. Very clear 
  
-6. With the new graphical editor (with complete functionality), would you still need to know Maude 
-to create your models: 
-a. Yes 
+6.  With the new graphical editor (with complete functional ity), would you still need to know Maude  
+to create your models:  
+a.  Yes 
 b. No 
-c. Not sure 
+c. Not sure  
  
-7. To which extent you find it important to have such graphical tool for creating your own models in 
+7.  To which extent you find it important to have such graphical tool for creating your own models in 
 PLA: 
-a. Very critical and would add much value 
-b. Important, but not insisting 
-c. Not important 
-d. I don’t know 
+a.  Very critical and would add much value  
+b. Important, but not insisting  
+c. Not important  
+d.  I don’t know  
  
-8. In a scale of 5, how do you rate this graphical tool - compared to other graphical tools in the same 
-field – in terms of clarity, simplicity, and practicality 
-Opportunities for improvement 
-9. What value such graphical tool would add to community (considering any possible further work)? 
+8.  In a scale of 5, how do you rate this graphical tool - compared to other graphical tools in the same  
+field –  in terms of clarity, simplicity,  and practicality  
+Opportunities for improvement  
+9.  What value such graphical  tool  would add to community (considering any possible further work)?  
  
-10. In your view, what might make the new tool more satisfying and much valuable?  
- 
- 
+10.  In your v iew,  what might  make the new tool more satis fying and much valuable?  
  
  
-73 
-  APPENDICES 
  
+ 
+ APPENDICES 
  
 74 
-  APPENDICES 
+ 
+ 
+ APPENDICES 
  
 75 
-  APPENDICES 
+ 
+ APPENDICES 
  
 76 
-  APPENDICES 
+ 
+ APPENDICES 
+ 
+77 
  
  
  
   
-77 
-  APPENDICES 
+ APPENDICES 
  
-Appendix VII– Rule Editor Source Code 
+78 
+ 
+Appendix VII–  Rule Editor  Source Code 
  
 The sources code of the rule editor is available in the following pages. Please note 
 that the code is note complete and some (non critical) parts have been suppressed 
 to provide more space. 
  
-78 
- package ruleEditor; 
-    private Position nextModPosition; 
-//imports suppressed 
-    private JLabel entity;    private Role occRole; 
-1 2 
-public class Rule {  
-    private ArrayList<JLabel> modGraphics; 
- private String ruleid;     private boolean selected; 
  APPENDICES 
- private HashMap<String,Object[]> consumed;     public OccurrenceOval(String ename, Role occRole, ArrayList<String> mods,  
  
- private HashMap<String,Object[]> produced; boolean movable) {/* create occurrence */ 
- private HashMap<String,Object[]> controls; 
- super(movable); 
- private String description;  selected = false;  this.occRole = occRole; 
- private String evidence;         entity = new JLabel(ename); //the main entity graphic 
- private String paraphrase;  
-        setRole(occRole); 
- private HashMap<String,OccGraphic> ruleGraphics;  
-        add(entity,1); 
+79 
+ 
   
+package ruleEditor; 
+//imports suppressed 
+public class Rule {  
+ private String ruleid; 
+ private HashMap<String,Object[]> consumed; 
+ private HashMap<String,Object[]> produced; 
+ private HashMap<String,Object[]> controls; 
+ private String description; 
+ private String evidence; 
+ private String paraphrase;  
+ private HashMap<String,OccGraphic> ruleGraphics;  
  public Rule(String ruleid, String description) {/* create a rule*/ 
-        nextModPosition = Position.EAST; 
   this.ruleid = ruleid; 
-        this.mods.addAll(mods); 
   this.description = description;   
-        addModifications(); 
   //instantiations suppressed 
- // instantiation and formatting code suppresses 
  } 
-    } 
- public Rule() {* create an empty rule     @Override 
-  //instantiations suppressed     public void mousePressed(MouseEvent e) { super.mousePressed(e); select(!selected); } 
- }      @Override 
- public Rule(Object[] rulespec) { /* create a rule from rule specification */     public void mouseDragged(MouseEvent e) {super.mouseDragged(e); select(true); } 
-  ruleid = (String) rulespec[1];       @Override 
-  consumed = (HashMap<String,Object[]>) rulespec[2];       public void mouseEntered(MouseEvent e) {paintOccurrence(true);} 
-  produced = (HashMap<String,Object[]>) rulespec[3]; 
-    @Override 
-  controls = (HashMap<String,Object[]>) rulespec[4]; 
-    public void mouseExited(MouseEvent e) {if(!selected)paintOccurrence(false);} 
-  description = (String) rulespec[5]; 
-    public void addModification(String mod) {  
-  evidence = (String) rulespec[6];; 
-     if(!mod.equals("")) { addModGraphic(mod); mods.add(mod); } 
+ public Rule() {* create an empty rule 
   //instantiations suppressed 
-    }  
  }  
-    public void removeModification(String mod) { 
+ public Rule(Object[] rulespec) { /* create a rule from rule specification */ 
+  ruleid = (String) rulespec[1]; 
+  consumed = (HashMap<String,Object[]>) rulespec[2]; 
+  produced = (HashMap<String,Object[]>) rulespec[3]; 
+  controls = (HashMap<String,Object[]>) rulespec[4]; 
+  description = (String) rulespec[5]; 
+  evidence = (String) rulespec[6];; 
+  //instantiations suppressed 
+ }  
  //Suppressed: setter and getter methods  
-     if(!mod.equals("")) { int i = mods.indexOf(mod); removeModGraphic(mod); 
  public Object[] rulespec() 
  {/* get rule info as array with rule specs */ 
-            mods.remove(i); repaint();} 
   Object[] rulespec = new Object[7]; 
-    }  
   rulespec[0] = "rule";  rulespec[1] = ruleid; rulespec[2] = getConsumed(); 
-    private void removeModGraphic(String mod) {    
   rulespec[3] = getProduced(); rulespec[4] = getControls(); 
- for(Iterator<JLabel>it=modGraphics.iterator();it.hasNext();) { 
   rulespec[5] = description; rulespec[6] = evidence;    
-      JLabel modLabel = it.next(); 
   return rulespec; 
-      if(modLabel.getText().equals(mod)) { it.remove(); remove(modLabel); 
  }  
-      nextModPosition = Position.getPosition(nextModPosition.id()-1); break; 
  public boolean addOccurrence(Object[] occ, String occId, Role role) { 
   if(occurrenceExist(occId)) return false;   
-    } } } 
   ruleGraphics.put(occId, null);   
-    private void addModGraphic(String label) { 
   switch (role) { 
-     JLabel mod;          //create the modification graphic 
     case CONSUMED:  consumed.put(occId,occ); break; 
-     if(occRole == Role.CONSUMED || occRole == Role.PRODUCED) 
     case PRODUCED: produced.put(occId,occ); break; 
-      mod = new JLabel(label,  
     case CONTROL: controls.put(occId,occ); break; 
-     new ImageIcon(getClass().getResource("images/mod_red.png")), JLabel.CENTER); 
   } return true; 
- }       else mod = new JLabel(label,  
+ }  
  private boolean occurrenceExist(String occId) {/* check if occurrence exists */ 
-    new ImageIcon(getClass().getResource("images/mod_green.png")), JLabel.CENTER);    
   if(ruleGraphics.containsKey(occId)) 
- //formatting suppressed 
    return true; 
- add(mod,0); 
   return false; 
- modGraphics.add(mod);   
  } 
- switch (nextModPosition) { 
  public void removeOccurrence(String occId, Role role) {   
-  ruleGraphics.remove(occId);     case EAST: mod.setBounds(70, 13, 50, 50); nextModPosition = Position.NORTH_EAST; break;       
+  ruleGraphics.remove(occId);   
   switch (role) { 
-  case NORTH_EAST: mod.setBounds(56, -7, 50, 50); nextModPosition = Position.NORTH; break; 
     case CONSUMED: consumed.remove(occId); break; 
-  case NORTH: mod.setBounds(30, -12, 50, 50); nextModPosition = Position.NORTH_WEST; break; 
     case PRODUCED: produced.remove(occId); break; 
-  case NORTH_WEST: mod.setBounds(4, -7, 50, 50); nextModPosition = Position.WEST; break; 
     case CONTROL: controls.remove(occId); break; 
-  case WEST: mod.setBounds(-11, 13, 50, 50); nextModPosition = Position.SOUTH_WEST; break; 
  }} 
-  case SOUTH_WEST: mod.setBounds(4, 33 ,50, 50); nextModPosition = Position.SOUTH; break; 
  public Object[] getOccSpec(String occId, Role role) { 
-  case SOUTH: mod.setBounds(30, 39, 50, 50); nextModPosition = Position.SOUTH_EAST; break;  
-  if(!occurrenceExist(occId)) return null;   
-  Object[] occspec = new Object[4];     case SOUTH_EAST: mod.setBounds(56, 33, 50, 50); nextModPosition = Position.EAST; break; 
+  if(occurrenceExist(occId)) return null;   
+  Object[] occspec = new Object[4];   
   switch (role) { 
-  } } 
     case CONSUMED: occspec = consumed.get(occId); break; 
-    private void addModifications() { 
     case PRODUCED: occspec = produced.get(occId); break; 
-  for (String m : mods) if(!m.equals(""))addModGraphic(m);      
     case CONTROL: occspec = controls.get(occId); break; 
-    } 
   } return occspec; 
-    // setters and getters suppressed 
 } }  
-79 
-//---------------------------------------------------------------------------------------- public void clear() { //suppressed: clear all contents}   
-public void select(boolean select) { selected = select;  paintOccurrence(selected); } 
+//---------------------------------------------------------------------------------------- 
 package ruleEditor; 
- 
-//imports suppressed public void paintOccurrence(boolean border) { //suppressed: change graphics icon image 
+//imports suppressed 
 public class OccurrenceOval extends MovableLayeredPane { 
-with/without border} 
     private ArrayList<String> mods; 
+    private Position nextModPosition; 
+    private JLabel entity;    private Role occRole; 
+    private ArrayList<JLabel> modGraphics; 
+    private boolean selected; 
+    public OccurrenceOval(String ename, Role occRole, ArrayList<String> mods,  
+boolean movable) {/* create occurrence */ 
+ super(movable); 
+ selected = false;  this.occRole = occRole; 
+        entity = new JLabel(ename); //the main entity graphic 
+        setRole(occRole); 
+        add(entity,1); 
+        nextModPosition = Position.EAST; 
+        this.mods.addAll(mods); 
+        addModifications(); 
+ // instantiation and formatting code suppresses 
+    } 
+    @Override 
+    public void mousePressed(MouseEvent e) { super.mousePressed(e); select(selected); } 
+    @Override 
+    public void mouseDragged(MouseEvent e) {super.mouseDragged(e); select(true); } 
+      @Override 
+      public void mouseEntered(MouseEvent e) {paintOccurrence(true);} 
+    @Override 
+    public void mouseExited(MouseEvent e) {if(selected)paintOccurrence(false);} 
+    public void addModification(String mod) {  
+     if(mod.equals("")) { addModGraphic(mod); mods.add(mod); } 
+    }  
+    public void removeModification(String mod) { 
+     if(mod.equals("")) { int i = mods.indexOf(mod); removeModGraphic(mod); 
+            mods.remove(i); repaint();} 
+    }  
+    private void removeModGraphic(String mod) {    
+ for(Iterator<JLabel>it=modGraphics.iterator();it.hasNext();) { 
+      JLabel modLabel = it.next(); 
+      if(modLabel.getText().equals(mod)) { it.remove(); remove(modLabel); 
+      nextModPosition = Position.getPosition(nextModPosition.id()-1); break; 
+    } } } 
+    private void addModGraphic(String label) { 
+     JLabel mod;          //create the modification graphic 
+     if(occRole == Role.CONSUMED || occRole == Role.PRODUCED) 
+      mod = new JLabel(label,  
+     new ImageIcon(getClass().getResource("images/mod_red.png")), JLabel.CENTER); 
+     else mod = new JLabel(label,  
+    new ImageIcon(getClass().getResource("images/mod_green.png")), JLabel.CENTER);    
+ //formatting suppressed 
+ add(mod,0); 
+ modGraphics.add(mod);   
+ switch (nextModPosition) { 
+  case EAST: mod.setBounds(70, 13, 50, 50); nextModPosition = Position.NORTH_EAST; break;       
+  case NORTH_EAST: mod.setBounds(56, -7, 50, 50); nextModPosition = Position.NORTH; break; 
+  case NORTH: mod.setBounds(30, -12, 50, 50); nextModPosition = Position.NORTH_WEST; break; 
+  case NORTH_WEST: mod.setBounds(4, -7, 50, 50); nextModPosition = Position.WEST; break; 
+  case WEST: mod.setBounds(-11, 13, 50, 50); nextModPosition = Position.SOUTH_WEST; break; 
+  case SOUTH_WEST: mod.setBounds(4, 33 ,50, 50); nextModPosition = Position.SOUTH; break; 
+  case SOUTH: mod.setBounds(30, 39, 50, 50); nextModPosition = Position.SOUTH_EAST; break;  
+  case SOUTH_EAST: mod.setBounds(56, 33, 50, 50); nextModPosition = Position.EAST; break; 
+  } } 
+    private void addModifications() { 
+  for (String m : mods) if(m.equals(""))addModGraphic(m);      
+    } 
+    // setters and getters suppressed 
+public void clear() { //suppressed: clear all contents}   
+public void select(boolean select) { selected = select;  paintOccurrence(selected); } 
+public void paintOccurrence(boolean border) { //suppressed: change graphics icon image 
+with/without border} 
  
- import java.awt.Point; 
-import java.awt.Color; 
-public abstract class MovableLayeredPane extends JLayeredPane implements MouseListener, 
-3 public class CellPanel extends JPanel { 4 
-MouseMotionListener { 
- private JScrollPane scrollableContainer; 
-    private Point position;    private JLayeredPane cellPanel; 
+ 
+1 2 
  APPENDICES 
-    private int xCorrection, yCorrection;  private int width, height; 
  
-    private boolean movable;   private Membrane cellMembrane, nucleusMembrane; 
-    public MovableLayeredPane(boolean movable) {  private boolean expanded; 
+80 
+ 
+  
+import java.awt.Point; 
+public abstract class MovableLayeredPane extends JLayeredPane implements MouseListener, 
+MouseMotionListener { 
+    private Point position;   
+    private int xCorrection, yCorrection; 
+    private boolean movable;  
+    public MovableLayeredPane(boolean movable) { 
         this.movable = movable; 
- private String title; 
  if(movable) { addMouseListener(this); addMouseMotionListener(this); } 
- private int layer; 
     } 
- private JLabel lblTitle; 
-  
     @Override 
- public CellPanel(String title, int width, int height, Membrane cm, Membrane nm) { 
-    public void mousePressed(MouseEvent e) {   this.width = width; this.height = height; 
-           Point parentLocation = getParent().getLocation();   cellMembrane = cm; nucleusMembrane = nm; 
-           xCorrection = parentLocation.x - e.getX();   expanded = false; 
-           yCorrection = parentLocation.y - e.getY();   createScrollableContainer(); createCellPanel(); 
+    public void mousePressed(MouseEvent e) { 
+           Point parentLocation = getParent().getLocation(); 
+           xCorrection = parentLocation.x - e.getX(); 
+           yCorrection = parentLocation.y - e.getY(); 
     } 
-  this.title = title; 
     @Override 
-  addToCell(cellMembrane); addToCell(nucleusMembrane); 
     public void mouseDragged(MouseEvent e) { 
-  lblTitle = new JLabel(title); 
            position = SwingUtilities.convertPoint(this, e.getX(), e.getY(), getParent()); 
-  //formatting suppressed 
-           setLocation(position.x + xCorrection , position.y + yCorrection );   addToCell(lblTitle); 
-    }  } 
-    public abstract void select(boolean select);  // setters and getters suppressed 
-    // setters, getters and overridden mouse events methods suppressed      private void createCellPanel() { 
+           setLocation(position.x + xCorrection , position.y + yCorrection ); 
+    } 
+    public abstract void select(boolean select); 
+    // setters, getters and overridden mouse events methods suppressed     
 //---------------------------------------------------------------------------------------- 
-  cellPanel = new JLayeredPane(); 
 //Imports suppressed 
-  //formatting suppressed 
 public class ComplexOccGraphic extends MovableLayeredPane { 
-  //add the cell panel inside the scrollable container 
  private ArrayList<OccurrenceOval> occGraphics;  
-  scrollableContainer.setViewportView(cellPanel);   
- private int lastX, lastY;  } 
- private boolean selected;  private void createScrollableContainer() { 
- public ComplexOccGraphic(boolean mouseListener) {   scrollableContainer = new JScrollPane(); 
-    super(mouseListener);   add(scrollableContainer); 
+ private int lastX, lastY; 
+ private boolean selected; 
+ public ComplexOccGraphic(boolean mouseListener) { 
+    super(mouseListener); 
 // instantiation and formatting suppressed 
+ } 
+ @Override 
+     public void mousePressed(MouseEvent e) {super.mousePressed(e); select(selected); } 
+ @Override 
+    public void mouseDragged(MouseEvent e) {super.mouseDragged(e); select(true); } 
+ @Override 
+ public void mouseEntered(MouseEvent e) {paintOccurrence(true);} 
+ @Override 
+ public void mouseExited(MouseEvent e) {if(selected)paintOccurrence(false);}  
+ private void paintOccurrence(boolean border) { 
+  for(OccurrenceOval occ : occGraphics) occ.paintOccurrence(border); 
+ }    
+ public void addOccurrence(OccurrenceOval occ) { 
+  lastX = lastX + 20;  lastY = lastY + 32; 
+  occGraphics.add(occ);  occ.setBounds(lastX,lastY,110,77); add(occ); 
+ } 
+ //setters and getters suppressed 
+ public void select(boolean select) { 
+  for(OccurrenceOval occ : occGraphics) occ.select(select);  
+  selected = select; 
+} } 
+//---------------------------------------------------------------------------------------- 
+import java.io.Serializable; 
+public class OccGraphic implements Serializable {  
+ private MovableLayeredPane occBefore, occAfter;  
+ public OccGraphic(MovableLayeredPane occBefore, MovableLayeredPane occAfter) { 
+  this.occBefore = occBefore; this.occAfter = occAfter; 
+ }  
+ // setters and getters suppressed 
+} 
+import java.awt.Color; 
+public class CellPanel extends JPanel { 
+ private JScrollPane scrollableContainer; 
+ private JLayeredPane cellPanel; 
+ private int width, height; 
+ private Membrane cellMembrane, nucleusMembrane; 
+ private boolean expanded; 
+ private String title; 
+ private int layer; 
+ private JLabel lblTitle; 
+ public CellPanel(String title, int width, int height, Membrane cm, Membrane nm) { 
+  this.width = width; this.height = height; 
+  cellMembrane = cm; nucleusMembrane = nm; 
+  expanded = false; 
+  createScrollableContainer(); createCellPanel(); 
+  this.title = title; 
+  addToCell(cellMembrane); addToCell(nucleusMembrane); 
+  lblTitle = new JLabel(title); 
+  //formatting suppressed 
+  addToCell(lblTitle); 
+ } 
+ // setters and getters suppressed 
+ private void createCellPanel() { 
+  cellPanel = new JLayeredPane(); 
+  //formatting suppressed 
+  //add the cell panel inside the scrollable container 
+  scrollableContainer.setViewportView(cellPanel);   
+ } 
+ private void createScrollableContainer() { 
+  scrollableContainer = new JScrollPane(); 
+  add(scrollableContainer); 
   //formatting suppressed 
  } 
- } 
- @Override 
  public void expand(boolean toExpand) { 
-     public void mousePressed(MouseEvent e) {super.mousePressed(e); select(!selected); } 
-  if(!expanded && toExpand) { width = ( width * 2 ) + 220; 
- @Override    cellPanel.setPreferredSize(new Dimension(width, height-20)); 
-    public void mouseDragged(MouseEvent e) {super.mouseDragged(e); select(true); }   } else if(expanded && !toExpand) { 
- @Override    width = ( width - 220 ) / 2; 
- public void mouseEntered(MouseEvent e) {paintOccurrence(true);}   cellPanel.setPreferredSize(new Dimension(( width * 2 ) + 220, height-20)); 
- @Override 
+  if(expanded && toExpand) { width = ( width * 2 ) + 220; 
+   cellPanel.setPreferredSize(new Dimension(width, height-20)); 
+  } else if(expanded && toExpand) { 
+   width = ( width - 220 ) / 2; 
+  cellPanel.setPreferredSize(new Dimension(( width * 2 ) + 220, height-20)); 
   } 
- public void mouseExited(MouseEvent e) {if(!selected)paintOccurrence(false);}  
   expanded = toExpand; 
- private void paintOccurrence(boolean border) { 
   scrollableContainer.setPreferredSize(new Dimension(width/2, height));  
-  for(OccurrenceOval occ : occGraphics) occ.paintOccurrence(border); 
  } 
- }     public void addToCell(Component comp) { 
- public void addOccurrence(OccurrenceOval occ) {   layer++; cellPanel.add(comp, new Integer(layer)); 
-  lastX = lastX + 20;  lastY = lastY + 32;  } 
-  occGraphics.add(occ);  occ.setBounds(lastX,lastY,110,77); add(occ);  public void clear() { // suppressed: clear all content } 
+ public void addToCell(Component comp) { 
+  layer++; cellPanel.add(comp, new Integer(layer)); 
  } 
+ public void clear() { // suppressed: clear all content } 
  }} 
- //setters and getters suppressed 
 //---------------------------------------------------------------------------------------- 
- public void select(boolean select) { 
 // imports from Java libraries suppressed   
-  for(OccurrenceOval occ : occGraphics) occ.select(select);  
 import bp2pl.KBEd;  
-  selected = select; public class RuleEditor { 
-} }  private int editMode; //to specify either new or edit existing 
-//----------------------------------------------------------------------------------------  protected static final int NEW = 1; 
-import java.io.Serializable;  protected static final int EDIT = 2; 
-public class OccGraphic implements Serializable {  
+public class RuleEditor { 
+ private int editMode; //to specify either new or edit existing 
+ protected static final int NEW = 1; 
+ protected static final int EDIT = 2; 
  private KBEd kb; // to hold KB object passed from PLA 
- private MovableLayeredPane occBefore, occAfter;  
  // suppressed: Normal components like buttons and text fields 
- public OccGraphic(MovableLayeredPane occBefore, MovableLayeredPane occAfter) { 
  private CellPanel panelWest; 
-  this.occBefore = occBefore; this.occAfter = occAfter; 
- private CellPanel panelEast; 80 
- }   //a hash map to hold KB rules graphics information 
+ private CellPanel panelEast; 
+ //a hash map to hold KB rules graphics information 
+ private HashMap<String, HashMap<String,OccGraphic>> kbGraphics; 
+ private Rule rule; //current rule 
+ private ArrayList<String> modnames;  
+3 4 
+ APPENDICES 
  
- // setters and getters suppressed  private HashMap<String, HashMap<String,OccGraphic>> kbGraphics; 
-}  private Rule rule; //current rule 
- private ArrayList<String> modnames;   
-          if(occPaths!=null) { 
- private Role occRole; 6 
-5            ArrayList<String> selectedOccs = getSelectedOccs(occPaths); 
- private String[] modifications; 
-           if(selectedOccs.size()!=0) { 
- private HashMap<String, String> abbrevMap; 
- APPENDICES             for(String occ : rule.getRuleGraphics().keySet()) 
- private ArrayList<String> mods; 
-             if(selectedOccs.contains(occ)) electOccurrence(occ,true); 
- public RuleEditor( KBEd kb) { /* Create the rule editor instance */ 
-            else selectOccurrence(occ,false); 
-  this.kb = kb; 
-         } } } } 
-  /*instantiations suppressed */ 
-  private ArrayList<String> getSelectedOccs(TreePath[] occPaths) { 
-  editMode = NEW;  
-   ArrayList<String> occs = new ArrayList<String>(); 
-  occRole = Role.CONSUMED; 
-   for(TreePath occPath : occPaths) {  
+81 
  
-       modifications = getData(kb.modSpecs(),1,4);//get modifications list from KB 
-    DefaultMutableTreeNode occNode = (DefaultMutableTreeNode) 
-  Arrays.sort(modifications, new stringComparator()); 
-      occPath.getLastPathComponent(); 
-  abbrevMap = (HashMap<String, String>)     
-            occs.add(occNode.toString()); 
+ 
   
+ 
+ private Role occRole; 
+ private String[] modifications; 
+ private HashMap<String, String> abbrevMap; 
+ private ArrayList<String> mods; 
+ public RuleEditor( KBEd kb) { /* Create the rule editor instance */ 
+  this.kb = kb; 
+  /*instantiations suppressed */ 
+  editMode = NEW;  
+  occRole = Role.CONSUMED; 
+       modifications = getData(kb.modSpecs(),1,4);//get modifications list from KB 
+  Arrays.sort(modifications, new stringComparator()); 
+  abbrevMap = (HashMap<String, String>)     
     kb.getAttribute("modificationAbbreviations");  
-           } return occs; 
   if(abbrevMap.size()==0) createAbbrevMap();  
-  } });  
   setupGUI(); //create the editor window components 
-  btnGroup.addActionListener(new ActionListener() { 
   getKBGraphics();       
-   public void actionPerformed(ActionEvent e) { 
   frame.setVisible(true); //show the editor window   
-     TreePath[] paths = occTree.getSelectionPaths(); 
  } 
-     if(paths.length>1) { 
  private void createAbbrevMap() { /* creates abbreviations list for modifications  
-    ArrayList<Object[]> soccs = new ArrayList<Object[]>(); 
   for(String m : modifications)  
-   ComplexOccGraphic coccBefore = new ComplexOccGraphic(true); 
    if(m.length()>3) abbrevMap.put(m, m.substring(0,3)); 
-   ComplexOccGraphic coccAfter = new ComplexOccGraphic(true); 
    else abbrevMap.put(m, m); 
-   DefaultTreeModel model = (DefaultTreeModel) occTree.getModel(); 
  } 
-    for(TreePath occPath : paths) { 
  private void getKBGraphics() { /* Gets the rules graphics information from file 
-     DefaultMutableTreeNode occNode =   
   try{ FileInputStream fileStream =  
-     (DefaultMutableTreeNode) occPath.getLastPathComponent(); 
     new FileInputStream(kb.getKBname()+".ser"); 
-            if(occNode != null) { 
    ObjectInputStream objStream = new ObjectInputStream(fileStream); 
-             String occ = occNode.toString(); 
    kbGraphics = (HashMap<String, HashMap<String, OccGraphic>>) 
-                OccGraphic occG =  
      objStream.readObject(); 
-      rule.getOccurrenceGraphic(occ);  
    objStream.close(); 
-                if(occG!=null) {               
    fileStream.close(); 
-             MovableLayeredPane occBefore = occG.occBefore(); 
   } catch(Exception ex){  //error – suppressed } 
-             MovableLayeredPane occAfter = occG.occAfter(); 
  } 
-                 model.removeNodeFromParent(occNode); 
  public void refreshAll() { /* resets all editor contents for a new rule */ }  
-                 occTree.repaint(); 
  private void clearPanels() { panelWest.clear();panelEast.clear(); } 
-                 if(occBefore!=null) { 
  private Object[] rulesFromKB() { /* get rule id's from the KB */ 
-                  occBefore.setMovable(false); 
   List<Object> list = new ArrayList<Object>(kb.ruleIds()); 
-                if(occAfter==null) 
           return list.toArray();   
-                     occRole = Role.CONSUMED;
  } 
-    coccBefore.addOccurrence((OccurrenceOval) occBefore); 
  private void setupGUI() { /* Setup the contents of the editor GUI. */ 
-                 } 
  // suppressed for space: setting the main frame and containing panels   
-                 if(occAfter!=null) { 
  // and adding all contents with layouts settings  
-                  occAfter.setMovable(false); 
    btnSaveToKb.addActionListener(new ActionListener() { 
-                  if(occBefore==null) 
   public void actionPerformed(ActionEvent e) { 
-                 occRole =  Role.PRODUCED; 
     if(verifyAll()){ 
-                  else 
    save(); 
-                  occRole = Role.CONTROL; 
    //suppressed: reset and clear fields 
-    coccAfter.addOccurrence((OccurrenceOval) occAfter); 
   }} }); 
-                 }  
   btnRefresh.addActionListener(new ActionListener() { 
-          Object[] soccspec = rule.getOccSpec(occ, occRole); 
    public void actionPerformed(ActionEvent e) { 
-                 soccs.add(soccspec); 
-    cbFindRule.setModel(new                       rule.removeOccurrence(occ, occRole); 
+    cbFindRule.setModel(new      
      DefaultComboBoxModel(rulesFromKB())); 
-              } }  } 
     cbFindRule.addItem("< New Rule >"); 
-     panelWest.addToCell(coccBefore); 
     cbFindRule.setSelectedItem("< New Rule >"); 
-     panelEast.addToCell(coccAfter); 
   } }); 
-     String locname =     
   setupTree(); 
-     comboBoxLocation.getSelectedItem().toString();
  
-     Object[] coccspec = {"cocc",soccs,locname};
  occTree.getSelectionModel().setSelectionMode(TreeSelectionModel.CONTIGUOUS_TREE_SEL
-                 String occId = kb.mkCOccLongName(coccspec);  81 
-ECTION);                  boolean added = false;                   
- 
+ECTION); 
   occTree.addTreeSelectionListener(new TreeSelectionListener() { 
-                 added = rule.addOccurrence(coccspec, occId, Role.CONTROL); 
          public void valueChanged(TreeSelectionEvent ev) {           
-                 if(!added) lblMessages.setText("Occurrences already grouped..."); 
           TreePath[] occPaths = occTree.getSelectionPaths(); 
+ 
+          if(occPaths=null) { 
+           ArrayList<String> selectedOccs = getSelectedOccs(occPaths); 
+           if(selectedOccs.size()=0) { 
+            for(String occ : rule.getRuleGraphics().keySet()) 
+            if(selectedOccs.contains(occ)) electOccurrence(occ,true); 
+            else selectOccurrence(occ,false); 
+         } } } } 
+  private ArrayList<String> getSelectedOccs(TreePath[] occPaths) { 
+   ArrayList<String> occs = new ArrayList<String>(); 
+   for(TreePath occPath : occPaths) { 
+    DefaultMutableTreeNode occNode = (DefaultMutableTreeNode) 
+      occPath.getLastPathComponent(); 
+            occs.add(occNode.toString()); 
+           } return occs; 
+  } });  
+  btnGroup.addActionListener(new ActionListener() { 
+   public void actionPerformed(ActionEvent e) { 
+     TreePath[] paths = occTree.getSelectionPaths(); 
+     if(paths.length>1) { 
+    ArrayList<Object[]> soccs = new ArrayList<Object[]>(); 
+   ComplexOccGraphic coccBefore = new ComplexOccGraphic(true); 
+   ComplexOccGraphic coccAfter = new ComplexOccGraphic(true); 
+   DefaultTreeModel model = (DefaultTreeModel) occTree.getModel(); 
+    for(TreePath occPath : paths) { 
+     DefaultMutableTreeNode occNode =   
+     (DefaultMutableTreeNode) occPath.getLastPathComponent(); 
+            if(occNode = null) { 
+             String occ = occNode.toString(); 
+                OccGraphic occG =  
+      rule.getOccurrenceGraphic(occ);  
+                if(occG=null) {               
+             MovableLayeredPane occBefore = occG.occBefore(); 
+             MovableLayeredPane occAfter = occG.occAfter(); 
+                 model.removeNodeFromParent(occNode); 
+                 occTree.repaint(); 
+                 if(occBefore=null) { 
+                  occBefore.setMovable(false); 
+                if(occAfter==null) 
+                     occRole = Role.CONSUMED;
+    coccBefore.addOccurrence((OccurrenceOval) occBefore); 
+                 } 
+                 if(occAfter=null) { 
+                  occAfter.setMovable(false); 
+                  if(occBefore==null) 
+                 occRole =  Role.PRODUCED; 
+                  else 
+                  occRole = Role.CONTROL; 
+    coccAfter.addOccurrence((OccurrenceOval) occAfter); 
+                 }  
+          Object[] soccspec = rule.getOccSpec(occ, occRole); 
+                 soccs.add(soccspec); 
+                 rule.removeOccurrence(occ, occRole); 
+              } }  } 
+     panelWest.addToCell(coccBefore); 
+     panelEast.addToCell(coccAfter); 
+     String locname =    
+     comboBoxLocation.getSelectedItem().toString();
+     Object[] coccspec = {"cocc",soccs,locname};
+                 String occId = kb.mkCOccLongName(coccspec);  
+                 boolean added = false;                   
+                 added = rule.addOccurrence(coccspec, occId, Role.CONTROL); 
+                 if(added) lblMessages.setText("Occurrences already grouped..."); 
    else {  
  
-       added = rule.addOccurrence(soccspec, occId, occRole); 
-     lblMessages.setText(""); 8 
-7  if(!added) lblMessages.setText("Occurrence already exists..."); 
-     rule.saveOccurrenceGraphic(occId, new  
-else { 
-      OccGraphic(coccBefore,coccAfter));  
- APPENDICES   OccurrenceOval occ = new OccurrenceOval(ename, occRole, mods, true); 
-     addToTree(occId, Role.CONTROL.id()); } } } }); 
-   OccurrenceOval occ2 = null; 
-//creating the Before cell panel with cell and nucleus membranes 
-  switch(occRole) { 
-Membrane cellMembraneBefore =  
-    case CONSUMED: panelWest.addToCell(occ); break; 
-new Membrane(this.getClass().getResource("images/stripCell.png"),new Point(0,101),2220,23);     case PRODUCED: occ2 = occ; occ = null; panelEast.addToCell(occ2); break; 
-Membrane nucleusMembraneBefore = new     case CONTROL: occ2 = new OccurrenceOval(ename, occRole, mods, true); 
-Membrane(this.getClass().getResource("images/stripNucleus.png"),new Point(0,275),2220,23); 
-   panelWest.addToCell(occ); panelEast.addToCell(occ2); break; 
- 
-panelWest = new CellPanel(" Before", 1000, 380, cellMembraneBefore, nucleusMembraneBefore); 
-  } 
-//creating the After cell panel with cell and nucleus membranes 
-  rule.saveOccurrenceGraphic(occId, new OccGraphic(occ,occ2)); 
-Membrane cellMembraneAfter =  
-  addToTree(occId, occRole.id()); 
- 
-new Membrane(this.getClass().getResource("images/stripCell.png"),new Point(0,101),2220,23); 
-  } } } }); 
-Membrane nucleusMembraneAfter = new 
-  occSample = new OccurrenceOval("sample", occRole, mods, false); 
-Membrane(this .getClass().getResource("images/stripNucleus.png"),new Point(0,275),2220,23);  protected HashMap<String,Object[]> createOccMap(ArrayList<Object[]> occArray) { 
-panelEast = new CellPanel(" After", 1000, 380, cellMembraneAfter, nucleusMembraneAfter);   HashMap<String,Object[]> occMap = new HashMap<String,Object[]>(); 
-  cbFindRule.addActionListener (new ActionListener () {   for(Object[] occspec : occArray){ 
- 
-  public void actionPerformed(ActionEvent e) {    String occId = null; 
-      if(cbFindRule.getSelectedItem().equals("< New Rule >")) refreshAll(); 
-   if(occspec[0].equals("socc")) occId = kb.mkSOccLongName(occspec); 
-      else { 
-   else occId = kb.mkCOccLongName(occspec); 
- 
-       String ruleid = cbFindRule.getSelectedItem().toString(); 
-   occMap.put(occId, occspec); 
-       refreshAll(); 
-  } return occMap; 
-       editMode = EDIT;  } 
- 
-       txtRuleName.setEnabled(false);  protected void selectOccurrence(String occ, boolean selectValue) { 
-   Object[] rulespec = kb.ruleSpecById(ruleid);              OccGraphic occG = rule.getOccurrenceGraphic(occ); 
-   rulespec[2] = createOccMap((ArrayList<Object[]>) rulespec[2]);              if(occG!=null) { 
-  
-   rulespec[3] = createOccMap((ArrayList<Object[]>) rulespec[3]); 
-              MovableLayeredPane occBefore = occG.occBefore(); 
-   rulespec[4] = createOccMap((ArrayList<Object[]>) rulespec[4]);  
-              MovableLayeredPane occAfter = occG.occAfter(); 
-   if(rulespec != null) { 
-              if(occBefore!=null) occBefore.select(selectValue); 
-        rule = new Rule(rulespec); 
-              if(occAfter!=null) occAfter.select(selectValue);  }} 
-        txtRuleName.setText(rule.getRuleId());  protected String getModFullName(String m) { 
-         txtDescription.setText(rule.getDescription());   String fullName = "";   
-         if(kbGraphics.containsKey(rule.getRuleId())) {   for(Iterator<String> it = abbrevMap.keySet().iterator();it.hasNext();) 
-      rule.setRuleGraphics(kbGraphics.get(rule.getRuleId()));    { fullName = it.next(); if(m.equals(abbrevMap.get(fullName))) break; } 
-           drawRuleGraphics(); } 
-  return fullName; 
-         else createDefaultGraphics(); 
- } 
-   else refreshAll(); 
- private void addToTree(String occId, int i) { 
-  } } });   
-  MutableTreeNode node = new DefaultMutableTreeNode(occId); 
-  String[] proteins = getData(kb.entitySpecs(),1,-1);     DefaultTreeModel model = (DefaultTreeModel) occTree.getModel(); 
-  Arrays.sort(proteins, new stringComparator());   
-  comboBoxProtein = new JComboBox(proteins);   MutableTreeNode root = (MutableTreeNode) model.getRoot(); 
-  addModificationLabels();   MutableTreeNode parent = (MutableTreeNode) root.getChildAt(i); 
-  String[] locations = getData(kb.locSpecs(),1,2); 
-  int index = parent.getChildCount();   
-  Arrays.sort(locations, new stringComparator()); 
-  model.insertNodeInto(node, parent, index);   
-  comboBoxLocation = new JComboBox(locations); 
-  TreeNode[] nodesBefore = model.getPathToRoot(node); 
-  rdbtnConsumed.addActionListener(new ActionListener() { 
-  TreePath nodePath = new TreePath(nodesBefore); 
-   public void actionPerformed(ActionEvent e) {   occTree.setSelectionPath(nodePath); 
-    occRole = Role.CONSUMED;   occTree.scrollPathToVisible(nodePath); 
-    occSample.setRole(occRole);  } 
-    repaintModLabels(); }});  private void setupTree() { 
-  btnAdd.addActionListener(new ActionListener() {   occTree.setModel(new DefaultTreeModel( 
-   public void actionPerformed(ActionEvent e) {
-    new DefaultMutableTreeNode("Occurrences") { 
- if(comboBoxProtein.getSelectedItem().toString().equals("") || 
-    add(new DefaultMutableTreeNode("Consumed")); 
-comboBoxLocation.getSelectedItem().toString().equals("")) 
-    add(new DefaultMutableTreeNode("Produced")); 
-   lblMessages.setText("Please select entity and location...");     add(new DefaultMutableTreeNode("Controls")); } )); 
-    else {   occTree.repaint(); } 
- String ename = comboBoxProtein.getSelectedItem().toString();  private String[] getData(ArrayList<Object[]> specs, int dataColumn, int decsColumn) 
- String locname = comboBoxLocation.getSelectedItem().toString();  {  82 
- ArrayList<String> occModnames = new ArrayList<String>();   ArrayList<String> nameList = new ArrayList<String>();   
- 
- occModnames.addAll(modnames); 
-  for(Object[] spec:specs) 
- Object[] soccspec = {"socc",ename,occModnames,locname};  
-   if(decsColumn==-1) nameList.add((String) spec[dataColumn]); 
- String occId = kb.mkSOccLongName(soccspec); boolean added = false;  
-   else nameList.add((String) spec[dataColumn]);  
- 
-   return nameList.toArray(new String[nameList.size()]); OccGraphic(coccBefore,coccAfter)); 
- }                 addToTree(coccId, role.id()); 
-10 
-9 
- private void save() { 
-  } } } 
+5 6 
  APPENDICES 
-  rule.setRuleId(txtRuleName.getText()); 
- private OccGraphic createSoccGraphic(String occId, Object[] occspec, Role role) { 
  
-  rule.setDescription(txtDescription.getText()); 
-  String ename = (String) occspec[1]; 
-  saveKBGraphics(); 
-  //String locname = (String) occspec[3]; 
-  kb.addRule(rule.rulespec());   modnames.clear(); 
- }   mods.clear(); 
- private void saveKBGraphics() {     modnames.addAll((ArrayList<String>)occspec[2]); 
-  String ruleid = rule.getRuleId();   for(String mod : modnames) 
+82 
  
-  if(kbGraphics.containsKey(ruleid)) 
-   mods.add(abbrevMap.get(mod)); 
-   kbGraphics.remove(ruleid); 
-  OccurrenceOval occ = new OccurrenceOval(ename, role, mods, true); 
-   kbGraphics.put(ruleid, rule.getRuleGraphics());   
-  OccurrenceOval occ2 = null; 
-  try{FileOutputStream fileStream = new 
-  switch(role) { 
-FileOutputStream(kb.getKBname()+".ser");    case CONSUMED: panelWest.addToCell(occ); break; 
  
-   ObjectOutputStream objStream = new    case PRODUCED: occ2 = occ; occ = null; panelEast.addToCell(occ2); 
-ObjectOutputStream(fileStream); break; 
-   objStream.writeObject(kbGraphics);    case CONTROL: occ2 = new OccurrenceOval(ename, role, mods, true); 
  
-   objStream.close(); 
-     panelWest.addToCell(occ); 
-   fileStream.close(); 
-panelEast.addToCell(occ2); break;  
-  } catch(IOException ex) { //error } 
-  } return new OccGraphic(occ,occ2);   
-  } 
+ 
+ 
+ 
+ 
+  
+     
+     lblMessages.setText(""); 
+     rule.saveOccurrenceGraphic(occId, new  
+      OccGraphic(coccBefore,coccAfter));  
+     addToTree(occId, Role.CONTROL.id()); } } } }); 
+//creating the Before cell panel with cell and nucleus membranes 
+Membrane cellMembraneBefore =  
+new Membrane(this.getClass().getResource("images/stripCell.png"),new Point(0,101),2220,23); 
+Membrane nucleusMembraneBefore = new 
+Membrane(this.getClass().getResource("images/stripNucleus.png"),new Point(0,275),2220,23); 
+panelWest = new CellPanel(" Before", 1000, 380, cellMembraneBefore, nucleusMembraneBefore); 
+//creating the After cell panel with cell and nucleus membranes 
+Membrane cellMembraneAfter =  
+new Membrane(this.getClass().getResource("images/stripCell.png"),new Point(0,101),2220,23); 
+Membrane nucleusMembraneAfter = new 
+Membrane(this.getClass().getResource("images/stripNucleus.png"),new Point(0,275),2220,23); 
+panelEast = new CellPanel(" After", 1000, 380, cellMembraneAfter, nucleusMembraneAfter); 
+  cbFindRule.addActionListener (new ActionListener () { 
+  public void actionPerformed(ActionEvent e) { 
+      if(cbFindRule.getSelectedItem().equals("< New Rule >")) refreshAll(); 
+      else { 
+       String ruleid = cbFindRule.getSelectedItem().toString(); 
+       refreshAll(); 
+       editMode = EDIT; 
+       txtRuleName.setEnabled(false); 
+   Object[] rulespec = kb.ruleSpecById(ruleid); 
+   rulespec[2] = createOccMap((ArrayList<Object[]>) rulespec[2]); 
+   rulespec[3] = createOccMap((ArrayList<Object[]>) rulespec[3]); 
+   rulespec[4] = createOccMap((ArrayList<Object[]>) rulespec[4]);  
+   if(rulespec = null) { 
+        rule = new Rule(rulespec); 
+        txtRuleName.setText(rule.getRuleId()); 
+         txtDescription.setText(rule.getDescription()); 
+         if(kbGraphics.containsKey(rule.getRuleId())) { 
+      rule.setRuleGraphics(kbGraphics.get(rule.getRuleId())); 
+           drawRuleGraphics(); } 
+         else createDefaultGraphics(); 
+   else refreshAll(); 
+  } } });   
+  String[] proteins = getData(kb.entitySpecs(),1,-1);   
+  Arrays.sort(proteins, new stringComparator()); 
+  comboBoxProtein = new JComboBox(proteins); 
+  addModificationLabels(); 
+  String[] locations = getData(kb.locSpecs(),1,2); 
+  Arrays.sort(locations, new stringComparator()); 
+  comboBoxLocation = new JComboBox(locations); 
+  rdbtnConsumed.addActionListener(new ActionListener() { 
+   public void actionPerformed(ActionEvent e) { 
+    occRole = Role.CONSUMED; 
+    occSample.setRole(occRole); 
+    repaintModLabels(); }}); 
+  btnAdd.addActionListener(new ActionListener() { 
+   public void actionPerformed(ActionEvent e) {
+ if(comboBoxProtein.getSelectedItem().toString().equals("") || 
+comboBoxLocation.getSelectedItem().toString().equals("")) 
+   lblMessages.setText("Please select entity and location..."); 
+    else { 
+ String ename = comboBoxProtein.getSelectedItem().toString(); 
+ String locname = comboBoxLocation.getSelectedItem().toString();  
+ ArrayList<String> occModnames = new ArrayList<String>(); 
+ occModnames.addAll(modnames); 
+ Object[] soccspec = {"socc",ename,occModnames,locname};  
+ String occId = kb.mkSOccLongName(soccspec); boolean added = false;  
+ 
+ added = rule.addOccurrence(soccspec, occId, occRole); 
+ if(added) lblMessages.setText("Occurrence already exists..."); 
+else { 
+ OccurrenceOval occ = new OccurrenceOval(ename, occRole, mods, true); 
+ OccurrenceOval occ2 = null; 
+ switch(occRole) { 
+   case CONSUMED: panelWest.addToCell(occ); break; 
+   case PRODUCED: occ2 = occ; occ = null; panelEast.addToCell(occ2); break; 
+   case CONTROL: occ2 = new OccurrenceOval(ename, occRole, mods, true); 
+  panelWest.addToCell(occ); panelEast.addToCell(occ2); break; 
  } 
- private void createDefaultGraphics() {    private void drawRuleGraphics() {   
-  createOccGraphics(rule.getConsumed(),Role.CONSUMED);   Role role = Role.CONSUMED;   
-  createOccGraphics(rule.getProduced(),Role.PRODUCED);   for(Iterator<String> it = rule.getRuleGraphics().keySet().iterator(); 
-  createOccGraphics(rule.getControls(),Role.CONTROL); it.hasNext();) { 
-  if(kbGraphics.containsKey(rule.getRuleId())) 
-   String occId = it.next(); 
-   kbGraphics.remove(rule.getRuleId()); 
-   OccGraphic occ = rule.getRuleGraphics().get(occId); 
-  kbGraphics.put(rule.getRuleId(), rule.getRuleGraphics());  
-   if(occ.occBefore()!=null && occ.occAfter()==null) { 
+ rule.saveOccurrenceGraphic(occId, new OccGraphic(occ,occ2)); 
+ addToTree(occId, occRole.id()); 
+ } } } }); 
+ occSample = new OccurrenceOval("sample", occRole, mods, false); 
+ protected HashMap<String,Object[]> createOccMap(ArrayList<Object[]> occArray) { 
+ HashMap<String,Object[]> occMap = new HashMap<String,Object[]>(); 
+ for(Object[] occspec : occArray){ 
+  String occId = null; 
+  if(occspec[0].equals("socc")) occId = kb.mkSOccLongName(occspec); 
+  else occId = kb.mkCOccLongName(occspec); 
+  occMap.put(occId, occspec); 
+ } return occMap; 
  } 
-    role = Role.CONSUMED; 
- private void createOccGraphics(ArrayList<Object[]> occs, Role role) {     panelWest.addToCell(occ.occBefore()); 
-  for(Object[] occspec : occs){    } else if(occ.occBefore()==null && occ.occAfter()!=null) { 
-   if(occspec[0].equals("socc")) {     role = Role.PRODUCED; 
-    String occId = kb.mkSOccLongName(occspec);       panelEast.addToCell(occ.occAfter()); 
-    rule.saveOccurrenceGraphic(occId, 
-   } else if(occ.occBefore()!=null && occ.occAfter()!=null) { 
-createSoccGraphic(occId, occspec, role));  
-    role = Role.CONTROL; 
-    addToTree(occId, role.id()); 
-    panelWest.addToCell(occ.occBefore()); 
-   } else if (occspec[0].equals("cocc")) { 
-    panelEast.addToCell(occ.occAfter()); 
-    String locname = (String) occspec[2];    } 
-    ArrayList<Object[]> soccs = new ArrayList<Object[]>();    addToTree(occId, role.id()); 
-    soccs.addAll((ArrayList<Object[]>)occspec[1]);  }} 
-    String coccId = kb.mkCOccLongName(occspec); } 
-    ComplexOccGraphic coccBefore = new 
-//---------------------------------------------------------------------------------------- 
-ComplexOccGraphic(true); public enum Role { 
-    ComplexOccGraphic coccAfter = new 
- CONSUMED(0), PRODUCED(1), CONTROL(2); 
-ComplexOccGraphic(true); 
- private int id; 
-    for(Object[] soccspec : soccs) {  Role(int id) { this.id = id; } 
-     String soccId = kb.mkSOccLongName(occspec);  public int id() { return id; } 
-     OccGraphic occG = createSoccGraphic(soccId, } 
-soccspec, role);                //---------------------------------------------------------------------------------------- 
-           MovableLayeredPane occBefore = occG.occBefore(); public enum Position { 
-           MovableLayeredPane occAfter = occG.occAfter(); 
- EAST(1), NORTH(3), WEST(5), SOUTH(7), NORTH_EAST(2), NORTH_WEST(4), 
-           if(occBefore!=null) { 
- SOUTH_WEST(6), SOUTH_EAST(8); 
-            occBefore.setMovable(false);                
- private int id; 
-                      coccBefore.addOccurrence((OccurrenceOval) occBefore);  Position(int id) { this.id = id; } 
-           }             public int id() { return id; } 
-           if(occAfter!=null) {  public static Position getPosition(int id) { 
-            occAfter.setMovable(false);   for(Position p : Position.values()) 
+ protected void selectOccurrence(String occ, boolean selectValue) { 
+            OccGraphic occG = rule.getOccurrenceGraphic(occ); 
+            if(occG=null) { 
+             MovableLayeredPane occBefore = occG.occBefore(); 
+             MovableLayeredPane occAfter = occG.occAfter(); 
+             if(occBefore=null) occBefore.select(selectValue); 
+             if(occAfter=null) occAfter.select(selectValue);  }} 
+ protected String getModFullName(String m) { 
+ String fullName = "";   
+ for(Iterator<String> it = abbrevMap.keySet().iterator();it.hasNext();) 
+  { fullName = it.next(); if(m.equals(abbrevMap.get(fullName))) break; } 
+ return fullName; 
+ } 
+ private void addToTree(String occId, int i) { 
+ MutableTreeNode node = new DefaultMutableTreeNode(occId); 
+ DefaultTreeModel model = (DefaultTreeModel) occTree.getModel(); 
+ 
+ MutableTreeNode root = (MutableTreeNode) model.getRoot(); 
+ MutableTreeNode parent = (MutableTreeNode) root.getChildAt(i); 
+ int index = parent.getChildCount();   
+ model.insertNodeInto(node, parent, index);   
+ TreeNode[] nodesBefore = model.getPathToRoot(node); 
+ TreePath nodePath = new TreePath(nodesBefore); 
+ occTree.setSelectionPath(nodePath); 
+ occTree.scrollPathToVisible(nodePath); 
+ } 
+ private void setupTree() { 
+ occTree.setModel(new DefaultTreeModel( 
+   new DefaultMutableTreeNode("Occurrences") { 
+   add(new DefaultMutableTreeNode("Consumed")); 
+   add(new DefaultMutableTreeNode("Produced")); 
+   add(new DefaultMutableTreeNode("Controls")); } )); 
+ occTree.repaint(); } 
+ private String[] getData(ArrayList<Object[]> specs, int dataColumn, int decsColumn) 
+{  
+ ArrayList<String> nameList = new ArrayList<String>();   
+ for(Object[] spec:specs) 
+  if(decsColumn==-1) nameList.add((String) spec[dataColumn]); 
+  else nameList.add((String) spec[dataColumn]);  
+ 
+7 8 
+ APPENDICES 
+ 
 83 
-               coccAfter.addOccurrence((OccurrenceOval) occAfter); 
-   if(p.id()==id) return p; 
-           } 
-  return EAST; 
  
-    } panelWest.addToCell(coccBefore); 
+ 
+ 
+ 
+ 
+ return nameList.toArray(new String[nameList.size()]); 
  } 
-    panelEast.addToCell(coccAfter); 
+ private void save() { 
+ rule.setRuleId(txtRuleName.getText()); 
+ rule.setDescription(txtDescription.getText()); 
+ saveKBGraphics(); 
+ kb.addRule(rule.rulespec()); 
+ } 
+ private void saveKBGraphics() {   
+ String ruleid = rule.getRuleId(); 
+ if(kbGraphics.containsKey(ruleid)) 
+  kbGraphics.remove(ruleid); 
+ kbGraphics.put(ruleid, rule.getRuleGraphics());   
+ try{FileOutputStream fileStream = new 
+FileOutputStream(kb.getKBname()+".ser"); 
+  ObjectOutputStream objStream = new 
+ObjectOutputStream(fileStream); 
+  objStream.writeObject(kbGraphics); 
+  objStream.close(); 
+  fileStream.close(); 
+ } catch(IOException ex) { //error } 
+ } 
+ private void createDefaultGraphics() {   
+ createOccGraphics(rule.getConsumed(),Role.CONSUMED); 
+ createOccGraphics(rule.getProduced(),Role.PRODUCED); 
+ createOccGraphics(rule.getControls(),Role.CONTROL); 
+ if(kbGraphics.containsKey(rule.getRuleId())) 
+  kbGraphics.remove(rule.getRuleId()); 
+ kbGraphics.put(rule.getRuleId(), rule.getRuleGraphics());  
+ } 
+ private void createOccGraphics(ArrayList<Object[]> occs, Role role) { 
+ for(Object[] occspec : occs){ 
+  if(occspec[0].equals("socc")) { 
+   String occId = kb.mkSOccLongName(occspec);   
+   rule.saveOccurrenceGraphic(occId, 
+createSoccGraphic(occId, occspec, role));  
+   addToTree(occId, role.id()); 
+  } else if (occspec[0].equals("cocc")) { 
+   String locname = (String) occspec[2]; 
+   ArrayList<Object[]> soccs = new ArrayList<Object[]>(); 
+   soccs.addAll((ArrayList<Object[]>)occspec[1]); 
+   String coccId = kb.mkCOccLongName(occspec); 
+   ComplexOccGraphic coccBefore = new 
+ComplexOccGraphic(true); 
+   ComplexOccGraphic coccAfter = new 
+ComplexOccGraphic(true); 
+   for(Object[] soccspec : soccs) { 
+    String soccId = kb.mkSOccLongName(occspec); 
+    OccGraphic occG = createSoccGraphic(soccId, 
+soccspec, role);                
+          MovableLayeredPane occBefore = occG.occBefore(); 
+          MovableLayeredPane occAfter = occG.occAfter(); 
+          if(occBefore=null) { 
+           occBefore.setMovable(false);                
+                     coccBefore.addOccurrence((OccurrenceOval) occBefore); 
+          }            
+          if(occAfter=null) { 
+           occAfter.setMovable(false); 
+              coccAfter.addOccurrence((OccurrenceOval) occAfter); 
+          } 
+   } panelWest.addToCell(coccBefore); 
+   panelEast.addToCell(coccAfter); 
+                rule.saveOccurrenceGraphic(coccId, new  
+ 
+OccGraphic(coccBefore,coccAfter)); 
+                addToTree(coccId, role.id()); 
+ } } } 
+ private OccGraphic createSoccGraphic(String occId, Object[] occspec, Role role) { 
+ String ename = (String) occspec[1]; 
+ //String locname = (String) occspec[3]; 
+ modnames.clear(); 
+ mods.clear(); 
+ modnames.addAll((ArrayList<String>)occspec[2]); 
+ for(String mod : modnames) 
+  mods.add(abbrevMap.get(mod)); 
+ OccurrenceOval occ = new OccurrenceOval(ename, role, mods, true); 
+ OccurrenceOval occ2 = null; 
+ switch(role) { 
+  case CONSUMED: panelWest.addToCell(occ); break; 
+  case PRODUCED: occ2 = occ; occ = null; panelEast.addToCell(occ2); 
+break; 
+  case CONTROL: occ2 = new OccurrenceOval(ename, role, mods, true); 
+    panelWest.addToCell(occ); 
+panelEast.addToCell(occ2); break;  
+ } return new OccGraphic(occ,occ2);  
+ } 
+ private void drawRuleGraphics() {   
+ Role role = Role.CONSUMED;   
+ for(Iterator<String> it = rule.getRuleGraphics().keySet().iterator(); 
+it.hasNext();) { 
+  String occId = it.next(); 
+  OccGraphic occ = rule.getRuleGraphics().get(occId); 
+  if(occ.occBefore()=null && occ.occAfter()==null) { 
+   role = Role.CONSUMED; 
+   panelWest.addToCell(occ.occBefore()); 
+  } else if(occ.occBefore()==null && occ.occAfter()=null) { 
+   role = Role.PRODUCED; 
+   panelEast.addToCell(occ.occAfter()); 
+  } else if(occ.occBefore()=null && occ.occAfter()=null) { 
+   role = Role.CONTROL; 
+   panelWest.addToCell(occ.occBefore()); 
+   panelEast.addToCell(occ.occAfter()); 
+  } 
+  addToTree(occId, role.id()); 
+ }} 
 } 
-                rule.saveOccurrenceGraphic(coccId, new   
-   
+//---------------------------------------------------------------------------------------- 
+public enum Role { 
+ CONSUMED(0), PRODUCED(1), CONTROL(2); 
+ private int id; 
+ Role(int id) { this.id = id; } 
+ public int id() { return id; } 
+} 
+//---------------------------------------------------------------------------------------- 
+public enum Position { 
+ EAST(1), NORTH(3), WEST(5), SOUTH(7), NORTH_EAST(2), NORTH_WEST(4), 
+ SOUTH_WEST(6), SOUTH_EAST(8); 
+ private int id; 
+ Position(int id) { this.id = id; } 
+ public int id() { return id; } 
+ public static Position getPosition(int id) { 
+  for(Position p : Position.values()) 
+   if(p.id()==id) return p; 
+  return EAST; 
+ } 
+} 
+ 
+ 
+9 10 

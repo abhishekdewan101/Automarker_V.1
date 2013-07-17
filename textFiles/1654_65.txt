@@ -1,3 +1,5 @@
+1 
+ 
 Executive Summury 
  
 Over the last fifteen years, the adoption and use of the Wireless Sensor Networks (WSNs) has been 
@@ -42,8 +44,9 @@ of the established keys and the hop-by-hop characteristics of the network (p. 65
  
  
  
-1 
- Contents 
+3 
+ 
+Contents 
  
 Executive Summury ................................................................................................................................ 1 
 Acknowledgements ................................................................................................................................. 2 
@@ -77,8 +80,9 @@ Contents .......................................................................
 2.3.4.2 ECC - Identity Based Cryptography (IBC) ........................................................................... 32 
 2.3.4.3 Key exchange in IP-based WSN ......................................................................................... 33 
 2.3.4.4 Clustered network approach ............................................................................................ 33 
-3 
- 2.4. Summary and Conclusions ......................................................................................................... 34 
+4 
+ 
+2.4. Summary and Conclusions ......................................................................................................... 34 
 3. IMPLEMENTATION OF THE KEY EXCHANGE TECHNIQUE .................................................................. 35 
 3.1 The working environment ........................................................................................................... 35 
 3.2 Implementation - Methods ......................................................................................................... 36 
@@ -99,8 +103,9 @@ Contents .......................................................................
 BIBLIOGRAPHY ...................................................................................................................................... 69 
  
  
-4 
- 1. INTRODUCTION 
+5 
+ 
+1. INTRODUCTION 
  
 It is observed that over the last fifteen years, the adoption and use of the wireless sensor networks 
 (WSNs) has been increased rapidly and that the data collected by sensors became an integral part of 
@@ -148,8 +153,9 @@ However, there are challenges associated with key management, and the process of
 6LowPANs is not trivial. Currently, the keys are pre-loaded to the nodes of the network and this can 
 be characterized as important security vulnerability. Actually, there is a gap in our understanding on 
 how encryption keys should be disseminated to the network nodes. 
-5 
- 1.1 The scope of the project 
+6 
+ 
+1.1 The scope of the project 
 The scope of this project is to investigate whether the existing techniques (designed for the 
 traditional, application-centric WSNs) for dynamic generation and exchange of cryptographic keys 
 are applicable and can be adopted in 6LoWPAN networks [3]. The techniques which seem to be 
@@ -184,8 +190,9 @@ Finally, we draw the conclusions of the current project by critically evaluating
 giving suggestions about the network and the established keys. Moreover, we suggest the work to 
 be done in the future in order to provide a complete solution for securing the link layer frames of the 
 6LowPAN networks.  
-6 
- 2. BACKGROUND 
+7 
+ 
+2. BACKGROUND 
  
 In this chapter we will present in brief the basic background of the project. Initially, we will give an 
 overview of the WSNs, and we will present some details of the underlying protocols. Moreover, we 
@@ -227,8 +234,9 @@ synchronization.
 channels in the 868 MHz band 
 ? The frame size is defined to be up to 127 bytes 
 ? The link layer security is achieved with the use of 128-bits AES. 
-7 
- It stated above that the frame size is up to 127 bytes, but as it can be seen in Figure 2.1 the actual 
+8 
+ 
+It stated above that the frame size is up to 127 bytes, but as it can be seen in Figure 2.1 the actual 
 payload is very limited after framing, addressing and defining the fields for optional security. 
 Actually, this is unavoidable and stems from the constraints of the device. 
  
@@ -263,8 +271,9 @@ that the IEEE 802.15.4 standard allows the use of group keys, where a common key
 group of nodes (devices) mainly for multicasting and broadcasting. As mentioned in the standard, 
 when a shared group key is used the provided protection is only against the outsider nodes and not 
 against malicious nodes in the specific group, sharing the same key. 
-8 
- According to [11], the MAC security options (fields in the MAC frame) are not enabled by default 
+9 
+ 
+According to [11], the MAC security options (fields in the MAC frame) are not enabled by default 
 every time a data frame is sent over the wireless channel. The required security must be defined by 
 the application, which is responsible to define the specific fields. Thus, it is very possible that data 
 are transmitted in plain by fault or bad application design. It is also important that the use of a group 
@@ -307,8 +316,9 @@ RC5 128 29.49
 Twofish 128 10.31 
  
 Table 2.1: The throughput of symmetric encryption algorithms according to the size of the key [12] 
-9 
-  
+10 
+ 
+ 
 Figure 2.2: Encryption, decryption and key expansion time for symmetric algorithms [12]. 
  
 2.1.2 Application-centric network design 
@@ -336,8 +346,9 @@ protocols are designed with specific characteristics (they do not follow the cla
 the layered architecture) to serve different applications and routing requirements. Because of the 
 nature of WSNs and the hardware constraints, it is not easy to design a new scalable transport 
 protocol to handle end-to-end communication and performing "handshaking". The "handshaking" 
-10 
- procedure uses acknowledgments which result to higher costs in terms of memory, bandwidth and 
+11 
+ 
+procedure uses acknowledgments which result to higher costs in terms of memory, bandwidth and 
 processing power. Most of the current transport protocols for WSNs intend in the exchange of UDP-
 type packets instead of TCP-type packets, as there is no need for acknowledgments and end-to-end 
 "reliable" communication. Since many WSN solutions are localized and event-oriented, the data 
@@ -372,8 +383,9 @@ Internet through an edge router [15] or an extended network consisting of a very
 embedded devices, using multiple edge routers. It is important to mention that the LowPANs are 
 stub networks [15]. More specifically, every network device is able to send packets to destinations 
 out of the LowPAN through the edge router or receive packets from the Internet, but does not 
-11 
- forward received packets to other networks; the LowPAN is not a transit network. Also, it is possible 
+12 
+ 
+forward received packets to other networks; the LowPAN is not a transit network. Also, it is possible 
 that a LowPAN is not connected to the Internet, where it stands as an ad-hoc network and uses the 
 IP network stack only for internal routing between the nodes (there is no edge router).  
 Another important aspect is that all the nodes of the LowPAN and the edge router share the same 
@@ -395,8 +407,9 @@ in order to be compatible for routing in IPv4 networks. Another important operat
 router is that it performs the Neighbor Discovery process, so that every node of the network is 
 registered with the specific edge router. This results to the definition of the interactions between 
 the nodes and the routers. 
-12 
- Furthermore, the 6LowPAN nodes are provided with mobility, not only throughout their specific 
+13 
+ 
+Furthermore, the 6LowPAN nodes are provided with mobility, not only throughout their specific 
 LowPAN but also between the edge routers in an extended network and even between different 
 low-power wireless networks. The 6LowPAN can support two techniques to achieve communication 
 between the nodes: the first relies on the link layer by forwarding link layer frames and the second 
@@ -432,8 +445,9 @@ protocol, it could possibly use the IPsec suite for secure communication, which 
 authenticity and confidentiality between the communicating nodes. According to [16] IPsec is not 
 suitable for 6LowPAN because of the embedded devices' limitations on processing and power 
 resources, which in effect leaves sensor devices with the inability to operate all the IPsec algorithms. 
-13 
- Also, IPsec consumes valuable bandwidth by generating redundant packets as it requires a large 
+14 
+ 
+Also, IPsec consumes valuable bandwidth by generating redundant packets as it requires a large 
 number of signalling messages [17]. Consequently, it is recommended that the encryption and 
 authentication is provided by the link layer as the proposed key exchange scheme must not generate 
 packets of large size and provide communication overhead. Although, it is reported in [18] that IPsec 
@@ -479,8 +493,9 @@ As 6LowPAN adopts the IEEE 802.15.4 standard for link layer specifications, we m
 the sensor's duty cycle period and check which key exchange technique can be adopted. Probably, 
 the performance of the proposed technique will be affected from duty cycle, so we have to specify 
 its impact on the network and evaluate its performance. 
-14 
- 2.2 Key management schemes for WSNs 
+15 
+ 
+2.2 Key management schemes for WSNs 
 The key management schemes proposed for WSNs are divided mainly into two different categories. 
 The first category consists of symmetric key schemes where the keys are pre-installed or assigned by 
 a trusted party and the second category consists of schemes based on public key cryptography. In 
@@ -526,8 +541,9 @@ messages (packets) are routed to reach the destination (multi-hop communication)
 entity-based key exchange scheme cannot be used as stand-alone scheme in 6LowPANs but possibly 
 it can be used in conjunction with other techniques (key-pool scheme, public-key cryptography) to 
 improve the performance of the network and reduce the communication overhead. 
-15 
- 2.2.2 Pre-shared keys   
+16 
+ 
+2.2.2 Pre-shared keys   
 In the second framework we categorise all the approaches where the keys are pre-installed in the 
 nodes (offline instalment) and are used directly for communication. Specifically, these keys are not 
 used to create, negotiate, and establish a secret session key; instead they are used directly for 
@@ -573,8 +589,9 @@ key with every node in its range, in order to be able to perform and manage oper
 revocation and re-keying.  
 After the deployment of the network, every node exchanges the identifiers of its keys with its 
 neighbors. If they have at least one common key, it is used as their pairwise key for symmetric 
-16 
- encryption and communication. Also, the sensor nodes have the restriction not to use the same key 
+17 
+ 
+encryption and communication. Also, the sensor nodes have the restriction not to use the same key 
 for communication with multiple nodes in their range as the key must be unique to provide the 
 required security. 
 As a matter of fact, the size of the pool is very large in comparison to the number of keys every 
@@ -588,35 +605,30 @@ common secret key, they are trying to find a secure routing path through their n
 communicate for key negotiation and establishment.  
 The connectivity of the network is analysed with the theory of random graphs. The network is 
 represented as the graph G(n, p), where n is the number of the nodes and p is the probability that 
-two nodes of the network have a link (a secret key). Given the probability P for the desired 
-c
+two nodes of the network have a link (a secret key). Given the probability Pc for the desired 
 connectivity, the function p can be expressed as: 
-        
+                                    
+   ,     
+     
  
   
-                             ,        , (2.1) 
-     
-  
+ 
+ 
+ , (2.1) 
  
 where n is the number of nodes in the network and c is a real constant. By knowing the number of 
-nodes n and the probability P we are able to calculate the average number of edges each node has, 
-c
+nodes n and the probability Pc we are able to calculate the average number of edges each node has, 
 such that           . Moreover, the desired probability of the network connectivity can be 
 expressed in relation to the size of the key pool R and the number of keys k every node stores. So, 
 the probability that two nodes of the network share at least one key is given by: 
-              
+p = 1          
  
- 
-    
-        
- 
-(2.2) 
-p = 1     = 1    
-              
          
-  
-    
- 
+  = 1   
+      
+            
+       
+             (2.2) 
  
 The network described above, operating with the key pool scheme, is very scalable as easily new 
 nodes can be installed. Firstly, we must install a unique key to every new node, for communication 
@@ -636,8 +648,9 @@ key must not be established only from one common key, but that multiple common k
 used as well as their hashing string. By this approach, the performance of the network is affected as 
 the communicating nodes must have more than one keys to be able to communicate and because it 
 provides communication and computation overhead. Also, in [24] they express the opinion that the 
-17 
- network will be vulnerable with this approach if the number of nodes is large. The latter approach 
+18 
+ 
+network will be vulnerable with this approach if the number of nodes is large. The latter approach 
 mentions that it is better to use multiple paths (communication through the neighbors) to establish 
 the communication link and not just to broadcast it to the recipient node. Similarly to the former 
 one, it provides communication overhead as multiple nodes are involved in the negotiation and 
@@ -683,8 +696,9 @@ communication with the others.
 2.3. Public Key Cryptography (PKC) 
 In this section, we will present and discuss some public-key cryptography algorithms in order to 
 achieve dissemination of a secret shared key between two nodes in WSNs. We will present the 
-18 
- classic Diffie-Hellman algorithm and how authentication of the nodes is achieved with the use of the 
+19 
+ 
+classic Diffie-Hellman algorithm and how authentication of the nodes is achieved with the use of the 
 station-to-station (STS) protocol and the digital signatures. Also, we will examine the RSA encryption 
 algorithm and discuss how a secret key is exchanged. Moreover, we will present the elliptic curve 
 cryptography (ECC) and the Diffie-Hellman scheme over elliptic curves (ECDH) as well as the elliptic 
@@ -695,9 +709,11 @@ recommended sizes for security strength of 80-bits (symmetric) are still secure,
 not be in the next few years.        
  
  
-Algorithm security Symmetric key 
+Algorithm security 
+lifetimes 
+Symmetric key 
+strength (bits)  
 DH - DSA RSA ECC 
-lifetimes strength (bits)  
 2010 80 1024 1024 160 
 Through 2030 112 2048 2048 224 
 Beyond 2030 128 3072 3072 256 
@@ -721,20 +737,17 @@ difficult to find the two prime factors of a large given number.
 Node A (and every node of the network) chooses two random prime numbers p and q where p ≠ q 
 and calculates the modulus n such as n = p ? q. Moreover, it calculates the ?=(p-1)?( q-1) and chooses 
 the public exponent e so that e is a positive number, relatively prime to ? and smaller than ?. After 
--1
-that, the node computes its private exponent d, which is unique, as d= e mod ?. At this point, the 
-public key (K ) of the node consists of {e, n} and the private key (K ) of {d, n}, where the public key 
-pub pri
+that, the node computes its private exponent d, which is unique, as d= e-1 mod ?. At this point, the 
+public key (Kpub) of the node consists of {e, n} and the private key (Kpri) of {d, n}, where the public key 
 is sent over the network and the private key is stored and kept secret. After the creation of the keys 
 the prime numbers p and q are never used again and preferably, they are thrown away. 
 Moreover, the plaintext m can be encrypted with the public key of the node {e, n} and the ciphertext 
-e
-c is computed by c = m mod n, so that the ciphertext can travel through the network securely. On 
+c is computed by c = me mod n, so that the ciphertext can travel through the network securely. On 
 the other hand, the encrypted message (ciphertext) can be decrypted only with the use of the stored 
-d
-private key by computing the m = c mod n. From all the above, it is obvious that the attacker can 
-19 
- decrypt all the encrypted messages only if he knows the private key of the recipient node or if he has 
+private key by computing the m = cd mod n. From all the above, it is obvious that the attacker can 
+20 
+ 
+decrypt all the encrypted messages only if he knows the private key of the recipient node or if he has 
 succeeded in getting the prime numbers p and q by factoring the modulus n. So, the RSA algorithm is 
 more secure as the key size is getting larger; currently the acceptable length of the key is at least 
 1024 bits and the recommended size is 2048 bits.  
@@ -780,8 +793,9 @@ too much energy, especially in the case of the low-power embedded devices.
 ? If an attacker gains access to multiple plaintexts and to their associated ciphertexts, he is 
 able to guess the encryption key by employing some cryptanalysis methods, such as the 
 known-ciphertext attack. 
-20 
- Thus, the most common approach is to create the digital signature by encrypting the hash digest of 
+21 
+ 
+Thus, the most common approach is to create the digital signature by encrypting the hash digest of 
 the message. The sender agrees with the recipient on the use of a message digest function and 
 encrypts (signs) the digest of the message to create its signature. Then, it attaches the signature to 
 the plaintext and sends the resulting message over the network. The recipient uses the same 
@@ -804,56 +818,62 @@ distribute the shared symmetric key but to create it. Thus, the communication fo
 is performed by sending "clear" messages (plaintext) over the network.  
 First of all, the two nodes agree on the use of a large prime number p and a generator g, which are 
 specifically chosen carefully, so that for every positive number n smaller than p, there is a power k 
-k
-satisfying the n = g mod p. After that, they both create their private keys, which in any case remain 
+satisfying the n = gk mod p. After that, they both create their private keys, which in any case remain 
 secret and their public keys that are derived from the private keys. A's private key is the random 
+value x and its public key is calculated as the value g
 x
-value x and its public key is calculated as the value g mod p. Similarly B's private key is the random 
-y
-value y and its public key is g mod p. At this point, they both send their public keys over the network 
+ mod p. Similarly B's private key is the random 
+value y and its public key is gy mod p. At this point, they both send their public keys over the network 
 (not encrypted) to reach the destination on the other side. After receiving each other's public key 
 they combine it with their private key to create a common shared secret key; A then calculates the 
-y x x y
-secret key by (g ) mod p and B by (g ) mod p, where: 
-y x y x yx
-((g ) mod p) mod p = (g ) mod p  =  g mod p = 
+secret key by (gy)x mod p and B by (gx)y mod p, where: 
+((gy) mod p)x mod p = (gy)x mod p  =  gyx mod p = 
+=  gxy mod p = (gx)y mod p = ((gx) mod p)y mod p 
 (2.3) 
-xy x y x y
-=  g mod p = (g ) mod p = ((g ) mod p) mod p 
  
 Therefore, without knowing each other's private key they manage to establish a secret value as their 
 shared secret symmetric key for secure communication. This key can be used by a symmetric 
 encryption algorithm, like AES. The Diffie-Hellman algorithm is based on the DLP, where given the 
-a
-value (g mod b) it is very difficult to guess the value a (secret key) even if the values g and b are 
+value (ga mod b) it is very difficult to guess the value a (secret key) even if the values g and b are 
 publicly known. Consequently, the algorithm is secure as long as there is no fast way to guess the 
 exponentiation and solve the discrete logarithm problem. Currently, the recommended size of the 
 modulus p is chosen to be 2048 bits and the provided security level is similar to the RSA algorithm 
 with 2048-bits private key. 
 The nodes taking part in the key agreement process with Diffie-Hellman algorithm are not able to be 
 mutually authenticated, if they do not use any other authentication method. Thus, the DH algorithm 
-21 
- is vulnerable to the man-in-the-middle attack. The Station-To-Station protocol (STS) [34] is an 
+22 
+ 
+is vulnerable to the man-in-the-middle attack. The Station-To-Station protocol (STS) [34] is an 
 authenticated key agreement protocol with key confirmation, based on DH and digital signatures, 
 eliminating the aforementioned vulnerability. Each participating node does not only create a private 
 and public key for DH exchange (DH keys) but also has a pair of asymmetric keys (private and public 
 key) as in the RSA algorithm, where the private key is used to sign a signature and the public key for 
 verification. 
 Very briefly, as in the classic Diffie-Hellman algorithm, node A generates its random private key x, 
+computes its public key gx and sends it over the network to node B. Also, B creates its private key y 
+and its public key g
+y
+ in the same way and after receiving A's public key g
 x
-computes its public key g and sends it over the network to node B. Also, B creates its private key y 
-y x
-and its public key g in the same way and after receiving A's public key g , it generates the common 
-x y
-symmetric secret key K = (g ) . The difference with the original Diffie-Hellman algorithm is that at 
-y x
-this point, B concatenates its public DH key and A's public DH key (g , g ) and signs these with his 
+, it generates the common 
+symmetric secret key K = (g
+x
+)
+y
+. The difference with the original Diffie-Hellman algorithm is that at 
+this point, B concatenates its public DH key and A's public DH key (g
+y
+, g
+x
+) and signs these with his 
 private asymmetric key in order to create a signature. Then, it encrypts the signature with the secret 
+key K and sends both the encrypted (signed) signature and its public DH key (g
 y
-key K and sends both the encrypted (signed) signature and its public DH key (g ) to A. Moreover, 
+) to A. Moreover, 
 after receiving the message from B, A computes the secret shared symmetric key K by combining its 
+private DH key (x) with B's public DH key (g
 y
-private DH key (x) with B's public DH key (g ). With the key K, it decrypts B's signature (which was 
+). With the key K, it decrypts B's signature (which was 
 encrypted by B with the key K) and verifies its validity, by using B's public asymmetric key. Also, A 
 must be authenticated by B, so that A similarly creates its signature by concatenating the two DH 
 public keys, sings the signature with its private asymmetric signing key, encrypts it with the shared 
@@ -885,83 +905,66 @@ minimized, ECC seems to be a suitable approach for usage. This is because the re
 is very small in comparison to the size of the keys in other traditional public key cryptography (PKC) 
 schemes. 
  
-22 
- 2.3.3.1 Background on elliptic curves  
+23 
+ 
+2.3.3.1 Background on elliptic curves  
 The term elliptic curve refers to a form of the Weierstrass equation and particularly, to the "smooth" 
 equations [35]. For simplicity, we will examine and present the elliptic curves over the set R of real 
 numbers at the beginning. Most of the elliptic curves (over the prime field) are described by the 
 simplified Weierstrass equation: 
+y2 = x3 + ax + b 
 (2.4) 
-2 3
-y = x + ax + b 
 A graphical representation of the proposed elliptic curves is presented in Figure 2.6 (there are two 
 elliptic curves created with different parameters a and b). Elliptic curves consist of an infinite 
-number of elements (points) P with coordinates (x , y ) where x and y satisfy the above equation 
-P P P P
+number of elements (points) P with coordinates (xP, yP) where xP and yP satisfy the above equation 
 and a special point O (is called point at infinite). Also, it must be noticed that every point P of the 
-curve, with coordinates (x , y ), has its negative point -P. The point -P is therefore the reflection of P 
-P P
-in the x-axis and has coordinates (x , -y ).  
-P P
+curve, with coordinates (xP, yP), has its negative point -P. The point -P is therefore the reflection of P 
+in the x-axis and has coordinates (xP, -yP).  
 It is very important that the elliptic curves are additive groups; this means that we can perform such 
 operations as the addition of two elements of the curve as well as point duplication and the resulting 
 point is also satisfying the equation of the curve. By combining these two operations, as it will be 
 explained later, the multiplication of a point of the curve with a scalar multiplier is achieved. 
-As the group is additive, any two distinct points on an elliptic curve E, P(x ,y ) and Q(x ,y ), where 
-P P Q Q
-the point P ≠ -Q can be added (P + Q = R) to create a new point R(x ,y ), which is also in the set of the 
-R R
+As the group is additive, any two distinct points on an elliptic curve E, P(xP,yP) and Q(xQ,yQ), where 
+the point P ≠ -Q can be added (P + Q = R) to create a new point R(xR,yR), which is also in the set of the 
 points satisfying the elliptic curve equation. Examining the addition by the geometry approach, it can 
 be represented by drawing a straight line that connects the two points P and Q, as shown in Figure 
-2.6(a). The specific line intersects the curve E exactly once at the point -R(x ,-y ), which is the 
-R R
-reflection of the point R(x ,y ). Moreover, if the point P(x ,y ) is added to the point Q(x ,y ) and the 
-R R P P Q Q
-latter is equal to P's negative point -P(x ,-y ), such as Q(x ,y ) = -P(x ,-y ), the result is the O point at 
-P P Q Q P P
+2.6(a). The specific line intersects the curve E exactly once at the point -R(xR,-yR), which is the 
+reflection of the point R(xR,yR). Moreover, if the point P(xP,yP) is added to the point Q(xQ,yQ) and the 
+latter is equal to P's negative point -P(xP,-yP), such as Q(xQ,yQ) = -P(xP,-yP), the result is the O point at 
 the infinite. As seen in Figure 2.6(b), the line connecting P and -P does not intersect the elliptic curve 
-at any third point. Also, by considering that P(x ,y ) = Q(x ,y ) and performing point addition, the 
-P P Q Q
+at any third point. Also, by considering that P(xP,yP) = Q(xQ,yQ) and performing point addition, the 
 resulting point R is the doubled P point, R = P + Q = P + P = 2P. 
  
  
 Figure 2.6: Point addition in elliptic curves (a) P + Q = R, and (b) P + (-P) = O [36] 
-23 
- Because of the underlying mathematics, the coordinates (x ,y ) of the resulting point R can be 
-R R
+24 
+ 
+Because of the underlying mathematics, the coordinates (xR,yR) of the resulting point R can be 
 calculated as: 
+xR = ?
 2
-x = ? - x - x 
-R P Q
+ - xP - xQ 
 (2.5) 
-y = - y + ?(x - x ) 
-R P P R
-    
-  
-where ? is the slope of the line connecting the points P and Q, and is given by:  ? =  .  
-   
-  
+yR = - yP + ?(xP - xR) 
+where ? is the slope of the line connecting the points P and Q, and is given by:  ? = 
+      
+     
+ .  
 Moreover, as mentioned earlier, we are able to find a point R on the elliptic curve, which is equal to 
 the double of the point P, such that R = 2P. Returning to the geometry approach, this can be 
-achieved by drawing the tangent line to the elliptic curve at the point P. If the coordinate y of the 
-P
-point P is not equal to zero (y ≠ 0) the tangent line intersects the curve exactly once at a distinct 
-P
-point -R, which is the negative (reflection on x-axis) of the point R. The coordinates (x ,y ) of R after 
-R R
+achieved by drawing the tangent line to the elliptic curve at the point P. If the coordinate yP of the 
+point P is not equal to zero (yP ≠ 0) the tangent line intersects the curve exactly once at a distinct 
+point -R, which is the negative (reflection on x-axis) of the point R. The coordinates (xR,yR) of R after 
 performing the point doubling operation on P are calculated as:  
-2
-x = ? - 2x  
-R P
+xR = ?
+2 - 2xP  
 (2.6) 
-  y = - y + ?(x - x ) 
-R P P R
- 
-       
- 
-where ? is the slope of the tangent line on the point P, given by  ? =  , and a is a real 
-  
- 
+  yR = - yP + ?(xP - xR) 
+where ? is the slope of the tangent line on the point P, given by  ? = 
+    
+     
+   
+ , and a is a real 
 number, a parameter defined by the equation of the elliptic curve.  
 By repeatedly performing the above operations we are able to multiply a point P with any scalar 
 number, depending on the sequence of the performed operations. For example, if we wish to 
@@ -980,47 +983,39 @@ sub-exponential time by the quadratic sieve algorithm and the number field sieve
 We do not use all the available elliptic curves for elliptic curve cryptography, but only specific finite 
 curves, as shown in Figure 2.7. These curves are finite, containing finite number of points, where 
 every point of the curve has only integer coordinates (not real numbers) and consequently, the 
-rounding error is avoided. The elliptic curves over the finite prime field   (p is a prime number) and 
-p
-p
-over the binary field   are of main interest in cryptography, as they are not vulnerable to sub-
-2
+rounding error is avoided. The elliptic curves over the finite prime field  p (p is a prime number) and 
+over the binary field  2p are of main interest in cryptography, as they are not vulnerable to sub-
 exponential attacks [41]. 
-24 
-  
+25 
+ 
+ 
 Figure 2.7: Finite fields proposed for public-key cryptography [42]. 
  
-Relating to the above, the point addition operation for an elliptic curve over the field   is calculated 
-p
+Relating to the above, the point addition operation for an elliptic curve over the field  p is calculated 
 by the equations: 
  
+xR = (?
 2
-x = (? - x - x ) mod p 
-R P Q
-    
-  
-(2.7) 
-where ? =  ( ) mod p 
-   
-   
-y = ( - y + ?(x - x ) ) mod p 
-R P P R
+ - xP - xQ ) mod p 
+where ? =  ( 
+      
+     
+) mod p (2.7) 
+ 
+yR = ( - yP + ?(xP - xR) ) mod p 
  
 The point doubling is given by: 
  
+xR = (?
 2
-x = (? - 2x ) mod p 
-R P
+ - 2xP) mod p 
+where ? = ( 
+    
+     
+   
+ ) mod p (2.8) 
  
-       
- 
-(2.8) 
-where ? = (  ) mod p 
-  
- 
- 
-y = ( - y + ?(x - x ) ) mod p 
-R P P R
+yR = ( - yP + ?(xP - xR) ) mod p 
 2.3.3.2 Elliptic curve Diffie-Hellman 
 The Elliptic Curve Diffie-Hellman (ECDH) is a public-key cryptographic scheme for key dissemination 
 between two nodes. It is based on the Diffie-Hellman algorithm, but the difference to the classic DH 
@@ -1030,59 +1025,41 @@ the parameters a and b of the curve, the prime modulus p, which has order n, and
 G. Then, each party chooses its own private key d so that d is a randomly chosen number and 
 smaller than the order n of the prime modulus. After that, node A takes the generated point P of the 
 curve and performs a scalar multiplication of the point, where its private key is used as the multiplier 
-(Q = d P). The multiplication is achieved by performing point additions and point doublings. The 
-A A
+(QA = dAP). The multiplication is achieved by performing point additions and point doublings. The 
 point Q is used as the node's public key and is sent without encryption over the network. Because of 
 the ECDLP the private key d cannot be extracted from Q in a reasonable time, so it is considered as 
-secure. The same operation is performed by node B in order to create its own public key Q , by 
-B
-multiplying its private key d with the point P, so that Q = d P. 
-B B B
-When B receives A's public key Q , it multiplies the public key of A with its own private key to create 
-A
-the shared secret s = d Q = d d P. This multiplication is performed by computing point additions 
-B A B A
-25 
- and doublings, similar to the multiplication of the public key computation. Similarly, A creates the 
-shared secret key by multiplying its private key d with B's public key Q . At this point, they hold the 
-A B
+secure. The same operation is performed by node B in order to create its own public key QB, by 
+multiplying its private key dB with the point P, so that QB = dBP. 
+When B receives A's public key QA, it multiplies the public key of A with its own private key to create 
+the shared secret s = dBQA = dBdAP. This multiplication is performed by computing point additions 
+26 
+ 
+and doublings, similar to the multiplication of the public key computation. Similarly, A creates the 
+shared secret key by multiplying its private key dA with B's public key QB. At this point, they hold the 
 same secret key for symmetric encryption: 
-(2.9) 
- d Q = d d P  = d d P = d Q  
-B A B A A B A B
+ dBQA = dBdAP  = dAdBP = dAQB  (2.9) 
 The ECDH does not provide authentication between the participating nodes, likely to the classic 
 Diffie-Hellman and RSA key exchange schemes and thus, is vulnerable to the man-in-the-middle 
 attack. This can be avoided by using the elliptic curve digital signature algorithm (ECDSA). The ECDSA 
 is similar to other digital signature algorithms, but the basic difference is that the used keys are 
 created over elliptic curves with point multiplication. 
-Very briefly, node A has the EC key pair (d , Q ), and also it has the domain parameters (a, b, FP, q, n, 
-A A
+Very briefly, node A has the EC key pair (dA, QA), and also it has the domain parameters (a, b, FP, q, n, 
 G, h) where a and b are the parameters of the elliptic curve, FP is the representation of the curve, q 
-m
-is a prime number (q = p) or a power of two (q = 2 ). Moreover, G is the base point, which is used for 
+is a prime number (q = p) or a power of two (q = 2m). Moreover, G is the base point, which is used for 
 the creation of the public key, and n is the order of G. To sign a signature on a message m, node A 
 generates a random number k and with scalar multiplication, computes the point R with coordinates 
--1
-(x ,y ), such that R = kG. Then, it computes the inverse of k (k mod n) and performs the SHA-1 
-R R
--1
-hashing function to the message m to obtain H and computes s = k (H + d R) mod n. The signature 
-A
+(xR,yR), such that R = kG. Then, it computes the inverse of k (k
+-1 mod n) and performs the SHA-1 
+hashing function to the message m to obtain H and computes s = k-1 (H + dAR) mod n. The signature 
 of A consists of (s, R) and is sent to B along with the message m. 
 On the other hand, node B obtains a certificate for A from a certificate authority (CA) to be able to 
 verify A's signature. The certificate is an authentic copy of A's domain parameters (a, b, FP, q, n, G, h) 
 and its public key. B, after receiving the message m and A's signature (s, R), computes the hashing H 
--1
-of the message and calculates the inverse of s (w = s mod n). Then, it creates the scalar multiplier u 
-1
-(u = Hw) and multiplies it with the base point G in order to get the point P on the curve (P = u G). 
-1 1 1 1
-After that, it creates the multiplier u , where u = x w, and by multiplying it with A's public key Q , it 
-2 2 R A
-obtains a second point on the elliptic curve P , such that P = u Q . Finally, B performs point addition 
-2 2 2 A
-of the points P and P and checks whether the resulting point R' has the same coordinates with the 
-1 2
+of the message and calculates the inverse of s (w = s-1 mod n). Then, it creates the scalar multiplier u1 
+(u1 = Hw) and multiplies it with the base point G in order to get the point P1 on the curve (P1 = u1G). 
+After that, it creates the multiplier u2, where u2 = xRw, and by multiplying it with A's public key QA, it 
+obtains a second point on the elliptic curve P2, such that P2 = u2 QA. Finally, B performs point addition 
+of the points P1 and P2 and checks whether the resulting point R' has the same coordinates with the 
 received point R (R point of the signature). If so, the signature of A is valid.  
 However, if the private key of a sensor node is leaked and the adversary gains knowledge of the 
 private key, he is able to calculate the secret shared keys the specific node establishes. This problem 
@@ -1102,8 +1079,9 @@ random number and the public key is computed by multiplying the private key with
 of the used elliptic curve. Moreover, in the ECMQV protocol the static key pair is used for long time, 
 while the pair of ephemeral keys has a short lifetime value and new keys are computed every time 
 the protocol runs. 
-26 
- According to the ECMQV protocol, the secret shared key is derived from both the static and the 
+27 
+ 
+According to the ECMQV protocol, the secret shared key is derived from both the static and the 
 ephemeral public keys of the participating nodes. At first, the communicating nodes compute and 
 store their static keys. Every time the nodes wish to establish a secret key, they send their static 
 public key to the other participant and they start computing their ephemeral keys. After the 
@@ -1133,8 +1111,7 @@ than ECDH along with ECDSA.
 2.3.3.4 Optimizations over the elliptic curves 
 According to [46], it is not necessary to use both coordinates for the representation and calculation 
 of the points over the curve, so the ECDH key exchange scheme and the ECDSA are simplified, while 
-only the x coordinate of the point R is used. This observation is very important, especially for 
-R 
+only the xR coordinate of the point R is used. This observation is very important, especially for 
 resource-constraint devices as the required microcontroller cycles are decreased. Moreover, as 
 presented in [47] and shown in Figure 2.8, by performing some optimizations on ECC computations 
 we can minimize the time spent on multiplication, sign and verification and thus, elliptic curve 
@@ -1150,8 +1127,9 @@ operation over the elliptic curves. Actually, the point multiplication is perfor
 number of point doublings and additions in a sequence. In the original form of the multiplication, the 
 operation follows the double-and-add method, which is similar to the multiply-and-square method 
 in the modular exponentiation operations (like exponentiation for the RSA algorithm). A given 
-27 
- illustration for this method is that if the next bit of the binary represented scalar multiplier is "0", we 
+28 
+ 
+illustration for this method is that if the next bit of the binary represented scalar multiplier is "0", we 
 perform a point doubling. Otherwise, if the bit is "1", we perform a point doubling and a point 
 addition on top. The pseudo-code of the method is given in figure 2.9. 
  
@@ -1165,24 +1143,22 @@ Figure 2.9: Pseudo-code for the double-and-add method for point multiplication [
 Because of the cost of the original multiplication method, some other optimized methods are used. 
 Specifically, in the windowed method a window of size w is chosen, where w is usually set to the 
 value of four, as the specific size is the optimum according to the NIST. Actually, in the windowed 
-w w
-version of the multiplication we pre-compute and store all the 2 points (d = 0, 1, 2, ... 2 -1) of the 
-i
-curve. Each point in the pre-computed array stands for the multiplication of the specific number d 
-i
+version of the multiplication we pre-compute and store all the 2w points (di = 0, 1, 2, ... 2
+w-1) of the 
+curve. Each point in the pre-computed array stands for the multiplication of the specific number di 
 with the base point of the curve. With this method we reduce the number of the point additions, 
 where addition is an expensive operation, by having the values pre-computed and stored in an array. 
 Similar to the double-and-add method, we perform a sequence of point doublings, but at most only 
 one point addition for every w bits of the multiplier. The pseudo-code of the above method is given 
 in the Figure 2.10. 
-28 
-  
+29 
+ 
+ 
 Figure 2.10: Pseudo-code for the windowed point multiplication method [49] 
  
 An improvement of the windowed method is the sliding-window method, where only half the points 
 are pre-computed and stored in contrast to the window method. Actually, we pre-compute the 
-w-1 w-1 w-1 w 
-points corresponding to the most significant bit of w (2 , 2 +1, 2 +2, .., 2 -1). With this method 
+points corresponding to the most significant bit of w (2w-1, 2w-1 +1, 2w-1 +2, .., 2w -1). With this method 
 we not only try to reduce the point additions, but also trade off some additions with doublings, as 
 the doubling operation is roughly faster. Eventually, if we are able to implement and use the sliding 
 window method, there is no need for the windowed method since the latter outperforms the former 
@@ -1202,8 +1178,9 @@ hand, by using signed digits and by the restriction that a "1" cannot be followe
 employs more zero digits in the representation of the specific number, in contrast to the binary 
 representation. Precisely, the NAF representation trades off some point addition operations with 
 point doublings, where the addition operation is more expensive than the point doubling. 
-29 
- 2.3.4 Related work 
+30 
+ 
+2.3.4 Related work 
 The key exchange techniques that are based on PKC are characterized as the most basic techniques 
 for key dissemination, both for the conventional wired and wireless networks. Moreover, they are 
 used for a long time now, because of the high level of security they provide. Until recently, it was 
@@ -1248,10 +1225,15 @@ represent the multiplier and the specific optimisations of NIST/SECG. The implem
 algorithm uses the CRT and the Montgomery reduction method. Moreover, the implementation was 
 performed on Atmel AVR Atmega128 microprocessor, written directly in the assembly language in 
 order to allow specific memory access optimisations.          
-30 
- Time Memory-data Memory-code 
+31 
+ 
 Asymmetric Algorithm 
-(s) (bytes) (bytes) 
+Time 
+(s) 
+Memory-data 
+(bytes) 
+Memory-code 
+(bytes) 
 ECC-160 0.81 282 3682 
 ECC-192 1.24 336 3979 
 ECC-224 2.19 422 4812 
@@ -1284,8 +1266,8 @@ key). The energy consumed for ECC signature verification is more than that of ve
 public key of RSA. If we examine the consumption of energy for a full "handshake" operation and not 
 individually for every module, ECC consumes four times less energy than RSA.   
  
-Key exchange Signature sign/verification 
 Algorithm 
+Key exchange Signature sign/verification 
 Client (mJ) Server(mJ) Sign (mJ) Verify (mJ) 
 RSA-1024 15.4 304 304 11.9 
 RSA-2048 57.2 2302.07 2302.7 53.7 
@@ -1295,8 +1277,9 @@ RSA-1024 (Handshake) 397.7 390.3
  
 ECC-160 (Handshake) 93.7 93.9 
 Table 2.4: Energy consumption for digital signatures, key exchange, and a full handshake [33]  
-31 
- However, in all the above related work they do not account the impact of the sensor's duty cycle or 
+32 
+ 
+However, in all the above related work they do not account the impact of the sensor's duty cycle or 
 they assume that the duty cycle takes only 1% or less of the total time. Also, they do not estimate 
 the average energy consumed for idle listening of the channel in comparison to the energy spent for 
 computation, as well as the energy spent for retransmission of the frames. It is important to check 
@@ -1316,9 +1299,7 @@ IDs and a request for secret key computation. The main advantage of the approach
 communication overhead in the network and the consumption of energy is minimized.  
 The proposed scheme is based on bilinear pairings of elliptic curves. A bilinear pairing is a 
 computable mapping of the points P, Q over an elliptic curve having the property:  
-a b ab
-(2.10) 
-e([a]P, [b]Q) = e(P, [b]Q) = e([a]P,Q) = e(P,Q) 
+e([a]P, [b]Q) = e(P, [b]Q)a = e([a]P,Q)b = e(P,Q)ab (2.10) 
 Moreover, the simplest type of bilinear pairings, used in [53], has the property that e(P,Q) = e(Q, P). 
 This scheme requires the existence of a Trusted Authority (TA) in the network, responsible to 
 compute and disseminate the private keys of all the nodes. The TA has its private master key S which 
@@ -1332,18 +1313,17 @@ S*H(ID) are known because of the ECDLP.
 After the deployment phase of the network, if two nodes wish to establish a secret key for secure 
 communication, each multiplies its private key S?H(ID) with the public key of the node on the other 
 side H(ID), so that: 
-S ? H(ID) ? H(ID) = S ? H(ID) ? H(ID) 
-A B B A
-(2.11) 
-A ? B = B ? A 
-pri pub pri pub
+S ? H(ID)A ? H(ID)B = S ? H(ID)B ? H(ID)A 
+Apri ? Bpub = Bpri ? Apub 
  
+(2.11) 
 The common secret key is established without prior communication of the nodes, as the public keys 
 of all the nodes are based on their identity and are publicly known. Also, a malicious node is not able 
 to guess a pairwise secret key of two communicating nodes from their public keys, as the master S of 
 the authority is secret. 
-32 
- As reported in [53] the above scheme consumes less energy than RSA and ECC to perform a full 
+33 
+ 
+As reported in [53] the above scheme consumes less energy than RSA and ECC to perform a full 
 "handshake" as it does not require authentication. The only messages that are sent over the 
 network are for signalling the beginning and the end of the key computation and thus, the 
 transmitted bytes are much less in comparison to the other public key schemes.  
@@ -1388,8 +1368,9 @@ consumption of energy; an assumption not viable for 6LowPANs, where the size of 
 defined in the IEEE 802.15.4 standard and modification is not allowed. Due to the assumptions they 
 have assumed, we cannot consider this scenario as a general asymmetric key exchange scheme in 
 order to check its applicability for 6LowPANs.  
-33 
- 2.4. Summary and Conclusions 
+34 
+ 
+2.4. Summary and Conclusions 
 Currently, we have studied the main approaches used in WSNs for exchange and dissemination of a 
 secret key between the nodes, in order to examine if they are applicable in 6LowPANs. Because of 
 the constraints of the sensor devices, it is recommended that the key establishment as well as the 
@@ -1436,8 +1417,9 @@ advantages it offers over the other public key schemes. The implementation will 
 check the viability and applicability of the chosen scheme (ECDH) in 6LowPAN networks as well as to 
 assess the scalability and the performance of the entire network in relation to the key exchange 
 process. 
-34 
- 3. IMPLEMENTATION OF THE KEY EXCHANGE TECHNIQUE 
+35 
+ 
+3. IMPLEMENTATION OF THE KEY EXCHANGE TECHNIQUE 
  
 3.1 The working environment 
 In the current project, we research ways in order to examine if any of the pre-existing key exchange 
@@ -1483,8 +1465,9 @@ the Cooja simulator is an integral part of the Contiki OS as it cannot be used s
 different purpose. In addition, the Cooja simulator is compatible with the Contiki OS and is able to 
 perform simulations of IPv6 sensor networks and carry out different and complex experiments. It 
 provides measurements and results, not only for particular operations of the sensors, but also for 
-35 
- the load and the behaviour of the entire network. The Cooja simulator is a powerful and very useful 
+36 
+ 
+the load and the behaviour of the entire network. The Cooja simulator is a powerful and very useful 
 tool to emulate and evaluate the functionality of the network before the source code is burned into 
 the sensor's hardware. In all of the simulations that we have performed, we utilised the Tmote Sky 
 platform [60] which carries a 16-bit MSP430 microcontroller [61], 48Mb of ROM and up to 10Mb of 
@@ -1517,8 +1500,9 @@ required security level (encryption and/or authentication), the key identifier m
 frame counter as shown in figure 3.1. Moreover, if the security level supports encryption and the key 
 is determined implicitly, it adds to the header an index to the specific key. If the key is defined 
 explicitly there must be a feature to include the key in the sent frame. On the other hand, all the 
-36 
- data contained in the security header must be recognised and parsed properly by the receiver node 
+37 
+ 
+data contained in the security header must be recognised and parsed properly by the receiver node 
 and not be considered as part of the frame payload (data). In this case, the parsing function has to 
 recognize the length of the security header and follow the reverse procedure in order to receive and 
 construct the frame correctly. As mentioned above, we have modified the structure of the MAC 
@@ -1548,8 +1532,9 @@ process for key exchange, as it will be explained later.
  
  
 Figure 3.2: Flowchart for the frame creation, searching for the key, sending/dropping the frame. 
-37 
- In the case where the secret key exists in the ACL table and is returned, we proceed to the 
+38 
+ 
+In the case where the secret key exists in the ACL table and is returned, we proceed to the 
 transmission of the outgoing frame. The returned key will normally be used for AES encryption of 
 the outgoing frame, but this is not the main goal of the current project and due to the luck of time 
 we do not apply the encryption scheme at the moment. The main reason for not using the AES 
@@ -1596,8 +1581,9 @@ implementation of the basic functions, which provides more optimised characteris
 to other methods as shown earlier. The sliding window method consumes a small amount of time 
 prior to the point multiplication operation to calculate and store the points of the window. These 
 points are used to minimize the total number of point additions (as mentioned in section 2.3.3.4). 
-38 
- Moreover, the ContikiECC project uses the above ECC functions (operations) to construct an example 
+39 
+ 
+Moreover, the ContikiECC project uses the above ECC functions (operations) to construct an example 
 of two communicating sensors which use the Elliptic Curve Digital Signatures Algorithm (ECDSA) to 
 achieve mutual authentication. The drawback of the specific example is that it does not employ 
 IPv6/UDP communication to send the signatures over the wireless medium. Also, the source code 
@@ -1641,8 +1627,9 @@ The reason we store the private key in the ACL table is because the private key 
 always the same and is not permanently stored. Every time a node wishes to compute a secret key 
 with a node of the network, a new unique private key is created. Thus, the different private keys are 
 stored to the related key association entries. Not only the private key is stored, but also the received 
-39 
- public key of the other participating node is stored too. This is because we need to temporarily keep 
+40 
+ 
+public key of the other participating node is stored too. This is because we need to temporarily keep 
 the public key in the corresponding entry, in relation to the MAC address. We have decided to store 
 both keys to the related entry in order to allow multiple key exchanges to run concurrently. If we do 
 not manage to store the keys, we need to build a mechanism that prevents multiple key exchanges 
@@ -1654,16 +1641,11 @@ key has been computed and stored. Moreover, by erasing them we prevent the possi
 and we reduce the RAM memory usage. 
  
  MAC Address Secret Key Lifetime key_ex_state Private ECC Key Public ECC Key 
-NULL NULL 
-1 00:12:74:02.. 17d3 4af7.. 455 COMPLETE 
-NULL NULL NULL 
-2 00:12:74:03.. ALLOCATED af33 a760.. 
-NULL NULL 
-3 00:12:74:04.. 42 IN_PROGRESS bf01 56a6.. 
-NULL 
-4 00:12:74:04.. 33 IN_PROGRESS 88c2 ae12.. fe45 2188 4a.. 
-NULL NULL NULL NULL NULL 
-5 NONE 
+1 00:12:74:02.. 17d3 4af7.. 455 COMPLETE NULL NULL 
+2 00:12:74:03.. NULL NULL ALLOCATED af33 a760.. NULL 
+3 00:12:74:04.. NULL 42 IN_PROGRESS bf01 56a6.. NULL 
+4 00:12:74:04.. NULL 33 IN_PROGRESS 88c2 ae12.. fe45 2188 4a.. 
+5 NULL NULL NULL NONE NULL NULL 
  
 Table 3.1: A snapshot of the ACL table of a network node 
  
@@ -1692,8 +1674,9 @@ the MAC address, the ACL entry is free to be allocated for a new key establishme
 Such free entry is depicted in the ACL association number five (5) of Table 3.1. The role of the 
 purge_association() function can be seen in the state transition diagram of Figure 3.5 (top-right 
 corner). 
-40 
-  
+41 
+ 
+ 
 Code Snippet 3.1: The purge_associations() function. 
  
 When the link-layer framer asks for a key, the function get_key_for_neigh(mac_address) searches 
@@ -1718,8 +1701,9 @@ described above, is clearly presented in Figure 3.2, where the framer asks for t
 frame creation time.  
 We decided to force the framer to drop the frame when the key establishment process is in progress 
 with the specific node (the ACL entry exist but the key is NULL). This is to avoid the situation where 
-41 
- the framer is blocked (and cannot be used by other applications) until the key exchange process is 
+42 
+ 
+the framer is blocked (and cannot be used by other applications) until the key exchange process is 
 over. The ACL entries corresponding to this situation are the 2, 3 and 4 of Table 3.1. 
 Concisely, the second (2) entry of Table 3.1 corresponds to the case where an association was free 
 and thus it became allocated and returned. The sender node has assigned the MAC address of the 
@@ -1756,8 +1740,9 @@ beginning of the process. After that, for every key association with a valid MAC
 its lifetime to the "oldest" temporary lifetime value. If the lifetime of the entry is less than the 
 temporary lifetime, we keep this association as the oldest one and we update the lifetime value of 
 the comparing parameter, as shown in Code Snippet 3.4. 
-42 
-  
+43 
+ 
+ 
 Code Snippet 3.4: allocate_association() function - Find the "oldest" entry. 
  
 When the loop (Code Snippet 3.3) terminates, there is no free association in the table, but the 
@@ -1777,8 +1762,9 @@ allocated to be able to establish and store a secret key
 .     
  
 Figure 3.4: The flowchart of the allocate_association() function. 
-43 
-  
+44 
+ 
+ 
 Furthermore, we construct a solution to overcome the problem of an ACL association being 
 permanently allocated because of indefinitely waiting for a key exchange reply message. We will 
 consider a scenario with two nodes (Alice and Bob) where Alice wants to send a unicast message to 
@@ -1826,8 +1812,9 @@ goes to listening state again. If the key does not exist, we return NULL and we 
 "Starting Key Exchange". Moreover, as it can be observed (in the top-right corner of Figure 3.5) every 
 second the device enters the state "Purging Expired Associations", where the lifetime of the 
 associations is updated. After the lifetime update the device returns to the "Listening" state. The 
-44 
- "Purging Expired Association" state means that the device does not only update the lifetimes of each 
+45 
+ 
+"Purging Expired Association" state means that the device does not only update the lifetimes of each 
 entry, but also erases entries whose lifetime reach the value of zero. 
  
 Figure 3.5: The state transition diagram of the device for the key exchange process. 
@@ -1839,8 +1826,9 @@ Associations" similar to the COMPLETE entries. The key exchange lifetime is upda
 way as the secret key lifetime and the entries are erased when the lifetime is expired.  
 By observing the state transition diagram of Figure 3.5, it can be seen that the device remains in the 
 "Awaiting Response" state only for 50 seconds, waiting for the key exchange reply message and then 
-45 
- moves to the "Listening" state. This happens as the lifetime of the key exchange expires and the 
+46 
+ 
+moves to the "Listening" state. This happens as the lifetime of the key exchange expires and the 
 corresponding association is released. 
  
 3.2.4 The key exchange (ECDH) process 
@@ -1884,8 +1872,9 @@ exchange process is shown in Figure 3.6. The first field of the message contains
 used Protocol (1byte) in order to ensure the compatibility of the communicating nodes. The second 
 field contains the type of the message that is sent, which takes one byte in memory. If the node 
 sending the message is the one that has started the key exchange process, the message type value is 
-46 
- set to MSG_TYPE_REQUEST. If the specific message is sent as a response to a previous request 
+47 
+ 
+set to MSG_TYPE_REQUEST. If the specific message is sent as a response to a previous request 
 message received, its type is defined as MSG_TYPE_REPLY. By that, we know if the received message 
 corresponds to an already running key exchange process or to a new one. The size of the payload 
 field (Public key) depends on the used elliptic curve, as the two coordinates of a specific point on the 
@@ -1912,8 +1901,9 @@ public key to that entry. After that, Bob computes his private and public ECC ke
 previously did, he loads his public key into the buffer. Moreover, he sets the version of the used 
 protocol, sets the message type value to MSG_TYPE_REPLY and sends the message, as shown in 
 Figure 3.7. 
-47 
- After the message is sent, he computes the secret shared key by multiplying the received public key 
+48 
+ 
+After the message is sent, he computes the secret shared key by multiplying the received public key 
 with his private ECC key. Subsequently, Bob sets the key state of the specific ACL association to 
 KEY_STATE_COMPLETE and the key lifetime to the default lifetime value. Then he erases the public 
 key of Alice as it is not needed any more and his private key from the association. Figure 3.8 presents 
@@ -1940,8 +1930,9 @@ at the same time or by multi-hop communication and routing problems.
  
 Figure 3.8: The key exchange process - full "Handshake" 
  
-48 
- As mentioned earlier, the ECDH daemon is always running in the background waiting for events. We 
+49 
+ 
+As mentioned earlier, the ECDH daemon is always running in the background waiting for events. We 
 have developed the ECDH daemon as a separate thread that starts running at the start-up of the 
 sensor devices and establishes a UDP connection, as shown in Code Snippet 3.5. Moreover, the 
 process remains in silence, listening to the wireless medium for key exchange messages.      
@@ -1966,8 +1957,9 @@ computes and sends the public key and then later, computes and stores the secret
 message is of type REPLY, then it only computes and stores the secret key, otherwise the message is 
 discarded. Actually, the tcpip_handler() is the most basic function, as it performs the key exchange 
 procedure, as shown in Figure 3.7.  
-49 
- 3.3 Discussion 
+50 
+ 
+3.3 Discussion 
 It is common practice for each sensor node to create its ECC keys only once, during the initialization 
 phase of the network and store these for future use. These two keys, which are used for the secret 
 key computation, are stored permanently and they cannot be changed. If an adversary or a 
@@ -2013,8 +2005,9 @@ All the nodes create a UDP/IP connection when their process thread begins at the
 of the network. This connection remains active as long as the process is running. The server 
 connection is configured to always listen to the port 5678 (SERVER_PORT) and to send its reply 
 messages to the client port 8765 (CLIENT_PORT). On the other hand, the client is configured so that 
-50 
- its UDP connection listens to the CLIENT_PORT and the outgoing messages are sent to the 
+51 
+ 
+its UDP connection listens to the CLIENT_PORT and the outgoing messages are sent to the 
 SERVER_PORT. 
 Moreover, the Neighbor Discovery operation is performed at the initialization phase of the network. 
 It is a distributed operation, performed by each specific node in order to discover its neighbouring 
@@ -2051,8 +2044,9 @@ Code Snippet 3.6: The client node process thread, which sends application messag
 In the Code Snippet 3.6, we can observe the main functionality of the client process thread. Except 
 from the initialization of the process and the establishment of the UDP connection, the client sets a 
 timer with a periodic send interval at 30 seconds. After that, as it can be seen, it enters the main 
-51 
- loop where it waits for events to occur. The events the client is able to handle are the periodic time 
+52 
+ 
+loop where it waits for events to occur. The events the client is able to handle are the periodic time 
 events of the timer. Actually, every time that an event occurs, the process of the client node sends a 
 message to the server and then it resets the timer in order to generate the next time event. 
   
@@ -2066,8 +2060,9 @@ are TCP-IP events, where the handler function is called. Actually, the tcpip_han
 messages, prints them and increases its counter, which keeps the number of the received messages. 
 Moreover, the server handles events caused by the network that report routing problems, and starts 
 the rpl_repair_root() function, which performs a global repair operation on the entire network.  
-52 
- 4. EXPERIMENTAL SETUP, RESULTS AND ANALYSIS 
+53 
+ 
+4. EXPERIMENTAL SETUP, RESULTS AND ANALYSIS 
 In this chapter, we present a number of different experiments carried out in order to provide the 
 results and the statistics for our implementation. Additionally, these results will be the basis of our 
 analysis and discussion as well as to conduct a critical evaluation of the implemented solution.  
@@ -2109,8 +2104,9 @@ ACL size 4
 ACL entry lifetime 1000 seconds 
 key exchange lifetime 50 seconds 
 Table 4.1: Simulation Configuration 
-53 
- 4.1 Memory requirements 
+54 
+ 
+4.1 Memory requirements 
 The available memory of the sensor devices is very limited, as mentioned earlier. Specifically, we use 
 the Tmote Sky devices for the simulation experiments, which provide only 48 KB of flash memory 
 (ROM) for source code hosting as well as 10 KB of RAM. Furthermore, the available memory of each 
@@ -2145,8 +2141,9 @@ having a pair of a MAC address and a secret key. Moreover, it provides functions
 ACL entries in order to return the key, to allocate, delete or replace an entry of the table as well as to 
 keep and maintain the lifetime of the keys.  
  
+File name  ROM (text) 
 RAM 
-File name  ROM (text) Overall 
+Overall 
 data bss 
 nn 3372 0 0 3372 
 ecc 2494 0 676 3170 
@@ -2154,8 +2151,9 @@ ecdh 1477 10 392 1879
 secp128r1 402 0 0 402 
 Total 7745 10 1068 8823 
 Table 4.2: Memory requirements of the used files, in bytes  
-54 
- The memory requirements of the above files are given in Table 4.2, which provides both the ROM 
+55 
+ 
+The memory requirements of the above files are given in Table 4.2, which provides both the ROM 
 memory needed for source code hosting and the RAM memory consumed. As it can be seen, the 
 ROM memory that is spent for handling the large numbers and performing the basic numerical 
 operations is about 3.3 kb. Moreover, we spend about 4.3 kb of ROM, as well as 1kb of RAM to 
@@ -2184,8 +2182,9 @@ node receiving Alice's request and replies with his private key (the node 2 in t
  
  
 Figure 4.1: The experimental setup of the key exchange process (2 sensor nodes). 
-55 
- When the two devices share a secret key, the communication is performed properly as long as the 
+56 
+ 
+When the two devices share a secret key, the communication is performed properly as long as the 
 lifetime of the key has not reached the value of zero. When the secret key expires, the entry of the 
 ACL table of the nodes is erased and thus a new key exchange process must start when a new 
 message is proceeded to be sent. Specifically, the sensor nodes communicate over a long period of 
@@ -2212,8 +2211,8 @@ Alice 8.560 8.547 25.586
 Bob 8.457 8.416 16.873 
 Table 4.3: Average Time consumption of the key exchange process 
  
-Key Exchange Process 
 Energy (mJ) Public  key Secret key 
+Key Exchange Process 
 MCU MCU + TX + RX 
 Alice 47.176 47.226 97.021 113.224 
 Bob 47.165 47.171 94.353 100.758 
@@ -2229,8 +2228,9 @@ elliptic curve point multiplication operation.
 Furthermore, the above table provides the amount of energy that is consumed for a complete key 
 exchange. The presented results address two different situations, where the first one counts only 
 the energy consumed by the microcontroller unit and the second estimates the overall amount of 
-56 
- energy that is consumed by the different modules of the device. We have decided to estimate the 
+57 
+ 
+energy that is consumed by the different modules of the device. We have decided to estimate the 
 energy consumption for both cases because of the fact that the transmitter and the receiver of the 
 devices are needed to achieve communication during the key exchange process. 
 Moreover, it is important to assume that the components of the device such as the micro-processor, 
@@ -2277,8 +2277,9 @@ a message to Bob. This means, that Alice computes her private and public ECC key
 key to Bob and waits for his response. On the other hand, after the key exchange request (public key 
 of Alice) is received by Bob, he computes his private and public keys, sends his public key as a 
 response to Alice and calculates the shared secret key. As observed in Table 4.3, Bob finishes the key 
-57 
- exchange process and generates the secret key 16.87 seconds after receiving the key exchange 
+58 
+ 
+exchange process and generates the secret key 16.87 seconds after receiving the key exchange 
 request. The overall time Bob spends can be roughly estimated as the time that is needed to 
 perform two point multiplication operations. 
 In contrast to Bob, Alice spends significantly more time than Bob to finish the key exchange process 
@@ -2325,8 +2326,9 @@ UDP connection with the server, but with one of the internal nodes that is close
 addition to the client-side functionalities the internal nodes (3, 6 and 9) have, they act as routers 
 performing the necessary routing operations for the other nodes. To be more precise, the nodes 
 that perform routing operations do not only serve nodes out of server's range, but also those that 
-58 
- are very close to the server. The routing decisions are taken in accordance to the routing tables, 
+59 
+ 
+are very close to the server. The routing decisions are taken in accordance to the routing tables, 
 which are constructed at the initialization phase of the network. 
 However, we are not concerned on how the routing should be performed, as the network uses the 
 Routing Protocol for Low-power devices (RPL), which is already implemented in the ContikiOS. 
@@ -2353,35 +2355,16 @@ simulated network for key lifetime values of 2000 and 2500 seconds respectively.
 presented in Figures 4.2 and 4.3 show the energy that is consumed by the micro-processor, the 
 transmitter and the receiver of the devices with different colours, but every bar of the chart sums up 
 the overall energy consumption. 
-59 
-  
+60 
+ 
+ 
 Energy(J) Energy(J) 
-16 16 
-RX TX MCU 
-RX TX MCU 
-12 12 
-8 8 
-4 
-4 
-0 
-0 
-0 1 2 3 4 5 6 7 8 9 
-0 1 2 3 4 5 6 7 8 9 
   
 x axis: The ID of the nodes 
 Figure 4.2: The energy consumption of the nodes for key lifetime of (a) 1000 and (b) 1500 seconds. 
  
  
 Energy(J) Energy(J) 
-16 16 
-RX TX MCU 
-RX TX MCU 
-12 
-12 
-8 8 
-4 4 
-0 0 
-0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 
   
 x axis: The ID of the nodes 
 Figure 4.3: The energy consumption of the sensors for key lifetime of (a) 2000 and (b) 2500 seconds. 
@@ -2392,8 +2375,37 @@ higher overall energy consumption in one of the experiments and the highest in t
 experiments. If we observe the provided data in more detail, we can examine that the micro-
 processor of the server node consumes, in each simulation, the largest amount of energy in contrast 
 to the micro-processors of the other sensor nodes. This mainly happens, because the server node 
-60 
- has multiple UDP connections to communicate with the clients and consequently, it establishes 
+0 
+4 
+8 
+12 
+16 
+0 1 2 3 4 5 6 7 8 9 
+RX TX MCU 
+0 
+4 
+8 
+12 
+16 
+0 1 2 3 4 5 6 7 8 9 
+RX TX MCU 
+0 
+4 
+8 
+12 
+16 
+0 1 2 3 4 5 6 7 8 9 
+RX TX MCU 
+0 
+4 
+8 
+12 
+16 
+0 1 2 3 4 5 6 7 8 9 
+RX TX MCU 
+61 
+ 
+has multiple UDP connections to communicate with the clients and consequently, it establishes 
 multiple secret keys. 
 Moreover, we observe that the transmitter of the server consumes the smallest amount of energy, 
 in contrast to the other nodes (in all the experiments) and that its receiver spends the largest 
@@ -2419,18 +2431,6 @@ routers, because these two nodes route packets from a single node and therefore,
 consumption is only slightly affected.  
  
 Energy(J) Energy(J) 
-20 
-20 
-RX TX MCU 
-RX TX MCU 
-16 
-16 
-12 
-12 
-8 8 
-4 4 
-0 0 
-1000 1500 2000 2500 1000 1500 2000 2500 
   
 x axis: The key lifetime (s) 
 Figure 4.4:  Energy consumption of (a) the server node "0" and (b) the router node "6" in relation to 
@@ -2439,8 +2439,25 @@ the key lifetime.
 By comparing the energy consumption of every single node as given in the above figures, we can 
 examine how the lifetime of the key affects the sensors' energy consumption and eventually, the 
 performance of the network. Figure 4.4 presents the energy consumption of (a) the server node and 
-61 
- (b) the router node "6" as the key lifetime increases. It can be seen that the energy spent by the 
+0 
+4 
+8 
+12 
+16 
+20 
+1000 1500 2000 2500 
+RX TX MCU 
+0 
+4 
+8 
+12 
+16 
+20 
+1000 1500 2000 2500 
+RX TX MCU 
+62 
+ 
+(b) the router node "6" as the key lifetime increases. It can be seen that the energy spent by the 
 micro-processor of the nodes decreases as the key lifetime increases. This happens because the keys 
 are valid for longer time and thus, fewer establishments are needed. Moreover, it can be observed 
 that the energy consumption of the server's receiver is fluctuating, but remains high. This can be 
@@ -2461,16 +2478,6 @@ energy that is consumed by the transmitter. Actually, a small increase is observ
 of the clients, similar to the transmitter, increase at the lifetime value of 1500 and falls afterwards.  
      
  
-Energy (J) 
-10 
-MCU TX RX 
-8 
-6 
-4 
-2 
-0 
-1000 1500 2000 2500 
-The Key Lifetime (s) 
  
 Figure 4.5: The average energy consumed by the client nodes. 
  
@@ -2480,8 +2487,19 @@ needed. The amount of the energy that the receiver spends is very common for eve
 running on the sensor nodes. Actually, the receiver normally consumes significantly more energy, 
 but by using the ContikiMAC we reduce the energy consumption dramatically. This happens as the 
 ContikiMAC uses an efficient duty cycle to avoid idle listening of the radio. Thus, we do care more 
-62 
- about the energy spent on the computations and the transmissions, in contrast to the energy 
+0 
+2 
+4 
+6 
+8 
+10 
+1000 1500 2000 2500 
+Energy (J) 
+The Key Lifetime (s) 
+MCU TX RX 
+63 
+ 
+about the energy spent on the computations and the transmissions, in contrast to the energy 
 consumed by the receiver, as this energy consumption is unavoidable. 
 Although, it is observed that the energy consumed by the receiver, and thus the overall energy the 
 device spends, is increased at key lifetime of 1500 seconds. This can be explained if we keep in mind 
@@ -2528,16 +2546,8 @@ said, we have simulated the network for different lifetime values to examine how
 affected. The percentage of the successfully received packets in relation to the lost packets is 
 presented in Figure 4.6. 
  
-63 
- Percentage 
-Packets Lost Packets Received 
-of packets 
-100% 
-90% 
-80% 
-70% 
-500 1000 1500 2000 2500 
-The key lifetime (s) 
+64 
+ 
  
 Figure 4.6: The packet-loss percentage due to the lack of key in relation to the key lifetime. 
  
@@ -2570,8 +2580,18 @@ and all the key re-establishments roughly coincide at a later stage. Therefore, 
 exchanges are performed on fixed but random times, we will avoid the situation where a node is 
 blocked because of waiting for key exchange, while the opponent node is unavailable as it currently 
 is in progress. 
-64 
- 4.4 Experiment: Scalability analysis of the network  
+70% 
+80% 
+90% 
+100% 
+500 1000 1500 2000 2500 
+Percentage 
+of packets 
+The key lifetime (s) 
+Packets Lost Packets Received 
+65 
+ 
+4.4 Experiment: Scalability analysis of the network  
 In this experiment we try to address the scalability of the 6LowPAN networks and how it is affected 
 by the implemented key exchange process. The default size of the ACL table was set to 4 for all the 
 previous simulations, which means that every sensor node is able to keep 4 address-key pairs in the 
@@ -2584,19 +2604,6 @@ every sensor node is able to have up to 36 entries in its ACL table without faci
 amount of memory that is consumed by the nodes as the size of the ACL table increases is presented 
 in Figure 4.7.  
  
-Memory 
-(bytes) 
-5200 
-4700 
-4200 
-3700 
-3200 
-2700 
-2200 
-1700 
-1200 
-ACL  
-2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 entries 
  
 Figure 4.7: Memory consumption in relation to the ACL size. 
  
@@ -2616,8 +2623,23 @@ and secret keys with some of its nearest neighbors. It follows that the network 
 36 associations per device becomes of very large scale if its density is low. Eventually, it can be said 
 that the size of the key table is quite large to support the existence of a very large number of nodes 
 and thus the networks can easily be extended. 
-65 
- 5. CONCLUSIONS  
+1200 
+1700 
+2200 
+2700 
+3200 
+3700 
+4200 
+4700 
+5200 
+2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 
+Memory 
+(bytes) 
+ACL  
+entries 
+66 
+ 
+5. CONCLUSIONS  
 As stated in the introduction chapter, the scope of the current project is to investigate whether any 
 of the existing key exchange techniques for the WSNs is applicable to the 6LowPAN networks, which 
 are IPv6-based and lossy wireless sensor networks. This aim stems from the fact that we need a 
@@ -2664,8 +2686,9 @@ mechanism that defines a lifetime value for every key. The lifetime is assigned 
 time and is decreased periodically. When the lifetime reaches zero, the key association is erased 
 from the ACL table. Also, if all the associations of the ACL are valid but a new one is requested, we 
 manage to find and replace the oldest of the existing associations. With the current implementation 
-66 
- we conclude that the proposed key exchange technique is applicable for the 6LowPAN networks and 
+67 
+ 
+we conclude that the proposed key exchange technique is applicable for the 6LowPAN networks and 
 that it can easily be used over the Internet stack, with the support of UDP/IP communication. 
 Moreover, ECDH requires a small amount of memory, and thus is suitable for devices with limited 
 resources.    
@@ -2708,8 +2731,9 @@ set objectives we fulfil the scope of the project.
  
  
  
-67 
- 6. FUTURE WORK 
+68 
+ 
+6. FUTURE WORK 
 In the current project we have implemented the ECDH key exchange technique, which is based on 
 elliptic curve cryptography. The elliptic curve we have used in the current project is the standardized 
 SECP128R1 curve, where its points have size 128-bits. We plan to use some different elliptic curves, 
@@ -2752,8 +2776,9 @@ this area, but the proposed techniques have to be implemented and tested for 6Lo
  
  
  
-68 
- BIBLIOGRAPHY 
+69 
+ 
+BIBLIOGRAPHY 
 [1] “contikiecc - Contiki port of TinyECC.” [Online]. Available: 
 http://score.ucsc.lk/projects/contikiecc. [Accessed: 22-Jun-2012]. 
 [2]  A. Dunkels, “Full TCP/IP for 8-bit architectures,” in Proceedings of the 1st international 
@@ -2795,8 +2820,9 @@ connected LoWPANs,” in Autonomous Decentralized Systems, 2009. ISADS  ’09. Inter
 Symposium on, 2009, pp. 1 –6. 
 [18]  S. Raza, T. Voigt, and U. Roedig, “6LoWPAN Extension for IPsec.,” presented at the 
 Interconnecting Smart Objects with the Internet Workshop, Prague, Czech Republic, 2011. 
-69 
- [19]  S. Bac, D. Kwak, and C. Kim, “Information Networking. Towards Ubiquitous Networking and 
+70 
+ 
+[19]  S. Bac, D. Kwak, and C. Kim, “Information Networking. Towards Ubiquitous Networking and 
 Services,” T. Vazão, M. M. Freire, and I. Chong, Eds. Berlin, Heidelberg: Springer-Verlag, 2008, 
 pp. 142–150. 
 [20]  A. Dunkels, L. Mottola, N. Tsiftes, F. Österlind, J. Eriksson, and N. Finne, “The announcement 
@@ -2840,8 +2866,9 @@ cryptography for wireless sensor networks,” in Pervasive Computing and Communica
 exchanges,” Designs, Codes and Cryptography, vol. 2, no. 2, pp. 107–125, 1992. 
 [35]  S. Burnett and S. Paine, The RSA Security’s Official Guide to Cryptography. New York, NY, USA: 
 McGraw-Hill, Inc., 2001. 
-70 
- [36] “Elliptic Curve: A Geometric Approach.” [Online]. Available: 
+71 
+ 
+[36] “Elliptic Curve: A Geometric Approach.” [Online]. Available: 
 http://www.certicom.com/index.php/21-elliptic-curve-addition-a-geometric-approach. 
 [Accessed: 19-Jul-2012]. 
 [37]  J. M. Pollard, “Monte Carlo Methods for Index Computation (mod p),” Mathematics of 
@@ -2886,8 +2913,9 @@ Cryptology and Information Security: Advances in Cryptology, London, UK, UK, 199
 wireless sensor networks,” in Proceedings of the fifth ACM international workshop on Wireless 
 network testbeds, experimental evaluation and characterization, New York, NY, USA, 2010, pp. 
 55–62. 
-71 
- [54]  R. Mzid, M. Boujelben, H. Youssef, and M. Abid, “Adapting TLS handshake protocol for 
+72 
+ 
+[54]  R. Mzid, M. Boujelben, H. Youssef, and M. Abid, “Adapting TLS handshake protocol for 
 heterogenous IP-based WSN using identity based cryptography,” in Communication in Wireless 
 Environments and Ubiquitous Systems: New Challenges (ICWUS), 2010 International 
 Conference on, 2010, pp. 1 –8. 
@@ -2925,6 +2953,4 @@ http://www.eecs.harvard.edu/~konrad/projects/shimmer/references/tmote-sky-
 datasheet.pdf. [Accessed: 01-Sep-2012]. 
  
  
- 
-72 
  

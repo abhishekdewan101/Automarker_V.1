@@ -1,3 +1,5 @@
+ 
+ 
 Executive Summary 
  
 Much effort has been devoted to improving the realism of virtual body figures in 
@@ -42,7 +44,8 @@ extracting, feature points matching and local shape deformation.
  
  
  
- Catalogue 
+ 
+Catalogue 
 1. Introduction ............................................................................................................... 1 
 1.1 Aims and Objectives  ....................................................................................................... 2 
 1.2 Structure  ......................................................................................................................... 3 
@@ -73,7 +76,8 @@ extracting, feature points matching and local shape deformation.
 6.1 Reset the pivot point of the figure model  .................................................................... 21 
 6.2 Geometric Cloth Template Modeling   ......................................................................... 23 
  
- 6.3 Template Fitting Method   ........................................................................................... 25 
+ 
+6.3 Template Fitting Method   ........................................................................................... 25 
 6.3.1 Garment Fitting Criteria  ........................................................................................ 25 
 6.3.2 Feature Points Matching  ....................................................................................... 25 
 6.3.3 Proportional Fitting  ............................................................................................... 27 
@@ -99,8 +103,9 @@ Reference  .....................................................................
 Appendix: Source code ................................................................................................. 51 
  
  
+1 
  
-  
+ 
 1. Introduction 
  
 With the development of 3D technology, shopping online is now a common 
@@ -141,8 +146,9 @@ method will be subsequently addressed. On the basis of the feature matching
 method, the new proportional fitting method proposed is proven to achieve garment 
 fitting automatically. This system was developed as a plug-in on the platform 
 Autodesk Maya, which is 3D computer graphic software that provides mature 
-1 
- toolsets and an environment in which the animator or programmer can develop 
+2 
+ 
+toolsets and an environment in which the animator or programmer can develop 
 challenging plug-in that could alleviate the workloads involved in increasing the 
 realism of the virtual world. The focus of this project is not the simulation of cloth; 
 there are already many mature software or plug-ins for cloth simulation, like SyFlex, 
@@ -185,8 +191,9 @@ Different style of clothes modeling method stored in different functions or data
 where can be edited and expanded easily by modelers or programmers, which makes 
 this better. 
  
-2 
- The fourth objective is fitting the created clothes to any one or several figure models 
+3 
+ 
+The fourth objective is fitting the created clothes to any one or several figure models 
 automatically. This is the challenging section of this project, because it is so difficult 
 to detect the position of the feature points on different body parts and virtual 
 garments in the 3D coordinates measuring system.  
@@ -229,8 +236,9 @@ results, in chapter 8, I evaluated the completion and limitations of this design
  
  
  
-3 
- 2. Backgrounds  
+4 
+ 
+2. Backgrounds  
  
 There are three problems one can associate with clothing a virtual figure model: the 
 design and modeling of the clothes, the matching of the cloth to the character, and 
@@ -271,8 +279,9 @@ the process of sewing two patterns together.
  
  
  
-4 
- 2.2 Garment Sewing Approach 
+5 
+ 
+2.2 Garment Sewing Approach 
 2.2.1 Pre-positioning of 2D Pattern Sewing Method 
  
 Traditional virtual garment modeling is still done manually by modelers and 
@@ -302,8 +311,9 @@ Fuhrmann. 2003)
  
  
 Clemens Groß and Arnulph Fuhrmann (2003) also claim that the figure model has to 
-5 
- face to a certain direction, such as the X axis. The posture of the figure should be 
+6 
+ 
+face to a certain direction, such as the X axis. The posture of the figure should be 
 similar to the one a real person would be required to assume in order to be 
 measured by a tailor in real life. The figure has to be standing straight. The arms 
 should stretch to the sides in a distance to the rest of the body. The legs cannot be 
@@ -332,8 +342,9 @@ center of the other bounding surfaces, which is also the starting point of the
 modeling process. This method could achieve good modeling for suitable fitting cloth. 
 However, it is hard to define the correct cloth surface when the cloth is quite loose. 
 Volino et al (2005) and Umetaniet al (2011) provide another interactive 3D garment 
-6 
- modeling system that allows for instant 3D feedback in answer to changes in clothes 
+7 
+ 
+modeling system that allows for instant 3D feedback in answer to changes in clothes 
 patterns by using a real-time physics-based simulation. This process still depends on 
 the user’s ability to make the right design choices in order. 
  
@@ -374,8 +385,9 @@ method can identify feature points faster than its corresponding alternatives in
 literature, it cannot detect the exact position of some non-boundary feature points 
 when they are in the same cross section. The second step is constructing garment 
 section lines. The figure section lines are created based on the recognized feature 
-7 
- points. The function of these section lines is to control the section shape of cloth 
+8 
+ 
+points. The function of these section lines is to control the section shape of cloth 
 feature positions (M. Cani and J. Hughes. 2007). The next step is establishing 
 silhouettes of cloth. The silhouette is constructed by connecting the key points on 
 section line. The key points can be acquired by calculating the intersection points 
@@ -406,8 +418,9 @@ output, which cannot achieve the automation in modeling process.
  
 2.4 Design Preserving Garment Transfer Method 
  
-8 
- Research performed on the garment modeling section and garment fitting section 
+9 
+ 
+Research performed on the garment modeling section and garment fitting section 
 separately has found these methods will not limit the users’ choice in design of 
 clothes. Due to the limits of the existing automatic garment modeling techniques, 
 many users have their own ideas about garment design in their work. Therefore, it is 
@@ -451,8 +464,9 @@ feature point on figure with an offset.
   
  
  
-9 
- 2.4.1 Summary 
+10 
+ 
+2.4.1 Summary 
  
 The aim of garment transferring is to make one kind of clothing fit various shapes of 
 manikins automatically. The original pattern design should be preserved in the fitting 
@@ -480,8 +494,9 @@ garment are obtained by calculating its relationship to the closest bone and ski
  
  
  
-10 
- 3 Key Techniques 
+11 
+ 
+3 Key Techniques 
  
 After examining the strengths and weaknesses of the existing methods of virtual 
 garment modeling and fitting and after reviewing the study of Brouet and Sheffer, I 
@@ -514,11 +529,10 @@ is better in terms of accuracy. The details of the algorithm can be summarized b
  
  
 (a)                              
-11 
- Figure 4: (a) It can be seen in the figure that the p ’s and p ’s closest skin points m 
-1 2 1
-and m are selected as reference points. This extracting method is not the best, since 
-2
+12 
+ 
+Figure 4: (a) It can be seen in the figure that the p1’s and p2’s closest skin points m1 
+and m2 are selected as reference points. This extracting method is not the best, since 
 the reference points can move apart on the target character, leading to an 
 undesirable vertical displacement. Selecting the orthogonal direction, will map points 
 to a circle around a same bone point, which could preserve the relative height. (Remi 
@@ -526,34 +540,21 @@ Brouet and Alla Sheffer 2012).
  
 The reference points that Remi Brouet and Alla Sheffer (2012) obtain are computed 
 in the following manner: 
-1) For each vertex p firstly its closest points p are computed on each bone of 
-g, b
-animation skeleton (p is possibly an extremity). 
-b
-2) For each bone, p is defined as the input character point closest to p along the 
-m g
-segment [p , p ].  
-b g
-3) “Selecting one or more reference points, both the distance from p to each of the 
-g
-intersections point p and the angle between the bone axis v and the vector p - 
-m b g
-p should be considered when these two vectors set to be orthogonal. The pairs 
-b
-(p , p ), which are selected as reference for p are those that minimize a 
-b m g, 
+1) For each vertex pg, firstly its closest points pb are computed on each bone of 
+animation skeleton (pb is possibly an extremity). 
+2) For each bone, pm is defined as the input character point closest to pg along the 
+segment [pb, pg].  
+3) “Selecting one or more reference points, both the distance from pg to each of the 
+intersections point pm and the angle between the bone axis vb and the vector pg - 
+pb should be considered when these two vectors set to be orthogonal. The pairs 
+(pb, pm), which are selected as reference for pg, are those that minimize a 
+combination of these two metrics?pm, pg?e
+?<vb,v>
 2
-?<v ,v>
-b
-2
-?
-combination of these two metrics ?p , p ?e , where they set ? = 0:1.” 
-m g
+?2  , where they set ? = 0:1.” 
 (Remi Brouet and Alla Sheffer 2012).  
-4) Finally, for each reference pair (p , p ), each point p should be associated with 
-b m g
-an offset o = ?p , p ?.  
-m g
+4) Finally, for each reference pair (pb, pm), each point pg should be associated with 
+an offset o = ?pm, pg?.  
  
 Remi Brouet and Alla Sheffer (2012) optimized the method of feature points 
 extracting in terms of accuracy and efficiency. Specifically, they associated vertices 
@@ -575,35 +576,34 @@ chosen reference points on the figure model replace the constant positions in
 skeleton frames. Dealing with changes in proportions of skeleton and making use of 
 skin-based offsets allows this method to cope with changes in shape of figure, such 
 as shoulder width. The algorithm of this method is as follows: 
-12 
-  
+13 
+ 
+ 
 For every cloth point with respect to the target character, the computed reference 
-points and offsets are used to gain the proportionally scaled locations p . If the 
-g
-proportionally scaled location p is certain, the first step of garment fitting is 
-g 
+points and offsets are used to gain the proportionally scaled locations pg. If the 
+proportionally scaled location pg is certain, the first step of garment fitting is 
 complete.  
-“Firstly, for every reference pairs (p , p ) on the source character, the corresponding 
-b m
-c c
-pairs (p , p ) on the target are calculated by using the cross-parameterization. If the 
-b m
-c c
-point p has a single pair of (p , p ), the p = p + o*v where v is a unit vector in 
-g b m g m bm bm
-c c
-the direction of (p , p ). If there are multiple reference pairs for the cloth vertex p , 
-b m g
+“Firstly, for every reference pairs (pb, pm) on the source character, the corresponding 
+pairs (pcb, p
+c
+m) on the target are calculated by using the cross-parameterization. If the 
+point pg has a single pair of (pb, pm), the p
+c
+g = p
+c
+m + o*vbm where vbm is a unit vector in 
+the direction of (pcb, p
+c
+m). If there are multiple reference pairs for the cloth vertex pg, 
 a weighted sum of the positions dictated by each reference is used, involving 
+non-linear weights to get a sharp transition w1 = 
+arctan(5?(t?0.5)+
 π
-( )
-arctan(5? t?0.5 + )
 2
-non-linear weights to get a sharp transition w =  and w = 1 – w , 
-1 2 1
+)
 π
-where t is the coordinate of the projection of the garment vertex p on the segment 
-g 
+ and w2 = 1 – w1, 
+where t is the coordinate of the projection of the garment vertex pg on the segment 
 between the two relevant bone reference points.”(Remi Brouet and Alla Sheffer 
 2012). 
  
@@ -634,8 +634,9 @@ can be avoided using the new method being presented now.
  
  
  
-13 
- 4 Maya Architecture 
+14 
+ 
+4 Maya Architecture 
  
 Since the developed plug-in works within the framework of the Maya system, it is 
 essential to present the structure and fundamental rules of Maya system. The 
@@ -644,14 +645,13 @@ level, Maya system can be broke down into three major components; the diagram is
 shown in Figure 5 below. 
  
  
-               Graphical user interface 
- 
- 
- MEL Commend Engine 
+               
  
  
  
-Dependency Graph 
+ 
+ 
+ 
  
                   Figure 5: Maya system (David A. D. Gould. 2003) 
  
@@ -678,30 +678,22 @@ node is shown in Figure 6.
  
  
  
-14 
-  
- 
-Node 
- 
- 
-Input 
-  
+Graphical user interface 
+MEL Commend Engine 
+Dependency Graph 
+15 
  
  
-Output 
  
  
-Compute ( ) 
+ 
  
  
  
  
 Figure 6: Generic node (David A. D. Gould. 2003). Input and output are two potential 
- 
 attributes of the node. All nodes include a compute function. The data is stored in 
- 
 the node’s attributes. The role of the compute function is to modify the data.  
- 
  
 Attributes in nodes: All the data stored in the node is regarded as attributes. Each 
 attribute has a name and a type. For example, a basic polygon cube node has 
@@ -716,16 +708,13 @@ attributes it has. Figure 7 presents an example of the relationship of DG nodes 
 DAG nodes. 
  
  
-transform 
  
  
    
-time animCurve transform 
  
  
  
  
-shape 
  
  
 Figure 7: The relationship of time, the animCurve, and transform Nodes consist of 
@@ -735,8 +724,25 @@ Directed acyclic graph nodes.
  
  
  
-15 
- 5 Project Specification 
+Node 
+ 
+ 
+ 
+ 
+Compute ( ) 
+ 
+ 
+ 
+ 
+ 
+Input 
+Output 
+time animCurve transform 
+transform 
+shape 
+16 
+ 
+5 Project Specification 
  
  
 Before moving on to method details, this section specifies the development 
@@ -773,49 +779,53 @@ section will present the framework of the system, which includes data flow and
 architecture design. Figure 8 demonstrates the development environment and part 
 of the fitting result in the scene. 
  
-16 
-  
+17 
+ 
+ 
 Figure 8: Development environment and user interface of the system 
  
 5.3 Operating Flow Chart 
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 Source the name of the plug-in 
  
- 
- 
- 
 User type the Install command  
-  
  
 User import figure models from 
- 
 the external file. 
- 
- 
- 
 Choose the style of cloth from 
- 
 the style tab on user interface. 
- 
- 
 Reset the pivot point of the 
- 
 figure model 
- 
- 
- Choose the figure models from 
+Choose the figure models from 
 the scene or the outliner 
- 
 window then execute the 
- 
 modeling and fitting operation. 
- 
- 
 Adjust the vertices on the cloth 
-17 
 along the normal. 
-                       Figure 9: Operating flow chart for plug-in 
+18 
+ 
+                      Figure 9: Operating flow chart for plug-in 
  
  
 The key stages of the data flow can be defined as follows: 
@@ -858,31 +868,23 @@ smooth skinning.
  
 Figure 10 features a graph that demonstrates the architecture design of the garment 
 modeling and fitting system. 
-18 
-  
-Figure models 
- 
-in the file 
- 
-Database 
- 
- 
-Figure models in User Interface 
- 
-the scene 
+19 
  
  
  
-Virtual garment 
- Figure models data Clothes data 
-modeling and 
- 
-fitting automatically 
  
  
  
- Clothes on 
-figure models 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
                  
    Figure 10: Architecture design diagram 
@@ -909,13 +911,33 @@ became varied in that period, especially in Europe and America (Yue L, XiaoGang 
 networks in order to gather statistics about the average figures. These figures are 
 suitable for the standard body size of the male. Figure 11 presents the standard 
 parameters of men’s shirts. 
-19 
-  
+Figure models in 
+the scene 
+User Interface 
+Figure models 
+in the file 
+Database 
+Clothes data Figure models data Virtual garment 
+modeling and 
+fitting automatically 
+Clothes on 
+figure models 
+20 
  
-Height of Size (cm) Chest Length of Length of Shoulder 
-Waistline 
-figure (cm) (cm) cloth (cm) sleeves (cm) width(cm) 
+ 
+ 
+Height of 
+figure (cm) 
+Size (cm) Waistline 
 (cm) 
+Chest 
+(cm) 
+Length of 
+cloth (cm) 
+Length of 
+sleeves (cm) 
+Shoulder 
+width(cm) 
 165 38 98 108 78 59.5 45 
 170 39 102 112 79 59.5 39 
 175 40 106 115 79 60.5 40 
@@ -949,22 +971,12 @@ handstand, lying-down, and so on.
  
  
  
-20 
- 6 Method  
+21 
+ 
+6 Method  
  
 Figure 12 demonstrates the connection of methods involved in this system. 
  
-Reset the pivot 
-point of the figure Smoothing  Cloth material 
-model 
-Deformation of  
-Cloth components Local shape 
-main part of 
-extruding deformation 
-garment template  
-Feature point 
-Proportional fitting 
-matching 
  
 Figure 12: connection of methods in the system 
  
@@ -988,8 +1000,23 @@ undergone any transformations. World space is the final space in which the shape
 are drawn. The basic steps of resetting the pivot point are: 
 1} Obtain the original position of the figure’s pivot point in world space. 
 2) Determine the position of the feet center in object space is (0, 0, 0), calculating its 
-21 
- corresponding position in world space. 
+Reset the pivot 
+point of the figure 
+model 
+Deformation of  
+main part of 
+garment template  
+Feature point 
+matching 
+Proportional fitting 
+Cloth components 
+extruding 
+Smoothing  Cloth material 
+Local shape 
+deformation 
+22 
+ 
+corresponding position in world space. 
 3) Transform the pivot point from original position to the new position in world space 
 (Transform matrix will be introduced in Chapter 6.2).. 
  
@@ -1014,8 +1041,9 @@ Algorithm 1: The main steps of my algorithm in resetPivot( ).
 (a)                          (b) 
     
                         (c)                          (d) 
-22 
- Figure 13: Pivot point adjusting automatically. The left two graphs (a), (c) show the 
+23 
+ 
+Figure 13: Pivot point adjusting automatically. The left two graphs (a), (c) show the 
 original pivot point’s position of the figure model in front view and side view; the 
 right ones (b), (d) show the position of pivot point transform to the feet center 
 automatically in front view and side view. 
@@ -1041,12 +1069,10 @@ described in Chapter 6.5.
  
 The bounding surface for the upper body is based on the automatic deformation of 
 cube mesh. Specifically, most deformations focus on the transformation of feature 
-points p . The feature points of the upper body surface are determined by the 
-g
+points pg. The feature points of the upper body surface are determined by the 
 standard parameters of the shirt. For example, the vertex on the shoulder associates 
 with the shoulder length in the parameter of shirt. A transformation is simply a 
-’ 
-mapping of a point from one place to another: p = p * transformMatrix. A single 
+mapping of a point from one place to another: p’ = p * transformMatrix. A single 
 transformation matrix can store more than one transformation:  
 transformMatrix = translateMatrix * scaleMatrix * rotateMatrix.  
  
@@ -1060,8 +1086,9 @@ point in this modeling process due to its location on skeleton. However, just
 transforming the feature points onto the cube mesh is insufficient to form the main 
 part of cloth template, since the shape around the feature points should form a 
 slope when translating the feature points. The selection function in Mel library can 
-23 
- be adopted to construct the shape around the feature points with smooth 
+24 
+ 
+be adopted to construct the shape around the feature points with smooth 
 transitions. I did not use this function since the main part of the garment template of 
 the shirt had no additional vertices except for feature points. That said though, if the 
 modelers intended to expand more complex clothing styles in this system, Soft 
@@ -1098,8 +1125,9 @@ shoulder, breast, waistline, back and neckline (figure (c)) .
    End for    
                                                                               
          Algorithm 2: The main steps of my algorithm in createTemplate( ) 
-24 
-  
+25 
+ 
+ 
  
    
 ( a )                      ( b )                       ( c ) 
@@ -1132,8 +1160,9 @@ garment and the surface of the figure model should not intersect apparently in
 the first step garment fitting.  
  
 6.3.2 Feature Points Matching 
-25 
-   
+26 
+ 
+  
 In this project, a garment template fitting involves matching feature points and 
 proportional fitting. The existing feature points extraction methods have been 
 analyzed and discussed in Chapter 3.1. Based on the study of Remi Brouet and Alla 
@@ -1142,73 +1171,75 @@ three basic steps to this feature matching method:
  
 1) The first step is extracting the feature points of the virtual garment and 
 computing the offset of these feature points. On the basis of the rules defined in 
-Chapter 3.1, the feature points of virtual cloth p have been specified in the 
-g
+Chapter 3.1, the feature points of virtual cloth pg have been specified in the 
 garment template modeling process; these are almost the same as the standard 
-parameters of garment. Each feature point p is associated with offset o. o is a 
-g 
+parameters of garment. Each feature point pg is associated with offset o. o is a 
 preset default value and will be adjusted in next section. 
 2) The second step is to compute, according to each feature point on the garment, 
 the corresponding points on the target figure by cross-parameterization.  
 3) The third step is fitting the cloth to the target figure. For each of the feature 
-c c c c
-points on the garment p p = p + o*v . Where p is feature points on the 
-g, g t tg t
-c c
-target figure, the v is a unit vector in the direction of (p , p ). 
-tg t g
+points on the garment pcg, p
+c
+g = p
+c
+t + o*vtg. Where p
+c
+t is feature points on the 
+target figure, the vtg is a unit vector in the direction of (p
+c
+t, p
+c
+g). 
  
 The construction of the transformation matrix is based on the method of Zhong Li 
-and Xianggang Jin (2009). Make F be the coordinate vector of the feature points on 
-i
-the figure model and C be the corresponding feature points on the garment 
-i
+and Xianggang Jin (2009). Make Fi be the coordinate vector of the feature points on 
+the figure model and Ci be the corresponding feature points on the garment 
 template model. After obtaining the match relations of key feature points between 
 two models, all the coordinate vector from both models should satisfy the coordinate 
 transformation equation below. 
-? 
-1 1
-? 
-2 2
-[ ] = R(? ,? ,? ) ? [ ]  ?
-? ? ?
-? ?
-? 
-? ?
-Where n is the number of key feature points, R(? ,? ,? ) is the rotation matrix, 
-? ? ?
+[
+?1
+?2
+?
+??
+] = R(??, ??, ??)? [
+ 1
+ 2
+?
+ ?
+]   ?
+Where n is the number of key feature points, R(??, ?? , ??) is the rotation matrix, 
   is the translation vector. 
  
          
-26 
-          
+27 
+ 
+         
 Figure 16: Feature points matching. The top two images present the feature point 
 extracting from garment template in side view and front view. The bottom two 
 images demonstrate the feature points matching effect in side view and front view. 
  
 6.3.3 Proportional Fitting 
  
-c
-During the feature point matching process, each feature point p on the target 
-g
+During the feature point matching process, each feature point pcg on the target 
 garment keeps a certain distance, the offset o, from the target manikin. In order to 
 make the garment proper fit the manikin automatically, I propose the proportional 
 fitting method. The basic steps of proportional fitting are as follows: 
-c c
-1) Assign each feature point p orthogonally to its nearest bone on p .  
-g b
-c c c
-2) Calculate the intersection point p of the vector (p - p ) intersect with its 
-i g b
-c c
-nearest skin surface. Then compute the distance d between p and p . 
-g i
-c c
-3) Adjust the offset o of each feature point p on the basis of proportion of d/|| p - 
-g g
+1) Assign each feature point pcg orthogonally to its nearest bone on p
 c
-p || 
-b
+b.  
+2) Calculate the intersection point pci of the vector (p
+c
+g - p
+c
+b) intersect with its 
+nearest skin surface. Then compute the distance d between pcg and p
+c
+i. 
+3) Adjust the offset o of each feature point pcg on the basis of proportion of d/|| p
+c
+g- 
+pcb|| 
    
 Figure 17: Proportional fitting effect. The left image presents the effect before 
 proportional fitting. The right one presents the proportional fitting effect on target 
@@ -1219,8 +1250,9 @@ figure.
 There is a built-in function-polySmooth in Maya for smoothing the polygon mesh. It 
 adds division to the polygon on mesh. This function is adopted after the garment 
 fitting process. 
-27 
-  
+28 
+ 
+ 
  
    
                       Figure 18: Mesh smooth 
@@ -1253,8 +1285,9 @@ Accurate detection of the direction of the arm surface of the figure model relie
 series of complex computations that can not be practically explored in this project. 
 Generally, rigging is a necessary step in the process of character production. It is still 
 the essential step before preparing the character for animation. Therefore, the 
-28 
- direction of the sleeve can be obtained by calculating the unit vector of bone of arm. 
+29 
+ 
+direction of the sleeve can be obtained by calculating the unit vector of bone of arm. 
  
 The calculation of the unit vector of the bone of an arm can be separated into two 
 steps. The first step is detecting the bone. It is not as easy for the computer to know 
@@ -1287,8 +1320,9 @@ Calculate the value $leftshoulderOrent of ($leftelbow-$leftshoulder)
                                                                              
   Algorithm 3: The main steps of my algorithm in sleeves extruding. 
  
-29 
-  
+30 
+ 
+ 
 Figure 19: Extruding direction of sleeves. The top left red circle indicates the left 
 shoulder joint. The bottom right red circle indicates the left elbow joint. After 
 obtaining the positions of these joints, the extruding direction (indicated with red 
@@ -1306,8 +1340,9 @@ extruding distance.
  
    
 (a)                                (b) 
-30 
-    
+31 
+ 
+   
             (c)                                 (d) 
 Figure 20: Sleeves extruding. The sleeves extruding process can be separated into 
 two stages. The first stage can be seen in images (a) and (b), which extrude a part of 
@@ -1331,8 +1366,9 @@ according to the size of the cloth template, calculate the proportional size of 
 Thirdly, extrude the surface in the corresponding place. Next, delete the seal surface 
 on the top of pockets. Finally, smooth the edge of pockets.  
  
-31 
-                      
+32 
+ 
+                     
 Figure 21: Extruded pocket (pocket was indicated in red circle). 
  
  
@@ -1353,8 +1389,9 @@ normal around a vertex can be seen on the figure below.
  
                       Figure 22: Vertex normal 
  
-32 
- The algorithm can be summarized as algorithm 4 shows below 
+33 
+ 
+The algorithm can be summarized as algorithm 4 shows below 
                                                                              
 Input: $amountToMoveFromSlider 
 Get the selected vertices and put them into $sel[] 
@@ -1387,8 +1424,9 @@ normal in 0.21cm
 In my project, the material of the man’s shirt is set to Lambert automatically. Lambert 
 is one of the most basic object materials in Maya; it possesses matte surfaces and 
 has no spectacular highlights. The default color of the shirt is set to white. The 
-33 
- specific steps of automatically setting the garment material are shown below: 
+34 
+ 
+specific steps of automatically setting the garment material are shown below: 
 1) Judge whether the garment has material or not. If it doesn’t have a material, 
 jump to Step 2.  
 2) Using the shadingNode command, classify the garment node as a Lambert shader 
@@ -1428,8 +1466,9 @@ Click the button and a user interface will appear on the scene.
  
  
  
-34 
- 6.9 User Interface 
+35 
+ 
+6.9 User Interface 
  
 The structure of the system is clearly presented on the user interface. There are 
 three basic operation steps that can be seen in Figure 24: reset pivot/position, create 
@@ -1468,8 +1507,9 @@ create a new one
 showWindow myWindow 
                                                                                              
  
-35 
-  
+36 
+ 
+ 
 Figure 24: User Interface of the plug-in 
  
  
@@ -1497,8 +1537,9 @@ width and thickness of upper body.
 9.    According to the value of Cstyle, choose the related function, for example, 
 jump into shirt ( ) 
 10.   Acquire the garment details options in shirt tab on user interface, which 
-36 
- include collars, pockets, and sleeves and so on. 
+37 
+ 
+include collars, pockets, and sleeves and so on. 
 11.   according to the garment details option, set up the corresponding parts of 
 cloth. 
 12.   acquire the central pivot point of upper body then scale and translate the 
@@ -1513,18 +1554,19 @@ Figure 25 further presents the flow chart for the automation algorithm.
  
                
  
-Mesh transforms automatically 
  
-based on the cloth style.  
-Feature points matching 
   
                 
  
-Garment components were extruded from the upper garment  
  
 Figure 25: Flow chart for automation algorithm   
-37 
- 7 Results and Analysis 
+Mesh transforms automatically 
+based on the cloth style.  
+Feature points matching 
+Garment components were extruded from the upper garment  
+38 
+ 
+7 Results and Analysis 
  
 In addition to the results of my automatic virtual garment modeling and fitting 
 demonstrated in Chapter 6, I have also performed experiments in testing and 
@@ -1539,8 +1581,9 @@ The result of different combinations of cloth components is shown below:
 ( a )                              ( b ) 
      
              ( c )                              ( d ) 
-38 
-    
+39 
+ 
+   
             ( e )                               ( f ) 
 Figure 26: Modeling of any combination of garment components 
  
@@ -1558,8 +1601,9 @@ The results of garment fitting for different arm postures of a figure model are 
 in Figure 27.  
   
 (a)                                 (b)  
-39 
-    
+40 
+ 
+   
                  (c )                                 (d)                               
   
                  (e)                                (f) 
@@ -1572,8 +1616,9 @@ fitting the figure’s arm. The results of this experiment point out that if the a
 raised too high or too low, sleeves will intersect with the arm. This is due to the 
 feature points on the original cuff being preset on the main surface of the garment 
 template, which cannot be affected by the direction and position of arm. The 
-40 
- positions of the feature points on the original cuff determined the range of extruding 
+41 
+ 
+positions of the feature points on the original cuff determined the range of extruding 
 direction. Therefore, if the arm exceeds the range of the extruding direction of the 
 sleeves, the extruding direction cannot be calculated. 
  
@@ -1588,15 +1633,17 @@ the back view. This is due to the feature points not being sufficient enough to 
 all area of vertices on the manikin. This means that there are no feature points in the 
 area of intersection.  
  
-41 
-  
+42 
+ 
+ 
  
 Figure 29: Garment match more different manikins (front and back views): a thin 
 person and a fat person. Garment successfully match these two models  
  
  
-42 
-  
+43 
+ 
+ 
 Figure 29: Fitting effect of shirt and two manikins with various body proportions in 
 front view and back view. The two manikins in the above images are formed by 
 proportional deformation of one manikin in different body parts. It can be seen that 
@@ -1613,21 +1660,26 @@ almost same as number of feature points). The algorithm of garment template
 modeling method, components extruding method and template fitting method are 
 test in Maya 2012 on Intel Core 2 Duo, T6500 2.1GHZ.  
  
-Vertices on manikin 8000 12000 15000 
+Vertices on manikin 
 (before smoothing) 
-Vertices on upper 100 100 100 
+8000 12000 15000 
+Vertices on upper 
 garment 
+100 100 100 
 Time in seconds 0.5       0.8       1.1 
 Table 1: Time testing for one garment on different manikins.  
  
-Vertices on manikin 12000 12000 12000 
+Vertices on manikin 
 (before smoothing) 
-Vertices on upper 100 200 300 
+12000 12000 12000 
+Vertices on upper 
 garment 
+100 200 300 
 Time in seconds 0.8       0.83       0.9 
 Table 2: Time testing for different garment on one manikin. 
-43 
-  
+44 
+ 
+ 
 It can be seen from the time testing result that the number of vertices on the upper 
 garment has more influence than the complexity of manikins. The timing of the mass 
 fitting, or the accumulation of individual time, was also tested.  
@@ -1638,14 +1690,23 @@ method with this automatic garment modeling and fitting method in terms of both
 efficiency and accuracy. The compared results are shown in Table 3 below. The 
 experiment object is a same cloth. 
  
- Traditional garment Automatic garment modeling 
-modeling method and fitting method 
+ Traditional garment 
+modeling method 
+Automatic garment modeling 
+and fitting method 
 Modeling time 2-3 hours          1 second 
-Accuracy of initial Low accuracy after High accuracy with a little 
-modeling pattern sewing  intersection 
-Accuracy after adjustment High accuracy after Higher accuracy after adjust 
-adjust vertices and vertices by local shape 
-faces for half an hour  deformation method  
+Accuracy of initial 
+modeling 
+Low accuracy after 
+pattern sewing  
+High accuracy with a little 
+intersection 
+Accuracy after adjustment High accuracy after 
+adjust vertices and 
+faces for half an hour  
+Higher accuracy after adjust 
+vertices by local shape 
+deformation method  
 Table 3: Comparison of traditional garment modeling method and automatic 
 garment modeling and fitting method. 
  
@@ -1657,8 +1718,9 @@ the Outliner. The function of Outliner is to present a hierarchical list of all 
 the scene in outline form (Maya 2012 help file). The figures below demonstrate the 
 garment mass modeling and fitting effect. 
  
-44 
-  
+45 
+ 
+ 
 Figure 30: Garment mass modeling and fitting effect 
  
  
@@ -1676,8 +1738,9 @@ manikin, a little intersection must take place in the fitting process.
  
  
  
-45 
- 8 Evaluation 
+46 
+ 
+8 Evaluation 
  
 The first objective of this project was to set up the initialization process of the plug-in 
 and to embed it into the Maya interface. This objective can be regarded as successful 
@@ -1720,8 +1783,9 @@ The fourth objective of this project was to achieve automatic garment fitting. F
 the result in Chapter 7, we can see that the modeled garment could fit manikins 
 successfully in three aspects: completely different manikins, the same manikin with 
 different proportion in body parts, and the same manikin with different proportions 
-46 
- in height, width and depth. For the more complex manikins, some intersection may 
+47 
+ 
+in height, width and depth. For the more complex manikins, some intersection may 
 occur due to the limited number of feature points on the garment and manikin. The 
 feature points are selected based on garment parameters. The number of feature 
 points cannot be too high, since this will take much more time in extracting and 
@@ -1765,8 +1829,9 @@ operation should be on vertices only.
  
  
  
-47 
- 9 Future Works 
+48 
+ 
+9 Future Works 
  
 It can be seen from the evaluation result that all objectives proposed in the 
 beginning of dissertation have been successfully achieved. Although there are some 
@@ -1809,8 +1874,9 @@ shapes that need to be adjusted in future work.
  
  
  
-48 
- Reference  
+49 
+ 
+Reference  
  
 Arnulph Fuhrmann, Clemens Gross, Volker Luckas, and Andreas Weber. (2003). 
 Interaction-free dressing of virtual humans. Computer & Graphics, 27(1):71–82. 
@@ -1853,8 +1919,9 @@ Li, Z., Jin, X., Barsky, B., Liu, J. (2009). 3D Clothing Fitting Based on the Ge
 Feature Matching. International Conference on Computer-Aided Design and 
 Computer Graphics, Nov 2009 
  
-49 
- Meng, Y., Wang, C.L., Jin, X. (2005). Flexible Shape Control for Automatic Resizing of 
+50 
+ 
+Meng, Y., Wang, C.L., Jin, X. (2005). Flexible Shape Control for Automatic Resizing of 
 Apparel Products. Computer-Aided Design 
  
 Nadia Magnenat-Thalmann, Seo Hyewon, and Cordier Frederic. (2004). Automatic 
@@ -1898,8 +1965,9 @@ Application Workshops.
  
  
  
-50 
- Appendix: Source code 
+51 
+ 
+Appendix: Source code 
  
 Main part of function of garment modeling and fitting.  
  
@@ -1941,8 +2009,9 @@ print ("\n" + $clothWaist);
  
 float $back1[3] = `xform -q -ws -t ($obj +".vtx[2755]")`; 
 float $back2[3] = `xform -q -ws -t ($obj +".vtx[2255]")`; 
-51 
- float $clothBack =  abs($back1[2]-$back2[2]); 
+52 
+ 
+float $clothBack =  abs($back1[2]-$back2[2]); 
 print ("\n" + $clothBack); 
  
 setToolTo CreatePolyCubeCtx; 
@@ -1986,8 +2055,9 @@ polySmooth  -mth 0 -dv 1 -bnr 1 -c 1 -kb 1 -ksb 1 -khe 0 -kt 1 -kmb 1 -suv 1 -pe
 -ro 1 -ch 1 $clothC; 
  
 } 
-52 
- ///////////////////// 
+53 
+ 
+///////////////////// 
 select -r $clothC; 
 } 
 } 
@@ -2007,7 +2077,7 @@ global proc moveVertAlongNormal(float $amountToMoveFromSlider)
  for ($vert in $sel) 
  { 
   select -r $vert; 
-  if (`nodeType $vert` != "mesh"){ 
+  if (`nodeType $vert` = "mesh"){ 
   warning "Works only on polygon vertices, skipping this selection."; 
   continue; 
   } 
@@ -2030,8 +2100,9 @@ global proc moveVertAlongNormal(float $amountToMoveFromSlider)
  select $sel; 
 } 
 Function of Installer 
-53 
- global proc installFit() 
+54 
+ 
+global proc installFit() 
 { 
  global string $gShelfTopLevel; 
  if (`tabLayout -exists $gShelfTopLevel`) 
@@ -2040,11 +2111,9 @@ Function of Installer
   -parent ($gShelfTopLevel + "|" + `tabLayout -q -st $gShelfTopLevel`) 
   -command "showMyWindow" 
   -image1 "out_cpClothSolver.png" 
-  -annotation "Maya cloth fitting!"; 
+  -annotation "Maya cloth fitting"; 
  } 
  else{ 
-  error "You need a shelf for this Install to complete!"; 
+  error "You need a shelf for this Install to complete"; 
  } 
 } 
-54 
- 

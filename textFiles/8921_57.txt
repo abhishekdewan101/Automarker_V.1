@@ -45,56 +45,58 @@ options and choosing the appropriate hardware and software products
 in SketchUp  
 -  Integrated the application in the PiVOT software system using the PiVOT API  
 -  Proved the use of the interface model in the development of other applications by 
-looking into the functionality of the interface together with its evaluation   
-Contents 
-Chapter 1 ................................................................................................... Error! Bookmark not defined. 
-Introduction ............................................................................................... Error! Bookmark not defined. 
-1.1 Motivation ............................................................................................ Error! Bookmark not defined. 
-1.2 PiVOT –Personalized View-Overlays for Tabletops............................. Error! Bookmark not defined. 
-1.3 Project Aim and Objectives ............................................................... Error! Bookmark not defined. 
-1.4 Thesis Organisation ........................................................................... Error! Bookmark not defined. 
-Chapter 2 ................................................................................................... Error! Bookmark not defined. 
-Background ................................................................................................ Error! Bookmark not defined. 
-2. 1 Related Work ................................................................................... Error! Bookmark not defined. 
-2.2.2 Hardware Components .............................................................. Error! Bookmark not defined. 
-2.2.3 Software Components ................................................................ Error! Bookmark not defined. 
-2.3 SketchUp - software for modeling of 3D objects................................ Error! Bookmark not defined. 
-2.3.2 Exporting Models from SketchUp ............................................... Error! Bookmark not defined. 
-Chapter 3 ................................................................................................... Error! Bookmark not defined. 
-Design ........................................................................................................ Error! Bookmark not defined. 
-3.1 Theoretical Approach ........................................................................ Error! Bookmark not defined. 
-3.2 Behavior of the Interface .................................................................. Error! Bookmark not defined. 
-3.3 Software and Hardware Products...................................................... Error! Bookmark not defined. 
-3.4 Design of the interface ...................................................................... Error! Bookmark not defined. 
-3.4.1 Shared View - choice of products ............................................... Error! Bookmark not defined. 
-3.4.2 Personal View - choice of products ............................................. Error! Bookmark not defined. 
-3.4.3 Touchscreen............................................................................... Error! Bookmark not defined. 
-3.5 System requirements ........................................................................ Error! Bookmark not defined. 
-2.5.1 Advantages and Disadvantages .................................................. Error! Bookmark not defined. 
-Chapter 4 ................................................................................................... Error! Bookmark not defined. 
-Implementation.......................................................................................... Error! Bookmark not defined. 
-4.1 Setting up the Touchscreen............................................................... Error! Bookmark not defined. 
-4.2.4 Inject Events in Browser ............................................................. Error! Bookmark not defined. 
-4.5 Improving the Performance of the Interface Components ................. Error! Bookmark not defined. Chapter 4 ................................................................................................... Error! Bookmark not defined. 
-Evaluation .................................................................................................. Error! Bookmark not defined. 
-4.1 User Evaluation ................................................................................. Error! Bookmark not defined. 
-4.1.1 Experiments ............................................................................... Error! Bookmark not defined. 
-4.1.2 Experimental Results .................................................................. Error! Bookmark not defined. 
-4.1.3 Questionnaire Results and Discussion ........................................ Error! Bookmark not defined. 
-4.2 Performance Evaluation .................................................................... Error! Bookmark not defined. 
-Chapter 5 ................................................................................................... Error! Bookmark not defined. 
-Future Work ............................................................................................... Error! Bookmark not defined. 
-5.1 Building Up on the Interface to Support Other Real-time Graphics Applications .. Error! Bookmark not 
+looking into the functionality of the interface together with its evaluation  
+ Contents 
+Chapter 1 ................................................................................................... Error Bookmark not defined. 
+Introduction ............................................................................................... Error Bookmark not defined. 
+1.1 Motivation ............................................................................................ Error Bookmark not defined. 
+1.2 PiVOT –Personalized View-Overlays for Tabletops............................. Error Bookmark not defined. 
+1.3 Project Aim and Objectives ............................................................... Error Bookmark not defined. 
+1.4 Thesis Organisation ........................................................................... Error Bookmark not defined. 
+Chapter 2 ................................................................................................... Error Bookmark not defined. 
+Background ................................................................................................ Error Bookmark not defined. 
+2. 1 Related Work ................................................................................... Error Bookmark not defined. 
+2.2.2 Hardware Components .............................................................. Error Bookmark not defined. 
+2.2.3 Software Components ................................................................ Error Bookmark not defined. 
+2.3 SketchUp - software for modeling of 3D objects................................ Error Bookmark not defined. 
+2.3.2 Exporting Models from SketchUp ............................................... Error Bookmark not defined. 
+Chapter 3 ................................................................................................... Error Bookmark not defined. 
+Design ........................................................................................................ Error Bookmark not defined. 
+3.1 Theoretical Approach ........................................................................ Error Bookmark not defined. 
+3.2 Behavior of the Interface .................................................................. Error Bookmark not defined. 
+3.3 Software and Hardware Products...................................................... Error Bookmark not defined. 
+3.4 Design of the interface ...................................................................... Error Bookmark not defined. 
+3.4.1 Shared View - choice of products ............................................... Error Bookmark not defined. 
+3.4.2 Personal View - choice of products ............................................. Error Bookmark not defined. 
+3.4.3 Touchscreen............................................................................... Error Bookmark not defined. 
+3.5 System requirements ........................................................................ Error Bookmark not defined. 
+2.5.1 Advantages and Disadvantages .................................................. Error Bookmark not defined. 
+Chapter 4 ................................................................................................... Error Bookmark not defined. 
+Implementation.......................................................................................... Error Bookmark not defined. 
+4.1 Setting up the Touchscreen............................................................... Error Bookmark not defined. 
+4.2.4 Inject Events in Browser ............................................................. Error Bookmark not defined. 
+4.5 Improving the Performance of the Interface Components ................. Error Bookmark not defined. 
+Chapter 4 ................................................................................................... Error Bookmark not defined. 
+Evaluation .................................................................................................. Error Bookmark not defined. 
+4.1 User Evaluation ................................................................................. Error Bookmark not defined. 
+4.1.1 Experiments ............................................................................... Error Bookmark not defined. 
+4.1.2 Experimental Results .................................................................. Error Bookmark not defined. 
+4.1.3 Questionnaire Results and Discussion ........................................ Error Bookmark not defined. 
+4.2 Performance Evaluation .................................................................... Error Bookmark not defined. 
+Chapter 5 ................................................................................................... Error Bookmark not defined. 
+Future Work ............................................................................................... Error Bookmark not defined. 
+5.1 Building Up on the Interface to Support Other Real-time Graphics Applications .. Error Bookmark not 
 defined. 
-5.1.1 Add more views – Personal Overlays .......................................... Error! Bookmark not defined. 
-5.2 Update Feedback - Editing the Models from Both Views ............... Error! Bookmark not defined. 
-5.3 Separate touches depending on head position .............................. Error! Bookmark not defined. 
-5.2 Real-time View Update ..................................................................... Error! Bookmark not defined. 
-Conclusion .................................................................................................. Error! Bookmark not defined. 
-References ................................................................................................. Error! Bookmark not defined. 
-Appendix .................................................................................................... Error! Bookmark not defined. 
+5.1.1 Add more views – Personal Overlays .......................................... Error Bookmark not defined. 
+5.2 Update Feedback - Editing the Models from Both Views ............... Error Bookmark not defined. 
+5.3 Separate touches depending on head position .............................. Error Bookmark not defined. 
+5.2 Real-time View Update ..................................................................... Error Bookmark not defined. 
+Conclusion .................................................................................................. Error Bookmark not defined. 
+References ................................................................................................. Error Bookmark not defined. 
+Appendix .................................................................................................... Error Bookmark not defined. 
  
-   
+  
+ 
  
  
  
@@ -122,8 +124,9 @@ on the second view and edit the model. The increase of speed of this process dec
 focus experienced by this animator and enhances the creativity. 
  
  
-  
-Figure 1: A rendered view of Pixar ’s Lightning McQueen (left) and rendered view of Wills Memorial 
+ 
+ 
+Figure 1: A rendered view of Pixar’s Lightning McQueen (left) and rendered view of Wills Memorial 
 Building (right) displayed on the multi-view display 
  
 Creative practices such as sketching, character animation and other usually require users to work 
@@ -156,8 +159,8 @@ displayed on the same screen using see through techniques.
  
 Figure 2: A user of the interface as she is rotating the ball rendered on the screen 
  
-  
-1.3 Project Aim and Objectives 
+ 
+ 1.3 Project Aim and Objectives 
  
 The aim of this project is to create an interface to work with Google SketchUp modeling software on 
 the PiVOT tabletop display. This interface introduces a way of animating that gives users the 
@@ -198,7 +201,8 @@ evaluates its performance. Chapter 6 discusses the future work that can be done 
  
  
  
-  
+ 
+ 
  
  
  
@@ -239,8 +243,8 @@ art. The application “EverybodyLovesSketch” (6) aids new as well as experienced 
 (7), which used a specially created hand-driven device to create stop-motion animation. Conte - (8) 
 a small interactive device with the shape of a crayon, recreates the crayon strokes on a tabletop 
 display. 
-  
-2.2 PiVOT  
+ 
+ 2.2 PiVOT  
  
 PiVOT is a tabletop system developed by the Bristol University Interaction and Graphics lab. It has 
 the capability to display more than one view on the same screen. 
@@ -270,7 +274,8 @@ The PiVOT system consists of the following devices:
     - touchscreen – new addition to the system 
     - lumisty film - diffuses the light from the projector in one direction 
 2 computers connected with a cross-over cable 
-  
+ 
+ 
 Figure 4: The components of the PiVOT display system 
  
 PiVOT consists of two separate display systems – one for each of the two views. The Personal View 
@@ -293,7 +298,8 @@ arrows). The Personal View can be observed directly from the top (blue arrows)
 There is one addition to this piece that allows both views to be displayed on the same screen. This is 
 achieved by a film layer positioned on top of the upper LC display. When a user leans forward he is 
 able to see through this layer and the personal view on the upper LC panel becomes visible to him. 
-Users further apart cannot see through the film and observe only the shared view produced by the projector. 
+Users further apart cannot see through the film and observe only the shared view produced by the 
+projector. 
  
 This see-through film layer used is called Lumisty film. This film works in the following way- when 
 viewed from a certain angle it is transparent, but when observed facing the viewer it is not. It 
@@ -342,7 +348,8 @@ in the same direction as the first one the polarized light will simply go throug
 become visible. On the other hand, if this polarizer is placed perpendicular to the first one, the light 
 coming from below will get blocked and make the color of pixels on the display visible. 
  
-Every pixel on the upper display is associated with a 3 values. These values represents angle at which the red, blue and green components of the light get displaced when the polarized ray from 
+Every pixel on the upper display is associated with a 3 values. These values represents angle at 
+which the red, blue and green components of the light get displaced when the polarized ray from 
 the second panel hits that pixel. If one of the displacement values is 0 then the light ray component 
 associated with this value passes through the display without making the corresponding color 
 visible. On the other hand if the displacement is 90 degrees, the ray wave becomes perpendicular to 
@@ -383,8 +390,8 @@ node through a USB port.
  
 Figure 7: A user interacting with the model of 
 Wills Memorial Building 
-  
-Camera 
+ 
+ Camera 
 - Camera for tracking - Grasshopper Express GX-FW-10K3M-C Optitrack camera, 1024x768 
 resolution, 60 fps capture speed. 
  
@@ -409,7 +416,8 @@ DDR3 RAM: NVIDIA GeForce 9500GT graphics card, running Windows 7
 Figure 8: Hardware arrangement and connections between the devices 
  
  
- 2.2.3 Software Components 
+ 
+2.2.3 Software Components 
 The software working on PiVOT has several elements with different functionality. The system API 
 and some small applications are built using C++. The operating system running on the machines is 
 Windows 7. 
@@ -457,7 +465,8 @@ group directory the file belongs to. At this moment the resource passes to the ‘
 order to reload the resources, a reload function is called on the resource of the whole resource 
 group. This function first unloads the resource and puts it back in the ‘Created’ state and then loads 
 it back into the ‘Loaded’ state. This procedure updates all the .mesh files but does not parse any 
-material scripts. Therefore, in order to reload the textures and materials too, the resource group must be cleared, which returns the resources to an ‘Unknown’ state and re-initialise it in order to 
+material scripts. Therefore, in order to reload the textures and materials too, the resource group 
+must be cleared, which returns the resources to an ‘Unknown’ state and re-initialise it in order to 
 apply the necessary changes to the material scripts. When a group is initialised, all its material and 
 texture scripts get parsed. In automatic resource loading all resource groups are initialised by Ogre 
 at the same time. If manual resource loading is chosen, then the groups are initialised one by one by 
@@ -504,7 +513,8 @@ overlay window will be situated. ARToolKitPlus is also used to find the relative
 of a person viewing the tabletop and the orientation of his head. At the moment this is 
 accomplished using 2 markers placed on the head of the user. The calculations and the updates of 
 the user’s position are made in real-time. 
- - NaturalPoint tracking tools and API written as C++ functions are used to capture the images from 
+ 
+- NaturalPoint tracking tools and API written as C++ functions are used to capture the images from 
 the Optitrack camera that does the tracking of users and the markers they are wearing. 
  
 - OpenCV is used to pre-process the images captured from the camera, in order to improve the 
@@ -552,7 +562,8 @@ feeling of depth of the view. VPB and RH masks and are used to display stereo 3D
  
  
  
-2.3 SketchUp - software for modeling of 3D objects  SketchUp is an application developed by Google to create 3D models. It can be installed and used on 
+2.3 SketchUp - software for modeling of 3D objects  
+SketchUp is an application developed by Google to create 3D models. It can be installed and used on 
 MAC OS X and Windows operating systems. Once the installation is complete users can create their 
 own models or load models from the SketchUp Warehouse (database of various 3D models). 
  
@@ -592,8 +603,8 @@ The SketchUp to ogre exporter work in the following way also shown in Figure 9:
 Figure 9: Procedure for exporting meshes from SketchUp; the plugin exports materials and textures 
 separately to the shared folder along with an XML file. This file is converted into a mesh by the XML 
 converter and saved in the same shred folder, ready to be imported by Ogre 
-  
  
+  
  
  
  
@@ -629,7 +640,8 @@ Personal View.  Vice versa, if the user is in the Shared View zone he cannot see
 The artist can thus focus on building a model and editing it. Switching between the two views will 
 take logr This can be done without losing focus. This comes as a result of the smooth transition 
 between the two views. 
- 3.2 Behavior of the Interface 
+ 
+3.2 Behavior of the Interface 
  
 The results to be achieved are a system which enables the user to create surfaces, curves and 
 meshes by interacting with the tabletop. Users are expected to see the 3D image of their models 
@@ -671,7 +683,8 @@ In short, the projected image is shown on the screen in the corresponding shape.
 to capture the viewport. It captures the SketchUp screen and loads it into a browser. The browser 
 content is then rendered in OGRE. The image is calibrated by mapping it to a polygon shape in 
 OGRE with precomputed coordinates. The resulting image is sent to the projector.) 
- 3.4.1 Shared View - choice of products 
+ 
+3.4.1 Shared View - choice of products 
  
 The Shared View is a projection of the SketchUp viewport. The viewport needs to be captured and 
 projected on to the lumisty film on the screen. Before projecting it every frame needs to be 
@@ -706,8 +719,8 @@ encodings of the remote screen via HTTP protocol. Unlike RealVNC, the users of T
 need to set up the port forwarding. The only thing that needs to be changed is the service 
 authentication settings. ThinVNC provided the option of userID and password authentication. This 
 option must be changed so that the service requires no authentication when ran in the Ogre 
-application.  
-Embed the Web Browser Content in Ogre 
+application. 
+ Embed the Web Browser Content in Ogre 
  
 A couple of libraries can be used together with Ogre to enable rendering of HTML content. They use 
 the image of the web page to drawn a texture, which can be used by Ogre in to assign to an entity or 
@@ -745,7 +758,8 @@ Every captured image of the viewport is saved a texture in Ogre and applied to a
 required shape. Setting the required dimensions of this polygon is called calibration.  
  
 Input: Image to be projected 
-- Load image as a texture by passing it to the graphics card - Use a prior calibration to define coordinates of the input image 
+- Load image as a texture by passing it to the graphics card 
+- Use a prior calibration to define coordinates of the input image 
 - draw a polygon made out of smaller triangles one by one 
 - for each, set proper texture coordinates that correspond to it 
 - graphics card fills the quads with the texture 
@@ -779,7 +793,8 @@ files and meshes, for the materials and for the textures.
 beckface.rb is responsible for displaying the back faces of the surfaces in OGRE. SketchUp creates 
 surfaces which can be visible both when looked from the front and from the back. On the other 
 hand OGRE only displays a surface if it is looked from the direction to which the surface normal 
-points to.  
+points to. 
+ 
 Finally, the ogre_export_1_2_0b9.rb file is responsible for recursively scanning the objects selected 
 for export and saving their geometry in separate structures. The whole entity is converted into a 
 geometrical object made out of triangles only. The triangles with the same material make up one 
@@ -826,7 +841,8 @@ thread method FrameRenderingQueued checks for if the mesh load is complete and  
 old entity with the new one. 
  
 The last method proved to be most suitable for the task, because it ensures the concurrent loading 
-of resources and mesh rendering. The mesh file and its texture load at the same time as the frame rendering. Both threads run simultaneously without accessing the shared resource at the same time 
+of resources and mesh rendering. The mesh file and its texture load at the same time as the frame 
+rendering. Both threads run simultaneously without accessing the shared resource at the same time 
 and waiting for a mutex to be released before continuing work.  
  
 To complete the final step of the design, the PiVOT API is used. Once a mesh is loaded from the 
@@ -873,7 +889,8 @@ comes together with the touchscreen device itself - it is called PQ Labs MultiTo
 server receives touch input from the device and can extract the coordinates of these touches. To do 
 that, an SDK is used. The PQ Labs company provides support for a touchscreen with a C++, C Sharp 
 or Java SDK. Windows 7 does not support the C++ SDK and for that reason the Java SDK was chosen 
-to capture touches from the screen using Eclipse.   
+to capture touches from the screen using Eclipse.  
+ 
 Using two different programming languages to create an interface creates the next design problem - 
 how to notify the C++ Ogre applications that a touch from the user is received. The answer is  - by 
 sending a message from the Java application to the C++ application. The communication needs to 
@@ -919,7 +936,8 @@ Using 2 computers to generate the Personal View and the Shared View and to run S
 inconvenient by the inability of a computer to have two different program windows in focus at the 
 same time. SketchUp, the Ogre Shared View application and the Ogre Personal View application 
 need to be the windows in focus in order to update their contents. If both SketchUp and one of the 
-Ogre applications run on the same machine, one of them will cease to update which will result in the other one failing to receive the updates made. For this reason, the interface requires the use of 
+Ogre applications run on the same machine, one of them will cease to update which will result in 
+the other one failing to receive the updates made. For this reason, the interface requires the use of 
 three computers. Each of these three computers will be responsible for one of the major elements 
 connected by the interface. Computer 1 will be in charge of creating the projection for the Shared 
 View, Computer 2 will generate the renders for the Personal View and Computer 3 will run the 
@@ -962,8 +980,8 @@ Computer 3 – ‘Alice’ - installed Visual Studio 2010
  
  
  
-  
  
+  
  
  
  
@@ -994,7 +1012,8 @@ junit.jar
 The events from the touchscreen are captured using a window created by JFrame - a framed 
 window of size 1024x768 pixels. A WindowAdapter is initialised and used to receive window 
 events. A frame listener is registered. Before it starts listening for touch events the connection to 
-the server needs to be established and the client request type. The client request type defines which requests from the client are being recognised - in this case all raw the raw data and gestures are 
+the server needs to be established and the client request type. The client request type defines which 
+requests from the client are being recognised - in this case all raw the raw data and gestures are 
 recognised by the listener. Finally, the resolution of the multi-touch server it taken. 
  
 To capture the events from the touchscreen  
@@ -1017,7 +1036,8 @@ TG_MULTI_MOVE_UP 6668 /PQLabs/MultiU Alice
 TG_MULTI_MOVE_DOWN 6668 /PQLabs/MultiD Alice 
 TG_MULTI_MOVE_LEFT 6668 /PQLabs/MultiL Alice 
 TG_MULTI_MOVE_RIGHT 6668 /PQLabs/MultiR Alice 
-TG_ROTATE_CLOCK 6668 /PQLabs/Clock Alice TG_ROTATE_ANTICLOCK 6668 /PQLabs/Anticlock Alice 
+TG_ROTATE_CLOCK 6668 /PQLabs/Clock Alice 
+TG_ROTATE_ANTICLOCK 6668 /PQLabs/Anticlock Alice 
  
  
  
@@ -1058,7 +1078,8 @@ Computer 2 - ‘MM’, opens a web browser and connects to Bob’s address using the p
 the way shown in picture 10. The URL is a concatenation of the IP and port number separated by a 
 colon. MM sets its screen resolution to match Bob’s - 1024x768. 
  
-The service starts when the ‘Connect’ button is pressed. The desktop of Bob is then shown on MM displaying the SketchUp viewport.  
+The service starts when the ‘Connect’ button is pressed. The desktop of Bob is then shown on MM 
+displaying the SketchUp viewport.  
  
 4.2.2 Render the Web Browser in OGRE 
 After the connection between the two computers through VNC is  successfully tested, the contents 
@@ -1099,7 +1120,8 @@ of this web view is defined when creating it as 1024x768.
  
        awe_webcore_initialize_default(); 
     newWin->webView = awe_webcore_create_webview(1024, 
-                                                768,                                                 false); 
+                                                768, 
+                                                false); 
  
  
 The URL string VNC will connect to is input by reading a line from a text file. The URL is formed in 
@@ -1138,7 +1160,8 @@ often.
    newWin->texture = tex; 
    while(awe_webview_is_loading_page(newWin->webView)) 
                 updateCore(); 
- This texture is assigned to an entity, which in this case is a polygon, and the entity is attached to  
+ 
+This texture is assigned to an entity, which in this case is a polygon, and the entity is attached to  
 node in the Ogre scene. During the Main Ogre thread the entity is rendered. 
  
  
@@ -1177,10 +1200,11 @@ with and informs the underlying hardware card that an access to the buffer writt
 happen. Different lock options can be set to the process. In this case, the lock is set to discard the 
 the whole contents of the buffer. After the buffer is modified, it is unlocked. 
  
-       if(renderBuffer != NULL)  
+       if(renderBuffer = NULL)  
           pixelBuffer->lock(Ogre::HardwareBuffer::LockOptions::HBL_DISCARD); 
          Ogre::PixelBox pixelBox = pixelBuffer->getCurrentLock(); 
- A PixelBox is a primitive structure containing an image in pixels in memory, a 2D array of pixel 
+ 
+A PixelBox is a primitive structure containing an image in pixels in memory, a 2D array of pixel 
 values. A new object of this class is created and the locked region from the buffer is assigned to it. 
 With the lock option being HBL_DISCARD this region is the whole buffer. When the pixel values of 
 the PixelBox are modified, this results in creating a new pixel buffer in the card memory which 
@@ -1221,7 +1245,8 @@ time it receives a message it is processed in the following way:
 Upon receiving the OSC message, this message is converted to an ofxOscMessage, by copying the 
 OSC address to the new message, and also the unsigned long value host and port number. The 
 queue is locked and the message is pushed at the back of the queue. Finally, the queue is unlocked. 
-This function makes use of the ofxOscMessage function calls to put the incomming message in the queue. A mutex is initialised to lock and unlock this common resource which is accessed from 
+This function makes use of the ofxOscMessage function calls to put the incomming message in the 
+queue. A mutex is initialised to lock and unlock this common resource which is accessed from 
 several methods. 
 boost::mutex oscMutex; 
        std::deque< ofxOscMessage* > messages; 
@@ -1252,7 +1277,8 @@ touchscreen.
 PQ_M_MOVE awe_webview_inject_mouse_move(newWin->webView, mx, my); 
 PQ_M_DOWN awe_webview_inject_mouse_move(newWin->webView, mx, my); 
 awe_webview_inject_mouse_down(newWin->webView, AWE_MB_LEFT); 
-PQ_M_UP awe_webview_inject_mouse_up(newWin->webView, AWE_MB_LEFT); PQ_CLICK awe_webview_inject_mouse_move(newWin->webView, mx, my); 
+PQ_M_UP awe_webview_inject_mouse_up(newWin->webView, AWE_MB_LEFT); 
+PQ_CLICK awe_webview_inject_mouse_move(newWin->webView, mx, my); 
 awe_webview_inject_mouse_down(newWin->webView, AWE_MB_LEFT); 
 awe_webview_inject_mouse_up(newWin->webView, AWE_MB_LEFT); 
  
@@ -1293,7 +1319,8 @@ less visible when exporting the meshes.
 A shared folder is created between ‘Bob’ - the computer running sketchup,  and Alice - the computer 
 responsible for generating the personal view. This shared folder is created on Bob. A network is 
 created between the two computers, so Alice can access Bob’s shared folder. The network that is set 
-up using a crossover cable is a home network with enabled file sharing. All computers in this network are given the permission to access the Shared Folder on Bob. All the meshed in the 
+up using a crossover cable is a home network with enabled file sharing. All computers in this 
+network are given the permission to access the Shared Folder on Bob. All the meshed in the 
 SketchUp environment are exported under the name box.mesh, box.mesh.xml and box.material to 
 the shared folder. All the textures are exported to a subfolder of the shared folder. 
  
@@ -1334,7 +1361,8 @@ Main Ogre thread: RenderScene();
     check for any new OSC messages and execute the touchscreen command 
         destroy old entity Box 
         swap pointers of Box with BoxNew 
-        attach Box to the scene node         lock mutex 
+        attach Box to the scene node 
+        lock mutex 
  
     Resource Loading Thread 
         sleep(MS) 
@@ -1377,7 +1405,8 @@ Main Ogre thread: RenderScene();
     checks if the updated entity is created in the background ? check = 1 
             destroy old entity Box 
             swap pointers of Box with BoxNew 
-            attach Box to the scene node             sets check back to 0 
+            attach Box to the scene node 
+            sets check back to 0 
  
     Resource Loading Thread 
         sleep(MS) 
@@ -1426,7 +1455,8 @@ in the Personal View.
 The process of calibrating the image that will be projected on the screen is performed once. Its main 
 purpose is to create the dimensions of the entity that the SketchupTexture reflecting the web 
 browser running VNC will acquire. This entity will be resemble the shape of a canvas sail of a ship. 
-When the web content gets updated, the texture of the entity changes, but its original configuration and setup remain.  
+When the web content gets updated, the texture of the entity changes, but its original configuration 
+and setup remain.  
  
 To setup the vertices of this ‘canvas’ and map a texture to it, the procedure is as follows: 
     - start with a square shape, made out of 4x4 squares. Each square is made out of 2 triangular 
@@ -1475,7 +1505,8 @@ man->beginUpdate(0);
 man->position(vertexX[id], vertexY[id], 0.0);             man->textureCoord(uvX,uvY-0.25); 
 man->position( vertexX[id+1], vertexY[id+1], 0.0);     man->textureCoord(uvX-0.25,uvY-0.25); 
 man->position( vertexX[id+5],  vertexY[id+5], 0.0);    man->textureCoord(uvX,uvY); 
-   man->index(0);    man->index(1); 
+   man->index(0); 
+   man->index(1); 
    man->index(2); 
    man->index(0); 
 man->end(); 
@@ -1523,7 +1554,8 @@ too high the screen will detect an event even if the user has only hovered his f
 surface. Saving the last mouse state is used to determine what the last action of the user was. If the 
 this action was touch press down then another event TG_DOWN can not be triggered until the 
 mouse state is changed back to TG_UP. This technique decreases further the noise coming from the 
-touchscreen.  
+touchscreen. 
+ 
  
  
  
@@ -1556,7 +1588,8 @@ main components used to form an overall evaluation of the performance of the sys
 The workload in this environment is mainly defined by the response of the system to touches on the 
 tabletop. That’s’ why the 10 participants (aged 22 to 30) were asked to complete 3 tasks on the 
 system and mark their experience. Each participant was given information about the system and 
-the way its two views can be observed. Each participant was then sat in a chair in front of PiVOT and some time to get used to switching from one view to the other. Some participants were leaning 
+the way its two views can be observed. Each participant was then sat in a chair in front of PiVOT 
+and some time to get used to switching from one view to the other. Some participants were leaning 
 forward above the screen to see the Personal View and others were standing up.  
 Tasks: 
 Three simple tasks were created to measure the experience of the users working on the display 
@@ -1578,7 +1611,8 @@ following rooms – living room, bedroom, kitchen, toilet and closet.
 Figure 13:  Task 1- Shared View 
  
 The objects are seen from the camera situated parallel to the (x, y) plane. To complete the task only 
-one instrument from the SketchUp tools is used – the Move tool.  - The participants were not told what every object is.  
+one instrument from the SketchUp tools is used – the Move tool.  
+- The participants were not told what every object is.  
 - They were only told that the second view of the system shows the rendered models. They 
 were constantly switching between the Personal and the Shared view to find out what every 
 picture they saw in the SketchUp viewport represents.  
@@ -1612,7 +1646,8 @@ Figure 14:  Task 3- Shared View
 5.1.2 Experimental Results 
  
 Success Rate 
-Task 1 All participants managed to complete the task. All of them used the Personal View before achieving 
+Task 1 
+All participants managed to complete the task. All of them used the Personal View before achieving 
 the correct arrangement. Eight out of ten people placed the bench outside after having looked at the 
 Personal view, which is also the correct place for it. 
 Task 2 
@@ -1628,8 +1663,11 @@ the holes in the ball but some could not locate it in the Shared View.
  
  
 The values in the table show the average of all the answers the participants gave to this question. 
- task 1 task 2 task 3 
-  
+ task 1 
+ 
+task 2 
+ 
+task 3 
 Question 1  -3.7 -3.3 -1.7 
 Question 2 -2.7 -2.2 -2 
 Question 3 -3.8 -3.2 -3.9 
@@ -1643,7 +1681,8 @@ Table – task 1 – ‘Furniture arrangement’ – use of both Personal and Shared Views
 The average scores between the participants clearly show that participants found the third task 
 most mentally demanding and the first task least demanding. The workload in terms of mental 
 demand  does not show to be dependent on the addition of a second view. As expected that the task 
-which asked participants to find something was the most menatally demanding. According to the table of times needed to complete the different tasks, task 3 took the longest time to complete – 
+which asked participants to find something was the most menatally demanding. According to the 
+table of times needed to complete the different tasks, task 3 took the longest time to complete – 
 5.1842 seconds on average, which shows it was harder than the other two tasks. The difficulty in 
 the task comes from not being able to find a hole in the ball and spending a long time looking for 
 one, which is a mental challenge. 
@@ -1680,7 +1719,8 @@ Table : Average times
 Key Points:  
 -  No correlation between mental and physical workload established. This means that the 
 users were not finding the use of the interface more difficult for harder tasks. 
- - After completing a certain task participants were able to complete a similar task nearly 
+ 
+- After completing a certain task participants were able to complete a similar task nearly 
 twice faster. This shows that working on the touchscreen is intuitive 
  
 - The interface between the two views is adequate, made participants feel less rushed and in 
@@ -1716,7 +1756,8 @@ this way gave them a more realistic idea of their own success in completing a ta
  
  
  
-  
+ 
+ 
  
  
 Chapter 6 
@@ -1737,10 +1778,6 @@ interaction between the users of the touchscreen and the system and the generate
 introducing head tracking techniques and enhancing the overall performance and speed. 
  
  
-Personal View Shared View 
-users can read and modify users can interact with the  
-the 3D model using 3D model without modifying it 
-one-finger touches using multiple-finger touches  
  
  
  
@@ -1750,7 +1787,15 @@ one-finger touches using multiple-finger touches
  
 The information shown on the two views doesn’t need to be related in a special way. The Personal 
 View can be further developed to make use of the mask panel. The result of that will be creating 
-different location dependent Personal Views for different users. This can be achieved by implementing the Personal View Overlays into the application. Further camera calibration and 
+different location dependent Personal Views for different users. This can be achieved by 
+Personal View Shared View 
+users can read and modify 
+the 3D model using 
+one-finger touches 
+users can interact with the  
+3D model without modifying it 
+using multiple-finger touches  
+implementing the Personal View Overlays into the application. Further camera calibration and 
 trackers for each user will be needed. To extend the view into several smaller Personal View 
 Overlays will create a personal space on the screen for each user, where they can view some 
 specific information about the model. For example different overlays can show the model in 
@@ -1771,33 +1816,37 @@ giving some users special authority. For example only a specific animator can se
 the model in development without any of the other co workers aware of what this view shows.  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 Personal View Shared View 
-Updates made in SketchUp Updates made in any view zone 
-are reflected in the render are reflected in both views  
-Users can modify the 3D model Users can modify the 3D model 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 6.1.2 Update Feedback - Editing the Models from Both Views 
+Updates made in SketchUp 
+are reflected in the render 
+Users can modify the 3D model 
+Updates made in any view zone 
+are reflected in both views  
+Users can modify the 3D model 
+6.1.2 Update Feedback - Editing the Models from Both Views 
  
 Currently, the Shared View has both ‘read’ and ‘write’ access and the Personal View has only read 
 access. To add more functionality to this display system, the interface can be modified to allow 
@@ -1813,17 +1862,9 @@ SketchUp model depending on the changes made in the mesh in Ogre.
  
  
  
-Personal View Shared View 
-users can interact with users can interact with 
-the model using multi-touch the model 
-using multi-touch 
  
 6.1.3 Separate touches depending on head position 
  
-Personal View Shared View 
-users can interact with the model users can interact with the model 
-at the same time at the same time 
-  
  
 Instead of separating user interaction as input to the Shared and input to the Personal View based 
 on number of fingers touching the screen 
@@ -1840,7 +1881,20 @@ able to detect which of them are in the Shared View zone and which are in the Pe
 and display the Personal Overlays of the latter. 
  
 6.1.4 User Collaboration on the Screen 
-As discussed above instead of having a single user of the Shared View change his position to see the Personal View more than one person users can be situated around the tabletop display. One of them 
+As discussed above instead of having a single user of the Shared View change his position to see the 
+Personal View Shared View 
+users can interact with 
+the model using multi-touch 
+users can interact with 
+the model 
+using multi-touch 
+Personal View Shared View 
+users can interact with the model 
+at the same time 
+users can interact with the model 
+at the same time 
+  
+Personal View more than one person users can be situated around the tabletop display. One of them 
 could be working on SketchUp and the other ones viewing the rendered model and discussing it. A 
 single user at a time will be able to modify the model either from the Personal or from the Shared 
 View zones. If the touches made on the touchscreen by one user could be distinguished from the 
@@ -1850,10 +1904,6 @@ head position of the person the finger touching the tabletop corresponds to usin
 will be able to separate the touches received by different people by matching a touch to the user 
 wearing the head tracker situated at the users head coordinates supplied by Kinect. 
  
-Personal View Shared View 
-users can interact with the model users can interact with the model 
-at the same time at the same time 
-  
  
 Adding this feature to the interface will enable more than more than one person to work on the 
 model without occluding the Personal View with his work. Task separation will be implemented 
@@ -1871,7 +1921,14 @@ material and mesh. This can be done using the Ruby API which supports multithrea
  
 The export process will work faster if only the modified submeshes of the SketchUp model are 
 exported. This will allow for export to take place at smaller time intervals because exporting a piece 
-of the model will take less time than exporting the whole model. The exporter needs to be made flexible so that it allows the necessary amount of time for the export of a mesh or submesh 
+of the model will take less time than exporting the whole model. The exporter needs to be made 
+Personal View Shared View 
+users can interact with the model 
+at the same time 
+users can interact with the model 
+at the same time 
+  
+flexible so that it allows the necessary amount of time for the export of a mesh or submesh 
 depending on the amount of submeshes the user modified. Furthermore, this solution can be 
 extended into having different submeshes being exported by different threads concurrently. With a 
 good processor and multiple core processors the export speed will increase making the SketchUp 
@@ -1911,7 +1968,8 @@ development system does not support multithreading.
  
  
  
- Conclusion 
+ 
+Conclusion 
  
 This project is based on years spend by researchers to develop the necessary display 
 design and implement its features.  
@@ -1937,8 +1995,8 @@ view systems in their work.
  
  
  
-  
  
+  
  
 References 
  
@@ -1980,7 +2038,8 @@ conference on Computer sup-ported cooperative work, ACM, 2004, 2004.
  
 12. SandCanvas: A Multi-touch Art Medium Inspired by Sand Animation 
 Rubaiat Habib Kazi, Kien-Chuan Chua, Shengdong Zhao, Richard C. Davis, Kok-Lim Low 
-  
+ 
+ 
 13. Open Sound Control - A Flexible Protocol for sensor networking" (Freed, Schmeder, 
 Zbyszynski) 
  
@@ -2013,14 +2072,15 @@ Annen T, Matusik W, Pfister H, Seidel H-P, Zwicker M
  
  
  
- Appendix 
+ 
+Appendix 
 Personal View – touch interaction response 
  
  
  
  
-Shared View  
- 
+Shared View 
+  
  
  
  

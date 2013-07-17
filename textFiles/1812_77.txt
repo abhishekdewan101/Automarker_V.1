@@ -1,3 +1,5 @@
+4 
+ 
 Index 
  
 EXECUTIVE SUMMARY .................................................................................................................. 6 
@@ -32,8 +34,9 @@ CHAPTER 3: METHODOLOGY AND IMPLEMENTATION OF THE POWER REDUCTION FEATURES 34
 3.2.2 Implementation variations using the Spartan-6 device ............................................. 42 
 3.3 Implementation of various motion estimation algorithms ............................................... 44 
 3.3.1 Methodology .............................................................................................................. 44 
-4 
- 3.3.2 Behavioural simulations ............................................................................................. 44 
+5 
+ 
+3.3.2 Behavioural simulations ............................................................................................. 44 
 3.3.3 Design Implementation configuration and post-P&R simulations ............................. 45 
 3.4 Architectural changes into the processor description ...................................................... 45 
 3.4.1 Practical approach ...................................................................................................... 46 
@@ -66,8 +69,9 @@ Appendix II: VHDL essential source code of the shallow pipeline implementation .
  
  
  
-5 
- EXECUTIVE SUMMARY 
+6 
+ 
+EXECUTIVE SUMMARY 
  
 A flexible and reconfigurable processor for motion estimation has been developed by the 
 Bristol Microelectronics group. The processor is designed to run fast-search block matching 
@@ -107,8 +111,9 @@ and resources allocated for the processor implementation on an FPGA (See section
  
  
  
-6 
- INTRODUCTION 
+7 
+ 
+INTRODUCTION 
  
 This section provides a brief overview to the project, describes the aims and objectives of the 
 present work and its general structure. 
@@ -150,8 +155,9 @@ tools available to affect the processor speed performance and power footprint, d
 the configuration of the tools.  Finally, the processor capability of running different motion 
 estimation algorithms and the availability of a processor specific toolset to create the source 
 code necessary to execute them on the processor makes it possible to evaluate the 
-7 
- performance of different algorithms in terms of power consumption. All of these features are 
+8 
+ 
+performance of different algorithms in terms of power consumption. All of these features are 
 fully available to the end-user and represent a low-cost and accessible option to achieve the 
 proposed goal.  
 The work presented here aims to explore these power reduction options, evaluate their 
@@ -193,8 +199,9 @@ the processor design was implemented on an alternative platform, an Spartan 6 FP
 The processor was then implemented under different configurations and each one was 
 evaluated as stated before, plus metrics regarding the utilization and allocation of the 
 FPGA resources 
-8 
- - Evaluation of different ME algorithms in terms of power consumption: Using the 
+9 
+ 
+- Evaluation of different ME algorithms in terms of power consumption: Using the 
 processor toolkit (Sharpeye Studio), seven ME algorithms were described, compiled 
 into processor instructions and then the memory netlists were regenerated to reflect 
 these changes. The power consumption of each algorithm was then estimated using 
@@ -222,8 +229,9 @@ power reduction achieved
  
  
  
-9 
- CHAPTER 1: POWER CONSUMPTION REDUCTION TECHNIQUES FOR FPGA-BASED 
+10 
+ 
+CHAPTER 1: POWER CONSUMPTION REDUCTION TECHNIQUES FOR FPGA-BASED 
 DESIGNS 
 1.1.1 Pipelining technique to reduce glitches 
  
@@ -243,17 +251,18 @@ power. In Figure 1.A an example of a spurious transition in an XOR gate feeding 
 circuit is shown. Although the unwanted transition settles before the next rising clock edge, 
 thus making it harmless for data flow, the glitch wastes power both, for the 1 to 0 and 0 to 1 
 transition. 
-FIGURE 1.B GLITCH PROPAGATION THROUGH SEVERAL LOGIC LEVELS 
-FIGURE 1.A SPURIOUS LOGIC STATE 
- 
-TRANSITION 
  
  
 In Figure 1.B the effects of glitch propagation are clearly shown in this XOR gate array. 
 Assuming the combinational circuits are fast enough to switch several times before a clock 
 period has completed, a glitch is able to propagate freely through many stages, with the 
-10 
- potential hazard of propagating a single glitch into several circuits, then greatly increasing the 
+FIGURE 1.A SPURIOUS LOGIC STATE 
+TRANSITION 
+FIGURE 1.B GLITCH PROPAGATION THROUGH SEVERAL LOGIC LEVELS 
+ 
+11 
+ 
+potential hazard of propagating a single glitch into several circuits, then greatly increasing the 
 wasted power caused by a single glitch. 
 The concept of saving power by minimizing glitches in a circuit is not new and has been 
 investigated in several papers already, both for ASICÕs and FPGAÕs. Even though pipelining 
@@ -270,7 +279,6 @@ but holds especially true for FPGAÕs since unwanted switching of logic elements 
 unnecessary switching of the routing logic [7]. In Figure 1.C itÕs shown how pipelining prevents 
 glitch propagation by limiting the unwanted transition to the closest pipeline register, shown in 
 blue. 
-FIGURE 1.C PIPELINING OF LOGIC STAGES TO AVOID GLITCH PROPAGATION 
 As shown in [6] glitch related power consumption is an important concern when working with 
 FPGA-based implementations. The inherent reconfigurable logic of FPGAÕs, like the Look Up 
 Tables (LUTÕs), which have multiple inputs and whose output may be connected to several 
@@ -281,8 +289,10 @@ blocks that implement arithmetic functions that process a large number of bits, 
 multiply-accumulators.  
 Results derived from [6] conclude that, the more logic levels a design has, the more dynamic 
 power consumption rises, and also that power savings can be achieved by simply adjusting the 
-11 
- way the internal logic of the design is connected together in order to, in turn, reduce the logic 
+FIGURE 1.C PIPELINING OF LOGIC STAGES TO AVOID GLITCH PROPAGATION 
+12 
+ 
+way the internal logic of the design is connected together in order to, in turn, reduce the logic 
 levels the design uses. This might be seen as an easy way to achieve power savings but one 
 needs to take into consideration that alteration of the data and control flow of a design might 
 not be possible on every design, and if possible, this may require significant time spent on by-
@@ -324,8 +334,10 @@ collapsing, this only means that the input data is set in the output lines as if
 wire) the latches between those stages. In order for this approach to work, reconfigurable 
 latch controllers have to be implemented in the pipeline design [3]. Despite the asynchronous 
 nature of the ÒcollapseÓ input of the latches, the merging of stages cannot just take place at 
-12 
- any time. The pipeline has to make the transition between full-depth and shallow just before 
+13 
+ 
+FIGURE 1.D SWITCH PROCESS INTO SHALLOW MODE FOR AND ADAPTIVE PIPELINE 
+any time. The pipeline has to make the transition between full-depth and shallow just before 
 new data arrives into the top stage and data in the lower stage has already been processed. 
 This assures data integrity and allows for the stages to merge in time to process the new data 
 being loaded. In a similar fashion, the mechanism for splitting stages is set when new data is 
@@ -350,9 +362,9 @@ dedicated to its application in ASICÕs . The results of [4] show power savings t
 further explained in [4] that the power savings are mostly due to the reduced branch 
 misprediction penalty and longer execution latency for dependent data in deep mode. In the 
 case that was investigated, the shallow mode pipeline was half the size of the deep mode one. 
-FIGURE 1.D SWITCH PROCESS INTO SHALLOW MODE FOR AND ADAPTIVE PIPELINE 
-13 
- However when the stages are merged, and as stated in [5], glitch propagation can happen 
+14 
+ 
+However when the stages are merged, and as stated in [5], glitch propagation can happen 
 through a larger number of logic levels, increasing dynamic power consumption to some 
 extent. ItÕs safe to conclude that there is a tradeoff between decreased power savings when 
 merging pipeline stages due to increased possibilities of glitch propagation and increased 
@@ -364,7 +376,6 @@ branch prediction engine is present due to complexity and power issues.
  
  
  
-FIGURE 1.E SIMPLE CLOCK GATING IMPLEMENTATION  
  
 Clock gating is one well know technique that has been in use for more than a decade, as a 
 power reduction technique for ASICÕs. This technique is a method to reduce signal transitions 
@@ -387,8 +398,10 @@ FPGAÕs is significantly different than the one used in more recent papers like t
 [9], as the former uses a feedback multiplexer to emulate the mechanism by which clock 
 gating is implemented in ASICÕs, and doesnÕt take into account recent FPGAÕs which include 
 clock gating capabilities integrated on chip. Nevertheless it makes a point in observing that 
-14 
- because of the inherent differences between ASICÕs and FPGAÕs, customization of the clock 
+FIGURE 1.E SIMPLE CLOCK GATING IMPLEMENTATION  
+15 
+ 
+because of the inherent differences between ASICÕs and FPGAÕs, customization of the clock 
 trees is possible to a lesser extent in FPGAÕs 
 1.2.2 Clock tree in FPGAÕs 
  
@@ -422,9 +435,9 @@ clock signal. Eventually these clock signals are fed selectively into the lower 
 by means of interconnection logic found on the intersections of the spines. This scheme allows 
 to keep several sub-regions working at different clock speeds, and makes it easier to 
 implement clock gating techniques. 
-15 
-  
-FIGURE 1.F FINE-GRAINED CLOCK TREE DISTRIBUTION ON A MODERN FPGA  
+16 
+ 
+ 
  
 From what has already been explained and from the work shown in [9] itÕs expected that the 
 power savings achieved are directly related to the clock tree layout and the way it is fed into 
@@ -450,8 +463,10 @@ implemented in circuits in which the clock activity is low, meaning that some re
 circuit can be held idle for longer times, which translates in larger power savings. This result 
 means that the total average power savings due to clock gating are in the range of 6.2% to 
 7.7% for designs with low clock activity and marginal to negative savings when the clock 
-16 
- activity is high. Regarding implementation costs [9] concludes that actually there is a small 
+FIGURE 1.F FINE-GRAINED CLOCK TREE DISTRIBUTION ON A MODERN FPGA  
+17 
+ 
+activity is high. Regarding implementation costs [9] concludes that actually there is a small 
 performance penalty for any design implementing this technique on an FPGA. The penalty is 
 about 0%-2% of the overall performance and it is due to the conflict of the synthesis tool when 
 optimizing the placing of logic cells or slices with two goal targets, one of them would be 
@@ -484,7 +499,7 @@ function of voltage, significant power savings can be achieved by means of this 
 achieve the maximum decrease in power consumption the circuit has to operate at the 
 minimum voltage possible and at the same time guaranteeing proper circuit operation [21]. 
 Both [18] and [19] show implementations of the technique in ASICÕs and their results show a 
-maximum of 50% power and 82% savings respectively, both using a 0.18 ?m fabrication 
+maximum of 50% power and 82% savings respectively, both using a 0.18?m fabrication 
 technology. In both works DVS is implemented through a mechanism that acts either as 
 feedback from the critical delay path, or as a delay synthesizer that emulates this same path. 
 The voltage is then continuously scaled down until information from this mechanism informs 
@@ -492,8 +507,9 @@ the control logic that either a delay error is about to happen or it has just ha
 Delay errors are the result of operating the transistors at lower voltages. As the operation 
 voltage decreases, switching in these elements becomes increasingly slower. And eventually 
 the circuit is unable to meet the critical delay path because the added delay that the slower 
-17 
- switching causes. Ensuring that the circuit meets this timing constraint ensures proper 
+18 
+ 
+switching causes. Ensuring that the circuit meets this timing constraint ensures proper 
 operation of the circuit [21] 
 Since DVS provides significant power reductions in ASICÕs, some research has already been 
 conducted towards its implementation into FPGAÕs with papers showing successful results as 
@@ -534,8 +550,9 @@ logic levels in order to avoid compatibility issues when connecting outside logi
 FPGA. Thi, however, is not a problem, especially in modern FPGAÕs where the supply lines 
 of the core and I/O blocks are separated. 
  
-18 
- ? Aside from the delay errors that may occur as a consequence of lowering the voltage of 
+19 
+ 
+? Aside from the delay errors that may occur as a consequence of lowering the voltage of 
 the core, another type of errors known as ÒIO errorsÓ can happen when the core voltage is 
 so low that, even a high signal going from the core logic to the I/O blocks is recognized by 
 the later as a logic low, making the output of the chip to be incorrect. As with delay errors, 
@@ -565,12 +582,14 @@ effectively compensate quick variations in die temperature (and also due to freq
 variations, if the if the implementation mechanism allows for those) before they can cause 
 errors. Shown in Figure 1.G is a simplified diagram showing the LDMC used in [21] 
  
- FIGURE 1.G SIMPLIFIED DIAGRAM OF A LOGIC DELAY MEASUREMENT CIRCUIT  
+ 
 The mechanism used in this work, while simple and efficient, has the important drawback that 
 all threshold points have to be set up, and optimized manually. While this might seem like a 
 safe approach it doesnÕt account for process variations which implies that, for example, if a 
-19 
- design was to be implemented across several FPGAÕs, some of the chips would actually be 
+FIGURE 1.G SIMPLIFIED DIAGRAM OF A LOGIC DELAY MEASUREMENT CIRCUIT  
+20 
+ 
+design was to be implemented across several FPGAÕs, some of the chips would actually be 
 running at a higher voltage than they could because the threshold points are static and the 
 same for all chips. Another drawback is that since the frequency is kept constant, no tradeoff is 
 allowed between design performance and power consumption, then neglecting important 
@@ -593,14 +612,15 @@ inside the processor pipeline present an important hazard. The DCM provides a re
 for frequency synthesizing and works together with the DVS block to dynamically find and 
 optimal voltage and frequency point [20].  
  
-FIGURE 1.H SIMPLIFIED DIAGRAM THE FREQUENCY REDUCTION MECHANISM IN A DVS IMPLEMENTATION  
  
 The DVS working mechanism starts by reducing the core voltage according to processor 
 activity. To avoid errors in the pipeline, the mechanism freezes the pipeline state before both 
 the DVS and DCM blocks start to search for a new operating point. The algorithm used to 
 balance voltage vs. frequency is not explained in full detail, but it is shown that the mechanism 
-20 
- is able to lower the frequency as a safety measure when the delay path line detects that the 
+FIGURE 1.H SIMPLIFIED DIAGRAM THE FREQUENCY REDUCTION MECHANISM IN A DVS IMPLEMENTATION  
+21 
+ 
+is able to lower the frequency as a safety measure when the delay path line detects that the 
 current operating point fails to meet the critical delay constraint. The supply voltage is allowed 
 to vary between 0.9 and 1.2 volts. Shown in Figure 1.F is a simplified diagram of the delay path 
 sensing mechanism and frecuency reduction criteria used in [20]. When delay errors are 
@@ -641,8 +661,9 @@ can be implemented independently. While this is true on principle, in [20] itÕs 
 level of integration may be required depending on the implementation of the mechanism to 
 avoid data flow errors.  Even so, the level of integration that might be needed, if any, is fairly 
 low and it appears that doing so may present little effort to the designer [21]. This makes the 
-21 
- DVS technique a strong option when targeting to reduce power consumption of a design that 
+22 
+ 
+DVS technique a strong option when targeting to reduce power consumption of a design that 
 is already fully developed [21]. 
 1.3.2 Critic analysis of the power reduction techniques 
  
@@ -684,8 +705,9 @@ can benefit greatly from this technique, since those logic blocks are deactivate
 which directly translates into saved dynamic power. However, itÕs possible to argue that this is 
 rarely the case for pipelined designs since a pipeline works, ideally, on the basis that each 
 stage is processing data at the same time. To back up this statement itÕs worth noting that the 
-22 
- results from one of the cited papers show only a marginal decrease on power consumption 
+23 
+ 
+results from one of the cited papers show only a marginal decrease on power consumption 
 when clock gating is implemented in an already pipelined design. Also the design effort that 
 would be necessary to fully implement the technique on an existing design could be extensive, 
 especially for a complex superscalar processor, because of the need to guarantee that clock 
@@ -725,8 +747,9 @@ need to be taken into consideration to implement each one of the FPGA power redu
 techniques into the processor description. Based on the review and the critical analysis, a 
 decision was made to implement the adaptive pipelining technique. Specific implementation 
 details of the technique are described in chapter X of this work. 
-23 
- CHAPTER 2: THE MOTION ESTIMATION PROCESSOR 
+24 
+ 
+CHAPTER 2: THE MOTION ESTIMATION PROCESSOR 
  
 2.1 Overview 
  
@@ -768,8 +791,9 @@ performance analysis tools. A simple programming model is used that serves as a 
 interface layer between the processor architecture and the programmer, then making possible 
 to quickly build complex algorithms without the need to go into the processor architecture in-
 depth. A C-like language, called Estimo C is used for this purpose, an itÕs aimed specifically to 
-24 
- describe motion estimation algorithms with simple syntax and C control flow constructs (if, for, 
+25 
+ 
+describe motion estimation algorithms with simple syntax and C control flow constructs (if, for, 
 while, etc.) [15],[25]. The compiler is capable of extracting parallelism from the code to 
 increase processor performance. Finally, by using the cycle-accurate simulator together with 
 the and the analysis tools, itÕs possible to estimate the performance of a given processor 
@@ -809,11 +833,10 @@ position data, thus requiring additional vector alignment units to process to lo
 Below, in Figure 2.B is a diagram isolating the FPEU microarchitecture and its data flow [15]. 
 The COST Selector block at the bottom of the figure is used to optionally implement rate-
 distortion optimization to improve frame quality [23].  
-25 
-  
-FIGURE 2.A PROCESSOR BASELINE MICROARCHITECTURE. 
+26 
  
-Taken from [15] 
+ 
+ 
 Reference memory is arranged in 128 bit rows but the horizontal search range is reduced to 
 112 bits in order to leave a 16 bit pixel area to load the column of next macroblock by using a 
 sliding window technique. This allows loading of new data as the current one is being 
@@ -823,24 +846,27 @@ least one memory port is free at all times, then preventing data flow bottleneck
 The core instruction set architecture (ISA) lacks any memory access instructions. A DMA engine 
 sitting outside the processor core is in charge of feeding the frame and macroblock data to be 
 processed in its internal memory [15]. 
-26 
-  
- 
-FIGURE 2.B MICROARCHITECTURE OF THE FRACTIONAL-PEL EXECUTION UNIT 
+FIGURE 2.A PROCESSOR BASELINE MICROARCHITECTURE. 
 Taken from [15] 
+27 
+ 
+ 
+ 
  
 The processor top interface can be seen below in Figure 2.C. The processor architecture offers 
 32 registers allocated for various functions like command, motion vector candidate, profile and 
 results registers. These can be accessed through the marked register access ports. Access to 
 both, point memory and program memory is done through the external DMA engine that 
 interfaces with the processor using the DMA marked pins. The done_interrupt pin is asserted 
-27 
- when processing of a macroblock is completed. Also, the processor provides debug pins that 
+FIGURE 2.B MICROARCHITECTURE OF THE FRACTIONAL-PEL EXECUTION UNIT 
+Taken from [15] 
+28 
+ 
+when processing of a macroblock is completed. Also, the processor provides debug pins that 
 allow access to the SAD and winner motion vector during processing [25]. 
  
  
- FIGURE 2.C LIQUID MOTION PROCESSOR TOP INTERFACE. 
-Taken from [25] 
+ 
  
 2.3 Block-matching motion estimation  
  
@@ -859,9 +885,11 @@ frame to frame, the current frame is partitioned in several blocks called macrob
 is then conducted over a search area in order to match one of the macroblocks from the 
 current frame to another block in the reference frame [27]. 
  
-28 
-  
-FIGURE 2.D BLOCK MATCHING IN MOTION ESTIMATION. 
+FIGURE 2.C LIQUID MOTION PROCESSOR TOP INTERFACE. 
+Taken from [25] 
+29 
+ 
+ 
  
 The search algorithm moves a block window around the search area in the reference frame 
 until the best match is found. The search area defines the maximum displacement of the block 
@@ -886,10 +914,11 @@ comes at a high computational cost. The need to reduce computational complexity 
 the use of fast motion estimation algorithms that aim at reducing the number of search points 
 calculated during block matching, at the cost of a slight increase in frame distortion [26] 
  
-29 
- 2.4.1 Three step search (TSS) 
+FIGURE 2.D BLOCK MATCHING IN MOTION ESTIMATION. 
+30 
  
-FIGURE 2.E THREE STEP SEARCH (TSS) ALGORITHM PROCEDURE 
+2.4.1 Three step search (TSS) 
+ 
  
 One of the earliest fast block-matching motion estimation algorithms to be proposed was the 
 three step search. The algorithm begins the search at the center of the search window, setting 
@@ -910,10 +939,11 @@ reduced to 1. Otherwise, the algorithm performs a second iteration with a step s
 the possibility of skipping to the final step if the lowest cost point is found at the center of the 
 square [28]. The search procedure used in the FSS algorithm is represented graphically in 
 Figure 2.F. 
-30 
-  
+FIGURE 2.E THREE STEP SEARCH (TSS) ALGORITHM PROCEDURE 
+31 
  
-FIGURE 2.F FOUR STEP SEARCH (FSS) ALGORITHM PROCEDURE 
+ 
+ 
  
 2.4.3 Hexagon based search (HEXBS) 
  
@@ -932,11 +962,13 @@ reduce the total number of
 calculated search points. This can 
 be appreciated graphically in 
 Figures 2.G and 2.H.  
-FIGURE 2.G HEXAGON BASED (HEXBS) ALGORITHM PROCEDURE, 
  
+FIGURE 2.F FOUR STEP SEARCH (FSS) ALGORITHM PROCEDURE 
+FIGURE 2.G HEXAGON BASED (HEXBS) ALGORITHM PROCEDURE, 
 USING DIAMOND R 
-31 
- The HEXBS algorithm works as follows:  
+32 
+ 
+The HEXBS algorithm works as follows:  
 - The algorithm checks all 7 points 
 in the hexagon shape, the one in 
 the center of the hexagon shape, 
@@ -953,8 +985,6 @@ at the center of the hexagon,
 then a final refinement step 
 follows. Two variations of the 
 algorithm are presented here: 
-FIGURE 2.H HEXAGON BASED (HEXBS) ALGORITHM PROCEDURE, 
-USING SQUARE REFINEMENT 
  
  
 A) The traditional HEXBS uses a diamond shape consisting of points located at 
@@ -978,14 +1008,16 @@ the diamond, as shown in the points marked in red in figure 2.I.
 - For the next iteration, the center of the new diamond is relocated to the point having 
 the lowest cost in the previous iteration. Should this point be the center of the 
 diamond, then the algorithm skips to the final step 
-32 
- - For the final step, the diamond is made smaller, consisting of only 4 points, not 
+FIGURE 2.H HEXAGON BASED (HEXBS) ALGORITHM PROCEDURE, 
+USING SQUARE REFINEMENT 
+33 
+ 
+- For the final step, the diamond is made smaller, consisting of only 4 points, not 
 including the center point. The cost is calculated for this smaller pattern and the 
 motion vector set to the lowest cost point 
 The characteristics of this algorithm allow it to get low distortion while greatly reducing the 
 computational cost, when comparing it to the full search algorithm 
  
-FIGURE 2.I DIAMOND SEARCH (DS) ALGORITHM PROCEDURE 
  
 2.4.5 Logarithmic search (LOG) 
  
@@ -996,9 +1028,10 @@ the lowest cost point. If the lowest cost was found at the center point in the p
 then the step size is halved and the cost is calculated for the new smaller sized pattern. The 
 LOG search algorithm procedure can be appreciated graphically in Figure 2.J. 
  
-33 
-  
-FIGURE 2.J LOGARITHMIC SEARCH (LOG) ALGORITHM PROCEDURE 
+FIGURE 2.I DIAMOND SEARCH (DS) ALGORITHM PROCEDURE 
+34 
+ 
+ 
  
 CHAPTER 3: METHODOLOGY AND IMPLEMENTATION OF THE POWER REDUCTION 
 FEATURES 
@@ -1014,31 +1047,16 @@ Figure 3.A is the data flow that was fed into the power estimation tool in order
 results. The processor netlist was generated from the VHDL source code, and later on, timing 
 simulations using a testbench were carried out. The generated data was used to obtain a SAIF 
 (Switching activity interchange file) stimulus file. This file was processed alongside data 
-34 
- generated after the synthesis, mapping and place & route process of the design had taken 
+FIGURE 2.J LOGARITHMIC SEARCH (LOG) ALGORITHM PROCEDURE 
+35 
+ 
+generated after the synthesis, mapping and place & route process of the design had taken 
 place. The resulting power estimation report was the means by which the processor power 
 consumption was measured and compared. Also, Figure 3.A shows two additional steps to the 
 ones described above (shown in dotted lines) that were added to account for the 
 modifications made to the processor description (dotted, in blue) and the search algorithm 
 that was executed on the processor (dotted, in red).  
-Changes in the processor ME algorithm compilation 
-(VHDL) description 
-(SharpEye) 
-ME Processor RTL 
-Netlist generation 
-synthesis 
-The Xilinx Xpower is 
-Mapping and place Testbench run and timing 
-and Route simulations 
-Specific FPGA static 
-SAIF file generation 
-consumption data +User 
-(Switching activity) 
-set constraints 
-Xilinx XPower Analyzer 
-Power consumption report 
  
-FIGURE 3.A POWER BENCHMARKING METHODOLOGY 
  
 3.1.1 The Processor Testbench 
  
@@ -1051,8 +1069,29 @@ verification checkpoints used to test that the correct motion vectors are being 
 the processor. 
 ItÕs worth noting at this point that some of the processor elements, like the point and program 
 memory cores, are not provided as source code, but rather as netlists generated using the 
-35 
- memory contents, and a configuration file containing the specifications of the memory 
+Netlist generation 
+The Xilinx Xpower is 
+Testbench run and timing 
+simulations 
+Mapping and place 
+and Route 
+SAIF file generation 
+(Switching activity) 
+Specific FPGA static 
+consumption data +User 
+set constraints 
+Xilinx XPower Analyzer 
+Power consumption report 
+ME Processor RTL 
+synthesis 
+ME algorithm compilation 
+(SharpEye) 
+Changes in the processor 
+(VHDL) description 
+FIGURE 3.A POWER BENCHMARKING METHODOLOGY 
+36 
+ 
+memory contents, and a configuration file containing the specifications of the memory 
 functionality (size, write mode, etc.).  
 The testbench contains a series of macroblocks, corresponding to the ÒcurrentÓ frame 
 memory, that are matched to the data of a reference frame. The motion processor is originally 
@@ -1093,8 +1132,9 @@ specific data like capacitance and static power consumption for the particular F
 design is being implemented [16]. Power consumption for each element is then calculated as a 
 function of: driven capacitance, voltage used to power the circuit or element, activity rate and 
 clock frequency. 
-36 
- For activity rates not specified in the stimulus file or if the user needs to manually adjust them, 
+37 
+ 
+For activity rates not specified in the stimulus file or if the user needs to manually adjust them, 
 the XPower Analyzer provides the means to individually set the rates of input signals and also 
 clock frequencies for each clock tree. ItÕs also possible to adjust other values like the core 
 operating voltage and the global default rate, which is the default rate set for any signal with 
@@ -1136,13 +1176,13 @@ popular tools like Modelsim. Also, early tests reported a slightly higher level 
 the power estimation results when using the ISim simulator (this figure is determined by the 
 number of nets within the design whose activity rates were obtained from simulation data 
 with respect to the total number of nets in the design). The confidence level of the power 
-37 
- estimation was between 75% and 80%, depending on the processor implementation. The SAIF 
+38 
+ 
+estimation was between 75% and 80%, depending on the processor implementation. The SAIF 
 format was favored due to the reduced file size over VCD. 
 The power estimation dataflow is shown below in Figure 3.B and is explained fully in the 
 following description 
  
-FIGURE 3.B POWER ESTIMATION DATAFLOW 
  
 After the processor design was fully implemented, the resulting netlists were exported into 
 ISim, along with the target device configuration. Unless stated otherwise for specific cases in 
@@ -1174,8 +1214,10 @@ The processor implementation is also affected by the timing constraints set by t
 explored in [15] the LiquidMotion processor is operated at 200 MHz as its standard frequency. 
 The original source files of the processor include a timing constrain of 5 ns, set on the clock 
 network, so the implementation tool is directed to guide the processor implementation to try 
-38 
- to meet this timing constrain, within the physical limits of the target device and the processor 
+FIGURE 3.B POWER ESTIMATION DATAFLOW 
+39 
+ 
+to meet this timing constrain, within the physical limits of the target device and the processor 
 description. Typically, the closer the timing constraint is to the maximum achievable limit, the 
 more constrained the implementation is and this results in the final implementation 
 consuming a higher amount of power than a similar implementation clocked at a slightly 
@@ -1199,20 +1241,18 @@ Package ff1738
 Speed -3 
 Synthesis tool XST 
 Timing constraint on CLK 
-10 [ns], 5 [ns], 4 [ns] 
 network 
+10 [ns], 5 [ns], 4 [ns] 
  
-TABLE 3.1 VIRTEX-5 DEVICE IMPLEMENTATION CONFIGURATION DETAILS 
  
 Device target XC6SLX100T 
 Package fgg484 
 Speed -3 
 Synthesis tool XST 
 Timing constraint on CLK 
-10 [ns], 5 [ns] 
 network 
+10 [ns], 5 [ns] 
  
-TABLE 3.2 SPARTAN-6 DEVICE IMPLEMENTATION CONFIGURATION DETAILS 
  
 3.2.1 Implementation variations using the Virtex-5 device 
  
@@ -1220,34 +1260,38 @@ The following strategies are aimed at directly reducing power consumption, incre
 design clock rate or reduce the allocated resources to implement the design and are available 
 within the ISE tool for Virtex-5 devices as the implementation target: 
 - Power optimization with/without physical synthesis 
-39 
- - Timing performance with/without IOB packing 
+TABLE 3.1 VIRTEX-5 DEVICE IMPLEMENTATION CONFIGURATION DETAILS 
+TABLE 3.2 SPARTAN-6 DEVICE IMPLEMENTATION CONFIGURATION DETAILS 
+40 
+ 
+- Timing performance with/without IOB packing 
 - Timing performance with physical synthesis 
 - Area reduction with/without physical synthesis 
 The custom implementation strategies were aimed at maximizing power reduction by 
 increasing the level of computation effort the implementation tools take to process the design. 
 The custom strategies created are shown below in Table 3.3. 
 Strategy Custom implementation options 
-Map and P&R: Effort Level-> High, Extra effort-> Normal, 
 Power reduction Map + P&R 
+Map and P&R: Effort Level-> High, Extra effort-> Normal, 
 Power reduction-> On 
-Same as above, plus 
 Power reduction  Synthesis + 
-Synthesis: Optimization Goal-> Area, Optimization effort-> 
 Map + P&R 
+Same as above, plus 
+Synthesis: Optimization Goal-> Area, Optimization effort-> 
 High, Power reduction-> On 
  
-TABLE 3.3 CUSTOM STRATEGIES IMPLEMENTED ON THE VIRTEX-5 DEVICE  
  
  
-FIGURE 3.C METHODOLOGY DATAFLOW FOR THE IMPLEMENTATIONS TARGETNG THE VIRTEX-5 
  
-DEVICE 
 To explore the impact of these strategies, and other implementation options, on the design 
 performance, the following, consecutive steps (shown as a dataflow diagram in Figure 3.C) 
 were taken.  
-40 
- 1.- Implementation of this strategies, using the settings shown in Table 3.1 and a timing 
+TABLE 3.3 CUSTOM STRATEGIES IMPLEMENTED ON THE VIRTEX-5 DEVICE  
+FIGURE 3.C METHODOLOGY DATAFLOW FOR THE IMPLEMENTATIONS TARGETNG THE VIRTEX-5 
+DEVICE 
+41 
+ 
+1.- Implementation of this strategies, using the settings shown in Table 3.1 and a timing 
 constraint of 10 ns. Once each design was implemented, the standard procedure detailed in 
 section 3.1 was carried out to estimate the power consumption of each strategy. The 
 customized sets of strategies were then created in order to explore its impact on the 
@@ -1266,19 +1310,19 @@ maximum achievable frequency for each implementation was calculated.
 The completion time at processor maximum frequency for each implementation was 
 calculated as: 
 Max. achievable freq.
-Completion time @ max. freq = Completion time @ test freq. ?  
+Completion time @ max. freq = Completion time @ test freq.  
 Test frequency
+?  
 Drawing from the equation in [12] for dynamic power consumption in FPGAÕs: 
-2
-Dynamic Power = CV f 
+2Dynamic Power = CV f  
 Then the following approach is valid to obtain an accurate estimation on the processor average 
 dynamic power consumption at different frequencies: 
 Avg. dynamic power @ test freq.
-Avg. dynamic power @ max. freq = ? Max. achievable freq. 
+Avg. dynamic power @ max. freq =  Max. achievable freq.
 Test frequency
+?  
 The total energy consumption was then calculated as: 
-Total energy consumption = Completion time @ max. freq ? Average power consumption @ max. freq
-? ? ? ?
+? ? ? ?Total energy consumption = Completion time @ max. freq   Average power consumption @ max. freq?
  
 A comparative analysis then followed according to these results, as presented in Section 4.1.1 
 of the present work 
@@ -1286,8 +1330,9 @@ of the present work
 using a timing constraint of 4 ns (corresponding to 250 MHz processor speed). As above, the 
 total power consumption was calculated for both implementations and evaluated by means of 
 a comparative analysis.  
-41 
- 3.2.2 Implementation variations using the Spartan-6 device 
+42 
+ 
+3.2.2 Implementation variations using the Spartan-6 device 
  
 Since the implementation toolkit had a wider range of custom optimization options available, 
 this phase of the project was focused on customized strategies and the impact of specific 
@@ -1300,7 +1345,6 @@ separately and their impact on the processor performance was evaluated in terms 
 or positive impact on the power consumption. The methodology described in this Section is 
 presented as a dataflow diagram in Figure 3.D.  
  
-FIGURE 3.D METHODOLOGY DATAFLOW FOR THE IMPLEMENTATIONS TARGETNG THE SPARTAN-6 DEVICE 
  
 Again, based on the results from the previous section; from the available predefined strategies 
 provided by the toolkit, only the ones aimed at increasing the processor clock rate were 
@@ -1308,83 +1352,124 @@ implemented. The rest of the strategies explored are completely customized and t
 are shown in Table 3.4. 
 Other specific options considered for implementation on a case-by-case basis, and not listed 
 inside any of the strategies: 
-42 
-  For Synthesis:  For Mapping: 
-FSM encoding, RAM style, Map slice logic. 
-Auto BRAM packing.  
+FIGURE 3.D METHODOLOGY DATAFLOW FOR THE IMPLEMENTATIONS TARGETNG THE SPARTAN-6 DEVICE 
+43 
+ 
+ For Synthesis: 
+FSM encoding, RAM style, 
+Auto BRAM packing. 
+ 
+ For Mapping: 
+Map slice logic. 
  
 Custom 
-Synthesis Map Options P&R 
 strategy 
-Power Optimization Goal: Area 
-reduction: Optimization effort: High Default Default 
-Synthesis Power reduction: On 
-Power Effort Level: High Effort Level: High 
-reduction:  Default Extra effort: Normal Extra effort: Normal 
-Map + P&R Power reduction: On Power reduction: On 
+Synthesis Map Options P&R 
 Power 
-Effort Level: High Effort Level: High 
+reduction: 
+Synthesis 
+Optimization Goal: Area 
+Optimization effort: High 
+Power reduction: On 
+Default Default 
+Power 
 reduction:  
-Default Extra effort: Normal Extra effort: Normal 
-Map + P&R + 
-Power reduction: High Power reduction: High 
-Clock gating 
-Effort Level: High 
-Extra effort: Normal 
-Power 
-Power reduction: Extra effort Effort Level: High 
-reduction: 
-Default Combinatorial logic Extra effort: Normal 
-enhanced 
-optimization: On Power reduction: High 
-Map+ P&R 
-LUT combining: Area 
-Global Optimization: Power 
-Effort Level: High 
-Power 
-Extra effort: Normal 
-reduction: 
-Optimization goal: Area Power reduction: Extra effort Effort Level: High 
-Area 
-Optimization effort: High Combinatorial logic Extra effort: Normal 
-synthesis + 
-Power reduction: On optimization: On Power reduction: High 
-enhanced 
-LUT combining: Area 
 Map + P&R 
-Global Optimization: Power 
+Default 
 Effort Level: High 
-Power 
 Extra effort: Normal 
+Power reduction: On 
+Effort Level: High 
+Extra effort: Normal 
+Power reduction: On 
+Power 
+reduction:  
+Map + P&R + 
+Clock gating 
+Default 
+Effort Level: High 
+Extra effort: Normal 
+Power reduction: High 
+Effort Level: High 
+Extra effort: Normal 
+Power reduction: High 
+Power 
 reduction: 
-Optimization goal: Speed Power reduction: Extra effort Effort Level: High 
-Speed 
-Optimization effort: High Combinatorial logic Extra effort: Normal 
-Synthesis + 
-Power reduction: On optimization: On Power reduction: High 
 enhanced 
-LUT combining: Area 
-Map +P&R 
-Global Optimization: Power 
+Map+ P&R 
+Default 
 Effort Level: High 
 Extra effort: Normal 
 Power reduction: Extra effort 
 Combinatorial logic 
-Power Effort Level: High 
 optimization: On 
-reduction: Default Extra effort: Normal 
 LUT combining: Area 
-Optimized Power reduction: High 
+Global Optimization: Power 
+Effort Level: High 
+Extra effort: Normal 
+Power reduction: High 
+Power 
+reduction: 
+Area 
+synthesis + 
+enhanced 
+Map + P&R 
+Optimization goal: Area 
+Optimization effort: High 
+Power reduction: On 
+Effort Level: High 
+Extra effort: Normal 
+Power reduction: Extra effort 
+Combinatorial logic 
+optimization: On 
+LUT combining: Area 
+Global Optimization: Power 
+Effort Level: High 
+Extra effort: Normal 
+Power reduction: High 
+Power 
+reduction: 
+Speed 
+Synthesis + 
+enhanced 
+Map +P&R 
+Optimization goal: Speed 
+Optimization effort: High 
+Power reduction: On 
+Effort Level: High 
+Extra effort: Normal 
+Power reduction: Extra effort 
+Combinatorial logic 
+optimization: On 
+LUT combining: Area 
+Global Optimization: Power 
+Effort Level: High 
+Extra effort: Normal 
+Power reduction: High 
+Power 
+reduction: 
+Optimized 
+Default 
+Effort Level: High 
+Extra effort: Normal 
+Power reduction: Extra effort 
+Combinatorial logic 
+optimization: On 
+LUT combining: Area 
 Global Optimization: Power 
 Register Duplication: On 
 Pack I/O registers into IOBs: 
 For Inputs and Outputs 
+Effort Level: High 
+Extra effort: Normal 
+Power reduction: High 
  
-TABLE 3.4 CUSTOM STRATEGIES IMPLEMENTED ON THE SPARTAN-6 DEVICE  
 Finally, taking advantage of the additional options available for the SmartXplorer tool when 
 used with a Spartan-6 device, the predefined strategies provided with the tool that yielded the 
-43 
- fastest clock rate and the lowest power consumption were optimized using a 64 cycle 
+TABLE 3.4 CUSTOM STRATEGIES IMPLEMENTED ON THE SPARTAN-6 DEVICE  
+44 
+ 
+fastest clock rate and the lowest power consumption were optimized using a 64 cycle 
 iteration, using timing performance and power reduction algorithms respectively. The settings 
 for the resulting implementations were combined with the already collected results and 
 merged into an optimized strategy, listed in Table 3.4 as ÒPower reduction and Timing 
@@ -1423,10 +1508,10 @@ algorithm and proper functionality. Behavioral simulations were carried in this 
 one of the ME algorithms. The testbench was then run for 1000 [us], with the exception of the 
 FS algorithm which required a 6000 [us] run in order to go through all the macroblocks used in 
 the testbench. Completion time was then recorded for each one of the algorithms at the time 
-th
-the motion vector was obtained for the 7 macroblock 
-44 
- 3.3.3 Design Implementation configuration and post-P&R simulations 
+the motion vector was obtained for the 7th macroblock 
+45 
+ 
+3.3.3 Design Implementation configuration and post-P&R simulations 
  
 In order to carry timing simulations and get the final power estimation results for each 
 algorithm, the netlist files containing the point memory and program memory had to be 
@@ -1444,7 +1529,6 @@ Primitive Selection Optimize for Area
 Pin Polarity Rising edge triggered/active high 
 Target device XC3S1500-5fg456 
  
-TABLE 3.5 MEMORY NETLIST CONFIGURATION  
 The MIF files obtained for each algorithm were manually modified to convert them into COE 
 files, which is a format acceptable for the CORE Generator tool. The COE files were then used 
 together with the configuration stated above, to create and initialize the memory netlists. 
@@ -1458,21 +1542,22 @@ Package ff1738
 Speed -3 
 Synthesis tool XST 
 Timing constraint on CLK 
-10 ns 
 network 
+10 ns 
  
-TABLE 3.6 IMPLEMENTATION CONFIGURATION DETAILS FOR THE VARIOUS MOTION ESTIMATION ALGORITHMS 
 Once the design was fully implemented, the standard procedure to estimate the power 
 consumption, as described in section 3.1 of the present work, was carried out. As in the case 
 for behavioral simulation, completion time for each algorithm was recorded at the time the 
-th
-motion vector was obtained for the 7 macroblock (the FS algorithm post-P&R simulation was 
+motion vector was obtained for the 7th macroblock (the FS algorithm post-P&R simulation was 
 extended to 6000 [us], as was the case for the behavioral simulation). Completion times for 
 behavioral and post-P&R simulations were compared to verify that the values were equal.  
 3.4 Architectural changes into the processor description 
  
-45 
- Drawing from the information collected from the literature review about FPGA power 
+TABLE 3.5 MEMORY NETLIST CONFIGURATION  
+TABLE 3.6 IMPLEMENTATION CONFIGURATION DETAILS FOR THE VARIOUS MOTION ESTIMATION ALGORITHMS 
+46 
+ 
+Drawing from the information collected from the literature review about FPGA power 
 reduction techniques, as presented in Chapter 1 of the present work, as well as the 
 conclusions obtained from the critical analysis at the end of the review and the details about 
 the processor functionality and architecture, a decision was taken to implement the adaptive 
@@ -1498,17 +1583,17 @@ to the outputs of the registers, which in turn is connected to the output ports 
 stage. The processed data is subsequently fed into the next pipeline stage. Feedback paths 
 exist between different pipeline stages and also internally to each stage. 
  
-FIGURE 3.E TYPICAL ARCHITECTURE OF A PIPELINE STAGE INSIDE THE LIQUIDMOTION PROCESSOR 
  
 When implementing the processor in an FPGA platform, the registers are synthetized as flip-
 flops. These registers account for a high level of dynamic power consumption. As evident by 
 the fully synchronous scheme used in the processor pipeline, every clock cycle, energy is used 
-46 
- to activate the flip-flopÕs. The approach used in this project to create the shallow pipeline, was 
+FIGURE 3.E TYPICAL ARCHITECTURE OF A PIPELINE STAGE INSIDE THE LIQUIDMOTION PROCESSOR 
+47 
+ 
+to activate the flip-flopÕs. The approach used in this project to create the shallow pipeline, was 
 to remove the registers in one of the pipeline stages, then allowing that stage to be merged 
 with the stage below it. This idea is shown in Figure 3.F. 
  
-FIGURE 3.F PROPOSED MERGING OF THE PIPELINE STAGES INSIDE THE LIQUIDMOTION PROCESSOR 
 This approach required changes into the processor VHDL description in order to remove the 
 registers. This was done by removing the synchronous description that was being synthesized 
 as flip-flopÕs. The rest of the combinational logic was meant to remain as in the original source 
@@ -1534,8 +1619,10 @@ of the pipeline, which meant that it was less likely to be affected by complex f
 Essential parts of the modified source code can be found in Appendix II of the present work  
 3.4.2 Behavioral and Post-Place & Route simulations 
  
-47 
- Simulations were used in this phase of the project in order to verify that the changes made 
+FIGURE 3.F PROPOSED MERGING OF THE PIPELINE STAGES INSIDE THE LIQUIDMOTION PROCESSOR 
+48 
+ 
+Simulations were used in this phase of the project in order to verify that the changes made 
 into the processor description were not altering the processor functionality. Behavioral 
 simulations were used as a first approach to verify this point. For these simulations, only the 
 source code relating to the pipeline was modified. No changes were made to the processor 
@@ -1547,8 +1634,9 @@ coding errors and erroneous descriptions can lead to either, generation of latch
 synthesizable design.  
  
 FIGURE 3.G SIMPLIFIED DIAGRAM OF THE LIQUIDMOTION PROCESSOR PIPELINE 
-48 
- The Post-P&R simulations were used as a second stage to verify processor functionality, but 
+49 
+ 
+The Post-P&R simulations were used as a second stage to verify processor functionality, but 
 also to verify that the processor implementation was feasible and that it was successful in 
 reducing the power consumption, compared to the original core. Feasibility of the design was 
 judged in terms of the resulting implementation power consumption and by verifying that no 
@@ -1588,8 +1676,9 @@ speeds, this was judged as the best way to compare their performance.
 4.1.1 Results using the Virtex-5 device and discussion  
  
 Several aspects can be highlighted from the results presented in Table 4.A as follows: 
-49 
- High static power consumption: First of all, for the case of the Virtex-5 FPGA, itÕs obvious that 
+50 
+ 
+High static power consumption: First of all, for the case of the Virtex-5 FPGA, itÕs obvious that 
 there is a great difference between the dynamic and static power consumption, with the latter 
 being more than 18 times the former. Regarding this point, it should be considered that the 
 Virtex-5 platform, itÕs a high end platform, generally aimed more at timing performance issues 
@@ -1631,48 +1720,9 @@ predefined ones provided by the implementation toolkit. This result motivated th
 of a larger array of options and customs strategies in the experiment conducted using the 
 Spartan-6 platform.  
  
-50 
- Dynamic Static Total Max Slice Occupied Fully 
-Power Power Power processor registers/ slices used 
-Options 
-(avg.) [mW] [mW] frecuency LUTÕs LUT-FF 
-[mW] [Mhz] pairs 
-Design timing constraint goal: 100 Mhz 
-Default 
-48.77 901.60 950.38 141.383 825/1,851 639 772 
-Power reduction 
-37.19 901.48 938.67 146.284 825/1,851 559 824 
-Map + P&R 
-Power reduction  
-Synthesis + Map + 
-39.87 901.51 941.38 122.429 825/1,836 588 763 
-P&R 
-Power optimization 
-39.34 901.51 940.85 122.986 822/1,710 480 776 
-w/physical synth. 
-Power optimization 
-39.34 901.51 940.85 122.986 822/1,710 480 776 
-w/o physical synth. 
-Area reduction 
-w/physical synthesis 
-41.35 901.53 942.87 124.378 827/1,574 451 752 
- 
-Area reduction w/o 
-physical synthesis 44.43 901.56 945.99 120.758 827/1,636 476 739 
- 
-Timing performance 
-w/IOB packing 48.94 901.60 950.54 127.307 847/1,898 667 777 
- 
-Timing performance 
-with physical 53.75 901.65 955.41 115.754 846/1,837 650 779 
-synthesis 
-Timing performance 
-w/o IOB packing 
-45.40 901.57 946.97 139.412 875/1,903 642 804 
+51 
  
  
-TABLE 4.A EXPERIMENTAL RESULTS USING DIFFERENT IMPLEMENTATION STRATEGIES FOR THE 
-VIRTEX-5 DEVICE 
  
 Following the methodology described in section 3.2.1 of the current work, the strategies 
 achieving the best result for lower power consumption and fastest clock speed were optimized 
@@ -1684,8 +1734,70 @@ as the speed of the original implementation). The custom strategy couldnÕt be op
 the fact that the SmartXplorer tool doesnÕt allow for this using the Virtex-5 platform. Because 
 of this, only the ÒTiming performance w/o IOB packingÓ was optimized prior re-
 implementation. Results for this procedure are shown below in Table 4.B. 
-51 
- Again, judging from these results, several aspects can be pointed out: 
+Options 
+Dynamic 
+Power 
+(avg.) 
+[mW] 
+Static 
+Power 
+[mW] 
+Total 
+Power 
+[mW] 
+Max 
+processor 
+frecuency 
+[Mhz] 
+Slice 
+registers/ 
+LUTÕs 
+Occupied 
+slices 
+Fully 
+used 
+LUT-FF 
+pairs 
+Design timing constraint goal: 100 Mhz 
+Default 48.77 901.60 950.38 141.383 825/1,851 639 772 
+Power reduction 
+Map + P&R 
+37.19 901.48 938.67 146.284 825/1,851 559 824 
+Power reduction  
+Synthesis + Map + 
+P&R 
+39.87 901.51 941.38 122.429 825/1,836 588 763 
+Power optimization 
+w/physical synth. 
+39.34 901.51 940.85 122.986 822/1,710 480 776 
+Power optimization 
+w/o physical synth. 
+39.34 901.51 940.85 122.986 822/1,710 480 776 
+Area reduction 
+w/physical synthesis 
+ 
+41.35 901.53 942.87 124.378 827/1,574 451 752 
+Area reduction w/o 
+physical synthesis 
+ 
+44.43 901.56 945.99 120.758 827/1,636 476 739 
+Timing performance 
+w/IOB packing 
+ 
+48.94 901.60 950.54 127.307 847/1,898 667 777 
+Timing performance 
+with physical 
+synthesis 
+53.75 901.65 955.41 115.754 846/1,837 650 779 
+Timing performance 
+w/o IOB packing 
+ 
+45.40 901.57 946.97 139.412 875/1,903 642 804 
+TABLE 4.A EXPERIMENTAL RESULTS USING DIFFERENT IMPLEMENTATION STRATEGIES FOR THE 
+VIRTEX-5 DEVICE 
+52 
+ 
+Again, judging from these results, several aspects can be pointed out: 
 Speed/Power tradeoff: As the frequency of the design is pushed to the limits, it becomes 
 apparent that lower power consumption can only be sustained at the cost of a decreased 
 design speed. In this case it was investigated if the higher clocked implementation could 
@@ -1695,30 +1807,34 @@ similar energy consumption levels using the 200 Mhz. constraint. One has to keep
 even though the energy consumption is nearly identical for both cases, the fastest 
 implementation still runs almost 20 Mhz. faster than the lower power consumption core, 
 which means a potential advantage when processing video in real time. 
-Dynamic Total Energy 
-Max 
-Power Static Power Total Power consumption 
-Virtex-5 processor 
-(avg.) [mW] [mW] @ max. freq. 
-freq. [Mhz] 
-[mW] [uJ] 
-Design timing constraint goal: 200 Mhz 
-Default 
-50.47 901.62 952.09 187.477 68.393 
-Lowest 
-40.12 901.51 941.63 185.977 61.477 
+Virtex-5 
+Dynamic 
 Power 
-Fastest 
-44.30 901.56 945.86 204.040 61.401 
+(avg.) 
+[mW] 
+Static Power 
+[mW] 
+Total Power 
+[mW] 
+Max 
+processor 
+freq. [Mhz] 
+Total Energy 
+consumption 
+@ max. freq. 
+[uJ] 
+Design timing constraint goal: 200 Mhz 
+Default 50.47 901.62 952.09 187.477 68.393 
+Lowest 
+Power 
+40.12 901.51 941.63 185.977 61.477 
+Fastest 44.30 901.56 945.86 204.040 61.401 
 Design timing constraint goal: 250 Mhz 
 Lowest 
-38.47 901.50 939.97 153.870 67.349 
 Power 
-Fastest 
-47.72 901.59 949.32 220.459 61.492 
+38.47 901.50 939.97 153.870 67.349 
+Fastest 47.72 901.59 949.32 220.459 61.492 
  
-TABLE 4.B EXPERIMENTAL RESULTS OBTAINED USING DIFFERENT TIMING CONSTRAINTS ON THE 
-CLOCK NETWORK FOR THE VIRTEX-5 DEVICE 
  
 Decrease in energy consumption: When the fastest implementation is compared to the 
 original core, a reduction of 10.22% in the total energy consumption is observed. ItÕs worth 
@@ -1734,62 +1850,85 @@ can be explained by the fact that, as the timing constraint is set higher, the i
 tools make use of more aggressive algorithms to try to meet the design constraints, however, 
 this might result in a significant decrease of speed or increase in power consumption, since the 
 tight requirements leave little room for other implementation tradeoffs. 
-52 
- 4.1.2 Results using the Spartan-6 device and discussion 
+TABLE 4.B EXPERIMENTAL RESULTS OBTAINED USING DIFFERENT TIMING CONSTRAINTS ON THE 
+CLOCK NETWORK FOR THE VIRTEX-5 DEVICE 
+53 
+ 
+4.1.2 Results using the Spartan-6 device and discussion 
  
 Following the procedure outlined in Section 3.2.2, the following results are reported on Tables 
 4.C and 4.D for the case of the Spartan-6 implementations. 
-Dynamic Static Total Max Slice Occupied Fully 
-Power Power Power processor registers/ slices used 
-Options 
-(avg.) [mW] [mW] frecuency LUTÕs LUT-FF 
-[mW] [Mhz] pairs 
-Default 30.39 81.48 111.87 111.869 840/1,845 647 809 
-Power reduction: 
-31.42 81.52 112.94 98.610 840/1,816 652 799 
-Synthesis 
-Power reduction:  
-109.123 
-29.58 81.46 111.04 814/1,809 621 788 
-Map + P&R 
-Power reduction:  
-Map + P&R + Clock 116.212 
-29.67 81.46 111.13 814/1,809 621 768 
-gating 
-Power reduction: 
-118.441 
-29.09 81.44 110.54 818/1,403 505 546 
-enhanced Map+ P&R 
-Power reduction: 
-Area synthesis + 
-101.719 
-29.66 81.46 111.12 818/1,439 501 546 
-enhanced Map + 
-P&R  
-Power reduction: 
-Speed Synthesis + 28.87 81.44 110.30 103.638 818/1,406 534 552 
-enhanced Map +P&R  
-Timing performance 
-w/IOB packing 30.78 81.50 112.27 78.272 918/1,558 671 679 
  
-Timing performance 
-with physical 78.272 
-30.78 81.50 112.27 918/1,558 671 679 
-synthesis 
-Timing performance 
-w/o IOB packing 123.793 
-29.75 81.46 111.21 923/1,552 601 716 
- 
-Power reduction and 
-timing performance: 29.09 81.44 110.54 118.441 818/1,403 505 546 
-Optimized 
- 
-TABLE 4.C EXPERIMENTAL RESULTS USING DIFFERENT IMPLEMENTATION STRATEGIES FOR THE 
-SPARTAN-6 DEVICE 
  
 Summarizing from the results shown in the above table, itÕs possible to outline the following: 
-53 
- Static Power consumption: As predicted before, the power consumption for the Spartan-6 
+Options 
+Dynamic 
+Power 
+(avg.) 
+[mW] 
+Static 
+Power 
+[mW] 
+Total 
+Power 
+[mW] 
+Max 
+processor 
+frecuency 
+[Mhz] 
+Slice 
+registers/ 
+LUTÕs 
+Occupied 
+slices 
+Fully 
+used 
+LUT-FF 
+pairs 
+Default 30.39 81.48 111.87 111.869 840/1,845 647 809 
+Power reduction: 
+Synthesis 
+31.42 81.52 112.94 98.610 840/1,816 652 799 
+Power reduction:  
+Map + P&R 
+29.58 81.46 111.04 109.123 814/1,809 621 788 
+Power reduction:  
+Map + P&R + Clock 
+gating 
+29.67 81.46 111.13 116.212 814/1,809 621 768 
+Power reduction: 
+enhanced Map+ P&R 
+29.09 81.44 110.54 118.441 818/1,403 505 546 
+Power reduction: 
+Area synthesis + 
+enhanced Map + 
+P&R  
+29.66 81.46 111.12 101.719 818/1,439 501 546 
+Power reduction: 
+Speed Synthesis + 
+enhanced Map +P&R  
+28.87 81.44 110.30 103.638 818/1,406 534 552 
+Timing performance 
+w/IOB packing 
+ 
+30.78 81.50 112.27 78.272 918/1,558 671 679 
+Timing performance 
+with physical 
+synthesis 
+30.78 81.50 112.27 78.272 918/1,558 671 679 
+Timing performance 
+w/o IOB packing 
+ 
+29.75 81.46 111.21 123.793 923/1,552 601 716 
+Power reduction and 
+timing performance: 
+Optimized 
+29.09 81.44 110.54 118.441 818/1,403 505 546 
+TABLE 4.C EXPERIMENTAL RESULTS USING DIFFERENT IMPLEMENTATION STRATEGIES FOR THE 
+SPARTAN-6 DEVICE 
+54 
+ 
+Static Power consumption: As predicted before, the power consumption for the Spartan-6 
 platform is much lower than for the Virtex-5. As the Spartan-6 is a platform focused into 
 reducing overall power consumption and is a newer device fabricated using a smaller process, 
 this result was expected. The static power consumption also stayed at nearly identical levels as 
@@ -1832,39 +1971,42 @@ performance algorithms respectively, using the SmartXplorer tool. Results are sh
 Decrease in energy consumption: The total energy consumption was reduced slightly, with a 
 2.49% in the best case for the 100 Mhz timing constraint and 3.96% for the 200 Mhz 
 constraint. ItÕs important to note that, for the latter case, all of the strategies failed by a large 
-54 
- margin to meet the constraint. This could imply that slower devices donÕt benefit as much 
+55 
+ 
+margin to meet the constraint. This could imply that slower devices donÕt benefit as much 
 from implementation variations, as on principle they are not able to run the core at the rated 
 200 Mhz. speed, there is little room, in terms of speed, to tradeoff in favor of decreasing 
 power consumption. Much more evident in the case of the Spartan-6 was the fact that the 
 lowest power implementation and the fastest one, achieved similar levels of total energy 
 consumption, with the fastest one still having the advantage of faster data processing. 
-Dynamic Total Energy 
+Spartan-6 
+Dynamic 
+Power 
+(avg.) 
+[mW] 
+Static Power 
+[mW] 
+Total Power 
+[mW] 
 Max 
-Power Static Power Total Power consumption 
-Spartan-6 processor 
-(avg.) [mW] [mW] @ max. freq. 
+processor 
 freq. [Mhz] 
-[mW] [uJ] 
+Total Energy 
+consumption 
+@ max. freq. 
+[uJ] 
 Design timing constraint goal: 100 Mhz 
-Default 
-30.39 81.48 111.87 111.869 26.139 
+Default 30.39 81.48 111.87 111.869 26.139 
 Lowest 
+Power 
 28.87 81.44 110.30 103.638 25.486 
-Power 
-Fastest 
-29.11 81.44 110.56 125.960 24.686 
+Fastest 29.11 81.44 110.56 125.960 24.686 
 Design timing constraint goal: 200 Mhz 
-Default 
-30.39 81.48 111.87 134.134 25.303 
+Default 30.39 81.48 111.87 134.134 25.303 
 Lowest 
-28.55 81.43 109.98 117.481 24.620 
-Power 
-Fastest 
-30.09 81.47 111.56 165.317 24.299 
+Power 28.55 81.43 109.98 117.481 24.620 
+Fastest 30.09 81.47 111.56 165.317 24.299 
  
-TABLE 4.D EXPERIMENTAL RESULTS OBTAINED USING DIFFERENT TIMING CONSTRAINTS ON THE 
-CLOCK NETWORK FOR THE SPARTAN-6 DEVICE 
  
 SmartXplorer optimizations: Using this tool, it was possible to discover that the processor 
 implementation also benefits from register optimization options. The options used were 
@@ -1883,8 +2025,11 @@ algorithms on the processor power consumption
  
 The results obtained from the experiments outlined in section 3.3 of the present work are 
 reported in Table 4.E. The table reports the total power consumption of each motion 
-55 
- estimation search algorithm, as well as the processing time that each one takes to process the 
+TABLE 4.D EXPERIMENTAL RESULTS OBTAINED USING DIFFERENT TIMING CONSTRAINTS ON THE 
+CLOCK NETWORK FOR THE SPARTAN-6 DEVICE 
+56 
+ 
+estimation search algorithm, as well as the processing time that each one takes to process the 
 same data and the total energy consumption.  
 From the results shown in this Section, the following remarks can be made: 
 Impact on dynamic power: Dynamic energy consumption is notably impacted by the motion 
@@ -1900,29 +2045,30 @@ larger amount of date, but other issues such as recovering from more branch misp
 depending on the algorithm, take place as well (please refer to Chapter 2 of the current work 
 for more details on the motion estimation algorithms) 
  
-Dynamic Static Total energy 
-Total Power Processing 
-Algorithm Power Power consumption 
-[mW] time [us] 
-(avg.) [mW] [mW] [uJ] 
-FS [15x15] 
-69.32 901.82 971.14 5516.920 5357.701 
+Algorithm 
+Dynamic 
+Power 
+(avg.) [mW] 
+Static 
+Power 
+[mW] 
+Total Power 
+[mW] 
+Processing 
+time [us] 
+Total energy 
+consumption 
+[uJ] 
+FS [15x15] 69.32 901.82 971.14 5516.920 5357.701 
 HEXBS 
-47.27 901.59 948.86 601.520 570.758 
 (diamond) 
-HEXBS (square) 
-48.77 901.60 950.38 693.920 659.487 
-Diamond 
-49.46 901.61 951.07 743.720 707.329 
-Logarithmic 
-55.27 901.67 956.94 884.120 846.049 
-TSS 
-58.30 901.70 960.00 927.720 890.611 
-FSS 
-57.13 901.69 958.82 960.720 921.157 
+47.27 901.59 948.86 601.520 570.758 
+HEXBS (square) 48.77 901.60 950.38 693.920 659.487 
+Diamond 49.46 901.61 951.07 743.720 707.329 
+Logarithmic 55.27 901.67 956.94 884.120 846.049 
+TSS 58.30 901.70 960.00 927.720 890.611 
+FSS 57.13 901.69 958.82 960.720 921.157 
  
-TABLE 4.E EXPERIMENTAL RESULTS OBTAINED USING DIFFERENT TIMING CONSTRAINTS ON THE 
-CLOCK NETWORK FOR THE SPARTAN-6 DEVICE 
  
 Total energy consumption: The difference in total energy consumption when using two 
 different fast searching ME algorithms can be up to 38.03%. This is a notable difference and 
@@ -1933,8 +2079,11 @@ when choosing a ME search algorithm to execute on the processor, one has to bear
 that the choice will not only affect the power consumption, but also the quality of the video 
 processing performed. This means that different algorithms have different distortion rates. In 
 general, an algorithm that uses more search points has lower distortion rates, which translates 
-56 
- into better video quality. Distortion rate is calculated as the value of the matching difference 
+TABLE 4.E EXPERIMENTAL RESULTS OBTAINED USING DIFFERENT TIMING CONSTRAINTS ON THE 
+CLOCK NETWORK FOR THE SPARTAN-6 DEVICE 
+57 
+ 
+into better video quality. Distortion rate is calculated as the value of the matching difference 
 between the matched macroblocks (i.e. the SAD  in the case of the LiquidMotion processor). 
 Further evaluation of the performance of motion estimation algorithms in terms of distortion 
 and average search points can be found in [27] and related works. 
@@ -1944,23 +2093,31 @@ reduce the processor power consumption
 The results of the implementation of the shallow pipeline in terms of power consumption are 
 shown below in Table 4.F. Description of the methodology of the experiment can be found in 
 section 3.4 of the current work. 
+Virtex-5 
 Dynamic 
-Static Total Max 
-Power Processing 
-Virtex-5 Power Power processor FFÕs 
-(avg.) time [us] 
-[mW] [mW] freq. [Mhz] 
+Power 
+(avg.) 
 [mW] 
+Static 
+Power 
+[mW] 
+Total 
+Power 
+[mW] 
+Max 
+processor 
+freq. [Mhz] 
+FFÕs 
+Processing 
+time [us] 
 Design timing constraint goal: 100 Mhz 
 Original 
-48.77 901.60 950.38 141.383 825 693920 
 Core 
+48.77 901.60 950.38 141.383 825 693920 
 Shallow 
-44.10 901.55 945.65 133.565 637 689320 
 Pipeline 
+44.10 901.55 945.65 133.565 637 689320 
  
-TABLE 4.F EXPERIMENTAL RESULTS OBTAINED USING THE PROPOSED SHALLOW PIPELINE DESIGN 
-FOR THE VIRTEX-5 DEVICE 
  
 Reduced dynamic power consumption: As a result of fewer registers contained in the pipeline, 
 fewer FFÕs were allocated for the processor implementation, which translated into reduced 
@@ -1980,8 +2137,11 @@ Even though the change seems to be fairly small, itÕs important to point out tha
 reduces total energy consumption at the same time and that the number of macroblocks used 
 for the testbench is fairly small when compared to a full video processing application which 
 can benefit even more from this decreased processing time 
-57 
- Steady static power: The creation of a shallow pipeline doesnÕt impact the static power 
+TABLE 4.F EXPERIMENTAL RESULTS OBTAINED USING THE PROPOSED SHALLOW PIPELINE DESIGN 
+FOR THE VIRTEX-5 DEVICE 
+58 
+ 
+Steady static power: The creation of a shallow pipeline doesnÕt impact the static power 
 consumption of the targeted FPGA. This behavior was anticipated in the review of the adaptive 
 pipeline design in Chapter 1. 
 Increase of glitches in the design: Despite the fact that a significant amount of registers were 
@@ -2023,8 +2183,9 @@ total energy consumption can be achieved by using a custom configuration for the
 implementation tools. As a result form this work, a custom configuration was created 
 specifically to optimize the resulting implementation of the LiquidMotion processor, using the 
 Xilinx ISE tools. The details of this configuration are shown in Table 3.4. Processor maximum 
-58 
- frequency is also increased (more than 8% for the Virtex-5 device) meaning an overall increase 
+59 
+ 
+frequency is also increased (more than 8% for the Virtex-5 device) meaning an overall increase 
 in processor performance. The apparent tradeoff of this benefit is the increased 
 implementation runtime. Given the level of increased performance obtained, itÕs safe to say 
 that, despite this small drawback, the investment of increased computation time in the 
@@ -2065,8 +2226,9 @@ expected from adding up the reductions achieved by each technique.
 CHAPTER 5:  WORK EVALUATION AND FUTURE WORK TOWARDS REDUCING THE 
 PROCESSOR POWER CONSUMPTION 
  
-59 
- After having analyzed the results of the experiments proposed in the current work, a critical 
+60 
+ 
+After having analyzed the results of the experiments proposed in the current work, a critical 
 evaluation of the current project is presented in this chapter, as well as outlining the aspects 
 that could be further explored in future works. 
 5.1 Evaluation of the current work 
@@ -2106,8 +2268,9 @@ used standalone or interchangeably with the original pipeline design, and given 
 configurability features of the processor, it could be switched to from full to low power mode 
 whenever the current video application is not demanding the totality of the processor 
 resources by switching the pipeline design. The shallow pipeline opens the possibility to 
-60 
- explore further architecture changes that could potentially reduce the power consumption 
+61 
+ 
+explore further architecture changes that could potentially reduce the power consumption 
 even further. 
 5.2 Future work 
  
@@ -2142,8 +2305,9 @@ performance of the LiquidMotion processor in terms of power consumption.
  
  
  
-61 
- REFERENCES 
+62 
+ 
+REFERENCES 
  
 [1] Kalaycioglu, C.; Ulusel, O.C.; Hamzaoglu, I.; , "Low power techniques for Motion Estimation 
 hardware," Field Programmable Logic and Applications, 2009. FPL 2009. International 
@@ -2189,8 +2353,9 @@ http://www.xilinx.com/support/documentation/sw_manuals/xilinx12_2/whatsnew.htm
  
 [12] Xilinx, Power Consumption at 40 and 45 nm, White Paper: Spartan-6 and Virtex-6 Devices 
 WP298 (v1.0), Apr. 2009. [Online]. Available: 
-62 
- http://www.xilinx.com/support/documentation/white_papers/wp298.pdf [Accessed: 11 May. 
+63 
+ 
+http://www.xilinx.com/support/documentation/white_papers/wp298.pdf [Accessed: 11 May. 
 2012]. 
  
 [13] XPower Analyzer. [Online]. Available: 
@@ -2233,8 +2398,9 @@ International Conference on , vol., no., pp.173-180, 11-14 Dec. 2005
 estimation processor for the H.264 video codec," Field Programmable Logic and Applications, 
 2008. FPL 2008. International Conference on , vol., no., pp.149-154, 8-10 Sept. 2008 
  
-63 
- [23] Nunez-Yanez, J.L.; Spiteri, T.; Vafiadis, G.; , "Multi-standard reconfigurable motion estimation 
+64 
+ 
+[23] Nunez-Yanez, J.L.; Spiteri, T.; Vafiadis, G.; , "Multi-standard reconfigurable motion estimation 
 processor for hybrid video codecs," Computers & Digital Techniques, IET , vol.5, no.2, pp.73-85, 
 March 2011 
  
@@ -2271,319 +2437,402 @@ FPGA Exploitation," Proceedings of the IEEE , vol.95, no.2, pp.438-452, Feb. 200
  
  
  
-64 
- Appendix I: Motion estimation algorithms source code 
+65 
+ 
+Appendix I: Motion estimation algorithms source code 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
   
+/// 4 Step Search 
   
-//Diamond search /// 4 Step Search 
- 
-//8 steps maximum   
-fpi = 8; 
 S = 2; // Step size 
- 
-Pattern(largediamond) 
 for(i = 0 to 2 step 1) 
-{ { 
-check(2,0) check(0, 0); 
- 
-check(1,1) check(S, 0); 
-check (0,2) 
-check(S, S); 
-check(-1,1) check(0, S); 
-check(-2,0) check(-S, S); 
- 
-check(-1,-1) check(-S, 0); 
-check(0,-2) 
-check(-S, -S); 
-check(1,-1) 
- check(0, -S); 
-} check(S, -S); 
-Pattern(small) update; 
- 
 { 
+check(0, 0); 
+check(S, 0); 
+check(S, S); 
+check(0, S); 
+check(-S, S); 
+check(-S, 0); 
+check(-S, -S); 
+check(0, -S); 
+check(S, -S); 
+update; 
 #if( WINID == 0 ) 
-check(0,1) 
 #break; 
-check(0,-1) } 
- 
-check(1,0) S = S / 2; 
-check(-1,0) check(0, 0); 
-}  
-check(S, 0); 
-check(0,0); check(S, S); 
-update; check(0, S); 
- 
-//large d search check(-S, S); 
-for(loop = 1 to fpi step 1) 
-check(-S, 0); 
-{ check(-S, -S); 
- 
-check(largediamond); check(0, -S); 
-#if( WINID == 0 ) check(S, -S);  
- 
-#break; 
-update; 
 } 
- 
-//small diamond   
- 
-check(small); /// Three Step Search 
-S = 4; // Step size 
- 
-check(0, 0); 
-//HEXBS with square refinement 
-check(S, 0); 
-//Original code modified with permission from Jose Nunez-
-check(S, S); 
-Yanez  
- 
-check(0, S); 
-//8 Steps maximum 
-check(-S, S); 
-fpi = 8; 
-check(-S, 0); 
-Patter n(square) 
-check(-S, -S); 
-{ 
-check(0, -S); 
-check(0,1) 
- 
-check(S, -S); 
-check(0,-1) 
-update; 
-check(1,0) 
-do { 
-check(-1,0) 
- 
 S = S / 2; 
-check(-1,-1) 
 check(0, 0); 
-check(-1,1) 
- 
 check(S, 0); 
-check(1,-1) 
 check(S, S); 
-check(1,1) 
 check(0, S); 
-} 
- 
 check(-S, S); 
-Pattern(hexbs) 
 check(-S, 0); 
-{ 
 check(-S, -S); 
-check (2,0) 
 check(0, -S); 
-check(-2,0) 
-check(S, -S); 
-check(1,2) 
- 
+check(S, -S);  
 update; 
-check(-1,2) 
+ 
+ 
+/// Three Step Search 
+S = 4; // Step size 
+check(0, 0); 
+check(S, 0); 
+check(S, S); 
+check(0, S); 
+check(-S, S); 
+check(-S, 0); 
+check(-S, -S); 
+check(0, -S); 
+check(S, -S); 
+update; 
+do { 
+S = S / 2; 
+check(0, 0); 
+check(S, 0); 
+check(S, S); 
+check(0, S); 
+check(-S, S); 
+check(-S, 0); 
+check(-S, -S); 
+check(0, -S); 
+check(S, -S); 
+update; 
 } while( S > 1 ); 
-check(1,-2) 
  
-check(-1,-2) 
- 
+  
+//Diamond search 
+//8 steps maximum 
+fpi = 8; 
+Pattern(largediamond) 
+{ 
+check(2,0) 
+check(1,1) 
+check(0,2) 
+check(-1,1) 
+check(-2,0) 
+check(-1,-1) 
+check(0,-2) 
+check(1,-1) 
+} 
+Pattern(small) 
+{ 
+check(0,1) 
+check(0,-1) 
+check(1,0) 
+check(-1,0) 
 } 
 check(0,0); 
- 
+update; 
+//large d search 
+for(loop = 1 to fpi step 1) 
+{ 
+check(largediamond); 
+#if( WINID == 0 ) 
+#break; 
+} 
+//small diamond  
+check(small); 
+//HEXBS with square refinement 
+//Original code modified with permission from Jose Nunez-
+Yanez  
+//8 Steps maximum 
+fpi = 8; 
+Pattern(square) 
+{ 
+check(0,1) 
+check(0,-1) 
+check(1,0) 
+check(-1,0) 
+check(-1,-1) 
+check(-1,1) 
+check(1,-1) 
+check(1,1) 
+} 
+Pattern(hexbs) 
+{ 
+check(2,0) 
+check(-2,0) 
+check(1,2) 
+check(-1,2) 
+check(1,-2) 
+check(-1,-2) 
+} 
+check(0,0); 
 update; 
 //hexagon search 
 for(loop = 1 to fpi step 1) 
- 
 { 
 check(hexbs); 
-#if( W INID == 0 ) 
+#if( WINID == 0 ) 
 #break; 
 } 
-65 
-  
+66 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
   
 //HEXBS search with diamond refinement 
 //8 steps maximum 
- 
 fpi = 8; 
 Pattern(hexbs) 
- 
 { 
 check(2,0) 
 check(-2,0) 
- 
 check(1,2) 
 check(-1,2) 
- 
 check(1,-2) 
 check(-1,-2) 
 } 
- 
 Pattern(small) 
 { 
 check(0,1) 
- 
 check(0,-1) 
 check(1,0) 
- 
 check(-1,0) 
 } 
 check(0,0); 
- 
 update; 
 //hexagon search 
- 
 for(loop = 1 to fpi step 1) 
 { 
 check(hexbs); 
- 
 #if( WINID == 0 ) 
 #break; 
 } 
- 
 //square refinement 
 check(small); 
- 
 } 
 //square refinement 
- 
 check(square); 
  
+67 
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-66 
- Appendix II: VHDL essential source code of the shallow pipeline 
+Appendix II: VHDL essential source code of the shallow pipeline 
 implementation 
  
---ORIGINAL CODE r_in.pipe_din <= din; 
-------------------------------------------- r_in.pipe_din2 <= din2; 
  
---  entity       = concatenate            r_in.pipe_addr <= addr; 
---  versi on      = 1.0                    r_in.pipe_enable_hp_inter <= enable_hp_inter; 
+ 
             
---  last update  = 1/08/06                r_in.pipe_enable <= enable; 
---  author       = Jose Nunez             r_in.valid <= r.pipe_enable; 
   
--------------------------------------------  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--ORIGINAL CODE 
+------------------------------------------- 
+--  entity       = concatenate            
+--  version      = 1.0                    
+--  last update  = 1/08/06                
+--  author       = Jose Nunez             
+------------------------------------------- 
 --MODIFIED CODE 
+------------------------------------------- 
+--  NOTE                                  
+--  Part of the shallow pipeline          
+--  implementation                        
+--  last update-> 15/09/12                
+--  author-> Alejandro Vaca               
+------------------------------------------- 
  
--------------------------------------------  
---  NOTE                                  valid <= '1' when r.valid = '1' else '0'; 
- 
---  Part of the shallow pipeline          quick_valid <= '1' when r.pipe_enable= '1' else '0'; 
---  implementation                         
- 
---  last update-> 15/09/12                 
---  author-> Alejandro Vaca               shift_data : process(r) 
--------------------------------------------  
- 
-  
--- sequential part replaced with simple signal assignment begin 
--- regist ers: data, valid, pipe_din, pipe_din2,   
--- pipe_addr, pipe_enable_hp_inter,pipe_enable   
--- were removed    if (r.pipe_enable_hp_inter = '0') then -- when interpolating the good data is 
- 
--- no latches are generated on implementation at the beginning 
-        
+-- sequential part replaced with simple signal assignment 
+-- registers: data, valid, pipe_din, pipe_din2,  
+-- pipe_addr, pipe_enable_hp_inter,pipe_enable  
+-- were removed 
+-- no latches are generated on implementation 
 -- code works fully at implementation level 
-  case r.pipe_addr is 
  
--- FUNCTION  
--- this unit makes sure that 8 valid pixels are assemble     when "000" => 
- 
-     din_temp <= r.pipe_din; 
+-- FUNCTION 
+-- this unit makes sure that 8 valid pixels are assemble 
 depending on byte address  
-     when "001" => 
-library ieee;      din_temp <= r.pipe_din(55 downto 0)& 
  
-use ieee.std_logic_1164.all; r.pipe_din2(63 downto 56);  
-    when "010" => 
+library ieee; 
+use ieee.std_logic_1164.all; 
 use IEEE.std_logic_unsigned."+"; 
-      din_temp <= r.pipe_din(47 downto 0) & 
  
-entity concatenate64 is r.pipe_din2(63 downto 48);   
- port(     when "011" => 
- 
- addr : in std_logic_vector(2 downto 0);      din_temp <= r.pipe_din(39 downto 0) & 
-r.pipe_din2(63 downto 40);  
+entity concatenate64 is 
+ port( 
+ addr : in std_logic_vector(2 downto 0); 
  clk : in std_logic; 
- clear : in std_logic;     when "100" => 
- 
- reset : in std_logic;      din_temp <= r.pipe_din(31 downto 0)& 
- din : in std_logic_vector(63 downto 0); r.pipe_din2(63 downto 32);  
- 
-    when "101" => 
+ clear : in std_logic; 
+ reset : in std_logic; 
+ din : in std_logic_vector(63 downto 0); 
  din2 : in std_logic_vector(63 downto 0); 
- dout : out std_logic_vector(63 downto 0);      din_temp <= r.pipe_din(23 downto 0)& 
- enable : in std_logic; r.pipe_din2(63 downto 24);   
- 
- enable_hp_inter : in std_logic; -- working in     when "110" => 
-     din_temp <= r.pipe_din(15 downto 0)& 
+ dout : out std_logic_vector(63 downto 0); 
+ enable : in std_logic; 
+ enable_hp_inter : in std_logic; -- working in 
 interpolation mode 
-      quick_valid : out std_logic; --as valid but one cycle earlier r.pipe_din2(63 downto 16);   
- 
- valid : out std_logic);  -- indicates when 64 valid     when "111" => 
-bits are in the output      din_temp <= r.pipe_din(7 downto 0)& r.pipe_din2(63 
- 
-downto 8);  
+      quick_valid : out std_logic; --as valid but one cycle earlier 
+ valid : out std_logic);  -- indicates when 64 valid 
+bits are in the output 
 end concatenate64; 
-      when others => null; 
  
-     end case; 
  
-architecture behav of concatenate64 is     else 
- case r.pipe_addr is 
+architecture behav of concatenate64 is 
  
-    when "000" => 
 type register_type is record 
- data : std_logic_vector(63 downto 0);   din_temp <= r.pipe_din2; 
-      valid : std_logic; -- bytes are valid     when "001" => 
- 
-      pipe_din : std_logic_vector(63 downto 0);   din_temp <=  r.pipe_din2(55 downto 0) & r.pipe_din(63 
-downto 56);  
+ data : std_logic_vector(63 downto 0); 
+      valid : std_logic; -- bytes are valid 
+      pipe_din : std_logic_vector(63 downto 0); 
       pipe_din2 : std_logic_vector(63 downto 0); 
-      pipe_addr : std_logic_vector(2 downto 0);     when "010" =>  
- 
-      pipe_enable_hp_inter : std_logic;        din_temp <= r.pipe_din2(47 downto 0) & r.pipe_din(63 
-      pipe_enable : std_logic; downto 48); 
- 
-    when "011" =>  
+      pipe_addr : std_logic_vector(2 downto 0); 
+      pipe_enable_hp_inter : std_logic; 
+      pipe_enable : std_logic; 
 end record; 
-       din_temp <= r.pipe_din2(39 downto 0) & r.pipe_din(63 
  
-signal r,r_in : register_type; downto 40);  
+signal r,r_in : register_type; 
+signal din_temp : std_logic_vector(63 downto 0); 
  
-signal din_temp : std_logic_vector(63 downto 0);     when "100" =>  
-       din_temp <= r.pipe_din2(31 downto 0) & r.pipe_din(63 
+begin 
+ 
+r_in.pipe_din <= din; 
+r_in.pipe_din2 <= din2; 
+r_in.pipe_addr <= addr; 
+r_in.pipe_enable_hp_inter <= enable_hp_inter; 
+r_in.pipe_enable <= enable; 
+r_in.valid <= r.pipe_enable; 
  
  
-downto 32);      
+ 
+valid <= '1' when r.valid = '1' else '0'; 
+quick_valid <= '1' when r.pipe_enable= '1' else '0'; 
+ 
+ 
+shift_data : process(r) 
+ 
+ 
 begin 
  
  
+   if (r.pipe_enable_hp_inter = '0') then -- when interpolating the good data is 
+at the beginning 
+        
+ case r.pipe_addr is 
  
-67 
-  
+    when "000" => 
+     din_temp <= r.pipe_din; 
+    when "001" => 
+     din_temp <= r.pipe_din(55 downto 0)& 
+r.pipe_din2(63 downto 56);  
+    when "010" => 
+     din_temp <= r.pipe_din(47 downto 0) & 
+r.pipe_din2(63 downto 48);   
+    when "011" => 
+     din_temp <= r.pipe_din(39 downto 0) & 
+r.pipe_din2(63 downto 40);  
+    when "100" => 
+     din_temp <= r.pipe_din(31 downto 0)& 
+r.pipe_din2(63 downto 32);  
+    when "101" => 
+     din_temp <= r.pipe_din(23 downto 0)& 
+r.pipe_din2(63 downto 24);   
+    when "110" => 
+     din_temp <= r.pipe_din(15 downto 0)& 
+r.pipe_din2(63 downto 16);   
+    when "111" => 
+     din_temp <= r.pipe_din(7 downto 0)& r.pipe_din2(63 
+downto 8);  
+      when others => null; 
+    end case; 
+    else 
+case r.pipe_addr is 
+    when "000" => 
+  din_temp <= r.pipe_din2; 
+    when "001" => 
+  din_temp <=  r.pipe_din2(55 downto 0) & r.pipe_din(63 
+downto 56);  
+    when "010" =>  
+       din_temp <= r.pipe_din2(47 downto 0) & r.pipe_din(63 
+downto 48); 
+    when "011" =>  
+       din_temp <= r.pipe_din2(39 downto 0) & r.pipe_din(63 
+downto 40);  
+    when "100" =>  
+       din_temp <= r.pipe_din2(31 downto 0) & r.pipe_din(63 
+downto 32);      
  
-  
+ 
+68 
+ 
+ 
+ 
    
+ 
+ 
+  
     when "101" => 
   din_temp <= r.pipe_din2(23 downto 0) 
- 
 & r.pipe_din(63 downto 24);   
     when "110" => 
- 
   din_temp <= r.pipe_din2(15 downto 0) 
 & r.pipe_din(63 downto 16); 
     when "111" => 
@@ -2608,6 +2857,4 @@ dout <= r.data;
  
 end behav; -- end of architecture 
  
- 
-68 
  

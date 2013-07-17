@@ -1,0 +1,2486 @@
+Abstract
+This dissertation is devoted to implement a homomorphic signature
+scheme that is capable of evaluating both linears and polynomials on
+signed data. Given the public key and a signatures set of messages,
+this scheme can efficiently produce a signature on the mean, standard
+deviation, and other statistics of the signed messages.
+The implementation presented in this dissertation is guilded by [5].
+There are four algorithms created in the implementation, namely Setup,
+Sign, Verify, and Evaluate. The process of their construction is deeply
+discussed with examples, as well as specific algorithms within them.
+Various mathematical theories are investigated in this dissertation
+to achieve the implementation. The majoy ones are lattices and ideals.
+The usage of them can be seen as an analogous signature version of
+GentrysÕ fully homomorphic encryption[15].
+Experimental results of core procedures in the implementation are
+analysed to study their time complexity. They compare the average
+time used by core procedures and nested for-loops, and they are fitted
+into curves to obtain an intuitive view.
+Although this dissertation reached certain point of success, there are
+still many open problems and improvement space. A brief discussion
+of open problems of homomorphic signatures are also given lastly.
+i
+Acknowledgements
+I would like to express my deep gratitude to Prof. Nigel Smart for his
+help, interesting discussions and constant encouragement through all
+the stages.
+I wish to acknowledge the continuing support from the people of
+MS51 of the Department of Computer Science of the University of
+Bristol.
+I would like to express my deep appreciation to my family. Whilst
+I have not seen them for a whole year whilst doing this course, their
+encouragement and support always were always with me. I also thank
+them for the financial support without which I could have never taken
+this course.
+I would like to thank Xiaomeng Zhang for his help in C++.
+I would like to thank Kevin Qian, Jessie Shen, and Ryan Qian for
+their help in proof reading.
+Finally, I appreciate Chenjun Bao. She always prays for me.
+Contents
+Chapter 1. Introduction 1
+1.1. A Brief and Informal Overview of Our Construction 1
+1.2. Related Work 3
+1.3. Security 4
+Chapter 2. Definitions related to Homomorphic Signature 5
+2.1. Basic Definitions 5
+2.2. Computational Security Definitions 7
+Chapter 3. Background on Lattices and Ideal Lattices 10
+3.1. Basic Background on Lattice 10
+3.2. Basic Background on Ideal Lattice 13
+Chapter 4. Homomorphic Signature Schemes 16
+4.1. A Linearly Homomorphic Signature Scheme 16
+4.2. A Polynomial Homomorphic Signature Scheme 21
+Chapter 5. A Homomorphic Signature Scheme: Implementation 25
+5.1. Number Theory Library 25
+5.2. Implementing Setup of Linearly Homomorphic Signature
+Scheme 27
+5.3. Implementing Sign of Linearly Homomorphic Signature
+Scheme 38
+5.4. Implementing Verify of Linearly Homomorphic Signature
+Scheme 44
+5.5. Implementing Evaluate of Linearly Homomorphic
+Signature Scheme 46
+5.6. Summary 47
+Chapter 6. Performance 48
+6.1. A Timing Test of Algorithm TrapGen 48
+6.2. A Timing Test of Algorithm SampleD 49
+Chapter 7. Conclusion 51
+7.1. Open Problems 52
+Bibliography 53
+Appendix A. Source Code 56
+iii
+CHAPTER 1
+Introduction
+We propose a solution to the new open problem of constructing a
+fully homomorphic signature scheme. This notion was introduced by
+Johnson, Molnar, Song and Wagner[17] when homomorphic encryp-
+tion schemes had been studied for some time. Homomorphic signature
+schemes can be considered as an analogous problem of homomorphic
+encryption schemes but with different security properties. For example,
+basic RSA is a multiplicatively homomorphic encryption scheme, and
+it can be used for signature schemes Ð i.e., given RSA public key pk =
+(N, e) and signatures {?i ? mdi mod N}, one can efficiently compute
+?i?i = (?ipii)d mod N , a signature that signs the product of the orig-
+inal messages. This useful property led a natural question: what can
+one do with a signature scheme that is fully homomorphic: a scheme
+S with an efficient algorithm Evaluate that, for any valid sign key, any
+signatures ?i ? Sign(sk,mi), outputs
+? ? Evaluate(pk, ?1, . . . , ?t),
+a valid signature under sk? Boneh and Freeman[5] answered: one
+can arbitrarily compute on signed data Ð i.e., one can process signed
+data without the signed key. As an application, they suggested private
+data mining service. A user can store its data on an untrusted server
+with signatures. Later, it can send a query on the data to the server,
+whereupon the server can express this query as a function to be applied
+to the data, and use the Evaluate algorithm to construct a signature
+as the response to the userÕs query, which the user then verifies. The
+serverÕs response here is desired to be more concise than the trivial
+solution, in which the server just sends all of the signatures back to the
+user to process on its own.
+1.1. A Brief and Informal Overview of Our Construction
+Firstly, an example application[5] of computing on signed data
+is given for explanation convenience: Alice has a numerical data set
+m1, . . . ,mn of size n. She independently adds a tag and an index to
+each datum mi, and signs the triple (tag,mi, i) for i = 1, . . . , n and
+obtains n independent signatures ?1, . . . , ?n. For convenience, write
+~? := (?1, . . . , ?n). The data set and the n signatures are stored on
+some untrusted remote server.
+1
+Later, when clients ask the server to compute some authenticated
+functions of the data, such as the mean or variance of subsets of the
+data, the server apply an algorithm Evaluate(pk,, f, ~?) that uses ~? and
+f to derive a signature ? on the triple
+(tag,m := f(f1, . . . ,mn), ?f?)
+where ?f? is an encoding of the function f . Now, the server publishs
+(m,?) to clients, and clients can verify that ? is a signature on the
+triple to check that the server correctly applied f to the data set.
+Our system uses two n-dimensional integer lattices ?1 and ?2 to
+generate the vector space for signing both the data and a description
+of the function f applied on the data. The lattice ?1 that defines the
+message space of Zn/?1 is considered as a vector space over Fp for some
+prime p.
+A signature in our system that does the Òdual-roleÓsigning is a
+short vector ? in Zn in the intersection of ?1 +u1 and ?2 +u2 for some
+u1,u2 ? Zn, which indicates ? = u1 mod ?1 and ? = u2 mod ?2.
+This method of jointly signing two vectors u1 and u2 is designed for
+preventing an attack from generating a vector ?? from ? such that
+? = ?? mod ?1 but ? 6= ?? mod ?2[5].
+Precisely speaking, a signature ? on a triple is a short vector in
+Zn that satisfies ? = m mod ?1 and ? = ?? (?f?) mod ?2, where ?? is
+a hash function that is defined by tag ? which encodes functions into
+vectors in Zn/?2. To this degree, it can be seen that the hash function
+?? does two significant contributions to our system. One is supporting
+the homomorphic properties of our system, and the other is keeping
+our system from a chosen-message adversary[15].
+It can be seen that these signatures are additively homomorphic.
+Let ?1 be a signature on a triple (?,m1, ?f1?) and let ?2 be a signa-
+ture on (?,m2, ?f2?). It can be ensure that ?1 + ?2 is a signature on
+(?,m1 +m2, ?f1 + f2?) with a good hash function ?? [5]. If p = 2, which
+indicates ?1 = (2Z)n, it turns out to be a similar and more efficient
+linearly homomorphic signature over F2 than previous known[4].
+Then we focus on polynomially homomorphic properties. ideal lat-
+tices are used to support our signature system with polynomial func-
+tions. This use of ideal lattice is a signature analogue of GentryÕs some-
+what homomorphic system[14]. Let g ? Z be a polynomial of degree
+n and let R be the ring Z[x]/(g). Then R is isomorphic to Zn[5] and
+ideals in R correspond to integer lattices in Zn under the Òcoefficient
+embeddingÓ[22]. Two lattices ?1 and ?2 in our system is chosen to be
+prime ideals p and q in R and a signature on the triple (?,m, f) to be
+a short element in R such that ? = m mod p and ? = ?? (?f?) mod q.
+Now two signatures ?1 and ?2 are obtained, which respectively signs
+two triple (?,m1, f1) and (?,m2, f2). Then with an appropriate hash
+2
+function ?? , it can be seen that [5]
+?1 + ?2 is a signature on (?,m1 +m2, ?f1 + f2?) and
+?1  ?2 is a signature on (?,m1 m2, ?f1  f2?).
+From this, any bounded degree polynomial with small coefficients can
+be evaluated on signatures.
+1.2. Related Work
+Before diving into the details, we briefly present some of the re-
+search literature related to fully homomorphic signature scheme. Mi-
+caliÕs computationally sound (CS) proofs[23] gives a solution to the
+problem discussed above: Alice sends the data set D and the corre-
+sponding signature ? to the server. Later, for some function f , the
+server computes the result of applying f to the data set D as t, and
+publishes the triple (?, t, pi) where pi is a short proof that the original
+data set D of ? and t exists. It uses the full machinery of the PCP the-
+orem to construct pi and the soundness is in the random oracle model.
+After MicaliÕs, Kilian[19] achieves the same without the random oracle
+model.
+Compared with our approach, the proof pi is eliminated. The server
+does not compute the result t of applying the function f to the data set
+D but a signature ?? that is derived from ? and authenticates both t
+and f . In the meanwhile, constructing ?? takes about the same work as
+computing f(D) and anyone can get an authentication of the result of
+applying further functions to t more simply by homomorphic signature
+than CS proofs[34].
+More recently Lyubashevsky and Micciancio [21] present a one-
+time signature scheme that is constructed by lattices directly. This
+signature scheme can sign O(n)-bit messages in O÷(n). The efficiency
+of the scheme and its security are both guaranteed by a special family
+in lattice that is called ideal lattice. From the one-time scheme a full
+signature scheme with similar asymptotic efficiency can be obtained by
+in corporating it into a standard tree structure[15].
+Another mentionable related work is "redactable" signatures[2, 32,
+18, 16, 7, 8]. The objective of these schemes in common is that
+they construct a signature on a message so that anyone can derive a
+signature on subsets of the message. This featured property gives a
+solution to computing on a subset of signed data which can be seen
+as a particular case in our focus Ð computing arithmetic functions on
+independently authenticated data.
+3
+1.3. Security
+Unforgeablity. Generally speaking, a forgery under a chosen mes-
+sage attack is that an adversary generates a valid signature on (?,m, ?f)
+but the messagem does not equal to the result of applying f to the data
+set with tag ? . For example, letm1, . . . ,mk be the data set signed using
+tag ? , and a messagem = f(m1, . . . ,mk). Then an adversary generates
+a signature ? such that ? is valid signature on (?, pk,m? 6= m,?, f). If
+a forgery as above exists, it can be used to solve the Small Integer So-
+lution (SIS) problem in the lattice ?2[5], which is as hard as standard
+worst case lattice problem[25].
+Privacy. Some applications need the signatures derived by Evalu-
+ate to be private. That is a signature on a message m that is the result
+of applying some function f on messages m1, . . . ,mk should reveal no
+information about m1, . . . ,mk besides what has been already revealed
+by m.
+On one hand, in linearly homomorphic signatures, our construct
+satisfy a privacy property called weak context hiding[5, 4], which indi-
+cates the signature derived from Evaluate for linearly functions is still
+private.
+On the other hand, in polynomially homomorphic signatures, it is
+difficult to tell whether our construct is private or not. It seems that
+the product ? = ?1 ?2 leaks information about the components ?1 and
+?1 and also about the original messages. It is still an open problem
+either to find some reasonable computational assumption to support
+our construct to be private, or to design a polynomially homomorphic
+signature scheme which is also private.
+Length efficiency. There is an additional requirement for homo-
+morphic signature schemes that the length of derived signatures is not
+much longer than the original signatures from which they were derived.
+4
+CHAPTER 2
+Definitions related to Homomorphic Signature
+2.1. Basic Definitions
+A conventional digital signature scheme S consists of three algo-
+rithms: KeyGenS , SignS and VerifyS . KeyGenS is a randomized algo-
+rithm that takes a security parameter n as input, and outputs a secret
+key sk as sign key and a public key pk as verify key; pk defines a mes-
+sage spaceM and a signature space ?. SignS is a randomized algorithm
+that takes sk and a message m ?M as input, and outputs a signature
+? ? ?. VerifyS takes a message m, pk and a signature ? ? ? as input,
+and outputs 1(accept) or 0(reject) which indicates whether the signa-
+ture ? authenticates the message m. The computational complexity of
+these algorithms must be polynomial in n. A minimal requirement of
+these algorithms is correctness.
+Definition 2.1.1. We say that a digital signature scheme is correct
+if, for any key-pair (sk, pk) generated by KeyGenS(n), any message
+m ?M,
+if ? ? Sign(sk,m), then Verify(pk,m, ?) = 1.
+A homomorphic signature scheme comprises the usual algorithms
+KeyGen, Sign, Verify as well as an additional algorithm Evaluate that
+returns how functions applied on signatures rather than messages. The
+objective processed in a homomorphic signature scheme is also slightly
+different from a conventional one. Homomorphic signature schemes
+deal with data sets of messages, while conventional ones sign single
+messages. If ~? is a valid set of signatures on messages ~m, then Evalu-
+ate(f, ~?) should be a valid signature for f(~m).
+Additionally, since many data sets are processed in homomorphic
+signature schemes, especially when evaluating functions, the Sign, Ver-
+ify and Evaluate algorithms take an extra "tag" as input[5]. The tag is
+used to bind messages from the same data set together so that they
+will not be mixed with messages from different data sets by those al-
+gorithms. There are many other ways to binding messages from the
+same data set. To avoid the tag, one could generate a new public key
+for each data set, but a new tag for each data set is more convenient.
+Formally, a homomorphic signature scheme is as follows:
+Definition 2.1.2. [5, Definition 2.1] A homomorphic signature scheme
+is a tuple of probabilistic,
+5
+polynomial-time algorithms (Setup, Sign, Verify, Evaluate) with the fol-
+lowing
+functionality[5]:
+¥ Setup(1n, k).
+Takes a security parameter n and a data set size k. Out-
+put a public key pk and a secret key sk. The public key pk
+defines a message spaceM, a signature space ?, and a set F
+of admissible functions f :Mk ?M.
+Let pii : Mk ? M be the function that projects onto the
+ith component; for every pk output by Setup(1n, k), there is
+pii ? F for i = 1, ..., k.
+¥ Sign(sk, ?,m, i).
+Takes a secret key sk, a tag ? ? 0, 1n, a message m ? M
+and an index i in{1, ..., k}, and outputs a signature ? ? ?.
+¥ Verify(pk, ?,m, ?, f).
+Takes a public key pk, a tag ? ? {0, 1}n, a message m ?M
+and a signature ? ? ?, and a function f ? F , and outputs
+either 0 (reject) or 1 (accept).
+¥ Evaluate(pk, ?, f, ?).
+Takes a public key pk, a tag ? ? {0, 1}n, a function f ? F ,
+and a tuple of signatures ~? ? ?k, and outputs a signature
+?? ? ?.
+Correctness is still a minimal requirement which a homomorphic
+signature need to hold.
+Definition 2.1.3. (Correctness of Homomorphic Signature). We say
+that a homomorphic signature scheme S is correct for functions in
+FS if, for any key-pair(sk,pk) output by SetupS(1n, k), any function f
+in FS , any tag ? ? {0, 1}n, any message m ? MS ,any tuples ~m =
+(m1, ...,mk) ?MkS , and any index i ? {1, . . . , k}, it is the case that:
+if ? ? Sign(sk, ?,m, i), then
+Verify(pk, ?,m, ?, pii) = 1,
+if ?i ? Sign(sk, ?,mi, i), then
+Verify(pk, ?, f(~m),Evaluate(pk, ?, f, (?1, ..., ?k)), f) = 1.
+We also say a signature scheme as above is F -homomorphic, or
+homomorphic with respect to F [5].
+Nevertheless, the Evaluate algorithm can take as input derived sig-
+natures themselves produced by Evaluate, by lots of iterations which
+will eventually leads to a point where the input signatures are valid,
+but the output signature is not. Therefore, a limited requirement of
+correctness property has been given here to simplify the discussion that
+Evaluate produce valid output when given as input signatures ~? pro-
+duced by the Sign algorithm.
+6
+Eventually, the definition of a almost-fully homomorphic signature
+scheme rises.
+Definition 2.1.4. (Almost-Fully Homomorphic Signature). We say
+that a homomorphic signature scheme S is fully homomorphic if it
+evaluates both linear functions and polynomial functions.
+2.2. Computational Security Definitions
+Unforgeability. Unforgeability, informally, means it is computa-
+tionally infeasible for an adaptive attacker to masquerade an honest
+sender in creating an authentic signed text that can be accepted by
+the verifying algorithm.
+To be specific, when an adversary tries to get involved in homomor-
+phic signatures, she is allowed to make adjustable signature queries on
+data sets of her choosing, each containing up to k messages, with the
+signer randomly choosing the tag ? for each data set queried.
+After a sufficient preparation, the adversary produces a message-
+signature pare (m?, ??) as well as an acceptable function f and tag ? ?.
+The winning condition corresponds two types of forgeries. In a type
+1 forgery, the pair (m?, ??) verifies for some data set not queried to
+the signer; this is the common notion of signature forgery. In a type
+2 forgery, the pair (m?, ??) verifies for some data set that was queried
+to the signer before, but m? does not match the result of f applied to
+messages queried. In other words, a type 2 forgery indicates that the
+signature ?? authenticates m? as f(~m) which in fact is not true.
+Definition 2.2.1. [5, Definition 2.2] We say a homomorphic signature
+scheme S is unforgeable if for all k and all probabilistic polynomial-time
+adversaries A, the advantage of A in the following game is negligible
+in the security parameter n:
+Setup: The challenger runs Setup(1n, k) to obtain (pk,sk) and
+publishes pk to A. The public key pk defines a message space
+M, a signature space ?, and a set F of acceptable functions
+f :Mk ?M.
+Queries: A specifies a sequence of data sets ~mi ?Mk and send
+them to the challenger. In response, The challenger chooses
+?i uniformly from 0, nn for each i, computes the signatures
+?ij ? Sign(sk, ?i,mij, j) for j = 1, . . . , k, and sends both of
+them to A.
+Output: A generates a tag ? ? ? 0, 1n, a message m? ?M, and
+a signature ?? ? ? for a function f ? F , and send them to
+the challenger to verify.
+Limitation: The adversary A cannot request signatures on new
+messages m after seeing signatures on other messages in the
+same data set.
+7
+The adversary wins if Verify(pk, ? ?,m?, ??, f) = 1, either
+(1) ? ? 6= ?i for all i (a type 1 forgery), or
+(2) ? ? = ?i for certain i but m? 6= f(~mi)(a type 2 forgery).
+The advantage of A is defined to be the probability that A wins the
+security game.
+Privacy. Privacy, generally speaking in cryptography, means it
+should be computationally infeasible for an adaptive attacker to gain
+any partial information on the contents of messages. In this settings,
+privacy means that even given signatures on a data set ~m ? Mk, the
+derived signatures on results of f1(~m), . . . , ft(~m) donÕt give away any
+information about ~m besides what has been leaked by the results[4].
+More specifically, privacy for homomorphic signatures is defined by
+the idea of "adversaries can not distinguish"[5]. The concept is similar
+to witness indistinguishability [12] from which the attacker is given
+signatures on many messages derived from two different data sets such
+that she can not tell which data set the derived signatures came from.
+This privacy property is weakly context hiding, which indicates the fact
+that derivation took place is not hidden. In addition, another limitation
+of this privacy property is that the original signatures are assumed as
+not public.
+Definition 2.2.2. [5, Definition 2.3] We say that a homomorphic sig-
+nature scheme S is weakly context hiding if for any fixed value of k
+the advantage of any probabilistic, polynomial-time adversary A in the
+following game is negligible in the security parameter n:
+Setup: The challenger runs Setup(1n, k) to obtain (pk,sk) and
+publishes (pk,sk) to A. The public key pk defines a message
+spaceM, a signature space ?, and a set F of acceptable func-
+tions f :Mk ?M.
+Challenge: A generates two data sets (~m?0, ~m?0) ? Mk, then
+picks many functions (f1, . . . , fs) ? F , which satisfy
+fi(~m?0) = fi(~m?0) foralli = 1, . . . , s.
+A sends (~m?0, ~m?0, f1, . . . , fs) to the challenger. In response, the
+challenger flips a fair coin b ? {0, 1} and pick a random tag.
+Then, k signatures in a vector ~? are signed from messages
+in ~m?b with the random tag. Next, the challenger derives a
+signature ?i on fi(~m?b from ~? for i = 1, . . . , s, and send s
+signatures to A.
+Output: A outputs a bit b?.
+The adversary A wins the game if b = b?. The advantage of A is the
+probability that A wins the game.
+If an adversary won the challenge game, it meant that the adver-
+sary could tell the difference between signatures of a response from
+signatures on ~m?0 or ~m?i .
+8
+Length efficiency. Length efficiency is a special criterion for ho-
+momorphic signatures, which means there is some limitation on the
+length of derived signatures. More precisely, it has been pointed out
+that the length of derived signatures should depends only logarithmi-
+cally on the size k of the data set[5].
+Definition 2.2.3. [5, Definition 2.4] We say that a homomorphic sig-
+nature scheme S is length efficient if there is some function µ : N? R
+such that for all (pk,sk) output by Setup(1n, k), for all ~m = (m1, . . . ,mk) ?
+Mk (Mk is defined by pk), for all tags ? ? {0, 1}n, and all functions
+f ? F (F is defined by pk), if
+?i ? Sign(pk, ?,mi, i) for i = 1, . . . , k, and ~? := (?1, . . . , ?k)
+then the bit length of the derived signature ? output by Evaluate(pk,
+?, f, ~?) is at most
+length(?) ² µ(n)  log k
+with overwhelming probability for all k > 0.
+9
+CHAPTER 3
+Background on Lattices and Ideal Lattices
+In this Chapter, we provide some basic background material needed
+to instantiate what is lattice, what is ideal lattice, and how to generate
+them. They are used to construct our abstract homomorphic signature
+scheme in next chapter.
+3.1. Basic Background on Lattice
+Let R denote the real numbers, and Z denote the integers. Vectors
+are written in column form using bold lower-case letters, e.g. v; Ma-
+trices are written as bold capital letters, e.g., B; bi is the i-th column.
+?v? is used to denote the Euclidean length of a vector v. For matrix
+B, ?B? is used to denote the length of the longest column vector in B.
+In our system, a lattice has been concerned as a discrete additive
+subgroups of Zm having finite index. The determinant of ? is the car-
+dinality of the quotient group Zm/?. Geometrically, the determinant
+is used to describe how sparse the lattice is.
+Changing the point of view, a lattice ? can be considered as a set of
+all integer linear combinations of m linearly independent basis vectors
+B= {b1, . . . ,bm} ? Zm[3]:
+? = L(B) =
+???Bc = ·
+i?[m]
+cibi : c ? Zm
+???.
+For example, let
+B =
+??????????
+p 0       0
+0 p 0    ...
+... ... . . .    ...
+... ... 0 p 0
+0       0 p
+??????????
+,
+and ? can be calculated as
+? = pZn = {p  (z1, . . . , zn) : zi ? Z}
+= {z1  (p, 0, . . . , 0) + z2  (0, p, 0, . . . , 0) + . . .+ zn(0, . . . , 0, p) : zi ? Z}
+10
+=???????????????????
+??????????
+p 0       0
+0 p 0    ...
+... ... . . .    ...
+... ... 0 p 0
+0       0 p
+??????????
+????????
+z1
+z2
+...
+zn?1
+zn
+???????? : zi ? Z
+???????????????????
+One thing here worth stating is that there are infinitely many bases
+those which can generate the same lattice when m ³ 2. Even though
+the absolute value of the determinant of the vectors bi is uniquely
+determined by ?, and is denoted by det(?). These bases are related to
+each other by unimodular transformations Ð B = B?  U that always
+exists for some unimodular U ? Zm?m.
+Hermite Normal Form of A Lattice. As mentioned above, ev-
+ery lattice has an infinite number of lattice bases. Informally, these
+bases can be devided into two groups[14] Ð a "good" group and a "bad"
+group. The bases in "good" group have reasonably short and nearly
+orthogonal vectors. For any basis B = {b1, . . . ,bn}, it holds that
+?ni=1?bi? ³ det(?); ?ni=1?bi? of "good" bases is more likely to reach
+the equality to det(?).
+Among all of these infinite many bases of a lattice ?, there exists a
+worst basis that is the Hermite Normal Form of ?. In linear algebra,
+the Hermite normal form is an analogue of reduced echelon form for
+matrices over Z, and it should have following mathematical properties:
+(1) H is an Upper Trianguluar Matrix
+(2) For i ? [m], hi,i > 0
+(3) For j ? [m], ·
+i?[j]
+hi,j  ai = 0 ? Znq
+(4) For i ? [m], hi,i ² q, proved by Section 2.4.1 in [3]
+(5) H? = H? I
+Given any basis B of a lattice ?, one can compute HNF(?) effi-
+ciently in time poly(n, lg(?B?)). The reason for "worst" is that HNF(?)
+does not leak more information about the structure of ? than any other
+basis. Therefore, HNF(?) is a good choice to be the public lattice basis
+in public key[24].
+Hard Random Lattices. A certain family of lattices in Zn is
+peculiarly concerned, which is often unusually specified by a matrix
+A ? Zl?nq for some positive integer l and positive integer modulus q.
+The latice associated with A is defined as
+??(A) =
+???x ? Zn : Ax = ·
+j?[n]
+xj  aj = 0 ? Zlq
+??? .
+It can be seen that ??(A) is closed under negation and addition, as
+well as it is Ôq-aryÕ.
+11
+For instance, let l = 3, n = 4, q = 29, and
+A =
+??? 4 7 11 108 3 2 1
+25 7 13 8
+??? .
+When we try to compute ??(A), firstly the kernel of A in modulus q
+is needed to compute. That is, in linear algebra, the set of all vectors x
+for which Ax = 0, where 0 denotes the zero vector with n components.
+That is
+Ker(A) =
+?????
+15
+6
+3
+1
+????? .
+Then a lattice basis of "Ax = 0" is about to form. However, Lattices
+are over Z, while the matrix Ker(A) is over Fq. Thus, the kernel matrix
+Ker(A) is expanded with another n columns to
+??Ker(A)?q  In
+??. It
+generates (by the columns)a basis of the lattice in Zn.
+??Ker(A)?q  In
+?? =
+?????
+15 0 0 0 0
+6 29 0 0 0
+3 0 29 0 0
+1 0 0 29 0
+????? .
+Finally, calculate its Hermite Normal Form.
+HNF
+??Ker(A)?q  In
+?? =
+?????
+29 0 0 15
+0 29 0 6
+0 0 29 3
+0 0 0 1
+????? .
+12
+3.2. Basic Background on Ideal Lattice
+In out system, the homomorphic signature scheme is based on lat-
+tices. According to [5], replacing general lattices to ideal lattices in
+linearly homomorphic signature scheme will improve it from for linear
+functions to for polynomial functions Ð the ultimate goal of this disser-
+tation. Therefore, a survey of ideal lattice is needed, and the difference
+between them leads to the key of this thesis.
+Ideal, Number Ring and Ideal Lattice. Generally, ideal lat-
+tices are a special class of lattices and a generalization of cyclic lattices[20],
+which unfortunately is not sufficient to our goal. According to [31],
+ideal lattice is considered as a special subset of lattices that posses
+the computationally interesting property of being related to structured
+matrices and polynomials.
+Let a number field K represented as Q[x]/f(x) be a finite-degree
+algebraic extension of the rational numbers Q. Its identification leads
+to a multiplicative structure on Qn in addition to the usual additive
+structure[5]. Then how much the multiplication increases should be
+determined. Define a parameter[5, 31]:
+?f := sup
+u,v?K
+?u  v?
+?u?  ?v? .
+This parameter bounds the length of the product increased by the
+multiplication, relative to the product of the length of the factors. In
+this implementation, the requirement is that ?f = poly(n). Let us
+focus on the function f(x) = xn + 1 and n is a power of 2. Then,
+according to Lemma 7.4.3 in [14] it can be obtained that ?f ² Ãn,
+which implies this f(x) is a good choice.
+Every number field has a ring of integers denoted by OK , and there
+is the subring R = Z[x]/f(x) inside OK . In other words, R is a proper
+sublattice of OK .
+Let I be an ideal of R, i.e. a subset of Z[x]/f(x), that is closed
+under addition and multiplication by elements of Z[x]/f(x). By the
+identification of R with Zn, I is a sublattice of R[14], therefore also
+called an ideal lattice.
+There are some key points worth stating from [33]:
+¥ The usage of Òideal latticeÓto refer to a rank one R-module
+differs from that of [31] of which Òideal latticeÓrefers to R-
+modules of arbitrary rank, whereas many basic ideas are in
+common.
+¥ An ideal lattice I is considered as prime if for x, y ? R, xy ? I
+infers either x ? I or y ? I.
+¥ If p is a prime ideal lattice of R, p can be written as p =
+(p + h(x))  R, of which the reduction mod p of polynomial
+h(x) is an irreducible factor of f(x) mod p.
+13
+Basically, to go from the linear homomorphic signature scheme to
+the polynomial scheme the keys need to be replaced to more powerful
+keysÐ ideal lattices. In ideal lattice, the multiply operation can be fea-
+sible as well as the add operation, and its result remains in the lattice,
+which implies Evaluate can be extended to multiplication of signatures.
+This is the key of polynomial homomorphic signature schemes.
+Example: Cyclic Lattices and Ideals in Z[x]/(xn ? 1). Here
+an example of cyclic lattices is given as well as ideals in Z[x]/(xn ? 1)
+to reveal some properties of ideal lattices more clearly.
+Let a lattice ?c be a cyclic lattice in Zn. Then it has three important
+properties:
+(1) For all v,w in ?c, v+w is also in ?c:
+(2) For all v in ?c, ?v is also in ?c:
+(3) For all v in ?c, a cyclic shift of v is also in ?c:
+At the same time, we take another point of view and consider this
+lattice ?c as a ideal. We found that a cyclic lattice in Zn is an ideal in
+Z[x]/(xn ? 1). Then it still has three important properties:
+(1) For all v,w in ?c, v+w is also in ?c:
+(?1 + 2x+ 3x2? 4x3) + (?7? 2x+ 3x2 + 6x3) = (?8 + 0x+ 6x2 + 2x3)
+(2) For all v in ?c, ?v is also in ?c:
+(3) For all v in ?c, a cyclic shift of v is also in ?c:
+14
+(?1 + 2x+ 3x2 ? 4x3) and (1? 2x? 3x2 + 4x3)
+?1 + 2x + 3x2 ? 4x3
+(?1 + 2x+ 3x2 ? 4x3)x = ?4? x+ 2x2 + 3x3
+(?1 + 2x+ 3x2 ? 4x3)x2 = 3? 4x? x2 + 2x3
+(?1 + 2x+ 3x2 ? 4x3)x3 = 2 + 3x? 4x2 ? x3
+15
+CHAPTER 4
+Homomorphic Signature Schemes
+4.1. A Linearly Homomorphic Signature Scheme
+The implemented homomorphic signature scheme in this disserta-
+tion are built on the Òhash-and-signÓsignatures of Gentry, Peikert, and
+Vaikuntanathan[15].
+First of all, let us review how GPV signatures work. In KeyGen, a
+public key and a secret key are generated. The public key is a lattice
+? ? Zn, and the secret key is the short basis of ?. In Sign, a message
+m is hashed to an H(m) ? Zn/?, and a short vector ? is sampled from
+the coset of ? defined by H(m). In Verify, two things are checked: ?
+is short and ? mod ? = H(m).
+Then some changes are made for adapting it to homomorphic sig-
+natures. The target which needs to be authenticated here is the triples
+(?,m, ?f?), of which ? is a ÒtagÓattached to a data set, m is a message
+in Fnp , and ?f? is an encoding of a function f acting on k-tuples of mes-
+sages. Now a formal description of the scheme from [5] is introduced,
+which is the base of this implementation:
+16
+The linearly homomorphic signature scheme.
+Setup(1n, k).
+(nÐ a security parameter,
+kÐ a data set size):
+(1) Choose two primes p, q = poly(n) with q ³ (nkp)2.
+Define l := bn/6 log qc.
+(2) Set ?1 := pZn.
+(3) Use TrapGen(q, l, n) to generate a matrix A ? Fl?nq
+along with a short basis Tq of ??q (A). Define ?2 :=
+??q (A) and T := p  Tq. Note that T is a basis of
+?1 ? ?2 = p?2.
+(4) Set v := p  Ãn log q  log n.
+(5) Let H : {0, 1}? ? (Flq) be a hash function.
+(6) Output the public key pk:= (?1,?2, v, k,H) and the
+ssecret key sk=T.
+Sign(sk,?,m, i).
+(skÐ a secret key,
+?Ð a tag in {0, 1}n,
+mÐ a message in Fnp ,
+iÐ an index):
+(1) Compute ?i := H(??i) ? Flq. ?? (?pii?) = ?i.
+(2) Compute t ? Zn such that t mod p = m and A 
+t mod q = ?i.
+(3) Output ? ? SamplePre(?1??2,T, t, v) ? (?1??2)+
+t.
+Verify(pk,?,m, ?, f)
+(pkÐ a public key,
+?Ð a tag in {0, 1}n,
+mÐ a message in Fnp ,
+?Ð a signature in Zn,
+fÐ a function in F)
+(1) If all of the following conditions hold, output 1 (ac-
+cept); otherwise output 0 (reject):
+(a) ??? ² k  p2  v
+Ã
+n.
+(b) ? mod p = m.
+(c) A  ? mod q = ?? (?f?).
+Evaluate(pk,?, f, ~?).
+(pkÐ a public key,
+?Ð a tag in {0, 1}n,
+fÐ a function in F encoded as ?f? = (c1, . . . , ck) ? Zk
+with ci ? (?p/2, p/2],
+~?Ð a tuple of signatures ?1, . . . , ?k in Zn)
+(1) Output ? := ?ki=1ci?i.
+17
+Figure 4.1.1. An example of the intersection of two 2-d lattices
+This is a complicated homomorphic signature scheme for linear
+functions. Setup is an algorithm like KeyGen in all other signature
+schemes. Its purpose is to generate public key pk and secret key sk as
+well as define system parameters. Public key pk consists of two lattices,
+k, v and a hash function H. The reason why there are two lattices in
+public key is that one needs to verify a GPV signature which is a signa-
+ture on both a message and a hash of an encoding of a function ?f? to
+authenticate both the message and the function as well as bind them
+together. Putting message m in Zn/?1 and hashed encoding function
+?? (?f?) in Zn/?2 gives a opportunity to apply Chinese remainder the-
+orem that would define a coset of ?1 ??2 in Zn. Then Sign(sk, ?,m, i)
+algorithm signs the message m and a projection function that projects
+the ith message out of a message set m1, . . . ,mk, and output a short
+vector to locate the message and the function in the coset defined by a
+short basis of ?1??2. Evaluate algorithm is analogical as Sign with ac-
+ceptable functions well hashed. Eventually, Verify checks a signatureÕs
+length and its propertyÐ ? mod ?1 = m and ? mod ?2 = ?? (?f?) to
+accept the signature or not.
+Now the requirement of correctness of the linearly homomorphic
+signature scheme define above is calculated.
+First, we check the three verification conditions for the signature on
+a message related to a projection function pii defined by pii(m1, . . . ,mk) =
+mi and encoded as ?pii? = ei. Let ? ? {0, 1}n, m ? Fnp , and i ?
+{1, . . . , k}. Then by algorithm Sign in the scheme, it can be obtained
+that
+? ? Sign(sk, ?,m, i).
+(1) From the definition of algorithm TrapGen in Sign, it can be
+gained ?T÷? ² O(pÃl log q), and therefore v ³ ?T÷??(Ãlog l)[3,
+Theoren 3.2]. Then it can be concluded that ??? ² vÃn exists
+with overwhelming probability by Lemma 4.4 in [25].
+18
+(2) By correctness of SamplePre defined in [15], it can be gained
+? ? (?1 ? ?2) + t, where ? mod p = t. By definition of t in
+algorithm Sign, t mod p = m.
+(3) As above, we have ? ? (?1 ? ?2) + t. Since ?2 is defined by
+a matrix A in Zq, A  ? mod q = ?i is obtained, where ?i is
+defined as ?? (?pii?) in Sign.
+Then, we discuss the situation of the signature on the result of
+applying a function on messages. Here the function applied on mes-
+sages can be any of acceptable functions in F , and it is encoded as
+?f? = (c1, . . . , ck) ? Zk, where |ci| ² p/2 ? Z. Let ? ? {0, 1}n, ~m =
+(m1, . . . ,mk) ? (Fnp )k, and ~? = (?1, . . . , ?k) with ?i ? Sigh(sk, ?,mi, i).
+Then by algorithm Evaluate in the scheme, we have
+?? ? Evaluate(pk, ?, f, ~?) = ?ici?i.
+Next, check the three verification conditions:
+(1) Since |ci| < p/2 for all i, it can be seen that
+???? = ?ki=1ci??i? ² k 
+p
+2 max{??i? : ?i ? ~?}.
+By Lemma 4.4 in [25], it can be achieved that
+???? ² k  p2  v
+Ã
+n.
+(2) By correctness of individual signatures, ?i mod p = mi for
+i ? {i, . . . , k} is gained. Thus,
+?? mod p =
+·
+i
+ci?i mod p =
+·
+i
+cimi = f(~m).
+(3) By correctness of individual signatures, A  ?i mod q = ?i for
+i ? {1, . . . , k}, which follows that
+A  ?? mod q = ·
+i
+A  ?i mod q
+=
+·
+i
+ci?i mod q
+= ?? (?f?).
+Unforgeability. Unforgeability of this linearly homomorphic scheme
+is based on that it is difficult to find a short nonzero vector in ?2[5].
+It can be supposed that an adversary who forges a signature for
+the linearly homomorphic scheme can be quite able to compute a short
+vector in the lattice ?2 computed in Step 3 of Setup. By Theorem
+3 in [3], the distribution of matrices A which is used to define ?2 is
+statistically close to uniform over Fl?nq . Therefore, the distribution of
+lattices ?2 is statistically close to the distribution of challenges for the
+SISq,n,? problem (for any ?)[25, 5].
+19
+According to Section 4.2 and Section 7.3 in [5], it is concluded that
+Òif SISq,m,? is infeasible for ? = k  p2  n log n
+Ã
+log q, then the linearly
+homomorphic signature cheme defined above is unforgeableÓ.
+Worst-case connections. To apply the conclusion mentioned
+above, restrictions should be satisfied. In worst case, the SISq,m,? prob-
+lem is as hard as approximating the SIVP problem within ?  O÷(Ãn),
+when q ³ ?  ?(Ãn log n)[15]. Indeed, the requirement in Setup that
+q ³ (nkp)2 ensures that q is large enough for the conclusion above to
+apply.
+Privacy. Now whether the linearly homomorphic signature scheme
+is weakly context hiding should be discussed. To determine its pri-
+vacy property, the privacy challenge game mentioned in Section 2.2 is
+needed. In the privacy game, an adversary gives the challenger two
+message set ~m?0, ~m?1 that contain k messages each and multiple accept-
+able functions f1, . . . , fs. It is defined that all functions received by the
+challenger satisfy:
+f(~m?1) = f(~m?1) ? Fnq , for all i = 1, . . . , s.
+In the scheme, ?1 ? ?2 and ? are used to answer the challenge.
+For j = 1, . . . , k, let ?(0)j and ?
+(1)
+j be the challengerÕs signatures on
+messages in ~m?0 and ~m?1, respectively. For i = 1, . . . , s, let d
+(b)
+i be the
+derived signature on result fi(~m?b) by applying Evaluate to signature
+sets ~?(b) = {?(b)1 , . . . , ?(b)k } and the function fi, b = {0, 1}. Consider
+?
+(b)
+j , d
+(b)
+i and fi as matrix E(b) ? Zn, D(b) ? Zn and F ? Zs?k so that
+row j of E(b) is (?(b)j )T ;row i of D(b) is (d
+(b)
+i )T ; and row i of F is ?? (?fi?).
+Then, it can be seen that D(b) = FE(b) for b = 0, 1 as ?? = · ci?i in
+Evaluate in Section 3.3.
+According to [5], when b=0, every signature ?(0)j is sampled from
+a distribution statistically close to D?+ti,v, of which ti is the result of
+Step (2) of the Sign algorithm. By Theorem 4.14 in [4], the derived
+signatures D(0) = FE(0) are statistically close to a certain distribution,
+which can be defined by ?, ?, F, F ~m?0. So will be D(1) and the certain
+distribution that D(1) is closed to is the same as the one D(0) closed
+to, since F ~m?0 = F ~m?1. Therefore, D(0) and D(1) are statistically close,
+which consequently concludes the adversary cannot win the challenge
+game.
+Length Efficiency. To decide whether or not the scheme intro-
+duced above is length efficient, we focus the up limit of the norm of
+signatures output by Sign(sk,.,.,.) and Evaluate to check what their bit
+length depend on.
+According to Lemma 4.4 in [25], the norm of signatures output by
+Sign with overwhelming probability will not exceed vÃn, which implies
+its bit length is at most nlg(v
+Ã
+n).
+20
+In the definition of Evaluate, ? is defined as ?ki=1ci?i. Since |ci| ²
+p/2 and ?i ² vÃn (?i output from Sign), the norm of ? is at most
+k  max{ci}  max{??i?} = k  p2  v
+Ã
+n. Therefore, the bit length of
+the derived signature ? will not exceed nlgk + nlg
+(
+p
+2  v
+Ã
+n
+)
+, which
+depends logarithmically on k. Now the length efficiency of the scheme
+can be concluded.
+4.2. A Polynomial Homomorphic Signature Scheme
+In this section, a construction, a signature scheme that authen-
+ticates polynomial functions on signed messages without the original
+authenticator, is described as well as its correctness requirement.
+Generally speaking, the concept of the polynomial system is replac-
+ing the lattices ?1,?2 by ideals and assuming the lattice Zn has a ring
+structure[5]. After the replacement, ring homomorphisms are built
+within mappings in the system. With ring homomorphisms, adding or
+multiplying signatures becomes a manner of adding or multiplying the
+corresponding messages and functions.
+Concretely, let F (x) ? Z[x] be a monic irreducible polynomial of de-
+gree n, and the number field F can be defined by F (x) as Q[x]/(F (x)).
+Then the lattice in Qn corresponding to the ring of integers of k is de-
+noted by OK , which leads us to Fp through OK/p as well as Fq (p and
+q are prime ideals that are subsets of OK of norm p, q.) When Fp and
+Fq are obtained, sign messages can be signed exactly as in the linearly
+homomorphic scheme.
+In the linearly homomorphic scheme, the projection functions pii are
+used as "original" functions to be a generating set for acceptable func-
+tions. the function f = ?cipii is encoded by its coefficients (c1, . . . , ck)
+as a vector. To compare with the linearly homomorphic scheme, the
+projection functions pii in a polynomial homomorphic scheme are ex-
+actly the linear monomials xi, and polynomial functions can be ob-
+tained by adding and multiplying monomials. With the same approach,
+polynomial functions on Fp[xi, . . . , xk] can be encoded as its vector of
+coefficients after an ordering on all monomials is built[5].
+The hash function ?? (?f) needs to be re-defined as well. For a
+function f in Fp[x1, . . . , xk] that is encoded as ?f? = (ci, . . . , cl), a
+"good" hash function ?? (?f) is defined as fö(?1, . . . , ?k), where fö is a
+polynomial function which can reduce to f mod p[5].
+To evaluate polynomials on signatures, given a polynomial f and
+signatures ?1, . . . , ?k ? K on messages m1, . . . ,mk ? Fp, the polyno-
+mial fö ? Z[x1, . . . , xk] is applied on the signatures, which is fö(?1, . . . , ?k).
+Now a formal description of the scheme from [5] is introduced, which
+theoretically can compute on signed messages for polynomials with
+small coefficients and bounded degree:
+21
+The polynomially homomorphic signature scheme.
+Setup(1n, k).
+(nÐ a security parameter,
+kÐ a data set size):
+(1) Choose a monic and irreducible polynomial F (x) ?
+Z[x] of degree n with ?F = poly(n).
+Let K := Q[x]/(F (x)) and R = Zn be the lattice
+that corresponds Z[x]/(F (x)) ? OK .
+(2) Run the PrincGen algorithm[30] with inputs F, n to
+produce distinct principal degree-one prime ideals
+p = (p, x ? a) and q = (q, x ? b) of R with gener-
+ators gp, gq, respectively.
+(3) Generate a basis T of p  q.
+(4) Set v := ?2F  n3 log n.
+(5) Choose positive integers: the coefficient bound y =
+poly(n) and d = O(1).
+(6) Compute l =
+(
+k + d
+d
+)
+? 1, which defines Zl where
+reduced polynomial fö get encoded.
+(7) Let H : {0, 1}? ? (Flq) be a hash function.
+(8) Output the public key pk:= (F, p, q, a, b, v, y, d,H)
+and the ssecret key sk=T.
+Sign(sk,?,m, i).
+(skÐ a secret key,
+?Ð a tag in {0, 1}n,
+mÐ a message in Fnp ,
+iÐ an index):
+(1) Compute ?i := H(??i) ? Flq. ?? (?pii?) = ?i.
+(2) Compute h = h(x) ? R such that h(a) mod p = m
+and h(b) mod q = ?i.
+(3) Output ? ? SamplePre(p  q,T, h, v) ? (p  q) + h.
+22
+Verify(pk,?,m, ?, f)
+(pkÐ a public key,
+?Ð a tag in {0, 1}n,
+mÐ a message in Fnp ,
+?Ð a signature in Zn,
+fÐ a function in F)
+(1) If all of the following conditions hold, output 1 (ac-
+cept); otherwise output 0 (reject):
+(a) ??? ² l  y  ?d?1F  (v
+Ã
+n)d.
+(b) ?(a) mod p = m.
+(c) ?(b) mod q = ?? (?f?).
+Evaluate(pk,?, f, ~?).
+(pkÐ a public key,
+?Ð a tag in {0, 1}n,
+fÐ a function in F encoded as ?f? = (c1, . . . , cl) ? Zl
+with cj ? (?y, y],
+~?Ð a tuple of signatures ?1, . . . , ?k in Zn)
+(1) Set fö := ?lj=1cjYj(x1, . . . , xk). Yj is the set of all
+non-constant monomials xe11 . . . xekk ordered.
+(2) Output fö(?1, . . . , ?k).
+Correctness of this Polynomially Homomorphic Signature
+Scheme. First, we check the three verification conditions for individ-
+ual signatures relative to a projection function pii defined by mono-
+mial xi and encoded as ?pii? = ei. Let ? ? {0, 1}n, m ? Fp, and
+i ? {1, . . . , k}. Then by algorithm Sign in the secheme, it can be seen
+that
+? ? Sign(sk, ?,m, i).
+(1) From the definition of algorithm PrincGen[30, Section 3.1] in
+Sign, the norm of the generators gp and gq is at most n1.5, by
+which it can be obtained that
+?gpgqxi? ² ?2F  n3 (fori = 0, . . . , n? 1).
+It follows that the basis T has ?T÷? ² ?2F n3, and therefore v ³
+?T÷??(Ãlog n)[3, Theoren 3.2]. Then it can be concluded that
+??? ² vÃn exists with overwhelming probability by Lemma
+4.4 in [25].
+(2) By correctness of SamplePre defined in [15], ? ? (p  q) +
+h(x), where ?(a) mod p = h(a) mod p. By definition of h(x)
+in algorithm Sign, it can be achieved that h(x) mod p = m.
+(3) As above, we have ? ? (pq)+h(x), and therefore ?(b) mod q =
+h(b) mod q = ?i.
+23
+Then, we discuss the situation of the signature on the result of
+applying a function on messages. Here the function applied on mes-
+sages can be any of acceptable functions in F , and it is encoded as
+?f? = (c1, . . . , cl) ? Zl, where |cj| ² y ? Z. Let ? ? {0, 1}n, ~m =
+(m1, . . . ,mk) ? Fkp, and ~? = (?1, . . . , ?k) with ?i ? Sigh(sk, ?,mi, i).
+Then by algorithm Evaluate in the scheme, it can be gained that
+?? ? Evaluate(pk, ?, f, ~?) = ?jcjYj(~?).
+Next, we check the three verification conditions:
+(1) Since f is acceptable |cj| is less than y for all j. Thus it can
+be gained that
+???? = ?lj=1cjYj(~?) ² y  ?lj=1Yj(~?).
+Next we discuss Yj(~?) in details. Since Yj(?) consists of mul-
+tiplying at most d of the ?i, it can be obtained
+?Yj(~?)? ² ?d?1F  (max{??i? : ?i ? ~?}).
+By Lemma 4.4 in [25],
+?Yj(~?)? ² ?d?1F  (v
+Ã
+n)d.
+Therefore,
+???? ² l  y  ?d?1F  (v
+Ã
+n)d.
+(2) Since a ring homomorphism built in, each monomial Yj can be
+split:(
+Yj(~?)
+)
+(a) = Yj
+(
+?1(a), . . . , ?k(a)
+)
+mod p.
+By correctness of individual signatures, it can be seen that
+?i(a) mod p = mi for i ? {i, . . . , k}. Thus, we have
+??(a) mod p =
+·
+j
+cj
+(
+Yj(~?)
+)
+mod p
+=
+·
+j
+ciYj
+(
+?1(a), . . . , ?k(a)
+)
+mod p
+=
+·
+j
+cjYj(m1, . . . ,mk)
+= f(~m).
+(3) By correctness of individual signatures, it can be gained that
+?i(b) mod q = ?i for i ? {1, . . . , k}. As above, we have
+??(b) mod q =
+·
+j
+cjYj(?1, . . . , ?k) mod q
+= ?? (?f?).
+24
+CHAPTER 5
+A Homomorphic Signature Scheme:
+Implementation
+In this chapter, a fully discussion of the implementation of our ho-
+momorphic signature schemes is given. We construct four independent
+programs, corresponding Setup, Sign, Verify, and Evaluate, to carry out
+our linearly homomorphic signature scheme. The polynomial homo-
+morphic signature scheme replaces the lattice generating module in
+Setup of the linearly one, and the rest part is analogous and can be
+built in almost the same route.
+5.1. Number Theory Library
+Firstly, an introduction of a library for doing number theory is
+given. Since most of computations in our schemes are related to the
+calculation of matrices and vectors, it would be very fussy and unwise
+to built those basic operations and environments line by line.
+NTL is a high-performance, portable C++ library[29] that provides
+algorithms for arbitrary length integers and for vectors, matrices and
+polynomials over the integers and over finite fields as well as some useful
+data structures.
+NTLÕs Programming Interface. Here some important APIs from
+NTL that are used in our code are listed with short descriptions of their
+function and role.
+ZZ: The class ZZ is used to represent signed, arbitrary length
+integers. The large prime q and relatively small prime q are
+initialized in this class.
+GenPrime(ZZ& p, long len, long err = 80): GenPrime gen-
+erates a random prime p of length l with a probability bounded
+by 2?err that p is composite.
+ZZ_p: The class ZZ_p is used to represent integers mod a mod-
+ulus. This class found the fields of our vectors and matrices.
+random_ZZ_p(): random_ZZ_p generates a random integer
+in modulus ZZ_p::modulus. This function is used to help to
+generate the random q-ary lattice ?2.
+mat_ZZ, mat_ZZ_p, mat_zz_p: These classes are used to
+represent matrices with different bounds. Most of the matrices
+in our schemes are initialized in these classes.
+25
+vec_ZZ, vec_ZZ_p: These classes are used to represent vec-
+tors with different bounds. Most of the vectors in our schemes
+are initialized in these classes.
+kernel(mat_ZZ_p& X, const mat_ZZ_p& A): kernel com-
+putes a basis for the kernel of the map x? x ?A, where x is
+a row vector. This function is used to help calculate ??(A).
+HNF(mat_ZZ& W, const mat_ZZ& A, const ZZ& D):
+HNF computes the Hermite Normal Form of A. This function
+is implemented using the algorithm of [10], and we will discuss
+another high performance algorithm to compute HNF in later
+section.
+mat_RR: mat_RR is used to represent matrices whose entries
+are in R. This class is used to help sample discrete gaussians.
+vec_RR: vec_RR is used to represent vectors whose entries are
+in R. Some coefficients are stored in vectors in this class, when
+sampling discrete gaussians.
+CRT(mat_ZZ& a, ZZ& prod, const mat_zz_p& A): This
+function implements Chinese Remainder Theory. This func-
+tion is used for "dual role" signing.
+26
+5.2. Implementing Setup of Linearly Homomorphic
+Signature Scheme
+Overview of Setup. According to the description, the main pur-
+pose of Setup is to generate the public key and secret key, and it has
+been implemented in setup.cc. It can be seen that Setup has been
+divided into five steps in the flow chart Figure 5.2.
+Figure 5.2.1. the flow chart of the algorithm Setup
+The Input of Setup. First, a security parameter n and a data set
+size k are put into Setup. Although there is no experiment to tell how
+large a security parameter could give us a reasonable computational
+security, it can still be assumed that n is in range of a long.
+Generating Two Primes. Then, two primes p and q need to be
+generated. Since the minimal length requirement of GenPrime in NTL
+27
+and the bound of q (q ³ (nkp)2)required by security property, p and q
+are generated as following:
+Figure 5.2.2. the flow chart of generating two primes
+28
+As shown in Figure 5.2.2, primes p and q are obtained by using Gen-
+Prime in NTL with their length picked up by C++ standard random
+function. It generates the primes repeatedly untill p and q are in the
+good range mentioned above.
+Generating Two Lattices. After two primes generated, two lat-
+tices are about to be generated. The first lattice ?1 is defined as pZn,
+which indicates a matrix with p in its diagonal. The other one is a
+lattice associated with a matrix A, which TrapGen is used to construct
+following the flow chart in Figure 5.2.3.
+Figure 5.2.3. the flow chart of generating lattice ?2
+TrapGen. Basic algorithm in TrapGen as described in [3]:
+29
+Algorithm? Framework for constructing A ? Zl?nq
+and basis S of ??(A).
+Input: A1 ? Zl?n1q and dimension n1 (in unary).
+Output:
+A2 ? Zl?n2q ;
+a basis S of ??(A), where A = [A1|A2]? Zl?nq
+for m = m1 +m2.
+(1) Generate component matrices U ? Zm2?m2 ;
+G,R ? Zm1?m2 ; P ? Zm2?m1 ;
+and C ? Zm1?m1 such that U is nonsingular and
+(GP+C) ? ?? (A1)
+(2) Let A2 = ?A1  (R+G) ? Zn?m2q .
+(3) Let S=
+(
+(G+R)U RP-C
+U P
+)
+? Zm?m.
+(4) return A2 and S.
+This algorithm extends the given input random matrix A1 ? Zn?m1q to
+A = [A1|A2] ? Zn?mq by equation:
+Construction of Algorithm?
+In Algorithm?, the basic idea is that sub-matrix G contains the
+m1 columns of H? = H ? I1, and P simply selects those columns to
+yield GP = H?[3]. Moreover, appended columns in G are included to
+ensure both U and GU short, which gives the reason why there exists
+an extra factor (l = logr q) in the restrictions.
+Then definitions of parts of outputs of Algorithm? can be given[3]:
+Definition of G
+G =
+[
+G(1)| . . . |G(m1)|M|0
+]
+? Zm1?m2
+(1) For i ? [m1], width of G(i) : wi = dlg hi,ie
+(2) For j ? wi, the j-th column of G(i): g(i)j = 2j?1  ei ? Zm1
+(3) The number of total columns of all G(i) =·
+i?[m1]
+wi ² n lg q +
+·
+i?[m1]
+lg hi,i ² 2n lg q
+1Given A1, let H ? Zm1?m1 be the Hermite normal form of ??(A1)
+30
+(4) If q is prime, there are at most n values of hi,i > 1(all are q),
+which results in that the number of columns is at most ndlg qe
+(because dlg 1e = 0)
+(5) The matrix M is all zero but first d rows, and is a some kind
+of complicated matrix that is only needed for analysis of ?S÷?
+Definition of P
+P =
+[
+P(1); . . . ;P(m1);0;0
+]
+? Zm2?m1
+, which mirroring the structure of G.
+(1) For each i, j ? [m1], P(i) contains entries p(i)k,j ? {0, 1} such
+that
+h?i.j =
+·
+k?[wi]
+p(i)k,j  2k?1,
+which actually turns h?i,j to binary and fill p
+(i)
+j with them
+(2) GP = H?
+Definition of U
+U = diag(Tw1 , . . . ,Twm1 , I) ? Zm2?m2 ,
+in which
+Tw =
+?????????????
+1 ?2 0       0
+0 1 ?2 . . . . . . ...
+... . . . . . . . . . . . . ...
+... ... . . . . . . . . . 0
+... ... ... . . . . . . ?2
+0          0 1
+?????????????
+? Zw?w
+Definition of R
+(1) Each entry in the top d rows of R is an independent {0,±1}-
+valued random variable that is 0 with probability 12 , 1 with
+probability 14 , -1 with probability
+1
+4
+(2) The remaining entries are all 0
+Fix the Input and Output of TrapGen. In the linearly homomorphic
+signature scheme, the input of TrapGen is (q, l, n), where q is a n-
+digit prime that satisfied q ³ (nkq)2, and l is a fixed number that
+equals bn/6 log qc. After given an appropriate input, TrapGen produces
+a output of a matrix A ? Fl?nq along with a short basis Tq of ??q (A).
+However, the input of TrapGen does not match what Algorithm?
+wants. To make it work, a basic idea is that a matrix A1l?n1q and n2 =
+n?n1 are put into Algorithm?. Then the output of Algorithm? is a ma-
+trixA2 ? Zl?n2 and a basis S of ??(A). By combining input matrixA1
+and output matrix A2, it can be obtained that A = [A1|A2] ? Zl?nq for
+n = n1 + n2, which is exactly what TrapGen should output. Secondly
+the other desired output in linearly homomorphic signature scheme is
+31
+a short basis. According to Figure 1 in [3], it can be confirmed that
+AS = 0 ? Zl?nq , which means a basis of ??q (A).
+Algorithm? perfectly provides the expecting outputs, but with re-
+strictions. Based on Theorem 3.2 in [5] and Lemma 3.5 in [3], Let
+? = 1/3, and l = bn/6 log qc, n1 should satisfy that
+(1 + ?)l log q ² n1 ² n? (4 + 2?)l log q,
+which limits the random matrix A1. Thus, the random matrix A1 is
+created by following steps:
+Figure 5.2.4. the flow chart of generating matrix A1
+Computing Hermite Normal Form. One difficult procedure of Trap-
+Gen is that how Hermite Normal Form is computed.
+It has been introduced that there is an API in NTL which computes
+the Hermite Normal Form of a matrix. However, the alogirthm used in
+NTL for HNF is very old and inefficient. Now we try to optimize the
+procedure by updating the algorithm. Foremost, a formally definition
+of Hermite Normal Form should be introduced:
+Definition 5.2.1. (Hermite normal form)[27]. For any n?m integer
+matrix A the Hermite normal form (HNF) of A is the unique matrix
+H = (hi,j) such that there is a unimodular n?n matrix U with UA = H,
+and such that H satisfies the following two conditions:
+32
+¥ there exist a sequence of integers j1 <    < jn such that for all
+0 ² i ² n hi,j = 0 exists for all j < ji (row echelon structure),
+¥ for 0 ² k < i ² n it can be gained 0 ² hk,ji < hi,ji(the pivot
+element is the greatest along its column and the coefficients
+above are nonnegative).
+For instance, an example can be?????
+5 3 1 4
+0 1 0 0
+0 0 19 16
+0 0 0 3
+????? .
+To compute Hermite normal form is quite like doing Gaussian Elim-
+ination without doing divisions, which causes it not the same as Gauss-
+ian Elimination. So it has to done by doing the row elimination which
+uses the extended Euclidean Algorithm.
+There are numbers of algorithms for the computing HNFÕs, includ-
+ing [28, 11, 6, 26]. Here, an algorithm by ClŽment Pernet and William
+Stein[27] is introduced and can be implemented, which is based on
+heuristically fast algorithm with several practical improvements.
+33
+Algorithm : Hermite Normal Form[26]
+Data Input: A: an n? n nonsingular matrix over Z
+Data Output: H: the Hermite normal form of A
+1 begin
+2 Write A =
+???B bcT an?1,n
+dT an,n
+???
+3 Compute d1 = det
+([
+B
+cT
+])
+4 Compute d2 = det
+([
+B
+dT
+])
+5 Compute the extended gcd of d1 and d2: g = sd1 + td2
+6 Let C =
+[
+B
+scT + tdT
+]
+7 Compute H1, the Hermite normal form of C, by working modulo g
+8 Obtain from H1 the Hermite form H2 of
+[
+B b
+scT + tdT san?1,n + tan,n
+]
+9 Obtain from H2 the Hermite form H3 of
+[
+B b
+cT an?1,n
+]
+10 Obtain from H1 the Hermite form H of
+???B bcT an?1,n
+dT an,n
+???
+11 end
+Algorithm  is an algorithm for computing HNFÕs on square matri-
+ces. The key ideas of Algorithm  go as following[27]:
+(1) Every entry in the HNF H of a suqare matrix A is always less
+then the absolute value of the determinant det(A), so one can
+compute H be working modulo the determinant of H. This
+idea was first introduced and developed in [11];
+(2) Computing H from H? which is the HNF computed of a small-
+determinant matrix constructed from A.
+To improve Algorithm  for rectangular matrices, the algorithm need
+to be decomposed into steps and develop them[27]:
+¥ The first bottleneck is in Steps 3 and 4 Ð Compute det. There
+are many algorithms for computing the determinant of an in-
+teger matrix A.
+The most common one involves computing the Hadamard
+bound on det(A), then computing the determinant modulo p
+for sufficiently many p using a Gaussian elimination algorithm,
+and finally using a Chinese remainder theorem reconstruction,
+which has bit complexity[13]
+O(n4(log n+ log ?A?) + n3 log2 ?A?).
+34
+According to Abbott, Bronstein and Mulders[1], the av-
+erage case complexity of the algorithm has been improved to
+O(n3(log2 n + log?A?)2). The two steps (Step 3 and 4) have
+been reduced into one solution Ð Doulbe determinant compu-
+tation Ð because matrices in these steps are similar.
+Algorithmà: Double determinant computation
+Data Input: B: an (n? 1)? n matrix over Z
+Data Input: c, d: two vectors in Zn
+Result: (d1, d2) = (det(
+[
+BT c
+]
+), det(
+[
+BT d
+]
+))
+begin
+1 Solve the system
+[
+BT c
+]
+x = d using DixonÕs p-adic lifting[9]
+2 yi = ? xixn , yn = 1xn solves
+[
+BT d
+]
+]y = c
+3 u1 = lcm(denominators(x)
+4 u2 = lcm(denominators(y)
+5 Compute HadamardÕs bounds h1 and h2
+on the determinants of
+[
+BT c
+]
+and
+[
+BT d
+]
+6 Select a set of primes (pi) s.t. ?ipi > max(h1u1 ,
+h2
+u2
+)
+7 for each pi do
+compute BT = LUP , the LUP decomposition of BT mod pi
+q = ?n?1i=1 Ui,i mod pi
+x = L?1cmodpi
+y = L?1dmodpi
+v
+(i)
+1 = qxnmodpi
+v
+(i)
+2 = qynmodpi
+8 reconstruct v1 and v2 using CRT
+9 return (/d1, d2) = (u1v1, u2v2)
+end
+¥ The second problem is compute the HNF of C in Algorithm .
+According to Pernet and Stein[27], this step has been improved
+by applying the standard row reduction Hermite normal form
+algorithm to C, always recuding all numbers modulo g, when
+the HNF of
+[
+C
+gI
+]
+is
+[
+H
+0
+]
+where H is the Hermite normal
+form of C.
+¥ Then Step 8 of Algorithm  is to find a column vector e such
+that [
+H1 e
+]
+= U
+[
+B b
+scT + tdT an?1,n
+]
+is in Hermite form, for a unimodular matrix U . In Micciancio
+and WarinschiÕs paper[26], the column e is computed using
+multi-modular computations and a tight bound on the size of
+the entries of e. Now this procedure has been improved by
+35
+using the p-adic lifting algorithm2. Then a column can be
+added as following:
+Algorithmàà[27]: AddColumn
+Data Input: B =
+[
+B1 b2
+bT3 b4
+]
+: an n? n matrix over Z
+Data Input: H1: the Hermite normal form of
+[
+B1
+bT3
+]
+Data Output: H: the Hermite normal form of B
+begin
+Pick a random vector u such that |ui| ² ?B?,?i
+Solve [ B1u ] y =
+[
+b2
+b4
+]
+Compute a kernel basis vector k of B1
+? = b4?b
+T
+3 y
+bT3 k
+x = y + ?k
+e = H1x
+return [H1e]
+end
+Instead of multi-modular computations, Algorithmàà tries
+to solve the problem by solving the system[
+B
+scT + tdT
+]
+x =
+[
+b
+an?1,n?1
+]
+by using p-adic lifting algorithm[9]. However, this way is not a
+shortcut as the row scT + tdT that has much larger coefficients
+worsen the complexity of finding a solution. Therefore, the
+algorithm has been enhanced by an idea of metonymy and
+recovery. Algorithmàà changes scT + tdT to a random row u
+that has small entries, and solve the system[
+B
+u
+]
+y =
+[
+b
+an?1,n?1
+]
+.
+Then, Algorithmàà tries to recover x with a kernel basis
+vector k of B in
+x = y + ?k,
+where ? satisfies
+? = an?1,n?1 ? (sc
+T + tdT )  y
+(scT + tdT )  k .
+¥ Finally, Steps 9 and 10 of Algorithm  consist of adding a new
+row to the current Hermite form and updating it to obtain a
+new matrix in Hermite form. The principle is to eliminate the
+new row with all existing pivots (Extended gcd based elimina-
+tion) and update the already computed parts when necessary.
+2The p-adic lifting algorithm solves modp and modp2, . . . , until modpn
+problem
+36
+Algorithmààà[27]: AddRow
+Data Input: A:
+Data Input: b:
+Data Output: H: the Hermite normal form of [Ab ]
+begin
+for all pivots ai,ji of A do
+if bj i = 0 then continue
+if Ai,ji |bj i then b := b? bj i/Ai,jiAi,1...n
+else
+/* Extended gcd based dlimination */
+(g, s, t) = XGCD(ai,ji , bj i)
+Ai,1...n := sAi,1...n + tbj i
+b := bj i/gAi,1...n ?Ai,ji/gb
+for k=1 to i? 1 do
+/* Reduce row k with row i */
+Ak,1...n := Ak,1...n ? bAk,ji/Ai,jicAi,1...n
+if b 6= 0 then
+let j be the index of the first nonzero element of b
+insert bT between rows i and i+ 1 such that ji < j < ji+1
+Return H = [Ab ]
+end
+Before proceeding, one thing has to be noted is that Algorithm [26]
+is designed to apply to square matrices. In the case where the matrix
+A is rectangular, we have to try to calculate submatrix of A and use
+Algorithmàà and Algorithmààà to add additional columns and rows for
+multiple times until correct.
+Compute the Short Basis of the Intersection of ?1 and ?2.
+After a deep discussion about generating two lattices, we focus back
+on remaining parts of Setup.
+It can be seen that the short basis T of ?1 ? ?2 is calculated after
+two lattices constructed. To compute this short basis, two short bases
+of lattices ?1 and ?2 are needed.
+On one hand, the problem of a short basis Tp of ?1 is relatively
+simple. Since ?1 is defined by pZn, the short basis of the coset of ?1
+and any other lattice ?? can be computed by multiplying p to a short
+basis T? of ??.
+On the other hand, by using TrapGen a short basis of the lattice
+associated with a matrix ??(A) has been already created. a short basis
+Tq of ?2 can be obtained directly from the output of TrapGen.
+Then the short basis output by TrapGen is multiplied by p to gen-
+erated a new short basis T which can represent the intersection.
+37
+Arrange the Output of Setup. Finally, it is about to arrange
+what has been computed into two "packages" called public key and
+secret key. The public key consists of ?1, which can be replaced by p,
+?2, which should be computed by matrix A by algorithm introduced
+in section 3.1.2, the data set size k and a parameter v = p  Ãn log q,
+which is used for sampling discrete gaussians in Sign. The secret key
+only consists the short basis T of the intersection of two lattices.
+5.3. Implementing Sign of Linearly Homomorphic Signature
+Scheme
+Overview of Sign. According to the description, the main pur-
+pose of Sign is to generate a signature that is a vector in Zn , and it
+has been implemented in sign.cc. It can be seen that Setup has been
+divided into five steps in the flow chart Figure 5.3.1.
+Figure 5.3.1. the flow chart of the algorithm Sign
+38
+The Input of Sign. In order to start a process of signing, the
+program needs a bunch of valid input. The input includes:
+Secret Key sk: A short basis T of ?1??2, by which sigantures
+can be sampled.
+Message m: A vector in Fnp , which could be in Zn. It needs to
+be mapped into our message space.
+Tag ? : An n-bit string of {0, 1}, which is initialized as a ZZ
+during the implementation.
+index i: An integer, which locates m in the message set tagged
+by ? .
+Matrix A: A matrix initialized as a mat_ZZ, which defines ?2.
+Hashing the Projection Function pii. The hash function used
+to hash functions that will be applied on messages has been modeled
+to a random oracle in [5].
+In our signing process, the hash function works as following algo-
+rithm:
+AlgorithmHash:
+Data Input: x ? {0, 1}?, a prime q, a fixed integer l
+Data Output: a vector in Flq
+y? 0 ? Flq
+For i = 0 . . . l ? 1 do
+Let s = x?i
+t? SHA-512(s) ? {0, . . . , 2512 ? 1}
+yi ? t mod q
+Output y
+Considering two main security properties of this hash function:
+One-way property: If there is an oracle that can break the
+one-way property of the algorithm above, this oracle can be
+used to break the one-way property of SHA-512: The chal-
+lenger sends a hash y ? Fq to the adversary to generate its
+corresponding message. To response, the adversary set l = 1
+and send y? ? y ? F1q to the oracle and get a message x?. Then
+x??0 is the message to hash y. If the oracle cannot output a
+message, then the adversary set l = 2 and the second output
+x?? of the oracle, which is valid, can construct the message to
+hash y, which is x???1.
+Collision resistant: Since the security given by SHA-512, it
+can be concluded that the collision resistant property of hash
+algorithm above is fine.
+With the hash function described above, the hash of the projection
+function pii can be computed easily Ð applying AlgorithmHash(??i).
+39
+Computing the "Dual-Role" Signing Vector. It can be seen
+that the third step in the flow chart of Sign is to compute a vector
+t ? Zn such that t mod p = m and A  t mod q = ?i.
+First, a vector m? in Flp that is defined as A m is computed. Then
+a new definition of t can be obtained such that A  t mod p = m? and
+A  t mod q = ?i. With this definition, a reconstruction problem of
+A  t is formed, and it can be solved by Chinese Remainder Theorem
+directly. After CRT applied, a vector t? in Zn is generated. Finally,
+Gaussian-Elimination algorithm is used to solve A  t = t? to get t.
+For example, let q = 7, p = 3, the matrix A =
+???2 0 1 0 14 2 0 0 0
+0 0 1 2 0
+???, a
+message m =
+???????
+1
+0
+2
+0
+0
+???????, and a hash ?i =
+???03
+5
+???. Then we proceed:
+(1) m? =
+???2 0 1 0 14 2 0 0 0
+0 0 1 2 0
+???
+???????
+1
+0
+2
+0
+0
+??????? =
+???11
+2
+??? .
+(2) A  t = CRT(p, q,m?, ?i)
+(a)
+???03
+5
+???+
+???77
+7
+???u =
+???11
+2
+??? mod p.
+(b) u =
+[
+1 1 2
+]
+.
+(c) A  t =
+??? 710
+5
+???
+(3) Solve
+???2 0 1 0 14 2 0 0 0
+0 0 1 2 0
+??? t =
+??? 710
+5
+???
+(a) t? {t1, t2, t3, t4, t5}.
+(b) Let t4 = 0 and t5 = 0, since matrix A is an 3? 5 matrix.
+(c) Get a solution:
+t1 = 1 + t4 +
+1
+2t5 = 1,
+t2 = 3? 2t4 + t5 = 3,
+t3 = 5? 2t4 = 5.
+40
+(d) t =
+???????
+1
+3
+5
+0
+0
+???????
+(4) Output t.
+Sampling Discrete Gaussians. Generally, a message is hashed
+to a point in some region of space, and its signature is essentially a
+nearby lattice point, which is found using a "good" secret basis. How-
+ever, in Trapdoor Functions[15], given by probabilitistic polynomial-
+time algorithms(SampleZ, SampleD, SamplePre), there are two main
+differences: first, they are based on random lattices that enjoy worst-
+case hardness; second and more importantly, the signatures are gener-
+ated by a randomized decoding algorithm whose output distribution is
+oblivious to the geometry of the secret basis.
+Gaussians on Lattices[15]
+For any s > 0 define the Gaussian function on Rn centered at c
+with parameter s:
+?x ? Rn, ?s,c(x) = exp (?pi?x? c?2/s2)
+.
+For any c ? Rn, real s > 0, and n-dimensional lattice ?, define the
+discrete Gaussian distribution over ? as:
+?x ? ?, D?,s,c(x) = ?s,c(x)
+?s,c(?)
+The Gram-Schmidt Norm of a Basis. Before discussing how to sam-
+ple discrete gaussians, the Gram-Schimdt norm of a basis need to be
+introduced as well as its orthogonalization and how to compute them.
+In any inner product space, one can choose the basis in which to work.
+It often greatly simplifies calculations to work in an orthogonal basis.
+Let S be a set of vectors S = {s1, . . . , sk} in Rm. The following
+notations are used:
+¥ ?S? denotes the length of the longest vector in S, i.e., max1²i²k ?si?.
+¥ S÷ := {s÷1, . . . , s÷)k} ? Rm denotes the Gram-Schmidt orthogo-
+nalization of the vectors s1, . . . , sk.
+¥ ?S÷? denotes the Gram-Schmidt norm of S.
+To compute the Gram-Schmidt orthogonalization, a simple algo-
+rithm is applied in our program:
+41
+AlgorithmGram?Schmidt
+Input:
+ÑÐa basis B of an n-dimensional lattice ? = L(B)
+Output:
+ÑÐa matrix which stores the Gram-Schmidt orthogonalization B÷
+(1) Expand B to Rn?n.
+(2) For i = 0, . . . , n? 1 do:
+b÷i ? bi.
+For j = 0, . . . , i? 1 do:
+Compute inner product c0 of bi and b÷j.
+Compute inner product c1 of b÷j and b÷j.
+Compute mi,j = c0/c1.
+b÷i = b÷i ?mi,j  b÷j
+(3) Output B÷
+Geometrically, mi,j  b÷j is the orthogonal projection of bi on the
+space spanned by b÷j, and b÷i is constructed by removing all orthogonal
+projections of bi on the space spanned by orthogonal vectors which
+have been already constructed.
+A Sampling Algorithm. Since continuous can not be generally achieved
+in computer, if it needs to sample some from Gaussians, it can only be
+sampled from discrete Gaussians as shown in Figure 5.3.2.
+Figure 5.3.2. An abstract discrete Gaussians
+Theorem 5.3.1. (Theorem 4.1 in [15]) There is a probabilistic polynomial-
+time algorithm that, given a basis B of an n-dimensional lattice ? =
+42
+L(B), a parameter s ³ ?B÷?  ?(Ãlog n), and a center c ? Rn, outputs
+a sample from a distribution that is statistically close to D?,s,c.
+SampleD
+Input:
+ÑÐa basis B of an n-dimensional lattice ? = L(B)
+ÑÐa parameter s ³ ?B÷?  ?(Ãlog n)
+ÑÐa center c ? Rn
+Output: a lattice vector
+Step 1: Let vn ? 0 and cn ? c. For i? n, . . . , 1, do:
+Let c?i = ?c, b÷i?/?b÷i, b÷i? ? R and s?i = s/?b÷i?
+Choose zi ? DZ,s?i,c?i
+(1)Set a fixed function t(n) ³ ?(Ãlog n)
+(2)Set s? = s?i, c? = c?i
+(3)Choose an integer zi ? Z ? [c? ? s?  t(n), c? + s?  t(n)]
+(this has been coded in a procedure SampleZ as shown in the flow chart)
+(4)Get probability ?s(x? c) ? (0, 1]
+(5)According to ?s(x? c) ? (0, 1], output zi or turn (3)
+Let ci?1 ? ci ? zibi and let vi?1 ? vi + zibi.
+Step 2: Output v0
+Pre-image Sampling with Trapdoor (SamplePre). According to [5],
+Algorithm SamplePre(A, T, t, v) simply calls SampleD(T, v,?t) and
+adds t to the result. Thus SamplePre(A, T, t, v) is used to generate a
+valid signature ?.
+43
+5.4. Implementing Verify of Linearly Homomorphic
+Signature Scheme
+Overview of Verify. According to the description, the main pur-
+pose of Sign is to check three verification conditions, and it has been
+implemented in verify.cc. It can be seen that Verify has been divided
+into three steps in the flow chart Figure 5.4.1.
+Figure 5.4.1. the flow chart of the algorithm Verify
+The Input of Verify. In order to start a process of signing, the
+program needs a bunch of valid input. The input includes:
+Public Key pk: An integer p that defines ?1, a matrix A that
+defines ?2, the data set size k and a parameter v = p 
+Ã
+n log q.
+Message m: A vector in Fnp , which could be in Zn. It needs to
+be mapped into our message space.
+Tag ? : An n-bit string of {0, 1}, which is initialized as a ZZ
+during the implementation.
+Index i: An integer, which locates m in the message set tagged
+by ? .
+Function f : a vector in Zk, which implies how function f is
+encoded as ?f?
+44
+Signature ?: A vector in Zn, which is supposed to be a signa-
+ture of m on f .
+Checking Three Verification Conditions. To determine whether
+a signature is valid, three verification conditions are required to check.
+First, since the length of every valid signature is well bonded, a
+signature with inappropriate length should be culled.
+Check the length of a signature
+(1) Calculate ??? = Ã?  ?.
+(2) if ??? ³ k  p2  v 
+Ã
+n
+Output 0
+Then, we check whether signature ? is signed on m for f in ?1??2.
+Check the integrity of message m applied by function f
+(1) Calculate m? = ? mod p.
+(2) if m? 6= m
+Output 0
+(3) Calculate ?? (?f?)
+(1) For i = 1, . . . , k ?i ? H(??i).
+(2) ?? (?f?) = ?ki=1ci?i.
+(4) Calculate h = A  ? mod q
+(5) If h 6= ?? (?f?)
+Output 0
+(6) Output 1
+The Output of Verify. If the input signature ? get "1" from length
+check and the message m and function f get "1" from integrity check,
+Verify output "1" to indicate that message m with function f is authen-
+ticated by a valid signature ?.
+45
+5.5. Implementing Evaluate of Linearly Homomorphic
+Signature Scheme
+According to the description, the main purpose of Evaluate is to
+generate a signature ? in Zn for the result of applying function f on a
+message set ~m, and it has been implemented in evaluate.cc.
+One of its attractive advantages is that Evaluate generates signa-
+tures without contacting the original authenticator. Signatures gener-
+ated by Evaluate are constructed from individual signatures on mes-
+sages of a message set.
+Evaluete has three steps as shown in the flow chart Figure 5.5.1.
+Figure 5.5.1. the flow chart of the algorithm Evaluate
+46
+5.6. Summary
+This chapter introduced the techniques we tried, described the pro-
+cess of implementing the linearly homomorphic scheme. We especially
+explained how four algorithms in the scheme are constructed, how spe-
+cific functional algorithms connects in four algorithms, and detailed
+computations within them.
+Core procedures in implemented programs have been tested to achieve
+better performance such as TrapGen and SampleD. The next chapter
+will illustrate the experiment results of their timing tests.
+47
+CHAPTER 6
+Performance
+The timing test measures the difference of time used to run proce-
+dures between specific procedures in our implementation and nested for
+loops. Time used by nested for-loops is used and rescaled as standard
+polynomial time to analysis the performance of procedures.
+6.1. A Timing Test of Algorithm TrapGen
+The first test performed is to investigate how fast a lattice associ-
+ated with a matrix can be generated by TrapGen, including generating
+a random matrix. The algorithm TrapGen discussed in previous chap-
+ter is applied to several different security parameters and a fixed data
+size.
+The test was performed running 10,000 times of these procedures
+with 256, 310, 450, 512, 740, 810 and 1024 as values for n. The data
+size k was set to 10. The average results are shown in table1. In order
+Security Parameter n TrapGen(n) O(n3)
+256 92.45ms 39.57ms
+320 151.8ms 77.01ms
+450 353.7ms 218.7ms
+512 479.6ms 316.6ms
+740 1842.8ms 939.7ms
+810 2988.9ms 1250.2ms
+1024 7069.1ms 2520.4ms
+Table 1. Average time used of timing test of TrapGen
+to have an intuitive view, the average results in table 1 are fitted to
+curves. Since the theoretical time complexity of TrapGen is O(n3) as
+implemented, its curve has been fitted as a cubic curve. From the
+chart as shown in Figure 6.1, it can be seen that the increasing speed
+of TrapGenÕs curve is fairly faster than O(n3)Õs. One possible reason
+is that TrapGen consists of lots of inner computations which have time
+complex of O(n2), while cubic for-loops do not have. Another possible
+reason, which is more important, is that some functions from NTL that
+TrapGen used have time complexity of O(n4) but is fast or havenÕt been
+applied to n-scale size data. In a word, the time complexity of TrapGen
+is complicated but the average time it used is acceptable.
+48
+Figure 6.1.1. fitted curves of average time used of table 1
+6.2. A Timing Test of Algorithm SampleD
+Then another test is run to investigate the performance of algorithm
+SampleD, which samples a vector in a lattice, including generating a
+Gram-Schmidt orthogonalization. The algorithm SampleD discussed
+in previous chapter is applied to shor bases randomly generated by
+Setup with different security parameters and a fixed data size as well
+as corresponding primes.
+The test was performed running 10,000 times of these procedures
+with 256, 310, 450, 512, 740, 810 and 1024 as values for n. The data
+size k was set to 10. The average results are shown in table2. Same
+as the analysis of TrapGen, the average results in table 1 are fitted to
+curves. Since the theoretical time complexity of SampleD is O(n3) as
+implemented, its curve has been also fitted as a cubic curve.
+From the chart as shown in Figure 6.2, it can be seen that the in-
+creasing speed of SampleDÕs curve is a little bit faster than O(n3)Õs but
+much slower than O(n4)Õs. One possible reason is that sampleD con-
+sists of lots of inner computations which have time complex of O(n2),
+while cubic for-loops do not have. However, it is clear that SampleDÕs
+curve is "covered" by O(n4)Õs, and it is unlikely that a further inflection
+49
+Security Parameter n sampleD(n) O(n3) O(n4)
+256 5.473s 10.10 3.957s
+320 10.718s 24.24s 7.701s
+450 31.586s93.65s 21.44s
+512 46.182s 156.14s 31.66s
+740 120.522s 599.23s 93.97s
+810 233.017s 991.99s 125.02s
+1024 414.981s 2456.92s 252.04s
+Table 2. Average time used of timing test of SampleD
+Figure 6.2.1. Performance of timing test of SampleD
+point will rocket sampleDÕs curve above O(n4)Õs. Therefore, it can be
+concluded that the time complexity of sampleD is in polynomial time.
+However, in terms of average time used, SampleD takes much longer
+than TrapGen, by comparing table 1 and table 2. A probable answer is
+that the process of generating Gram-Schimdt orthogonalization takes
+too much time because many matrix computations within it. In a word,
+the time complexity of sampleD is quite good, but its performance still
+needs further optimization.
+50
+CHAPTER 7
+Conclusion
+This dissertation discussed homomorphic signature schemes pro-
+posed by Boneh and Freeman in depth. The objective was to im-
+plement a version of homomorphic signature that authenticates func-
+tions as well as results of applying them on messages. The functions
+mentioned above includes linear functions and polynomial functions of
+bounded degree. An implementation of linearly homomorphic signa-
+ture has been achieved at the end of this dissertation, some critical
+tests included.
+At the beginning, we introduced a question about computing on
+signed data and gave a brief overview of homomorphic signatures.
+In order to implement a homomorphic signature scheme, first of
+all we need to know what it is. Chapter 2 presented many definitions
+related to homomorphic signatures. In this chapter, we showed how
+homomorphic signatures differs from conventional digital signatures.
+There are two major differences. The first one is that homomorphic
+signature not only signs data but also signs functions which doubles
+the work of Setup and Sign as well as Verify. The second one is homo-
+morphic signature has a special algorithm to handle signature sets to
+generate other valid signatures.
+Chapter 3 reviewed basic mathematical background of homomor-
+phic signatures. Lattices and Ideals were explained with examples,
+and an approach to calculate a lattice associated with a matrix was
+introduced.
+Chapter 4 discussed homomorphic signature schemes, by which the
+implementation can be carried out. The correctness of both two ho-
+momorphic signatures were proven, and security properties of linearly
+homomorphic were talked about.
+After chapter 4, where a brief constructing flow was given, the pro-
+cess of implementation was described in chapter 5. In this chapter,
+details of building four algorithm of homomorphic signatures were pre-
+sented seperately. Algorithms they used and techniques they based on
+were explained with examples. Some optimizations were given as well,
+along with their advantages and disadvantages.
+Chapter 6 illustrated the results of timing tests of two core proce-
+dures. Time complexity of these two procedures were analyzed with
+consideration of real time used, and it concluded that their time com-
+plexity is acceptable.
+51
+7.1. Open Problems
+There are many open problems that remain in homomorphic sig-
+natures. First, as explained in the introduction, derived signatures
+are desired not to leak information about the original data set. This
+privacy property still can not be solved for polynomial functions.
+Second, hash function SHA-512 is applied when computing hash
+of functions in the implemented homomorphic signature schemes. It is
+weak against a chosen message attack. To upgrade the security of our
+scheme, new techniques are needed to eliminate the random oracle.
+Finally, the implementation in this dissertation can been as a step
+on the path to a fully homomorphic signature scheme, which could de-
+rive signatures of results of applying any function on signed data. Thus
+it would be a useful paralled to existing fully homomorphic encryption
+system.
+52
+Bibliography
+[1] John Abbott, Manuel Bronstein, and Thom Mulders. Fast deterministic com-
+putation of determinants of dense matrices. In Proceedings of the 1999 inter-
+national symposium on Symbolic and algebraic computation, ISSAC Õ99, pages
+197Ð204, New York, NY, USA, 1999. ACM. 35
+[2] Jae Hyun Ahn, Dan Boneh, Jan Camenisch, Susan Hohenberger, abhi shelat
+abhi shelat, and Brent Waters. Computing on authenticated data. Cryptology
+ePrint Archive, Report 2011/096, 2011. http://eprint.iacr.org/. 3
+[3] Jo‘l Alwen and Chris Peikert. Generating shorter bases for hard random lat-
+tices. Theory of Computing Systems, 48:535Ð553, 2011. 10.1007/s00224-010-
+9278-3. 10, 11, 18, 19, 23, 29, 30, 32
+[4] Dan Boneh and David Freeman. Linearly homomorphic signatures over binary
+fields and new tools for lattice-based signatures. In Dario Catalano, Nelly Fazio,
+Rosario Gennaro, and Antonio Nicolosi, editors, Public Key Cryptography Ð
+PKC 2011, volume 6571 of Lecture Notes in Computer Science, pages 1Ð16.
+Springer Berlin / Heidelberg, 2011. 10.1007/978-3-642-19379-8_1. 2, 4, 8, 20
+[5] Dan Boneh and David Mandell Freeman. Homomorphic signatures for poly-
+nomial functions. Cryptology ePrint Archive, Report 2011/018, 2011. http:
+//eprint.iacr.org/. i, 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 16, 19, 20, 21, 32, 39, 43
+[6] R. Bradford. Hermite normal forms for integer matrices. In James Davenport,
+editor, Eurocal Õ87, volume 378 of Lecture Notes in Computer Science, pages
+315Ð316. Springer Berlin / Heidelberg, 1989. 10.1007/3-540-51517-8_133. 33
+[7] Christina Brzuska, Marc Fischlin, Tobias Freudenreich, Anja Lehmann, Mar-
+cus Page, Jakob Schelbert, Dominique Schršder, and Florian Volk. Security of
+sanitizable signatures revisited. In Proceedings of the 12th International Con-
+ference on Practice and Theory in Public Key Cryptography: PKC Õ09, Irvine,
+pages 317Ð336, Berlin, Heidelberg, 2009. Springer-Verlag. 3
+[8] Ee-Chien Chang, Chee Liang Lim, and Jia Xu. Short redactable signatures
+using random trees, 2009. xujia comp.nus.edu.sg 14258 received 9 Jan 2009,
+last revised 13 Jan 2009. 3
+[9] John D. Dixon. Exact solution of linear equations using&lt;i&gt;p&lt;/i&gt;-
+adic expansions. Numerische Mathematik, 40:137Ð141, 1982.
+10.1007/BF01459082. 35, 36
+[10] P. D. Domich, R. Kannan, and Jr. L. E. Trotter. Hermite normal form com-
+putation using modulo determinant arithmetic. Math. Oper. Res., 12:50Ð59,
+February 1987. 26
+[11] P. D. Domich, R. Kannan, and Jr. L. E. Trotter. Hermite normal form com-
+putation using modulo determinant arithmetic. Math. Oper. Res., 12:50Ð59,
+February 1987. 33, 34
+[12] U. Feige and A. Shamir. Witness indistinguishable and witness hiding proto-
+cols. In Proceedings of the twenty-second annual ACM symposium on Theory
+of computing, STOC Õ90, pages 416Ð426, New York, NY, USA, 1990. ACM. 8
+[13] Joachim Von Zur Gathen and Jurgen Gerhard. Modern Computer Algebra.
+Cambridge University Press, New York, NY, USA, 2 edition, 2003. 34
+53
+[14] Craig Gentry. A fully homomorphic encryption scheme. PhD thesis, Stanford,
+CA, USA, 2009. AAI3382729. 2, 11, 13
+[15] Craig Gentry, Chris Peikert, and Vinod Vaikuntanathan. Trapdoors for hard
+lattices and new cryptographic constructions. In Proceedings of the 40th annual
+ACM symposium on Theory of computing, STOC Õ08, pages 197Ð206, New
+York, NY, USA, 2008. ACM. i, 2, 3, 16, 19, 20, 23, 41, 42
+[16] Stuart Haber, Yasuo Hatano, Yoshinori Honda, William Horne, Kunihiko
+Miyazaki, Tomas Sander, Satoru Tezoku, and Danfeng Yao. Efficient signa-
+ture schemes supporting redaction, pseudonymization, and data deidentifica-
+tion. In Proceedings of the 2008 ACM symposium on Information, computer
+and communications security, ASIACCS Õ08, pages 353Ð362, New York, NY,
+USA, 2008. ACM. 3
+[17] Robert Johnson, David Molnar, Dawn Xiaodong Song, and David Wagner.
+Homomorphic signature schemes. In Proceedings of the The CryptographerÕs
+Track at the RSA Conference on Topics in Cryptology, CT-RSA Õ02, pages
+244Ð262, London, UK, UK, 2002. Springer-Verlag. 1
+[18] Robert Johnson, David Molnar, Dawn Xiaodong Song, and David Wagner.
+Homomorphic signature schemes. In Proceedings of the The CryptographerÕs
+Track at the RSA Conference on Topics in Cryptology, CT-RSA Õ02, pages
+244Ð262, London, UK, UK, 2002. Springer-Verlag. 3
+[19] Joe Kilian. Improved efficient arguments. In Proceedings of the 15th Annual
+International Cryptology Conference on Advances in Cryptology, CRYPTO Õ95,
+pages 311Ð324, London, UK, 1995. Springer-Verlag. 3
+[20] Vadim Lyubashevsky. Lattice-based identification schemes secure under active
+attacks. In Ronald Cramer, editor, Public Key Cryptography Ð PKC 2008,
+volume 4939 of Lecture Notes in Computer Science, pages 162Ð179. Springer
+Berlin / Heidelberg, 2008. 10.1007/978-3-540-78440-1_10. 13
+[21] Vadim Lyubashevsky and Daniele Micciancio. Asymptotically efficient lattice-
+based digital signatures. In Proceedings of the 5th conference on Theory of
+cryptography, TCCÕ08, pages 37Ð54, Berlin, Heidelberg, 2008. Springer-Verlag.
+3
+[22] Vadim Lyubashevsky, Chris Peikert, and Oded Regev. On ideal lattices and
+learning with errors over rings. In Henri Gilbert, editor, Advances in Cryptology
+Ð EUROCRYPT 2010, volume 6110 of Lecture Notes in Computer Science,
+pages 1Ð23. Springer Berlin / Heidelberg, 2010. 10.1007/978-3-642-13190-5_1.
+2
+[23] Silvio Micali. Computationally sound proofs. 30(4):1253Ð1298, 2000. 3
+[24] Daniele Micciancio. Improving lattice based cryptosystems using the hermite
+normal form. In Revised Papers from the International Conference on Cryp-
+tography and Lattices, CaLC Õ01, pages 126Ð145, London, UK, 2001. Springer-
+Verlag. 11
+[25] Daniele Micciancio and Oded Regev. Worst-case to average-case reductions
+based on gaussian measures. SIAM J. Comput., 37:267Ð302, April 2007. 4, 18,
+19, 20, 23, 24
+[26] Daniele Micciancio and Bogdan Warinschi. A linear space algorithm for com-
+puting the hermite normal form. In Proceedings of the 2001 international sym-
+posium on Symbolic and algebraic computation, ISSAC Õ01, pages 231Ð236,
+New York, NY, USA, 2001. ACM. 33, 34, 35, 37
+[27] ClŽment Pernet and William Stein. Fast computation of hermite normal forms
+of random integer matrices. Journal of Number Theory, 130(7):1675Ð1683,
+2010. 32, 33, 34, 35, 36, 37
+54
+[28] KANNAN R. Polynomial algorithms for computing the smith and hermite
+normal forms of an integer matrix. SIAM Journal on computing, 8(4):499Ð507,
+1979. 33
+[29] Victor Shoup. Ntl: A library for doing number theory, Sept 2011. 25
+[30] N. Smart and F. Vercauteren. Fully homomorphic encryption with relatively
+small key and ciphertext sizes. In Phong Nguyen and David Pointcheval, ed-
+itors, Public Key Cryptography Ð PKC 2010, volume 6056 of Lecture Notes
+in Computer Science, pages 420Ð443. Springer Berlin / Heidelberg, 2010.
+10.1007/978-3-642-13013-7_25. 22, 23
+[31] Damien StehlŽ, Ron Steinfeld, Keisuke Tanaka, and Keita Xagawa. Efficient
+public key encryption based on ideal lattices. In Mitsuru Matsui, editor, Ad-
+vances in Cryptology Ð ASIACRYPT 2009, volume 5912 of Lecture Notes
+in Computer Science, pages 617Ð635. Springer Berlin / Heidelberg, 2009.
+10.1007/978-3-642-10366-7_36. 13
+[32] Ron Steinfeld, Laurence Bull, and Yuliang Zheng. Content extraction signa-
+tures. In Kwangjo Kim, editor, Information Security and Cryptology Ñ ICISC
+2001, volume 2288 of Lecture Notes in Computer Science, pages 163Ð205.
+Springer Berlin / Heidelberg, 2002. 10.1007/3-540-45861-1_22. 3
+[33] Peter Stevenhagen. The arithmetic of number rings. In Algorithmic number
+theory: Lattices, number fields, curves and cryptography, volume 44 of Math-
+ematical Sciences Research Institute Publications, pages 209Ð266. Cambridge
+Univ. Press, 2008. 13
+[34] Paul Valiant. Incrementally verifiable computation or proofs of knowledge im-
+ply time/space efficiency. In Proceedings of the 5th conference on Theory of
+cryptography, TCCÕ08, pages 1Ð18, Berlin, Heidelberg, 2008. Springer-Verlag.
+3
+55
+APPENDIX A
+Source Code
+setup.cc and sign.cc are appended.
+setup.cc
+1 /?
+2 ? setup . cc
+3 ?
+4 ? Created on : Aug 3 , 2011
+5 ? Author : arthur
+6 ?/
+7
+8 #inc lude<NTL/ZZ . h>
+9 #inc lude<NTL/ZZ_p . h>
+10 #inc lude<NTL/mat_ZZ . h>
+11 #inc lude<NTL/mat_ZZ_p . h>
+12 #inc lude<fstream>
+13 #inc lude<math . h>
+14 #inc lude<NTL/HNF. h>
+15 NTL_CLIENT
+16
+17 ofstream fout ;
+18
+19 mat_ZZ callHadamard ( i n t d) {
+20 mat_ZZ mat , matT ;
+21 mat . SetDims (d , d) ;
+22 i f (d == 1)
+23 mat [ 0 ] [ 0 ] = 1 ;
+24 e l s e {
+25 matT = callHadamard (d / 2) ;
+26 i n t i , j ;
+27 f o r ( i = 0 ; i < d / 2 ; i++)
+28 f o r ( j = 0 ; j < d / 2 ; j++) {
+29 mat [ i ] [ j ] = matT [ i ] [ j ] ;
+30 mat [ i + d / 2 ] [ j ] = matT [ i ] [ j ] ;
+31 mat [ i ] [ j + d / 2 ] = matT [ i ] [ j ] ;
+32 mat [ i + d / 2 ] [ j + d / 2 ] = ?matT [ i ] [ j ] ;
+33 }
+34 }
+35 return mat ;
+36 }
+37
+56
+38 void trapGen (ZZ q , long l , long n1 , long n2 , mat_ZZ_p? matA
+, mat_ZZ_p? matA1 ,
+39 mat_ZZ? bas i s , mat_ZZ_p? matA2) {
+40
+41 mat_ZZ matU , matG, matR , matP , matHNF, matHp ;
+42 matU . SetDims (n2 , n2 ) ;
+43 matG . SetDims (n1 , n2 ) ;
+44 matR . SetDims (n1 , n2 ) ;
+45 matP . SetDims (n2 , n1 ) ;
+46 i n t i , j , d = 4 ? l ? NumBits ( q ) / 3 ;
+47
+48 /?
+49 ? Calcu la te HNF of l a t t i c e_ (A1)
+50 ?/
+51
+52 mat_ZZ_p matL1 ;
+53 ke rne l (matL1 , t ranspose (?matA1) ) ;
+54 matL1 = transpose (matL1) ;
+55 fout << " Kernel o f A" << endl << matL1 << endl ;
+56
+57 mat_ZZ matA1Z ;
+58 mat_ZZ_p matA1Zp ;
+59 i f (matL1 .NumRows( ) == 0) {
+60 matA1Z . SetDims ( (?matA1) . NumCols ( ) , (?matA1) . NumCols ( ) ) ;
+61 f o r ( i = 0 ; i < matA1Z . NumCols ( ) ; i++)
+62 matA1Z [ i ] [ i ] = q ;
+63 } e l s e {
+64
+65 matA1Z . SetDims (matL1 .NumRows( ) , matL1 . NumCols ( ) + matL1 .
+NumRows( ) ) ;
+66 matA1Zp . SetDims (matL1 .NumRows( ) , matL1 . NumCols ( ) ) ;
+67 f o r ( i = 0 ; i < matL1 .NumRows( ) ; i++)
+68 f o r ( j = 0 ; j < matL1 . NumCols ( ) ; j++) {
+69 matA1Z [ i ] [ j ] = rep (matL1 [ i ] [ j ] ) ;
+70 matA1Zp [ i ] [ j ] = matL1 [ i ] [ j ] ;
+71 }
+72 f o r ( i = matL1 . NumCols ( ) ; i < matA1Z .NumRows( ) ; i++) {
+73 matA1Z [ i ] [ i ] = q ;
+74 }
+75 }
+76
+77 HNF(matHNF, t ranspose (matA1Z) , power (q , (?matA1) .NumRows( )
+) ) ;
+78
+79 matHp . SetDims (matHNF.NumRows( ) , matHNF.NumCols ( ) ) ;
+80 matHNF = transpose (matHNF) ;
+81 f o r ( i = 0 ; i < matHNF.NumRows( ) ; i++)
+82 f o r ( j = 0 ; j < matHNF.NumCols ( ) ; j++)
+57
+83 i f ( i != j )
+84 matHp [ i ] [ j ] = matHNF[ i ] [ j ] ;
+85 e l s e
+86 matHp [ i ] [ j ] = matHNF[ i ] [ j ] ? 1 ;
+87
+88 /?
+89 ? Calcu la te U
+90 ?/
+91 fout << "matU" << endl ;
+92 i n t htU = 0 ;
+93
+94 f o r ( j = 0 ; j < n1 ; j++) {
+95 long tempLen = NumBits (matHNF[ j ] [ j ] ) ;
+96 i f ( tempLen != 1) {
+97 f o r ( i = htU ; i < htU + tempLen ? 1 ; i++)
+98 matU [ i ] [ i + 1 ] = ?2;
+99 htU += NumBits (matHNF[ j ] [ j ] ) ;
+100 }
+101 }
+102 f o r ( j = 0 ; j < n2 ; j++)
+103 matU [ j ] [ j ] = 1 ;
+104 fout << matU << endl ;
+105
+106 /?
+107 ? Calcu la te G
+108 ?/
+109 i n t wdG = 0 ;
+110 f o r ( i = 0 ; i < n1 ; i++) {
+111 long tempW = NumBits (matHNF[ i ] [ i ] ) ;
+112 i f (tempW != 1) {
+113 f o r ( j = wdG; j < wdG + tempW; j++)
+114 matG [ i ] [ j ] = to_ZZ(pow(2 , j ? wdG) ) ;
+115 wdG += NumBits (matHNF[ i ] [ i ] ) ;
+116 }
+117 }
+118 i n t dG = 1 ;
+119
+120 whi l e (dG ? 2 < n2 ? 2 ? l ? NumBits ( q ) )
+121 dG ?= 2 ;
+122 mat_ZZ matHdm;
+123 matHdm = callHadamard (dG) ;
+124
+125 f o r ( i = 0 ; i < d ; i++)
+126 f o r ( j = 0 ; j < dG; j++)
+127 matG [ i ] [ j + wdG] = matHdm[ i ] [ j ] ;
+128
+129 /?
+130 ? Calcu la te R
+58
+131 ?/
+132 i n t dR, i n t r ;
+133 dR = d ;
+134 f o r ( i = 0 ; i < dR; i++)
+135 f o r ( j = 0 ; j < n2 ; j++) {
+136 i n t r = rand ( ) % 4 ;
+137 switch ( i n t r ) {
+138 case 1 :
+139 matR [ i ] [ j ] = 1 ;
+140 break ;
+141 case 2 :
+142 matR [ i ] [ j ] = ?1;
+143 break ;
+144 d e f au l t :
+145 matR [ i ] [ j ] = 0 ;
+146 }
+147 }
+148 fout << "matR" << endl << matR << endl ;
+149 /?
+150 ? Calcu la te P
+151 ?/
+152 ZZ hpZ ;
+153 i n t htP = 0 , k ;
+154 f o r ( i = 0 ; i < n1 ; i++) {
+155 f o r ( j = 0 ; j < n1 ; j++) {
+156 hpZ = matHp [ i ] [ j ] ;
+157 k = 0 ;
+158 whi l e (hpZ > 0) {
+159 matP [ k + htP ] [ j ] = hpZ % 2 ;
+160 hpZ /= 2 ;
+161 k++;
+162 }
+163 }
+164 htP += NumBits (matHNF[ i ] [ i ] ) ;
+165 }
+166
+167 /?
+168 ? A2
+169 ?/
+170 mat_ZZ_p matRp = to_mat_ZZ_p(matR) , matGp = to_mat_ZZ_p(
+matG) ;
+171 (?matA2) . SetDims ( l , n2 ) ;
+172 (?matA2) = (?1) ? (?matA1) ? (matRp + matGp) ;
+173
+174 (? ba s i s ) . SetDims ( n1 + n2 , n1 + n2 ) ;
+175 mat_ZZ matT_1 , matT_2 ;
+176 matT_1 = (matG + matR) ? matU ;
+177 matT_2 = matR ? matP ;
+59
+178 f o r ( i = 0 ; i < matT_2 .NumRows( ) ; i++)
+179 matT_2 [ i ] [ i ] ?= 1 ;
+180 f o r ( i = 0 ; i < n1 ; i++)
+181 f o r ( j = 0 ; j < n2 ; j++)
+182 (? ba s i s ) [ i ] [ j ] = matT_1 [ i ] [ j ] ;
+183 f o r ( i = 0 ; i < n1 ; i++)
+184 f o r ( j = n2 ; j < n1 + n2 ; j++)
+185 (? ba s i s ) [ i ] [ j ] = matT_2 [ i ] [ j ? n2 ] ;
+186 f o r ( i = n1 ; i < n1 + n2 ; i++)
+187 f o r ( j = 0 ; j < n2 ; j++)
+188 (? ba s i s ) [ i ] [ j ] = matU [ i ? n1 ] [ j ] ;
+189 f o r ( i = n1 ; i < n1 + n2 ; i++)
+190 f o r ( j = n2 ; j < n1 + n2 ; j++)
+191 (? ba s i s ) [ i ] [ j ] = matP [ i ? n1 ] [ j ? n2 ] ;
+192
+193 (?matA) . SetDims ( l , n1 + n2 ) ;
+194 c l e a r (?matA) ;
+195 f o r ( i = 0 ; i < l ; i++)
+196 f o r ( j = 0 ; j < n1 ; j++)
+197 (?matA) [ i ] [ j ] = (?matA1) [ i ] [ j ] ;
+198 f o r ( i = 0 ; i < l ; i++)
+199 f o r ( j = n1 ; j < n1 + n2 ; j++)
+200 (?matA) [ i ] [ j ] = (?matA2) [ i ] [ j ? n1 ] ;
+201
+202 }
+203
+204 i n t main ( ) {
+205 long n , k , l ;
+206
+207 fout . open ( " output . txt " ) ;
+208 c in >> n >> k ;
+209 ZZ p , q ;
+210 long l en = 0 , lp ;
+211
+212 p = 0 ;
+213 q = ?1;
+214 whi l e ( q < (n ? p ? k ) ? (n ? p ? k ) ) {
+215 srand ( time (NULL) ) ;
+216 l en = rand ( ) % (n / 25) + n / 49 + 1 + rand ( ) % (n / 10) ;
+217
+218 GenPrime (q , len , 80) ;
+219 lp = rand ( ) % ( l en / 3) + 2 ;
+220 GenPrime (p , lp , 80) ;
+221 }
+222
+223 l = n / (6 ? NumBits ( q ) ) ;
+224
+225 ZZ_p : : i n i t ( q ) ;
+60
+226
+227 long n1 = ( long ) ( l en ? l ? ( 1 . 34 f ) + 1) ;
+228
+229 mat_ZZ bsT ;
+230 mat_ZZ_p matA1 , matA2 , matL ;
+231 matA1 . SetDims ( l , n1 ) ;
+232
+233 i n t i , j ;
+234 SetSeed ( to_ZZ( time (NULL) ) ) ;
+235 f o r ( j = 0 ; j < n1 ; j++)
+236 f o r ( i = 0 ; i < l ; i++) {
+237 ZZ_p r = random_ZZ_p( ) ;
+238 matA1 [ i ] [ j ] = r ;
+239 }
+240 ZZ vv = p ? NumBits ( to_ZZ(n) ) ? s q r t (n ? NumBits ( q ) ) ;
+241
+242 mat_ZZ_p matA ;
+243 trapGen (q , l , n1 , n ? n1 , &matA , &matA1 , &bsT , &matA2) ;
+244 bsT = bsT ? p ;
+245 fout << "p" << endl << p << endl ;
+246 fout << "matA" << endl << matA << endl ;
+247 fout << "v " << endl << v << endl ;
+248 fout << "k " << endl << k << endl ;
+249 fout << "bsT" << endl << bsT << endl ;
+250 fout . c l o s e ( ) ;
+251 re turn 0 ;
+252 }
+sign.cc
+1 /?
+2 ? s i gn . cc
+3 ?
+4 ? Created on : Aug 20 , 2011
+5 ? Author : arthur
+6 ?/
+7 #inc lude<NTL/ZZ . h>
+8 #inc lude<NTL/ZZ_p . h>
+9 #inc lude<NTL/vec_ZZ . h>
+10 #inc lude<NTL/vec_ZZ_p . h>
+11 #inc lude<NTL/vec_RR . h>
+12 #inc lude<NTL/mat_ZZ . h>
+13 #inc lude<NTL/mat_ZZ_p . h>
+14 #inc lude<NTL/mat_RR. h>
+15 #inc lude<NTL/RR. h>
+16
+17 NTL_CLIENT
+18
+19 ZZ sampleZ (ZZ s , ZZ c , long n) {
+20 ZZ_p x ;
+61
+21 ZZ m = ZZ_p : : modulus ( ) ;
+22 long tn = 0 , nn = n ;
+23 whi l e (nn > 0) {
+24 nn /= 10 ;
+25 tn++;
+26 }
+27 tn++;
+28 ZZ_p : : i n i t (2 ? s ? tn ) ;
+29 x = random_ZZ_p( ) ;
+30 ZZ_p : : i n i t (m) ;
+31 re turn rep (x ) + c ;
+32 }
+33 mat_RR Gs(mat_ZZ matA) {
+34 mat_ZZ matAt = transpose (matA) ;
+35 mat_RR gsA , matAr ;
+36 gsA . SetDims (matAt .NumRows( ) , matAt . NumCols ( ) ) ;
+37 matAr . SetDims (matAt .NumRows( ) , matAt . NumCols ( ) ) ;
+38 i n t i , j ;
+39 RR tempR ;
+40 f o r ( i = 0 ; i < matAt .NumRows( ) ; i++)
+41 f o r ( j = 0 ; j < matAt . NumCols ( ) ; j++) {
+42 conv (tempR , matAt [ i ] [ j ] ) ;
+43 matAr [ i ] [ j ] = tempR ;
+44 }
+45 RR mij , inner1 , inner2 ;
+46 f o r ( i = 0 ; i < matAt .NumRows( ) ; i++) {
+47 gsA [ i ] = matAr [ i ] ;
+48 f o r ( j = 0 ; j < i ; j++) {
+49 InnerProduct ( inner1 , matAr [ i ] , gsA [ j ] ) ;
+50 InnerProduct ( inner2 , gsA [ j ] , gsA [ j ] ) ;
+51 mij = inner1 / inner2 ;
+52 gsA [ i ] ?= mij ? gsA [ j ] ;
+53 }
+54 }
+55 return gsA ;
+56 }
+57 vec_ZZ sampleD (mat_ZZ bsT , ZZ s , vec_ZZ c , long n) {
+58 vec_ZZ v , cn = c ;
+59 v . SetLength (n) ;
+60 mat_RR gT ;
+61 mat_ZZ bsTt = transpose (bsT) ;
+62 gT = Gs(bsT) ;
+63 i n t i , j ;
+64 f o r ( i = 0 ; i < n ; i++)
+65 v [ i ] = to_ZZ (0) ;
+66 RR inner1 , inner2 ;
+67 ZZ zn , spz , cpz ;
+68 RR sp , cp , root ;
+62
+69 vec_RR cnr ;
+70 cnr . SetLength ( cn . l ength ( ) ) ;
+71 RR tempR ;
+72 f o r ( i = n ? 1 ; i >= 0 ; i??) {
+73 f o r ( j = 0 ; j < cn . l ength ( ) ; j++) {
+74 conv (tempR , cn [ j ] ) ;
+75 cnr [ j ] = tempR ;
+76 }
+77 InnerProduct ( inner1 , cnr , gT [ i ] ) ;
+78 InnerProduct ( inner2 , gT [ i ] , gT [ i ] ) ;
+79 cp = inner1 / inner2 ;
+80 conv ( sp , s ) ;
+81 conv ( root , s q r t ( inner2 ) ) ;
+82 sp = sp / root ;
+83 conv ( spz , sp ) ;
+84 conv ( cpz , cp ) ;
+85 zn = sampleZ ( spz , cpz , n ) ;
+86 cn = cn ? zn ? bsTt [ i ] ;
+87 v = v + zn ? bsTt [ i ] ;
+88 }
+89 re turn v ;
+90 }
+91
+92 vec_ZZ samplePre (mat_ZZ bsT , ZZ s , vec_ZZ c , long n) {
+93 SetSeed ( to_ZZ( time (NULL) ) ) ;
+94 vec_ZZ v = sampleD (bsT , s , ?c , n ) ;
+95 v += c ;
+96 re turn v ;
+97 }
+98
+99 vec_ZZ_p Hash (vec_ZZ) {
+100 // return NULL;
+101 }
+102
+103 i n t main ( ) {
+104 mat_ZZ bsT , matMp, matAt , matA , matAlpha , matM;
+105
+106 ZZ tau ;
+107 vec_ZZ message , t ;
+108 vec_ZZ_p messageC ;
+109 ZZ v ;
+110 long index ;
+111 ZZ p = to_ZZ(11) , q = to_ZZ(31) ;
+112 c in >> sk >> matA >> tau >> message >> index >> p >> q >>
+v ;
+113
+114 ZZ_p : : i n i t (p) ;
+115 message = to_vec_ZZ(to_vec_ZZ_p(message ) ) ;
+63
+116
+117 /?
+118 ? c a l c u l a t e alpha_i
+119 ?/
+120
+121 /?
+122 ? c a l c u l a t e t
+123 ?
+124 ? p can not be too big
+125 ?/
+126 i n t i , x , j ;
+127 matM. SetDims (message . l ength ( ) , 1) ;
+128 f o r ( i = 0 ; i < message . l ength ( ) ; i++)
+129 matM[ i ] [ 0 ] = message [ i ] ;
+130 zz_p : : i n i t ( to_long (p) ) ;
+131 matMp = matA ? matM;
+132 mat_zz_p matMpp = to_mat_zz_p(matMp) ;
+133 matAt = matAlpha ;
+134 x = CRT(matAt , q , matMpp) ;
+135 mat_RR matAex ;
+136 matAex . SetDims (matA . NumCols ( ) , matA . NumCols ( ) ) ;
+137
+138 f o r ( i = 0 ; i < matA . NumCols ( ) ; i++)
+139 f o r ( j = 0 ; j < matA . NumCols ( ) ; j++) {
+140 cout << i << " " << j << endl ;
+141 i f ( i < matA .NumRows( ) )
+142 matAex [ i ] [ j ] = to_RR(matA [ i ] [ j ] ) ;
+143 e l s e i f ( i == j )
+144 matAex [ i ] [ j ] = to_RR(1) ;
+145 //FIXME se t diag to 1 ;
+146
+147 }
+148 cout << matAex << endl << determinant (matAex) << endl ;
+149 mat_RR matAtex ;
+150 matAtex . SetDims (matA . NumCols ( ) , 1) ;
+151 f o r ( i = 0 ; i < matA .NumRows( ) ; i++)
+152 i f ( i < matAt .NumRows( ) )
+153 matAtex [ i ] [ 0 ] = to_RR(matAt [ i ] [ 0 ] ) ;
+154 e l s e
+155 matAtex [ i ] [ 0 ] = to_RR(0) ;
+156 cout << matAtex << endl ;
+157 matAtex = inv (matAex) ? matAtex ;
+158 cout << matAtex << endl ;
+159 vec_ZZ vecTZ ;
+160 matTZ . SetDims (matAt .NumRows( ) , 1) ;
+161 f o r ( i = 0 ; i < matAt .NumRows( ) ; i++)
+162 vecTZ [ i ] = to_ZZ(matAtex [ i ] [ 0 ] + 0 . 1 ) ;
+163 vec_ZZ vv = samplePre (bsT , v , vecTZ , n) ;
+64
+164 cout << vv << endl ;
+165 }
+65

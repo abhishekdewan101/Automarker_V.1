@@ -1,3 +1,7 @@
+1
+ Gobel et al., (1994), Correlated mutations and residue contacts in proteins, Proteins: Structure, Function, and 
+Bioinformatics, 18 , pp. 309–317. (doi: 10.1002/prot.340180402) 
+ 
 Abstract 
 The study of human genetic evolution and genetics has been a major area of research since 
 the 80’s. The year 2003 saw the successful completion of Human Genome Project with 99% 
@@ -11,8 +15,9 @@ mutations on the three dimensional structure space of the proteins so as to find
 between residues in physical space. "The maintenance of protein function and structure 
 constrains the evolution of amino acid sequences. This fact can be exploited to interpret 
 correlated mutations observed in a sequence family as an indication of probable physical 
+contact in three dimensions" 
 1
-contact in three dimensions"   
+  
 The process involves high-end data integration by generating information on human genetic 
 variation. The variations found between the genomes of more than 2000 individuals are taken 
 through the 1000 Genomes Project consortium (recent release in 2011). Information from 
@@ -47,18 +52,14 @@ HMM models.
 to find physical interactions between the variant residues. 
 ? Statistical testing has been carried out which confirms the existence of 
 complementary mutations on protein level. 
-1
- Gobel et al., (1994), Correlated mutations and residue contacts in proteins, Proteins: Structure, Function, and 
-Bioinformatics, 18 , pp. 309 –317. (doi: 10.1002/prot.340180402) 
-  
-List of Figures 
+ List of Figures 
  
 Figure 1: Flow of information from genome level to protein structure level............................4 
 Figure 2: DNA coding and non-coding information ................................................................. 5 
 Figure 3: Backbone of an amino acid residue at sequence and structure level. ...................... 6 
 Figure 4: The 20 amino acids with their one and 3 letter code ................................................ 6 
                Figure 5: Formation of a protein chain by peptide bonding between amino acids..................7 
-Figure 6: 3 distinct domains in the same protein structure ......... Error! Bookmark not defined. 
+Figure 6: 3 distinct domains in the same protein structure ......... Error Bookmark not defined. 
 Figure 7: The levels of protein formation from sequence to structure level. ............................ 8 
 Figure 8: Sequence level bonding towards formation of a protein............................................8 
 Figure 9: Visualization of 3D structure of a protein chain .......................................................9  
@@ -84,8 +85,8 @@ Figure 21: Table merge_ensp and its attributes..................................
 Figure 22: Tables in local 'hgv' database................................................................................35 
 Figure 23: Screenshot of view of domain assignment from Superfamily database ................36 
 Figure 24: Complexity of proteins, domains and mutation occurrence..........................38  
-Figure 25: Simplified View of calculation of ModStart from Alignment.................................41  
-Figure 26: Advanced calculation of ModStart from Alignment...............................................42 
+Figure 25: Simplified View of calculation of ModStart from Alignment.................................41 
+ Figure 26: Advanced calculation of ModStart from Alignment...............................................42 
  
 Figure 27: Deciphering the sequence and model positions.....................................................43 
  
@@ -97,14 +98,15 @@ Figure 31 : Histograms of distance calculation of random position coordinates I 
 for 23380 residues....................................................................................................................53 
  
  Figure 32: Histograms of distance calculation of random position coordinates II calculated 
-for 23380 residues....................................................................................................................54  
+for 23380 residues....................................................................................................................54 
+  
 List of Tables 
 Table 1a: Missense data output from VEP (Columns 1-6) ..................................................... 25 
 Table 1b: Missense data output from VEP (Columns 7-14) ................................................... 25 
 Table 2: Description of the individual tables in the Superfamily database ............................ 29 
 Table 3: Data view of the merge_ensp table in hgv database and some of its attributes. ...... 37 
 Table 4: Specific records from merge_ensp table for finding valid positions within regions.
- ........................................................................................ Error! Bookmark not defined.9 
+ ........................................................................................ Error Bookmark not defined.9 
 Table 5: CoordinateOutput File with coordinates of mutations in each protein .................... 46 
 Table 6: Statistical Results of observed distribution.................................................................51  
  
@@ -118,96 +120,97 @@ Table 8: Statistical Results of random distribution II..........................
  
  
   
- Table of Contents 
+Table of Contents 
  
 Abstract 
 Acknowledgement 
 List of Figures 
 List of Tables 
  
-1. Introduction…………………………………………….……….......................................1 
- 1.1 Aim and Objectives…….………………………………………….…….....….....1 
- 1.2. Outline……....……………………………………..............................................2 
+1. Introduction........................................1 
+ 1.1 Aim and Objectives............1 
+ 1.2. Outline..................................................2 
  
-2. Conceptual Knowledge ………… ……… ……… … ………… ……… …… … … ……...…..3 
- 2.1 Overview and Definition……………………………………………………….....3  
- 2.2. DNA Level………………………………………………………….………........5 
- 2.3. Protein Level……………………………………………………………….….....7 
- 2.4. Protein structure and Complexity………………………………………….….....7 
-  2.4.1 Studying protein structures………………………………………......8 
-  2.4.2 Sequence, Structure, Function Relationship………………..…….....9 
- 2.5. Gene level……………………………...……………………….…………….....10 
-  2.5.1 SNP………………………………………....………………………....10 
-  2.5.2 Genetic variation……………………….………………..…………...10 
+2. Conceptual Knowledge.....3 
+ 2.1 Overview and Definition.....3  
+ 2.2. DNA Level.........5 
+ 2.3. Protein Level......7 
+ 2.4. Protein structure and Complexity......7 
+  2.4.1 Studying protein structures......8 
+  2.4.2 Sequence, Structure, Function Relationship.......9 
+ 2.5. Gene level.........10 
+  2.5.1 SNP........10 
+  2.5.2 Genetic variation......10 
  
-3. Background. ……… … ………… ……… … …… … … ……… ……… ……… … ………....12 
- 3.1 Human Genome Project………………………………………………………....12 
- 3.2 Correlated mutations and residue contacts…………………..…………....……..13 
- 3.3 Novelty…………………………....………………….………….......……….....13 
- 3.4 Project Protocol ……………………………………........………………………14 
+3. Background.....12 
+ 3.1 Human Genome Project....12 
+ 3.2 Correlated mutations and residue contacts........13 
+ 3.3 Novelty.................13 
+ 3.4 Project Protocol ........14 
  
-4. Tools and techniques … ………… ……… ……… … ………… ……… ……… … ….... …..15 
- 4.1 Data Mining, Integration and Information Retrieval………………………….....15 
- 4.2 Database Sources.…………………………….....………………..……………...15 
-  4.2.1 1000 Genomes Database … ……….…………………....……………..15  
-  4.2.2 ENSEMBL genomic database……….………………………………..16 
-   4.2.2.1. Variant Effect Predictor……………………………………16 
-  4.2.3. SUPERFAMILY database………………………………….….....…..17 
-  4.2.4 SCOP……………………………………..........……………………...17 
-  4.2.5 Protein Data Bank (PDB).…………………………………....…..…...17 
- 4.3 Data Formats……………………………………....……………..………………18 
-  4.3.1 VCF and BAM file formats………………………………....………...18 
-  4.3.2 PDB file format………………………………...……….....................18 
- 4.4 Statistical Calculations………………………….………………..........................18 
- 4.5 MATLAB………………………………....………..............................................19 
- 4.6 Data Specification………………………………...………..................................19  
+4. Tools and techniques......15 
+ 4.1 Data Mining, Integration and Information Retrieval.....15 
+ 4.2 Database Sources...........15 
+  4.2.1 1000 Genomes Database.......15  
+  4.2.2 ENSEMBL genomic database...16 
+   4.2.2.1. Variant Effect Predictor16 
+  4.2.3. SUPERFAMILY database........17 
+  4.2.4 SCOP.............17 
+  4.2.5 Protein Data Bank (PDB)..........17 
+ 4.3 Data Formats......18 
+  4.3.1 VCF and BAM file formats.......18 
+  4.3.2 PDB file format........................18 
+ 4.4 Statistical Calculations...........................18 
+ 4.5 MATLAB..................................................19 
+ 4.6 Data Specification.....................................19  
  
-5 Data Collection……………………………………............……………………………….20 
- 5.1 Introduction………………………………………………….............................20 
- 5.2 Basic data requirements……………………………………..............................20 
- 5.3 Summary………………………………………..................................................22 
+5 Data Collection.............20 
+ 5.1 Introduction.............................20 
+ 5.2 Basic data requirements..............................20 
+ 5.3 Summary..................................................22 
  
-6  Data Integration…………………………………………………………....……….23 
-  6.1 Data extraction……………...………………………………........………………23 
- 6.2 Decoding data…………………...……………………………………………… 24 
-  6.2.1 Specifications……………………………………………………….....26 
-  6.2.2 Significance……………………………………………....…………...27 
- 6.3 Data storage…………………...……………………………………………........27  6.4 Information retrieval from the Superfamily Database…………………..............27 
-  6.4.1 Accessibility………………………………………..……………........29 
- 6.5 Mapping variations from protein to domain level…………………………….....30 
-  6.5.1 Input query…………………………………………………………….31 
-  6.5.2   Extracted information………………………………………....……..33 
-  6.5.3   Consequence……………………………....…………………………33 
-  6.5.4 Assigning domains to the variants……………………....………….35 
-  6.5.6 Summary………………………...........……………………………36 
- 6.6 Mapping variations on models and extracting coordinates from ASTRAL……..37 
-  6.6.1 Processing valid positions within region…………....……….………..37 
-   6.6.1.2    Analysis of characteristics of the acquired data………....38 
-  6.6.2 Calculation of residue position in the model……………...…..……...40 
-   6.6.2.1   The protocol followed…......……………………………..40  
-   6.6.2.2   To calculate the position on the model……………………41 
-   6.6.2.3    Complexity. ………………...………..………………….42 
-   6.6.2.4    Significance……....………………………………………43 
-  6.6.3 Spatial coordinates extraction………....………………………..……..43 
-   6.6.3.1 Reading data from ASTRAL File……….......………..……44 
-   6.6.3.2 Protocol of extracting coordinate information……....…......45 
- 6.7 Summary…………....………………………………………………………..…..47 
+6  Data Integration.....23 
+  6.1 Data extraction...........23 
+ 6.2 Decoding data... 24 
+  6.2.1 Specifications.....26 
+  6.2.2 Significance.......27 
+ 6.3 Data storage...........27 
+ 6.4 Information retrieval from the Superfamily Database..............27 
+  6.4.1 Accessibility..........29 
+ 6.5 Mapping variations from protein to domain level.....30 
+  6.5.1 Input query.31 
+  6.5.2   Extracted information......33 
+  6.5.3   Consequence....33 
+  6.5.4 Assigning domains to the variants.....35 
+  6.5.6 Summary...........36 
+ 6.6 Mapping variations on models and extracting coordinates from ASTRAL..37 
+  6.6.1 Processing valid positions within region.......37 
+   6.6.1.2    Analysis of characteristics of the acquired data....38 
+  6.6.2 Calculation of residue position in the model........40 
+   6.6.2.1   The protocol followed........40  
+   6.6.2.2   To calculate the position on the model41 
+   6.6.2.3    Complexity. ......42 
+   6.6.2.4    Significance....43 
+  6.6.3 Spatial coordinates extraction........43 
+   6.6.3.1 Reading data from ASTRAL File.........44 
+   6.6.3.2 Protocol of extracting coordinate information..........45 
+ 6.7 Summary........47 
  
-7 Statistical Calculations……………………………………….......…………..…………..48 
- 7.1 Methodology………………………………………………………………..……48 
- 7.2 Summary………………………………………………………………………....49 
+7 Statistical Calculations...........48 
+ 7.1 Methodology..48 
+ 7.2 Summary....49 
  
-8 Results and discussion……………………………………….......…………..…………..50 
- 8.1 Histogram Plot………………....…………………………………………..……50 
-  8.1.1 Detailed Description...………………....……………....………..……51 
-   8.1.1.1 Observations..………………………………………..……52 
- 8.1.2 Validation of results obtained...………………....……………....………..……52 
-   8.1.2.1 Random Run I..………………………………………..……53 
-   8.1.2.2 Random Run II..……………………………………..……54 
- 8.2 Inference………………....…………………………………………..…….......55 
- 8.3 Hypothesis testing……....…………………………………………..……........55 
+8 Results and discussion...........50 
+ 8.1 Histogram Plot......50 
+  8.1.1 Detailed Description.............51 
+   8.1.1.1 Observations....52 
+ 8.1.2 Validation of results obtained.............52 
+   8.1.2.1 Random Run I....53 
+   8.1.2.2 Random Run II....54 
+ 8.2 Inference.............55 
+ 8.3 Hypothesis testing..............55 
  
-9 Conclusion……………………………………….......…………..…………....................56 
+9 Conclusion.............................56 
  9.1 Future work.......................................................................................................56 
  
 BIBLIOGRAPHY  
@@ -220,13 +223,17 @@ APPENDIX D MATLAB Code
  
  
  
- 1 Introduction 
+ 
+1 Introduction 
+ 
+ 
  
 1 Introduction 
 "The study of complementary changes of volume and/or size in the interior of proteins has been a 
 classical topic in protein analysis. Although complementary mutations do occur . . . they are not 
+the rule." 
 [1]
-the rule."  
+ 
 -  Lesk and Chothia (Mol.Biol. 136:225-270, 1980.) 
  
 Over the past few decades, there has been an explosive growth in the amount of  biological 
@@ -264,8 +271,9 @@ mutation, and regain gene functionality. By mapping single mutations in one pers
 through to their affect on the spatial arrangement of the atoms in the 3D molecule, that is the 
 protein, this study will compare whether mutations are complementary (i.e. next to each other, 
 and interacting chemically or physically) or not.  
+2 Introduction 
  
- 2 Introduction 
+ 
  
 AIM: To argue the hypothesis that complementary mutations occur in protein structures and see 
 to what extent can we prove or disprove the hypothesis and bring out further relevant studies 
@@ -309,8 +317,9 @@ The "genome" of any given individual is unique and mapping "the human genome" in
 sequencing multiple variations of each gene. The project aims at data analysis and mining of a 
 large set of data and the process involves the following phases, each of which would lead us to a 
 step closer to obtain a basis to reason the initial hypothesis. 
+3 Introduction 
  
- 3 Introduction 
+ 
  
 ? Analyzing and detecting mutations (SNP’s) occurring in different humans (data taken from 
 experimental results of the 1000 Genome Project) by comparing it to a reference human 
@@ -324,9 +333,8 @@ genome.
 complementary mutations. 
  
  
+Conceptual Knowledge 4    4 
  
- 4 4 
-Conceptual Knowledge    
  
 2 Conceptual Knowledge 
 This section briefly defines the key domains and terminology related to this project. The 
@@ -371,8 +379,8 @@ Figure 1. DNA molecules encode the biological information fundamental to most li
 whereas Proteins are the primary unit of biological function. 
  
 Figure 1: Flow of information from genome level to protein structure level 
- 5 5 
-Conceptual Knowledge    
+Conceptual Knowledge 5    5 
+ 
  
 The genome is made up of 30 billion base pairs. It is spread across 22 chromosomes (with an 
 addition of  X and Y chromosomes). Not all parts of the genome contain information. The exons 
@@ -418,8 +426,8 @@ synthesis and there are only 4 bases in the DNA coding for all the amino acids. 
 triplet: The triplet code was first suggested by Gammow in 1954. In a triplet code, three DNA 
 bases code for one amino acid. The code is universal: The same genetic code is applicable to all 
 forms of organisms. 
- 6 6 
-Conceptual Knowledge    
+Conceptual Knowledge 6    6 
+ 
  
 2.3 Protein level 
 Proteins are linear chains of amino acids (a.a.) of differing sequences and lengths. They are 
@@ -427,11 +435,9 @@ polymers of amino acids which evolve into three dimensional structures.
  
 Information in the DNA dictates the sequence of its amino acids. Each a.a. consists of  the 
 following elements: 
-? Amino group (NH ) - amino terminal end 
-2
+? Amino group (NH2) - amino terminal end 
 ? Carboxyl group (COOH) - Carboxyl terminal end 
-? The central carbon atom C-alpha (C )  
-?
+? The central carbon atom C-alpha (C?)  
 ? A variable side chain R different for each amino acid. 
 The structure of an amino acid at the sequence level and its structural level is represented in 
 Figure 3. 
@@ -465,8 +471,8 @@ Figure 3: Backbone of an amino acid residue at sequence(left) and structure(righ
  
  
 Figure 4: The 20 amino acids with their one and 3 letter code 
- 7 7 
-Conceptual Knowledge    
+Conceptual Knowledge 7    7 
+ 
  
 Amino acids: There are 20 standard amino acids namely Alanine, Arginine, Asparagine, Aspartic 
 Acid, Cysteine, Glutamic Acid, Glutamine, Glycine, Histidine, Isoleucine, Leucine, Lysine, 
@@ -508,8 +514,8 @@ occur in proteins.
 Domain : Several motifs usually combine to form compact globular structure called as domains. 
 It is generally associated with a function. A domain is considered the fundamental unit of protein 
 structure which is compact, stable and has a specific function. 
- 8 8 
-Conceptual Knowledge    
+Conceptual Knowledge 8    8 
+ 
  
  
 Figure 6: 3 distinct domains in the same protein structure 
@@ -537,8 +543,8 @@ level, to folding gradually in space because of bonding and forces and finally e
 protein structure.  
  
 Figure 8: Sequence level bonding towards formation of a protein 
- 9 9 
-Conceptual Knowledge    
+Conceptual Knowledge 9    9 
+ 
  
  
  
@@ -578,15 +584,18 @@ AA and maximizes exposed hydrophilic Amino acids.
  
  
  
- 10 1
-Conceptual Knowledge    
+Conceptual Knowledge 10    1
 0 
+ 
  
 2.5 Genome level 
 Mutations (which are any change in the DNA base sequence), occur constantly in all cells and 
 organisms.  Offspring's rarely get a perfect copy of the DNA from its parents. But mutations are 
-9 9
-rare: about 1 DNA base change per 10 bases each cell generation. (Humans have about 3 x 10 
+rare: about 1 DNA base change per 10
+9
+ bases each cell generation. (Humans have about 3 x 10
+9
+ 
 bases). Some mutational changes are much larger: chromosome rearrangements that include 
 genes torn in half and moved to new locations, sometimes combined with other genes. 
  
@@ -614,16 +623,18 @@ Figure 11 : Single Nucleotide polymorphism (SNP) mutation among 2 genomes.
  
 Mutations are the changes which alter the chemical structure of a gene at a molecular level. Gene 
 mutations or point mutations are the mutations produced by alterations in base sequences of the 
+concerned genes. This can take place either by base substitution, base addition or base deletion.
 [2]
-concerned genes. This can take place either by base substitution, base addition or base deletion. 
+ 
 Any two copies of the human genome differ from one another by approximately 0.1% of 
+nucleotide sites (that is, one variant per 1,000 bases on average)
 [3]
-nucleotide sites (that is, one variant per 1,000 bases on average) 
+ 
  
 Figure 12 : Mutations detected on residue positions via alignment of genomes. 
- 11 1
-Conceptual Knowledge    
+Conceptual Knowledge 11    1
 1 
+ 
  
 Alignment: The result of a comparison of two or more gene or protein sequences in order to 
 determine their degree of base or amino acid similarity. Sequence alignments are used to 
@@ -667,17 +678,16 @@ As mentioned, the primary structure of the protein contains all relevant informa
 building of the protein structure. It is thus that this study formulates a knowledge based approach 
 by constituting the detailed aspects of each entity and their characteristics while deciphering the 
 results. 
-  Background | 12 
 3 Background 
  
-[4] 
-3.1 Human Genome Project   
+3.1 Human Genome Project  [4]  
  
 The Human Genome Project (HGP) is an international scientific research project with a primary 
 goal of determining the sequence of chemical base pairs which make up DNA, and of identifying 
 and mapping the approximately 20,000-25,000 genes of the human genome from both a physical 
+and functional standpoint
 . [4]
-and functional standpoint 
+ 
  
 In 2000, a draft about the human genome project was announced which was then completed and 
 accepted in 2003. It is still being worked upon, and further analyses are being published. The 
@@ -694,7 +704,7 @@ Consortium and Celera Genomics run by Craig Ventor. Upon publication of the majo
 genome in February 2001, Francis Collins, the director of NHGRI, noted that the genome could 
 be thought of in terms of a book with multiple uses. After the complete published results of the 
 Human genome project, all genes were “known”, scientists now needed to understand their 
-functions! 
+functions 
  
 The next steps to be taken were to elucidate and comprehensively identify the structural and 
 functional components of human genome and to elucidate the organization of genetic network 
@@ -710,19 +720,21 @@ would be compared to find variations.
 The Human Genome: 
 • The entire collection of chromosomes in each cell of an organism is called a genome. 
 • Humans have 46 (2n) chromosomes. 
-9
-• The human genome has about 3 x 10 base pairs and around 25,000 genes. 
+• The human genome has about 3 x 109 base pairs and around 25,000 genes. 
  
  
-  Background | 13 
+ 
+ Background | 12 
+ Background | 13 
+ 
+3.2 Correlated mutations and residue contacts
 [5]
-3.2 Correlated mutations and residue contacts 
+ 
  
 As stated above, the sequence-structure and function relationship clearly states that if the amino 
 acid sequence varies, the 3D protein structure would take a different shape. (Section 1.1.2) 
  
-[5]
-The publication – "Correlated mutations and residue contacts in proteins" , states that correlated 
+The publication – "Correlated mutations and residue contacts in proteins" [5], states that correlated 
 mutations do occur in protein structures. The research studies the structural evolutionary 
 constraints and analysis the effects of mutations which occur together when variation occurs. This 
 is one of the reasons which could lead to understanding that complementary mutations occur. For 
@@ -736,8 +748,9 @@ correlation factor, the two positions being analyzed would be considered to be i
 with each other.  
  
 The research mentions Lesk and Chothia stating that even though complementary mutations do 
+occur, they would not necessarily be the rule. 
 [5]
-occur, they would not necessarily be the rule.  Other parallel approaches conclude that it 
+ Other parallel approaches conclude that it 
 depends on the number of sequences considered, and the range of similarity considered for the 
 sequences that these results may vary.  
  
@@ -762,14 +775,14 @@ and if so, with regard to arguing the existence of complementary mutations.
  
  
  
-  Background | 14 
 3.4  Project Protocol  
 The following figure depicts the research protocol carried out throughout this study which is 
 explained throughout the further chapters. 
-Validation 
  
-Figure depicts : Flowchart of the Project Protocol Tools and Techniques | 15 
-4 Tools and techniques 
+Figure depicts : Flowchart of the Project Protocol 
+ Background | 14 
+Validation 
+ 4 Tools and techniques 
  
 4.1 Data Mining, Integration and Information Retrieval:  
  
@@ -783,8 +796,9 @@ mutations.
  
 4.2 Database Sources 
  
+4.2.1 1000 Genomes Database
 [6]
-4.2.1 1000 Genomes Database :  
+ :  
  
 The 1000 Genomes Project is a consortium of scientific researchers around the world who have 
 got together to use DNA sequencing to examine human genetic variations. The goal of the 1000 
@@ -815,12 +829,13 @@ mutational information of the amount of variations occurring at respective posit
 chromosomes, genes, transcripts and proteins.   
  
  
- Tools and Techniques | 16 
-4.2.2  ENSEMBL genomic database    
+Tools and Techniques | 15 
+ 4.2.2  ENSEMBL genomic database    
  
 The Ensembl project produces genome databases for vertebrates and other eukaryotic species, 
+and makes this information freely available online 
 [7]
-and makes this information freely available online . For homo-sapiens (humans): The site 
+. For homo-sapiens (humans): The site 
 provides a data set based on the February 2009 Homo sapiens high coverage assembly GRCh37 
 (GCA_000001405.6) from the Genome Reference Consortium. The database management system 
 used is MySQL. The data is available both in the form of a web based viewer or downloadable 
@@ -847,8 +862,9 @@ simply taking the pre-computed data. Since Ensembl is a huge data repository, we
 this database to get the initial mutation data on the genomic sequences in our research. 
  
  
+4.2.2.1 Variant Effect Predictor 
 [8]
-4.2.2.1 Variant Effect Predictor  
+ 
  
 Ensembl provides the facility to predict the functional consequences of known and unknown 
 variants using the Variant Effect Predictor (VEP). There are three primary ways to use the 
@@ -868,27 +884,28 @@ VT=SV, indicates the variant is a deletion.
  
  
 Figure 13: The working of the VEP perl script 
- Tools and Techniques | 17 
-This research uses the VEP tool to output information about the mutations acquired through the 
+Tools and Techniques | 16 
+ This research uses the VEP tool to output information about the mutations acquired through the 
 1000 genomes database. The perl script is used for this research which returns the output in the 
 form of VCF files. The detailed description of how the tool works is explained in the data 
 integration and collection chapters. 
  
  
-[9][10]
-4.2.3  SUPERFAMILY database  
+4.2.3  SUPERFAMILY database [9][10] 
  
  SUPERFAMILY provides structural, functional and evolutionary information for proteins from 
+all completely sequenced genomes. 
 [10]
-all completely sequenced genomes.  The database can be used for several applications, one of 
+ The database can be used for several applications, one of 
 which is ‘Sequence Search’.  It finds the domain annotations for DNA sequences or protein 
+sequences over SCOP (Structural Classification of Proteins) 
 [11]
-sequences over SCOP (Structural Classification of Proteins) . The sequences given are 
+. The sequences given are 
 checked to find the domain assignments specific to the input sequences. If the assignment 
-[12] [13] 
-doesn’t exist, a BLAST search is carried out against the ASTRAL database. If there is no 
+doesn’t exist, a BLAST [12] search is carried out against the ASTRAL [13] database. If there is no 
+result found till here, the next step is searching the HMM (Hidden Markov Models) 
 [14]
-result found till here, the next step is searching the HMM (Hidden Markov Models)  and SAM 
+ and SAM 
 (Sequencing and alignment Modeling) for the input sequences. 
  
 The SUPERFAMILY database would be used in the project to map protein coding regions onto 
@@ -902,20 +919,23 @@ The database also provides the functional annotation of domain superfamilies. Th
 made use of if we want to extend our work and look for functional changes taking place due to 
 mutational changes in the protein sequences. 
  
+4.2.4  SCOP 
 [15]
-4.2.4  SCOP   
+  
  
 The SCOP (Structural Classification of Protein) database is a comprehensive ordering of all 
 proteins of known structure according to their evolutionary, functional and structural 
 relationships. The basic classification unit is the protein domain. This database provides a 
 detailed and comprehensive description of the structural and evolutionary relationships of the 
-proteins of known structure. The classiﬁcation of protein structures in the database is based on 
+proteins of known structure. The classification of protein structures in the database is based on 
+evolutionary relationships and on the principles that govern their three-dimensional structure. 
 [15]
-evolutionary relationships and on the principles that govern their three-dimensional structure.  
  
  
+ 
+4.2.5  Protein Data Bank (PDB) 
 [16]
-4.2.5  Protein Data Bank (PDB)  
+ 
  
 PDB is an international data repository which contains dimensional structures of protein 
 complexes. The structures are determined by Xray and NMR techniques. It currently consists of 
@@ -926,8 +946,8 @@ publication can be referred.
  
 Users can download PDB files which have all the coordinates of each atom listed in them for 
 visualization through bioinformatics softwares such as Schrodinger, JMol etc. Also, users can 
- Tools and Techniques | 18 
-download FASTA file formats which have the amino acid sequence of the protein. The EC 
+Tools and Techniques | 17 
+ download FASTA file formats which have the amino acid sequence of the protein. The EC 
 numbers are also stated if there exists an enzyme in the structure. Enzymes are proteins that 
 catalyze (i.e., increase the rates of) biochemical reactions. The Enzyme Commission number (EC 
 number) is a numerical classification scheme for enzymes, based on the chemical reactions they 
@@ -953,8 +973,9 @@ is an option whether to contain genotype information on samples for each positio
 information is available on the 1000 genomes website [http://www.1000genomes.org/about] 
  
  
+4.3.2  PDB file format 
 [16]
-4.3.2  PDB file format  
+ 
  
 Each PDB file for a structure contains a header with the description of which structure it is, has 
 information about when the structure was published and which organism does it belong to. It 
@@ -975,16 +996,15 @@ residues and the occupancy and temperature factor for each atom.
  
 Euclidean distances are used to calculate distance matrices. Distance matrix gives distances in Å 
 (angstrom) between all atoms. It’s main use is in comparison of atoms in 3D structures. Given an 
- Tools and Techniques | 19 
-amino acid, the centre of mass is found for each of the two atoms Euclidean distances are 
+Tools and Techniques | 18 
+ amino acid, the centre of mass is found for each of the two atoms Euclidean distances are 
 calculated between them. The analysis of the interactions between the nearest atoms is carried out 
 to see if they have any relationship such as occurring correlatedly.  
  
 The distance formula for N dimensions is given by :     
  
  
-[17]
-4.5  MATLAB  
+4.5  MATLAB [17] 
  
 MATLAB is a high-level language and interactive environment for numerical computation, 
 visualization, and programming. Using MATLAB, you can analyze data, develop algorithms, and 
@@ -1023,7 +1043,7 @@ The variant information processed and collected through querying the SUPERFAMILY
 and mapping over the domains: 136,090 records.  
  
  
- Data Collection | 20 
+Tools and Techniques | 19 
 5  Data Collection  
  
 5.1 Introduction 
@@ -1066,7 +1086,8 @@ The Human genetic Variation data was acquired from ENSEMBL
 To get a list of variants in Ensembl proteins the Ensembl database was referred.  The database 
 only includes "known" mutations i.e. novel/individual mutations are included (there are some 
 1000 Genome mutations which have not made it into the database yet).  The database was 
-downloaded locally  from the ENSEMBL website-  Data Collection | 21 
+downloaded locally  from the ENSEMBL website-  
+Data Collection | 20 
 (http://www.ensembl.org/info/data/ftp/index.html). The tables that were used were the 
 transcript_variation, variation, variation_feature and variation_synonym tables.  The database 
 expands to around 37 GB's.  
@@ -1108,11 +1129,13 @@ when they do not map onto a SNP.
  
 The database: 
 1000 genomes data was downloaded through the public ftp site, vol1, release 20110521 available 
+at ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20110521/. 
 [6]
-at ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20110521/.  
+ 
 The data is accessed through EBI (European Bioinformatics Institute) for European users. This 
 release represents version 3 of the integrated variant call set based on both low coverage and 
-exome whole genome sequence data.  Data Collection | 22 
+exome whole genome sequence data.  
+Data Collection | 21 
 The data was downloaded from the following FTP site on 5th August 2012 - 
 ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20110521/README.phase1_integrated_release
 _version3_20120430]  
@@ -1123,7 +1146,8 @@ To take the study forward and continue with mapping of each mutation on the geno
 levels it is essential that the dataset used has all the required information for the processing of the 
 data at further steps. The data processed by Variant Effect Predictor comprises of the detailed 
 position mappings of mutations on each protein in the genome. Thus we take this data for further 
-research.  Data Integration | 23 
+research.  
+Data Collection | 22 
 6  Data Integration 
  
 The process of finding a basis of arguing over the existence of complementary mutations is 
@@ -1158,14 +1182,17 @@ has been collected.
 Figure : Screenshot of data location from 1000 Genomes website 
  
 After collecting the data which entails our data requirements, we now use the tool Variant Effect 
-[8] [7]
-Predictor provided by ENSEMBL  to extract the functional characteristic features of the 
+Predictor 
+[8] 
+provided by ENSEMBL 
+[7]
+ to extract the functional characteristic features of the 
 downloaded variants. The standalone perl script (preferable for handling queries which involve 
 processing a large amount of data) is used to run the tool.  
 The perl VEP script called variant_effect_predictor.pl, is run on the command line to extract 
-information about all the variants downloaded from the raw 1000 Genomes data files. Data Integration | 24 
- 
-perl variant_effect_predictor.pl -i [VCF File] -o [Results File] -fork 6 --protein 
+information about all the variants downloaded from the raw 1000 Genomes data files. 
+Data Integration | 23 
+ perl variant_effect_predictor.pl -i [VCF File] -o [Results File] -fork 6 --protein 
 ? --protein :  
 The --protein parameter adds the corresponding Ensembl protein ID to the output (it reports 
 the transcript ID by default). The protein ID's are recognized by their stable ENSP identifiers. 
@@ -1186,8 +1213,9 @@ interpretation is explained in the following section 4.2.
 The output file generated by VEP script is taken and the missense variant data is extracted from 
 it. The file is named missense.txt and is saved as a tab delimited text file. The retrieved output file 
 contains information about a total of 868,139 missense variants. 
+The data attributes are explained below 
 [8] 
-The data attributes are explained below :   
+:   
  
 1. Uploaded variation - as chromosome_start_alleles. This is the variant ID.  
 2. Location - in standard coordinate format (chr:start or chr:start-end); chr stand for 
@@ -1204,11 +1232,12 @@ filtered.
 10. Relative position in protein - amino acid position in protein. 
 11. Amino acid change - only given if the variation affects the protein-coding sequence 
 12. Codons - the alternate codons with the variant base highlighted as upper case. 
-13. Corresponding variation - identifier of existing variation (observed as NULL) Data Integration | 25 
+13. Corresponding variation - identifier of existing variation (observed as NULL) 
+Data Integration | 24 
 14. Extra - this column contains ENSP - the Ensembl protein identifier of the affected transcript 
 only because while running the VEP script , --protein command was used. This column has 
 identifiers on the basis of the data processing run via the script. 
-Empty values are denoted by '-'.   
+Empty values are denoted by '-'.  
  
  
 The 14 columns and their data (sample 10 rows for depiction) have been depicted below in Table  
@@ -1227,13 +1256,23 @@ rs189598710 10:390828 C ENSG00000151240 ENST00000280886 Transcript
 rs12358220 10:402317 T ENSG00000151240 ENST00000540204 Transcript 
  
 Table 1a : Missense data output from VEP (Columns 1-6) 
+Consequence 
+cDNA_ 
+position 
+CDS_ 
+position 
+Protein
+_ 
+position 
+Amino
+_ 
+acids 
+Codons 
 Existing
-Protein Amino
-cDNA_ CDS_ _ 
-Consequence _ _ Codons Extra 
-position position variatio
-position acids 
+_ 
+variatio
 n 
+Extra 
 missense_variant 1063 810 270 D/E gaC/gaA - ENSP00000371003 
 missense_variant 326 195 65 D/E gaC/gaA - ENSP00000439587 
 missense_variant 925 690 230 D/E gaC/gaA - ENSP00000371017 
@@ -1247,11 +1286,12 @@ missense_variant 1221 997 333 A/T Gcc/Acc - ENSP00000443826
  
 Table 1b : Missense data output from VEP (Columns 7-14) 
 In the first column, the uploaded variation id's are in the format " rs186355291" which are the 
-ID's allotted by dbSNP (Database for single nucleotide polymorphisms SNP's and multiple small Data Integration | 26 
+ID's allotted by dbSNP (Database for single nucleotide polymorphisms SNP's and multiple small 
+Data Integration | 25 
 scale variations). DBSNP database is a collection of the list of all variants and allots them a 
 unique identification number starting with 'rs'. It is a public-domain archive for a broad collection 
-[18] 
 of simple genetic polymorphisms. 
+[18] 
  
 Where the variant is novel as it has not been identified yet, i.e. no dbSNP 'rs ID' is assigned, VEP 
 automatically creates one in the following format:  
@@ -1287,7 +1327,8 @@ mapping each variation to the position at the respective protein sequences. This
 Figure 15. 
  
  
-Figure 15 : A single mutation can belong to many proteins Data Integration | 27 
+Figure 15 : A single mutation can belong to many proteins 
+Data Integration | 26 
 These details are carefully considered while extracting the sequence information of each protein 
 ENSP, through the Superfamily Database further in the research. 
  
@@ -1316,21 +1357,23 @@ more variants, and also, variants belong to one or more proteins. This means tha
 highly correlated. Next we process through the data thorough the Superfamily database for 
 domain mappings. 
  
-6.4 Information retrieval from the Superfamily Database  
+6.4 Information retrieval from the Superfamily Database 
  
 The database dump was downloaded, extracted and the database was extracted through the 
 command line on the local machine. The database files were very large in size to have been 
 loaded and executed on the local machine. The MySQL database files were downloaded from the 
 site: http://supfam2.cs.bris.ac.uk/SUPERFAMILY/howto_use_database.html.  
  
+The SUPERFAMILY database 
 [10] 
-The SUPERFAMILY database  server is located at -  
+ server is located at -  
 http://supfam2.cs.bris.ac.uk/SUPERFAMILY/  
  
 Because of the limited space and resources, the database has been accessed via SSH tunneling on 
 the remote server. The details on how the remote database server has been accessed are given 
 further in this section.  
- Data Integration | 28 
+ 
+Data Integration | 27 
 SSH is an encrypted network protocol generally used for remote shell service, secure data 
 communication, command execution etc. In SSH tunneling, a payload protocol is wrapped around 
 the SSH protocol (the delivery protocol) and sent over the network. 
@@ -1338,16 +1381,18 @@ the SSH protocol (the delivery protocol) and sent over the network.
 The schema of the Superfamily database is given below in Figure 16. 
  
  
+Figure 16 : Schema of the Superfamily database
  [10]
-Figure 16 : Schema of the Superfamily database Data Integration | 29 
+ 
+Data Integration | 28 
+6.4.1  Accessibility 
 [10]
-6.4.1  Accessibility  
+ 
  
 The Superfamily server, is accessible through the Computer Science department at the University 
 of Bristol. An access to the database has been made available for viewing and querying this 
 database with an allotted username and password for this research. The server is available at 
-[10] 
-supfam2@cs.bris.ac.uk The link to the server is http://supfam2.cs.bris.ac.uk/SUPERFAMILY/ 
+supfam2@cs.bris.ac.uk The link to the server is http://supfam2.cs.bris.ac.uk/SUPERFAMILY/ [10] 
 For this research project, the remote database server was accessed via the local machine, through 
 SSH tunneling ( NX Client ).  
  
@@ -1361,100 +1406,81 @@ protein sequence details can be viewed and retrieved. The database contains a to
 ? SCOP and models - des, cla, hie, model, pdb_sequence 
  
  
-TABLES PROPERTY DESCRIPTION 
  
   
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SCOP models 
 align protein domain Table containing alignments between the 
- 
 sequences and hidden Markov models.  
- 
- 
-protein domain The domain assignments table containing the 
-ass 
- 
+ass protein domain The domain assignments table containing the 
 superfamily level classification for each domain. 
- 
- 
- 
-SCOP models Table containing the SCOP domain definitions 
-cla 
- 
+cla Table containing the SCOP domain definitions 
 and classifications.  
- 
- 
 comb protein domain The protein is represented as a sequence of SCOP 
- 
 domains rather than amino acids. 
- 
- 
 des SCOP and models Table containing the description for each SCOP 
- 
 domain. 
- 
- 
 family protein domain The family level classification for each domain, 
- 
 which is contingent upon the superfamily level 
- 
- 
 classification in the 'ass' table.  
- 
- 
 genome genome & sequences General information on each genome; including 
- 
 genome name, taxonomy and download details. 
- 
- 
- 
 genome_sequence genome & sequences A table containing the sequences for all genomes. 
- 
-SCOP and models The SCOP database uses a hierarchical 
-hie 
+hie SCOP and models The SCOP database uses a hierarchical 
 classification scheme. This table contains the 
-parent and children nodes of each SCOP entry. Data Integration | 30 
- 
-info domain statistics Domain assignment statistics for each genome. 
- 
- 
- 
-len  domain statistics Occurrence of SCOP superfamilies in each 
- 
-genome. 
- 
- 
-len_comb domain combination Occurrence of domain combinations in each 
- 
-statistics genome. 
+parent and children nodes of each SCOP entry. 
+TABLES PROPERTY DESCRIPTION 
+Data Integration | 29 
+  
  
  
  
-domain statistics Occurrence of SCOP families in each genome. 
-len_family 
- 
- 
- model SCOP and models Details of which superfamilies the models 
- 
-statistics represent, and the seed sequences (from SCOP) 
- 
-which were used to build the models. 
  
  
  
-SCOP and models The filtered sequences from ASTRAL which 
-pdb_sequence 
- 
-were used to build the models. 
  
  
  
-protein genomes & sequences Allow a protein level abstraction of sequence 
  
-being specific to a genome, this allows for the 
  
- UniProt genome to use the same sequences in the 
  
-database as other genomes. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -1469,11 +1495,33 @@ studied to process and extract the information relevant to this research. The mu
 exonic regions of the genome are already derived , mapped with their respective protein ENSP 
 identifiers.  
  
+Now to further map these mutations on the protein domains, the Superfamily Database 
 [10]
-Now to further map these mutations on the protein domains, the Superfamily Database  is 
+ is 
 used. The database annotates structural protein domains at the SCOP (Structural Classification of 
 Proteins) superfamily level (Refer Section 4.2.3). This information has to be retrieved to get the 
-domain level mappings. Data Integration | 31 
+domain level mappings. 
+Data Integration | 30 
+info domain statistics Domain assignment statistics for each genome. 
+len  domain statistics Occurrence of SCOP superfamilies in each 
+genome. 
+len_comb domain combination 
+statistics 
+Occurrence of domain combinations in each 
+genome. 
+len_family domain statistics Occurrence of SCOP families in each genome. 
+model SCOP and models 
+statistics 
+Details of which superfamilies the models 
+represent, and the seed sequences (from SCOP) 
+which were used to build the models. 
+ pdb_sequence SCOP and models The filtered sequences from ASTRAL which 
+were used to build the models. 
+ 
+protein genomes & sequences Allow a protein level abstraction of sequence 
+being specific to a genome, this allows for the 
+UniProt genome to use the same sequences in the 
+database as other genomes. 
 Figure 17 :Model schema of the database tables from which data is extracted (part of the 
 Superfamily Database) 
  
@@ -1497,7 +1545,8 @@ protein table in the Superfamily database.
 C. The protein attribute in the protein table is the same as the protein attribute in the ass table. 
  
 D. Now, we have the protein ENSP mappings on the domain assignments table - ass. 
- Data Integration | 32 
+ 
+Data Integration | 31 
 a) The protein column is the protein id used in the protein table. This gives the access to the 
 genome project specific seqid column.  
  
@@ -1546,7 +1595,8 @@ relationships were built in order to query and extract information.
 ? ass.evalue < = 0.0001 
 ? genome = 'hs'    
  
- Data Integration | 33 
+ 
+Data Integration | 32 
 6.5.2   Extracted information 
  
 Through the process of selection of attributes, the following information is extracted: 
@@ -1578,7 +1628,8 @@ individual other than the developers, we fetch the information required for form
 results by storing the information into the local database "hgv".   
  
 The full code on how the data has been fetched, the JDBC connection established and the output 
-stored in a file has been given in Appendix C - C.1. Data Integration | 34 
+stored in a file has been given in Appendix C - C.1. 
+Data Integration | 33 
 The extracted result set is stored in a tab delimited file. The contents of this file are then loaded 
 into a new table in the hgv database with the table name as "supfam_ensp_rs". The structure of 
 the table is shown as below in figure: 
@@ -1592,7 +1643,8 @@ Figure 19 : Table supfam_ensp_rs and its attributes
 Figure 20 : Screenshot of query run on Superfamily database (By providing set of ENSP 
 numbers) 
  
- Data Integration | 35 
+ 
+Data Integration | 34 
 6.5.4 Assigning domains to the variants 
  
 Next, the data retrieved from the Superfamily database and the missense data is merged together 
@@ -1615,7 +1667,8 @@ of which missense_fulldata has the initial variant information extracted through
 supfam_ensp_rs contains result set retrieved from Superfamily database and merge_ensp has 
 relevant data from these two tables merged together on the basis of protein identification 
 numbers. 
-Figure 22: Tables in local 'hgv' database. Data Integration | 36 
+Figure 22: Tables in local 'hgv' database. 
+Data Integration | 35 
 Data properties and complexity  
  
 It is noted that : 
@@ -1651,7 +1704,9 @@ with conceptual knowledge.
  
  
  
- Data Integration | 37 
+ 
+Data Integration | 36 
+Data Integration | 37 
 6.6  Mapping variations on models and extracting coordinates 
 from ASTRAL 
  
@@ -1675,6 +1730,9 @@ A part of the data extracted from the merge_ensp table has been depicted in Tabl
 view contains the attributes HGV_ID, HGV_ENSP, HGV_VARIANT, HGV_POSITION, 
 HGV_SCOPID, HGV_REGION, HGV_MODEL. The contents of these attributes have been 
 described in Section 6.5.2.   
+ 
+Table 3: Data view of the merge_ensp table in hgv database and some of its attributes. 
+ 
 HGV_ID HGV_ENSP HGV_VARIANT HGV_POSITION HGV_SCOPID HGV_REGION HGV_MODEL
 1 ENSP00000005082 rs143840804 473 d1x3ca1 396-452 0050784
 2 ENSP00000005082 rs143840804 473 d1x3ca1 508-564 0050784
@@ -1698,10 +1756,7 @@ HGV_ID HGV_ENSP HGV_VARIANT HGV_POSITION HGV_SCOPID HGV_REGION HGV_MODEL
 20 ENSP00000005082 11_3381057_C/G 371 d1x3ca1 508-564 0050784
 21 ENSP00000005082 11_3381057_C/G 371 d1v65a_ 3-59 0044637
 22 ENSP00000005082 11_3381057_C/G 371 d1x3ca1 451-508 0050784
- 
-Table 3: Data view of the merge_ensp table in hgv database and some of its attributes. 
- Data Integration | 38 
-6.6.1.2    Analysis of characteristics of the acquired data 
+6.6.1.2   Analysis of characteristics of the acquired data 
  
 Following are the characteristic points of the acquired data (pointed out in Section 6.5) with 
 reference to the information content in Table 3. All the points stated provide a view of the 
@@ -1746,7 +1801,9 @@ occurs when the domains are overlapping (explained in point (c))
  
 6.  The model for each protein's domain is different. Even if it may seem in the same table 
 depicted above that the model numbers are redundant, it has been found and concluded that the 
-alignment of the sequence is different in each case.  Data Integration | 39 
+alignment of the sequence is different in each case.  
+Data Integration | 38 
+Data Integration | 39 
 7.   The mutation at a position is uniquely named and depicted in the GV_VARIANT column as 
 either the dbSNP "rs ID's" or by the uniquely allotted VEP ID's, allotted by VEP if the mutation is 
 not yet reported into the dbSNP database. (Refer Section 6.2) 
@@ -1771,11 +1828,6 @@ mappings which are present in the sequence.
 Another aspect taken into consideration while filtering out the relevant data for use in further 
 research, is the multiple region values. The following table, Table 4, depicts some sample records 
 from the merge_ensp table.  
-HGV_ID HGV_ENSP HGV_VARIANT HGV_POSITION HGV_SCOPID HGV_REGION HGV_MODEL
-10410 ENSP00000278833 11_62380920_C/T 56 d1g8qa_ 149-178,209-262 0037997
-20120 ENSP00000309577 rs146720224 2038 d1p3ja1 2093-2128,2206-2322 0048689
-20121 ENSP00000309577 rs149468678 2063 d1p3ja1 2093-2128,2206-2322 0048689
-20283 ENSP00000310227 11_46766091_G/A 1854 d1u6gc_ 602-691,721-788,856-1064,1186-1423 0049802
 Table 4 : Specific records from merge_ensp table for finding valid positions within regions. 
  
  
@@ -1790,7 +1842,13 @@ The region starts at residue 149 and end ends at residue 262 of the domain "d1g8
 "ENSP00000278833 ". The reason behind this theory of domain regions being split into specific 
 parts of the sequence and not in a continuous chain of residues is an interesting biological 
 phenomenon. A domain is formed due to the interaction of certain residues which join together to 
-form an independent functioning unit in the protein.  Data Integration | 40 
+form an independent functioning unit in the protein.  
+HGV_ID HGV_ENSP HGV_VARIANT HGV_POSITION HGV_SCOPID HGV_REGION HGV_MODEL
+10410 ENSP00000278833 11_62380920_C/T 56 d1g8qa_ 149-178,209-262 0037997
+20120 ENSP00000309577 rs146720224 2038 d1p3ja1 2093-2128,2206-2322 0048689
+20121 ENSP00000309577 rs149468678 2063 d1p3ja1 2093-2128,2206-2322 0048689
+20283 ENSP00000310227 11_46766091_G/A 1854 d1u6gc_ 602-691,721-788,856-1064,1186-1423 0049802
+Data Integration | 40 
 As depicted in above 3D protein structure diagrams in this report, it is not the continuous 
 sequence amino acids which group together to form parts of the structure, instead, the 3D 
 structure is formed with the folding of the protein chain and collective residues residing close to 
@@ -1838,7 +1896,8 @@ position value which was extracted out of the VEP script with the ENSP identifie
 RegionStart is the start position of the region calculated in the previous section . This is only 
 calcualted for the variations, the position of which lies in between the defined region. The starting 
 position of the region is then termed as RegionStart. Example: if the region reads [45-52, 78 - 92] 
-and the position is 50, then the RegionStart value shall be 45 and RegionEnd value 92.  Data Integration | 41 
+and the position is 50, then the RegionStart value shall be 45 and RegionEnd value 92.  
+Data Integration | 41 
 ModStart is the position that the model starts from. This position might not be 1 in most of the 
 cases. The model starts from a pre-defined position in the sequence, and it is counted forward 
 each position in the sequence by adding the modstart number prior to going ahead in the 
@@ -1848,11 +1907,7 @@ sequence.
 6.6.2.2   To calculate the position on the model 
  
 For each record in the merge_ensp table, we consider the alignment and note the position of 
-occurrence of mutation.   
-+------------+-------------+-----------+--------------------------------------------------------------+----------- 
-| scopid  |position  |region   | alignment                      | modstart 
-+------------+-------------+-----------+--------------------------------------------------------------+----------- 
-d2cqea2 |     8      |    3-27    |  TKQITCRYFMHGVCREGSQCLFSHD    |       4 
+occurrence of mutation.  
  
  
 For the above record:  Position = 8, RegionStart = 3, ModStart = 4. 
@@ -1880,7 +1935,12 @@ position that maps to a position in the model. The position in the model would b
 counting to the same position (Position of character "C"). i.e. 4 + (3 uppercase letters) = 7.  
  
  
- Data Integration | 42 
+ 
++------------+-------------+-----------+--------------------------------------------------------------+----------- 
+| scopid  |position  |region   | alignment                      | modstart 
++------------+-------------+-----------+--------------------------------------------------------------+----------- 
+d2cqea2 |     8      |    3-27    |  TKQITCRYFMHGVCREGSQCLFSHD    |       4 
+Data Integration | 42 
 Thus, the norms of querying the Superfamily database with the attributes region and ModStart are 
 as follows: 
 a) The RegionStart value is increment only by counting the letters in the alignment (Upper case 
@@ -1924,7 +1984,8 @@ position extracted.
 information "M" (found on one left of the target column. The residues on the right still 
 read small case letters for 2 columns). 
  
- Data Integration | 43 
+ 
+Data Integration | 43 
 6.6.2.4    Significance  
  
  
@@ -1964,19 +2025,20 @@ Mapping the variants on the 3D spatial plane , which is the protein structure le
 challenge in this research. A facility which provides the structural view of the biological data is 
 required for accomplishing this task. The Protein Data Bank (PDB) archive is the single 
 worldwide repository of information about the 3D structures of large biological molecules, 
+including proteins and nucleic acids. 
 [16]
-including proteins and nucleic acids.  The (PDB) format provides a standard representation for 
+ The (PDB) format provides a standard representation for 
 macromolecular structure data derived from X-ray diffraction and NMR studies. 
 The ASTRAL compendium provides databases and tools useful for analyzing protein structures 
 and their sequences.  It is partially derived from, and augments the SCOP: Structural 
 Classification of Proteins database. Most of the resources provided here depend upon the 
-[16]
-coordinate files maintained and distributed by the Protein Data Bank.  
+coordinate files maintained and distributed by the Protein Data Bank. [16] 
  
 The PDB-style files for SCOP domains are downloaded from the website 
 http://astral.berkeley.edu/pdbstyle-1.75.html. The filtered and processed files are stored in a 
 database file system called the ASTRAL database. The data was downloaded on September 2, 
-2012. The total size of the downloaded zipped ASTRAL files is approximately 5 GB's.  Data Integration | 44 
+2012. The total size of the downloaded zipped ASTRAL files is approximately 5 GB's.  
+Data Integration | 44 
 The files are unzipped and extracted. The extracted files consist of domain ".ent" files addressed 
 with the SCOP domain names of the domain information they contain. 
 Each file has the PDB file format, as discussed in Section 4.4.2. 
@@ -2000,7 +2062,8 @@ and metadata about the information contained in the file.
 ? Nucleic acid residues are listed from the 5' to the 3' terminus. 
  
 The core information is stored in the rows with records starting with "ATOM". The information 
-stored in each column is described as: Data Integration | 45 
+stored in each column is described as: 
+Data Integration | 45 
  
 1) Column 1 - Record name "ATOM" depicts that the row contains information about an atom or 
 a residue. 
@@ -2037,7 +2100,8 @@ equals to the name of the ASTRAL file with an extension of ".ent". The path till
 location of the ASTRAL file is defined and the contents of the file are read.  
  
 II. For the rows which contain the "ATOM" element, the residue sequence number 
-(Column-6 in the ASTRAL file) is matched with the ModelPosition in the merge_ensp Data Integration | 46 
+(Column-6 in the ASTRAL file) is matched with the ModelPosition in the merge_ensp 
+Data Integration | 46 
 table record.  
  
 III. a) There are more than one rows in the file which contain the residue sequence number 
@@ -2068,6 +2132,7 @@ ASTRAL file. These are cases where the ASTRAL files lack full information of the
 architectures or there may be occurrence of random loop regions at those positions which cannot 
 be taken as static.  
  
+Table 4 : CoordinateOutput File with coordinates of mutations in each protein (Part of the table) 
 PROTEIN ID X- COORDIANTE Y- COORDIANTE Z- COORDIANTE
 ENSP00000311042 -61.053 57.511 -28.945
 ENSP00000328808 -55.442 43.872 -17.169
@@ -2086,7 +2151,7 @@ ENSP00000280886 64.000 147.418 18.770
 ENSP00000280886 45.468 178.352 34.043
 ENSP00000326128 15.242 25.146 17.486
 ENSP00000354040 1.665 32.695 72.208
-Table 4 : CoordinateOutput File with coordinates of mutations in each protein (Part of the table) Data Integration | 47 
+Data Integration | 47 
  
  
  
@@ -2134,7 +2199,7 @@ delivered:
  
  
  
- Statistical Calculations | 48 
+ 
 7 Statistical Calculations 
  
 With the completion of the data integration phase, many detailed information features are 
@@ -2177,12 +2242,13 @@ positions of the X, Y and Z orthogonal coordinates measured in Armstrongs.
  
 III. Both the textdata and data are passed into a function Eu_distance which would calculate the 
 Euclidean distances and return a histogram plot of the distance versus the frequency of distances 
-found.   
+found.  
  
 a)  The unique elements of the textdata attribute are collected into a new set called as values. 
 The values variable now contains the unique protein ENSP numbers from the first column of the 
 result set elements.  
-  Statistical Calculations | 49 
+  
+Statistical Calculations | 48 
 b) For each element in the values set, if the occurrence of the element is found more than once in 
 a file, it means that there are at least two points in the CoordinateOutput file belonging to the 
 same protein.  
@@ -2224,7 +2290,8 @@ researched and more statistical analysis can be drawn out of the given data by u
 measures of calculations and visualizations. The next chapter - Results discusses the details about 
 the histogram plotted and what we infer from the study. 
  
- Results and discussion | 50 
+ 
+Statistical Calculations | 49 
 8  Results and discussion 
  
 For this research experiment, data from the 1000 Genomes Project was taken which includes the 
@@ -2253,16 +2320,17 @@ structure.
 A total of 16,498 data points (each point representing a residue position on the 3 dimensional 
 space) have been analyzed and processed to calculate Euclidean distances between the,. For each 
 protein, if a protein has more than one point mutations, we calculate the distance between those 
+points. Example, for a protein A, if there are 4 coordinate sets found (4 data points), there are 
 4
-points. Example, for a protein A, if there are 4 coordinate sets found (4 data points), there are C
-2 
+C2 
 combinations of distances calculated between each pair of atoms.  
  
 The coordinates for each protein were studied and distances between them on the 3D plane were 
 calculated with the help of MATLAB to present a histogram of the distances versus the frequency 
 of the distances, for a visual analysis via graphical representations. The histfit function is used 
 which gives the histogram of the data with superimposed normal density.  
- Results and discussion | 51 
+ 
+Results and discussion | 50 
 The following was the resultant histogram obtained:   
  
  
@@ -2271,23 +2339,14 @@ and the normal distribution (data 2) of the data in red.
  
 8.1.1     Detailed description 
  
-Statistical Value X axis Y axis 
  
-minimum 2.931   
  
- maximum 388.3          
- mean 195.6 931 
- median 195.6 
-  
  
-mode 2.931 
-  
  
-std deviation 
-            
  
-range 385.3  
-         
+ 
+ 
+ 
  
 Table 6 : Statistical Results of observed distribution 
  
@@ -2297,7 +2356,16 @@ distance range of approximately 2.9 Armstrongs. Also, the minimum value and the 
 for the distances are the same i.e. 2.931 Armstrong.  
  
 II. Values within the distance of approximately 2 to 25 Armstrongs are found to be significantly 
-higher in number as compared to the ones calculated between residues present at a farther Results and discussion | 52 
+higher in number as compared to the ones calculated between residues present at a farther 
+Statistical Value X axis Y axis 
+minimum 2.931   
+maximum 388.3          
+mean 195.6 931 
+median 195.6   
+mode 2.931   
+std deviation             
+range 385.3           
+Results and discussion | 51 
 distance.  
  
 III. The histogram predicts that most of the complementary mutations occur on the 3 dimensional 
@@ -2310,7 +2378,7 @@ V. The resultant distance calculations tend to follow an exponential distributio
 frequencies. The nature of the graph tends to exhibit a normal continuous distribution. 
  
  
-8.1.1.1   Observations 
+8.1.1.1  Observations 
  
 The resultant graph acquired from the study has a normal continuous distribution implying that 
 the values are correlated and the histogram shows significant sense of mutations occurring very 
@@ -2344,9 +2412,9 @@ in the sequence and then gives the result set of these coordinates.
 ? There were two random plots generated to give a weighty basis of comparison between 
 random distributions and significant results. 
   
- Results and discussion | 53 
  
- 
+Results and discussion | 52 
+  
 8.1.2.1   Random Run I : 
  
  
@@ -2360,25 +2428,24 @@ the zero distances because they would refer to comparing distance between the sa
 The histogram shows random output frequencies for the relevant data (the distances between two 
 different points).  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Table 7: Statistical Results of random distribution I 
 Statistical Value X axis Y axis 
- 
-minimum 2.351 
-  
- 
+minimum 2.351   
 maximum 467.9            
- 
 mean 235.1 1566 
- 
-median 235.1 
-   
- mode 2.351 
-  
-std deviation 
-                 
- 
+median 235.1   
+mode 2.351   
+std deviation                  
 range 465.5            
- 
-Table 7: Statistical Results of random distribution I Results and discussion | 54 
+Results and discussion | 53 
 8.1.2.2   Random Run II 
  
  
@@ -2390,25 +2457,21 @@ In this run, 38,609 random coordinates were plotted on the histogram, to study t
 frequency. The graph is highly similar to the random run I. We would neglect the zero based 
 positions as these are the distances being calculated from an atom the very same atom.  
  
-Statistical Value X axis Y axis 
  
+ 
+ 
+ 
+Table 8: Statistical Results of random distribution II 
+ 
+Statistical Value X axis Y axis 
 minimum 2.351   
 maximum 467.9           
- 
-mean 235.1 
-          
-median 235.1 
-  
- 
-mode 2.7791 
-  
-std deviation 
-                 
- 
-range 465.5  
-          
-Table 8: Statistical Results of random distribution II 
- Results and discussion | 55 
+mean 235.1           
+median 235.1   
+mode 2.7791   
+std deviation                  
+range 465.5            
+Results and discussion | 54 
 8.2 Inference  
 The two Random Runs I and II, are highly similar in distribution. In the first run the data size has 
 been taken as nominal, whereas in the second run we increase the data size to observe to what 
@@ -2456,7 +2519,8 @@ distance calculations between the mutations on each protein.
  
 We present the hypothesis to be true to certain extent, at which this study has been able to draw a 
 conclusion through data integration and usage of multiple database and information resource.     
- Conclusion | 56 
+ 
+Results and discussion | 55 
 9 Conclusion  
  
 The research has successfully presented with large scale analysis of data related to human genetic 
@@ -2500,7 +2564,9 @@ Disease detection and examining the rates of mutations, is another area where th
 research can be applied to. Most of the diseases are mainly caused by the mutations occurring at 
 unexpected or unidentified regions. With this work, the mutations can be mapped to their origin, 
 to study how diseases actually progress. Overall this research paves a modern approach to view 
-evolution, and study human variation and the intricacies of biological entities. Bibliography 
+evolution, and study human variation and the intricacies of biological entities. 
+Conclusion | 56 
+Bibliography 
  
 [1] Lesk, A.M., Chothia, C. How different amino acid sequences determine similar 
 protein structures: The structure and evolutionary dynamics of the globins. J. Mol. Biol. 
@@ -2514,14 +2580,14 @@ Project. Nature 426 , 789-796.
 ISBN 1-5375-16-9. 
  
  [5] Gobel et al., (1994), Correlated mutations and residue contacts in proteins, Proteins: 
-Structure, Function, and Bioinformatics, 18 , pp. 309 –317. (doi: 10.1002/prot.340180402) 
+Structure, Function, and Bioinformatics, 18 , pp. 309–317. (doi: 10.1002/prot.340180402) 
  
  [6] The 1000 Genomes Project Consortium. (2010). A map of human genome variation 
 from population-scale sequencing. Nature 467, 1061-1073. (doi:10.1038/nature09534) 
  
 [7] Flicek P., Amode M. R., Barrell D., Beal K., Brent S., Chen Y., Clapham P., 
 Coates G., Fairley S., Fitzgerald S.  et al. (2011). Ensembl 2011. Nucleic Acids Res. 39 Suppl 1, 
-D800 –D806. doi:10.1093/nar/gkq1064 
+D800–D806. doi:10.1093/nar/gkq1064 
 [8] McLaren W, Pritchard B, Rios D, Chen Y, Flicek P, Cunningham F. 
 Deriving the consequences of genomic variants with the Ensembl API and SNP Effect 
 Predictor. BMC Bioinformatics 26(16): 2069-70(2010 doi:10.1093/bioinformatics/btq330 
@@ -2529,20 +2595,21 @@ Predictor. BMC Bioinformatics 26(16): 2069-70(2010 doi:10.1093/bioinformatics/bt
 Genome Sequences using a Library of Hidden Markov Models that Represent all Proteins 
 of Known Structure." J. Mol. Biol., 313(4), 903-919. 
 [10] Derek Wilson, Ralph Pethica, Yiduo Zhou, Charles Talbot, Christine Vogel, Martin Madera,  
-Cyrus Chothia and Julian Gough. (2009). SUPERFAMILY —sophisticated comparative 
+Cyrus Chothia and Julian Gough. (2009). SUPERFAMILY—sophisticated comparative 
 genomics, data mining, visualization and phylogeny. Nucleic Acids Research, Database issue. 
-Vol. 37, D380 –D386. (doi:10.1093/nar/gkn762)  
+Vol. 37, D380–D386. (doi:10.1093/nar/gkn762)  
 [11] Andreeva,A., Howorth,D., Chandonia,J.-M., Brenner,S.E., Hubbard,T.J.P., Chothia,C. and 
 Murzin,A.G. (2008) Data growth and its impact on the SCOP database: new developments. 
-Nucleic Acid Res., 36, D419 –D425. 
- [12] Altschul,S.F., Gish,W., Miller,W., Myers,E.W. and Lipman,D.J. (1990) Basic local 
-alignment search tool. J. Mol. Biol., 215, 403 –410. 
+Nucleic Acid Res., 36, D419–D425. 
+ 
+[12] Altschul,S.F., Gish,W., Miller,W., Myers,E.W. and Lipman,D.J. (1990) Basic local 
+alignment search tool. J. Mol. Biol., 215, 403–410. 
  
 [13]  Chandonia,J.M., Hon,G., Walker,N.S., Lo Conte,L., Koehl,P., Levitt,M. and Brenner,S.E. 
-(2004) The ASTRAL compendium in 2004. Nucleic Acids Res., 32, D189 –D192. 
+(2004) The ASTRAL compendium in 2004. Nucleic Acids Res., 32, D189–D192. 
  
 [14] Karplus,K., Barrett,C. and Hughey,R. (1998) Hidden Markov models for detecting remote 
-protein homologies. Bioinformatics, 14, 846 –856. 
+protein homologies. Bioinformatics, 14, 846–856. 
  
 [15] Murzin A. G., Brenner S. E., Hubbard T., Chothia C. (1995). SCOP: a structural 
 classification of proteins database for the investigation of sequences and structures. J. Mol. 
@@ -2564,10 +2631,12 @@ from: http://www.webyog.com/en/
  
  
  
- APPENDIX A TABLES 
+ 
+APPENDIX A TABLES 
 MISSENSE FILE INITIAL 
 RESULT AFTER SUPREFAMILY DETAILS RETRIEVED 
-PrROTEIN AND DOMAIN INFORMATION WITH VARIANTS APPENDIX B : MYSQL QUERIES 
+PrROTEIN AND DOMAIN INFORMATION WITH VARIANTS 
+APPENDIX B : MYSQL QUERIES 
 1. Loging into mysql 
 execute the following on terminal : mysql -u root -p  
  
@@ -2616,7 +2685,8 @@ where
         and cla.px = model.seed 
         and protein.protein = ass.protein 
         and ass.auto = align.auto 
-        and genome = 'hs'.      and ass.evalue <= 0.0001;  APPENDIX C : JDBC connections  and JAVA codes  
+        and genome = 'hs'.      and ass.evalue <= 0.0001;  
+APPENDIX C : JDBC connections  and JAVA codes  
  
  
  
@@ -2676,7 +2746,8 @@ align.auto    AND genome = 'hs'    AND seqid in ("+loadColumn("ensp.csv")+")  AN
                                                 // Get the column names; column indices start from 1 
                                                 for (int i = 1; i < numColumns + 1; i++) 
                                                                 cNamaes.add(rsmd.getColumnName(i)); 
-                                                sb.append(cNamaes.toString().replaceAll("\\[|\\]", ""));                                                 sb.append('\n'); 
+                                                sb.append(cNamaes.toString().replaceAll("\\[|\\]", "")); 
+                                                sb.append('\n'); 
                                                 while (rs.next()){ 
                                                                 for(String name: cNamaes) 
                                                                                 sb.append(rs.getString(name)).append('\t'); 
@@ -2741,7 +2812,8 @@ align.auto    AND genome = 'hs'    AND seqid in ("+loadColumn("ensp.csv")+")  AN
  
  
  
- C.2.   The program returns the coordinates of mutated residues from the corresponding 
+ 
+C.2.   The program returns the coordinates of mutated residues from the corresponding 
 ASTRAL files 
  
 ? The information is gathered, the positions are checked to be within valid ranges, 
@@ -2798,7 +2870,8 @@ hgv.merge_ensp.HGV_ALIGNMENT, hgv.merge_ensp.HGV_ENSP "
  
    while (rs.next()) { 
  
-    int id = (Integer) rs.getObject(INDEX_ID);     int position = (Integer) rs.getObject(INDEX_POSITION); 
+    int id = (Integer) rs.getObject(INDEX_ID); 
+    int position = (Integer) rs.getObject(INDEX_POSITION); 
     String region = (String) rs.getObject(INDEX_REGION); 
     String scopId = (String) rs.getObject(INDEX_SCOP_ID); 
     int modStart = (Integer) rs.getObject(INDEX_MOD_START); 
@@ -2814,19 +2887,19 @@ hgv.merge_ensp.HGV_ALIGNMENT, hgv.merge_ensp.HGV_ENSP "
  
      System.out.println("ModStart: " + calculatedModStart); 
  
-File fd = new File("C:/Users/Pranshu/Desktop/PDB files or ASTRAL!!/ASTRAL/pranshu  ASTRAL/tmp/pranshu/ scopId + 
+File fd = new File("C:/Users/Pranshu/Desktop/PDB files or ASTRAL/ASTRAL/pranshu  ASTRAL/tmp/pranshu/ scopId + 
 ".ent"); 
  
      BufferedReader br = new BufferedReader(new FileReader(fd)); 
      String str = null; 
      String result; 
  
-     while ((str = br.readLine()) != null) { 
+     while ((str = br.readLine()) = null) { 
  
       String[] tuple = str.split("[ |\t]+"); 
  
       if (tuple[0].equals("ATOM")) { 
-       if (!isInteger(tuple[5])) { 
+       if (isInteger(tuple[5])) { 
    System.out.println("CORRUPTED   " + scopId + "\t" + calculatedModStart+ "CORRUPTED"); 
         continue; 
        } 
@@ -2859,8 +2932,8 @@ File fd = new File("C:/Users/Pranshu/Desktop/PDB files or ASTRAL!!/ASTRAL/pransh
  
  } // end main 
  
-   
- 
+  
+  
 public static boolean isInteger(String input) { 
   try { 
    Integer.parseInt(input); 
@@ -2919,9 +2992,10 @@ C.2.2.  Finding ModStart position in Model
    if (Character.isUpperCase(alignment.charAt(i)) 
      || Character.isLowerCase(alignment.charAt(i))) { 
     regionStart = regionStart + 1; 
-     if (regionStart == position) { 
  
-     if (!Character.isUpperCase(alignment.charAt(i))) { 
+    if (regionStart == position) { 
+ 
+     if (Character.isUpperCase(alignment.charAt(i))) { 
       int leftCap = 1; 
       int rightCap = 1; 
  
@@ -2977,7 +3051,8 @@ C.2.2.  Finding ModStart position in Model
  } 
  
 } // end class 
- APPENDIX D :MATLAB Code 
+ 
+APPENDIX D :MATLAB Code 
  
 function   distances2 = Eu_distance2( textdata, trainData  ) 
 %  

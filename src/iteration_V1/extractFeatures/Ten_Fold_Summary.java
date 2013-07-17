@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 
-import Jama.Matrix;
+import plotting.scatter_plot;
 
 public class Ten_Fold_Summary {
 	public static void main(String [] args){
@@ -34,6 +34,9 @@ public class Ten_Fold_Summary {
 			index[fold]++;
 		}
 		double[] correlationFactors = new double[10];
+		double [] predictedMark = new double[textFiles.length];
+		double [] actualMark = new double[textFiles.length];
+		int counter1 =0;
 		// perform regression and calculate average correlation
 		for(int i=9;i>=0;i--){
 			ArrayList<String> bestWords = esp.trainingWords("textFiles", i);
@@ -107,15 +110,13 @@ public class Ten_Fold_Summary {
 			regression.newSampleData(marksDataSet, parameterData);
 			double [] coff = regression.estimateRegressionParameters();
 			
-			double [] predictedMark = new double[index[testingFold]];
-			double [] actualMark = new double[index[testingFold]];
-			counter =0;
+			
 			for(int j=0;j<folds.length;j++){
 				for(int k=0;k<index[j];k++){
 					if(j==testingFold){
 						File tmpFile = folds[j][k];
 						String tmp[] = tmpFile.getName().split("_");
-						actualMark[counter] = Integer.parseInt(tmp[1].substring(0,2));
+						actualMark[counter1] = Integer.parseInt(tmp[1].substring(0,2));
 				
 				double[] predictingValues = new double[bestWords.size()+4];
 				predictingValues[0] = esp.totalImageCount(tmpFile);
@@ -154,7 +155,7 @@ public class Ten_Fold_Summary {
 					}catch(IOException e){
 						e.printStackTrace();
 					}
-						predictedMark[counter] = coff[0];
+						predictedMark[counter1] = coff[0];
 						System.out.println(coff[0]+" + ");
 						for(int l=0;l<predictingValues.length;l++){
 							if(l==predictingValues.length-1){
@@ -162,30 +163,30 @@ public class Ten_Fold_Summary {
 							}else{
 							System.out.print(coff[l+1]*predictingValues[l]+" + ");
 							}
-							predictedMark[counter] += coff[l+1]*predictingValues[l];
+							predictedMark[counter1] += coff[l+1]*predictingValues[l];
 						}
 						
-						if(predictedMark[counter]>100){
-							predictedMark[counter] =100;
+						if(predictedMark[counter1]>100){
+							predictedMark[counter1] =100;
 						}
-						System.out.println(actualMark[counter]+"	"+predictedMark[counter]);
-						counter++;
+						System.out.println(actualMark[counter1]+"	"+predictedMark[counter1]);
+						counter1++;
 					}
 				}
 			}
-			/*scatter_plot sp = new scatter_plot(("Actual Mark v/s Predicted Mark (Testing Fold "+i+")"), "Actual Marks", "Predicted Marks", actualMark, predictedMark);
-			sp.pack();
-			sp.setVisible(true);
-			*/
-			double correlation = new PearsonsCorrelation().correlation( actualMark ,predictedMark);
-			correlationFactors[i] = correlation;
-			System.out.println("The correlation factor for testing set "+ testingFold + " equals to "+correlation);
-			System.out.println("\n\n");
 		}
-		double averageCorrelation = 0;
-		for(int i=0;i<correlationFactors.length;i++){
-			averageCorrelation += Math.abs(correlationFactors[i]);
+		
+		double averageError =0.0;
+		for(int i =0;i<actualMark.length;i++){
+			System.out.println(actualMark[i]+"	"+predictedMark[i]);
+			averageError += actualMark[i] - predictedMark[i];
 		}
-		System.out.println("Average Correlation is "+ averageCorrelation/10);
+		
+		double correlation = new PearsonsCorrelation().correlation( actualMark ,predictedMark);
+		scatter_plot sp = new scatter_plot(("Actual Mark v/s Predicted Mark"), "Actual Marks", "Predicted Marks", actualMark, predictedMark);
+		sp.pack();
+		sp.setVisible(true);
+		System.out.println("Average Correlation is "+ correlation);
+		System.out.println("Average Error is "+ averageError/actualMark.length);
 	}
 }

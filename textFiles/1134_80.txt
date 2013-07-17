@@ -32,15 +32,17 @@ organisms. There are also other technical points that need to be highlighted. Fi
 scoring framework has an analytical formulation that makes it statistically sound and fast 
 to compute. Second, we developed the framework such that it can be easily integrated in 
 the existing SUPERFAMILY analysis pipeline. 
- Acknowledgments 
+ 
+  
+Acknowledgments 
 I would like to thank my supervisors Dr Julian Gough for his continuous support with this 
 research and for introducing me to the field of Bioinformatics. 
 I would also like to express my thanks to Dr Tim Kovacs for accepting my transfer to the 
 MSc in Machine Learning. 
 I thank Corina for her moral support and for coming with me to the University of Bristol. 
  
- 
- Table of Contents 
+  
+Table of Contents 
 1 Introduction......................................................................................................................................... - 1 - 
 1.1 Background ..................................................................................................................................... - 1 - 
 1.2 Challenges of domain identification ............................................................................................... - 1 - 
@@ -89,8 +91,9 @@ I thank Corina for her moral support and for coming with me to the University of
 8 Bibliography ...................................................................................................................................... - 48 - 
 9 Appendix ........................................................................................................................................... - 50 - 
  
+- 1 - 
  
- 1 Introduction 
+1 Introduction 
 1.1 Background 
 The last 20 years have seen the rise of bioinformatics as a method of applying computer 
 science to biology. Ever since the Human Genome Project that managed to completely 
@@ -129,8 +132,9 @@ domain identification will thus improve both homology detection and new protein
 annotation. 
 This project is mainly based on research and will be heavily reliant on the understanding 
 on how the SUPERFAMILY pipeline works. Most of the work, apart from devising the 
-- 1 - 
- new scoring and E-value functions, will be conducted on the SUPERFAMILY databases 
+- 2 - 
+ 
+new scoring and E-value functions, will be conducted on the SUPERFAMILY databases 
 and framework. This implies a thorough understanding of the functioning of the HMM 
 models, especially the SAM framework, the current scoring frameworks, domain 
 architecture, domain assignment.  
@@ -168,8 +172,9 @@ Protein sequence analysis lies at the core of understanding the biological proce
 organisms. Enhancing the predictions of a state of the art analysis framework like 
 SUPERFAMILY, which affects many researchers, even by a small amount, can have a 
 magnified impact on science. 
-- 2 - 
- 1.4 Structure and organization of the thesis 
+- 3 - 
+ 
+1.4 Structure and organization of the thesis 
 Chapter 2 is an extensive part of the thesis that encompasses 4 major parts: first a general 
 introduction to proteins and domains, together with the databases that harbour information 
 on them; the second part links protein homology with domain identification and describes 
@@ -182,8 +187,9 @@ In chapter 3 we present the scoring method developed, together with the data use
 results we obtained, whilst in chapter 5 we conduct an in-depth evaluation of the current 
 work. We dedicate chapter 6 to delineating the avenues for further research. Chapter 7 will  
 conclude this thesis.  
-- 3 - 
- 2 Background 
+- 4 - 
+ 
+2 Background 
 This chapter is aimed at introducing basic knowledge concerning proteins and domains. 
 The chapter will have four main parts. The first part will act as an introduction to 
 bioinformatics and we will briefly discuss the importance of proteins for life maintenance 
@@ -216,8 +222,9 @@ takes place;
 defined by atomic coordinates; 
 ? Quaternary structure – the structure formed by several protein molecules into a 
 single larger protein or multi subunit complex. 
-- 4 - 
-  
+- 5 - 
+ 
+ 
 Figure 2-1 Protein structure described by the four hierarchical levels. 
 Souce: http://en.wikipedia.org/wiki/File:Protein_structure.png 
 Protein molecules perform all the vital cell functions which make proteins the building 
@@ -234,8 +241,9 @@ homology. Thus, protein domains can be utilized for function association. They a
 identified in a sequence based on the conservation sites observed in sequence alignments. 
 Domains are a strong utensil for functional identification as conserved elements retain 
 function through evolution.  
-- 5 - 
-  
+- 6 - 
+ 
+ 
 Figure 2-2: 3D rendering of a protein. Its constituent domains are rendered with 
 different colours. Source: Jmol, 
 http://www.rcsb.org/pdb/explore/jmol.do?structureId=1JEB&bionumber=1 
@@ -263,8 +271,9 @@ It is updated weekly and as of September 2012 it contains 69,232 protein structu
 2.1.4 Structural Classification of Proteins (SCOP) 
 SCOP represents a database that classifies all the protein structures within the PDB 
 database. It provides a comprehensive description of the structural and evolutionary 
-- 6 - 
- relationships of the proteins of known structure [3]. SCOP is manually curated and 
+- 7 - 
+ 
+relationships of the proteins of known structure [3]. SCOP is manually curated and 
 contains a classification of protein structural domains based on evolutionary relationships; 
 thus, the classification unit is the structural domain. This classification is hierarchical and 
 encompasses 7 levels [3] : 
@@ -306,8 +315,9 @@ The most popular function of the SUPERFAMILY web interface is the Sequence Searc
 which automatically annotates SCOP (Structural Classification of Proteins) domains based 
 on a submitted sequence. The search process starts with checking the database for already 
 existing domain assignments. In case there are no results, then the search sequence will be 
-- 7 - 
- compared with ASTRAL using BLAST. If domains are still not assigned then domains are 
+- 8 - 
+ 
+compared with ASTRAL using BLAST. If domains are still not assigned then domains are 
 searched for with the HMM library and the SAM package. 
  
 Figure 2-3: SUPERFAMILY domain assignment page for a protein sequence. 
@@ -319,14 +329,15 @@ few homologues of the search sequence are aligned and used to build a HMM profil
 Afterwards the HMM profile is used to search the SUPERFAMILY model library for 
 distant homologues. 
 Moreover, the database also contains 2,414 completely mapped genomes (started with 58 
-genomes in 2002!) which can be used through the comparative genomics tools to identify 
+genomes in 2002) which can be used through the comparative genomics tools to identify 
 the over and under-represented superfamilies or families of protein domains in each 
 genome, relative to the kingdom it belongs to 
 (http://supfam.cs.bris.ac.uk/SUPERFAMILY/articles/nar2009.pdf). 
 Based on the usage of the SUPERFAMILY pipeline it is easy to understand the motivation 
 of incorporating context for domain identification.  
-- 8 - 
- 2.1.6  Conclusion 
+- 9 - 
+ 
+2.1.6  Conclusion 
 Proteins are the building blocks of life and they are formed from domains which are 
 evolutionary units. Proteins can have one or multiple domains. Domains describe the 
 conserved elements within proteins based on sequence or structural homology. SCOP is a 
@@ -366,8 +377,9 @@ These remote homologous proteins still share a common ancestor even if at struct
 they have diverged considerably from the primary protein sequence. When performing 
 multiple sequence alignment on a protein sequence with the purpose of identifying the 
 available homologues two issues may arise: either the sequence similarity is below 30% 
-- 9 - 
- which makes it difficult to decide on the homologous status of a candidate protein ([1]) or 
+- 10 - 
+ 
+which makes it difficult to decide on the homologous status of a candidate protein ([1]) or 
 the proteins in question may show conservation sites, but structurally they have nothing in 
 common. This is why remote homolog detection is complex as no scientist can make 
 inferences solely based on structural analysis or on sequence analysis.  
@@ -411,8 +423,9 @@ probability of occurring in a given database by chance ([13]). Next to the expec
 notion we have to introduce the P-value, which is the probability of obtaining by chance a 
 score at least as large as that of the query sequence. In fact, the E-value is the product of 
 the P-value and the size of the database. 
-- 10 - 
- Sequence similarity search methods are suitable for detecting homologues only when 
+- 11 - 
+ 
+Sequence similarity search methods are suitable for detecting homologues only when 
 protein sequences larger than 100 residues in length have 30% identical amino acids with 
 the query sequence. Anything below this value falls within the Twilight Zone making 
 remote homology detection extremely inefficient. 
@@ -451,8 +464,9 @@ Profile Hidden Markov Models
 A Hidden Markov Model is a statistical model that constructs a profile of the query 
 sequence given the multiple sequence alignments of homologous sequences. In fact, a 
 profile HMM is a linear series of nodes that roughly correspond to the residue position 
-- 11 - 
- from the alignment it was constructed (see Error! Reference source not found.). Each 
+- 12 - 
+ 
+from the alignment it was constructed (see Error Reference source not found.). Each 
 ode can have one of the following states that comprise the rate of mutation: 
 ? Match (M) = this state models the conserved regions within the alignment; 
 ? Insert (I) = portions of sequences that do not match within the original model; 
@@ -478,19 +492,17 @@ After the pHMM has been built, the profile can be used to align and score a quer
 sequence with the newly created model. For this, dynamic programming is employed, and 
 more specifically the Viterbi algorithm which finds the most likely path to follow a 
 sequence of events ([15]). The algorithm computes the probability that the query sequence 
-S will match the profile HMM M(w), where n is the length of the protein sequence and w 
-n 
+Sn  will match the profile HMM M(w), where n is the length of the protein sequence and w 
 the set of estimated parameters for the probabilistic model: 
- ( | ( ))  ∑ (   | ( ))  
-  
+ (  | ( ))   ∑  (    | ( )) 
+ 
  
 Where π is the pathway of the pHMM that starts at the Begin state and ends at the End 
 state.  
+The algorithm aims to solve            (     ( )). 
+- 13 - 
  
-The algorithm aims to solve         (     ( )). 
-  
-- 12 - 
-  
+ 
 Figure 2-4 Hidden Markov Model States (Source: Julian Gough, Bristol 
 University, Computational Genomics and Bioinformatics Algorithms, Lecture 
 Notes, 2012) 
@@ -507,8 +519,9 @@ built from the training dataset or by use of primary sequence motifs ([2]). Alth
 are outperforming the generative methods, they are still heavily reliant on them for feature 
 extractions. Likewise, the computational time needed might be too costly when adopting 
 these machine learning techniques.  
-- 13 - 
- As for the Inductive Logic Programming approach to remote homology detection, 
+- 14 - 
+ 
+As for the Inductive Logic Programming approach to remote homology detection, 
 researchers have developed two methods. The first one is called Homology Induction (HI), 
 whilst the second one uses a combination of machine learning and ILP to directly 
 functional protein classes from sequences. HI learns rules that are true for sequences that 
@@ -536,61 +549,52 @@ similarity of the sequences. The scheme that we used in our thesis is additive a
 derived from on [10]. 
 2.3.1 Substitution matrices 
 Let us assume that we have two protein sequences in amino acid form: 
-      
-  
-      
-  
-where                                                 are the amino acid 
-  
-positions which are selected from the alphabet  . 
+        
+        
+where                                                   are the amino acid 
+positions which are selected from the alphabet . 
 If we already have a pair of sequences which are aligned, we want to assign a score to the 
 alignment which would give a measure of the likelihood that the sequences are related 
 versus unrelated. We achieve this by calculating two probabilities for the random model   
-and for the match model  . 
-- 14 - 
- The random model assumes that the amino acid   occurs with the frequency  , therefore 
+and for the match model . 
+- 15 - 
  
+The random model assumes that the amino acid   occurs with the frequency   , therefore 
 the probability of having the two sequences is the product of the probabilities of each 
 amino acid: 
-( )
-                     ∏ ∏  
-  
-  
-  
+              (     )  ∏   
+ 
+∏   
+ 
+ 
 In the case of the match model the aligned pairs of amino acids occur with the joint 
-probability  . The joint probability   is the probability that amino acids   and   have 
-    
+probability    . The joint probability     is the probability that amino acids   and   have 
 each independently been derived from some original amino acid   in their common 
 ancestor. The probability of the whole alignment is: 
-              (     ) ∏  
-  
-  
+             (     )  ∏     
+ 
  
 To calculate the odds ratio we divide the likelihood of the match model to the likelihood 
 of the random model. 
- (     ) 
-  
-  
-             ∏ 
- (     )  
-  
-  
+            
+ (     )
+ (     )
+ ∏
+     
+       
  
 We then calculate the log odds ratio 
-  ∑ (   ) 
-  
+  ∑ (     )
+ 
  
 where 
- 
-  
  (   )     
-  
-  
-The  (   ) scores can be placed in a 20x20 matrix for all amino acid combinations. It is 
-  
+   
+    
+ 
+The  (     ) scores can be placed in a 20x20 matrix for all amino acid combinations. It is 
 called a score matrix or a substitution matrix, and we give as an example below the 
-BLOSUM50 ([10]) matrix where the element     is the score for amino acids   and  . 
-  
+BLOSUM50 ([10]) matrix where the element     is the score for amino acids    and   . 
 The log-odds values have been scaled and rounded for ease of computation. It is evident 
 that the values on the main diagonal for identical amino acids are the highest. 
   A R N D C Q E G H I L K M F P S T W Y V 
@@ -605,8 +609,9 @@ G 0 -3 0 -1 -3 -2 -3 8 -2 -4 -4 -2 -3 -4 -2 0 -2 -3 -3 -4
 H -2 0 1 -1 -3 1 0 -2 10 -4 -3 0 -1 -1 -2 -1 -2 -3 2 -4 
 I -1 -4 -3 -4 -2 -3 -4 -4 -4 5 2 -3 2 0 -3 -3 -1 -3 -1 4 
 L -2 -3 -4 -4 -2 -2 -3 -4 -3 2 5 -3 3 1 -4 -3 -1 -2 -1 1 
-- 15 - 
- K -1 3 0 -1 -3 2 1 -2 0 -3 -3 6 -2 -4 -1 0 -1 -3 -2 -3 
+- 16 - 
+ 
+K -1 3 0 -1 -3 2 1 -2 0 -3 -3 6 -2 -4 -1 0 -1 -3 -2 -3 
 M -1 -2 -2 -4 -2 0 -2 -3 -1 2 3 -2 7 0 -3 -2 -1 -1 0 1 
 F -3 -3 -4 -5 -2 -4 -3 -4 -1 0 1 -4 0 8 -4 -3 -2 1 4 -1 
 P -1 -3 -2 -1 -4 -1 -1 -2 -2 -3 -4 -1 -3 -4 10 -1 -1 -4 -3 -3 
@@ -620,68 +625,47 @@ Table 2-1 BLOSUM50 substitution matrix (Source: [10])
 To measure the significance we can check the distribution of the maximum of   
 alignment scores to independent random sequences. The score is considered significant if 
 the probability of this maximum being greater than the observed best score is small. Let 
-  be the maximum of a series of N independent Gaussian random variables. Then 
- 
+   be the maximum of a series of N independent Gaussian random variables. Then 
 asymptotically we converge to the extreme value distribution (EVD): 
-( )
-    
- (   )    (    ) 
- 
+ (    )     (    
+ (   )) 
 The number of unrelated matches with score greater than   is approximately Poisson 
 distributed with mean: 
-   
- ( )      
+ ( )          
 where 
+?   is the positive root of ∑      
   (   )
-∑
-?   is the positive root of      ; 
-     
+     ; 
 ?   is a constant given by a geometrically convergent series also dependent on the 
-  and  (   );   corrects for the non-independence of possible starting points for 
- 
+   and  (   );   corrects for the non-independence of possible starting points for 
 matches; 
-( )
-?   is a parameter to transform      into a natural scale. 
+?   is a parameter to transform  (   ) into a natural scale. 
 The probability that there is a match of score greater than   is then: 
-( )
-   
- (   )     
+ (   )       ( ) 
 2.3.3 The Extreme Value Distribution 
 Let  ( ) be the probability density function and we take   samples. The probability that 
+the largest of   samples is less than   is   ( ), where  ( )  ∫  ( )  
  
- 
-( )
-the largest of   samples is less than   is  ( ), where     ( )  . Then the 
-∫
   
- 
-probability density function of  ( ) is it’s derivative with respect to  : 
- 
-  ( )
-   
-( ) ( ) ( )
-                                      ( ) 
+. Then the 
+probability density function of   ( ) is it’s derivative with respect to  : 
+   ( )
   
-- 16 - 
-    
-( )
-If we are dealing with the exponential density:       then the probability 
-      
-distribution function is  ( )    . If we choose   such that       and 
+   ( )    ( )                        (   )      ( ) 
+- 17 - 
+ 
+If we are dealing with the exponential density:  ( )        then the probability 
+distribution function is  ( )        . If we choose   such that          and 
 define      , then: 
-                     
-  ( ) ( )    (   )   (     ) 
-      
-( )
-                  
+  ( )    ( )        (      )         (        )    
+         (     )          
 Therefore if we calculate the integral 
+∫        (     )   
  
-         
-∫     (  )      (  ) 
   
+    (     ) 
 we get the probability distribution function: 
-   
- (               )    (  ) 
+ (               )     (     ) 
 which is called a Gumbel distribution. 
 The Gumbel distribution is the EVD for various other densities  ( ), for example the 
 Gaussian. 
@@ -706,8 +690,9 @@ tool is worthwhile. However, this approach is complementary to our proposed rese
 and can be used in conjunction with it. 
 Paper [20] describes another context sensitive approach for improving the precision of 
 HMM domain detection. The CODD algorithm functions along the following lines: 
-- 17 - 
- ? First build a reference list of conditionally dependent pairs (CDP), which contains 
+- 18 - 
+ 
+? First build a reference list of conditionally dependent pairs (CDP), which contains 
 all the domain pairs that co-occur at least once in the set of proteins of known 
 composition; 
 ? Then use a HMM model to predict domains on the query sequence with a 
@@ -734,213 +719,207 @@ This section explains the details of the dPUC model from [21]. Let’s assume we h
 protein sequence and   is the set of candidate domains obtained through HMMER with a 
 tolerant E-value threshold. Now let’s assume   is a subset of  . The authors define the 
 score of domain   with respect to   as: 
-      ∑  
-       
+          ∑    
    
+ 
 where 
-?   is the score of domain  , which is calculated in a similar way as in  section 2.3 
- 
-?   is the domain score threshold for the family of domain  , and  
- 
-?   is the context score between domains   and  . 
-  
-The calculation of   and   is already included in the existing standard scoring 
-  
-frameworks. So the novelty of this model is the introduction of the context score   which 
-  
+?    is the score of domain  , which is calculated in a similar way as in  section 2.3 
+?    is the domain score threshold for the family of domain  , and  
+?     is the context score between domains   and  . 
+The calculation of    and    is already included in the existing standard scoring 
+frameworks. So the novelty of this model is the introduction of the context score     which 
 fits well with an additive scoring scheme. 
 The next few paragraphs are dedicated to the context scores calculation. For calculating 
-  we need statistics from an already annotated protein domain architecture database. The 
-  
-- 18 - 
- authors of the dPUC model used Pfam domain assignments based on sequences for about 
+    we need statistics from an already annotated protein domain architecture database. The 
+- 19 - 
+ 
+authors of the dPUC model used Pfam domain assignments based on sequences for about 
 10 organisms from Uniprot. In our project we will use SUPERFAMILY domain 
 assignments based on sequences for more organisms from the Protein Data Bank. The 
 authors used only multi-domain proteins which is a good idea because a single domain 
-protein cannot provide context statistics. We first define the normalized pair counts   as 
-  
+protein cannot provide context statistics. We first define the normalized pair counts     as 
 the sum over all proteins   in the database of the product of the counts of domain   and   
 normalized by the total number of domains in protein  : 
-  
-    
-  ∑             
-  
-   
- 
- 
- (   )
-    
-  ∑    
-  
-   
- 
- 
-where   is the number of domains of family   in protein   and   the total number of 
-   
-domains in protein  . The normalization done with     is meant to compensate for 
- 
-inflated counts due to very large proteins. Also in the case of     the expression 
- (   ) keeps domains from counting themselves in the case where we only have one 
-    
-occurrence of family   in protein  . Having   defined, we can now calculate 
-  
-probabilities: 
- 
-  
-  
- 
- 
-        
-  
-   
- 
-       
- 
- 
-where   is the probability that domains   and   co-ocurred,   is the probability that a 
-   
-random domain family occurred,   is the sum of all   (  ∑ ) and   is the total 
+    ∑
       
-∑
-number of unique domain families. The probabilities are scaled such that     and 
+     
+             
+    ∑
+   (     )
+     
     
-∑   . 
-  
-We now have the building blocks to calculate the context scores   as pairwise log-odds: 
-  
+where     is the number of domains of family   in protein   and    the total number of 
+domains in protein  . The normalization done with      is meant to compensate for 
+inflated counts due to very large proteins. Also in the case of     the expression 
+   (     ) keeps domains from counting themselves in the case where we only have one 
+occurrence of family   in protein  . Having     defined, we can now calculate 
+probabilities: 
+    
+    
  
   
-            
    
-  
-  
-where   is the measured probability that domains   and   co-ocurred, and    is the 
+      
+   
+ 
+ 
+     
+where     is the probability that domains   and   co-ocurred,    is the probability that a 
+random domain family occurred,   is the sum of all     (  ∑      ) and   is the total 
+number of unique domain families. The probabilities are scaled such that ∑         and 
+∑      . 
+We now have the building blocks to calculate the context scores     as pairwise log-odds: 
+        
+   
     
+       
+where     is the measured probability that domains   and   co-ocurred, and      is the 
 probability that the association between domains   and   occurred by chance. The 
 logarithm in base two is chosen such that the context scores match the HMMER2 bit 
 scores. 
 What is useful about this formulation is that if the domain pair     is not observed, the 
 context score is negative. But if the pair     is observed and the context score is still 
 negative, then it is automatically set to zero so it will have no influence on the total score. 
-- 19 - 
- These statements are evident from the equations above. For example if the domain pair     
- 
-is not observed, the context score is negative:          <0. 
-     
-   
-Let’s come back to our final aim of selecting a set of domain assignments. The objective is 
-to find         (∑ ), where   only contains non-overlapping domains and 
-      
-        . 
-   
 - 20 - 
- Protein sequence: 
-GRQQG…CAITAGFMKELTQSLVAL…QLCESCGDMVHEKIHRA…SVFRM
-GK 
-Candidate 
-domains: 
-candidate domain candidate domain 
-candidate domain 
-1 4 
-candidate domain candidate domain 
-3 
-2 5 
-Network: 
-H -T 
-3 3
-candidate domain 
-3 
-C 
-C 
-34
-13
-H -T H -T 
-C C 
-1 1 4 4
-23 35
-C 
-14
-candidate domain candidate domain 
-1 4 
-C 
-C 
-15
-24
-H -T H -T 
-2 2 5 5
-candidate domain candidate domain 
-C 
-2 
-25 5 
-Results with Standard Pfam: 
-S S 
-1,{1,3} 3,{1,3}
-candidate domain candidate domain 
-1 3 
-Results with dPUC Pfam: 
-S S S 
-1,{1,3,4} 4,{1,3,4}
-3,{1,3,4}
-candidate domain candidate domain candidate domain 
-1 3 4 
+ 
+These statements are evident from the equations above. For example if the domain pair     
+is not observed, the context score is negative:               
+ 
+   
+<0. 
+Let’s come back to our final aim of selecting a set of domain assignments. The objective is 
+to find         (∑       ), where   only contains non-overlapping domains and 
+          . 
+- 21 - 
+ 
  
 Figure 2-6 Graph theoretic framework 
 This problem can be modelled from a graph theory perspective. If we look at Figure 2-6 
 we see at the upper part an example of protein sequence in amino acid form. In this 
 example this protein sequence can be split into three parts each of them having different 
-- 21 - 
- candidate domain assignments discovered by HMMER with a permissive threshold. For 
+candidate domain 
+1 
+GRQQGCAITAGFMKELTQSLVALQLCESCGDMVHEKIHRASVFRM
+GK 
+candidate domain 
+3 
+candidate domain 
+4 
+candidate domain 
+2 
+candidate domain 
+5 
+Protein sequence: 
+candidate domain 
+1 
+candidate domain 
+3 
+candidate domain 
+4 
+candidate domain 
+2 
+candidate domain 
+5 
+H3-T3 
+H
+1
+-T
+1
+ H
+4
+-T
+4
+ 
+H
+5
+-T
+5
+ H
+2
+-T
+2
+ 
+C
+13
+ C
+34
+ 
+C
+14
+ 
+C
+23
+ C
+35
+ 
+C
+15
+ C
+24
+ 
+C
+25
+ 
+Candidate 
+domains: 
+Network: 
+candidate domain 
+1 
+candidate domain 
+3 
+Results with Standard Pfam: 
+candidate domain 
+1 
+candidate domain 
+3 
+candidate domain 
+4 
+Results with dPUC Pfam: 
+S1,{1,3} S3,{1,3} 
+S1,{1,3,4} S3,{1,3,4} S4,{1,3,4} 
+- 22 - 
+ 
+candidate domain assignments discovered by HMMER with a permissive threshold. For 
 the first domain position there are two candidate domains (1 and 2), for the second there is 
 one candidate domain (3) and for the last position there are two candidate domains (4 and 
 5). From these candidate domains we build a network in which each node has the weight 
-equal to the Pfam score minus the threshold     and the branches have the weights 
-  
-equal to the context scores  . In the bottom of the figure you can see the final non-
-  
+equal to the Pfam score minus the threshold       and the branches have the weights 
+equal to the context scores    . In the bottom of the figure you can see the final non-
 overlapping domain assignment results for the Standard Pfam model and for the Pfam 
 with dPuc. The standard model has fewer results (two) than dPUC which has three results 
 due to positive context for domain 4. 
 To find the solution to this optimization task, the authors of [21] formulate it as an integer 
-linear programming problem. For this purpose, we define a variable         for each 
- 
-domain   and a variable         for domains    and  
-  
+linear programming problem. For this purpose, we define a variable          for each 
+domain   and a variable           for domains    and  
+   {
                                                          
-  { 
- 
                                                                                                    
+ 
+    {
                                                                
-  { 
-  
                                                                                                               
+ 
 Next we define the score of domain   as: 
-  [   ]  ∑   
-        
- 
-Then the goal is to maximize ∑  such that: 
-  
-                                                                                                       
-    
- 
-                                                                                          
-    
+   [     ]   ∑      
  
  
-                                                                               
-  
- 
-                                                     (                         )    
- 
- 
- 
- 
-∑                      (                         )
-    
+Then the goal is to maximize ∑     such that: 
 {
+  
+ 
+  
+ 
+                                                                                                           
+                                                                                              
+                                                                                 
+                                                     (                         )    
+∑        
    
+   
+                 (                         )
  
-where   is a Pfam-specific sequence threshold. They use lp_solve for finding the solution 
- 
+where   
+  is a Pfam-specific sequence threshold. They use lp_solve for finding the solution 
 to this integer linear programming problem. 
 2.4.2 Evaluation of dPUC 
 Two methods of evaluating the performance of the model are used in [21]: Estimated false 
@@ -950,12 +929,14 @@ Pfam model with the dPUC model on actual and permutated protein sequences. To
 simulate the false predictions they use the shuffled sequences, while the true predictions 
 are done on the real protein sequences. Shuffling is done to preserve the fractions of 
 aminoacids and the total length of each protein. To evaluate the context models they also 
-- 22 - 
- concatenate the real sequences with the randomized sequences so that they can count the 
+- 23 - 
+ 
+concatenate the real sequences with the randomized sequences so that they can count the 
 random predictions generated by context with real but also shuffled sequences. 
 To calculate the false discovery rate they compute: 
+     
  
-      
+ 
  
 where   is the number of predictions on the shuffled protein and   is the number of 
 predictions per real protein. 
@@ -987,8 +968,9 @@ The disadvantages of dPUC are the following. First, the authors test on few orga
 Second, the co-occurrence information can be improved by adding ordering and adjacency 
 information in the score function. 
  
-- 23 - 
- 2.5.1 Adjacency and ordering 
+- 24 - 
+ 
+2.5.1 Adjacency and ordering 
 There are several papers which prove that protein domain adjacency and ordering are 
 important and should be included in the context information. 
 The authors of [8] show that if we find an adjacent pair of domains   and   then they 
@@ -999,8 +981,9 @@ the studied domains do not make combinations with other families.
 There are some combinations of domains which are very frequent in proteins. In [3] these 
 combinations are called supra-domains. The authors find 1203 two-domain and 166 three-
 domain combinations that are significantly over-represented. 
-- 24 - 
- 3 Method 
+- 25 - 
+ 
+3 Method 
 In this chapter we start presenting our method in section 3.1 which motivates our choice 
 for adjacency and ordering and gives a high level description of our approach. We 
 continue with section 3.2 which gives a detailed mathematical description of our context 
@@ -1012,60 +995,38 @@ the way we plan to test the benchmark in subsection 3.5.2.
 Protein domains appear in nature in only a few combinations next to each other. Out of all 
 the possible domain combinations, less than    appear at least once in the UniProt 
 database. The histogram in Figure 3-1 shows that out of the possible           
-          domain combinations only a few thousand occur at least once in the UniProt 
+         domain combinations only a few thousand occur at least once in the UniProt 
 database. This gives strong support to our hypothesis that domain adjacency can be used 
 as context information as only a few domain combinations are actually found in nature. 
  
 Figure 3-1 Support for the domain adjacency hypothesis. The figure represents 
 the distribution of adjacent domain counts greater than zero. The x axis labels is 
 log scaled and it represents all combinations of adjacent domain counts (how 
-many times did domain   appear to the left of domain  ). The y axis represents 
-  
+many times did domain    appear to the left of domain   ). The y axis represents 
 the frequency. 
 Now we need to provide support for our hypothesis that the order of adjacent domains is 
-important. In order to do that we count all domain combinations     and their reverse 
-  
-    to see how much they differ. As a measure of their difference we calculate 
-  
-- 25 - 
-    ( (   )  (   ))
-    
- for all domain combinations with  (   )  (   )  . Figure 
-    
- (   )  (   )
-    
+important. In order to do that we count all domain combinations       and their reverse 
+      to see how much they differ. As a measure of their difference we calculate 
+- 26 - 
+ 
+   ( (    )  (    ))
+ (    )  (    )
+ for all domain combinations with  (     )   (     )   . Figure 
 3-2 shows that the vast majority of adjacent domain counts differ greatly from their 
 flipped version. More than 75% of the cases are situated at the rightmost end of the 
-histogram denoting where the difference between  (   ) and  (   ) is almost as 
-    
+histogram denoting where the difference between  (     ) and  (     ) is almost as 
 large as the sum between them. Note that the counts at the x axis value of zero also contain 
-the combinations     with     which still support our hypothesis. We conclude that 
-  
+the combinations       with     which still support our hypothesis. We conclude that 
 there is significant support for our hypothesis that domain ordering in architectures is 
 important and can provide valuable information for predicting protein domains. This 
 finding is also in line with biological and chemical considerations as domains are usually 
 asymmetrical in their amino acid composition. Our conclusion plays a key part in refuting 
 the approach of using  just co-occurrence as a measure of context which was prevalent in 
 the literature.  
-0.8 
-scaled absolute difference between adjacent domain counts
-0.7
-0.6
-0.5
-0.4
-0.3
-0.2
-0.1
-0
- 
-0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1
-abs[n(d,d) - n(d,d)] / [n(d,d) + n(d,d )]
-i j j i i j j i
  
 Figure 3-2 Support for the domain ordering hypothesis. The figure represents the 
 distribution of the scaled absolute difference between counts of adjacent domains 
-   and their reverse   . The x axis represents the scaled difference of counts 
-    
+     and their reverse     . The x axis represents the scaled difference of counts 
 and the y axis the frequency. 
 Based on these findings, we focus our project around adjacency and ordering. In the final 
 paragraphs of this section we give a high level description of our approach. The diagram 
@@ -1079,9 +1040,47 @@ of domain   more robust we look to see how often the combination  ,  ,   appeare
 other protein domain architectures. Depending on the occurrences in the protein domain 
 architecture database the original HMM E-value will be multiplied by a factor making the 
 prediction more or less significant. 
-- 26 - 
+0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+abs[n(d
+i
+,d
+j
+) - n(d
+j
+,d
+i
+)] / [n(d
+i
+,d
+j
+) + n(d
+j
+,d
+i
+)]
+fr
+e
+q
+u
+e
+n
+c
+y
  
-frequency 
+ 
+scaled absolute difference between adjacent domain counts
+- 27 - 
+ 
+ 
 Figure 3-3: Diagram of a protein domain architecture. Source: author. 
 In the next subsection we formulate 6 scoring functions based on the adjacency and 
 ordering principle. 
@@ -1097,42 +1096,32 @@ without much extra computation time.
 To fulfill the second requirement we start off from  the original score calculation method. 
 The context scores currently calculated for HMM alignments take the form of sums of log 
 odds ratios: 
- ( ) ∑ (   ) 
-  
+ ( )  ∑ (     )
  
  
-  
-where  (   )    ( ) can be taken from the substitution matrix. 
- 
-  
-  
+where  (   )      (
+   
+    
+) can be taken from the substitution matrix. 
 Having also the first requirement in mind, the best way to formulate the new context 
 framework would be an analytical function which can  be easily combined with the 
 original scoring function. The second requirement would lead us to combine the new 
 scoring functions by addition. Therefore we formulate the new score with context as 
 follows: 
-  ( )  ( )  (   )  (   ) 
-         
+  ( )   ( )   (       )   (        ) 
 where the contributions of each side of the context score is calculated as follows: 
- (   )
-  
- (   )    ( ) 
-   
-( )
-   ( )
-  
-- 27 - 
- where: 
-?  (   ) is the match probability of finding domain   to the left of domain   
-    
-because they form togheter a structural/functional relation, 
-?  ( ) ( ) is the background probability of finding domain   to the left of 
-   
-domain   by chance, and 
+ (     )      (
+ (     )
+ (  ) (  )
+) 
+- 28 - 
  
-( )
-?    is the probability of finding domain  . 
-  
+where: 
+?  (     ) is the match probability of finding domain    to the left of domain    
+because they form togheter a structural/functional relation, 
+?  (  ) (  ) is the background probability of finding domain    to the left of 
+domain    by chance, and 
+?  (  ) is the probability of finding domain   . 
 We also need to take into account cases when we do not have any domain appearing in the 
 left, right or both. In that case the respective context score is set to zero and it does not 
 bring any modifications to the original HMM score. 
@@ -1141,128 +1130,89 @@ six variations of the scoring framework, and the differences between them come f
 way the estimates are being defined. 
 The background probabilities are easier to define and they will be the same for all the 
 scoring frunctions: 
+ ?( )  
  
-( )
- ?   
+ 
  
 where   is the number of domains found in nature, which is a number greater than 2000. 
 The match probability estimates are defined in three different variations. 
 The first scoring framework defines the match probability estimates as a ratio between 
 the adjacency counts for each superfamily combination divided by the sum of adjacency 
 counts for all superfamily combinations, with Laplace correction on top: 
- ?(   )  
-  
- ?(   )   
-   
+ ? (     )   
+ ?(     )   
+∑  ?(     )     
  
-∑ ?(   )  
-    
-where   is the number of domains found in nature and  ?(   ) are adjacency counts from 
-  
-existing proteins calculated as follows:  ?(   )  ∑ ? (   ), meaning that the counts 
-      
-are calculated as the number of times domain   appeared at the left of domain   in all 
-  
+where   is the number of domains found in nature and  ?(     ) are adjacency counts from 
+existing proteins calculated as follows:  ?(     )   ∑  ? (     ) , meaning that the counts 
+are calculated as the number of times domain    appeared at the left of domain    in all 
 proteins. 
- 
-The additions of 1 to the numerator and   to the denominator, also known as Laplace 
+The additions of 1 to the numerator and    to the denominator, also known as Laplace 
 correction, help in avoiding the case where the probability estimate would be exactly zero 
 which would lead to a log odds ration equal to minus infinity. In case the domain 
-combination     is not found in the existing protein domain architectures database then 
-  
+combination       is not found in the existing protein domain architectures database then 
+ ?(     )    and   ? (     )   
  
- ?(   )   and   ?(   )  . 
-     
+∑  ?(    )    
+ . 
+- 29 - 
  
-∑ ?(   )  
-    
-- 28 - 
- It can be easily seen that the probabilities sum to one if we take all possible domain 
-∑
-combinations:  ?(   )  . 
-     
+It can be easily seen that the probabilities sum to one if we take all possible domain 
+combinations: ∑  ? (     )    . 
 The second scoring framework defines the match probability estimates as follows: 
+ ? (     )   
+ ?(     )  
  
- ?(   ) 
   
+∑  ?(     )    
  
- 
- ?(   )   
-   
-∑ ?(   )  
-    
- ? (   )
-   
-∑
-where  ?(   )  , meaning that the counts are calculated as the number of 
-   
+where  ?(     )   ∑
+ ? (    )
  ? ( )
- 
-times domain   appeared at the left of domain   in all proteins divided by the total 
-  
+ , meaning that the counts are calculated as the number of 
+times domain    appeared at the left of domain    in all proteins divided by the total 
 number of domains existing in each protein. This takes into account that in longer proteins 
 there is a higher chance of finding random combinations between domains. Therefore, for 
 example we will consider that a domain adjacency occurrence conveys stronger context 
 information if found in a two domain protein than if it occurs in a five domain protein. 
-At the same time the Laplace correction is different such that if combination     is not 
-  
+At the same time the Laplace correction is different such that if combination       is not 
+found   ? (     )   
  
-found   ?(   )   which would lead to a stronger negative context. In 
-   
- 
-∑
- ( ?(   )  )
-    
-other words, the context score  (   ) would still be negative and greater in magnitude 
-  
-in the second framework than in the first framework when combination     is not found: 
-  
- (   )  (   ). 
-      
+  (∑  ?(    )    )
+ which would lead to a stronger negative context. In 
+other words, the context score  (     ) would still be negative and greater in magnitude 
+in the second framework than in the first framework when combination       is not found: 
+  (     )    (     ). 
 The third scoring framework defines the match probability estimates as follows: 
- ?(   )  
-  
- ?(   )   
-   
+ ? (     )   
+ ?(     )   
+∑  ?(     )     
  
-∑ ?(   )  
-    
- ? (   )
-   
-where the adjacency counts  ?(   )  ∑ . 
-   
+where the adjacency counts  ?(     )   ∑
+ ? (    )
  ? ( )
- 
+ . 
 Compared to the first and second frameworks, the third framework has the same adjacency 
 counts as the second framework and the same Laplace correction as the first framework. 
-This type of Laplace correction is such that if combination     is not found   ?(   ) 
-     
+This type of Laplace correction is such that if combination       is not found   ? (     )  
  
+ 
+∑  ?(    )    
   which would lead to a weaker negative context. 
- 
-∑
- ?(   )  
-    
 Turning our attention back to the context scores   it would be very useful to incorporate 
 the information contained in the E-values of the left and right domains. The most intuitive 
 way in which we can use that information would be if we give proportional weights to the 
-context scores of the left  (   ) and right  (   ) depending on the E-values 
-         
-E( ( )) and E( ( )). To put this into a mathematical formulation: 
-         
-  
- ( )  ( )    (   )    (   ) 
-                  
+context scores of the left  (       ) and right  (        ) depending on the E-values 
+E( (     )) and E( (      )). To put this into a mathematical formulation: 
+   ( )   ( )         (       )          (        ) 
 where  
-- 29 - 
-     ( ( ))
-     
-           
-    
-    ( ( ))     ( ( ))
-           
-      
-         
+- 30 - 
+ 
+        
+     ( (     ))
+     ( (     ))       ( (      ))
+       
+               
 In words, the weight for the left context score will be twice the ratio between the log of the 
 E-value of the left domain and the sum of logs of the left and right E-values. The reason 
 for using the log of E-value instead of just E-value is because the distribution of E-values 
@@ -1282,31 +1232,21 @@ In this subsection we will show how we arrive at E-value context factors based o
 context scores defined in the previous section. 
 The E-value of a match between an HMM model and a protein sequence can be calculated 
 from the score value: 
-      
-( )
- (    )      
+ (   ( ))             
 where   is a parameter depending on the size of the database,   is the length of the 
 Hidden Markov Model,   is the length of the amino acid sequence,   is a scale parameter 
-  
-( )
-equal to 1 in our case as we are using log odds ([10]), and    is the modified score.  
+equal to 1 in our case as we are using log odds ([10]), and    ( ) is the modified score.  
 Our modified score is defined as: 
-  
-( ) ( )
-         (   )    (   ) 
-                  
+   ( )   ( )         (       )          (        ) 
 Therefore we can separate the context part of the score as a factor to multiply with the 
 original E-value: 
- (   (   )    (   ))
-                  
-( ) ( )
- (    )  (  )   
-- 30 - 
- By separating an E-value context factor we are avoiding the need to know the original 
-( )
-score  . This is a great feature also because only the original E-values  (  ) are stored 
+ (   ( ))   ( ( ))    (       (      )         (       )) 
+- 31 - 
+ 
+By separating an E-value context factor we are avoiding the need to know the original 
+score  . This is a great feature also because only the original E-values  ( ( )) are stored 
 in the SUPERFAMILY database but not the original scores    Another desirable feature is 
-that we avoid the need to know parameters  ,  , and  . 
+that we avoid the need to know parameters  , , and  . 
 3.4 Data 
 We used the SUPERFAMILY database for our project. Figure 3-4 shows the database 
 schema that we will be using. 
@@ -1341,8 +1281,9 @@ actual score for the (sfL,sfR) combination. Notice that the first row of the tab
 record with sfL=0 and sfR=0. That row is reserved for the score for the case when a 
 certain domain combination was never found before in the database (notice the extreme 
 negative score of -23). 
-- 31 - 
- Display of the calculation of the hash table for one of the scoring functions 
+- 32 - 
+ 
+Display of the calculation of the hash table for one of the scoring functions 
 RUNNING saveContextScores: 
  > Calculating number of domains observed: 
    > n=2223 
@@ -1364,7 +1305,7 @@ RUNNING saveContextScores:
     100879      56019    -0.0079474966280937 
     100879      56112    -1.5791038657811118 
     100879      56672    -1.0645308430925755 
-… 
+ 
 3.4.2 Extracting HMM assignment data 
 The second SQL statement is used for extracting HMM assignment data in the following 
 format: 
@@ -1385,8 +1326,9 @@ the order in which domains appear in an assignment. In the table below we displa
 result of processing the assignment data from SUPERFAMILY. Notice how each protein 
 sequence is treated separately and the domains left (sfL), center (sfC), and right (sfR) are 
 being placed in order. Each row in the table corresponds to a domain being analysed (sfC) 
-- 32 - 
- and it’s adjacent domains (sfL and sfR). Each row also has context scores attached to the 
+- 33 - 
+ 
+and it’s adjacent domains (sfL and sfR). Each row also has context scores attached to the 
 specific domain combinations found. Notice how the context score (scoreL or scoreR) are 
 equal to zero when we have no left or right context. The final two column represent the 
 original E-value from the HMM models (eval1) and the modified E-value with our context 
@@ -1434,16 +1376,18 @@ RUNNING assign(ENSPPYP00000000034):
                47986     52540      0.00      8.66   2.7e-24   4.8e-25 
      47986     52540                8.66      0.00   6.1e-10   1.1e-10 
      47986    140856     52540    -23.41    -23.41   4.2e-02   4.9e+02 
-… 
  
  
-- 33 - 
-  
+ 
+- 34 - 
+ 
+ 
  
 Figure 3-4: SUPERFAMILY database schema. Source: http://supfam.org 
 /SUPERFAMILY/pics/database_schema_1_75.png 
-- 34 - 
- 3.5 Benchmark 
+- 35 - 
+ 
+3.5 Benchmark 
 This section explains how we conceived our benchmark and the difficulties we faced 
 (subsection 3.5.1) and the way we planned the testing of our benchmark (subsection 
 3.5.2). 
@@ -1454,33 +1398,19 @@ with protein sequences and superfamily annotations. Therefore we had to be creat
 devising a benchmark. 
 We decided to use very strong and very weak assignments from the SUPERFAMILY 
 database. Consiquently we consider ground truth correct assignments domains with an 
-  
-HMM E-value less than    and ground truth incorrect assignments those with an E-
-  
-value greater than   . 
+HMM E-value less than      and ground truth incorrect assignments those with an E-
+value greater than     . 
 Our E-value context factor will act as a classifier of domains based only on the context 
 information. A domain will be classified as positive if the E-value context factor is smaller 
 than 1 and negative otherwise. 
 For clarity the following table explains how a confusion matrix for this classifier can be 
 calculated: 
  E-value HMM: E-value context factor: 
-( )
-    (   )    (   )
-         
-( )          
- (  ) 
-  
-   
-True Positive if 
-        
-   
-False Positive if 
-        
-   
-True Negative if         
-   
-False Negative if 
-        
+  ( ( ))   (       (      )         (       )) 
+True Positive if            
+False Positive if            
+True Negative if            
+False Negative if            
 Table 3-1: Method for calculating the confusion matrix for the context classifier. 
 Source: author. 
 3.5.2 Testing 
@@ -1488,28 +1418,26 @@ For testing if there is an improvement over the benchmark we took the following 
 The first step is to calculate the satistics. We query the SUPERFAMILY database 
 containing protein domain architectures for representative genomes (around two thousand 
 organisms, or 60 million protein domain architectures) and UniProt. We iterate through 
-each architecture and build up the adjacency counts  ?(   ). Having the adjacency 
-  
-counts we can calculate  (   ) which we store in a hash table. 
-  
+each architecture and build up the adjacency counts  ?(     ). Having the adjacency 
+counts we can calculate  (     ) which we store in a hash table. 
 The second step is to calculate the E-value context factors for each protein in the database. 
 To do this we iterate through the database taking each protein at a time and parse the 
-- 35 - 
- SUPERFAMILY assignment results containing: superfamily code, region of the protein 
+- 36 - 
+ 
+SUPERFAMILY assignment results containing: superfamily code, region of the protein 
 where the superfamily was found, and the E-value of the assignment. For each superfamily 
 annotated we search in the protein to see what is the superfamily to the left which is 
 closest and the superfamily to the right which is closest. We consider a superfamily to act 
-  
-as context only if it has an E-value smaller than   . Now we have a long list where each 
+as context only if it has an E-value smaller than     . Now we have a long list where each 
 record contains: superfamily code left, E-value left, superfamily code center, E-value code 
 center, superfamily code right and E-value code right. Having these records and the hash 
-table with context scores  (   ) we can compute the E-value context factors for all of 
-  
+table with context scores  (     ) we can compute the E-value context factors for all of 
 the six scoring frameworks. 
 Lastly, if we have the E-value context factors we can calculate preformance measures such 
 as the ROC curve. 
-- 36 - 
- 4 Results 
+- 37 - 
+ 
+4 Results 
 In this chapter we discuss the results obtained. In the first section (4.1) we present the 
 context score distributions, then we look at the E-value context factor distributions and 
 afterwards we explain how the original E-values are combined with the context factors. In 
@@ -1520,81 +1448,41 @@ adjacency and ordering information improves protein domain identification.
 Before computing performance measures of the context scoring frameworks it is necessary 
 to inspect how the context scores are distributed to see where the performance might come 
 from and if the values are reasonable. 
-Figure 4-1 contains histograms for the context scores  (   ),  (   ) and  (   ) 
-         
-for all combinations if     (i.e.    and   ). We start with the distribution for the first 
-  
+Figure 4-1 contains histograms for the context scores   (     ),   (     ) and   (     ) 
+for all combinations if       (i.e.    and   ). We start with the distribution for the first 
 context scoring framework. The shape of the distribution is not surprisingly similar to the 
 distribution of the adjacency counts, with a peak at the minimum and exponentially 
 decreasing towards the maximum. We can see that most of the context scores will increase 
-the E-values providing negative context and the maximum score is     (   ) 
-       
+the E-values providing negative context and the maximum score is          (     )  
   . There is a peak at the minimum of the distribution which is found for domain 
-combinations     not found in existing protein domain architectures 
-  
-(    (   )      ). We move on to analyse the second scoring framework. Here 
-       
+combinations       not found in existing protein domain architectures 
+(         (     )       ). We move on to analyse the second scoring framework. Here 
 we see that the minimum of the distribution (for domain combinations that are not found 
-in existing protein domain architectures) is much lower:     (   )       . 
-       
+in existing protein domain architectures) is much lower:          (     )        . 
 This is a very significant adjustment for the original E-value. The right tail of the second 
 distribution is not too different from the first distribution with the maximum positive 
-context being very similar     (   )   . The third distribution is similar to the 
-       
+context being very similar          (     )    . The third distribution is similar to the 
 second but due to the different Laplace correction the minimum is much closer to the 
-average of the distribution:     (   )      . This leads to a more conservative 
-       
+average of the distribution:          (     )       . This leads to a more conservative 
 context adjustment of the original E-value. 
-- 37 - 
-  
-6000
-f1
-4000
-2000
-0
+- 38 - 
  
--25 -20 -15 -10 -5 0 5 10 15 20 25
-C (d,d)
-1 i j
  
-6000
-f2
-4000
-2000
-0
- 
--25 -20 -15 -10 -5 0 5 10 15 20 25
-C (d,d)
-2 i j
- 
-6000
-f3
-4000
-2000
-0
- 
--25 -20 -15 -10 -5 0 5 10 15 20 25
-C (d,d)
-3 i j
- 
-Figure 4-1 Distributions of the context scores  (   ) for scoring frameworks 
-  
+Figure 4-1 Distributions of the context scores  (     ) for scoring frameworks 
 1, 2 and 3 respectively. The   axis represents the context scores and the   axis 
 the frequency. The values are obtained by taking all the possible combinations of 
-  
- 
-   
-   . The three vertical lines are drawn at threshold values   ( ),   and 
+     . The three vertical lines are drawn at threshold values   (
     
- 
   
- 
-     
-          
-  ( ) respectively, where     ,      and     . We 
-      
+   
+),   and 
+  (
+    
   
- 
+   
+) respectively, where     
+       ,          and     
+       . We 
 use the threshold in the centre at     (plotted with orange) to distinguish 
 between negative context (to the left of the zero threshold) which will demote a 
 domain making it more insignificant and positive context which will promote a 
@@ -1615,46 +1503,93 @@ because it is very unlikely to find domains in the database that rarely appeared
 combination with another domain. Also noteworthy is the fact that most of the values are 
 outside the red vertical lines, meaning that the changes in E-value due to context will be 
 important. Scoring frameworks 3 and 6 are very similar to frameworks 2 and 5 but due to 
-- 38 - 
+-25 -20 -15 -10 -5 0 5 10 15 20 25
+0
+2000
+4000
+6000
+C
+1
+(d
+i
+,d
+j
+)
+fr
+e
+q
+u
+e
+n
+c
+y
  
-frequency frequency frequencya different Laplace correction the values are less extreme. These last scoring schemes will 
+ 
+f1
+-25 -20 -15 -10 -5 0 5 10 15 20 25
+0
+2000
+4000
+6000
+C
+2
+(d
+i
+,d
+j
+)
+fr
+e
+q
+u
+e
+n
+c
+y
+ 
+ 
+f2
+-25 -20 -15 -10 -5 0 5 10 15 20 25
+0
+2000
+4000
+6000
+C
+3
+(d
+i
+,d
+j
+)
+fr
+e
+q
+u
+e
+n
+c
+y
+ 
+ 
+f3
+- 39 - 
+ 
+a different Laplace correction the values are less extreme. These last scoring schemes will 
 also generate an important change in the E-values. 
-5 5 5
-x 10 x 10 x 10
-2.5 2.5 2.5 
-f1 f2 f3
-2 2 2
-1.5 1.5 1.5
-1 1 1
-0.5 0.5 0.5
-0 0 0 
--40 -20 0 20 40 -40 -20 0 20 40 -40 -20 0 20 40
-log(E-value context factor) log(E-value context factor) log(E-value context factor)
-5 5 5
-x 10 x 10 x 10
-2.5 2.5 2.5 
-f4 f5 f6
-2 2 2
-1.5 1.5 1.5
-1 1 1
-0.5 0.5 0.5
-0 0 0 
--40 -20 0 20 40 -40 -20 0 20 40 -40 -20 0 20 40
-log(E-value context factor) log(E-value context factor) log(E-value context factor)
  
 Figure 4-2 Distributions of E-value context factors. The three vertical lines are 
-  
-  
-  
-   
-     
-drawn at threshold values   ,   and    respectively, where   
-   
+drawn at threshold values   
     
   
-          
-  ,      and     . We use the threshold in the centre at 
    
+,   and   
+    
+  
+   
+ respectively, where     
+   
+    ,          and     
+       . We use the threshold in the centre at 
     (plotted with orange) to distinguish between negative context (to the left 
 of the zero threshold) which will demote a domain making it more insignificant 
 and positive context which will promote a domain. The two sideward thresholds 
@@ -1663,30 +1598,155 @@ and positive context which will promote a domain. The two sideward thresholds
 MATLAB. 
 Now we exemplify how the original HMM E-values work together with the E-value 
 context factors to generate the modified E-values. Figure 4-3 shows all these distributions 
-      
-together with vertical lines that mark three thresholds:  ,   and  . The red 
-   
-   
+together with vertical lines that mark three thresholds:     
+  
+,     and     
+  
+. The red 
 distribution plots the original HMM E-value and the overlapping green distribution plots 
 the E-value context factor distributions for the second scoring framework. By multiplying 
 the values in the two distributions we arrive at the modified E-values which are plotted in 
 the blue distribution. Ideally we would want to see values in the uncertainty region 
-    
-(between the lateral thresholds   and  ) move to the side. This is exactly what we 
-   
-   
+(between the lateral thresholds     
+  
+ and     
+  
+) move to the side. This is exactly what we 
 see happening in the blue distribution. 
 In the following section we will see whether the direction of movement generated by the 
 E-value context factors is the right one. 
-- 39 - 
+-40 -20 0 20 40
+0
+0.5
+1
+1.5
+2
+2.5
+x 10
+5
+log(E-value context factor)
+fr
+e
+q
+u
+e
+n
+c
+y
  
-frequency frequency
-frequency frequency
-frequency frequency 
+ 
+f1
+-40 -20 0 20 40
+0
+0.5
+1
+1.5
+2
+2.5
+x 10
+5
+log(E-value context factor)
+fr
+e
+q
+u
+e
+n
+c
+y
+ 
+ 
+f2
+-40 -20 0 20 40
+0
+0.5
+1
+1.5
+2
+2.5
+x 10
+5
+log(E-value context factor)
+fr
+e
+q
+u
+e
+n
+c
+y
+ 
+ 
+f3
+-40 -20 0 20 40
+0
+0.5
+1
+1.5
+2
+2.5
+x 10
+5
+log(E-value context factor)
+fr
+e
+q
+u
+e
+n
+c
+y
+ 
+ 
+f4
+-40 -20 0 20 40
+0
+0.5
+1
+1.5
+2
+2.5
+x 10
+5
+log(E-value context factor)
+fr
+e
+q
+u
+e
+n
+c
+y
+ 
+ 
+f5
+-40 -20 0 20 40
+0
+0.5
+1
+1.5
+2
+2.5
+x 10
+5
+log(E-value context factor)
+fr
+e
+q
+u
+e
+n
+c
+y
+ 
+ 
+f6
+- 40 - 
+ 
+ 
 Figure 4-3: The distributions of the original E-values from HMM (red), Evalue 
 context factors for the first scoring framework (green) and the new E-values with 
-the context correction (blue). The   axis is in    (      ) scale and the   axis 
-  
+the context correction (blue). The   axis is in      (      ) scale and the   axis 
 represents the frequency. Source: histograms generated in MATLAB by the 
 author. 
 4.2 Choosing a context framework 
@@ -1705,37 +1765,23 @@ would explain this increased performance. First, the adjacency counts are scaled
 domain counts in each protein. Second, more weight is given to whichever adjacent 
 domain has a more significant E-value. 
  
-- 40 - 
-  
+- 41 - 
  
-ROC curve for all scoring frameworks
-1 
-0.9
-0.8
-0.7
-0.6
-0.5
-0.4
-0.3
-f1
-f2
-0.2
-f3
-f4
-0.1
-f5
-f6
-0
  
-0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1
-False Positive Rate
+ 
  
 Figure 4-4: ROC curve for all the context scoring frameworks. 
  
 In order to properly rank the scoring frameworks we calculate the area under the ROC 
 curve (Table 4-1). 
-Scoring Area under the ROC Optimal Operating TPR 
-Framework curve Point (FPR=0.01) 
+Scoring 
+Framework 
+Area under the ROC 
+curve 
+Optimal Operating 
+Point 
+TPR 
+(FPR=0.01) 
 f1 0.705 [0.77, 0.99] 0.0752 
 f2 0.712 [0.81, 0.99] 0.0495 
 f3 0.712 [0.77, 0.99] 0.0495 
@@ -1744,9 +1790,43 @@ f5 0.722 [0.83, 0.99] 0.0485
 f6 0.722 [0.80, 0.99] 0.0494 
 Table 4-1 Area under the ROC curve, optimal operating point and True Positive 
 Rate at a 1% False Positive Rate for all the scoring frameworks 
-- 41 - 
+0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+False Positive Rate
+T
+ru
+e
+ P
+o
+s
+it
+iv
+e
+ R
+a
+te
+ROC curve for all scoring frameworks
  
-True Positive RateIt is therefore evident that all of the scoring functions would be able to improve protein 
+ 
+f1
+f2
+f3
+f4
+f5
+f6
+- 42 - 
+ 
+It is therefore evident that all of the scoring functions would be able to improve protein 
 domain identification and they can be successfully added to the SUPERFAMILY analysis 
 pipeline. Nevertheless the methods with which use different weights for left and right 
 context perform better and also the ones that use scaled counts. 
@@ -1766,8 +1846,9 @@ robust.
 Another finding of this thesis is that it does not make a large difference if we calculate the 
 statistics on UniProt or on the representative organisms (it doesn’t matter if we use just 
 representative species or the whole genomes). 
-- 42 - 
- 5 Evaluation of the project 
+- 43 - 
+ 
+5 Evaluation of the project 
 Our project had the aim of improve protein domain identification using context 
 information, more specifically domain adjacency and ordering. 
 We will take each objective one by one and discuss how much we achieved. 
@@ -1778,8 +1859,7 @@ each other. Out of all the possible domain combinations, less than    appeared a
 once in the SUPERFAMILY databases. This gave strong support to our hypothesis that 
 domain adjacency could be used as strong context information. Second, we provided 
 support for our hypothesis that the order of adjacent domains is important. In order to do 
-that we counted all domain combinations     and their reverse     to see how much 
-    
+that we counted all domain combinations       and their reverse       to see how much 
 they differed.  We found that the vast majority of adjacent domain counts differed greatly 
 from their flipped version. Third, we used the two findings to calculate the exact values 
 which were later used in our scoring functions. 
@@ -1808,8 +1888,9 @@ our dataset of SUPERFAMILY domains. That would indeed have been quite difficult 
 dPUC uses Pfam annotations which are at the family level rather than at the superfamily 
 level. Nevertheless the reason for not taking such a convoluted approach was the fact that 
 we showed that domain ordering plays a very important role, thus contradicting the co-
-- 43 - 
- occurrence approach. As the project progressed we did not see a big gain in investing time 
+- 44 - 
+ 
+occurrence approach. As the project progressed we did not see a big gain in investing time 
 in achieving this objective which we set out when writing the literature review. 
 In terms of deliverables we did produce an algorithm which enhances prediction of 
 domains using context-dependent priors, optimised and validated on real data. We also 
@@ -1827,8 +1908,9 @@ on Perl by half.
  
  
  
-- 44 - 
- 6 Further Research 
+- 45 - 
+ 
+6 Further Research 
 There are plenty of directions for further improving the method presented in this thesis and 
 the assessment of its contribution. In this chapter we will take each potential improvement 
 and explain it in detail. 
@@ -1868,8 +1950,9 @@ domains in a query amin oacid sequence. Currently a domain is considered adjacen
 another domain without regard to the gap length and if there is any overlap, the 
 adjacency is considered invalid. One approach would be to put a cap on the length of 
 gap between the gap for the adjacency to be considered valid. Another issue is dealing 
-- 45 - 
- with multiple partial matches between a HMM model and a an aminoacid sequence. 
+- 46 - 
+ 
+with multiple partial matches between a HMM model and a an aminoacid sequence. 
 Currently we take the first partial match but there are other ways of doing this. 
 6. The sixth point which is worth investigating is the effect of limitting the allowed gap 
 length in the protein domain architectures used for building the context scores table. 
@@ -1893,8 +1976,9 @@ deployment on the SUPERFAMILY servers. This would be easily achived from a
 programming perspective as the code of this thesis was developped in Perl with 
 integration in mind. However it would be a challenging software testing task which is 
 beyond the scope of this thesis. 
-- 46 - 
- 7 Conclusions 
+- 47 - 
+ 
+7 Conclusions 
 Our project proves that context information is useful based on testing on much more 
 representative data than any of the previous papers on the subject. The method is tested on 
 2414 genomes of representative organisms or more than 60 million protein sequences 
@@ -1913,8 +1997,9 @@ databases.
 The result of this project was the proof that we were able to improve a state of the art 
 domain detection framework. By doing that we are not just showing a proof of principle 
 but we have added real value to the scientific field.  
-- 47 - 
- 8 Bibliography 
+- 48 - 
+ 
+8 Bibliography 
 [1] C. Vogel, C. Berzuini, M. Bashton, J. Gough, and S. a Teichmann, “Supra-domains: 
 evolutionary units larger than single protein domains.,” Journal of molecular 
 biology, vol. 336, no. 3, pp. 809-23, Feb. 2004. 
@@ -1947,8 +2032,9 @@ Biol, 1990.
 Methods in enzymology, vol. 183. pp. 63-98, Jan-1990. 
 [13] S. Karlin and S. F. Altschul, “Methods for assessing the statistical significance of 
 molecular sequence features by using general scoring schemes.,” Proceedings of the 
-- 48 - 
- National Academy of Sciences of the United States of America, vol. 87, no. 6, pp. 
+- 49 - 
+ 
+National Academy of Sciences of the United States of America, vol. 87, no. 6, pp. 
 2264-8, Mar. 1990. 
 [14] N. Bergman, “Comparative Genomics: Volumes 1 and 2,” 2007. 
 [15] L. Rabiner, “A tutorial on hidden Markov models and selected applications in 
@@ -1970,10 +2056,11 @@ Bioinformatics (Oxford, England), vol. 25, no. 23, pp. 3077-83, Dec. 2009.
 identification.,” BMC bioinformatics, vol. 12, no. 1, p. 90, Jan. 2011.  
  
  
-- 49 - 
- 9 Appendix 
+- 50 - 
+ 
+9 Appendix 
 Main Subroutines for connecting with the MySQL Database (Perl) 
-#!/usr/bin/perl -w 
+#/usr/bin/perl -w 
 use strict; 
 use DBI; 
 use DBD::mysql; 
@@ -2016,7 +2103,7 @@ sub assignAll {
     # RETRIEVE SCORES 
     my %Clr = %{retrieve $fnContextScores}; 
     # OUTPUT FILE 
-    open(my $fhOut, ">", $fnOut) or die "cannot open > $fnOut: $!"; 
+    open(my $fhOut, ">", $fnOut) or die "cannot open > $fnOut: $"; 
     printf $fhOut "%8s%8s%8s%10s%10s%10s\n",  
         "sfL", "sfC", "sfR", "evalL", "evalC", "evalR"; 
     # ASSIGN 
@@ -2031,8 +2118,9 @@ PA|EEB20240.1|hypothetical';
         GROUP BY protein.seqid  
         HAVING COUNT(ass.sf)>=2"; 
     my $sqlSeqid = "SELECT protein.seqid,COUNT(ass.sf)  
-- 50 - 
-         FROM ass,protein,genome  
+- 51 - 
+ 
+        FROM ass,protein,genome  
         WHERE protein.genome=genome.genome  
             AND genome.include='y' 
             AND protein.protein=ass.protein  
@@ -2099,8 +2187,9 @@ sub assign {
             AND protein.protein=ass.protein"; 
     my $sqlAssH = $sqlConnect->prepare($sqlAss); 
     $sqlAssH->execute(); 
-- 51 - 
-     $sqlAssH->bind_columns(\$hSf, \$hEval, \$hReg); 
+- 52 - 
+ 
+    $sqlAssH->bind_columns(\$hSf, \$hEval, \$hReg); 
     # LOOP THROUGH RESULTS 
     while($sqlAssH->fetch()) { 
         @aux1 = split(',', $hReg); 
@@ -2142,13 +2231,13 @@ sub assign {
         # Left 
         if ($sfL[$i] ne "") { 
             $scoreL[$i] = $Clr->{$sfL[$i]}{$sfC[$i]}; 
-            if (!defined $scoreL[$i]) {$scoreL[$i] = $Clr->{0}{0};} 
+            if (defined $scoreL[$i]) {$scoreL[$i] = $Clr->{0}{0};} 
         } 
          
         # Right 
         if ($sfR[$i] ne "") { 
             $scoreR[$i] = $Clr->{$sfC[$i]}{$sfR[$i]}; 
-            if (!defined $scoreR[$i]) {$scoreR[$i] = $Clr->{0}{0};} 
+            if (defined $scoreR[$i]) {$scoreR[$i] = $Clr->{0}{0};} 
         } 
         # Modified E-value 
         $evalC2[$i] = $evalC[$i] * exp( -$lambda * ($scoreL[$i] + $scoreR[$i]) 
@@ -2167,8 +2256,9 @@ sub assign {
                 $$fp++; 
                 $$dS_FP += $scoreL[$i]+$scoreR[$i]; 
             } elsif ($evalC[$i]>=$evalTh_Max && $evalC2[$i]>=$evalTh_Max) { 
-- 52 - 
-                 $$tn++; 
+- 53 - 
+ 
+                $$tn++; 
                 $$dS_TN += $scoreL[$i]+$scoreR[$i]; 
             }; 
             # Print 
@@ -2235,8 +2325,9 @@ len_supra.genome=genome.genome AND genome.include='y';
             for ($i=0; $i<@combArrayNoGaps-1; $i++) { 
                 $clr->{$combArrayNoGaps[$i]}{$combArrayNoGaps[$i+1]} += 
 $number/$length; 
-- 53 - 
-                 $c += $number/$length 
+- 54 - 
+ 
+                $c += $number/$length 
             } 
         } 
     } 
@@ -2279,5 +2370,3 @@ columns.
     ($num_rows, $num_cols); 
 } 
 # ------------------------------------------------------------------------- 
-- 54 - 
- 

@@ -1,3 +1,5 @@
+2 
+ 
 Abstract 
  
 The project is about understanding how user behaviour affects power consumption. There is 
@@ -49,8 +51,9 @@ answer research questions leading to the following discoveries:
  
  
  
-2 
- Acknowledgements 
+3 
+ 
+Acknowledgements 
  
 I would like to thank my supervisor, Chris Preist, for his indispensable advice and guidance 
 throughout this project. 
@@ -101,8 +104,9 @@ Finally I would like to thank my parents for believing in me and for loving me u
  
  
  
-3 
- Contents table 
+4 
+ 
+Contents table 
  
 Declaration           1 
 Abstract           2 
@@ -118,7 +122,7 @@ Acknowledgements          3
 3 Methodology          10 
  3.1 Software         10 
   3.1.1 Programming and API       10 
-  3.1.2 Software design        11 
+  3.1.2 Software design       11 
   3.1.3 Issues, problems and difficulties      13 
   3.1.4 Software deployment       14 
  3.2 User trials         15 
@@ -153,8 +157,9 @@ C Appendix C: finalisation sheet
  
  
  
-4 
-  
+5 
+ 
+ 
 1 Aims and objectives 
  
 The project has two main aims. The first one is to design and develop a software application that can 
@@ -205,8 +210,9 @@ trials
  
  
  
-5 
-  
+6 
+ 
+ 
 2 Literature review 
  
 This chapter only states the important papers from the literature research and gives a short insight 
@@ -257,8 +263,9 @@ application windows without switching between them.
  
 There were other papers that were included in the research which had similar findings to the papers 
 referenced above, as well as some papers which provided ideas for the development and 
-6 
- implementation of the tracking application. One of the papers develops a tracking application which 
+7 
+ 
+implementation of the tracking application. One of the papers develops a tracking application which 
 collects information on all user activity in order to improve the design of video games, in the sense 
 that it does not only collect information on the processes that are running, but collects information 
 on all user initiated events (Kim, 2008). Another paper built on the methods and findings of 
@@ -294,13 +301,12 @@ overhead. Teehan reaches the conclusion that the best approach is to avoid inclu
 in his calculations, so the overhead is distributed amongst all the tasks. Following is the equation 
 given by Teehan’s paper on the impact share of a task t on device d. 
  
-? ? ? ? (? ,? )
+???? ?????? ?? , ? =  
+????(?? , ?)
+ ????(?? ,?)
 ?
-? ? ? ? ? ? ? ? ? ? ? ,? =  
-?
-?
- ? ? ? ? (? ,? )
-? =1 ?
+?=1
+ 
 Equation 1. Impact of a user’s task (process or group of processes) 
  
 Equation 1 can be modified by looking at the user behaviour impact, firstly the user (positive) 
@@ -308,26 +314,24 @@ impact, which means the active time that the user spent on a task t, secondly th
 which means the inactive time during which task t runs. The negative impact can be calculated as a 
 difference between the first two equations or as a standalone equation, using the idle/inactive time. 
  
-? ? ? ? ? ? ? ? ? ? (? ,? )
+???? ?????? ?? , ? =  
+?????? ????(?? , ?)
+ ????(?? ,?)
 ?
-? ? ? ? ? ? ? ? ? ? ? ,? =  
-?
-?
- ? ? ? ? (? ,? )
-? =1 ?
+?=1
+ 
  
 Equation 2. Positive impact of the user 
  
  
-7 
- ? ? ? ? ? ? ? ? ? ? ? ? (? ,? )
-?
-? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ,? =  
-? ?
+8 
  
-? ? ? ? (? ,? )
+???????? ?????? ?? , ? =  
+???????? ????(?? , ?)
+ ????(?? ,?)
 ?
-? =1
+?=1
+ 
  
 Equation 3. Negative impact of the user 
  
@@ -358,8 +362,7 @@ utilisation, the memory model which is however design specifically for virtual m
 model which again is designed specifically for virtual machines and a model for other components. 
 Both Da Costa and Kansal give a generalised power model which includes all of these components.  
  
-? ? ? ? ? = ? + ? ? ? ? ? + ? ? ? ? ? ? ? ? + ? ? ? ? ? ? + ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? 
-1 2 3 4
+????? =  ? + ?1 ? ??? +  ?2 ? ?????? + ?3 ? ???? + ?4 ? ??????? ????????? 
  
 Equation 4. Power model proposed by Da Costa 
  
@@ -378,8 +381,9 @@ derived from the completed user trials and on other experiments.
  
  
  
-8 
- 2.4 Research analysis 
+9 
+ 
+2.4 Research analysis 
  
 This chapter explains why the mentioned papers are relevant to this project and gives the decisions 
 based on them. It contains decisions taken towards what the tracking application needs to gather 
@@ -429,8 +433,9 @@ add a new entry every time “focus” is changed from one process to another. This 
 the amount of gathered data is much larger. Because of this absence, there is need for some further 
 assumptions in the data analysis which will be discussed later. 
  
-9 
- Based on the papers from Beauvisage and Barata, the data analysis consists of statistically analysing 
+10 
+ 
+Based on the papers from Beauvisage and Barata, the data analysis consists of statistically analysing 
 processes in terms of usage, activity and grouping into tasks, as well as analysing the users involved 
 in the trials in terms of activities. 
  
@@ -481,8 +486,9 @@ was the most suitable for this project.
  
  
  
-10 
- 3.1.2 Software design 
+11 
+ 
+3.1.2 Software design 
  
 The application was designed as a Windows Forms application, which is an event driven graphical 
 application. This means that the user’s interaction to the tracking application is through a graphic 
@@ -530,8 +536,9 @@ exited.
  
  
  
-11 
- PInvoke 
+12 
+ 
+PInvoke 
  
  
 Add to registry 
@@ -582,8 +589,9 @@ completely exit the application (from the system tray icon).
  
  
  
-12 
- runProgram() 
+13 
+ 
+runProgram() 
 while (check program is running) 
  get focused process 
  get list of processes 
@@ -634,8 +642,9 @@ the application.
  
 The application also needed to contain a configuration file in order to work on any computer. This 
 configuration file meant that any user trying to run the application on his computer needed to install 
-13 
- the .NET framework version 4.0. In the end this did not prove a problem, since most participants in 
+14 
+ 
+the .NET framework version 4.0. In the end this did not prove a problem, since most participants in 
 the user trials already had the framework installed, while the others managed to install it without a 
 problem. 
  
@@ -686,8 +695,9 @@ Studio 2010, the IDE that was used for developing the tracking application. This
 files that were needed for the tracking application to work on any computer (such as the icon file, 
 the application configuration file, the SQLite DLL file) were compiled into a Windows Installer setup 
 file. Once the installation package was ready it was sent to the participants in the user trials. As 
-14 
- mentioned before, some of them were required to install the .NET framework in order to run the 
+15 
+ 
+mentioned before, some of them were required to install the .NET framework in order to run the 
 application. This proved very easy, since the Visual Studio setup package has a built-in option that 
 gives directions on how to install the .NET framework, which means that even inexperienced users 
 were able to install both the framework and the application without any problems. 
@@ -738,8 +748,9 @@ data, the users with concerns accepted to participate in the trials.
  
  
  
-15 
- 4 Data analysis and results 
+16 
+ 
+4 Data analysis and results 
  
 The data analysis consisted of two parts. The first one regards the data analysis of the user trials, 
 which looks at understanding user behaviour and on building interesting statistics about it. It also 
@@ -790,8 +801,9 @@ as a small test and the small amount of data gathered from that test was not use
 analysis or in the statistics. The crashes column represents crashes in terms of the tracking 
 application, not in terms of the operating system. The crashes for the two users were mentioned in a 
 previous chapter about software issues. 
-16 
- 4.2 Assumptions 
+17 
+ 
+4.2 Assumptions 
  
 A large part of the data analysis consists of assumptions since there is a large amount of data, but 
 much information about how the processes were used. This is because gathering information about 
@@ -841,8 +853,9 @@ applications that are generally left in the background to wait for an event to h
 receiving a message or downloading a file. As mentioned before it depends on the interaction 
 between the user and these applications. 
  
-17 
- There are situations in which some processes can be ignored. It happens when multiple instances of 
+18 
+ 
+There are situations in which some processes can be ignored. It happens when multiple instances of 
 an application are open. This usually happens with Internet browsers and means that there are 
 several tabs opened in the browser. The focus is kept by the process that opened the browser in the 
 first place (therefore the original tab), which means that the rest of the processes belonging to the 
@@ -858,8 +871,7 @@ percentages.
  
 4.3 Analysis methods 
  
-th
-In terms of raw numbers, the gathered results from the 14 users (excepting the 15 user which was 
+In terms of raw numbers, the gathered results from the 14 users (excepting the 15th user which was 
 a test on a virtual machine) summed up to 84027 process entries. However some of these entries 
 were not useful for the data analysis. The way the tracking application works is that it compares the 
 list of running processes to the list of processes in the database once every 2 seconds. Including the 
@@ -892,38 +904,62 @@ second category involves processes with which the user does not interact directl
 user in various tasks. The first category is the one that sparks most interest and the one that shows 
 most of the user’s behaviour. The next table further splits the processes we are interested in into 
 smaller categories. 
-18 
-  
+19 
+ 
+ 
 Category Description Examples 
-antivirus software that usually runs in adaware.exe, avp.exe, 
-the background to protect the avastui.exe, msascui.exe, etc. 
+antivirus software that usually runs in 
+the background to protect the 
 computer 
-browsers internet browsers and firefox.exe, 
-additional components or falshplayerplugin.exe, 
-plugins iexplore.exe, java.exe, etc. 
+adaware.exe, avp.exe, 
+avastui.exe, msascui.exe, etc. 
+browsers internet browsers and 
+additional components or 
+plugins 
+firefox.exe, 
+falshplayerplugin.exe, 
+iexplore.exe, java.exe, etc. 
 download download managers azureus.exe, strongdc.exe, etc. 
-games computer games either played angrybrids.exe, aoeonline.exe, 
-locally or online solitaire.exe, etc. 
-multimedia software for local or online itunes.exe, dropbox.exe, 
-media access photoshop.exe, winamp.exe, 
+games computer games either played 
+locally or online 
+angrybrids.exe, aoeonline.exe, 
+solitaire.exe, etc. 
+multimedia software for local or online 
+media access 
+itunes.exe, dropbox.exe, 
+photoshop.exe, winamp.exe, 
 etc. 
-messaging software for online messaging skype.exe, outlook.exe, 
-and the associated trays, yahoomessenger.exe, 
-includes email ymsgr_tray.exe, etc. 
-network software used for network wireshark.exe, connectify.exe, 
-management etc. 
-office software similar to the MS excel.exe, winrar.exe, 
-Office suite, editors and other isoburn.exe, etc. 
+messaging software for online messaging 
+and the associated trays, 
+includes email 
+skype.exe, outlook.exe, 
+yahoomessenger.exe, 
+ymsgr_tray.exe, etc. 
+network software used for network 
+management 
+wireshark.exe, connectify.exe, 
+etc. 
+office software similar to the MS 
+Office suite, editors and other 
 management software 
-programming mostly programming software, devenv.exe, eclipse.exe, 
-also includes other software arcmap.exe, etc. 
+excel.exe, winrar.exe, 
+isoburn.exe, etc. 
+programming mostly programming software, 
+also includes other software 
 used for various work 
-remote access software used for connectivity amazonclouddrive.exe, 
-and remote access nxclient.exe, teamviewer.exe 
-system various software used either by datacardmonitor.exe, cmd.exe, 
-the system or in support to sidebar.exe, taskmgr.exe, 
-other applications, also system vuauclt.exe, etc. 
+devenv.exe, eclipse.exe, 
+arcmap.exe, etc. 
+remote access software used for connectivity 
+and remote access 
+amazonclouddrive.exe, 
+nxclient.exe, teamviewer.exe 
+system various software used either by 
+the system or in support to 
+other applications, also system 
 management software 
+datacardmonitor.exe, cmd.exe, 
+sidebar.exe, taskmgr.exe, 
+vuauclt.exe, etc. 
 virtual machine virtual machines setups vmware-tray.exe, 
 xencenter.exe, etc. 
 viruses malicious software e.exe, freeklogger.exe 
@@ -944,8 +980,9 @@ consumption of the device. Like games, processes that are running for multimedia
 need of more resources and lead to greater power consumption. Like the download category, the 
 messaging category contains software that usually sits in the background either running a 
 communication or being idle. Although analysing network power consumption is not important to 
-19 
- the project, the network category provides software applications that can give interesting details. 
+20 
+ 
+the project, the network category provides software applications that can give interesting details. 
 After browsers and messaging software, office and programming contain the most used software 
 applications. They are usually used for work purposes. Since most of the participants are either 
 studying or working in an IT environment, the category is named programming, although it contains 
@@ -996,8 +1033,9 @@ user is also active in terms of multimedia and messaging. In terms of background
 are much less then for the previous user, which means smaller power consumption. Generally 
 applications are only used when needed and there is a small amount of “garbage” processes. 
  
-20 
- User 3 spends most of his time on the Internet as well, but compared to user 2, the amount of 
+21 
+ 
+User 3 spends most of his time on the Internet as well, but compared to user 2, the amount of 
 inactive time is higher. Other activities include playing games and working on special applications 
 designed for archaeology surveys. From the gathered data it is obvious that the user leaves 
 applications running for long periods of time, in some situations leaving the computer without 
@@ -1048,8 +1086,9 @@ opportunities for the assumptions to be applied, here the data was more ambiguou
 undertaken were simple, without obvious window switching, so both the initial ratio and the final 
 ratio were smaller than average. This meant that the user provided a high level of inactivity. 
  
-21 
- User 11 was similar to user 10, because the tasks undertaken were simple, mainly Internet browsing 
+22 
+ 
+User 11 was similar to user 10, because the tasks undertaken were simple, mainly Internet browsing 
 and document viewing (possibly studying purposes). Changes were made in regards to messaging 
 and media viewing. 
  
@@ -1083,22 +1122,8 @@ lead to a high activity ratio.
  
  
  
-22 
- 100
-90
-80
-70
-60
-50
-original
-40
-modified
-30
-20
-10
-0
-user user user user user user user user user user user user user user user 
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+23 
+ 
  
  
 Table 4. Active time to focused time ratio 
@@ -1112,8 +1137,11 @@ keyboard which cannot be noticed by the tracking application. At the other end i
 cannot access information about what the processes are doing, the inactivity of the user remained 
 uncertain. 
  
- background idle time power duration sleep/hibernate shut down 
-processes management 
+ background 
+processes 
+idle time power 
+management 
+duration sleep/hibernate shut down 
 user 1 high high medium 18 days 9 3 
 user 2 low low good 14 days 19 15 
 user 3 low high bad 21 days 41 5 
@@ -1132,8 +1160,52 @@ user 15 medium low good 18 days 11 8
  
 Table 5. Analysis of user behaviour in terms of power managing 
  
-23 
- Table 5 requires some additional explanations. The first column concerns background processes (the 
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+100
+user 
+1
+user 
+2
+user 
+3
+user 
+4
+user 
+5
+user 
+6
+user 
+7
+user 
+8
+user 
+9
+user 
+10
+user 
+11
+user 
+12
+user 
+13
+user 
+14
+user 
+15
+original
+modified
+24 
+ 
+Table 5 requires some additional explanations. The first column concerns background processes (the 
 system processes are excluded). Some users have applications on their systems which start at 
 system start-up and run in the background continuously. These applications can be plug-ins, add-
 ons, quick access system trays, updaters or messaging clients. Except the messaging clients which 
@@ -1182,8 +1254,9 @@ Another pattern derived from the analysis is accessing multimedia content on the
 watching a video or listening to music. Here it will be interesting to see the differences between 
 actively using the application and running it in the background. 
  
-24 
- Most of the participants in the trials have used one form of Internet messaging. Here it will be 
+25 
+ 
+Most of the participants in the trials have used one form of Internet messaging. Here it will be 
 interesting to test the difference between communicating through classical input (mouse and 
 keyboard) and communicating through a webcam. 
  
@@ -1204,38 +1277,52 @@ transferring the files.
 After the user trials were finished, the participants were asked to give some details that are needed 
 for this part of the analysis. 
  
- device brand os sleep or monitor 
-hibernate shutdown 
-u1 laptop Acer Travelmate windows 7 ultimate sleep 10 min 
+ device brand os sleep or 
+hibernate 
+monitor 
+shutdown 
+u1 laptop Acer Travelmate 
 5744G 
-u2 laptop Toshiba Satellite windows 7 sleep 10 min 
-L550 professional sp1 
+windows 7 ultimate sleep 10 min 
+u2 laptop Toshiba Satellite 
+L550 
+windows 7 
+professional sp1 
+sleep 10 min 
 u3 laptop Dell XPS L511 windows 7 hibernate 15 min 
 u4 laptop HP Pavilion dv6 windows 7 sleep n/a 
 u5 virtual machine n/a windows xp n/a n/a 
 u6 laptop HP dv7-6150ev windows 7 sp1 sleep 5 min 
-u7 laptop HP Pavilion dm4 windows 7 home sleep 5 min 
+u7 laptop HP Pavilion dm4 windows 7 home 
 premium sp1 
-u8 pc n/a windows 7 home n/a 20 min 
+sleep 5 min 
+u8 pc n/a windows 7 home 
 premium sp1 
-u9 laptop HP Presario CQ57 windows 7 home hibernate 15 min 
+n/a 20 min 
+u9 laptop HP Presario CQ57 windows 7 home 
 premium sp1 
+hibernate 15 min 
 u10 laptop Sony VCPEB11 windows 7 sp1 sleep 10 min 
-u11 laptop Samsung P469 windows 7 sleep 5 min 
+u11 laptop Samsung P469 windows 7 
 professional sp1 
+sleep 5 min 
 u12 laptop Dell Studio 1747 windows 7 sp1 sleep 10 min 
-u13 pc n/a windows xp n/a 20 min 
+u13 pc n/a windows xp 
 professional sp3 
-u14 laptop Lenovo b560 windows 7 home sleep 10 min 
+n/a 20 min 
+u14 laptop Lenovo b560 windows 7 home 
 premium sp1 
-u15 laptop Acer 5739G windows 7 hibernate 5 min 
+sleep 10 min 
+u15 laptop Acer 5739G windows 7 
 professional sp1 
+hibernate 5 min 
  
 Table 6. Systems used in user trials (with power options) 
  
  
-25 
-  
+26 
+ 
+ 
 A PC desktop in general consumes more power than a laptop. It is interesting to note that both PC 
 users, based on tables 5 and 6, do not have sleep or hibernate mode activated. Also they have the 
 longest idle time for the monitor to go off. This shows that just by changing some settings on the 
@@ -1286,8 +1373,9 @@ Power in idle 7.91 W 19.5 W
 Typical 40 W 48 W 
  
 Table 8. Laptop specifications 
-26 
-  
+27 
+ 
+ 
 The device which was used to monitor power consumption is a “Watts Up? PRO”. The meter 
 monitors power consumption and sends the data through a USB cable to the computer, where the 
 data is displayed as a table and a graph (Watts Up, 2012).  
@@ -1338,8 +1426,9 @@ minutes 1 and 3 and unfocused (minimised) for minutes 2 and 4. This time the gra
 the difference between the two types of playing. When the media player was focused, the 
 consumption averaged 25 W, when it was unfocused, it averaged 24 W. Of course when changing 
 between focused and unfocused there are spikes in the power consumption. 
-27 
-  
+28 
+ 
+ 
  
  
  
@@ -1390,8 +1479,9 @@ tasks which involved graphics, the consumption remained low, around 25 W.
  
  
  
-28 
-  
+29 
+ 
+ 
  
  
  
@@ -1442,8 +1532,9 @@ webcam. This increased the consumption considerably.
  
 Image 5. Graph showing the first two stages of the test creating similar power consumptions, while 
 the last stage increases consumption considerably due to the addition of the webcam 
-29 
- power in off 0.8 W power with browser (download) 30 W 
+30 
+ 
+power in off 0.8 W power with browser (download) 30 W 
 power in sleep 1.5 W window switching 35 W 
 power in idle (monitor off) 14.5 W power with music 25 W 
 power in idle 19.5 W power with video 35 W 
@@ -1494,8 +1585,9 @@ highest consumption average for the patterns, while user 8 had the lowest.
  
  
  
-30 
- 5 Conclusion 
+31 
+ 
+5 Conclusion 
  
 Power consumption depends on many factors, user behaviour being one of the most important and 
 decisive. Through raising awareness, user behaviour can improve; therefore power consumption can 
@@ -1546,8 +1638,9 @@ consumption will remain unpredictable, but the near future can only bring better
  
  
  
-31 
- 5.2 Future work 
+32 
+ 
+5.2 Future work 
  
 In terms of the tracking application there are many ideas and designs which can be applied. The first 
 improvement can be the missing function to treat each “computer usage session” on its own. This 
@@ -1598,8 +1691,9 @@ that are resource intensive, such as games, image, audio and video editors.
  
  
  
-32 
- 6 Reference list 
+33 
+ 
+6 Reference list 
  
 Beauvisage, T. (2009) ‘Computer usage in daily life’ In Proceedings of the 27th international 
 conference on Human factors in computing systems. Held April 4-9 2009 in Boston, USA 
@@ -1609,13 +1703,11 @@ of the International Working Conference on Advanced Visual interfaces. Held May 
 Italy 
  
 Brdiczka, O. (2010) ‘From documents to tasks: deriving user tasks from document usage patterns’ In 
-th
-Proceedings of the 15 international conference on Intelligent user interfaces. Held February 7-10 in 
+Proceedings of the 15th international conference on Intelligent user interfaces. Held February 7-10 in 
 Hong Kong, China 
  
 Tak, S. and Cockburn, A. (2009) ‘Window watcher: a visualization tool for understanding windowing 
-st
-activities’ In Proceedings of the 21 Annual Conference of the Australian Computer-Human 
+activities’ In Proceedings of the 21st Annual Conference of the Australian Computer-Human 
 interaction Special interest Group. Held November 23-27 in Melbourne, Asutralia 
  
 Kim, J.H., Gunn, D.V., Schuh, E.,Phillips, B., Pagulayan, R.J. and Wixon, D. (2008) ‘Tracking real-time 
@@ -1643,8 +1735,7 @@ applications’ In Proceedings of the 11th IEEE/ACM International conference on Gr
 October 25-28 2010 in Brussels, Belgium 
  
 Smith, J.W., Khajeh-Hosseini, A., Ward, J.S. and Sommerville I. (2011) ‘CloudMonitor: Profiling 
-th
-applications and predicting power usage’ In Proceedings of the IEEE 5 International Conference on 
+applications and predicting power usage’ In Proceedings of the IEEE 5th International Conference on 
 Cloud Computing. Held June 24-29 in Honolulu, USA 
  
 Kansal, A., Zhao, F., Liu, J., Kothari, N. and Bhattacharya, A.A. (2010) ‘Virtual machine power 
@@ -1653,8 +1744,9 @@ metering and provisioning.’ In Proceedings of the 1st ACM symposium on Cloud Com
  
 Bryman, A. and Bell, E. (2007) Business research methods. New York: Oxford University Press 
  
-33 
- W3Schools (2012) OS Statistics [online] available from 
+34 
+ 
+W3Schools (2012) OS Statistics [online] available from 
 <http://www.w3schools.com/browsers/browsers_os.asp> 
  
 MSDN (2012) Walkthrough: Calling Windows APIs (Visual Basic) [online] available from 
@@ -1705,8 +1797,9 @@ Watts Up (2012) Watts Up? [online] available from
  
  
  
-34 
- Appendix A: Code 
+35 
+ 
+Appendix A: Code 
  
 using System; 
 using System.Collections.Generic; 
@@ -1789,8 +1882,9 @@ Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\R
  
                         row["value"] = 1; 
  
-35 
-                         row.EndEdit(); 
+36 
+ 
+                        row.EndEdit(); 
                     } 
                 } 
  
@@ -1823,7 +1917,7 @@ namespace ActiveWin
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param> 
         protected override void Dispose(bool disposing) 
         { 
-            if (disposing && (components != null)) 
+            if (disposing && (components = null)) 
             { 
                 components.Dispose(); 
                 this.icon.Dispose(); 
@@ -1875,8 +1969,9 @@ namespace ActiveWin
             this.Text = "Form1"; 
             this.ResumeLayout(false); 
  
-36 
-         } 
+37 
+ 
+        } 
  
         #endregion 
  
@@ -1961,8 +2056,9 @@ namespace ActiveWin
             //if running at shutdown, restaart automatically 
             if (init == 1) 
             { 
-37 
-                 stop.Enabled = true; 
+38 
+ 
+                stop.Enabled = true; 
                 run.Enabled = false; 
  
                 Hide(); 
@@ -2046,8 +2142,9 @@ namespace ActiveWin
             sql_cmd.ExecuteNonQuery(); 
  
             //initialise States table 
-38 
-             sql_cmd.CommandText = "CREATE TABLE IF NOT EXISTS States (crt INTEGER, name VARCHAR(50), start 
+39 
+ 
+            sql_cmd.CommandText = "CREATE TABLE IF NOT EXISTS States (crt INTEGER, name VARCHAR(50), start 
 VARCHAR(100)," + 
                 "end VARCHAR(100), closed INTEGER, PRIMARY KEY (crt));"; 
             sql_cmd.ExecuteNonQuery(); 
@@ -2099,7 +2196,7 @@ VARCHAR(100)," +
                         foreach (DataRow row in dt4.Rows) 
                         { 
                             if (((Convert.ToInt32(row["closed"])) == 0) && 
-(now1.ToString(format).CompareTo(row["start"]) != 0)) 
+(now1.ToString(format).CompareTo(row["start"]) = 0)) 
                             { 
                                 DateTime l = GetLastSystemShutdown(); 
  
@@ -2132,8 +2229,9 @@ VARCHAR(100)," +
  
                                     row.EndEdit(); 
  
-39 
-                                     sql_cmd.CommandText = "INSERT INTO States (crt,name,start,end,closed) " + 
+40 
+ 
+                                    sql_cmd.CommandText = "INSERT INTO States (crt,name,start,end,closed) " + 
                                         "VALUES (NULL,'powerSuspended',?,?,1);"; 
  
                                     SQLiteParameter para2 = sql_cmd.CreateParameter(); 
@@ -2218,8 +2316,9 @@ VARCHAR(100)," +
 (p.ProcessName.CompareTo(currentProcess.ProcessName) == 0)) 
                                 { 
                                     //check if user is idle 
-40 
-                                     int idle = GetLastInputTime(); 
+41 
+ 
+                                    int idle = GetLastInputTime(); 
  
                                     sfocus = row["focus"].ToString(); 
                                     focus = Convert.ToDouble(sfocus); 
@@ -2304,8 +2403,9 @@ VARCHAR(100)," +
                         { 
                             row.BeginEdit(); 
  
-41 
-                             row["closed"] = 0; 
+42 
+ 
+                            row["closed"] = 0; 
  
                             row.EndEdit(); 
                         } 
@@ -2390,8 +2490,9 @@ VARCHAR(100)," +
                 foreach (DataRow row in dt2.Rows) 
                 { 
                     if ((row["name"].ToString().CompareTo("running") == 0) && (Convert.ToInt32(row["value"]) == 1)) 
-42 
-                     { 
+43 
+ 
+                    { 
                         row.BeginEdit(); 
  
                         row["value"] = 0; 
@@ -2411,7 +2512,7 @@ VARCHAR(100)," +
         { 
             IntPtr handle = GetForegroundWindow(); 
  
-            return handle != null ? GetProcessByHandle(handle) : null; 
+            return handle = null ? GetProcessByHandle(handle) : null; 
         } 
  
         private static Process GetProcessByHandle(IntPtr handle) 
@@ -2469,8 +2570,9 @@ VARCHAR(100)," +
  
  
  
-43 
- Appendix B: participation sheet 
+44 
+ 
+Appendix B: participation sheet 
  
 This is the read me file for the ActiveWin application. 
  
@@ -2521,8 +2623,9 @@ Thank you for your cooperation, Andrei Mocanu
  
  
  
-44 
- Appendix C: finalisation sheet 
+45 
+ 
+Appendix C: finalisation sheet 
  
 What to do: 
  
@@ -2550,5 +2653,3 @@ Additional things I would like to know about your computer (useful for my thesis
  - after how much time does your display/monitor turn off? 
  
 If you have any questions or are unsure how to do any of the tasks, please contact me. 
-45 
- 

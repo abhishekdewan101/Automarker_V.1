@@ -1,3 +1,5 @@
+3 
+ 
 Contents 
 1 EXECUTIVE SUMMARY .................................................................................................................... 8 
 2 AIMS, OBJECTIVES AND THESIS ORGANIZATION. ............................................................................. 8 
@@ -33,8 +35,9 @@ variations and the degradation on their performance must be observed. ..........
 6 DESIGNS UNDER PROCESS VARIATIONS ........................................................................................ 24 
 6.1 INVERTER RING OSCILLATORS ................................................................................................ 25 
 6.2 TRIODE CELL .......................................................................................................................... 29 
-3 
- 6.3 SYMMETRIC LOAD DIFFERENTIAL RING OSCILLATORS ............................................................ 33 
+4 
+ 
+6.3 SYMMETRIC LOAD DIFFERENTIAL RING OSCILLATORS ............................................................ 33 
 6.4 LC VCO ................................................................................................................................... 37 
 6.5 CHAPTER CONCLUSION .......................................................................................................... 39 
 7 PROCESS VARIATION AWARE VCO ................................................................................................ 40 
@@ -68,8 +71,9 @@ APPENDIX A 180 NM ..............................................................
  
  
  
-4 
- TABLE OF TABLES 
+5 
+ 
+TABLE OF TABLES 
 Table 3-0-1: VCO parameters performance ...................................................................................... 10 
 Table 6-0-1: starved inverter performance parameters.................................................................... 25 
 Table 6-0-2: starved current VCO under corner cases ...................................................................... 27 
@@ -114,8 +118,9 @@ cell. ..........................................................................
  
  
  
-5 
- TABLE OF FIGURES 
+6 
+ 
+TABLE OF FIGURES 
 Figure 3--0-1: Illustration of VCO concept ........................................................................................ 10 
 Figure 3-0-2: LC tank schematic ....................................................................................................... 11 
 Figure 3-0-3: Varactor representation.............................................................................................. 12 
@@ -160,8 +165,9 @@ Figure 0-8 .....................................................................
 Figure 7-0-9 ..................................................................................................................................... 46 
 Figure 7-0-10 ................................................................................................................................... 48 
 Figure 7-0-11: .................................................................................................................................. 48 
-6 
- Figure 7-0-12: process variations sensor connected to the differential amplifier .............................. 50 
+7 
+ 
+Figure 7-0-12: process variations sensor connected to the differential amplifier .............................. 50 
 Figure 7-0-13 ................................................................................................................................... 50 
 Figure 7-0-14: DC analysis showing that the differential amplifier is unaffected by process variations
 ........................................................................................................................................................ 51 
@@ -200,8 +206,9 @@ Figure 7-16: schematic of symmetric cell when multiple currents are applied ....
  
  
  
-7 
- 1 EXECUTIVE SUMMARY 
+8 
+ 
+1 EXECUTIVE SUMMARY 
 Over the past decades semiconductors technologies has suffered an extreme scale down, fact that 
 continues nowadays, recently the scale down has reached the impressive number of 22 nm process 
 node (critical dimensions of transistor). CMOS technology has been used to reach such a reduction in 
@@ -241,8 +248,9 @@ For the appropriate completion of this project two main aims need to be achieved
 mentioned that the time is not sufficient to achieve all the specific characteristics for a USB 
 3.0 implementation and achieve aim two as well, but the VCO must achieve a frequency of 5 
 GHz and possess low noise   
-8 
- 2. The investigation of this VCO under process variations and a possible solution that would 
+9 
+ 
+2. The investigation of this VCO under process variations and a possible solution that would 
 make the VCO aware of process variations and therefore its performance would be 
 unaffected as much as possible due to process variations that might occur. 
 In order to achieve these aims 4 objectives must be achieved 
@@ -278,8 +286,9 @@ Chapter 6 shows all the VCOs that were design in this project, their respective 
 are included as well, this chapter includes as well the design’s results of the VCOs under process 
 variations, this chapter is very important to understand the effects that process variations can cause 
 on different VCO. 
-9 
- Chapter 7 combined with chapter 6 are the most important chapters in this project, chapter 7 
+10 
+ 
+Chapter 7 combined with chapter 6 are the most important chapters in this project, chapter 7 
 presents 2 different solutions to the process variation problem, two different solutions that can be 
 attached to different VCOs and produce a small but important improvement in the process variation 
 area. 
@@ -288,55 +297,47 @@ Chapter 8 and 9 present a conclusion and possible future work
 3 BACKGROUND  
 3.1 VCO 
 A VCO is an electronic oscillator whose oscillatory frequency is controlled by an input DC voltage 
- , VCOs are used in application such as PLL, frequency synthesizers or function generators, in 
-    
-figure 3.1 it can be observe this concept, the output   is a non-perfect periodic sinusoidal signal, 
-   
-  can be expressed in equation 3.1, where    is a fixed phase and   is the amplitude,  is the 
-      
-angular carrier frequency that can be expressed in equation 3.2, where   is the center frequency, all 
- 
-this parameters ( ,   and  )  are dependent on many design parameters that can involve active 
-  
+     , VCOs are used in application such as PLL, frequency synthesizers or function generators, in 
+figure 3.1 it can be observe this concept, the output      is a non-perfect periodic sinusoidal signal, 
+     can be expressed in equation 3.1, where    is a fixed phase and    is the amplitude,   is the 
+angular carrier frequency that can be expressed in equation 3.2, where    is the center frequency, all 
+this parameters (  ,   and   )  are dependent on many design parameters that can involve active 
 and passive devices, by configuring these parameters the VCO performance can be configure as well. 
  
- ( )     (    )   (   )     ( )    ( )   (   )  
-                
+    ( )       (      )   (   )      (     )      (     )   (   )  
  
-V
-O
-F  (Hz)
-c
-V
-V
-tune out
-V (volts)
-tune
-t
-VCO
-B) C)
-A)
  
 Figure 3--0-1: Illustration of VCO concept 
  
  
-Table 3-0-1: VCO parameters performance 
  
-parameter Unit
  
+ 
+ 
+ 
+VCO
+Vtune Vout
+t
+VO
+tuneV
+F  (Hz)
+(volts)
+A) B) C)
+c
 Center frequency MHz or GHz
 Tuning range GHz or MHz
- 
 jitter Seconds @ frequency
- Phase noise dBc/Hz @offset [KHz]
+Phase noise dBc/Hz @offset [KHz]
 VCO-Gain MHz/V
- 
-2
 area µ m
 Supply voltage V
+parameter Unit
 Power consumption mW
-10 
- There are many parameters that are consider at the time of designing a VCO, these can be 
+2
+Table 3-0-1: VCO parameters performance 
+11 
+ 
+There are many parameters that are consider at the time of designing a VCO, these can be 
 summarize in table 3.1, the main parameters are center frequency, tuning range, phase noise, power 
 consumption and area.   
  
@@ -347,29 +348,21 @@ way that oscillation is achieved, one is called LC oscillators and the other is 
 LC oscillators achieve a signal oscillation through a resonant tank composed by passive devices 
 (inductor and capacitor) building a parallel resonant tank; this is symbolized in figure 3.2. The carrier 
 frequency can be calculated by equation 3.3, where   is the inductance and   is the capacitance. 
- 
-           (3.3) 
+   
  
 √  
- 
-C
- 
- 
-v
-tune
- 
-L
+         (3.3) 
  
  
-R
  
  
-Figure 3-0-2: LC tank schematic 
  
-The capacitance   is proportional to the input voltage   and as expressed in equation 3.3 the 
-    
-carrier frequency   is dependent on the capacitance, this way a voltage control oscillator can be 
  
+ 
+ 
+ 
+The capacitance   is proportional to the input voltage       and as expressed in equation 3.3 the 
+carrier frequency    is dependent on the capacitance, this way a voltage control oscillator can be 
 achieved, it must be mentioned that not only the variable capacitance   tunes the oscillation 
 frequency but also the parasitic and inductor capacitances. LC oscillators can achieve high center 
 frequencies, low phase noise and low power consumption, on the other hand, their tuning range is 
@@ -379,59 +372,40 @@ inductance   are not implemented with passive components due to their high area 
 problems and it needs to be explained how they are implemented in order for a proper 
 understanding on how process variations affect them. 
  
-11 
- 3.2.1.1 CAPACITANCE INMPLEMENTATION THROUGH VARACTORS 
+C
+L
+R
+v tune
+Figure 3-0-2: LC tank schematic 
+12 
+ 
+3.2.1.1 CAPACITANCE INMPLEMENTATION THROUGH VARACTORS 
 MOS inversion mode varactors are voltage-controlled capacitors which are widely used to create on 
 chip capacitances [3] and have been used for a long time [4]. Varactors are implemented by shorting 
-the source and drain regions and applying a tuning voltage   to them (figure 3.3b), this tuning 
-    
+the source and drain regions and applying a tuning voltage       to them (figure 3.3b), this tuning 
 voltage varies the depletion region, which at the same time varies the depletion region capacitance 
-  which is in series with the gate oxide capacitance  , observe figure 3.3.a for a graphical 
-   
-representation of this. The varactor capacitance   can be calculated with equation 3.4, it is clear 
+   which is in series with the gate oxide capacitance    , observe figure 3.3.a for a graphical 
+representation of this. The varactor capacitance    can be calculated with equation 3.4, it is clear 
+the importance of the parameter    . 
  
-the importance of the parameter  . 
   
+ 
+ 
    
-        (3.4) 
-   
-    
  
  
-V
-gate
-V V
-tune tune
- 
-+
-poly
-N
-V
- 
-drain
-tune
-source
-C
-ox
- 
-+
-+
-N
-N
-d
-C
-d
- 
-G
- 
-s
--
-p
+  
+      (3.4) 
  
  
-a) b)
  
-Figure 3-0-3: Varactor representation 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -446,38 +420,53 @@ induced by the alternating current flowing through the conducting metal layers, 
 density B is the responsible for this magnetic field. 
   In spiral inductors, the distinction between fabrication process parameters and design parameters 
 must be made.  
-12 
- ? Process parameters: 
+Figure 3-0-3: Varactor representation 
+N
++ N
++
+N
++
+C
+d
+Cox
+p -
+Vtune Vtune
+Vgate
+poly
+drain source
+d
+s
+G
+a) b)
+Vtune
+13 
+ 
+? Process parameters: 
 1. Oxide thickness 
 2. Substrate resistivity 
 3. Number of metal layers 
 4. Thickness   and composition of metal layers. 
 ? Design parameters: 
 1. Number of turns,   
-2. Metal width,   
+2. Metal width,  
 3. Edge to edge spacing between adjacent metal,   
-4. Outer or inner diameter,   and   
-     
-5. Number of sides,   
+4. Outer or inner diameter,      and     
+5. Number of sides,  
  
 Spiral inductors can be implemented in different geometries, on figure 3.4b it can be seen the most 
 used one, square or “Manhattan”, due to its layout simplicity and low cost, there are more efficient 
 geometries such as hexagonal or octagonal, or circular which is the most effective one. 
  
-w
-Metal traces
-E
-E 3
-2 oxide
+oxide
 substrate
-s
-d
-in
+Metal traces
 B
-E
-1
-d
-out
+E1
+E2
+E3
+w
+dout
+dins
 d
 A) B)
  
@@ -485,38 +474,44 @@ Figure 3-0-4
  
 From equation 3.5 it can be calculated the inductance of a square spiral inductance [7] with an error 
 margin of 8%, from this equation it is clear that the inductance is highly dependent on process 
-parameter   (metal thickness), which can suffer a variation of       on the fabrication process due 
+parameter   (metal thickness), which can suffer a variation of      on the fabrication process due 
 to chemical – mechanical polishing [7].    
  
   
- 
-   (  (    ))     (3.5) 
-( )
-      
-( ) ( ) ( )
-                    (3.6) 
   
- 
-13 
   
+ (  (
+ 
+ (   )
+    ))     (3.5) 
+  (    )    (    ) (   )    (3.6) 
+ 
+14 
+ 
+ 
  3.2.2 RING OSCILLATORS 
 Another way to implement an oscillation signal is by cascading individual   delay cells creating a 
+delay path with a negative feedback of     , this can be seen in figure 3.5, the frequency    is 
+calculated by the total time of the delay path, with equation 3.7 this can be done were    is the 
+delay of each individual cell, and  is the number of delay cells.                                                                
  
-delay path with a negative feedback of    , this can be seen in figure 3.5, the frequency   is 
+   
  
-calculated by the total time of the delay path, with equation 3.7 this can be done were   is the 
- 
-delay of each individual cell, and   is the number of delay cells.                                                                
- 
- 
-       (3.7)   
- 
-     
- 
+      
+    (3.7)   
+DELAY
+CELL
+1
+DELAY
+CELL
+2
+DELAY
+CELL
+3
+DELAY
+CELL
+N
 DELAY PATH
-DELAY DELAY DELAY DELAY
-CELL CELL CELL CELL
-1 2 3 N
  
 Figure 3--0-5: Ring oscillator schematic 
  
@@ -536,8 +531,9 @@ probability of any variations has increased considerable, this fact simply intro
 nowadays is not only required to model a nano-scale system for worst case process corners 
 scenarios, but to be tolerant to different process variation that may occur during fabrication, process 
 variations can be categorized in two categories.    
-14 
- 1. Inter-die variations: these come from lot-to-lot, wafer-to-wafer and within the wafer, these 
+15 
+ 
+1. Inter-die variations: these come from lot-to-lot, wafer-to-wafer and within the wafer, these 
 variations affects every device in the system by equal, such problems can be random 
 residuals or wafer die interactions, these problems are described in detail in [5] 
 2. Intra die variations: these affect the device dopant density, geometry, circuit timing or gate 
@@ -558,8 +554,7 @@ to RDF in 65nm technology.
 2. Line edge and Line width roughness (LER and LWR): these are just a simple deviation of an 
 ideal straight line structure which is created in the lithography step, this concept is 
 illustrated in figure 3.6b, in [8] it has been proved that this problem only starts when the 
-gate length is 80 nm or below, this problem affects directly  .  
- 
+gate length is 80 nm or below, this problem affects directly   .  
  
 3. Gate dielectric variations: these are variations on the metal gate used for MOS devices, 
 variations in gate oxide thickness, fixed charge or interface traps, physical variations of these 
@@ -576,21 +571,17 @@ Base line
 A) B)
  
 Figure 3-0-6: a) the decrement of the number of dopants [5],    b)LER and LWR illustration 
-15 
- 3.3.1 PROCESS VARIATION ON LC OSCILLATORS 
+16 
+ 
+3.3.1 PROCESS VARIATION ON LC OSCILLATORS 
 Process variations in this case can be separated 2 categories: 
-1. capacitance: the varactor capacitance   (equation 3.4) is highly dependent on the gate 
- 
-oxide capacitance  , which is dependent on the oxide thickness as equation 3.8 shows 
-  
- 
-  
-         (3.8) 
-  
- 
-  
-Oxide thickness   is dependent on the gate length which can suffer a variation of     , 
-  
+1. capacitance: the varactor capacitance    (equation 3.4) is highly dependent on the gate 
+oxide capacitance   , which is dependent on the oxide thickness as equation 3.8 shows 
+    
+   
+   
+       (3.8) 
+Oxide thickness     is dependent on the gate length which can suffer a variation of     , 
 [6], looking back at equation 3.3 it can be seen the importance of this variation. 
  
 2. Planar inductor: The inductance produce by a planar inductor can vary up to      [7] due 
@@ -602,26 +593,21 @@ effects, the LC tank is not a good approach mainly to the inductance.
 3.3.2 PROCESS VARIATIONS ON RING OSCILLATORS 
 As ring oscillators are created only with MOS transistors two main parameters are the major 
 contributors to VCO performance degradation, this is easily seen from equation 3.9, this is the drain 
-current of any MOS device, clear is the dependency to the parameters   and  , which as 
-   
+current of any MOS device, clear is the dependency to the parameters     and   , which as 
 described before suffer a huge variation due to process variations. 
  
  
- 
-  
- 
-  (   )        (3.9)     
-    
-  
-  
    
- 
-        (3.10)    
- 
   
  
  
  
+(      )
+        (3.9)     
+   
+     
+   
+      (3.10)    
  
  
  
@@ -632,8 +618,11 @@ described before suffer a huge variation due to process variations.
  
  
  
-16 
- A(V,jw)
+ 
+ 
+ 
+17 
+ 
 4 DESIGN METHODOLOGY  
 4.1 VCO DESIGN THEORY   
 4.1.1 BARKHAUSEN OSCILLATOR THEORY 
@@ -642,136 +631,121 @@ amplifier   and a feedback network  , the amplifier   is characterize by the tra
  (    ) were   represents the input amplitude and    the angular frequency, on the same way the 
 feedback network transfer function is  (    ).  
  
-F(V,jw)
-V
  
-F
-V
-out
  
-V
-A
  
-V
-∑ 
-in
  
-Figure 4-0-1: Barkhausen feedback model 
  
 If both parts, amplifier and feedback network, are linear systems, both expressions can be simplified 
 to  (  ) and  (  ), then we find 
-   (  )      (4.1) 
-    
+      (  )       (4.1) 
 and  
-   (  )       (4.2) 
-    
+    (  )           (4.2) 
 where  
-           (4.3) 
-    
+               (4.3) 
 the complete transfer function of the system is  
-  (  )
+    
    
-      (4.4) 
-( )
-       (  )
-  
+ 
+ (  )
+   (  ) (  )
+     (4.4) 
 This system is unstable if  
-| ( )|
-   |( (  )|       (4.5) 
+| (  )||( (  )|        (4.5) 
 Barkhausen criteria states that long as the system is unstable the oscillation amplitude will grow[11], 
 this specifies that if the gain Is greater 1 the output amplitude of the system will grow indefinitely, in 
 reality this amplitude will reach a saturation at some point and it will become stable. 
 The conclusion of this analysis is that two conditions need to be met for the system to oscillate. 
 1. The open loop amplitude gain of the system should be equal or greater than 1. 
+2. The feedback network needs to create a phase change of     . 
+VF
+A
+(V
+,jw
+)
+F(V,jw)
+∑ 
+Vout
+Vin
+VA
+Figure 4-0-1: Barkhausen feedback model 
+18 
  
-2. The feedback network needs to create a phase change of    . 
-17 
-  
+ 
 4.1.2 N STAGE RING OSCILLATOR 
  
--Gm
--Gm -Gm
-R R C R
-C C
+-Gm -Gm -Gm
+R C R C R C
  
 Figure 4-0-2: 3 stage ring oscillator 
 Looking at figure 4.2 it can be seen a 3 stage ring oscillator where the total delay line is the sum of 
 each delay stage where each stage delay can be found by 
-       (  /C) 
-     
- 
-Where the – represent a phase shift of    of the input, 
- 
+            (  /C) 
+Where the – represent a phase shift of     of the input, 
+           
   
-       
-         
-     
  
-      
-  
    
+  
+ 
+   
+  
+    
+      
+ 
 As an open loop transfer function  
-        
-                       
- 
+                               
+         (
     
-    ( ) 
-     
       
+)
+ 
+ 
 From this we can see that an N stage ring oscillator will have a delay of  
- 
+         (
     
-    ( ) 
-     
       
+)
+ 
+ 
 The condition above is satisfied if the number of stages is odd, in case of even number of stages 
 the total delay would be  
- 
+        (
     
-   ( ) 
-     
       
+)
  
-As stated before the phase change of the entire loop needs to be    , this states the next two 
+ 
+As stated before the phase change of the entire loop needs to be     , this states the next two 
 facts: 
 1. If single ended stages are used then it is required for the number of stages to be odd. 
 2. If double ended stages are used then the number of stages can be either odd or even. 
-18 
- 4.1.4 NON IDEAL OSCILLATORS 
+19 
+ 
+4.1.4 NON IDEAL OSCILLATORS 
 The theories presented before are only for ideal oscillators, in reality physical design has to account 
 for distortions on the output, because of these distortions different effects need to be analyse and 
 minimize through the design process. 
 4.1.4.1 PHASE NOISE AND JITTER 
 A perfect oscillator will have a perfect sinusoidal output that can be described as 
-      [      ] 
-     
-where   is the amplitude,   is the center frequency and   is a fixed phase, but in reality the output 
-  
+          [       ] 
+where    is the amplitude,    is the center frequency and   is a fixed phase, but in reality the output 
 signal is 
-[ ]
-   ( )       ( ) 
-     
-where   is a periodic function and there are fluctuations in the parameters  ( ) and   ( ), in terms 
- 
-of frequency domain this will create a symmetrical distribution of   [12] this is called phase noise, 
- 
+       ( ) [       ( )] 
+where   is a periodic function and there are fluctuations in the parameters   ( ) and   ( ), in terms 
+of frequency domain this will create a symmetrical distribution of    [12] this is called phase noise, 
 observe figure 4.3a for frequency domain representation and 4.3b for time domain, the Jitter is the 
 phase noise in terms of time domain. The lower the jitter the better the performance of a VCO. 
  
+tF
 Power 
-Signal 
-? f
-c
-density
-amplitude
+density ? fc
+cf
 ? T
-t
-F
-f
-c
+Signal 
+amplitude
 Frequency domain Time domain
-A)
-B)
+A) B)
  
 Figure 4-0-3 
  
@@ -784,8 +758,9 @@ variations and as devices get smaller this source of noise becomes more importan
 contributor to the noise [13]. 
  
   
-19 
-   
+20 
+ 
+  
 4.2 VCO PERFORMANCE MEASUREMENT 
 Various VCO designs are presented in this dissertation, it is important that all of them reach a 
 practical performance, for this reason a practical performance of a USB 3.0 was chosen for this 
@@ -807,34 +782,33 @@ performing monte carlo simulations.
 All the designs need to be tested not only for corner cases, but for multiple process variations and 
 the effects that these variations have on different technologies, it has been explained that 
 performance degradation of a system due to process variations is mostly due to the random 
-variations of oxide thickness   and threshold voltage  , therefore, this project focuses on the 
-   
+variations of oxide thickness     and threshold voltage   , therefore, this project focuses on the 
 manipulation of these two parameters. Every device in Cadence Virtuoso has a technology file, this 
 file contains up to 40 parameters for CMOs technologies, these parameters dictate the behaviour of 
 the device, by having access to these technology files a Monte Carlo simulation can be written and 
-performed where parameters   and   are varied through a Gaussian distribution, on figure 4.4 it 
-   
+performed where parameters     and    are varied through a Gaussian distribution, on figure 4.4 it 
 can be seen a flow chart of this procedure. 
+ 
+ 
+ 
+ 
  
  
 TECHNOLOGY 
 FILE
- 
-EDXL
-PROCESS
- 
-MONTE
-VARIATIONS 
-CARLO
-RESULT
- 
-SIMULATION
- 
 IC 
 DESIGN
+EDXL
+MONTE
+CARLO
+SIMULATION
+PROCESS
+VARIATIONS 
+RESULT
 Figure 4.-0-4: process variations simulation flow chart  
-20 
-  
+21 
+ 
+ 
 Process variations is a wide area to investigate, plus this project is also trying to design a system that 
 is aware of them, therefore, this project is focusing only in inter-die variations, in other words, 
 variations that occur by the same proportion to all the devices in the system, from now on every 
@@ -853,188 +827,140 @@ The inverter is the simplest form of delay cell, schematic can be seen in figure
 simple CMOS inverter, the delay of each cell is determined by the charging and discharging of the RC 
 network where this RC network is a function of the parasitic capacitance and resistance of the MOS 
 technology, figure 5.1b, this delay is calculated by equation 5.1, where the total capacitance is 
-dependent on the variant parameter gate oxide capacitance   . 
-  
+dependent on the variant parameter gate oxide capacitance     . 
  
  
-VDD
  
-VDD
  
-I
-D
  
-I
-D
-OUTPUT
  
-OUTPUT
-INPUT
  
-I
  
-D
-I
-D
+ 
+ 
  
 CONTROL VOLTAGE
- 
-a)
-b)
- 
-Figure 5-0-1: a) simple inverter schematic.   b) single stage VCO 
-21 
-  
+OUTPUT
 VDD
- 
-OUTPUT
- 
-OUTPUT
-INPUT R
-OUT
-INPUT
-C
-TOT
- 
- 
- 
+ID
+ID
+INPUT OUTPUT
+DI
+ID
+VDD
 a) b)
-Figure 5-0-2:  a) inverter schematic  b) small signal representation of the output node 
+Figure 5-0-1: a) simple inverter schematic.   b) single stage VCO 
+22 
  
  
-          (5.1) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                 (5.1) 
+     
+   
+  
+         
+              (
+ 
+ 
+)      (         )                        
+Going back to equation 3.7 where 
        
  
-  
-           
-   
- 
- 
- 
-( ) ( )
-                                      
-              
- 
-Going back to equation 3.7 where 
- 
-             
- 
-     
- 
+      
+       
 by rearranging we obtain  
+   
+  
+          
+       
+ 
+Where    
+   
+  
  
  
+ 
+(      )
          
- 
-     
-     
- 
-Where   
- 
- 
-  
- 
-  (   )        
-    
-  
-  
    
- 
-                     
- 
-  
-It is clear the dependency of the oscillation frequency to supply voltage  , the oxide thickness 
-  
- , and threshold voltage  , this particular VCO design is called starved VCO because the inverters 
+     
    
+                   
+It is clear the dependency of the oscillation frequency to supply voltage   , the oxide thickness 
+   , and threshold voltage   , this particular VCO design is called starved VCO because the inverters 
 are starved for current. 
- 
-It is required to have an odd number of stages in order to obtain a phase change of     in all the 
+It is required to have an odd number of stages in order to obtain a phase change of      in all the 
 delay path.  
  
  
-22 
-  
+VDD
+INPUT OUTPUT
+INPUT
+OUTPUT
+a) b)
+R
+OUT
+C
+TOT
+Figure 5-0-2:  a) inverter schematic  b) small signal representation of the output node 
+23 
+ 
+ 
 5.1.2 DOUBLE ENDED OR DIFFERENTIAL CELLS 
 Another way to implement delay cells is by differential op amps (figure 5.3) with different 
 configurations, where each delay cell must have a gain of 1 or greater, the total phase change across 
- 
-the delay path must be    , with this configuration it is possible to have even and odd number of 
+the delay path must be     , with this configuration it is possible to have even and odd number of 
 stages, this is due to the fact that each differential delay cell can produce a phase shift of the input 
-  
-of     and    . 
+of      and     . 
  
-_ _
-_
  
-+ +
-+
-_ _
-_
-+ +
  
-+
  
-Figure 5-0-3: differential amplifier schematic 
  
 As the single ended ring oscillator, the time delay of each stage is dependent on parasitic 
 capacitance and resistance, where the resistance is controlled by the current applied to the cell, this 
 way of creating time delays is called resistive loads, figure 5.4a there are different ways of creating 
 resistive loads, in figure 5.4b it can be seen what is called the triode load, this load is very sensitive 
-to power supply variations  , the resistance in this case is determined by the size of the MOS 
-  
+to power supply variations    , the resistance in this case is determined by the size of the MOS 
 devices and the control voltage. 
 Another way is by is shown in figure 5.4C, these are called symmetric loads, as it can be seen this 
 configuration is no more than a two current sources with resistive loads, symmetric loads are less 
 sensitive to power supply changes due to their high impedance, on the other hand their frequency 
 range is shorter as the devices need to be in saturation in order to function correctly. 
  
-23 
++
+_
++
+_
++
+_
++
+_
++
+_
++
+_
+Figure 5-0-3: differential amplifier schematic 
+24 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   
-VDD
  
- 
-R R
- 
-out out
-1 2
-input
-input
-2
-1
- 
- 
-Bias
- 
-VDD
-VDD
-A) resistive Loads
- 
-Control
-Control
-voltage
-voltage
- 
-out
-out
-out
-1
-2 1 out
-2
- 
-input
-2 input
-1
-input input
-2 1
-  
-Bias current
-Process
-control
- 
-C) symmetric
-B) Triode
-Figure 5-0-1: different ways of performing resistive loads 
  
 6 DESIGNS UNDER PROCESS VARIATIONS 
 In this section, all the described designs in the previous section are tested under corner cases and 
@@ -1049,54 +975,75 @@ performance degradation due to corner cases is quite similar.
  
  
  
-24 
- 6.1 INVERTER RING OSCILLATORS 
+Bias
+out
+2
+out
+1
+R R
+Control
+voltage
+out
+1
+Bias current
+VDD
+input 1
+input2
+Control
+voltage
+VDD
+input1input2
+out
+2 out1
+Process
+control
+out 2
+input
+2 input 1
+VDD
+C) symmetricB) Triode
+A) resistive Loads
+Figure 5-0-1: different ways of performing resistive loads 
+25 
+ 
+6.1 INVERTER RING OSCILLATORS 
 This is the first design to be investigated; the complete schematic can be seen in figure 6.1, this 
-design has a good voltage swing from   to ground due to the last stage, in table 6.1, it is listed a 
-  
+design has a good voltage swing from     to ground due to the last stage, in table 6.1, it is listed a 
 performance summary of this design, the frequency range in this design is considerably high, this can 
 be seen in figure 6.2 where the oscillation frequency response to the control voltage is plotted, the 
 response is significantly linear. The cycle to cycle jitter is more than acceptable with a 0.1265% 
 standard deviation. This design can be achieved with a low amount of transistors (only 12) compared 
 with the other designs.  
  
-VDD
  
  
  
-OUTPUT
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
 CONTROL VOLTAGE
- 
- 
-Figure 6-0-1: starved current VCO 
- 
- 
- 
-Table 6-0-1: starved inverter performance 
-parameters 
- 
+OUTPUT
+VDD
 Frequency range 0.21 – 5GHz
 Voltage range 0.2 – 1.5 Volts
- 
 current 120 µA
 Supply voltage 1.2 Volts
- Jcc 253 fsec. @ 5.1GHz
+Jcc 253 fsec. @ 5.1GHz
 Phase noise @ 100KHz offset -54 dBc
 Phase noise @ 100MHz offset -114 dBc
 transistors 12
-25 
- oscillation frequency  
-6.00
-5.00
-4.00
-3.00
-2.00
-1.00
-0.00
-0 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6
-input voltage 
+Figure 6-0-1: starved current VCO 
+Table 6-0-1: starved inverter performance 
+parameters 
+26 
+ 
  
 Figure 6-0-2: starved inverter frequency response 
  
@@ -1112,83 +1059,130 @@ of these 2 parameters from their established values in the technology files, the
 are performed with a Gaussian distribution. 
 ? Average frequency: the average VCO oscillation frequency from the 100 sample test run. 
 ? Frequency variations in percentage: this is the average deviation of the VCO oscillation 
-frequency from the average frequency due to the   and   variations. 
-    
-As an example, in table 6.3, when    and   are varied 30% with a Gaussian distribution, we can 
-    
-see an average frequency of 3.99 GHz, where this frequency can suffer a deviation of       .   
+frequency from the average frequency due to the     and     variations. 
+As an example, in table 6.3, when      and     are varied 30% with a Gaussian distribution, we can 
+see an average frequency of 3.99 GHz, where this frequency can suffer a deviation of      .   
  
  
-26 
+0.00
+1.00
+2.00
+3.00
+4.00
+5.00
+6.00
+0 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6
+Fr
+e
+q
+u
+e
+n
+cy
+ in
+ G
+H
+z 
+input voltage 
+oscillation frequency  
+27 
  
-Frequency in GHz Table 6-0-2: starved current VCO under corner cases 
-90 nm.
-Corner case SS SF FS FF
-Frequency range 0.21 – 3.4GHz 0.21 – 5GHz 0.2 – 4.2GHz 0.21 – 6.5GHz
-Voltage range 0.2 – 1.5 Volts 0.2 – 1.5 Volts 0.2 – 1.5 Volts 0.2 – 1.5 Volts
-current 88 µA 135 µA 100 µA 171 µA
-Supply voltage 1.2 Volts 1.2 Volts 1.2 Volts 1.2 Volts
-Jcc 360 fsec. @ 3.4GHz 261 fsec. @ 5GHz 285 fsec. @ 4.1GHz 193 fsec. @ 6.5GHz
-Phase noise @ 100KHz offset -65 dBc -64 dBc -54 dBc -52 dBc
--125 dBc -124 dBc -114 dBc -112 dBc
+Table 6-0-2: starved current VCO under corner cases 
+Frequency range
+Voltage range
+current
+Supply voltage
+Jcc
+Phase noise @ 100KHz offset
 Phase noise @ 100MHz offset
-transistors 12 12 12 12
+Corner case
+transistors
+90 nm.
+0.21 – 3.4GHz
+0.2 – 1.5 Volts
+88 µA
+1.2 Volts
+360 fsec. @ 3.4GHz
+-65 dBc
+-125 dBc
+SS
+12
+0.21 – 5GHz
+0.2 – 1.5 Volts
+135 µA
+1.2 Volts
+261 fsec. @ 5GHz
+-64 dBc
+-124 dBc
+SF
+12
+0.2 – 4.2GHz
+0.2 – 1.5 Volts
+100 µA
+1.2 Volts
+285 fsec. @ 4.1GHz
+-54 dBc
+-114 dBc
+FS
+12
+0.21 – 6.5GHz
+0.2 – 1.5 Volts
+171 µA
+1.2 Volts
+193 fsec. @ 6.5GHz
+-52 dBc
+-112 dBc
+FF
+12
  
  
 Table 6-0-3: starved current VCO under process variations simulation. 
-STARVED INVERTER 90 NM TECHNOLOGY
 Oxide thickness and threshold 
-5% 10% 20% 30%
 voltage variations
+5% 10% 20% 30%
 Frequency variations in 
-±  2.5 % ±  5.2% ±  11.34% ±  22.2%
 percentage
+±  2.5 % ±  5.2%  ±  11.34% ±  22.2%
 Mean frequency 4.4 4.3 4.23 3.99
+STARVED INVERTER 90 NM TECHNOLOGY
  
 Apart from the process variations, the deviation of the oscillation frequency due variations in 
-  
-temperature and voltage supply  was experimented, temperature was varied from     to     
-  
+temperature and voltage supply    was experimented, temperature was varied from    
+  to      
 and voltage supply      , the results can be seen in figure 6.3 for temperature variation and in 
 figure 6.4 for voltage variation. It is clear from these results that the VCO performance is highly 
 dependent on these 2 parameters, specially to temperature variations.      
-oscillation variation due to temperature 
-variations 
-8.00E+09
-7.00E+09
-6.00E+09
-temp = 120
-5.00E+09
-temp = 80
-4.00E+09
-temp = 40
-3.00E+09
-temp = 0
-2.00E+09
-1.00E+09 temp = -40
-0.00E+00
-0 0.5 1 1.5 2
-input voltage 
  
 Figure 6-0-3: starved current VCO frequency response at different temperatures. 
  
-27 
- 
-frequency   
-oscillation variation due to supply voltage 
-variations 
-6.00E+09
-5.00E+09
-4.00E+09
-Vdd = 1.2
-3.00E+09
-Vdd = 1.08
-2.00E+09
-Vdd = 1.32
-1.00E+09
 0.00E+00
-0 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6
+1.00E+09
+2.00E+09
+3.00E+09
+4.00E+09
+5.00E+09
+6.00E+09
+7.00E+09
+8.00E+09
+0 0.5 1 1.5 2
+fr
+e
+q
+u
+en
+cy
+  
 input voltage 
+oscillation variation due to temperature 
+variations 
+temp = 120
+temp = 80
+temp = 40
+temp = 0
+temp = -40
+28 
+ 
+ 
  
 Figure 6-0-4: starved current VCO frequency response under different power supply voltages 
  
@@ -1197,27 +1191,80 @@ Because of the single ended nature of this design, the DC component on the outpu
 due to this fact, the harmonic 0 is higher than other designs. 
  
  
-Phase noise starved current 90 nm 
-frequency in Hz 
-4.00E+09 2.00E+09 0.00E+00 -2.00E+09 -4.00E+09
-0
--20
--40
--60
--80
--100
--120
--140
--160
--180
  
 Figure 6-0-5: phase noise analysis of starved current VCO 
-28 
+0.00E+00
+1.00E+09
+2.00E+09
+3.00E+09
+4.00E+09
+5.00E+09
+6.00E+09
+0 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6
+Fr
+e
+q
+u
+e
+n
+cy
  
-Frequency 
-Spectral output (Vrms) (dBc)  
+input voltage 
+oscillation variation due to supply voltage 
+variations 
+Vdd = 1.2
+Vdd = 1.08
+Vdd = 1.32
+-180
+-160
+-140
+-120
+-100
+-80
+-60
+-40
+-20
+0
+-4.00E+09-2.00E+090.00E+002.00E+094.00E+09
+Sp
+e
+ct
+ra
+l o
+u
+tp
+u
+t (
+V
+rm
+s)
+ (d
+B
+c)
+ 
+frequency in Hz 
+Phase noise starved current 90 nm 
+29 
+ 
+ 
  
 Frequency in Hz
+Sp
+ec
+tr
+al
+ o
+u
+tp
+u
+t 
+(V
+rm
+s)
+ (
+d
+B
+c)
  
 Figure 6-0-6: harmonics of starved current VCO 
  
@@ -1235,135 +1282,195 @@ sensitive to variations in supply voltage, figure 6.8 shows this. In terms of mo
 process variations the frequency degradation is very similar to the one in the starved inverter design, 
 table 6.6 shows these results. The results for the noise analysis under normal conditions can be seen 
 in figures 6.10 and 6.11. 
-29 
+30 
  
-Spectral output (Vrms) (dBc)VDD
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+Frequency range
+Voltage range
+current
+Supply voltage
+Jcc
+Phase noise @ 100KHz offset
+Phase noise @ 100MHz offset
+Corner case
+transistors
+90 nm.
+3.7 – 0.27GHz
+0 – 0.85 Volts
+250 µA
+1.2 Volts
+137 fsec. @ 3.6GHz
+-66dBc
+-126 dBc
+SS
+26
+5.5 – 0.55GHz
+0 – 0.85 Volts
+250 µA
+1.2 Volts
+264 fsec. @ 5.4GHz
+-66 dBc
+-127
+SF
+36
+4.25 – 0.34GHz
+0 – 0.85 Volts
+150 µA
+1.2 Volts
+128 fsec. @ 4.3GHz
+-64 dBc
+-125 dBc
+FS
+36
+6.2 – 0.67GHz
+0 – 0.85 Volts
+150 µA
+1.2 Volts
+98 fsec. @ 6.2GHz
+-64 dBc
+-124 dBc
+FF
+36
+triode
+ 
+Table 6-0-5: triode VCO under corner cases 
  
 Control
 voltage
- 
+VDD
+input1input2
 out
-out
-2
-1
- 
-input input
-2 1
- 
- 
+2 out1
 Process
 control
- 
- 
-Figure 6-0-7: triode delay cell 
- 
-  
-Table 6-0-4: triode VCO performance parameters 
-90 nm
- 
-triode
 Frequency range 5 – 0.46GHz
 Voltage range 0 – 0.85 Volts
 current 250 µA
 Supply voltage 1.2 Volts
 Jcc 232 fsec. @ 5.1GHz
 Phase noise @ 100KHz offset -64 dBc
--124 dBc
-Phase noise @ 100MHz offset
+Phase noise @ 100MHz offset -124 dBc
 transistors 36
 triode
-90 nm.
-Corner case SS SF FS FF
-Frequency range 3.7 – 0.27GHz 5.5 – 0.55GHz 4.25 – 0.34GHz 6.2 – 0.67GHz
-Voltage range 0 – 0.85 Volts 0 – 0.85 Volts 0 – 0.85 Volts 0 – 0.85 Volts
-current 250 µA 250 µA 150 µA 150 µA
-Supply voltage 1.2 Volts 1.2 Volts 1.2 Volts 1.2 Volts
-Jcc 137 fsec. @ 3.6GHz 264 fsec. @ 5.4GHz 128 fsec. @ 4.3GHz 98 fsec. @ 6.2GHz
-Phase noise @ 100KHz offset -66dBc -66 dBc -64 dBc -64 dBc
-Phase noise @ 100MHz offset -126 dBc -127 -125 dBc -124 dBc
-transistors 26 36 36 36
+90 nm
+Figure 6-0-7: triode delay cell 
+Table 6-0-4: triode VCO performance parameters 
+31 
  
-Table 6-0-5: triode VCO under corner cases 
- 
-30 
- Table 6-0-6: triode VCO under process variations results. 
-TRIODE CELL 90 NM TECHNOLOGY
-Oxide thickness and threshold 
-5% 10% 20% 30%
-voltage variations
-Frequency variations in 
-±  1.8 % ±  3.7% ±  10.04% ±  22.08%
-percentage
-Center frequency in GHz 5 5.036 4.87 4.5
+Table 6-0-6: triode VCO under process variations results. 
  
  
  
-frequency oscillation variation due to 
-supply voltage variation 
-6.00
-5.00
-4.00
-vdd = 1.08 V.
-3.00
-2.00 vdd = 1.2 V.
-1.00 Vdd = 1.32 V.
-0.00
-0 0.2 0.4 0.6 0.8 1 1.2
-control voltage 
  
 Figure 6-0-8: triode frequency response at different voltage supply. 
  
-oscillation frequency variation due to 
-temperature variations 
-7.00
-6.00
-5.00
-temp = -40
-4.00
-temp = 0
-3.00
-temp = 40
-2.00
-temp = 80
-1.00
-0.00 temp = 120
-0 0.2 0.4 0.6 0.8 1
-control voltage 
  
 Figure 6-0-9: triode VCO frequency response at different temperatures  
-31 
+Oxide thickness and threshold 
+voltage variations
+5% 10% 20% 30%
+Frequency variations in 
+percentage
+±  1.8 % ±  3.7%  ±  10.04% ±  22.08%
+Center frequency in GHz 5 5.036 4.87 4.5
+TRIODE CELL 90 NM TECHNOLOGY
+0.00
+1.00
+2.00
+3.00
+4.00
+5.00
+6.00
+0 0.2 0.4 0.6 0.8 1 1.2
+fr
+e
+q
+u
+en
+cy
+ in
+ G
+H
+z 
+control voltage 
+frequency oscillation variation due to 
+supply voltage variation 
+vdd = 1.08 V.
+vdd = 1.2 V.
+Vdd = 1.32 V.
+0.00
+1.00
+2.00
+3.00
+4.00
+5.00
+6.00
+7.00
+0 0.2 0.4 0.6 0.8 1
+fr
+e
+q
+u
+en
+cy
+ in
+ G
+H
+z 
+control voltage 
+oscillation frequency variation due to 
+temperature variations 
+temp = -40
+temp = 0
+temp = 40
+temp = 80
+temp = 120
+32 
  
-frequency in GHz frequency in GHz harmonics triode load 90 nm
+-40
+-35
+-30
+-25
+-20
+-15
+-10
+-5
 0
 0 5 10 15 20 25
--5
--10
--15
--20
--25
--30
--35
--40
+Sp
+e
+ct
+ra
+l 
+o
+u
+tp
+u
+t 
+(V
+rm
+s)
+ (
+d
+B
+c)
 frequency in GHz
+harmonics triode load 90 nm
  
 Figure 6-0-10: Triode VCO harmonics. 
  
  
  
-Noise spectral output 
-frequency offset in Hz 
-4.00E+09 2.00E+09 0.00E+00 -2.00E+09 -4.00E+09
-0
--20
--40
--60
--80
--100
--120
--140
--160
--180
  
 Figure 6-0-11: Triode VCO phase noise analysis. 
  
@@ -1371,10 +1478,38 @@ Figure 6-0-11: Triode VCO phase noise analysis.
  
  
  
-32 
+-180
+-160
+-140
+-120
+-100
+-80
+-60
+-40
+-20
+0
+-4.00E+09-2.00E+090.00E+002.00E+094.00E+09
+Sp
+ec
+tr
+a
+l o
+u
+tp
+u
+t 
+(V
+rm
+s)
+ (d
+B
+c)
  
-Spectral output (Vrms) (dBc) 
-Spectral output (Vrms) (dBc) 
+frequency offset in Hz 
+Noise spectral output 
+33 
+ 
+ 
 6.3 SYMMETRIC LOAD DIFFERENTIAL RING OSCILLATORS 
 This design was chosen for investigation due to its known high quality [10], this design achieves a 
 lower frequency range compared with previous designs; this is translated into a more linear 
@@ -1394,114 +1529,164 @@ In terms of power supply and temperature variations, results can be seen in figu
 explained before this design suffers less degradation in terms of power supply variations. 
  
  
-VDD
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 Control
- 
 voltage
- 
- input
-2
- 
 Process
 control
- 
- 
-Figure 6-0-12: symmetric delay cell 
- 
-Table 6-0-7: Symmetric VCO performance 
-parameters 
+VDD
+input2
 Frequency range 5 – 2.4GHz
- 
 Voltage range 0 – 0.85 Volts
 current 150 µA
- 
 Supply voltage 1.5 Volts
 Jcc 197 fsec. @ 5GHz
- 
 Phase noise @ 100KHz offset -60 dBc
--120 dBc
-Phase noise @ 100MHz offset
+Phase noise @ 100MHz offset -120 dBc
 transistors 36
+Figure 6-0-12: symmetric delay cell 
+Table 6-0-7: Symmetric VCO performance 
+parameters 
+34 
  
- 
-33 
- Table 6-0-8: Symmetric VCO under corner cases 
-symmetric
-90 nm.
-Corner case SS SF FS FF
+Table 6-0-8: Symmetric VCO under corner cases 
 Frequency range
-3.6 – 2.8GHz 5.6 – 2.6GHz 4 – 2.6GHz 6.3 – 3.5GHz
-Voltage range 0 – 0.85 Volts 0 – 0.85 Volts 0 – 0.85 Volts
+Voltage range
+current
+Supply voltage
+Jcc
+Phase noise @ 100KHz offset
+Phase noise @ 100MHz offset
+Corner case
+transistors
+90 nm.
+3.6 – 2.8GHz
 0 – 0.85 Volts
-current 150 µA 150 µA 150 µA 150 µA
-Supply voltage 1.5 Volts 1.5 Volts 1.5 Volts 1.5 Volts
-Jcc 245 fsec. @ 3.8GHz 256 fsec. @ 5.4GHz 210 fsec. @ 3.9GHz 98 fsec. @ 6.2GHz
-Phase noise @ 100KHz offset -62dBc -40 dBc -66 dBc -64 dBc
-Phase noise @ 100MHz offset -122 dBc -100 dBc -120 dBc -124 dBc
-transistors 36 36 36 36
+150 µA
+1.5 Volts
+245 fsec. @ 3.8GHz
+-62dBc
+-122 dBc
+SS
+36
+5.6 – 2.6GHz
+0 – 0.85 Volts
+150 µA
+1.5 Volts
+256 fsec. @ 5.4GHz
+-40 dBc
+-100 dBc
+SF
+36
+4 – 2.6GHz
+0 – 0.85 Volts
+150 µA
+1.5 Volts
+210 fsec. @ 3.9GHz
+-66 dBc
+-120 dBc
+FS
+36
+150 µA
+1.5 Volts
+98 fsec. @ 6.2GHz
+-64 dBc
+-124 dBc
+FF
+36
+symmetric
+6.3 – 3.5GHz
+0 – 0.85 Volts
  
  
  
 Table 6-0-9: symmetric VCO under process variations analysis  
-SYMMETRIC CELL 90 NM TECHNOLOGY
 Oxide thickness and threshold 
-5% 10% 20% 30%
 voltage variations
+5% 10% 20% 30%
 Frequency variations in 
-±  1.36 % ±  2.9% ±  7.6% ±  17.08%
 percentage
+±  1.36 % ±  2.9%  ±  7.6% ±  17.08%
 Center frequency in GHz 5.14 5.1 4.1 4.8
+SYMMETRIC CELL 90 NM TECHNOLOGY
  
  
  
-oscillation frequency variation due to 
-temperature variations 
-7.00
-6.00
-5.00
-temp = -40
-4.00
-temp = 0
-3.00
-temp = 40
-2.00
-temp = 80
-1.00
-0.00
-temp = 120
-0 0.2 0.4 0.6 0.8 1
-control voltage 
  
 Figure 6-0-13: symmetric VCO frequency response at different temperatures 
  
  
-34 
- 
-Frequency in GHz  
- 
-oscillation frequency variation due to 
-supply voltage variations 
-6.00
-5.00
-4.00
-3.00 Vdd = 1.35
-2.00 Vdd = 1.5
-1.00 Vdd = 1.65
 0.00
+1.00
+2.00
+3.00
+4.00
+5.00
+6.00
+7.00
 0 0.2 0.4 0.6 0.8 1
+Fr
+e
+q
+u
+en
+cy
+ in
+ G
+H
+z 
 control voltage 
+oscillation frequency variation due to 
+temperature variations 
+temp = -40
+temp = 0
+temp = 40
+temp = 80
+temp = 120
+35 
+ 
+ 
+ 
  
 Figure 6-0-14: symmetric VCO frequency response under different power supply voltages 
  
-Harmonics symmetric load 90 nm
+-50
+-40
+-30
+-20
+-10
 0
 0 5 10 15 20 25
--10
--20
--30
--40
--50
+Sp
+e
+ct
+ra
+l 
+o
+u
+tp
+u
+t 
+(V
+rm
+s)
+ (
+d
+B
+c)
 frequency in GHz
+Harmonics symmetric load 90 nm
  
 Figure 6-0-15: symmetric VCO harmonics 
  
@@ -1509,23 +1694,35 @@ Figure 6-0-15: symmetric VCO harmonics
  
  
  
-35 
+0.00
+1.00
+2.00
+3.00
+4.00
+5.00
+6.00
+0 0.2 0.4 0.6 0.8 1
+fr
+e
+q
+u
+e
+n
+cy
+ in
+ G
+H
+z 
+control voltage 
+oscillation frequency variation due to 
+supply voltage variations 
+Vdd = 1.35
+Vdd = 1.5
+Vdd = 1.65
+36 
  
-frequency in GHz 
-Spectral output (Vrms) (dBc) 
  
-noise analysis symmetric load 90 nm 
-Frequency offset in Hz 
-4.00E+09 2.00E+09 0.00E+00 -2.00E+09 -4.00E+09
-200
-150
-100
-50
-0
--50
--100
--150
--200
+ 
  
 Figure 6-0-16: symmetric VCO phase noise analysis 
  
@@ -1542,9 +1739,37 @@ Figure 6-0-16: symmetric VCO phase noise analysis
  
  
  
-36 
+-200
+-150
+-100
+-50
+0
+50
+100
+150
+200
+-4.00E+09-2.00E+090.00E+002.00E+094.00E+09
+Sp
+e
+ct
+ra
+l o
+u
+tp
+u
+t (
+V
+rm
+s)
+ (d
+B
+c)
  
-Spectral output (Vrms) (dBc) 6.4 LC VCO 
+Frequency offset in Hz 
+noise analysis symmetric load 90 nm 
+37 
+ 
+6.4 LC VCO 
 This design is based on an LC tank, in contrast with all the previous ones that were ring oscillators. In 
 figure 6.17 it can be seen the schematic for this design, the capacitance is formed by PMOS 
 varactors, for simulation simplicity the inductance is not spiral. Table 6.10 shows the performance 
@@ -1553,57 +1778,47 @@ frequency range is low, it can only be tuned 100 MHz by the current control, thi
 figure 6.18, on the other hand this design holds some advantages over the ring oscillators, the phase 
 noise is extremely low in this design, fact that is emphasize on the extremely low cycle to cycle jitter 
 achieving the incredible figure of 11 fseconds in a high frequency of almost 5 GHz.   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 VDD
- 
- 
- 
-varactors
- 
-out
-out
-1
-2
- 
-L
- 
- 
- 
 Current 
 control
- 
- 
- 
-Figure 6-0-17: LC oscillator schematic 
- 
- 
-Table 6-0-10: LC performance parameters 
- 
- 
-LC tank oscillator
- 
+out 1out 2
+varactors
+L
 Frequency range 4.73 – 4.63GHz
 current range 10 – 75uA
- Supply voltage 1.2 Volts
+Supply voltage 1.2 Volts
 Jcc 11.48 fsec. @ 4.7GHz
 Phase noise @ 100KHz offset -84 dBc
- 
--144 dBc
-Phase noise @ 100MHz offset
+Phase noise @ 100MHz offset -144 dBc
 transistors 13
+LC tank oscillator
+Figure 6-0-17: LC oscillator schematic 
+Table 6-0-10: LC performance parameters 
+38 
  
  
-37 
- Table 6-0-11: LC tank under process variations 
-LC tank 90 NM 
  
-Oxide thickness and threshold 
-10% 20% 30%
-voltage variations
  
-Frequency variations in 
-±  0.05% ±  0.93% ±  2.3%
-percentage
- Center frequency in GHz 4.6 4.6 4.6
  
 In table 6.11 it can be seen the results of the LC tank under monte carlo simulations for process 
 variations, at a first look it shocks how low the frequency variations are, this is because there is a 
@@ -1622,32 +1837,41 @@ process variations in the inductance.
  
  
  
-frequency range LC tank oscillator 
-4.74
-4.72
-4.70
-4.68
-4.66
-4.64
-4.62
-4.60
-0.00 10.00 20.00 30.00 40.00 50.00 60.00 70.00 80.00
-current in µAmps 
  
 Figure 6-0-18: LC tank frequency response 
  
-38 
+4.60
+4.62
+4.64
+4.66
+4.68
+4.70
+4.72
+4.74
+0.00 10.00 20.00 30.00 40.00 50.00 60.00 70.00 80.00
+fr
+e
+q
+u
+en
+cy
+ in
+ G
+H
+z 
+current in µAmps 
+frequency range LC tank oscillator 
+Oxide thickness and threshold 
+voltage variations
+10% 20% 30%
+Frequency variations in 
+percentage
+±  0.05%  ±  0.93% ±  2.3%
+Center frequency in GHz 4.6 4.6 4.6
+LC tank 90 NM 
+Table 6-0-11: LC tank under process variations 
+39 
  
-frequency in GHz oscillation frequency variation due 
-to inductance variation 
-5.50
-5.00
-4.50
-4.00
-3.50
-3.00
-20.00 22.00 24.00 26.00 28.00 30.00 32.00 34.00
-inductance in nH 
  
 Figure 6-0-19: frequency response dependency to inductance L 
  
@@ -1676,9 +1900,30 @@ future work, in the next section improvements are performed to reduce the perfor
 degradation of the other 2 designs due to random process variations 
  
  
-39 
+3.00
+3.50
+4.00
+4.50
+5.00
+5.50
+20.00 22.00 24.00 26.00 28.00 30.00 32.00 34.00
+fr
+e
+q
+u
+e
+n
+cy
+ in
+ G
+H
+z 
+inductance in nH 
+oscillation frequency variation due 
+to inductance variation 
+40 
  
-frequency in GHz 7 PROCESS VARIATION AWARE VCO 
+7 PROCESS VARIATION AWARE VCO 
 In the previous chapter it was observed the dependency of VCO’s oscillation frequency to process 
 variations, voltage supply and temperature. This project focuses on process variations; therefore, 
 this chapter presents two solutions that minimize the degradation of the oscillation frequency due 
@@ -1691,18 +1936,10 @@ this idea will be explained deeper later, but it must be mentioned that is not a
 it introduces more power consumption to every VCO, fact that is obviously not practical for 
 any system.  
  
-Bias current
-Bias current
  
-VCO
-VCO
  
-Bias current
  
-Bias current
  
-a) PREVIOUS b) SOLUTION
-Figure 7-0-1 
  
 2. Process variation aware control voltage: A much better idea than the previous one is to 
 create a system that is capable of sensing the process variations that occur to all devices by 
@@ -1712,24 +1949,34 @@ process variations and due to the linear frequency response of every VCO to the 
 voltage this can be achieve.  
  
  
-V
-control
  
- Process variation 
-Process variation 
-Process information
-aware control voltage
-Differential 
-variation VCO
  
-amplifier
+ 
+ 
+ 
+ 
+VCO
+Bias currentBias current
+Bias current
+VCO
+Bias current
+a) PREVIOUS b) SOLUTION
+VCO
+Process 
+variation 
 sensor
- 
+Differential 
+amplifier
+Vcontrol
+Process variation 
+information
+Process variation 
+aware control voltage
+Figure 7-0-1 
 Figure 7-0-2 
+41 
  
- 
-40 
- 7.1 PROCESS VARIATION AWARE CONTROL VOLTAGE 
+7.1 PROCESS VARIATION AWARE CONTROL VOLTAGE 
  In order to implement this solution, the flowchart presented in figure 7.3 had to be followed. 
 1. It is required to perform a deeper investigation about the effects of process variations on 
 the VCO performance, especially on the oscillation frequency, in order to create a solution it 
@@ -1739,42 +1986,27 @@ could happen to all devices by equal amount.
 3.  A differential amplifier whose performance is not affected by any process variations needed 
 to be design. The differential amplifier output can be simplified by the equation below 
  
-                                
-          
+                                          
  
 It is essential for the correct functionality of the differential amplifier that the values of the 2 
 inputs, control voltage and process variation sensor, are not corrupted by any process 
 variation that may occur in the differential amplifier.   
  
-1 2
-3
  
-Design a differential 
-Deep investigation of 
-amplifier whose 
  
-process variations Design a process 
-performance in 
-effects on VCO variation sensor
-unaffected by process 
  
-performance
-variations
  
-Figure 7-0-3: flow chart to achieve process variation aware VCO 
 7.1.1 DEEPER INVESTIGATION OF PROCESS VARIATIONS. 
  In order to implement the explained designs in chapter 6, it is required the usage of NMOS and 
 PMOS devices, the behaviour of these devices is different and therefore it requires the investigation 
 of process variations to be separated into 2 parts: 
 1. It is necessary to know in what degree the VCO performance is tied to the process variations 
 that occur to NMOS and PMOS separately. 
-2. As the project focuses on the variations of   and  , it is necessary to know which one of 
-    
+2. As the project focuses on the variations of     and    , it is necessary to know which one of 
 these two contributes more to the VCO performance degradation. 
 In tables 7.1 and 7.2 it can be seen these investigations in two designs, starved inverter and 
 symmetric, here we can see 2 important facts: 
-1. When   and   are varied at the same time, but first these variations only affecting to 
-    
+1. When     and     are varied at the same time, but first these variations only affecting to 
 NMOS devices and after affecting only to PMOS devices, we can observe that the 
 degradation caused by PMOS to the oscillation frequency is much higher than the one 
 caused by NMOS, specially note when the process variations are 30% for the inverter case 
@@ -1782,222 +2014,277 @@ table 7.1 and 7.2, for NMOS the oscillation frequency varies ±11.3%, but in the 
 ±17.7%. 
 2. Since it was discovered that process variations on PMOS affects more to the degradation of 
 the oscillation frequency than process variation on NMOS, it was important to know which 
-41 
- parameter   or   was affecting more to the degradation, both parameters were varied 
-    
-separately and it was found that for both designs, the gate oxide thickness   affects much 
-  
+Deep investigation of 
+process variations 
+effects on VCO 
+performance
+Design a process 
+variation sensor
+Design a differential 
+amplifier whose 
+performance in 
+unaffected by process 
+variations
+1 2 3
+Figure 7-0-3: flow chart to achieve process variation aware VCO 
+42 
+ 
+parameter     or     was affecting more to the degradation, both parameters were varied 
+separately and it was found that for both designs, the gate oxide thickness     affects much 
 more to the VCO performance degradation, principally in the symmetric design.  
  
-Table 7-0-1: Deep investigation of INVERTER or starved current VCO under different process variations 
-NMOS and PMOS t V
-ox th
-and variation
-investigation
-INVERTER 90 NM (PMOS VARIATION)
-INVERTER 90 NM (NMOS VARIATION)
+ 
+ 
+ 
+ 
 Oxide thickness and threshold 
-10% 20% 30% Threshold voltage 10% 20% 30%
 voltage variations
-Frequency variations in 
-Frequency variations in 
-±  3.2% ±  6.5% ±  9.78%
-±  3.2% ±  6.6% ±  11.3%
-percentage
-percentage
-Center frequency in GHz 4.7 4.7 4.7
-Center frequency in GHz 4.7 4.6 4.6
-INVERTER 90 NM (PMOS VARIATION)
-INVERTER 90 NM (PMOS VARIATION)
-Oxide thickness and threshold 
-10% 20% 30% Oxide thickness 10% 20% 30%
-voltage variations
-Frequency variations in Frequency variations in 
-±  4.3% ±  9.5% ±  17.7% ±  3.1% ±  7.8% ±  16.2%
-percentage percentage
-Center frequency in GHz 4.7 4.6 4.48 Center frequency in GHz 4.7 4.6 4.5
-Table 7-0-2: Deep investigation of symmetric VCO under different process variations 
-t V
-NMOS and PMOS 
-ox and th variation
-investigation
-SYMMETRIC 90 NM (PMOS VARIATION)
-SYMMETRIC 90 NM (NMOS VARIATION)
-Oxide thickness and threshold 
-Threshold voltage 10% 20% 30%
 10% 20% 30%
-voltage variations
 Frequency variations in 
-Frequency variations in 
-±  2.23% ±  4.47% ±  6.8%
-±  0.98% ±  2.69% ±  11.3%
 percentage
-percentage
-Center frequency in GHz 5.1 5.1 5.1
-Center frequency in GHz 5.1 5 4.9
-SYMMETRIC 90 NM (PMOS VARIATION) SYMMETRIC 90 NM (PMOS VARIATION)
+±  4.3%  ±  9.5% ±  17.7%
+Center frequency in GHz 4.7 4.6 4.48
+INVERTER 90 NM (PMOS VARIATION)
 Oxide thickness and threshold 
-10% 20% 30% Oxide thickness 10% 20% 30%
 voltage variations
-Frequency variations in Frequency variations in 
-±  2.6% ±  8.38% ±  17.4%
-±  3.03% ±  7.54% ±  15.16%
-percentage percentage
+10% 20% 30%
+Frequency variations in 
+percentage
+±  3.2%  ±  6.6% ±  11.3%
+Center frequency in GHz 4.7 4.6 4.6
+INVERTER 90 NM (NMOS VARIATION)
+Threshold voltage 10% 20% 30%
+Frequency variations in 
+percentage
+±  3.2%  ±  6.5% ±  9.78%
+Center frequency in GHz 4.7 4.7 4.7
+INVERTER 90 NM (PMOS VARIATION)
+Oxide thickness 10% 20% 30%
+Frequency variations in 
+percentage
+±  3.1%  ±  7.8% ±  16.2%
+Center frequency in GHz 4.7 4.6 4.5
+INVERTER 90 NM (PMOS VARIATION)
+NMOS and PMOS 
+investigation
+tox Vthand variation
+Oxide thickness and threshold 
+voltage variations
+10% 20% 30%
+Frequency variations in 
+percentage
+±  3.03%  ±  7.54% ±  15.16%
 Center frequency in GHz 5.1 5 4.8
+SYMMETRIC 90 NM (PMOS VARIATION)
+Oxide thickness and threshold 
+voltage variations
+10% 20% 30%
+Frequency variations in 
+percentage
+±  0.98%  ±  2.69% ±  11.3%
+Center frequency in GHz 5.1 5 4.9
+SYMMETRIC 90 NM (NMOS VARIATION)
+Threshold voltage 10% 20% 30%
+Frequency variations in 
+percentage
+±  2.23%  ±  4.47% ±  6.8%
+Center frequency in GHz 5.1 5.1 5.1
+SYMMETRIC 90 NM (PMOS VARIATION)
+Oxide thickness 10% 20% 30%
+Frequency variations in 
+percentage
+±  2.6%  ±  8.38% ±  17.4%
 Center frequency in GHz 5.1 5 4.8
+SYMMETRIC 90 NM (PMOS VARIATION)
+NMOS and PMOS 
+investigation
+tox Vthand variation
+Table 7-0-1: Deep investigation of INVERTER or starved current VCO under different process variations 
+Table 7-0-2: Deep investigation of symmetric VCO under different process variations 
+43 
  
  
- 
- 
-42 
-  
 7.1.2 PROCESS VARIATION SENSOR 
 As process variations on PMOS devices are the major contributors to oscillation frequency 
 degradation, a sensor capable of sensing PMOS process variations with as much accuracy as possible 
 needs to be design. A special PMOS diode was used for this purpose; the schematic for this can be 
 seen in figure 7.4, where the control voltage is connected directly to this process variation sensor, 
-table 7.3 shows the monte carlo simulations when   and   are varied separately and the control 
-   
-voltage is kept constant at          , again variations are higher due to   than to  . Table 
-   
-7.4shows the results when   and   are varied 30% on the same simulation, but this time the 
-   
+table 7.3 shows the monte carlo simulations when    and     are varied separately and the control 
+voltage is kept constant at          , again variations are higher due to     than to   . Table 
+7.4shows the results when    and     are varied 30% on the same simulation, but this time the 
 control voltage is varied, the purpose of this simulations is to observe if the sensor behaves on the 
 same manner at different control voltages, as the results show the voltage variations are almost the 
-Table 7-0-4:oxide thickness and threshold voltage variation separately 
-t V
-ox and th variation
-SENSING 90 NM (PMOS VARIATION) SENSING 90 NM (PMOS VARIATION)
-Oxide thickness 10% 20% 30% Threshold voltage 10% 20% 30%
-Voltage variation ±  6.48% ±  11.12% ±  18.33%
-Voltage variation ±  5.7% ±  9.35% ±  11.62%
-Average Voltage in Volts 0.987 0.908 0.998 Average Voltage in Volts 0.990 0.994 0.998
 same for all the control voltages cases.  
-Table 7-0-3: PMOS performance under different control voltages 
-SENSING 90 NM (PMOS VARIATION) under different control 
-votages
-Control voltage 1.2 1 0.8 0.6 0.4 0.2
-Voltage variation ±  13.05% ±  14.25% ±  13.74% ±  12.76% ±  11.51% ±  10.61%
-Average Voltage in Volts 0.987 0.835 0.684 0.525 0.356 0.179
  
  
 This PMOS diode can sense as accurately as possible the voltage threshold variations, equation 7.1 
 expresses the drain current 
  
- 
+   (
    
   
-  ( )[(   ) ] (   )             7.1 
-       
-   
+) [(      )
+ ]  
+ 
+ 
+(      )
+              7.1 
 or  
+where                 
+     √        (7.2) 
+Threshold voltage 10% 20% 30%
+Voltage variation ±  5.7%  ±  9.35% ±  11.62%
+Average Voltage in Volts 0.990 0.994 0.998
+SENSING 90 NM (PMOS VARIATION)
+Oxide thickness 10% 20% 30%
+Voltage variation ±  6.48% ±  11.12% ±  18.33%
+Average Voltage in Volts 0.987 0.908 0.998
+SENSING 90 NM (PMOS VARIATION)
+tox Vthand variation
+Control voltage 1.2 1 0.8
+Voltage variation ±  13.05% ±  14.25% ±  13.74%
+Average Voltage in Volts 0.987 0.835 0.684
+0.6
+±  12.76%
+0.525
+SENSING 90 NM (PMOS VARIATION) under different control 
+votages
+0.4
+±  11.51%
+0.356
+0.2
+±  10.61%
+0.179
+Table 7-0-4:oxide thickness and threshold voltage variation separately 
+Table 7-0-3: PMOS performance under different control voltages 
+44 
  
-where               
-   
-           (7.2) 
-√
-  
-43 
-  M
-1
- 
-Process variations sensor output
-Control 
-DC
-voltage
- 
-sizes
-M
-2
-Device width
- 
-M
-120n.
-1
-M
- 120n. 
-2
  
  
-Figure 7-0-4: PMOS proves variation sensor 
+ 
+ 
+ 
+ 
+ 
   
   7.2 
-It is clear from equation 7.2 that any small change in   and    will create a variation in the output 
-   
-voltage, the sizes W/L of the PMOS are kept to the minimum so the changes in   and    are 
-   
+It is clear from equation 7.2 that any small change in    and      will create a variation in the output 
+voltage, the sizes W/L of the PMOS are kept to the minimum so the changes in    and      are 
 emphasized, figure 7.5 shows the % variation in voltage as the width of both PMOS are increased, as 
 the widths get larger, the % variations in voltage decreases. 
 The bulk is not connected to the voltage supply, this means that the voltage that is applied to the 
 bulk is not constant, with this configuration we can find 2 transconductances modelling the devices, 
-  and   (body transconductace), and with two transconductance the process variations can be 
-   
+   and     (body transconductace), and with two transconductance the process variations can be 
 measure with more accuracy.  
  
-PMOS Process variations sensor sensitivity 
-16
-14
-12
-10
-8
-6
-4
-0 2 4 6 8 10 12
-PMOS width in um.  
  
 Figure 7-0-5: 
  
  
-44 
+4
+6
+8
+10
+12
+14
+16
+0 2 4 6 8 10 12
+%
+ v
+ar
+ia
+ti
+o
+n
+ in
+ o
+u
+tp
+u
+t v
+o
+lt
+ag
+e
  
-% variation in output voltage  
-In order to measure the   and variations on NMOS devices the equivalent circuit can be seen in 
+PMOS width in um.  
+PMOS Process variations sensor sensitivity 
+DC
+Control 
+voltage
+Process variations sensor output
+M 1
+M 2
+120n.
+120n. 
+Device width
+M 1
+M 2
+sizes
+Figure 7-0-4: PMOS proves variation sensor 
+45 
  
+ 
+In order to measure the    and variations on NMOS devices the equivalent circuit can be seen in 
 figure 7-6, as the variations happening in NMOS devices are less it is obvious that the % variations in 
-the sensing voltage is less as well, this can be seen in figure 7.7, where   and   are varied 30% at 
-   
+the sensing voltage is less as well, this can be seen in figure 7.7, where    and     are varied 30% at 
 different widths values 
  
  
  
-M
-1
-Control voltage sensitive to 
- 
-Control 
-DC
-process variations
-voltage
-M
-2
  
  
  
-Figure 7-0-6: NMOS process variations sensor 
  
  
-NMOS Process variations 
-sensor sensitivity 
-7
-6
-5
-4
-3
-0 2 4 6 8 10 12
-NMOS width in um. 
+ 
  
 Figure 7-0-7:  
  
 From the just presented results it can be summarize two facts: 
-1. Process variations   and   can be sense and by varying the width of sensor devices 
-   
+1. Process variations    and     can be sense and by varying the width of sensor devices 
 (PMOS), the sensitivity of this sensor can be tuned (figure 7.5). 
 2. The sensitivity of this sensor is almost the same under different control voltage values (table 
 7.4) 
 From these two facts, two different steps were followed next: 
-45 
+3
+4
+5
+6
+7
+0 2 4 6 8 10 12
+%
+ v
+ar
+ia
+ti
+o
+n
+ in
+ o
+u
+p
+u
+t v
+o
+lt
+ag
+e
  
-% variation in ouput voltage 1. The VCO was adapted to the process variations sensor: this means that the VCO 
+NMOS width in um. 
+NMOS Process variations 
+sensor sensitivity 
+DC
+Control 
+voltage
+M 1
+M2
+Control voltage sensitive to 
+process variations
+Figure 7-0-6: NMOS process variations sensor 
+46 
+ 
+1. The VCO was adapted to the process variations sensor: this means that the VCO 
 performance in terms of frequency tuning range was adapted to the process variations 
 sensor, a high level schematic of this is shown on figure 7.8, the disadvantage of this method 
 is the limitations in terms of frequency tuning range, best way to explain this is by an 
@@ -2007,31 +2294,67 @@ voltage of 0.7, but due to process variations we obtain 4.4 GHz with 0.7 (figure
 the frequency range sensitivity to process variations is the same as the process variations 
 sensor, then the system will adapt so a frequency of 4 GHz is achieved.         
  
-Process variation 
-Process 
  
-aware control voltage
-variation VCO
  
-sensor
  
-Figure 0-8 
  
+Voltage control in Volts
+Fr
+eq
+u
+en
+cy
+ in
+ G
+H
+z
+4
+0.7
+Voltage control in Volts
+Fr
+eq
+u
+en
+cy
+ in
+ G
+H
+z
+4.4
+0.7
+Process variation sensor 
+output in volts.
+Fr
+eq
+u
+en
+cy
+ in
+ G
+H
+z
+4
+0.6
+Voltage control in Volts
+Fr
+eq
+u
+en
+cy
+ in
+ G
+H
+z
 Frequency response of  
-Ideally frequency of 4 Frequency change due 
-Voltage control re-
 starved inverter VCO
-GHz to process variations
+Ideally frequency of 4 
+GHz
+Frequency change due 
+to process variations
+Voltage control re-
 establishes initial 
 frequency
-4.4
-4
-4
-0.7 0.7 0.6
-Voltage control in Volts Voltage control in Volts Voltage control in Volts
-Process variation sensor 
-D) output in volts.
-A) B) C)
+A) B) C) D)
  
 Figure 7-0-9 
  
@@ -2042,26 +2365,30 @@ Method 1 was tested with the starved inverter configuration, in table 7.5 it can
 when the control voltage was set to 1, comparing this results with table 6.3 it can be seen a 4% 
 improvement in the 20% and 30% process variations cases, this is not a tremendous improvement 
 but it needs to be taken into account the high frequencies that are achieved, around 4 GHz. 
-46 
+Process 
+variation 
+sensor
+VCO
+Process variation 
+aware control voltage
+Figure 0-8 
+47 
  
-Frequency in GHz
-Frequency in GHz
-Frequency in GHz
-Frequency in GHzTable 7-0-5: method 1 tested on starved current VCO 
-STARVED INVERTER 90 NM TECHNOLOGY
+Table 7-0-5: method 1 tested on starved current VCO 
 Oxide thickness and threshold 
-5% 10% 20% 30%
 voltage variations
+5% 10% 20% 30%
 Frequency variations in 
-±  2 % ±  4.3% ±  7.5% ±  18%
 percentage (   ?   )
+±  2 % ±  4.3%  ±  7.5% ±  18%
 Average frequency in GHz 3.9 3.7 3.8 4.1
+STARVED INVERTER 90 NM TECHNOLOGY
 Variation in process variations 
-±15 mV ±19 mV ±45 mV ±83 mV
 sensor output (   ?   )
+±15 mV ±19 mV ±45 mV ±83 mV
 Average process variations 
-0.760 mV. 0.743mV 0.756mV 0.789mV
 output
+0.760 mV. 0.743mV 0.756mV 0.789mV
 Control voltage 1 1 1 1
  
  
@@ -2072,7 +2399,7 @@ implemented, in order to implement it we need to follow 3 steps:
 different from other VCOs, it is required to observe the variations in frequency due to 
 process variations, in figure 7.10a it can be seen an illustration of this, ideally frequency 
 point X will not suffer any variations due to process variations, but unfortunately point X will 
-suffer a variation of    . 
+suffer a variation of   . 
 2. Observe voltage variations in process variations sensor: it was explained that the process 
 variations sensor sensitivity is inversely proportional to the PMOS width, but the output 
 voltage of this sensor is also inversely proportional to the PMOS width, figure 7.11. The 
@@ -2080,49 +2407,69 @@ process variations sensor output will suffer a variation of    from voltage poin
 process variations, figure 7.10b, this variation ? will depend on the PMOS width. 
 3. Adjust the PMOS width: with the appropriate variation in ?, a decrement in   variation can 
 be achieved, and this is shown in table 7.5, in this case both PMOS widths were set to 
-1.25µm. let’s take the example when   and   are varied 30%, the control voltage is 1 volt, 
-   
+1.25µm. let’s take the example when    and     are varied 30%, the control voltage is 1 volt, 
 as the PMOS width is high, the output of the process variations sensor will drop considerably 
 to 0.789 mV, this creates an average frequency of 4.1 GHz, to keep this frequency as 
-invariant as possible to process variations, ? will vary       . 
-47 
-  
-Frequency response of  Process variations sensor 
-starved inverter VCO response to control voltage
-5
-1
-. .
-0.5
-2
-Frequency point X voltage point Y
-0
-0
-0.5
-0.5 1 1
-Control voltage in Volts Control voltage in Volts
-A) B)
+invariant as possible to process variations, ? will vary     . 
+48 
  
+ 
+Control voltage in Volts
+Fr
+eq
+u
+en
+cy
+ in
+ G
+H
+z
+Frequency response of  
+starved inverter VCO
+.
+Frequency point X
+± 
+?
+P
+ro
+ce
+ss
+ v
+ar
+ia
+ti
+o
+n
+ 
+se
+n
+so
+r 
+o
+u
+tp
+u
+t 
+vo
+lt
+ag
+e
+Process variations sensor 
+response to control voltage
+.± ? 
+Control voltage in Volts
+voltage point Y
+0
+5
+2
+0.5 1 0 0.5 1
+0.5
+1
+A) B)  
 Figure 7-0-10 
  
  
  
-Process variation sensor dependency to 
-PMOS width 
-0.75
-0.7
-0.65
-0.6
-0.55
-control voltage = 0.8 V.
-0.5
-control voltage = 0.65 V.
-0.45
-0.4
-control voltage = 0.5 V.
-0.35
-0.3
-0.00 0.50 1.00 1.50
-PMOS devices width in µm. 
  
 Figure 7-0-11:  
  
@@ -2131,15 +2478,55 @@ It has been shown that method 1 shows improvements, on the other hand is difficu
 and suffers from huge limitations as the VCO frequency performance is dependent on the width of 
 the PMOS devices that are used in the process variations sensor, because of the widths we can 
 summarize two important facts. 
-48 
+0.3
+0.35
+0.4
+0.45
+0.5
+0.55
+0.6
+0.65
+0.7
+0.75
+0.00 0.50 1.00 1.50
+P
+ro
+ce
+ss
+ v
+ar
+ia
+ti
+o
+n
+s 
+se
+n
+so
+r 
+o
+u
+tp
+u
+t v
+o
+lt
+ag
+e
+ in
  
-± ?
-± ? 
-Process variations sensor output voltage in 
-Frequency in GHz
-volts 
-Process variation 
-sensor output voltage1. As the width is increased the sensor loses sensitivity (figure 7.5), this loss of sensitivity is 
+vo
+lt
+s 
+PMOS devices width in µm. 
+Process variation sensor dependency to 
+PMOS width 
+control voltage = 0.8 V.
+control voltage = 0.65 V.
+control voltage = 0.5 V.
+49 
+ 
+1. As the width is increased the sensor loses sensitivity (figure 7.5), this loss of sensitivity is 
 small but it is desirable to achieve the highest possible sensitivity and this is done with the 
 minimum possible width which is 120 nm. 
 2. As the width of the PMOS is increased, the output voltage of the process variations sensor 
@@ -2167,60 +2554,36 @@ This differential amplifier performance is unaffected by process variations; the
 design can be seen of figure 7.12, is nothing more than a simple differential amplifier but the unique 
 fact about it, is that is design only with NMOS, by using only NMOS and the appropriate W/L ratio 
 sizes, process variations cause almost no effect on the system performance, transistors  ,   and 
-  
-  are the key elements of this design. The idea of this system is exactly the same as the explained 
- 
+   are the key elements of this design. The idea of this system is exactly the same as the explained 
 previously; an example of the performance of this design can be seen in figure 7.3, this figure shows 
-a DC analysis of the differential amplifier when the input voltage that is applied to device   is 
- 
+a DC analysis of the differential amplifier when the input voltage that is applied to device    is 
 varied from 0 to 1 volt, from this figure it can be described two important facts of this design: 
 1. The output voltage of the differential op amp (process variation aware control voltage) can 
 achieve a minimum voltage of 0.5 volts, this is due to the special configuration of transistors 
-  and   and   , whose bulk is connected to   , this creates the first limitation for this 
-     
+   and   and   , whose bulk is connected to     , this creates the first limitation for this 
 system, the control voltage can never be less than 0.5 volts. 
 2. With the width manipulation of every transistor different performances can be achieved, as 
 an example figure 7-13 shows two different cases when the devices   to   have different 
-  
 widths values, therefore different drain currents. 
-49 
- Process variations 
-sensor output
-Control 
-DC
+50 
+ 
 VDD
+M 1
+M 2
+M 3
+M 5M 4
+M 6 M 7 M 8
+DC
+Control 
 voltage
-M M
-6 7
-M
-8
 Process variation Aware Control 
-M
 voltage 
-M 5
-4
-M
-1
-M
-3
-M
-2
+Process variations 
+sensor output
  
 Figure 7-0-12: process variations sensor connected to the differential amplifier 
  
  
-DC analysis of the differential amplifier 
-1.1
-1
-0.9
-0.8
-M1 to M3 widths = 500 nm.
-0.7
-M1 to M3 widths = 5 um.
-0.6
-0.5
-0 0.5 1 1.5
-process variations sensor output voltage (in Volts) 
  
 Figure 7-0-13 
  
@@ -2229,73 +2592,142 @@ variations, in this graph it can be seen a DC analysis at the 4 process corner c
 difference in performance. 
  
  
-50 
- 
-process variation aware control voltage 
-(in Volts)  
-DC analysis  
-1.1
-1
-0.9
-0.8
-FF and FS
-0.7
-0.6 SS and SF
 0.5
-0.4
-0 0.2 0.4 0.6 0.8 1 1.2
-process variations sensor output (Volts) 
+0.6
+0.7
+0.8
+0.9
+1
+1.1
+0 0.5 1 1.5
+p
+ro
+ce
+ss
+ v
+ar
+ia
+ti
+o
+n
+ a
+w
+ar
+e
+ c
+o
+n
+tr
+o
+l v
+o
+lt
+ag
+e
+ 
+(i
+n
+ V
+o
+lt
+s)
+ 
+process variations sensor output voltage (in Volts) 
+DC analysis of the differential amplifier 
+M1 to M3 widths = 500 nm.
+M1 to M3 widths = 5 um.
+51 
+ 
+ 
  
 Figure 7-0-14: DC analysis showing that the differential amplifier is unaffected by process variations 
  
-As this is a differential amplifier by varying the W/L ratio of the input transistors   to  , the gain 
-  
-of the amplifier can be adjusted, this can be seen in figure 7-15, where the width of transistor   is 
- 
-kept constant at 500 nm, the width W of   is varied, the length of both devices are kept constant 
- 
-at 90 nm, it can be observed that as the W/L ratio of   gets higher, the gain of the amplifier 
- 
+As this is a differential amplifier by varying the W/L ratio of the input transistors    to  , the gain 
+of the amplifier can be adjusted, this can be seen in figure 7-15, where the width of transistor    is 
+kept constant at 500 nm, the width W of    is varied, the length of both devices are kept constant 
+at 90 nm, it can be observed that as the W/L ratio of    gets higher, the gain of the amplifier 
 increases. 
  
-DC analysis at different W/L ratios for 
-M4 
-1
-0.9
-0.8 W = 500 nm.
-W = 1.6 um.
-0.7
-W = 2.8 um.
-0.6
-W = 4 um.
-0.5
-0 0.2 0.4 0.6 0.8 1 1.2
-process variations sensor output (Volts) 
  
 Figure 7-0-15 
  
-51 
- 
-differential amplifier output (Volts) differential amplifier output (votls) Another way to control the gain of the differential amplifier is by varying the W/L ratio of transistor 
-  as the width is decreased the gain of the amplifier is reduced. 
- 
- 
-DC analysis at different W/L ratios for 
-M8 
-1.3
-1.2
-1.1
-1
-W = 500nm
-0.9
-W = 1.6 um
-0.8
-0.7 W = 2.8 um.
-0.6
-W = 4 um
+0.4
 0.5
+0.6
+0.7
+0.8
+0.9
+1
+1.1
 0 0.2 0.4 0.6 0.8 1 1.2
-process variations sensor output (volts) 
+d
+if
+fe
+re
+n
+ti
+al
+ a
+m
+p
+lif
+ie
+r 
+o
+u
+tp
+u
+t (
+vo
+tl
+s)
+ 
+process variations sensor output (Volts) 
+DC analysis  
+FF and FS
+SS and SF
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+0 0.2 0.4 0.6 0.8 1 1.2
+d
+if
+fe
+re
+n
+ti
+al
+ a
+m
+p
+lif
+ie
+r 
+o
+u
+tp
+u
+t 
+(V
+o
+lt
+s)
+ 
+process variations sensor output (Volts) 
+DC analysis at different W/L ratios for 
+M4 
+W = 500 nm.
+W = 1.6 um.
+W = 2.8 um.
+W = 4 um.
+52 
+ 
+Another way to control the gain of the differential amplifier is by varying the W/L ratio of transistor 
+   as the width is decreased the gain of the amplifier is reduced. 
+ 
  
  
 In table 7.6 it can be seen the results when this design was tested with the inverter design (starved 
@@ -2306,11 +2738,11 @@ obtain a better improvement.
  
 Table 7-0-6: starved current results when the process variations sensor is combined with the differential amplifier 
 Oxide thickness and threshold 
-5% 10% 20% 30%
 voltage variations
+5% 10% 20% 30%
 Frequency variations in 
-±  4.3 % ±  6.4% ±  8.3% ±  20%
 percentage
+±  4.3 % ±  6.4%  ±  8.3% ±  20%
 Mean Frequency in GHz 3.9 3.68 3.73 3.6
  
  
@@ -2319,76 +2751,105 @@ Mean Frequency in GHz 3.9 3.68 3.73 3.6
  
  
  
-52 
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+1.1
+1.2
+1.3
+0 0.2 0.4 0.6 0.8 1 1.2
+d
+if
+fe
+re
+n
+ta
+il 
+am
+p
+lif
+ie
+r 
+o
+u
+tp
+u
+t (
+vo
+lt
+s)
  
-differentail amplifier output (volts) 7.2 INCREASE CURRENT 
+process variations sensor output (volts) 
+DC analysis at different W/L ratios for 
+M8 
+W = 500nm
+W = 1.6 um
+W = 2.8 um.
+W = 4 um
+53 
+ 
+7.2 INCREASE CURRENT 
 This is the most successful method for reducing the VCO performance degradation due to process 
 variation, this method simply consists in adding more and larger currents to the VCO. For ring 
 oscillators the equation below is the most important, this equation states the oscillator frequency is 
-proportional to the drain current   of a delay cell, where   is the number of delay cells. 
- 
- 
- 
+proportional to the drain current    of a delay cell, where  is the number of delay cells. 
    
+  
+          
  
-     
-     
-Where   is highly dependent on   of each device, and as the equation below states   is 
+Where      is highly dependent on     of each device, and as the equation below states     is 
+highly dependent on the gate oxide thickness     
     
    
-highly dependent on the gate oxide thickness   
-  
- 
-  
    
-  
  
-  
-If the drain current   is made higher the parameter   becomes less important in the equation 
-    
-above, therefore the VCO frequency degradation due to the process variation    can be reduce.  
-  
+If the drain current    is made higher the parameter      becomes less important in the equation 
+above, therefore the VCO frequency degradation due to the process variation      can be reduce.  
 This method was tested with the symmetric VCO, in figure 7.16 it can be seen the modifications that 
 were made to each cell, and currents of           where input to each cell. 
  
  
  
-VDD
  
-current current
  
-I
+ 
+ 
+ 
 Control
-D
-I
-D
 voltage
- 
-out out
-2 1
- 
+out
+2
+VDD
 input
- 2 input
 1
-I
-D
+2
+currentcurrent
 current
+out
+1
+input
+DI
+DI
+DI
 Figure 7-16: schematic of symmetric cell when multiple currents are 
 applied 
-53 
- Table 7-7: symmetric VCO under process variation but when multiple currents are applied to each cell. 
+54 
+ 
+Table 7-7: symmetric VCO under process variation but when multiple currents are applied to each cell. 
 Oxide thickness and threshold 
-5% 10% 20% 30%
 voltage variations
+5% 10% 20% 30%
 Frequency variations in 
-±  2 % ±  4% ±  6.5% ±  14.5%
 percentage
+±  2 % ±  4%  ±  6.5% ±  14.5%
 Mean Frequency in GHz 4.9 4.5 4.8 4.6
  
  
 The table above, table 7.7, shows the results of this method, in a 90 nm symmetric load design, the 
-frequency variations is only         when   and   are varied 30%, this are the best achieved 
-   
+frequency variations is only        when     and    are varied 30%, this are the best achieved 
 results, and the VCO is still oscillating at a very high frequency of 4.6 GHz. 
  
  
@@ -2410,8 +2871,9 @@ results, and the VCO is still oscillating at a very high frequency of 4.6 GHz.
  
  
  
-54 
- 8. REVIEW AND CONCLUSION  
+55 
+ 
+8. REVIEW AND CONCLUSION  
 In this project 4 different VCOs have been design, each one of these designs has an appropriate 
 performance for implementation on a PLL system of a USB 3.0, achieving a frequency of 5 GHz and 
 with a low noise performance, each of these designs was investigated under process variations and 
@@ -2451,10 +2913,10 @@ followed to achieve the main aim of this project, a VCO that is aware of process
 aim a PMOS diode capable of sensing the variations that could happen in the gate oxide thickness 
 and threshold voltage was design, this supported two possible solution but unfortunately both of 
 this solutions suffered from some limitations. 
-55 
- The first solution consisted in the direct connection of the PMOS diode to the VCO, this the PMOS 
-diode, varies the control voltage depending on the variation of parameters   and  , and as the 
-   
+56 
+ 
+The first solution consisted in the direct connection of the PMOS diode to the VCO, this the PMOS 
+diode, varies the control voltage depending on the variation of parameters     and   , and as the 
 VCO frequency is highly dependent on the control voltage a less affected VCO to process variations 
 was achieved, this technique could only be tested on the starved current design, the results show a 
 4% improvement comparing them without this technique, however this technique suffered from the 
@@ -2469,8 +2931,7 @@ Finally, a very rudimentary solution was carried out, even though that it was ru
 solution showed the best results when it comes to a VCO that is unaffected by process variations, 
 this solution was based on the increment on the number of currents being applied to the VCO, 
 therefore increasing the power consumption, this solution was tested with the symmetric load 
-design achieving a frequency variation of only         at 4.6 GHz when   and   are varied up to 
-   
+design achieving a frequency variation of only        at 4.6 GHz when     and    are varied up to 
 30% in the monte carlo simulations. 
  
  
@@ -2487,12 +2948,12 @@ design achieving a frequency variation of only         at 4.6 GHz when   and   a
  
  
  
-56 
- 9. Future work 
+57 
+ 
+9. Future work 
 From the presented solutions in chapter 7 to create a process variation aware VCO, the most 
 promising one is the method that uses the process variations sensor to adapt the control voltage 
-depending on the variations of   and  , this method has shown huge limitations and it is clear 
-   
+depending on the variations of     and   , this method has shown huge limitations and it is clear 
 that it has not been completely implemented, as future work I believe that the main path to follow is 
 the improvement of this method as it has shown small improvements in the area of process 
 variation aware VCO, the next points should be follow for this: 
@@ -2505,10 +2966,10 @@ be require to sense the NMOS variations as well, figure xxx illustrates this ide
  
 PMOS 
 variations
-Process variations 
-control voltage
 NMOS 
 variations
+Process variations 
+control voltage
  
 2. It would be require to reduce the limitations that the special differential amplifier creates, 
 specially the limitation of only being capable of producing a minimum output voltage of 0.5 
@@ -2528,8 +2989,9 @@ and a more accurate simulation could be performed.
  
  
  
-57 
- REFERENCES 
+58 
+ 
+REFERENCES 
  
 [1]  Sarmista Sengupta,  Soumya Pandit  “Statistical Study of the Effect of Process Variations on   
 Nano-scale CMOS Circuits with Scaling”, Annual IEEE India Conference (INDICON), pages 1 – 
@@ -2564,48 +3026,153 @@ IEEE Asia-Pacific Conference on Advance System Integrated Circuits , pages 150-1
  
  
  
-58 
- APPENDIX A 180 NM 
-inverter
-180 nm
-Corner case SS SF FS FF
-Frequency range
-2.8 – 0.2GHz 4.2 – 0.5GHz 4.4 – 0.35GHz 5.2 – 0.67GHz
-Voltage range 0.6 – 2 Volts 0.6 – 2 Volts 0.6 – 2 Volts 0.6 – 2 Volts
-current 50 µA 50 µA 50 µA 50 µA
-Supply voltage 1.2 Volts 1.2 Volts 1.2 Volts 1.2 Volts
-Jcc 512 fsec. @ 2.4GHz 210 fsec. @ 3.9GHz 256 fsec. @ 4.2GHz 168 fsec. @ 5GHz
-Phase noise @ 100KHz offset -58 dBc -51 dBc -37 -36 dBc
--118 dBc -110 dBc -97 -121 dBc
-Phase noise @ 100MHz offset
-transistors 12 12 12 12
- 
- 
- 
-Triode
-180 nm
-Corner case SS SF FS FF
-Frequency range 2.3 – 0.3GHz 5.9 – 0.2GHz 4.1 – 0.8GHz 9.3 – 0.4GHz
-Voltage range 0 – 0.4 Volts 0 – 0.66 Volts 0 – 0.55 Volts 0 – 0.77 Volts
-current 150 µA 150 µA 150 µA 150 µA
-Supply voltage 1.2 Volts 1.2 Volts 1.2 Volts 1.2 Volts
-Jcc 434 fsec. @ 2.2GHz 374 fsec. @ 4.1GHz 311 fsec. @ 4.1GHz 234 fsec. @ 9.3GHz
-Phase noise @ 100KHz offset -45 dBc -24 dBc -35 dBc -30 dBc
-Phase noise @ 100MHz offset -105 dBc -108 dBc -117 dBc -100 dBc
-transistors 26 26 26 26
- 
- 
-symmetric
-180 nm
-Corner case SS SF FS FF
-Frequency range 2.5 – 0.57GHz 4.89 – 1.5GHz 4.1 – 0.8GHz 9.3 – 6.3GHz
-Voltage range 0 – 0.35 Volts 0 – 0.5Volts 0 – 0.55 Volts 0 – 0.55 Volts
-current 150 µA 150 µA 150 µA 150 µA
-Supply voltage 1.2 Volts 1.2 Volts 1.2 Volts 1.2 Volts
-Jcc 494 fsec. @ 2.2GHz 293 fsec. @ 4.9GHz 277 fsec. @ 4.1GHz 169 fsec. @ 9GHz
-Phase noise @ 100KHz offset -44 dBc -39 dBc -38 dBc -35 dBc
-Phase noise @ 100MHz offset -122 dBc -115 dBc -118 dBc -110 dBc
-transistors 26 26 26 26
- 
 59 
+ 
+APPENDIX A 180 NM 
+Frequency range
+Voltage range
+current
+Supply voltage
+Jcc
+Phase noise @ 100KHz offset
+Phase noise @ 100MHz offset
+Corner case
+transistors
+180 nm
+2.8 – 0.2GHz
+0.6 – 2 Volts
+50 µA
+1.2 Volts
+512 fsec. @ 2.4GHz
+-58 dBc
+-118 dBc
+SS
+12
+4.2 – 0.5GHz
+0.6 – 2 Volts
+50 µA
+1.2 Volts
+210 fsec. @ 3.9GHz
+-51 dBc
+-110 dBc
+SF
+12
+4.4 – 0.35GHz
+0.6 – 2 Volts
+50 µA
+1.2 Volts
+256 fsec. @ 4.2GHz
+-37
+-97
+FS
+12
+5.2 – 0.67GHz
+0.6 – 2 Volts
+50 µA
+1.2 Volts
+168 fsec. @ 5GHz
+-36 dBc
+-121 dBc
+FF
+12
+inverter
+ 
+ 
+ 
+Frequency range
+Voltage range
+current
+Supply voltage
+Jcc
+Phase noise @ 100KHz offset
+Phase noise @ 100MHz offset
+Corner case
+transistors
+180 nm
+2.3 – 0.3GHz
+0 – 0.4 Volts
+150 µA
+1.2 Volts
+434 fsec. @ 2.2GHz
+-45 dBc
+-105 dBc
+SS
+26
+5.9 – 0.2GHz
+0 – 0.66 Volts
+150 µA
+1.2 Volts
+374 fsec. @ 4.1GHz
+-24 dBc
+-108 dBc
+SF
+26
+4.1 – 0.8GHz
+0 – 0.55 Volts
+150 µA
+1.2 Volts
+311 fsec. @ 4.1GHz
+-35 dBc
+-117 dBc
+FS
+26
+9.3 – 0.4GHz
+0 – 0.77 Volts
+150 µA
+1.2 Volts
+234 fsec. @ 9.3GHz
+-30 dBc
+-100 dBc
+FF
+26
+Triode
+ 
+ 
+Frequency range
+Voltage range
+current
+Supply voltage
+Jcc
+Phase noise @ 100KHz offset
+Phase noise @ 100MHz offset
+Corner case
+transistors
+180 nm
+2.5 – 0.57GHz
+0 – 0.35 Volts
+150 µA
+1.2 Volts
+494 fsec. @ 2.2GHz
+-44 dBc
+-122 dBc
+SS
+26
+4.89 – 1.5GHz
+0 – 0.5Volts
+150 µA
+1.2 Volts
+293 fsec. @ 4.9GHz
+-39 dBc
+-115 dBc
+SF
+26
+4.1 – 0.8GHz
+0 – 0.55 Volts
+150 µA
+1.2 Volts
+277 fsec. @ 4.1GHz
+-38 dBc
+-118 dBc
+FS
+26
+9.3 – 6.3GHz
+0 – 0.55 Volts
+150 µA
+1.2 Volts
+169 fsec. @ 9GHz
+-35 dBc
+-110 dBc
+FF
+26
+symmetric
  

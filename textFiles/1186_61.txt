@@ -26,7 +26,8 @@ Chapter 4 Implementation of the network model  .................................
 4.1 System requirements and hardware developing  ............................................... 20 
 4.2 Techniques and application fields  .................................................................... 23 
 4.3 Construction principle  ...................................................................................... 24 
-4.3.1 Feature list setting ...................................................................................... 26 4.3.2 Perez’s curve simulation  ............................................................................ 27 
+4.3.1 Feature list setting ...................................................................................... 26 
+4.3.2 Perez’s curve simulation  ............................................................................ 27 
 4.3.3 Rationality thresholds configuration  ......................................................... 28 
 Chapter 5 Analysis of prediction results  ................................................................ 30 
 5.1 Sequence and life span analysis  ....................................................................... 34 
@@ -48,7 +49,8 @@ Chapter 7 Evaluation of the work  ..............................................
 Acknowledgement  ..................................................................................................... II 
 Bibliography  ............................................................................................................ III 
 Appendices  ................................................................................................................. V 
- Figure Contents 
+ 
+Figure Contents 
  
 Figure 1 The knowledge composition of the work  ...................................................... 3 
 Figure 2 The basic concepts of unipartite network and bipartite network  ................... 5 
@@ -69,7 +71,8 @@ Figure 16 The new model based on weighted network   ............................
 Figure 17 The basic shapes of the co-operate relationships  ...................................... 45 
 Figure 18 The concepts of chain reaction  .................................................................. 47 
 Figure 19 Basic ideas of the similarity between rows in image processing  .............. 50 
-Figure 20 The difference of contribution from the images  ........................................ 50 Table Contents 
+Figure 20 The difference of contribution from the images  ........................................ 50 
+Table Contents 
  
 Table 1 The difference between various nesstedness  .................................................. 8 
 Table 2 Hardware requirements of different sort of software  .................................... 22 
@@ -86,7 +89,10 @@ Table 12 Elimination of the hardware components in 2006  .......................
 Table 13 Difference between the results from reality and prediction of 2006  .......... 37 
 Table 14 Status matrix between technology and application field  ............................ 38 
 Table 15 The time consumption of different data scale  ............................................. 39 
-Table 16 Factorial and combination figures  .............................................................. 40 Executive summary 
+Table 16 Factorial and combination figures  .............................................................. 40 
+I 
+ 
+Executive summary 
  
  
 Bipartite network is the kind of network that originates from the field of pollination 
@@ -120,16 +126,16 @@ improvements are on the theory level, implementations are necessary for evaluati
  
 Finally, a short list of bullet points that summarise the main contributions and 
 achievements in the project will be listed as follow: 
-· The basic concept of the bipartite network is expanded with a new variation, 
+ The basic concept of the bipartite network is expanded with a new variation, 
 3-Dimension bipartite network. 
-· Two different methods for the time evaluation in the new model are created, and 
+ Two different methods for the time evaluation in the new model are created, and 
 their performance are analysed. 
-· Introduction of real data processing is given for a better use in other fields. 
-· Improvements for the model quality are given for future enhancement. 
-· Cross-field applications are introduced to provide some inspiration in the area 
+ Introduction of real data processing is given for a better use in other fields. 
+ Improvements for the model quality are given for future enhancement. 
+ Cross-field applications are introduced to provide some inspiration in the area 
 apart from data analysis, which also expand the coverage of the new model. 
-I 
- Chapter 1 
+1 
+Chapter 1 
 Aims and objectives 
  
  
@@ -170,7 +176,8 @@ several steps should be executed for both accomplishments and improvements. Firs
 of all, an objective analysis of the dataset used in the original bipartite network should 
 be given, which would be a useful reference to define the dataset for the new model. 
 Secondly, since the model is constructed for application expanding, different dataset 
-1 with various features should be taken into consideration and being deeply analysed. 
+2 
+with various features should be taken into consideration and being deeply analysed. 
 Such a practice is necessary for the polymorphism of the model, namely, it is more 
 ideal to construct a model which can deal with different situations. For the last, the 
 source of the datasets for the sample analysis is significant, only build a convincing 
@@ -214,7 +221,8 @@ research results from this area. On a more objective sight, the use of existing 
 findings about network, or especially bipartite network is reasonable. It means that 
 some classical ideas and algorithms will be applied and recombined as the basis of the 
 new model. 
-2 1.3.2  Upgrading aspects 
+3 
+1.3.2  Upgrading aspects 
 This is a huge information resource pool because so many potential theories can be 
 applied to the new model for upgrading. To raise a simple instance, theories from the 
 areas like artificial intelligence, business economics or even psychology can be added 
@@ -239,18 +247,14 @@ given and clearly displayed through the form of a figure:
  
  
  
-Network 
- 
-Related Areas 
- 
-Bipartite Network 
  
  
  
  
  
  
-Current Work 
+ 
+ 
  
  
  
@@ -262,7 +266,12 @@ from the general network and some other subject will be applied into the work.
 With the general idea about the construction of the work, the application aim will be 
 briefly introduced here. As is known so far, bipartite network is a kind of static 
 network that can reveal some potential information from some of the characteristic 
-3 value. A typical example could be the pollination network, with a piece of data 
+Related Areas 
+Current Work 
+Network 
+Bipartite Network 
+4 
+value. A typical example could be the pollination network, with a piece of data 
 available, some value could be calculated to show that if it is urgent to protect some 
 of the species from either plants or insects. By comparison, dynamic bipartite network 
 is quite different from the static version, the results given from it will be based on the 
@@ -284,7 +293,8 @@ work focuses on providing an easy comprehension network model for more users
 from all the aspects that they are interested in, such like data feature, sample 
 execution, result analysis and development evaluation. 
   
-4 Chapter 2 
+5 
+Chapter 2 
 Background and context 
  
  
@@ -301,24 +311,14 @@ etc. Besides, bipartite network holds the basic concept same as the unipartite n
 like vertex, nodes, direction, weight, and so on. In this part, the concepts of the 
 bipartite network will be given from the basic points to the complicated notions. 
  
-B 
-A 
- 
-5 1 9 
- 
- 
-3 
- 
-1 
-1 
-2 
-1 
- 
-2 
  
  
  
-4 6 8 5 
+ 
+ 
+ 
+ 
+ 
  
  
 Figure 2. The basic concepts of unipartite network and bipartite network. (A) 
@@ -335,39 +335,31 @@ separately.
 Typically, one of the useful transformations of the bipartite network is projection [1], 
 because during the network analysis, information from the relationship between the 
 nodes from the same group is also important for the prediction. 
-5  
-A B 
- 
-A B C D 
- A B C D 
- 
- W 1 1 0 0 
- 
-X 0 1 1 1 
- 
-Y 1 1 0 0 
- 
-Z 0 0 1 1 
-W X Y Z 
- 
- 
- 
-C 
-D 
+A 
+2 1 
+2 
 1 
-2 
- 
-A B W X 
- 
+4 6 8 5 
+5 1 9 
+3 
 1 
- 1 
-1 
-2 
-2 
+B 
+6 
  
  
-2 
-C D Y Z 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
 Figure 3. The basic transformation of bipartite network. (A) The original topological 
@@ -388,7 +380,6 @@ same cluster, on comparison, there are less links between the nodes from differe
 clusters.  
  
  
-A B 
  
  
  
@@ -398,7 +389,31 @@ A B
  
 Figure 4. Concept of modularity. (A) A network with high modularity, two clusters 
 can be easily found. (B) A network with low modularity. 
-6 2.1.2  Robustness [2,3] 
+ A B C D 
+W 1 1 0 0 
+X 0 1 1 1 
+Y 1 1 0 0 
+Z 0 0 1 1 
+W X Y Z 
+A B C D 
+A B 
+2 
+A B 2 
+1 
+C D 
+1 
+C 
+Y 
+2 
+W X 
+1 
+Z 
+2 
+1 
+D 
+A B 
+7 
+2.1.2  Robustness [2,3] 
 This is a parameter to evaluate the ability of survival if a certain node in a network is 
 removed. Specifically, survival here means that in a network, node A can still find a 
 path to node B even if node C in the whole network is deleted. Theoretically, if the 
@@ -408,7 +423,6 @@ a computer network system has a strong robustness, even if one of the computers 
 being attacked, the rest of the system is still working, but if it is weak, the system will 
 be broken instantly. 
  
-A B 
  
  
  
@@ -443,12 +457,13 @@ found which connects the nodes of the subset of the former amount after another.
 higher the nestedness is, the rule will be displayed more strictly. More formally, in a 
 particle network, nestedness is a measure that demonstrates the likelihood of a link 
 from the low order node to a comparatively higher one. 
-7  A B C D  A B C D 
-W 1 1 1 1 W 1 1 1 1 
-X 1 1 1 0 X 1 0 1 0 
+A B 
+8 
+ A B C D 
+W 1 1 1 1 
+X 1 1 1 0 
 Y 1 1 1 0 
-Y 0 1 0 0 
-Z 1 0 0 0 Z 1 0 0 0 
+Z 1 0 0 0 
  
 Table 1. The two separate tables display the difference between different nestedness. 
 Assume that A-D represent a group of different islands from close to far to the 
@@ -459,14 +474,12 @@ farther island has a higher property to be seen on the closer island, obviously,
 according to the tables above, it is easy to draw the conclusion that the table on the 
 left has a higher nestedness than the right one. 
  
-· Different measurements from Ulrich and Atmar [4] 
+ Different measurements from Ulrich and Atmar [4] 
 There exist some popular ways of the measurement of nestedness, such like 
 “discrepancy” and “matrix temperature”, the former one is easier to compute while 
 the latter one is comparatively more popular but needs more solid mathematical 
 foundation. 
  
-A 
-B 
   
  
 Figure 6. The brief explanation about the recommended nestedness measurements. (A) 
@@ -475,35 +488,42 @@ perfect nested matrix, in the given case above, the minimum value of shifting is
 Matrix temperature is the normalized sum of squared distances d of holes (0s) and 
 outliers (1s) from the isoclines along the matrix diagonals. Figure 6 is cited from [4]. 
  
-· Lee’s suggestion about computing nestedness [6] 
+ Lee’s suggestion about computing nestedness [6] 
 Although the matrix temperature is quite popular, it is not easy to calculate since it 
 imports the concepts from linear algebra. In Lee’s paper, a more effective method to 
 measure the nestedness is introduced, which is considered having as good as or even 
 better performance than the matrix temperature. Briefly, the computation of 
 nestedness is defined as follow:  
-8 k
-kk
-aa
-1 ∑
-il jl
-l =1
-N =
-∑∑
-k(k ?1) min(d ,d )
-ij =11 = ij
+ A B C D 
+W 1 1 1 1 
+X 1 0 1 0 
+Y 0 1 0 0 
+Z 1 0 0 0 
+A B 
+9 
+1
+1 1
+1
+1
+kk k
+il jll
+i j i j
+a a
+N
+k( k ) min( d ,d )
+=
+= =
+=
+?
+∑∑∑
  
-k
-aa
 where “di” is the order of node i,  is the sum of the common neighbors 
-∑
-il jl
-l =1
 of certain node pair i and j, k is the number of nodes of the whole network. Aiming at 
 the project, it seems to be useful to handle the projection of the bipartite network since 
 such a method is suitable for the unipartite conditions. It could help to deal with the 
 chain reaction with the appearance of a specific node. 
  
-· Rodrıguez-Girones’s new algorithm [7] 
+ Rodrıguez-Girones’s new algorithm [7] 
 The appearance of another algorithm to compute the nestedness of the network tends 
 to raise some other drawbacks of nestedness temperature especially aiming at the fact 
 that the calculation of the “temperature” is demanding for the reorder of rows or 
@@ -519,7 +539,11 @@ related functions and values have been established. Concepts in this section wil
 partly applied into the construction of new model and the potential future 
 improvements as well in the following parts. 
   
-9 Chapter 3 
+1
+k
+il jll a a=∑
+10 
+Chapter 3 
 Description of the work 
  
  
@@ -534,11 +558,6 @@ network theories. On the other hand, its own features are evident as well. Gener
 the basic model can be demonstrated with the following structure figure, and the 
 details will be given based on the sequence of the figure: 
  
-Bipartite Network Dataset 
-Similarity Nestedness 
-Time factor Probability Contribution 
-Appearance Disappearance 
-Bipartite Network Prediction 
  
  
 Figure 7. The main structure of the basic dynamic bipartite network model from the 
@@ -549,28 +568,34 @@ Since the bipartite network model was originally used in the pollination network
 necessary to have a comprehensive analysis of the features of the data from the 
 ecosystem, in order to have a better assessment of the data from the other areas. 
 Hence, in this part, a detailed analysis will be given to reveal the difference between 
-10 datasets of different areas. 
+Bipartite Network Dataset 
+Similarity Nestedness 
+Probability Contribution Time factor 
+Appearance Disappearance 
+Bipartite Network Prediction 
+11 
+datasets of different areas. 
  
 Before exploring the data from other fields, it is of great importance to recap the 
 features of the dataset from pollination network specifically. The features will be 
 labeled with a phrase and be described with a further explanation as follow: 
  
-· Two main sets: Plants and insects are the only two main groups in this bipartite 
+ Two main sets: Plants and insects are the only two main groups in this bipartite 
 network, which is also a key rule for any models in other areas. 
-· Number of nodes: In a specific pollination network, the sorts of insects and plants 
+ Number of nodes: In a specific pollination network, the sorts of insects and plants 
 are kept in a certain amount level. Besides, the quantity of the sorts is up to 
 around one hundred since the chosen species have a bottom threshold. 
-· Mutualistic: In the pollination network, plants and insects rely on each other to 
+ Mutualistic: In the pollination network, plants and insects rely on each other to 
 live, in other words, from the view of computer science, the life span of the 
 vertexes of one group in the network depends on the interaction with the other 
 group, namely, if a node extincts in the bipartite network, it implies that the 
 weight of its link with others is below a certain level. 
-· Choice stability: This feature depends on the characteristic of the ecological field, 
+ Choice stability: This feature depends on the characteristic of the ecological field, 
 as long as the insects and plants live in an ideal environment, comparatively, 
 insects will not change their links to the plants within a wide range with a high 
 probability. Except for the situation such as a forest fire that will destroy the 
 environment which would make some species disappear. 
-· Long life span: As a part of the whole ecological system, the life span of the 
+ Long life span: As a part of the whole ecological system, the life span of the 
 pollination network of is very long, the species keep their generations with the 
 loop of the seasons, similar to the idea of “Choice stability”, the network will be 
 well kept if the objective environment is suitable for the species. 
@@ -593,7 +618,8 @@ field of computer science, furthermore, the subject of papers can be classified 
 sub-fields such as network, cryptography, database, graphics, etc, or they can be 
 classified more specifically such as bipartite network. Two groups, comparatively 
 small scale according to the specific need, classification of the nodes, and avoid the 
-11 unstable human factor (although author is one group of the two, but the professionals 
+12 
+unstable human factor (although author is one group of the two, but the professionals 
 seldom tries to change their research field because it is not easy to make some 
 research attractive if one is not familiar with that knowledge). Focus on this spot, a 
 reasonable bipartite network can be built to research the phenomenon like technique 
@@ -637,21 +663,17 @@ In order to judge a persistence of a specific node in the network, the definitio
 contribution of the node should be clearly demonstrated. The measure quantifies the 
 degree to which the overall nestedness of the network compares with the value 
 obtained when randomizing just the interactions of that particular node. 
-12 Mathematically, this is defined as: 
+13 
+Mathematically, this is defined as: 
 *
- 
-C =( N ? N )/ ?
-*
-ii
-N
 i
 *
-?
+i i NC ( N N ) / ?= ?  
+where N is the observed nestedness of the network, 
 *
-N
-N
-i i
-where N is the observed nestedness of the network,  and  are the average 
+iN  and *iN
+?
+ are the average 
 and standard deviation of nestedness across an ensemble of random replicates within 
 which the interactions of node i have been randomized. 
  
@@ -679,7 +701,8 @@ a key measure of the degree to which each node’s interactions work for or agains
 long-term persistence of species in the mutualistic network. Specifically, in the 
 practical application in other fields, we compare each node’s nestedness contribution 
 to its survival probability, in general, the more a node contributes to the architecture 
-13 of its network, the greater its probability of extinction. 
+14 
+of its network, the greater its probability of extinction. 
  
 3.3  Similarity and probability [1] 
 Apart from the macro measures of a network, micro measures also exist, apparently, it 
@@ -694,15 +717,16 @@ Here we use one of the most popular method to solve this problem, namely, we use
 the concept of collaborative filtering, which is based on the result of similarity 
 between the nodes from the same group. The formula of the similarity between two 
 nodes is defined as follow: 
-n
-aa ?
-∑
-ik jk
 1
-S =
-i,j
-min( d ,d )
-ij
+n
+ik jk
+i, j
+i j
+a a
+S min( d ,d )
+?
+=
+∑
  
 where d is the degree of the node, a stands for the linking status between the nodes, if 
 i connects with k, then a of i and k is one, otherwise, it is zero, n is the number of 
@@ -710,17 +734,23 @@ nodes of the group that does not contain node i and j.
  
 With the definition of similarity, now we can define the measure of the probability 
 that if node i from group A is interested in the node j of group B, here we define P as: 
+1
+1
 m
-sa ?
-∑
 il jl
-l =1,l ≠i
-P =
-i,j m
-s
-∑
+l ,l i
+mi, j
 il
-l =1,l ≠i
+l ,l i
+s a
+P
+s
+= ≠
+= ≠
+?
+=
+∑
+∑
  
 where m is the number of nodes of group A. To explain this formula more clearly, we 
 firstly calculate the sum of the product between all the other nodes in group A apart 
@@ -736,7 +766,8 @@ between nodes from two groups can be influenced by probability and contribution
 separately, which enable the matrix to be a dynamic state. In reality, since the edge 
 between nodes needs certain time to be constructed, therefore, such a characteristic 
 should be reflected from the linking status matrix. In order to satisfy such a demand, 
-14 two main methods dealing with time will be introduced, specifically, the concept of 
+15 
+two main methods dealing with time will be introduced, specifically, the concept of 
 feature list and Perez’s curve [11] can be applied into the network model. 
  
 With respect to the feature list, there are two main concepts that will influence the 
@@ -780,7 +811,8 @@ tendency of every new produced technology is very similar, in other words, peopl
 will accept the new comers following the steps of Perez’s curve, the only difference is 
 the developing speed. Recently, old technologies are easier being substituted by the 
 new ones, the reason for this phenomenon is evident, the information is spreading too 
-15 fast, once some surprising technology is released, it will be spread to every corner of 
+16 
+fast, once some surprising technology is released, it will be spread to every corner of 
 the earth overnight, after that, the relevant ideas, no matter from its supporters of 
 protesters, will be published as quickly as we imagine, hence, the life span of the 
 recent techniques are in a shorter cycle. 
@@ -803,19 +835,7 @@ technique is not widely accepted; if it grows fast between periods, it implies t
 being popular at the moment; when the growing speed becomes slow again, generally, 
 the number of links is becoming stable at a high level, according to Perez’s theory, 
 some new technology is probably on the way to a new revolution. 
-16 Change of connection numbers to a certain node 
-100 
-90 
-80 
-70 
-60 
-50 
-40 
-30 
-20 
-10 
-0 
-t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 
+17 
  
 Figure 10. The figure of the number of the links to a specific node. Ideally, with the 
 time passes by, the number of edges collected in different time can be shown with a 
@@ -845,22 +865,36 @@ be given, otherwise, it is impossible for the matrix to spread the links with an
 initialisation, and it seems to be inconsistent with the facts. As to the weighted matrix, 
 it is more difficult to give the original figures because the 0s and 1s should be 
 replaced by specific numbers, which should be roughly evaluated. 
-17 3.6  Time Factor 
+0 
+10 
+20 
+30 
+40 
+50 
+60 
+70 
+80 
+90 
+100 
+t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 
+Change of connection numbers to a certain node 
+18 
+3.6  Time Factor 
 Time factor is a significant component to upgrade the bipartite network from the static 
 level to a dynamic level. Thus, in this part, the various concepts about time and their 
 related measure methods will be introduced. Overall, time factor can be defined in 
 different levels, which will be briefly demonstrated as follow, and the practical 
 application depends on the features of the dataset. 
  
-· Short time period: Roughly, time span from minutes to days can be defined as a 
+ Short time period: Roughly, time span from minutes to days can be defined as a 
 short time period. It is suitable for the datasets which have a high updating 
 frequency, such as the number of some posts shared by the users, if we check a 
 certain post a week after it was posted, it might already be forgotten by the users. 
-· Long time period: Roughly, time span from weeks to years can be considered as a 
+ Long time period: Roughly, time span from weeks to years can be considered as a 
 long time period. Scenarios like pollination network, the edge between the certain 
 insect and plant may not change even by years. Hence, as long as nothing special 
 happens, there is no need to monitor the data so frequently. 
-· Life span: This is a parameter that depends on the dataset we choose, we define 
+ Life span: This is a parameter that depends on the dataset we choose, we define 
 life span as the time from arrive to extinct of a new comer, thus, the life span 
 varies from field to field, in the ecological environment, a specific species of 
 plant can keep alive for hundreds of years under ideal conditions, while in the 
@@ -869,7 +903,7 @@ system Window XP, Microsoft will stop the support of it in 2014, namely, its lif
 span is just less than 20 years. In this project, life span is just a reference for the 
 controls of data processing, more care will be take care of during the special 
 periods. 
-· Processing span: This is another parameter that will rely on the features of the 
+ Processing span: This is another parameter that will rely on the features of the 
 selected dataset. Processing span is the time that the system consumes from 
 collecting the data to making a conclusion, intuitively, processing span is longer 
 than the time period and shorter than the life span, otherwise, the conclusion will 
@@ -888,7 +922,8 @@ after another nine months. There is no doubt that the time span varies between
 predicting objects, sometimes the difference can be huge enough like days and 
 decades, but since the developing sequence is comparatively stable, thus with the near 
 future matters available, the model can amplify it for further futures. With the 
-18 improvement of the model, the time period can be given with the help of a well design 
+19 
+improvement of the model, the time period can be given with the help of a well design 
 formula and enough amounts of existing data. 
  
 Finally, there is one thing left which cannot be neglected which is important to the 
@@ -918,7 +953,8 @@ able to provide a prediction based on the simulation of network changing, which 
 help the user to have a general idea about the future happenings. Thus, users can take 
 some measures for the potential results. 
   
-19 Chapter 4 
+20 
+Chapter 4 
 Implementation of the network model 
  
  
@@ -949,17 +985,18 @@ information defined ahead. Apart from this, there exist some typical characteris
 that could vary from field to field. 
  
 4.1  System requirements and hardware developing 
-· Background introduction 
+ Background introduction 
 The dataset originates from the relationship between system requirements of different 
 sort of software and the development of computer hardware components. With the 
 estimation of the hardware development, user can take corresponding actions for a 
 better self development. 
  
-· Data features 
+ Data features 
 Generally, system requirements of the software are mainly related to CPU, RAM, 
 hard disk space, graphic card, resolution and so on. Different levels of hardware 
 components can be defined as the nodes from one of the groups, for instance, CPU 
-20 with the frequency of 2.5GHz and 3.0GHz can be considered as two nodes from the 
+21 
+with the frequency of 2.5GHz and 3.0GHz can be considered as two nodes from the 
 hardware group. But since there are some similarities between them, thus some 
 improvement measures are necessary to decline its negative influence. Specifically, 
 under such a circumstance, if a higher level node is connected with a node from 
@@ -979,58 +1016,61 @@ kind of software, the system requirements are raising in some of the hardware
 components. Besides, requirements of different sort of software varies, it depends on 
 its function and display method. 
  
-System requirements CPU RAM Hard Graphic card 
+System requirements CPU RAM Hard 
 disk 
+Graphic card 
 Software classification 
-1GHz 256MB 3.8GB 16-Bit 
 Programming platform 
-1GHz 256MB 4GB / 
 (Visual Studio) 
+1GHz 256MB 3.8GB 16-Bit 
+1GHz 256MB 4GB / 
 1.6GHz 1GB 3GB / 
-Pentium 3 128MB 400MB / 
 Document processing 
-500MHz 256MB 2GB / 
 (Microsoft Office) 
+Pentium 3 128MB 400MB / 
+500MHz 256MB 2GB / 
 500MHz 512MB 3GB DX9.0c 64MB 
-Pentium 3 or 4 384MB 750MB 16-Bit 
 2D processing 
-1.8GHz 1GB 1GB OpenGL 2.0 
 (Adobe Photoshop) 
+Pentium 3 or 4 384MB 750MB 16-Bit 
+1.8GHz 1GB 1GB OpenGL 2.0 
 Pentium 4 1GB 1GB 256MB 
-Pentium 3 512MB 450MB OpenGL 
 3D processing 
-Pentium 4 2GB 2GB OpenGL 2.0 
 (Maya) 
+Pentium 3 512MB 450MB OpenGL 
+Pentium 4 2GB 2GB OpenGL 2.0 
 Pentium 4 2GB 10GB OpenGL 
-Pentium 3 1GHz 1GB 2GB VGA 
 Database 
-2GHz 2GB 2GB / 
 (SQL server) 
+Pentium 3 1GHz 1GB 2GB VGA 
+2GHz 2GB 2GB / 
 2GHz 2GB 2.2GB / 
-Pentium 3 800MHz 1GB 710MB 32-Bit 
 Animation processing 
-2GHz 1GB 10GB OpenGL 2.0 
 (Adobe Flash) 
+Pentium 3 800MHz 1GB 710MB 32-Bit 
+2GHz 1GB 10GB OpenGL 2.0 
 Pentium 4 512MB 3.5GB / 
-Pentium 4 512MB 4GB 128MB 
 Video Processing 
-Pentium 4 1GB 1GB / 
 (Corel VideoStudio) 
+Pentium 4 512MB 4GB 128MB 
+Pentium 4 1GB 1GB / 
 Core 2*1.83GHz 2GB 3GB 256MB 
-21 Pentium 4 1.4GHz 512MB 4.7GB G6800 128MB 
+22 
 Sports Game 
-Pentium 4 3.0GHz 1GB 6.5GB G6600 256MB 
 (PES) 
+Pentium 4 1.4GHz 512MB 4.7GB G6800 128MB 
+Pentium 4 3.0GHz 1GB 6.5GB G6600 256MB 
 Core 2*2.0GHz 2GB 8GB G7900 256MB 
-Pentium 4 2.4GHz 1GB 4.7GB G6800 128MB 
 Racing Game 
-Pentium 4 3.0GHz 1GB 6GB GT240 512MB 
 (Need for speed) 
+Pentium 4 2.4GHz 1GB 4.7GB G6800 128MB 
+Pentium 4 3.0GHz 1GB 6GB GT240 512MB 
 Core 2 2*1.8GHz 2GB 6.5GB Dx9.0C 256MB 
-Pentium 4 2.0GHz 512MB 9.9GB G5900 256MB 
 FPS Game 
-(Tomb Raider Legend Pentium 4 3.0GHz 1GB 8GB G6600 256MB 
+(Tomb Raider Legend 
 or Call of Duty) 
+Pentium 4 2.0GHz 512MB 9.9GB G5900 256MB 
+Pentium 4 3.0GHz 1GB 8GB G6600 256MB 
 Pentium 2*2.93GHz 3GB 12GB GT240 1GB 
 Table 2: Hardware requirements of different sort of software in 2006, 2008 and 2010. 
  
@@ -1043,42 +1083,33 @@ computers can be found on the official website of DELL, while the other figures 
 be obtained from the database of some authentic famous websites. Generally, the level 
 of the same configuration is declining with time goes. 
  
-Hardware components CPU RAM Hard Graphic card 
+Hardware components CPU RAM Hard 
 disk 
+Graphic card 
 Series(year) 
 D510(2006A) Celeron 1.5GHz 256MB 40GB Intel GMA 900 
 640M(2006B) Core2 2*1.66GHz 512MB 120GB Intel GMA 950 
-AMD 2*1.8GHz 1GB 120GB ATI X1150 256MB 
-Inspiron 1501(2006C) 
-Core2 2*2.33GHz 2GB 120GB 7950GTX 512MB 
-XPS M1710(2006D) 
-Pentium 2*2.5GHz 1GB 250GB Intel GMA 3100 
-OptiPlex 360 (2008A) 
-Core2 2*2.66GHz 2GB 500GB ATI 3450 256MB 
-Inspiron 518 (2008B) 
-Core2 4*2.33GHz 4GB 500GB 9800GT 512MB 
-Studio (2008C) 
+Inspiron 1501(2006C) AMD 2*1.8GHz 1GB 120GB ATI X1150 256MB 
+XPS M1710(2006D) Core2 2*2.33GHz 2GB 120GB 7950GTX 512MB 
+OptiPlex 360 (2008A) Pentium 2*2.5GHz 1GB 250GB Intel GMA 3100 
+Inspiron 518 (2008B) Core2 2*2.66GHz 2GB 500GB ATI 3450 256MB 
+Studio (2008C) Core2 4*2.33GHz 4GB 500GB 9800GT 512MB 
 Studio XPS(2008D) Core I7 4*2.66GHz 6GB 1TB GT220 1GB 
 VOSTRO 220(2009A) Pentium 2*2.6GHz 2GB 320GB Intel GMA X4500 
 Inspiron 545(2009B) Core2 2*2.93GHz 2GB 500GB GT220 1GB 
 VOSTRO 430(2009C) Core I5 4*2.66GHz 4GB 320GB ATI 4350 512MB 
 Studio XPS 435t(2009D) Core I7 4*2.66GHz 6GB 1TB ATI 4670 512MB 
-Core2 4*2.5GHz 4GB 640GB GT310 512MB 
-Inspiron 560(2010B) 
-AMD 4*2.8GHz 4GB 500GB ATI 5450 1GB 
-Studio XPS 7100(2010C) 
-Pentium 2*2.7GHz 2GB 500GB Intel GMA 
-Inspiron 660-1(2012A) 
-Core I3 2*3.3GHz 2GB 500GB GT620 1GB 
-Inspiron 660-2(2012B) 
-Core I5 4*3.0GHz 4GB 1TB GT640 1GB 
-Inspiron 660-3(2012C) 
-Core I7 4*3.4GHz 4GB 2TB AMD 7870 2GB 
-XPS 8500(2012D) 
+Inspiron 560(2010B) Core2 4*2.5GHz 4GB 640GB GT310 512MB 
+Studio XPS 7100(2010C) AMD 4*2.8GHz 4GB 500GB ATI 5450 1GB 
+Inspiron 660-1(2012A) Pentium 2*2.7GHz 2GB 500GB Intel GMA 
+Inspiron 660-2(2012B) Core I3 2*3.3GHz 2GB 500GB GT620 1GB 
+Inspiron 660-3(2012C) Core I5 4*3.0GHz 4GB 1TB GT640 1GB 
+XPS 8500(2012D) Core I7 4*3.4GHz 4GB 2TB AMD 7870 2GB 
 Table 3. Hardware configuration of computers in different years, especially, from 
 2010, DDR3 is put into use instead of DDR2 in RAM. 
  
-22 Based on the two tables above, a matrix of links between software and hardware 
+23 
+Based on the two tables above, a matrix of links between software and hardware 
 requirements of different level can be processed for the simulation. There is one thing 
 need to be paid attention to is that the lowest level of hardware is not placed in the 
 matrix since according to the feature of this dataset, there must be a link between the 
@@ -1088,29 +1119,29 @@ the very basic level at that period.
  
 Software\Hardware CM CU CH RM RU RH DM DU DH GM GU GH 
 Programming 
-1 0 0 1 1 0 1 1 0 0 0 0 
 platform 
+1 0 0 1 1 0 1 1 0 0 0 0 
 Document 
-0 0 0 1 0 0 0 0 0 0 0 0 
 processing  
+0 0 0 1 0 0 0 0 0 0 0 0 
 2D processing 1 0 0 1 1 0 0 0 0 1 0 0 
 3D processing      1 1 0 1 1 1 1 1 0 1 1 0 
-Database          1   0 0 1 1 1 1 0 0 0 0 0 
+Database            1 0 0 1 1 1 1 0 0 0 0 0 
 Animation 
-1 1 0 1 1 0 1 1 1 1 1 0 
 processing  
+1 1 0 1 1 0 1 1 1 1 1 0 
 Video Processing  1 1 0 1 1 0 1 0 0 1 0 0 
-Sports Game       1   1 0 1 1 0 1 1 0 1 0 0 
-Racing Game       1  1 1 1 1 0 1 1 0 1 1 1 
-FPS Game         1   1 0 1 1 0 1 1 1 1 1 0 
-C: CPU  R: RAM  D: DISK G: Graphic card  
+Sports Game         1 1 0 1 1 0 1 1 0 1 0 0 
+Racing Game        1 1 1 1 1 0 1 1 0 1 1 1 
+FPS Game           1 1 0 1 1 0 1 1 1 1 1 0 
+C: CPU  R: RAM D: DISK G: Graphic card  
 M: Medium U: Upper middle  H: High 
  
 Table 4: Matrix of relationship between hardware and software, which is used in the 
 actual simulation of the program, the analysis result is obtained based on this matrix. 
  
 4.2  Techniques and application fields 
-· Background introduction: 
+ Background introduction: 
 This is a relationship network between the computer science technology and their 
 related application field. With the current data available, the dynamic bipartite 
 network model will predict the spreading of the techniques and their extinction time 
@@ -1119,7 +1150,8 @@ according to the results.
  
  
  
-23 · Data feature 
+24 
+ Data feature 
 The matrix which demonstrates the relationship between the techniques and its related 
 application field is manually created because of the limitation of data available. But 
 we can still evaluate the result given by the programme via some objective materials. 
@@ -1130,26 +1162,22 @@ like the practice mentioned above.
  A B C D E F G H I J K L M N 
 a 1 0 0 0 0 0 0 0 0 0 0 1 0 1 
 b 0 0 0 0 0 0 0 1 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 1 0 0 0 1 0 
-c 
+c 0 0 0 0 0 0 0 0 1 0 0 0 1 0 
 d 0 1 1 0 0 0 0 0 1 0 1 0 1 1 
 e 1 0 0 0 1 0 1 0 0 1 0 1 0 1 
 f 1 1 1 0 0 0 1 0 0 1 1 0 1 1 
 g 0 1 1 1 1 1 0 1 1 1 1 0 1 1 
-1 0 0 1 0 1 0 1 1 1 1 0 0 1 
-h 
+h 1 0 0 1 0 1 0 1 1 1 1 0 0 1 
 i 1 0 0 0 1 0 1 0 0 1 0 1 1 1 
 j 1 1 0 0 0 0 0 0 0 1 0 1 0 0 
 k 1 1 1 0 1 0 1 0 1 1 0 1 0 1 
 l 0 0 0 0 0 0 1 0 0 1 0 1 0 0 
-1 0 0 0 0 1 0 0 0 1 0 0 0 0 
-m 
+m 1 0 0 0 0 1 0 0 0 1 0 0 0 0 
 n 0 1 1 0 0 0 1 0 1 1 0 1 1 1 
 o 1 0 0 0 1 1 1 0 1 1 0 0 0 0 
 p 1 1 0 1 1 1 0 1 1 1 1 0 1 1 
 q 0 1 0 1 1 1 1 0 1 1 1 0 1 1 
-1 1 0 1 0 1 0 1 1 1 1 0 1 1 
-r 
+r 1 1 0 1 0 1 0 1 1 1 1 0 1 1 
 Table 5. The linking relationship table between techniques and application fields, the 
 relative names of the table will be listed in the appendix. 
  
@@ -1165,17 +1193,10 @@ one of the groups. The former is determined by the probability between two nodes
 while the latter is decided by the contribution of one node. Moreover, the result is not 
 simply calculated from the original data matrix, it will give the output after the 
 upgrade of the matrix for a couple of times, which stands for the imitation of the 
-24 dynamic development of reality. Generally, the processing flow of the dynamic 
+25 
+dynamic development of reality. Generally, the processing flow of the dynamic 
 bipartite network can be demonstrated through the figure below. 
  
-Matrix status 
-changing 
-algorithms 
-Status matrix 
-Data source 
-Prediction 
-Results 
-Step Processor 
  
 Figure 11. The operation flow figure of the basic dynamic bipartite network, which 
 contains the major procedure and the main components in use as well. 
@@ -1190,11 +1211,11 @@ iterated for certain rounds based on the needs of the users. To a microcosmic vi
 there are some components which are important for the construction of the model will 
 be briefly introduced as follow: 
  
-· A matrix processor, which can store the information of the linking status between 
+ A matrix processor, which can store the information of the linking status between 
 groups, most important of all, it should have the function of matrix modification 
 such like value changing, column deleting, variation recording and other related 
 functions. 
-· Mathematical processor, since the main purpose of the basic model is to calculate 
+ Mathematical processor, since the main purpose of the basic model is to calculate 
 the probability and contribution of the matrix, therefore, related function is 
 necessary, such like the random column creating and computing of mean and 
 standard deviation, which are both of great significance for the calculation of the 
@@ -1204,11 +1225,20 @@ the matrix processor.
 From the introduction of the construction principle especially the flow graph, it is not 
 difficult to find that the most important component to distinguish the difference 
 between bipartite network and dynamic bipartite network is the construction of step 
-25 processor. Therefore, both of the time evaluation method will be introduced here 
+Data source 
+Status matrix 
+Step Processor 
+Matrix status 
+changing 
+algorithms 
+Prediction 
+Results 
+26 
+processor. Therefore, both of the time evaluation method will be introduced here 
 based on the real data. 
  
 4.3.1  Feature list setting 
-· System requirements and hardware developing: 
+ System requirements and hardware developing: 
 In this sample, node features are only chosen from one of the groups, in other words, 
 it is assumed that only some features from the hardware components will influence 
 the popularisation. Specifically, price is an important parameter that cannot be ignored, 
@@ -1233,13 +1263,15 @@ Table 6. The table of the features of the matrix with the fixed specific values.
 Based on the feature list, the way of timing consumption evaluation can be calculated 
 through the method based on the idea of weight. Directly, the evaluation formula can 
 be written as follow: 
-n
-Value ?Weight
-∑ nn
 1
- 
-Time Consumption =
+n
+n nValue Weight
 Ti min g Base
+Time Consumption
+?
+=
+∑
+ 
 To be more specific, n in the formula stands for the total number of the features in the 
 feature list. Weight can be considered as a kind of importance tendency, the sum of 
 weight of all the features should be a constant value such like 10, 20 or 100. Timing 
@@ -1249,7 +1281,8 @@ sum of weight of features is 10, cost weight 6 and efficient weight 4, timing ba
 set as 7, in order to have same maximum time consumption with the method about 
 Perez’s curve. 
  
-26 · Techniques and application fields: 
+27 
+ Techniques and application fields: 
 In this relationship network, features will come from both of the groups. From the 
 technique side, setup cost is been extracted as a typical feature, it reveals the level of 
 comprehensive difficulty of applying a specific technology to a certain field, 
@@ -1271,8 +1304,7 @@ Difficulty 3 2 3 2 3 2 2 2 3 2 1 1 1 1
  
 Field a b c d e f g h i j k l m n o p q r 
 Interaction 0 0 0 0 1 1 0 1 1 1 1 1 1 1 1 0 1 0 
-4 2 2 3 4 3 2 4 4 4 3 3 2 3 2 1 1 1 
-Scope 
+Scope 4 2 2 3 4 3 2 4 4 4 3 3 2 3 2 1 1 1 
 Table 7. The feature list of the relationship network between techniques and fields, the 
 relative names can be seen in the appendix. 
  
@@ -1290,11 +1322,11 @@ consumption in different period can be set beforehand. Such a practice is used i
 testing of the model. 
  
 Period index 0 1 2 3 4 5 6 
-7 4 2 1 2 4 7 
-Time consumption 
+Time consumption 7 4 2 1 2 4 7 
 Table 8. The table of step settings according to the Perez’s curve, intuitively, figures in 
 the table are symmetrical. 
-27 The construction principle will be explained at first, period index can be considered as 
+28 
+The construction principle will be explained at first, period index can be considered as 
 the current period of the development of a certain object, which is influenced by the 
 amount of current links with others. According to the concept of Perez’s theory, the 
 developing speed is fast in the middle and slow in both of the ends. Thus, the index in 
@@ -1307,10 +1339,9 @@ curve is built for the further calculation. Intuitively, if more period indexes 
 the table, the time consumption evaluation will be more precise. From the other hand, 
 such a design can be applied to the data with all sorts of scale. The formula of time 
 evaluation can be written as follow: 
-Current Connections
- 
-Time Consumption = Table( ? Maximum Index )
+Current ConnectionsTime Consumption Table( Maximum Index )
 Maximum Connections
+= ?  
 Raising an example with random numbers, if the amount of the possible links between 
 a certain node and all the nodes from the other group is 40, while there exist 24 edges 
 at the moment, based on the table given above, the index for the current situation will 
@@ -1339,31 +1370,80 @@ have a same value of contribution. But obviously, the situations from these two
 groups are absolutely different. Based on the research of contribution, it implies that 
 the node which has more links with others have a higher probability to be eliminated, 
 thus, in order to predict the right node that will face the extinction, a simple but useful 
-28 mechanism will be applied into it. Apart from checking the contribution of the certain 
+29 
+mechanism will be applied into it. Apart from checking the contribution of the certain 
 node, the proportion of the edges will be inspected before making a prediction. In 
 other words, if the proportion of current edges which have been built of the node does 
 not reach a threshold, even if the contribution is high enough, it still needs more links 
 for development. In the real testing, the proportion is setting for 60%. 
  
-?? 0 ?? 1 ?? 1 ?? 1
-B 
-A 
-?? ?? ?? ??
-0 0 1 1
-?? ?? ?? ??
-?? ?? ?? ??
-1 0 0 1
-?? ?? ?? ??
-0 0 1 1
-?? ?? ?? ??
-?? ?? ?? ??
-0 0 1 1
-         
-?? ?? ?? ??
-?? ?? ?? ??
-0 0 1 0
-?? ?? ?? ??
- 
+0
+0
+1
+0
+0
+0
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+  
+1
+0
+0
+0
+0
+0
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+     
+1
+1
+0
+1
+1
+1
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+  
+1
+1
+1
+1
+1
+0
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?
+? ?  
 Figure 12. The process of matrix transformation based on the “discrepancy” method 
 of nestedness calculation. 
  
@@ -1373,7 +1453,9 @@ specifically introduced, in other words, a model of dynamic bipartite network ca
 completely constructed based on the details mentioned above. Therefore, the result 
 evaluation will be demonstrated in the following chapter. 
   
-29 Chapter 5 
+A B 
+30 
+Chapter 5 
 Analysis of prediction results 
  
  
@@ -1397,24 +1479,25 @@ sections which cover the following aspects. In each aspect, different performanc
 the model with different threshold will be demonstrated, in order to bring a more 
 comprehensive evaluation of the model. 
  
-· Sequence accuracy: Since there are no random values in this model, thus the 
+ Sequence accuracy: Since there are no random values in this model, thus the 
 sequence obtained from the model is constant under the same situation. Via 
 comparing the result with the actual development in the selected area, a sequence 
 difference can be obtained. From the angle of the model, sequence is a key 
 measurement criterion because it would help users to have a direct feeling of the 
 future happenings. 
-· Life span accuracy: This is another important criterion for results evaluation, 
+ Life span accuracy: This is another important criterion for results evaluation, 
 based on the features of the model construction principles, the main method for 
 life span analysis is to comparing the multiple relationships between the time spot 
 of extinction of different nodes.  
-· Perez’s curve analysis: Such an analysis aims at the changing pace for one node, 
+ Perez’s curve analysis: Such an analysis aims at the changing pace for one node, 
 it focuses on the phenomenon that if the selected node is expanding its number of 
 links like the tendency according to Perez’s curve. 
-· Special theories: In different areas, there are some special theories which can 
+ Special theories: In different areas, there are some special theories which can 
 partly reveal the accuracy of the model. This can also be a kind of assistant 
 method. 
-· Timing consumption: Efficiency is a criterion that we cannot neglect, in this 
-30 section, different algorithms will be used to run the model only for the difference 
+ Timing consumption: Efficiency is a criterion that we cannot neglect, in this 
+31 
+section, different algorithms will be used to run the model only for the difference 
 of time, for a good solution, high accuracy and fast speed are both demanding. 
  
 Apart from the analysis methods, all the assumptions and value configuration is ought 
@@ -1448,7 +1531,8 @@ development will be presented, and four sorts of nodes disappearance are shown.
  
 Original matrix 
  
-31 Group A 
+32 
+Group A 
     
  
 Group B 
@@ -1459,7 +1543,8 @@ Group C
  
  
  
-32 Group D 
+33 
+Group D 
     
 Figure 13. The comparison of different probability threshold and between two timing 
 computing methods. Group A, B, C, D represent the probability of 0.3, 0.5, 0.7 and 
@@ -1478,8 +1563,7 @@ if the probability is set on 0.3. Thus, improvements should be designed for such
 circumstance. 
  
 Table A 
-a b c d a b c d a b c d a b c d 
- 
+ a b c d a b c d a b c d a b c d 
 CM 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
 CU 8 8 8  8 8 8  8 8 8  8 8 13  
 CH                 
@@ -1492,7 +1576,8 @@ D
 GM 3 3 3 3 3 3 3 3 3 3 3 3 6 6 6  
 GU 8    8    8    8    
 GH                 
-33 Table B 
+34 
+Table B 
  a b c d a b c d a b c d a b c d 
 CM 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 
 CU 5 5 5  5 5 5  5 5 5  5 5 7  
@@ -1506,7 +1591,7 @@ D
 GM 3 3 3 3 3 3 3 3 3 3 3 3 5 5 5  
 GU 5    5    5    5    
 GH                 
-C: CPU  R: RAM  D: DISK G: Graphic card  
+C: CPU  R: RAM D: DISK G: Graphic card  
 M: Medium U: Upper middle  H: High 
  
 Table 9. The result of disappearance of the nodes predicted by the network model, 
@@ -1534,7 +1619,8 @@ to be “extinct” after the disappearance of the lower level component. On the con
 the prediction based on Perez’s theory provides a not good enough result. Specifically, 
 sequences in CPU and hard disk are reversed either because of the timing setting 
 theory or the changing of contribution. On the other hand, sequence between 
-34 components is also an important criterion, which will be analysed based on the actual 
+35 
+components is also an important criterion, which will be analysed based on the actual 
 data demonstrating as follow. 
  
 Hardware Eliminated Time Hardware Eliminated Time 
@@ -1578,7 +1664,8 @@ in graphic card, 3:8 is obtained. Such a result is based on the parameter of 2 s
 of the node disappearance, if the parameter is step to 1 step, the actual result will 
 become 5:7, 2:4, 4:5 and 2:7, which is much closer to the real data. On the whole, the 
 model provides a reasonable result of the timing multiple relationship between nodes. 
-35 Similar to the conclusion of the sequence analysis, in order to improve the quality of 
+36 
+Similar to the conclusion of the sequence analysis, in order to improve the quality of 
 the prediction results, it is significant to construct a current dataset of a high quality. 
  
 5.2  Perez’s curve analysis 
@@ -1621,7 +1708,8 @@ Perez’s curve have a little mistake in RAM.
 Hardware Eliminated Time Hardware Eliminated Time 
 CM 2007 DM 2007 
 CU 2007 DU 2007 
-36 CH M-2008 DH 2007 
+37 
+CH M-2008 DH 2007 
 RM 2007 GM 2007 
 RU 2008 GU M-2008, 2009 
 RH M-2008 GH U-2008, M-2009 
@@ -1653,8 +1741,7 @@ a 1 6 0 0 8 11 6 0 8 6 8 1 4 1
 b 6 5 0 5 6 5 11 1 6 5 3 0 3 3 
 c 6 5 0 5 6 5 11 0 1 5 3 0 1 3 
 d 7 1 1 9 12 9 11 0 1 5 1 0 1 1 
-1 7 0 0 1 12 1 0 9 1 10 1 8 1 
-e 
+e 1 7 0 0 1 12 1 0 9 1 10 1 8 1 
 f 1 1 1 0 13 10 1 0 8 1 1 0 1 1 
 g 6 1 1 1 1 1 11 1 1 1 1 0 1 1 
 h 1 7 0 1 14 1 13 1 1 1 1 0 5 1 
@@ -1664,11 +1751,11 @@ k 1 1 1 0 1 14 1 0 1 1 10 1 5 1
 l 8 6 0 0 8 14 1 0 8 1 10 1 5 5 
 m 1 6 0 0 7 1 6 0 7 1 4 0 4 4 
 n 8 1 1 0 13 14 1 0 1 1 8 1 1 1 
-37 o 1 6 0 0 1 1 1 0 1 1 7 0 4 4 
+38 
+o 1 6 0 0 1 1 1 0 1 1 7 0 4 4 
 p 1 1 0 1 1 1 9 1 1 1 1 0 1 1 
 q 7 1 0 1 1 1 1 0 1 1 1 0 1 1 
-1 1 0 1 11 1 9 1 1 1 1 0 1 1 
-r 
+r 1 1 0 1 11 1 9 1 1 1 1 0 1 1 
 Table 14: The status matrix based on the relationship network between technology 
 and application, 0.5 and 2.0 are set for probability and contribution separately. 1 in the 
 matrix means that the link is originally built in the matrix, while 0 reveals the 
@@ -1706,7 +1793,8 @@ result that the medium level CPU will be eliminated after 4 steps, and upper mid
 level will be eliminated after another 3 steps, it implies that the elimination frequency 
 of the CPU predicted by the model is close to the fact. 
  
-38  
+39 
+ 
 Figure 14. The processor development based on Moore’s law. Figure 14 is adapted 
 from [12]. 
  
@@ -1731,14 +1819,14 @@ since it need to list all the combination possibilities, the time consumption wi
 lot with the expanding of the dataset scale. Such a conclusion can be proved by the 
 fact that the multiple relationship between the time consumption is close to their 
 related maximum combination amount. Since the bipartite network originates from 
-39 the dataset with the scale of hundred, thus it is significant to have an evaluation of the 
+40 
+the dataset with the scale of hundred, thus it is significant to have an evaluation of the 
 probable time consumption of dataset with different scale. 
  
 N N! N! / (M!*M!) 
 10 3628800 252 
 18 6.402e+15 48620 
-2.433e+18 184756 
-20 
+20 2.433e+18 184756 
 50 3.041e+64 126410606437752 
 100 9.333e+157 1.090e+29 
 200 7.887e+374 9.055e+58 
@@ -1768,7 +1856,8 @@ configuration of the feature list is of great importance. Finally, some of the p
 setting needs the past data training in order to have a most ideal result among all the 
 possible values. 
   
-40 Chapter 6 
+41 
+Chapter 6 
 Improvements and further work 
  
  
@@ -1780,7 +1869,7 @@ examples of cross field application of the dynamic bipartite network model will 
 introduced for a kind of reference. 
  
 6.1  Improvements based on the analysis results 
-· Self-developing mechanism 
+ Self-developing mechanism 
 In the data analysis, it is revealed that if the amount of edges with one node is not 
 enough, it will keep such a state to the end of the simulation, which does not fit the 
 facts. In order to improve the quality of the model, a self-developing mechanism can 
@@ -1805,11 +1894,12 @@ on, although the simple version can provide some prediction result, it is obviou
 there exist some improvements from different aspects that can refine the whole model, 
 which can either raise its accuracy or expand its application field. 
  
-· Algorithm improvements 
+ Algorithm improvements 
 Although there is not a high demanding for the efficiency of the whole model, 
 especially, the scale of the dataset is not that huge. When the model meet the dataset 
 with a huge scale such like the posts from a social network platform, it is necessary to 
-41 enhance the efficiency of the model. Except for the long term prediction, if the model 
+42 
+enhance the efficiency of the model. Except for the long term prediction, if the model 
 is applied into the online application, it is improper to keep the users waiting because 
 of the limitation of computing algorithm. Therefore, it is significant to find a new 
 system which is compatible with a big scale of dataset. 
@@ -1830,12 +1920,13 @@ Figure 15. The construction of Van Emde Boas tree. Figure 15 is cited from [13].
  
 Obviously, the original vEB tree only stores the position information of 1, but in the 
 variety which serves for the nestedness computation, information of both 0 and 1 
-42 should be stored in the parent nodes since the computation is related to the position 
+43 
+should be stored in the parent nodes since the computation is related to the position 
 swap between them. Specific performance need to be further improved although it 
 seems to be compatible from the theoretic level. 
  
 6.2  Future improvements 
-· Weighted dynamic bipartite network [14] 
+ Weighted dynamic bipartite network [14] 
 It will become a totally new version if weighted network is applied into this model. 
 More information can be revealed from it. Since we can add numbers onto the nodes 
 and edges, evidently, concept like scale and allocation will be added into the model. 
@@ -1845,15 +1936,11 @@ how one specific technology is applied in different areas with different situati
 a comparison can be demonstrated from the following figure. 
  
  
-T1 
- T1 T2 T2
- 
-  
  
  
- F1 F2 F3 F2 
-F1 
-F3 
+ 
+ 
+ 
  
  
 Figure 16. The comparison graph displays a direct new view of the network model. 
@@ -1867,7 +1954,7 @@ Since the nodes can be labeled as different scales, that means nodes from one gr
 can be organized by communities. Some of the classical algorithms will be introduced 
 here for a reference. 
  
-· Newman’s measure of Modularity [15,16,17] 
+ Newman’s measure of Modularity [15,16,17] 
 Based on the model of a bipartite network, apart from the relationship between groups, 
 it is also necessary to have some idea about the features between the nodes in one 
 group, such as the closeness of different software applications. Therefore, a good 
@@ -1878,38 +1965,46 @@ It can be considered as one of the most popular method to handle such a problem,
 because it is not difficult to see his name in the papers of this area. A brief 
 introduction and implementation will be given as follow: 
  
-43 It is assumed that the unipartite network will only be divided into two sub networks 
+T1 
+F1 
+T2
+ 
+F2 
+F3 
+T1 
+F1 
+T2
+ 
+F2 F3 
+44 
+It is assumed that the unipartite network will only be divided into two sub networks 
 according to the algorithm, because more clusters can be separated via a similar 
 operation. According to the equality 
-oo oo
-11
+1 114 2 4 2
+i j i j
+ij i i ij i i
 ij ij
- 
-M= ( A? )( ss+= 1) ( A? )ss
-∑∑ ij i i ij i i
-42 kk 42 kk
-ij ij
+o o o o
+M= ( A )( s s ) ( A )s sk k k k? + = ?∑ ∑  
 M is the modularity of a specific network, m is the edge of it, A stands for the link 
 between two nodes, o is the order of a node and s represents the grouping status of a 
 certain node. In this algorithm, the network is divided into two groups via maximize 
 the value of modularity M with the help of the knowledge of linear algebra such as 
 eigenvalue, eigenvector, Cartesian product and so on. 
  
-· Guimera’s method of the computation [8] 
+ Guimera’s method of the computation [8] 
 The method introduced in the paper of pollination networks to calculate modularity is 
 based on an algorithm from R. Guimera. Generally, the value of modularity of a 
 certain node implies the extent which it has more links to its own community 
 comparing with the condition that if all the edges of this node is randomly built. 
 Mathematically, it can be represented as:  
-N
-Ik
 2
-ss
- 
-M = ( ?( ))
-∑
-II 2
-s =1
+1 2
+N
+s s
+s
+I kM ( ) )I I(=
+= ?∑  
 where M is the modularity of the network, “N” is the number of modules of the whole 
 network, “Is” is the number of links from other nodes to module s, “I” is the number 
 of all the links in the network, and “ks” indicates the sum of degree of all the nodes in 
@@ -1919,7 +2014,7 @@ assigned, because it is estimated that this algorithm has an accuracy over 90 pe
 identify the module. With the help of the modularity, the potential influence from one 
 node to its neighbours can be objectively demonstrated. 
  
-· Lambiotte’s special idea about modularity [18] 
+ Lambiotte’s special idea about modularity [18] 
 During the process of bipartite network, when we have a new projection network in 
 our hand, the modularity being figured out is not the only information that is useful, 
 some other methods dealt with the network can also reveal something valuable. 
@@ -1928,9 +2023,7 @@ mathematical way, Lambiotte focuses on something more graphical, to be more
 specific, he emphasis on the number of triangles in the network, which could also 
 demonstrates the relation between nodes. 
  
-44 A A B 
-A A C 
-B C B D 
+45 
  
 Figure 17. The most basic shapes of the co-operate relationships, namely, from 1 to 4. 
  
@@ -1946,7 +2039,7 @@ probable that the same bug can be found in Vista and XP, because the operation
 systems could have something in common. This is the reason why modularity is 
 helpful. 
  
-· Multi-level dynamic network 
+ Multi-level dynamic network 
 In order to make the model more compatible, it needs to have the ability to deal with 
 datasets of different feature and scale. Feature list is still suitable for all sorts of 
 features, the selected features just have to be time-related to make the result more 
@@ -1963,7 +2056,14 @@ value of their parent node is a key point of a multi-level network.
  
 Apart from the features mentioned above, Perez’s theory seems to be more compatible 
 with this new model. Specifically, Perez’s theory can be added into the matrix both on 
-45 a micro view and a macro view. Focusing on a link between two certain nodes, the 
+A A B 
+A 
+B C 
+A 
+B D 
+C 
+46 
+a micro view and a macro view. Focusing on a link between two certain nodes, the 
 weight of edge might increase as the shape of the curve mentioned in the theory, 
 although the time period will be influenced by the difference of the features of 
 different nodes. Besides, rise to a higher level, concerntrating on a certain node, 
@@ -1973,7 +2073,7 @@ tendency of the certain node will also majorly follow the rhythm of Perez’s theo
 the whole, both of the weight of edges and nodes will change in a similar step, and the 
 node will be influenced by the changing of its own link. 
  
-· Dynamic feature list 
+ Dynamic feature list 
 In the given samples, once the figures in the feature list are set, they will become 
 fixed. It seems to be suitable to some cases, but it is a better practice to make it more 
 general. It is reasonable to set the parameters with the past data, but since the model is 
@@ -2007,10 +2107,11 @@ importance to recognize the similarity of different data and store only one vers
 the information, otherwise, there will be huge amount of redundant information 
 occupying the space of hard disk. On the whole, when data are coming from the 
 source which have a big scale and with a fast updating speed, it is of great 
-46 significance to lay down a complete strategy for a better efficiency performance and 
+47 
+significance to lay down a complete strategy for a better efficiency performance and 
 accuracy of needed figures. 
  
-· Chain reaction [19] 
+ Chain reaction [19] 
 According to the purpose of the model, the measure of a single node which will 
 appear or disappear is not comprehensive to some extent. To be more specific, it is 
 also valuable to simulate a dynamic trend based on the current data and prediction 
@@ -2041,11 +2142,12 @@ macroeconomic network from Lee’s work in 2011 [9], the impact of the spreading o
 economic crises can be evaluated. Generally speaking, the main idea of this crisis 
 spreading model is comparing the weight of edges ?W lost by a certain node with a 
 set portion (t) of the node’s own weight, thus, defined as t*C. The crisis will influence 
-47 the node if ?W is greater than tC. Obviously, research in the field of economic is 
+48 
+the node if ?W is greater than tC. Obviously, research in the field of economic is 
 always easier to arouse others attention, therefore, it is important to choose a field that 
 is close to people’s daily life, or at least, being useful to a specific group of people. 
  
-· Two direction value changing 
+ Two direction value changing 
 Up to now, every concept of the dynamic bipartite network model is based on the 
 assumption that once the edge between two nodes is constructed, it will not be deleted 
 until one of the nodes disappears. From another view, it is necessary to have an 
@@ -2071,7 +2173,7 @@ also seems to be probable. Under such a circumstance, a reasonable solution will
 add a time evaluation component on each link of the matrix, hence, when a certain 
 edge is running out of date according to the simulation, the link will be cancelled. 
  
-· Data collection method 
+ Data collection method 
 Under the circumstance which figures of the matrix or feature list need to be 
 calculated from a big scale of dataset, it is not always a relaxing work to collect all the 
 needed data especially some of them are not available on the Internet, or some others 
@@ -2085,7 +2187,8 @@ more customers because of the discount and the missions from the game-like
 application from the Foursquare as well, besides, merchants pay for the useful data 
 they want which is collected by the customers, Foursquare creates a platform which 
 provides a data source which is established by the users, they will win the profit from 
-48 those who need the processed data collection. It is an effective solution for such kind 
+49 
+those who need the processed data collection. It is an effective solution for such kind 
 of problem, but it is not easy to simulate others to get the market, it is a kind of 
 challenge which is from another subject, hence, it will not be introduced specifically. 
  
@@ -2093,7 +2196,7 @@ challenge which is from another subject, hence, it will not be introduced specif
 The dynamic bipartite network is originally used for some prediction, in this section, 
 the potential expanding applications will be discussed. 
  
-· Artificial intelligence 
+ Artificial intelligence 
 This can be regarded as a kind of application transfer of the dynamic bipartite network. 
 Since such a network model aims at future prediction, therefore, it is reasonable to 
 apply it on the artificial intelligence system. To raise an intuitive example, such as a 
@@ -2107,7 +2210,7 @@ to know the current situation of its competitors, it is obvious to find a matrix
 development simulation. Overall, artificial intelligence is a direct transfer for the new 
 model that can be easily imagined. 
  
-· Image processing 
+ Image processing 
 Different with the application in the field of artificial intelligent, image processing can 
 be considered as a kind of application transfer that is field crossing. Specifically, 
 based on the concept of matrix, it is probable to refine a comparatively obscure image 
@@ -2129,7 +2232,8 @@ Based on such an assumption, “similarity” can be used to find the difference ext
 between pixel lines, specifically, it is reasonable to add a new line of transition color 
 if the similarity between lines is high. Otherwise, it might be a kind of edge of the 
 content in the picture. As for the calculation of contribution, it can be used as a space 
-49 optimisation algorithm. When a certain row has a high contribution, the dots of the 
+50 
+optimisation algorithm. When a certain row has a high contribution, the dots of the 
 row are comparatively well ordered by the difference of color. One more thing should 
 note is that under such an assumption, color should be separated into several groups 
 as a preprocessing of the calculation of contribution. Intuitively, the more groups the 
@@ -2140,7 +2244,6 @@ The following pictures will provide a general idea about the procedure of the im
 processing based on the concept from the dynamic bipartite network, it is allowable to 
 both regarded them as either an image or a matrix with numbers. 
  
-A B 
  
  
 Figure 19. Basic ideas of the similarity between rows. When the similarity between 
@@ -2149,8 +2252,6 @@ the whole image smoother. While the similarity between rows in group B seems to 
 comparatively lower, there is no need to practice a transition. In addition, it is also a 
 necessity to set some threshold for the judgment. 
  
-D 
-C 
  
  
 Figure 20. The difference of contribution from the images. If the color are reasonably 
@@ -2162,7 +2263,10 @@ like another picture if it is contracted.
  
 On the whole, it is an application transfer which has not been further researched, it is 
 better to apply it with a real picture for the evaluation. On the other hand, it can be 
-50 summarized that the application of the dynamic bipartite network can be expanded to 
+C D 
+A B 
+51 
+summarized that the application of the dynamic bipartite network can be expanded to 
 a higher level over the pollination network. 
  
 On the whole, based on the basic design of the dynamic bipartite network model, 
@@ -2172,7 +2276,8 @@ Besides, cross field applications are also attractive. After all, although the l
 improvements seems to be reasonable, they need to be implemented and evaluated via 
 some ground-trusted datasets or convincing results such like reduction of time. 
   
-51 Chapter 7 
+52 
+Chapter 7 
 Evaluation of the work 
  
  
@@ -2213,7 +2318,8 @@ and effort to apply the model into a new system framework.
  
 In addition, it is more important to refine the quality of the linking matrix and the 
 feature list from the original dataset. The more objective and valuable the matrix is, 
-52 the more convincing the prediction result will be. From the angle of the user, it is 
+53 
+the more convincing the prediction result will be. From the angle of the user, it is 
 easier to create a relationship network with the data available. On the contrast, it is 
 comparatively hard to choose the features of the feature list and configure them with 
 specific values. 
@@ -2257,7 +2363,8 @@ side, the whole system will drop into an infinite loop.
 Therefore, such an assumption raises another demand for the selection of the dataset, 
 namely, the user’s action based on the prediction should not influence back to the 
 result. For instance, if there is a relationship between consumer‘s purchasing desire 
-53 and product price, intuitively, different price will lead to different purchasing desire, 
+54 
+and product price, intuitively, different price will lead to different purchasing desire, 
 hence, when the consumer is interested in the price prediction, it will lead to a loop 
 between price and marketing scale. 
  
@@ -2268,7 +2375,9 @@ From the angle of technique development, it still needs to be improved with more
 practical refining operations and testing of more datasets from different fields and 
 scales. A predictor with a high accuracy, better efficiency and a larger compatibility 
 will be the goal of this model. 
-54 Acknowledgements 
+II 
+ 
+Acknowledgements 
  
  
 I am grateful for all the support I received from Dr. Steve Gregory. Sincerely thank 
@@ -2292,8 +2401,9 @@ to be a little bit intensive, I am always trying my best to make the project bet
 people around me show their confidence on me. In addition, some of my friends give 
 me some professional suggestions on the writing of the dissertation, especially thanks 
 indeed. 
-II 
- Bibliography 
+III 
+ 
+Bibliography 
  
  
 [1] Tao Zhou et al, Bipartite network projection and personal recommendation, 
@@ -2335,8 +2445,9 @@ arXiv:0803.2854v1, [physics.soc-ph], DOI: 10.1063/1.2956795
 PHYSICAL REVIEW, E 72, 066117, 2005 
 [19] Sergey V. Buldyrev et al, Catastrophic cascade of failures in interdependent 
 networks, nature08932, doi:10.1038, vol.464, 15 April 2010 
-III 
- [20] Yaron Singer, Dynamic Measure of Network Robustness, Electrical and 
+IV 
+ 
+[20] Yaron Singer, Dynamic Measure of Network Robustness, Electrical and 
 Electronics Engineers in Israel, 2006 IEEE, 366-370, Nov. 2006 
 [21] Santo Fortunato, Community detection in graphs, Physics Reports 486 75_174, 
 2010 
@@ -2354,8 +2465,9 @@ PHYSICAL REVIEW E 76, 066102, 2007
 [27] Paulo R. Guimarães Jr, Improving the analyses of nestedness for large sets of 
 matrices, Environmental Modelling & Software, Volume 21, Issue 10, Pages 
 1387-1516, October 2006 
-IV 
- Appendices 
+V 
+ 
+Appendices 
  
  
 A1. Name of the nodes in the table 5 and 14 
@@ -2375,59 +2487,57 @@ aerospace.
 A2. Matrix of second time evaluation 
 Software\Hardware CM CU CH RM RU RH DM DU DH GM GU GH 
 Programming 
-1 0 0 1 0 0 1 1 1 0 0 0 
 platform 
+1 0 0 1 0 0 1 1 1 0 0 0 
 Document 
+processing  
 0 0 0 1 0 0 0 0 0 0 0 0 
-processing  
 2D processing 1 0 0 1 1 0 1 1 1 1 0 0 
-3D processing     1  0 0 1 1 0 1 1 1 1 1 0 
-Database       1      0 0 1 1 1 1 1 1 0 0 0 
+3D processing      1 0 0 1 1 0 1 1 1 1 1 0 
+Database            1 0 0 1 1 1 1 1 1 0 0 0 
 Animation 
-1 0 0 1 1 1 1 1 1 1 1 0 
 processing  
+1 0 0 1 1 1 1 1 1 1 1 0 
 Video Processing  1 0 0 1 1 0 1 1 1 1 1 0 
-Sports Game       1   0 0 1 1 0 1 1 1 1 1 0 
-Racing Game     1    1 1 1 1 1 1 1 1 1 1 0 
-FPS Game       1     1 0 1 1 0 1 1 1 1 1 1 
+Sports Game         1 0 0 1 1 0 1 1 1 1 1 0 
+Racing Game        1 1 1 1 1 1 1 1 1 1 1 0 
+FPS Game           1 1 0 1 1 0 1 1 1 1 1 1 
 Table A2. The table processed from the data in 2006 for the retesting. 
   
-V 
- A3. Basic design of the programme 
+VI 
+ 
+A3. Basic design of the programme 
 The whole program is written in Java, no database like SQL or Oracle is applied, data 
 storage is accomplished through file stream, namely, the dataset is read or written into 
 a txt file. The program is composed of four classes, each of the class is set to deal with 
 different task. 
  
-· starter: The entry of the whole program, all the necessary objects are created here. 
-· listMatrix: This class is constructed to process the majority of the computations 
+ starter: The entry of the whole program, all the necessary objects are created here. 
+ listMatrix: This class is constructed to process the majority of the computations 
 related with the bipartite network matrix, including the functions like computing 
 the nestedness of the network matrix, similarity between rows, update the value 
 of a specific position and delete a certain row or column. 
-· randomColumnCreator: The main function of this class can be understood from 
+ randomColumnCreator: The main function of this class can be understood from 
 its name, it creates all possible columns which have the same number of nodes as 
 the original column. All the possible columns are used to compute the 
 contribution of the specific node. 
-· mathProcessor: This class is created to deal with some special tasks such as 
+ mathProcessor: This class is created to deal with some special tasks such as 
 calculating the mean and standard deviation of several numbers, which is also 
 used to assist the process of the contribution of a certain node. 
-· stepCounter: This class is created to evaluate the potential steps of the 
+ stepCounter: This class is created to evaluate the potential steps of the 
 connections between two nodes based on the features it obtained from the feature 
 list. There is a sub mathematical model in it to help calculating the result. 
 Intuitively, the design of the sub model will influence the evaluation of the steps. 
-· nameSearch: This is the class which draws up a unified format of output, which 
+ nameSearch: This is the class which draws up a unified format of output, which 
 makes the printing results more user-friendly. 
  
-starter 
-listMatrix stepCounter 
-nameSearch 
-mathProcessor 
-randomColumnCreator 
  
  
 Figure A3. The class diagram of the program. From the class diagram we can see that 
 the status matrix is the core of the model without any doubt. The majority of the 
 computation is related to this matrix, meanwhile, other classes are also important 
 because their existence guarantee the objective of the final result. 
-VI 
- 
+starter 
+listMatrix 
+randomColumnCreator mathProcessor 
+nameSearch stepCounter 

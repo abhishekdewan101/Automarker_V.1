@@ -1,3 +1,5 @@
+i 
+ 
 Abstract 
  
 This project experiments with algorithms which could address problems in 
@@ -28,8 +30,8 @@ interpolation (Section 3.1.2 and Section 3.2.1).
 (Section 3.3.1). 
 ¥ Finding an interpolation point in image sequence (Section 3.3.2). 
   
-i 
-  
+ iii 
+ 
 Contents 
 Abstract ............................................................................................................. i 
 Acknowledgements ......................................................................................... ii 
@@ -57,8 +59,9 @@ Acknowledgements ...............................................................
 2.4.2 Previous Work ......................................................................- 13 - 
 2.4.3 Summary ..............................................................................- 14 - 
 2.5 Background Summary .................................................................- 15 - 
-iii 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+iv 
+ 
 3. Methods ............................................................................................. - 16 - 
 3.1 Image Rgistration ....................................................................... - 16 - 
 3.1.1 Implementation of a previous Framework ......................... - 16 - 
@@ -87,8 +90,8 @@ iii
 4.4.2 Summary ............................................................................. - 41 - 
 4.5 Additional Tested Results ........................................................... - 42 - 
 4.5.1 Registration Results ............................................................ - 42 - 
-iv 
-  
+ v 
+ 
 4.5.2 Interpolation Results ...........................................................- 43 - 
 4.6 Results Summary .........................................................................- 46 - 
 5. Discussion ...........................................................................................- 47 - 
@@ -106,8 +109,9 @@ iv
 5.5.2 Software considerations ......................................................- 51 - 
 6. References ..........................................................................................- 52 - 
 7. Appendix (Source Code) .....................................................................- 54 - 
-v 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 1 - 
+ 
 1. Introduction 
 1.1    Non Ð Linear Time Ð Lapse Photography 
  
@@ -146,8 +150,9 @@ find a proper method to implement registration for image sequence,
 including an algorithm to align two images as well as deciding the best 
 image to act as the reference.  
 ? Objectives for image registration 
-- 1 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 2 - 
+ 
 o Implementation of an algorithm to align two images. 
 o Apply the algorithm to image sequence. 
 o Experiment with the algorithm for acceleration. 
@@ -179,8 +184,9 @@ from experiments, followed by an evaluation of the project to determine if
 it has obtained the objectives. Finally future work is discussed in different 
 aspects, including software developing and extensions of present methods. 
   
-- 2 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 3 - 
+ 
 2. Background 
 2.1    Image Segmentation Methods 
  
@@ -195,10 +201,6 @@ method segmentation process, it could work well when an image owns a
 decent contrast, which is suitable for a constant threshold to distinguish the 
 background and objects in an image. A basic thresholding algorithm can be 
 described as follows: 
-Algorithm 1   Basic Thresholding 
-Search all pixels f(x, y) of the image f. An image element g(x, y) of the 
-segmented image will be categorized as object if f(x, y) > T, where T 
-denotes the threshold, otherwise, it belongs to the background. 
 There are a number of methods to determine T, usually detecting the mean 
 or median gray value could be suitable for segmentation with brightness. 
 Mean gray value is calculated from the mean value of all pixels, while 
@@ -216,8 +218,13 @@ the entire image, furthermore, splitting and merge techniques could be
 used simultaneously. 
 When merging and splitting are combined, it works in a hierarchical data 
 structure (M. Sonka, et al, 1999), images are sufficiently subdivided when 
-- 3 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Algorithm 1   Basic Thresholding 
+Search all pixels f(x, y) of the image f. An image element g(x, y) of the 
+segmented image will be categorized as object if f(x, y) > T, where T 
+denotes the threshold, otherwise, it belongs to the background. 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 4 - 
+ 
 not matching a homogeneity criterion, then merge adjacent regions if they 
 could be in a homogeneous region. 
 2.1.3  Summary 
@@ -235,14 +242,18 @@ including movements from objects, edges, surfaces and even the entire
 scene (camera movement). Basic optical flow estimation is on the basis of 
 the Optical Flow Equation (OFE) 
  
-?? ?? ??
- ? +  ? + = 0 
-? ?
-?? ?? ??
+??
+??
+ ?? +  ????  ?? +  ???? = 0 
 (1) 
-Where ? ( ? , ? , ? ) is the image sequence, ? , ? denote the 2 Ð D velocity in 
-? ?
-the image plane respectively, while , , are partial derivates of 
+Where ?(?,?, ?) is the image sequence, ??,?? denote the 2 Ð D velocity in 
+the image plane respectively, while ??
+??
+, ??
+??
+, ??
+??
+ are partial derivates of 
 intensity within a frame and between frames. Equation (1) indicates that 
 intensity along motion trajectory remains constant. 
  
@@ -250,15 +261,13 @@ intensity along motion trajectory remains constant.
 H. 264 / AVC is a commonly used compression, recording and distribution 
 standard for high definition video, and motion estimation techniques form 
 the core of such applications (Iain Richardson, 2010). Source images could 
-be captured from either digital cameras or a video clip, a motion vector 
-( ? , ? ) is used for representing motion information from one frame to a 
+be captured from either digital cameras or a video clip, a motion vector (?,?) is used for representing motion information from one frame to a 
 reference frame, and an image could be sub Ð divided into small motion 
 blocks (usually square - shaped), each motion block contains a motion 
 vector when compare to the reference. 
-- 4 - 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 5 - 
  
-?? ?? ??
-?? ?? ??Non Ð Linear Time Lapse Photography                                                     TING XU 
 H.264 / AVC differs from other MPEG encoding standards mainly during 
 motion estimation together with its two components, motion vectors and 
 motion compensation. When operating motion estimation, image 
@@ -268,7 +277,10 @@ therefore reduces the bit rate.
 Block Matching Algorithm (BMA) (I.E.G Richardson, 2003) is a popular 
 method in motion estimation, as shown in Figure 1, the algorithm is 
 described as follows: 
-Figure 1   Basic concept of BMA 
+ 
+ 
+ 
+ 
 Algorithm 2   Block Matching 
 1) For one motion block in the current frame, we compare it within 
 the search range (a larger region containing same size blocks 
@@ -281,12 +293,10 @@ selected, and all pixels in the block are regarded as having the
 same motion vector.  
 4) Repeat from 1) until all the motion blocks are checked in the 
 current frame. 
+Figure 1   Basic concept of BMA 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 6 - 
  
- 
- 
- 
-- 5 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
 2.2.3  Block Matching Algorithms 
  
 In this part a number of BMAs are 
@@ -301,25 +311,20 @@ are in positive relationship, lager
 amount of computation obtains more 
 accurate estimation results. 
  
-Figure 2   Example of a definition 
 Full search block matching 
-of motion block and search 
-range 
 Full search block matching algorithm 
 (Alois, 2009) assesses every possible 
-Block size: N * N Pixels 
 motion blocks in the search range. 
 Hence, it could generate the best block matching motion vector. Residue is 
 less possible in this type of BMA, however, the required computations are 
 relatively high due to a larger amount of candidates to evaluate in a pre - 
-defined search range. If a motion block is defined as ? ? ? pixels with 
-search range of ±2 ? disrance. A 
+defined search range. If a motion block is defined as ? ?  ? pixels with 
+search range of ±2?  disrance. A 
 full search BMA evaluates every 
 blocks, in the search range at one 
 pixel step. Hence, as shown in 
 Figure 2, the number of candidates 
-2
-to evaluate is 4 ? ? 4 ? = 16 ? , 
+to evaluate is 4? ?  4? = 16?2 , 
 which is predominantly high 
 compared to any of the search 
 algorithms. 
@@ -331,11 +336,16 @@ keep good block matching (Yu-Wen
 Huang, et al, 2006) accuracy.  
  
  
+ 
+Figure 2   Example of a definition 
+of motion block and search 
+range 
+Block size: N * N Pixels 
 Figure 3   Illustration of Three Ð step 
  
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 7 - 
  
-- 6 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
 Three step search 
 In a three-step search (TSS) algorithm (Alan Bovik, 2009), whose process 
 could be described as Figure 3, the first iteration evaluates nine candidates, 
@@ -374,16 +384,17 @@ diamond candidates are already
 evaluated during first iteration 
 and they are not considered 
 during the second iteration. The 
-Figure 4   Illustration of 2D logarithmic 
 results from the first iteration 
-search 
 can be used for these 
 candidates. When the step size 
 is reduced to only one pixel, it begins the final iteration where all eight 
 surrounding candidates are evaluated. The best matching candidate from 
 this iteration is selected for the current block.  
-- 7 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 4   Illustration of 2D logarithmic 
+search 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 8 - 
+ 
 One at a time search algorithm 
 The one at a time search algorithm 
 estimates the motion vector 
@@ -406,9 +417,7 @@ the y - axis. It is similar to x-axis search
 and is followed by estimating the y - 
 component of the motion vector. One - 
 step at a time search on average tests 
-Figure 5   Illustration of One at a time 
 less number of candidates. However, 
-search 
 the motion vector accuracy is poor. 
  
 2.2.4  Difference Criteria 
@@ -424,23 +433,24 @@ Means squared difference
 The Mean Squared Difference (MSD) is firstly calculate the difference of 
 pixel values between the current frame and the reference frame at pixel p, 
 then square the difference and finally add up the results from all the pixels 
-in one comparison. Specifically, for a block containing ? ? ? pixels, the 
+in one comparison. Specifically, for a block containing ? ?  ? pixels, the 
 MSD could be expressed by the following equation. 
-- 8 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-? ? 1 ? ? 1
-1
-2
-= ? ?[? ( ? , ? ) ? ? ( ? , ? )] 
-?? ?
-2
-?
-? = 0 ? = 0
+Figure 5   Illustration of One at a time 
+search 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 9 - 
+ 
+??? =  1
+?2
+? ?[????(?, ?) ?  ????(?, ?)]2??1
+?=0
+??1
+?=0
+ 
 (2) 
-1
-Where ? ( ? , ? ) denotes the pixel value at position ( ? , ? ),and multiply by  is 
-2
-?
+Where ?(?, ?) denotes the pixel value at position (?, ?),and multiply by 1
+?2
+ is 
 for the purpose of the mean value, in practice, it could be neglected if 
 magnitude makes contributes to decision making, where smaller values 
 indicates a better match, and hence the division operation makes no 
@@ -450,14 +460,13 @@ Mean absolute difference
 A similar criterion to MSD is the Mean Absolute Difference (MAD), which 
 only takes the difference of pixel values rather than squaring it, it is shown 
 by the following expression. 
-? ? 1 ? ? 1
-1
-( ) ( )
-= ? ? | ? ? , ? ? ? ? , ? | 
-?? ?
-2
-?
-? = 0 ? = 0
+??? =  1
+?2
+? ? |????(?, ?) ?  ????(?, ?)|??1
+?=0
+??1
+?=0
+ 
 (3) 
  
 Comparison 
@@ -465,14 +474,9 @@ There are no significant differences between MSD and MAD, in both criteria,
 larger similarity is expressed by smaller values, however, from a graphic 
 demonstration in Figure 6, it can be seen that the MSD provides more 
 smoothness in a 2 Ð D coordination system. 
-- 9 - 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 10 - 
  
-?? ?
-???
-?? ?
-???Non Ð Linear Time Lapse Photography                                                     TING XU 
-Figure 6   Maps of the MSD (left) and MAD (right) 
-(Murali, et al, 2012) 
  
 2.2.5  Summary 
  
@@ -497,8 +501,11 @@ photographer cannot ensure that the tripod are installed at exactly the
 same position throughout the entire capturing phase, which could last 
 longer than weeks or even months. In addition, as I experimented in 
 practice, even if the tripod position are carefully marked, it is difficult to 
-- 10 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 6   Maps of the MSD (left) and MAD (right) 
+(Murali, et al, 2012) 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 11 - 
+ 
 capture the a consistent sequence after moving away from original place, 
 thus, registration is indispensable for generating a more reasonable 
 sequence. 
@@ -529,32 +536,23 @@ Transform (SIFT) can be decent algorithm boils down to retaining features
 like illumination, rotation, or geometric distortion. Their experiments have 
 shown that it is less expensive in extracting feature points to combine FT 
 and SIFT. In FT, image transformation pair is assumed as f(x, y) and F(?, ?), 
-with displacement (? x, ? y), thus the transformation can be expressed as: 
-? ? 2 ¹( ? Æ ? + ? Æ ? )
-( ) ( )
-? ? ? , ? ? ? ? ? ? ? , ? ? 
+with displacement (?x, ?y), thus the transformation can be expressed as: 
+? (? ? ??, ? ? ??) ? ?(?, ?)???2¹(?Æ?+?Æ?) 
               (4) 
-For two images, f (x, y) and f (x, y), their relationship in time domain can be 
-1 2
+For two images, f1(x, y) and f2(x, y), their relationship in time domain can be 
 assumed as 
-? ( ? , ? ) = ? ( ? ? , ? ? ) 
-1 2
-                     (5) 
+?1(?, ?) = ?2 (? ? ??,? ? ??)                      (5) 
 Therefore, FT of each image can be obtained from (1) and (2): 
-- 11 - 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 12 - 
  
-?? ??
-??Non Ð Linear Time Lapse Photography                                                     TING XU 
-( )
-? ? 2 ? ? Æ ? + ? Æ ?
-? ( ? , ? ) = ? ( ? , ? ) ? 
-1 2
+?1(?, ?)  =  ?2(?, ?)???2?(?Æ?+?Æ?) 
                     (6) 
 At this stage, phase correlation function can be calculated by cross power 
 spectrum of inverse FT: 
-? ?? ( ? , ? ) = ? ( ? ? , ? ? ) 
+???(?,?)  =  ? (? ? ??, ? ? ??) 
                     (7) 
-where (? x, ?y ) is a non - zero position of phase correlation function which 
+where (?x, ?y) is a non - zero position of phase correlation function which 
 values in zero at most positions, and it is the shift that expected for image 
 overlap region segmentation. 
 The algorithm preferred at early stage is (G. Ward, 2003), which is original 
@@ -584,9 +582,9 @@ Current films are usually projected at 24 frames per second, which means
 this project is to adjust the playing back speed when necessary. 
 Image interpolation is the method that is employed in this project to 
 implement a non Ð linear timescale, by definition, image interpolation can 
-- 12 - 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 13 - 
  
-?? ??Non Ð Linear Time Lapse Photography                                                     TING XU 
 also be regarded as image scaling and resampling, which will increase the 
 image size and resampling to a newly Ð created image plane. Particularly, in 
 time Ð lapse, the resampled image need a motion prediction algorithm, 
@@ -617,10 +615,8 @@ them in detail respectively.
 The basic idea of (D. Mahajan, 
 et al, 2009) is to create some 
 Ômotion pathÕ to lead the 
-(a) 
 variation of pixels between 
 two input images, the basic 
-p
 notion of such path is 
 described in Figure 7, (a) 
 defined two simple images 
@@ -628,13 +624,16 @@ constructed by single lines
 (blue background not 
 included), and at t = 1 the 
 image is a left Ð shifted 
-(b) 
 version of the one at t = 0, 
 they are together regarded as 
-Figure 7    Basic notion of path 
 the input images in this 
-- 13 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 7    Basic notion of path 
+(a) 
+(b) 
+p
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 14 - 
+ 
 example, Figure 7 (b) shows that for images could be interpolated between 
 the inputs, and each time, the image is actually shifted to the left at a step 
 of 1 pixel, character ÔfÕ is the information on pixel p0, which will be 
@@ -674,16 +673,18 @@ completeness of the newly created frame.
  
  
  
-- 14 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 15 - 
+ 
 2.5    Background Summary  
  
 This section has explained the reason for the registration and interpolation 
 in this project, in conjunction of previous methods and algorithms that are 
 relative to this project, from basic concepts to previous research work, 
 algorithms that might be adopted are the project is described in detail.   
-- 15 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 16 - 
+ 
 3. Methods 
  
 In this section all the methods and algorithms that are employed in this 
@@ -712,32 +713,19 @@ capture multi Ð images, however, this algorithm is designed for hand Ð held
 exposures, which could cause similar camera movement when creating time 
 Ð lapse image sequence, hence, it should be worth experimenting with. 
 The input to the algorithm is two grayscale images, which could be 
-1
-converted by the following formula . 
-? = 0.212671 ? ? + 0.715160 ? ? + 0.072169 ? ? 
+converted by the following formula1. 
+? = 0.212671 ? ? +  0.715160 ? ? +  0.072169 ? ? 
 (8) 
-                                                      
-1
- This equation is from the OpenCV function that are used for color space transformation. 
-- 16 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+                                                     
+1 This equation is from the OpenCV function that are used for color space transformation. 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 17 - 
+ 
 Then one of the two is selected as the reference, both images will be 
 segmented by a median threshold, which is selected from sorting all the 
 gray values, the segmentation algorithm is displayed below. 
-Algorithm 3   Median Thresholding 
-1) Compute grey values for all pixels in the image and then 
-accumulating frequencies to form a histogram. 
-2) Begin from 0, count pixel numbers located in each grey value until 
-they are add up to half of the pixel amount (image height 
-multiplied by image width). 
-3) At this point, the value is selected as the threshold ? . 
-4) Segment image, if pixel value ? ( ? , ? ) > ? , set pixel value as 255 
-(black), otherwise, set values to 0 (white). 
- 
 This algorithm could segment image according to the exposure, brighter 
 part will be completely set to white while darker part will be black, an 
-Figure 8   Results of grayscale and thresholding segmented images 
-Left: Original Image  Middle: Greyscale image  Right: Segmented image 
 example from images captured in Edinburgh, Scotland are shown in Figure 8 
 (with original image, grayscale image and segmented result), the result 
 contains only two values and could be easy to implement the following XOR 
@@ -747,9 +735,22 @@ which could get a value of 0 under the condition that two pixels own the
 same values, while non Ð zero if they are different (set to 255 for showing a 
 recognizable result), an example of two unaligned images is shown in figure 
 9. 
+Algorithm 3   Median Thresholding 
+1) Compute grey values for all pixels in the image and then 
+accumulating frequencies to form a histogram. 
+2) Begin from 0, count pixel numbers located in each grey value until 
+they are add up to half of the pixel amount (image height 
+multiplied by image width). 
+3) At this point, the value is selected as the threshold ?. 
+4) Segment image, if pixel value ?(?, ?) > ?, set pixel value as 255 
+(black), otherwise, set values to 0 (white). 
+ 
+Figure 8   Results of grayscale and thresholding segmented images 
+Left: Original Image  Middle: Greyscale image  Right: Segmented image 
 Figure 9   Result of XOR operation 
-- 17 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 18 - 
+ 
 In spite of the cloud in the sky, the outline of buildings indicates the 
 difference, and it is noticeable that computing one image with itself will 
 result in a completely black scene, thus to find the offsets for a pair, we 
@@ -758,29 +759,27 @@ and calculate the total non Ð zero pixel quantity, the smallest direction will
 be regarded as the correct movement. 
  
 Acceleration 
-Figure 10   Image pyramid 
 When applied in practices, the basic method could encounter difficulties, 
 naturally images from time Ð lapse photographer may have a High Definition 
 (HD) resolution at 1920 * 1080, which could result in a time Ð consuming 
 pixel comparison, or worse, a larger range to detect the displacement in 
 contrast to smaller Ð sized images. A common solution is to create an image 
 pyramid, which resizes images down by a quarter (halves height and width 
-- 18 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 10   Image pyramid 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 19 - 
+ 
 respectively), with such technique, computation cost will be massively 
 reduced. Figure 10 gives a concept of image pyramid. 
 Now that the source images are shrunk to smaller sizes, we could limit a ±1 
 pixel range for XOR comparison in horizontal (x) and vertical (y) directions 
 respectively. Finally, if the image pyramid is created to ? levels, returning 
 consequence from the accelerated algorithm will be linearly expanded by a 
-factor of 2 in each level, to put another way, the final shifting magnitude is 
-?
-2 times that of the bottom level. 
+factor of 2 in each level, to put another way, the final shifting magnitude is 2? times that of the bottom level. 
 In conclusion, to align images via threshold and XOR operation is less 
 complicated comparing with others (SIFT, GA, etc.), the key factor is to 
 compute differences in two images, in conjunction with acceleration 
-method, the results are shown in section 4.2.1. 
- 
+method, the results are shown in section 4.2.1.  
 3.1.2  A Motion Estimation Ð Based Method 
  
 Due to the block matching algorithm could segment background and 
@@ -805,14 +804,15 @@ is illustrated in Figure 11, which
 means that, each block will 
 compare in the context up to two 
 blocks shifting all directions, the 
-Figure 11   Sample Motion Block and 
 comparison is to traversal in the 
-search range demonstration 
 search range, utilizing full search 
 algorithm, after that, we could 
+Figure 11   Sample Motion Block and 
+search range demonstration 
 Block size: 8 * 8, search range: 40 * 40 
-- 19 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 20 - 
+ 
 get a reasonable motion vector indicates the smallest differences for this 
 block. However, as experimented with HD images (1920 * 1080), such size 
 configurations are relatively small, which shoots up computation, 
@@ -822,31 +822,6 @@ results are discussed in section 4.4.1.
 With respect to the measurement of block differences, in each block 
 comparing pair, I compute the MSD of total pixel pair differences, this 
 algorithm is demonstrated below.  
-Algorithm 4   Block difference computation. 
-1) For one motion block in the input image, start with the first pixel 
-in the block, assume the input image has ? blocks, each block has 
-? pixels. 
-2) Subtract the pixel grey value with corresponding pixel in the 
-1
-reference image, square the result ? . 
-?
-1 ?
-3) Add up ? to ? of all pixels in the block as an illustration of block 
-? ?
-1
-difference, denoting by ? . 
-?
-4) Traversal in the search range of this block from step 2) and 3), with 
-1 ?
-step of 1 pixel, obtain ? to ? . 
-? ?
-? 1 ?
-5) Find the smallest ? , ? = (1, 2, 3, É , ? ) from ? to ? , record 
-? ? ?
-the motion vector ( ? , ? ) for this block. 
-? ?
-6) Repeat from 1) to 5) until all blocks in the input images are 
-computed. 
  
 Segmentation 
 At this stage, motion vectors have been computed and then they should be 
@@ -863,51 +838,56 @@ threshold is that it should be somehow large to avoid such incorrect
 election probability, a mean value is less reliable since zero vectors could 
 still account for a certain proportion. As a consequence, there vectors are 
 neglected when selecting the threshold, below listed the algorithm. 
-- 20 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-Algorithm 5   Detection of motion vector threshold. 
-1) Input all the motion vectors in algorithm 4, form a sequence 
-( ) ( )
-? , ? , ? , ? , É , ( ? , ? ), where ? is the quantity of motion 
-1 1 2 2 ? ?
-blocks. 
-) ( )
-2) For ( ? , ? , ? = 1, 2, 3, É , ? , compute ? = ( ? , ? ), ? 
-? ? ? ? ? ?
-denotes the moving distance of a block. 
-3) Exclude all vectors when ? =  0, and sum up other non Ð zero 
-?
-distances, with whose quantity ? accumulated, results in ? . 
-?
-4) Threshold  = ? . 
-?
+Algorithm 4   Block difference computation. 
+1) For one motion block in the input image, start with the first pixel 
+in the block, assume the input image has ? blocks, each block has 
+? pixels. 
+2) Subtract the pixel grey value with corresponding pixel in the 
+reference image, square the result ??1. 
+3) Add up ??1 to ???of all pixels in the block as an illustration of block 
+difference, denoting by ??1. 
+4) Traversal in the search range of this block from step 2) and 3), with 
+step of 1 pixel, obtain ??1 to ???. 
+5) Find the smallest ??? , ? = (1, 2, 3,  ,?) from ??1  to ??? , record 
+the motion vector (??,??) for this block. 
+6) Repeat from 1) to 5) until all blocks in the input images are 
+computed. 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 21 - 
+ 
 Now the threshold could be larger because zeros are intentionally 
 disregarded, and then remaining data will result in a mean that could 
 implement the segmentation, the vector norms of foreground blocks will be 
-larger than ? , while the remaining belong to the background, an example 
+larger than ?, while the remaining belong to the background, an example 
 result of segmentation is shown in Figure 12.It could be seen that the 
-Figure 12   Sample segmentation by motion estimation 
-Left: Source image    Right: Segmented result 
 segmentation could roughly recognize the background (yellow part), but via 
 data selection before shift, such errors are under tolerance. 
  
 Shift the image 
 In the practice of time Ð lapse photography, the moving parts should not be 
 considered when applying alignment operation, and this is the reason why I 
-did the previous segmentation part, thus the shift vector ? ? , ? ? for the 
-? ?
+did the previous segmentation part, thus the shift vector ???, ??? for the 
 input image is actually the background ÔmotionÕ (compare the current frame 
 to the reference frame) and (0, 0) indicates that registration is not required, 
 I select the motion vector that owns the largest frequency in the 
 background part, this not only neglect a few computation errors that could 
 be caused by intensity changes, but enhance the probability that the 
 background position relationship between the assessed image and the 
-- 21 - 
+Algorithm 5   Detection of motion vector threshold. 
+1) Input all the motion vectors in algorithm 4, form a sequence (?1,?1), (?2,?2),  , (??, ??), where ? is the quantity of motion 
+blocks. 
+2) For (??,??), ? = (1, 2, 3,  ,?), compute ?? = ????(??,??), ?? 
+denotes the moving distance of a block. 
+3) Exclude all vectors when ?? =   0, and sum up other non Ð zero 
+distances, with whose quantity ? accumulated, results in ?. 
+4) Threshold  =  ? ??  . 
+Figure 12   Sample segmentation by motion estimation 
+Left: Source image    Right: Segmented result 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 22 - 
  
-? ?? ?Non Ð Linear Time Lapse Photography                                                     TING XU 
 reference satisfies the selected vector. In addition, since image pyramid is 
-?
-employed for acceleration, the vector should be multiplied by 2 if source 
+employed for acceleration, the vector should be multiplied by 2? if source 
 images are shrunk ? level(s) to a smaller size. 
  
 Acceleration 
@@ -940,8 +920,9 @@ the motion information of the object.
  
  
  
-- 22 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 23 - 
+ 
 Creation of intermediate frames 
 Now that we have computed how much the objects moves from one frame 
 to another, the intermediate position could be estimated, firstly, the 
@@ -960,13 +941,14 @@ to current frame rather than half of that. However, this is out of project
 scope so I did not apply experiments. 
  
 Occlusion handling 
-Figure 13   Empty pixels after interpolation 
 In image interpolation problems, there will be empty pixels in the newly 
 created frames, which is displayed in Figure 13, as part of the edge is not 
 being filled. Particularly, when previous method is applied, there could be 
 holes at some edges because the input images are regarded as a 2 Ð D array, 
-- 23 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 13   Empty pixels after interpolation 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 24 - 
+ 
 when processing the blocks near the edges, there will be out Ð of Ð bound 
 problems, which have been purposely disregarded when comparing blocks, 
 it is reliable because after that the motion vectors with largest frequency is 
@@ -977,44 +959,6 @@ Algorithm overview
 As described before, Algorithm 6 gives the process from selected motion 
 vectors. It is currently designed for creating one image between images, if 
 more novel frames are required, the process could be repeated. 
-Algorithm 6   Novel frame creation (Considered for one image). 
-1) Assume the foreground contains ? motion blocks with ? motion 
-vectors, ( ? , ? ), ( ? , ? ), É , ( ? , ? ). 
-1 1 2 2 ? ?
-2) Select the vectors that owns largest frequency and estimated as 
-motion vector, demoted by ( ? , ? ). 
-? ?
-?
-?
-?
-?
-? ?
-3) New position coordinates ( ? , ? ) = ( ? ? , ? ? ), 
-1 1
-2 2
-where ? , ? are the pixels positions in the current image, or 
-1 1
-?
-?
-?
-?
-? ?
-( ? , ? ) = ( ? + , ? + ), where ? , ? denote the 
-0 0 0 0
-2 2
-pixels positions in the reference image. 
-4) Copy pixels from the corresponding coordinates in current or 
-reference frame. 
-5) For values of pixel ( ? , ? ) in the background part of the new frame, 
-? ( ? + ? , ? + ? )
-0 1 0 1
-?
-( )
-? ? , ? = , where ? denotes the pixel 
-2
-values of a pixel, note that the value here is in RGB colour 
-channels. 
-6) Fill empty pixels with value calculation similar to 5). 
  
 3.2.2  Summary 
  
@@ -1023,8 +967,24 @@ interpolation, and if the correct positions of moving objects are able to
 achieve, plausible new frame could be obtained by copying pixels from 
 source frames, in addition, it is indispensable to fill blank pixels caused by 
 this method. 
-- 24 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Algorithm 6   Novel frame creation (Considered for one image). 
+1) Assume the foreground contains ? motion blocks with ? motion 
+vectors, (?1,?1), (?2,?2),  , (??,??). 
+2) Select the vectors that owns largest frequency and estimated as 
+motion vector, demoted by (??,??). 
+3) New position coordinates (?,?) =  (?1 ?  ?? 2? , ?1  ?  ?? 2? ), 
+where ?1,?1 are the pixels positions in the current image, or (?,?) =  (?0 +  ?? 2? , ?0 +  ?? 2? ), where ?0,?0 denote the 
+pixels positions in the reference image. 
+4) Copy pixels from the corresponding coordinates in current or 
+reference frame. 
+5) For values of pixel (?,?) in the background part of the new frame, 
+?(?,?) = ?(?0 +  ?1,?0 +  ?1) 2? , where ? denotes the pixel 
+values of a pixel, note that the value here is in RGB colour 
+channels. 
+6) Fill empty pixels with value calculation similar to 5). 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 25 - 
+ 
 3.3 Image Sequence Consideration 
  
 Previous methods still work for two images, it should be extend to the 
@@ -1043,8 +1003,7 @@ image, but in an image sequence, it is completely different, a correct
 reference point could massively save computation amount, for example, 
 consider an image sequence consisting of 100 images that have been 
 captured via a tripod, if there were slightly movement after capturing the 
-th
-5 image, the fastest registration should apply calibration to the first five 
+5th image, the fastest registration should apply calibration to the first five 
 images rather than the remaining 95, hence any one from image 6 to 100 
 could be selected as a reference, if unfortunately image 1 to 5 is selected, 
 the registration algorithm should be run for 95 times, thus it is significant to 
@@ -1062,19 +1021,14 @@ the reason why I do registration. Under such consideration, it could be
 assumed that the input images are actually divided into ? groups, images in 
 each group are perfectly aligned because of usage of tripod (it could also be 
 possible that only one image is in the group). To write the assumption into 
-mathematical form, for all ? images in image sequence ? , they are divided 
-into ? groups, which could be denoted by a set ( ? , ? , É , ? ), their 
-1 2 ?
-corresponding image quantities is written as ( ? , ? , É , ? ). 
-1 2 ?
+mathematical form, for all ? images in image sequence ?, they are divided 
+into ? groups, which could be denoted by a set (?1, ?2,  ,??), their 
+corresponding image quantities is written as (?1,?2,  ,??). 
  
-- 25 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 26 - 
+ 
 Main process 
-Group1 Group2 Group3 
-RP 
-Start 
-Figure 14   An illustration of reference point detection 
 Figure 14 gives an example of three image groups compromising an image 
 sequence, the algorithm starts from the first image in the first group, 
 selecting the first image as reference point, then time, check one image 
@@ -1102,64 +1056,48 @@ The following box demonstrates the entire algorithm.
  
  
  
-- 26 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-Algorithm 7   Reference point detection 
-1) For Groups ( ? , ? , É , ? ) in image sequence ? in total ? 
-1 2 ?
-images, aligned image quantities for each group are written as 
-( ? , ? , É , ? ) (to be detected).Set the first image as the 
-1 2 ?
-reference point, set up an image quantity accumulator ? ?? . 
-2) Check one image each time after the reference point, if image 
-? , ( ? = 2, 3, É , ? ) satisfies the aligned condition, ? ?? = ? ?? + 1, 
-?
-then check the next image. 
-3) If two images are not aligned at image ? , store ? ?? to ? , ( ? =
-? ?
-1, 2, É , ? ), then move the reference point to ? ,  ? ?? = 0, repeat 
-?
-from 2) until the last one. 
-4) Find the largest ? , set the final reference point to the first image 
-?
-of ? . 
-?
+Group2 
+RP 
+Group1 Group3 
+Figure 14   An illustration of reference point detection 
+Start 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 27 - 
+ 
  
 3.3.2 Determine the Interpolation Points 
  
 Similarly to registration, not all the gap between two frames requires 
 interpolation, only these are sufficiently large will apply the algorithm. From 
-a motion vector (x, y), the distance of motion d could be calculated as 
-m
-2 2
-d = sqrt(x + y ). For an image sequence, I first detect all the distances 
-m
+a motion vector (x, y), the distance of motion dm could be calculated as dm = sqrt(x2 + y2). For an image sequence, I first detect all the distances 
 between frames, then select the points that are within a specified range (set 
 to 0.8 in test, could be set by user in practice) of the largest distance. 
 Algorithm 8 in the next table describes this process. 
+ 
+ 
+ 
+Algorithm 7   Reference point detection 
+1) For Groups (?1, ?2,  ,??) in image sequence ? in total ? 
+images, aligned image quantities for each group are written as (?1,?2,  ,??) (to be detected).Set the first image as the 
+reference point, set up an image quantity accumulator ???. 
+2) Check one image each time after the reference point, if image 
+?? , (? = 2, 3,  ,?) satisfies the aligned condition, ??? =  ??? + 1, 
+then check the next image. 
+3) If two images are not aligned at image ??, store ??? to ?? , (? =1, 2,  , ?), then move the reference point to ??,  ??? = 0, repeat 
+from 2) until the last one. 
+4) Find the largest ??, set the final reference point to the first image 
+of ??. 
 Algorithm 8   Interpolation point detection 
-1) For image sequence ? with images ( ? , ? , É , ? ), start from the 
-1 2 ?
-first pair ( ? , ? ) (index = 1). 
-1 2
-1
-2) Compute the motion information and get the motion distance d , 
-?
+1) For image sequence ? with images (?1, ?2,  , ??), start from the 
+first pair (?1, ?2) (index = 1). 
+2) Compute the motion information and get the motion distance d?1 , 
 then index = index + 1, repeat 2) until the last pair. 
-?
-3) Find the largest d , ? = 1, 2, É , ? , set as . d . 
-?
-?
-4) Restart from the first pair, if d > 0.8 ? d , do interpolation 
-?
+3) Find the largest d?? , ? = 1, 2,  ,?, set as . d???. 
+4) Restart from the first pair, if d?? >  0.8 ?  d???, do interpolation 
 between this pair. 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 28 - 
  
- 
- 
-- 27 - 
- 
-?? ?
-?? ?Non Ð Linear Time Lapse Photography                                                     TING XU 
 3.3.3 Summary 
  
 When extend the methods to the entire image sequence, for registration, it 
@@ -1182,8 +1120,9 @@ motion estimation is positive with both image operations. Finally, the
 methods are extended to image sequence and could be able to run 
 automatically. 
   
-- 28 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 29 - 
+ 
 4. Implementation and results 
  
 The 4th section illustrates the results I have achieved with some 
@@ -1198,12 +1137,6 @@ The entire project is implemented by C++ using Open Source Computer
 Vision (OpenCV), program environment is a 32bit Windows 7 Running on a 
 virtual machine, with Microsoft Visual Studio 2010. Min configuration of this 
 virtual system is listed in the following table. 
-Table 1   Test machine configuration 
-Component Models 
-CPU Intel(R) Core(TM) i7 Ð 2620M @ 2.70GHz, 4 processors 
-Memory 3GB @ 1333MHz 
-Hard Disk 80GB 
-Graphic Card Intel HD 3000 
  
 Cameras used 
 ¥ Panasonic LUMIX DMC Ð LX5GK 
@@ -1215,8 +1148,15 @@ are described in section 4.1.2.
  
  
  
-- 29 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Component Models 
+CPU Intel(R) Core(TM) i7 Ð 2620M @ 2.70GHz, 4 processors 
+Memory 3GB @ 1333MHz 
+Hard Disk 80GB 
+Graphic Card Intel HD 3000 
+Table 1   Test machine configuration 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 30 - 
+ 
 4.1.1  Image Names 
  
 Due to the input to my program is an image sequence, and OpenCV can 
@@ -1246,28 +1186,27 @@ Queue are mostly used to store motion vectors, to accumulate distance
 frequencies for data optimization, as shown in Figure 15, three structures 
 are designed. 
 ¥ struct blockMotionVector  
-For storing motion vectors when comparing two images, ( ? , ? ) is an 
-index of motion   blocks, ( ? ? , ? ? ) denotes the motion 
+For storing motion vectors when comparing two images, (?,?) is an 
+index of motion   blocks, (??????, ??????) denotes the motion 
 vector. 
 ¥ strct disranceFrequencyNode  
 Used for counting frequencies of motion vectors. 
 ¥ struct imageInfoNode 
-- 30 - 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 31 - 
  
-??? ? ??? ?Non Ð Linear Time Lapse Photography                                                     TING XU 
 Only used for registration, this structure corresponds to the first 
-images of each group, ?? ???????? represents the image position 
+images of each group, ?????????? represents the image position 
 with quantities of matched images stores in 
-? ????? ????????? , the nodes form a bi Ð direction queue 
+???????????????????, the nodes form a bi Ð direction queue 
 since the reference point need to reference to both nodes in the 
 contexts. 
-Figure 15   Structures definition  
 Due to the First Ð In Ð First Ð Out (FIFO) character of queue, the motion 
 information could be accessed strictly as the sequence has been stored, this 
 is extremely significant for registration in image sequence, when file names 
 are in sequence stored in vectors and could be accessed by an index, in that 
 way, the elements in the vectors could be projected to nodes from 
-, so that each image could easily get an shift vector when 
+?????????????, so that each image could easily get an shift vector when 
 applying shifting operation. 
  
 4.2    Unsuccessful Results 
@@ -1277,10 +1216,10 @@ project are illustrated, including failure examples of thresholding Ð XOR
 algorithm and some error in image interpolation.  
  
  
-- 31 - 
+Figure 15   Structures definition  
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 32 - 
  
-??????? ??? ???
-??? ?Non Ð Linear Time Lapse Photography                                                     TING XU 
 4.2.1  XOR Registration 
  
 Registration by comparing the 
@@ -1301,10 +1240,7 @@ because of the massive
 distortion of the lens, which is 
 set on a focal length of 24mm 
 equivalent to a full Ð frame 
-Figure 16   A result aligned by the 
 system. 
-thresholding Ð XOR algorithm  
-        
 In contrast, the failure 
 in Figure 17 shows 
 almost no differences 
@@ -1318,17 +1254,20 @@ experimented with
 several other examples 
 but unfortunately 
 obtain similar results. It 
-Figure 17   Failure example of the XOR 
 can be seen that the 
-computation 
 XOR algorithm is less 
 robust, in further work, it could still be difficult to find a reasonable 
 standard to determine whether two images are aligned and then apply 
 shifting to images, as a consequence, this part of work has been classified as 
 unsuccessful category. 
-- 32 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-Figure 18   Noises near threshold 
+Figure 16   A result aligned by the 
+thresholding Ð XOR algorithm  
+        
+Figure 17   Failure example of the XOR 
+computation 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 33 - 
+ 
 In addition, (G. Ward, 2003) 
 proposed a method for 
 handling noises with an 
@@ -1339,7 +1278,6 @@ values are within a certain
 distance of the threshold, 
 otherwise, they are set to 255, 
 in this way, the noises near 
-Figure 19   Exclusion image example 
 threshold could be shown in 
 white points in the exclusion 
 image, Figure 18 illustrates the noises in the red square in the actual pixels, 
@@ -1352,8 +1290,11 @@ In conclusion, although the XOR algorithm could achieve some effect, when
 comparing with motion estimation based method, computation in the 
 entire image shows obvious disadvantages, and considering the difficulty for 
 sequence extension, this algorithm is waived in the later part of the project. 
-- 33 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 18   Noises near threshold 
+Figure 19   Exclusion image example 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 34 - 
+ 
 4.3     Motion Estimation Registration 
  
 In this section a number of images that are aligned by motion estimation 
@@ -1364,8 +1305,9 @@ sequence.
 Figure 20   Success alignment for the failure example of the XOR 
 computation 
 Up: Unaligned results               Down: Aligned images 
-- 34 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 35 - 
+ 
 In figure 20, the result that is not achieved by the thresholding  - XOR 
 method is shown, it is noticeable that the background are reasonably 
 aligned, but the source images still representing the motion, and hence the 
@@ -1380,8 +1322,9 @@ image size), and Figure 21 is in similar condition to the previous Edinburgh
 images. 
 Figure 21   Another example aligned by motion estimation 
 Up: Unaligned results                Down: Aligned images 
-- 35 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 36 - 
+ 
 The Figures have expressed the effectiveness 
 of motion estimation method, when applied 
 to image sequence, it could still detect the 
@@ -1392,16 +1335,11 @@ which is purposely formed as Figure 14,
 Group 1, 2, 3 contains 5, 6, and 14 images 
 respectively, and image index, relatively, 
 starts from 0 to 24, the camera displacement 
-Figure 22   Image 
-sequence registration 
-information output 
 is intentionally set and the 
 program achieve an expected 
 result with the reference 
 image selected as image 11, 
-Figure 23   Failure of motion estimation 
 thus only 11 images (image 0 
- 
 to 10) requires registration rather than 14 if simply set the first image as 
 reference. As experimented, each registration operation could cost up to 
 roughly 1 second, therefore, it could be forecast that the computation 
@@ -1421,8 +1359,14 @@ well as wide angle scenes, but only for some efficiency differences, one
 situation that fails the algorithm is that the background and objects moves 
 in different directions but in very similar distance. 
  
-- 36 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 22   Image 
+sequence registration 
+information output 
+Figure 23   Failure of motion estimation 
+ 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 37 - 
+ 
 4.4     Interpolation 
 The interpolation results are shown in this section with comparisons 
 between different parameter configurations, the unpleased results in the 
@@ -1431,17 +1375,18 @@ new frames.
  
 4.4.1  Results 
 Motion block selection 
-Figure 24   Comparison before and after motion vector selection 
-Left: No selections   Right: Selection by frequency 
-          
 In the early stage, after motion vectors are recorded, the new frame is 
 computed by the raw data, which could result in incorrect position of some 
 blocks, as shown in Figure 24 (left), a block containing the trunk of the car 
 model located in the background and cause an obvious error, but the main 
 body of the car is just in the correct position, it can be seen that the most 
 motion blocks obtain the reasonable motion information apart from a few 
-- 37 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 24   Comparison before and after motion vector selection 
+Left: No selections   Right: Selection by frequency 
+          
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 38 - 
+ 
 exceptions, which result in errors, from this example I tried to select the 
 motion vectors from frequency, use the motion vectors with largest 
 frequency to represent the entire object, by implementing that, incorrect 
@@ -1470,34 +1415,35 @@ demonstrates an interpolation
 at the same point with 
 different block sizes, in this 
 image, block size are actually 
-Figure 25   Different block size 
 not changed but the image 
-comparison 
 pyramid is modified as an 
 alternative. Both operations 
-Block size: 8 * 8 
 are equivalent because the 
-Search range: 40 * 40 
 computation varies linearly. In 
 the upper image, the size is 
-Pyramid level of top image: 4 
 larger, so one block containing 
 the part of left back wheel is 
-Pyramid level of bottom image: 3 
 classified as background and 
-Pyramid change equals the effects of 
 hence kept still. In contrast, 
-resizing the block and search range 
 when reduce one level in 
-because images are linearly shrunk to a 
 pyramid, the motion blocks 
-quarter size of one lever higher 
 equally shrunk to a quarter of 
 previous area, the car is 
 sufficiently divided as 
 foreground. Furthermore, if the pyramid level continues goes up, smaller 
-- 38 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 25   Different block size 
+comparison 
+Block size: 8 * 8 
+Search range: 40 * 40 
+Pyramid level of top image: 4 
+Pyramid level of bottom image: 3 
+Pyramid change equals the effects of 
+resizing the block and search range 
+because images are linearly shrunk to a 
+quarter size of one lever higher 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 39 - 
+ 
 motion blocks could result in extremely negative effect, firstly the 
 computation workload could shoot up due to such square Ð magnitude 
 growth and secondly, over Ð segmentation would be presented, since the 
@@ -1511,7 +1457,6 @@ relative higher probability of obtaining plausible images could be achieved.
 Comparisons are shown in Figure 27 and Figure 28, same sequence are 
 input to the program, when pyramid level is set to 4, four images are 
 created and three are plausible, when the pyramid level reduced by 1, five 
-Figure 26   Different block size comparison 
 images are created and the result is slightly improved. 
  
  
@@ -1520,8 +1465,10 @@ images are created and the result is slightly improved.
  
  
  
-- 39 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 26   Different block size comparison 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 40 - 
+ 
 Interpolation point 
 For an image sequence, the interpolation is applied wherever the motion 
 distance between two frames are within a specified range of the largest one, 
@@ -1529,28 +1476,22 @@ the range is set to 0.8 in experiments, and various number of images will be
 created, Figure 28 is an example that five images are created, compared to 
 the results shown in Figure 27, the only difference at the beginning of the 
 program is the level of image pyramid. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 Figure 27   Results from image sequence interpolation 
 Pyramid level: 4 
 Except for the last frame, other images could be regarded as plausible, 
 the model car is in the correct position while segmentation is reasonable, 
-th
-interpolation for the 4 image is a bit more difficult, motion blocks are 
+interpolation for the 4th image is a bit more difficult, motion blocks are 
 relative large for this context, it is improved in the case of Figure 28. 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 41 - 
  
- 
- 
- 
- 
- 
- 
-- 40 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-Figure 28   Another result 
-Pyramid level: 3 
-One more image is created at a 
-new point (first image), the last 
-image is improved, while other 
-three are similar 
  
 4.4.2  Summary 
  
@@ -1567,11 +1508,17 @@ contributes to a detailed story telling when images are projected to films
 due to an equivalent effect of reducing playing back rate. 
 Some more images that have been tested are shown in the section 4.5. 
  
-- 41 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 28   Another result 
+Pyramid level: 3 
+One more image is created at a 
+new point (first image), the last 
+image is improved, while other 
+three are similar 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 42 - 
+ 
 4.5  Additional Tested Results 
 4.5.1  Registration Results 
-Figure 29   A not perfect result 
  
 Figure 29 shows a close but not perfect registration result, it can be seen 
 that the windows in the center part and buildings in the right of the images 
@@ -1581,7 +1528,6 @@ rotation.
 Figure 30, comparing to the previous example, camera are controlled only in 
 translation, when capturing images, hence, the result is much better, the 
 blur in Figure 30 may due to long exposure. 
-Figure 30   Better result when camera are not rotated 
 Examples in Figure 29 and 30 illustrate that the algorithm could not only 
 work for images presented with motions, but suitable for relatively ÔstaticÕ 
 images, actually the entire image are regarded as background but it motion 
@@ -1590,21 +1536,12 @@ from another aspect that motion estimation based method could neglect
 the motions in source images, which is ideal for time Ð lapse photography. 
  
  
-- 42 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-4.5.2  Interpolation Results 
-Figure 32   Unpleased results of 
-excessive small block size 
-Figure 31   A result that is close to 
-plausible 
-Small block size could give more 
-accuracy, however images could 
-(Middle image are newly 
-be over segmented, some blocks 
-computed) 
-in the background are 
-categorized as foreground. 
+Figure 29   A not perfect result 
+Figure 30   Better result when camera are not rotated 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 43 - 
  
+4.5.2  Interpolation Results 
 The results given in Figure 31 and Figure 32 not perfectly interpolated, in 
 Figure 31, the cream cap is difficult to be contained in a block that is 
 categorized to the foreground, thus it is incorrectly segmented to the 
@@ -1614,26 +1551,41 @@ The three images in Figure 32 are all interpolated from source images, it is
 noticeable that there are error motions in the background, this is because of 
 small motion blocks, which could result in over segmentation, so that some 
 background elements are regarded as moving.  
-- 43 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-Figure 33   Another visual plausible result 
+Figure 32   Unpleased results of 
+excessive small block size 
+Small block size could give more 
+accuracy, however images could 
+be over segmented, some blocks 
+in the background are 
+categorized as foreground. 
+Figure 31   A result that is close to 
+plausible 
+(Middle image are newly 
+computed) 
  
-Middle image are newly created 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 44 - 
+ 
+ 
 Figure 33 is a correct interpolation result with plausible visual effect, the 
 motion of the car model is not significant, while the pixels in the 
 intermediate frame could be projected to the right position. 
  
-- 44 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 33   Another visual plausible result 
+Middle image are newly created 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 45 - 
  
-Figure 34   Result of image sequence interpolation 
+ 
  
 Figure 34 shows an example that interpolation is applied to an entire image 
 sequence, the program can automatically search in a specified directory and 
 then read each image pair one time, it can be seen from the graph that 
 interpolated image could make compensation to relative large motions that 
-- 45 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Figure 34   Result of image sequence interpolation 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 46 - 
+ 
 are presented between frames, and the distance of car model movements 
 become similar between frames after interpolation. 
  
@@ -1651,8 +1603,9 @@ similar distance in two directions, it is fairly difficult for segmentation, and
 difficulty for interpolation is to find a proper block size. 
  
   
-- 46 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 47 - 
+ 
 5. Discussion 
  
 In this section the results observed are being discussed, with comparison 
@@ -1691,8 +1644,9 @@ the influence from motion, since to compare differences on the entire
 image is not reasonable, in time Ð lapse practices, motions should actually 
 be neglected when applying registration, ideally operations should only 
 work with the background parts. Therefore, it is natural to divide images to 
-- 47 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 48 - 
+ 
 small parts and separate motions from background, which is the reason why 
 motion estimation method is finally implemented.  
  
@@ -1732,8 +1686,9 @@ to determine a equilibrium point, from the experiments carried out with HD
 (1920 * 1080) level, an acceptable point could be 8 * 8 block size with 40  * 
 40 (±16) search range, image pyramid level is set at 3 (actual input image 
 resolution 240 * 135). 
-- 48 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 49 - 
+ 
 5.2.3  Applicability 
  
 Motion estimation based method could be effective if an image is 
@@ -1742,16 +1697,9 @@ successfully segmented, throughout the experiments, for image registration,
 are closely to perfect, while for interpolation, there are 30 reasonable 
 results out of 50 input pairs, to sum up, a conclusion is shown in the 
 following table. 
-Table 2   Experiment Results Summary 
 There are limitations for this method. Firstly, in our experiment, images with 
 similar motions in background and foreground are difficult to be segmented 
 and therefore less likely to obtain plausible registration and interpolation. 
-Registration Interpolation 
-Input pairs Perfect Reasonable Input pairs Perfect Reasonable 
-results results results results 
-50 24 9 50 15 16 
-Successful 0.66 Successful 0.62 
-Proportion Proportion 
 Secondly, since the method is designed for 2 Ð D motion field, problems in 3 
 Ð D motion field are not included. 
   
@@ -1768,8 +1716,25 @@ automatically registered, which could contribute to time Ð lapse
 photographer since it is common to deal with thousands of images. 
 For the interpolation part, as interpolation is applied whenever a relative 
 large motion is detected, more details are displayed in the film and hence 
-- 49 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Registration Interpolation 
+Input pairs Perfect 
+results 
+Reasonable 
+results 
+Input pairs Perfect 
+results 
+Reasonable 
+results 
+50 24 9 50 15 16 
+Successful 
+Proportion 
+0.66 Successful 
+Proportion 
+0.62 
+Table 2   Experiment Results Summary 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 50 - 
+ 
 the time become non Ð linear, it becomes more expressive when the 
 photographer misses some motions when capturing images, similar to 
 registration, in this project the interpolation is also automatic for the 
@@ -1811,8 +1776,9 @@ and automatically implement registration and interpolation. Firstly, vector
 container in C++ is employed for recording all file names in a specified 
 directory, in conjunction with creating new file names. Then vector objects 
 are working with queue structure to detect reference image for registration, 
-- 50 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
+- 51 - 
+ 
 and to determine interpolation point between two frames. In short, this 
 project has developed image processing techniques to fit a large number of 
 images without any manual operation. 
@@ -1849,677 +1815,53 @@ based on these algorithms. Software could be either developed on PC
 machines or based on web browsers, more factors such as user Ð defined 
 parameters should be taken into consideration. 
   
-- 51 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-6. References 
- 
-[1] Iain E.Richardson,The H.264 Advanced Video Compression 
-Standard John Wiley & Sons ltd, 978-0-470-51692-8, 2010. 
-[2] I.E.G. Richardson, H.264 and MPEG-4 Video Compression: Video 
-Coding for Next Generation Multimedia, John Wiley & Sons, Ltd, 
-0-470-84837-5, 2003. 
-[3] Alois M.Bock, Video Compression Systems from first Principles 
-to Concatenated Codecs,The Institution of Engineering and 
-Technology, 978-0-86431-963-6, 2009. 
-[4] Yu-Wen Huang, Ching-Yeh Chen, Chen-Han Tsai, Chun-Fu Shen 
-And Liang-Gee Chen, Survey on Block Matching Motion 
-Estimation Algorithms and Architectures with New Results, 
-Journal of VLSI Signal Processing , Springer Vol.42, pp.297Ð320, 
-2006. 
-[5] Alan Conrad Bovik, The Essential Guide to Video processing, 
-Elsevier, 978-0-12-374456-2, 2009. 
-[6] Murali, E. Krishnan, E. Gangadharan and Nirmal P. Kumar, H.264 
-Motion Estimation and Applications, Video Compression, Dr. 
-Amal Punchihewa (Ed.), ISBN: 978-953-51-0422-3, InTech, 
-2012. 
-[7] Aseem A, Maneesh A, Michael C, et al. Photographing Long 
-Scenes with Multi-Viewpoint Panoramas. ACM Transactions on 
-Graphics, 25(3), pp. 853-861, 2006. 
-[8] Loewke K, Camarillo D, Piyawattanametha W, et al. Realtime 
-Image Mosaicing with a Hand-held Dual-axes Confocal 
-Microscope. Progress in Biomedical Optics and Imaging. Proc of 
-SPIE, Endoscopic microscopy III, Proceeding of SPIE, 6851: 
-68510F1-9, 2008. 
-[9] Heinze N, Esswein M, KrŸger W, et al. Automatic Image 
-Exploitation System for Small UAVs. Proc of SPIE on Airborne 
-Intelligence, Surveillance, Reconnaissance (ISR) Systems and 
-Applications, 6946: 69460G1-10, 2008. 
-[10] Q. Zhang, Z. Zhang, D. Zeng, A fast, Automatic and Robust Image 
-Registration Algorithm, International Conference on Virtual 
-Reality and Visualization, 2011. 
-[11] F. L. Seixas, L. S. Ochi, A. Conci, D. C. M. Saade, Image Registration 
-Using Genetic Algorithms, Proceedings of the 10th annual 
-conference on Genetic and evolutionary computation, 2008. 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
 - 52 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-[12] G. Ward. Fast, Robust Image Registration for Compositing High 
-Dynamic Range Photographs From Hand-held Exposures. 
-Journal of Graphics Tools: JGT, 2003. 
-[13] D. Mahajan, F. Huang, W. Matusik, R. Ramamoorthi, P. 
-Belhumeur Moving gradients: a path-based method for plausible 
-image interpolation, ACM Transactions on Graphics (TOG) - 
-Proceedings of ACM SIGGRAPH 2009 TOG Homepage, Volume 28 
-Issue 3, 2009. 
-[14] T. Stich, C. Linz, C. Wallraven, D. Cunningham, M. Magnor, 
-Perception-motivated Interpolation of Image Sequences, ACM 
-Transactions on Applied Perception: TAP, 2011. 
-[15] C. L. ZITNICK, N. JOJIC, S. B. KANG, Consistent segmentation for 
-optical flow estimation, Proc. IEEE Int. Conf. Computer Vision, pp. 
-1308Ð1315, 2005. 
-[16] V. KOLMOGOROV, R. ZABIH, Computing visual correspondence 
-with occlusions using graph cuts, Proc, IEEE Int. Conf. Computer 
-Vision, pp. 508Ð515, 2001. 
-[17] J. SUN, Y. LI, S. KANG, H. SHUM, Symmetric stereo matching for 
-occlusion handling, Proc. IEEE Conf. Computer Vision and 
-Pattern Recognition 2, pp. 399Ð406, 2005. 
-[18] A. W. FITZGIBBON, Y. WEXLER, A. ZISSERMAN, Image-based 
-rendering using image-based priors, Proc. IEEE Int. Conf. 
-Computer Vision, pp. 1176Ð1183, 2003. 
-[19] H. WANG, R. RASKAR, N. AHUJA, Seamless video editing, Int. Conf. 
-on Pattern Recognition, vol. 3, pp. 858Ð861, 2004. 
-[20] J. JIA, C. TANG, Image stitching using structure deformation, IEEE 
-Trans. Pattern Analysis and Machine Intelligence 30, 4, pp. 617Ð
-631, 2008. 
-[21] M. Sonka, V. Hlavac, R. Boyle, Image processing, analysis, and 
-machine vision, second edition, Brooks/Cole Publishing 
-Company, 1999. 
-  
+ 
+6. References 
+ [1] Iain E.Richardson,The H.264 Advanced Video Compression Standard John Wiley & Sons ltd, 978-0-470-51692-8, 2010. [2] I.E.G. Richardson, H.264 and MPEG-4 Video Compression: Video Coding for Next Generation Multimedia, John Wiley & Sons, Ltd, 0-470-84837-5, 2003. [3] Alois M.Bock, Video Compression Systems from first Principles to Concatenated Codecs,The Institution of Engineering and Technology, 978-0-86431-963-6, 2009. [4] Yu-Wen Huang, Ching-Yeh Chen, Chen-Han Tsai, Chun-Fu Shen And Liang-Gee Chen, Survey on Block Matching Motion Estimation Algorithms and Architectures with New Results, Journal of VLSI Signal Processing , Springer Vol.42, pp.297Ð320, 2006. [5] Alan Conrad Bovik, The Essential Guide to Video processing, Elsevier, 978-0-12-374456-2, 2009. [6] Murali, E. Krishnan, E. Gangadharan and Nirmal P. Kumar, H.264 Motion Estimation and Applications, Video Compression, Dr. Amal Punchihewa (Ed.), ISBN: 978-953-51-0422-3, InTech, 2012. [7] Aseem A, Maneesh A, Michael C, et al. Photographing Long Scenes with Multi-Viewpoint Panoramas. ACM Transactions on Graphics, 25(3), pp. 853-861, 2006. [8] Loewke K, Camarillo D, Piyawattanametha W, et al. Realtime Image Mosaicing with a Hand-held Dual-axes Confocal Microscope. Progress in Biomedical Optics and Imaging. Proc of SPIE, Endoscopic microscopy III, Proceeding of SPIE, 6851: 68510F1-9, 2008. [9] Heinze N, Esswein M, KrŸger W, et al. Automatic Image Exploitation System for Small UAVs. Proc of SPIE on Airborne Intelligence, Surveillance, Reconnaissance (ISR) Systems and Applications, 6946: 69460G1-10, 2008. [10] Q. Zhang, Z. Zhang, D. Zeng, A fast, Automatic and Robust Image Registration Algorithm, International Conference on Virtual Reality and Visualization, 2011. [11] F. L. Seixas, L. S. Ochi, A. Conci, D. C. M. Saade, Image Registration Using Genetic Algorithms, Proceedings of the 10th annual conference on Genetic and evolutionary computation, 2008. 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
 - 53 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-7. Appendix (Source Code) 
-/** Function getExpShift(const IplImage * srcImage1, const IplImage * srcImage2, int 
-shiftBits, int shiftRet[]) 
- *   Find the offsets in x and y direction for the image comparing to the reference  
- * Parameters: 
- *   srcImage1: the reference frame 
- *   srcImage2: the current frame 
- *  shiftBits: specified imagepyramid levels 
- *  shiftRet[]: array for storing x and y shifts 
- */ 
-void getExpShift(const IplImage * srcImage1, const IplImage * srcImage2, int shiftBits, 
-int shiftRet[]){ 
- int minErr; 
- int curShift[2]; 
  
- IplImage *tb1 = cvCreateImage(cvGetSize(srcImage1), 8, 1); 
- IplImage *tb2 = cvCreateImage(cvGetSize(srcImage2), 8, 1); 
- IplImage *eb1 = cvCreateImage(cvGetSize(srcImage1), 8, 1); 
- IplImage *eb2 = cvCreateImage(cvGetSize(srcImage2), 8, 1); 
- 
- int i, j; 
- if(shiftBits > 0){ 
-  IplImage *sm1Img1 = cvCreateImage(cvSize(srcImage1->width/2, srcImage1-
->height/2), srcImage1->depth, srcImage1->nChannels); 
-  IplImage *sm1Img2 = cvCreateImage(cvSize(srcImage2->width/2, srcImage2-
->height/2), srcImage2->depth, srcImage2->nChannels); 
-  //image pyramid 
-  shrinkImage(srcImage1, &sm1Img1); 
-  shrinkImage(srcImage2, &sm1Img2); 
-  //recursive call 
-  getExpShift(sm1Img1, sm1Img2, shiftBits - 1, curShift); 
- 
-  cvReleaseImage(&sm1Img1); 
-  cvReleaseImage(&sm1Img2); 
-  //re - calculate positions 
-  shiftRet[0] = curShift[0] * 2; 
-  shiftRet[1] = curShift[1] * 2; 
- } else { 
-  curShift[0] = curShift[1] = 0; 
-  //Segmentation, tb denotes for segmented images with a threshold, and eb 
-stands for the exclusion image 
-  createBitmaps(srcImage1, tb1, eb1); 
-  createBitmaps(srcImage2, tb2, eb2); 
-   
-  minErr = srcImage1->width * srcImage1->height; 
- 
-  for(i = -1; i < 1; i++) 
-   for(j = -1; j < 1; j++) { 
-    int xOffset = curShift[0] + i; 
-    int yOffset = curShift[1] + j; 
- 
-    IplImage * shiftedTB2 = cvCreateImage(cvGetSize(srcImage2), 8, 1); 
-    IplImage * shiftedEB2 = cvCreateImage(cvGetSize(srcImage2), 8, 1); 
-    IplImage * diffBMP = cvCreateImage(cvGetSize(srcImage2), 8, 1); 
-    int err; 
-    shiftBitMap(tb2, xOffset, yOffset, shiftedTB2); 
-    shiftBitMap(eb2, xOffset, yOffset, shiftedEB2);  
-    //Compare for the difference for the two images using an XPR operator 
+[12] G. Ward. Fast, Robust Image Registration for Compositing High Dynamic Range Photographs From Hand-held Exposures. Journal of Graphics Tools: JGT, 2003. [13] D. Mahajan, F. Huang, W. Matusik, R. Ramamoorthi, P. Belhumeur Moving gradients: a path-based method for plausible image interpolation, ACM Transactions on Graphics (TOG) - Proceedings of ACM SIGGRAPH 2009 TOG Homepage, Volume 28 Issue 3, 2009. [14] T. Stich, C. Linz, C. Wallraven, D. Cunningham, M. Magnor, Perception-motivated Interpolation of Image Sequences, ACM Transactions on Applied Perception: TAP, 2011. [15] C. L. ZITNICK, N. JOJIC, S. B. KANG, Consistent segmentation for optical flow estimation, Proc. IEEE Int. Conf. Computer Vision, pp. 1308Ð1315, 2005. [16] V. KOLMOGOROV, R. ZABIH, Computing visual correspondence with occlusions using graph cuts, Proc, IEEE Int. Conf. Computer Vision, pp. 508Ð515, 2001. [17] J. SUN, Y. LI, S. KANG, H. SHUM, Symmetric stereo matching for occlusion handling, Proc. IEEE Conf. Computer Vision and Pattern Recognition 2, pp. 399Ð406, 2005. [18] A. W. FITZGIBBON, Y. WEXLER, A. ZISSERMAN, Image-based rendering using image-based priors, Proc. IEEE Int. Conf. Computer Vision, pp. 1176Ð1183, 2003. [19] H. WANG, R. RASKAR, N. AHUJA, Seamless video editing, Int. Conf. on Pattern Recognition, vol. 3, pp. 858Ð861, 2004. [20] J. JIA, C. TANG, Image stitching using structure deformation, IEEE Trans. Pattern Analysis and Machine Intelligence 30, 4, pp. 617Ð631, 2008. [21] M. Sonka, V. Hlavac, R. Boyle, Image processing, analysis, and machine vision, second edition, Brooks/Cole Publishing Company, 1999. 
+  
+Non Ð Linear Time Lapse Photography                                                     TING XU 
 - 54 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-    xorBitMap(tb1, shiftedTB2, diffBMP); 
-     
-    err = totalOneInBitMap(diffBMP); 
  
-    if(err < minErr) { 
-     shiftRet[0] = xOffset; 
-     shiftRet[1] = yOffset; 
-     minErr = err; 
-    } 
-    cvReleaseImage(&shiftedTB2); 
-    cvReleaseImage(&shiftedEB2); 
-   } 
-   cvReleaseImage(&tb1); 
-   cvReleaseImage(&tb2); 
-   cvReleaseImage(&eb1); 
-   cvReleaseImage(&eb2); 
- } 
-} 
-/** Function getFileNames(string path, vector<string>& files) 
- *  To search in a directory, including all files, typically image files in this case, and 
-store their names in a vector 
- * Parameters: 
- *  path: the directory path to be searched 
- *  files: the vector that used to store file names with directory path 
- */ 
-void getFileNames(string path, vector<string>& entireNames, vector<string>& 
-fileNames){ 
-   //File handle 
-    long   hFile   =   0; 
-    //File information 
-    struct _finddata_t fileinfo; 
-    string p; 
- 
-    if((hFile = _findfirst(p.assign(path).append("/*").c_str(),&fileinfo)) != -1){ 
-        do{ 
-            //If it is a directory, go in iteration, otherwise, add to list 
-            if((fileinfo.attrib & _A_SUBDIR)){ 
-                if(strcmp(fileinfo.name,".") != 0 && strcmp(fileinfo.name,"..") != 0) 
-                    getFileNames( p.assign(path).append("/").append(fileinfo.name), 
-entireNames, fileNames); 
-            } 
-            else{ 
-                entireNames.push_back(p.assign(path).append("/").append(fileinfo.name)); 
-    fileNames.push_back(fileinfo.name); 
-            } 
-        }   while(_findnext(hFile, &fileinfo) == 0); 
- 
-        _findclose(hFile); 
-    } 
-} 
-/** Function getBlockShift(IplImage * referenceFrame, IplImage * currentFrame, 
-BlockMotionVectorPtr *headPtr, BlockMotionVectorPtr *tailPtr) 
- *  Main function of block matching algorithm that are used in motion estimation, 
-block size is preprocessored, as well as search range 
- *  The final motion vector is stored as a node which is then insert to a queue 
- *  Parameters: 
- *  *referenceFrame: reference frame pointer, which points to the reference image, 
-the previous one. 
+7. Appendix (Source Code) /** Function getExpShift(const IplImage * srcImage1, const IplImage * srcImage2, int shiftBits, int shiftRet[])  *   Find the offsets in x and y direction for the image comparing to the reference   * Parameters:  *   srcImage1: the reference frame  *   srcImage2: the current frame  *  shiftBits: specified imagepyramid levels  *  shiftRet[]: array for storing x and y shifts  */ void getExpShift(const IplImage * srcImage1, const IplImage * srcImage2, int shiftBits, int shiftRet[]){  int minErr;  int curShift[2];   IplImage *tb1 = cvCreateImage(cvGetSize(srcImage1), 8, 1);  IplImage *tb2 = cvCreateImage(cvGetSize(srcImage2), 8, 1);  IplImage *eb1 = cvCreateImage(cvGetSize(srcImage1), 8, 1);  IplImage *eb2 = cvCreateImage(cvGetSize(srcImage2), 8, 1);   int i, j;  if(shiftBits > 0){   IplImage *sm1Img1 = cvCreateImage(cvSize(srcImage1->width/2, srcImage1->height/2), srcImage1->depth, srcImage1->nChannels);   IplImage *sm1Img2 = cvCreateImage(cvSize(srcImage2->width/2, srcImage2->height/2), srcImage2->depth, srcImage2->nChannels);   //image pyramid   shrinkImage(srcImage1, &sm1Img1);   shrinkImage(srcImage2, &sm1Img2);   //recursive call   getExpShift(sm1Img1, sm1Img2, shiftBits - 1, curShift);    cvReleaseImage(&sm1Img1);   cvReleaseImage(&sm1Img2);   //re - calculate positions   shiftRet[0] = curShift[0] * 2;   shiftRet[1] = curShift[1] * 2;  } else {   curShift[0] = curShift[1] = 0;   //Segmentation, tb denotes for segmented images with a threshold, and eb stands for the exclusion image   createBitmaps(srcImage1, tb1, eb1);   createBitmaps(srcImage2, tb2, eb2);      minErr = srcImage1->width * srcImage1->height;    for(i = -1; i < 1; i++)    for(j = -1; j < 1; j++) {     int xOffset = curShift[0] + i;     int yOffset = curShift[1] + j;      IplImage * shiftedTB2 = cvCreateImage(cvGetSize(srcImage2), 8, 1);     IplImage * shiftedEB2 = cvCreateImage(cvGetSize(srcImage2), 8, 1);     IplImage * diffBMP = cvCreateImage(cvGetSize(srcImage2), 8, 1);     int err;     shiftBitMap(tb2, xOffset, yOffset, shiftedTB2);     shiftBitMap(eb2, xOffset, yOffset, shiftedEB2);      //Compare for the difference for the two images using an XPR operator 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
 - 55 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
- *  *currentFrame: current frame pointer, which points to the second image where 
-motion has occured in contrast to the reference frame 
- *  *headPtr: head node address of the queue 
- *  *tailPtr: tail node address of the queue 
- */ 
-void getBlockShift(IplImage * referenceFrame, IplImage * currentFrame, 
-BlockMotionVectorPtr *headPtr, BlockMotionVectorPtr *tailPtr){ 
- int imageWidth = referenceFrame->width; 
- int imageHeight = referenceFrame->height; 
- int imageIndexX, imageIndexY; 
- int rangeShiftX, rangeShiftY; 
- int blockIndexX, blockIndexY; 
- double smallestSquareSum = 10000.0000; 
- int smallestShifts[2]; 
- double squareSumMatrix[SEARCH_RANGE * SEARCH_RANGE] = {10000.0000}; 
- int matrixIndex = 0; 
- //calculation loop, adjust here for pixelwise or blockwise 
- for(imageIndexX = 0; imageIndexX < imageWidth - BLOCK_SIZE; 
-imageIndexX+=BLOCK_SIZE) 
-  for(imageIndexY = 0; imageIndexY < imageHeight - BLOCK_SIZE; 
-imageIndexY+=BLOCK_SIZE){ 
-   //smallestSquareSum = 10000.0000; 
-   smallestShifts[0] = 0; 
-   smallestShifts[1] = 0; 
  
-   int isFirstSumInRange = 1; 
-   //Second loop, in the search range for motion blocks 
-   for(rangeShiftX = -SEARCH_RANGE; rangeShiftX < SEARCH_RANGE; 
-rangeShiftX++) 
-    for(rangeShiftY = -SEARCH_RANGE; rangeShiftY < SEARCH_RANGE; 
-rangeShiftY++){ 
-     int isThePositionOutOfRange = 0; 
-     double sum = 0; 
-     //This loop is to compare pixels in motion blocks 
-     for(blockIndexX = imageIndexX; blockIndexX < imageIndexX + 
-BLOCK_SIZE; blockIndexX++) 
-      for(blockIndexY = imageIndexY; blockIndexY < imageIndexY + 
-BLOCK_SIZE; blockIndexY++){ 
-        
-       //Control the calculated point inside the image range 
-       if(blockIndexX < imageWidth && blockIndexY < 
-imageHeight && (blockIndexX + rangeShiftX) >= 0 && (blockIndexX + rangeShiftX) < 
-imageWidth && (blockIndexY + rangeShiftY) >= 0 && (blockIndexY + rangeShiftY) < 
-imageHeight){ 
-        int grayDiff = getPixel(currentFrame, blockIndexX, 
-blockIndexY) - getPixel(referenceFrame, blockIndexX + rangeShiftX, blockIndexY + 
-rangeShiftY); 
-        sum += grayDiff * grayDiff; 
-       } else{ 
-        isThePositionOutOfRange = 1; 
-       } 
-      } 
-     //Out - of - bound control 
-     if(!isThePositionOutOfRange){ 
-      if(isFirstSumInRange){ 
-       smallestSquareSum = sum; 
-       smallestShifts[0] = rangeShiftX; 
-       smallestShifts[1] = rangeShiftY; 
+    xorBitMap(tb1, shiftedTB2, diffBMP);          err = totalOneInBitMap(diffBMP);      if(err < minErr) {      shiftRet[0] = xOffset;      shiftRet[1] = yOffset;      minErr = err;     }     cvReleaseImage(&shiftedTB2);     cvReleaseImage(&shiftedEB2);    }    cvReleaseImage(&tb1);    cvReleaseImage(&tb2);    cvReleaseImage(&eb1);    cvReleaseImage(&eb2);  } } /** Function getFileNames(string path, vector<string>& files)  *  To search in a directory, including all files, typically image files in this case, and store their names in a vector  * Parameters:  *  path: the directory path to be searched  *  files: the vector that used to store file names with directory path  */ void getFileNames(string path, vector<string>& entireNames, vector<string>& fileNames){    //File handle     long   hFile   =   0;     //File information     struct _finddata_t fileinfo;     string p;      if((hFile = _findfirst(p.assign(path).append("/*").c_str(),&fileinfo)) != -1){         do{             //If it is a directory, go in iteration, otherwise, add to list             if((fileinfo.attrib & _A_SUBDIR)){                 if(strcmp(fileinfo.name,".") != 0 && strcmp(fileinfo.name,"..") != 0)                     getFileNames( p.assign(path).append("/").append(fileinfo.name), entireNames, fileNames);             }             else{                 entireNames.push_back(p.assign(path).append("/").append(fileinfo.name));     fileNames.push_back(fileinfo.name);             }         }   while(_findnext(hFile, &fileinfo) == 0);          _findclose(hFile);     } } /** Function getBlockShift(IplImage * referenceFrame, IplImage * currentFrame, BlockMotionVectorPtr *headPtr, BlockMotionVectorPtr *tailPtr)  *  Main function of block matching algorithm that are used in motion estimation, block size is preprocessored, as well as search range  *  The final motion vector is stored as a node which is then insert to a queue  *  Parameters:  *  *referenceFrame: reference frame pointer, which points to the reference image, the previous one. 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
 - 56 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-       isFirstSumInRange = 0; 
-      } else{ 
-       if(sum <= smallestSquareSum){ 
-        smallestSquareSum = sum; 
-        smallestShifts[0] = rangeShiftX; 
-        smallestShifts[1] = rangeShiftY; 
-       } 
-      } 
-     } 
-    } 
-    enqueueMotionVectors(headPtr, tailPtr, imageIndexX, imageIndexY, 
-smallestShifts[0], smallestShifts[1]);  
-  } 
-} 
-/** Function computeDistanceThreshold(BlockMotionVectorPtr 
-motionVectorQueueNode) 
- *  First version: to calculate the mean value of all distance, which is the simplest 
-method to find a distance threshold 
- */ 
-double computeDistanceThreshold(BlockMotionVectorPtr motionVectorQueueNode){ 
- long count = 0; 
- double sum = 0; 
  
- if(motionVectorQueueNode == NULL){ 
-  fprintf(stderr, "Error: Motion Vector Queue is empty\n"); 
-  exit(-1); 
- } else{ 
-  while(motionVectorQueueNode != NULL){ 
-   // Computation is limited for non - zero vectors to enhance the motion 
-distance threshold 
-   if(motionVectorQueueNode->shiftX != 0 || motionVectorQueueNode-
->shiftY !=0){ 
-    count++; 
-    sum += sqrt(square(motionVectorQueueNode->shiftX) + 
-square(motionVectorQueueNode->shiftY)); 
-   } 
-   motionVectorQueueNode = motionVectorQueueNode->nextPtr; 
-  } 
- 
-  if(sum != 0){ 
-   return sum / count; 
-  } else { 
-   return 0; 
-  } 
- } 
-} 
-/**Function findReferencePoint(ImageInfoNodePtr *headImageInfoNodePtr, 
-ImageInfoNodePtr *tailImageInfoNodePtr, vector<string>& srcFileNames) 
- *  Try to find the best registration point inorder to do tha fastest registration 
- * Parameters: 
- *  srcFileNames: the vector that stores file names in the folder which contains all 
-files in image sequence 
- * Return: 
- *  reference number, an integer that denotes the image index which will be select 
-as reference. 
- */ 
-int findReferencePoint(ImageInfoNodePtr *headImageInfoNodePtr, ImageInfoNodePtr 
-*tailImageInfoNodePtr, vector<string>& srcFileNames){ 
+ *  *currentFrame: current frame pointer, which points to the second image where motion has occured in contrast to the reference frame  *  *headPtr: head node address of the queue  *  *tailPtr: tail node address of the queue  */ void getBlockShift(IplImage * referenceFrame, IplImage * currentFrame, BlockMotionVectorPtr *headPtr, BlockMotionVectorPtr *tailPtr){  int imageWidth = referenceFrame->width;  int imageHeight = referenceFrame->height;  int imageIndexX, imageIndexY;  int rangeShiftX, rangeShiftY;  int blockIndexX, blockIndexY;  double smallestSquareSum = 10000.0000;  int smallestShifts[2];  double squareSumMatrix[SEARCH_RANGE * SEARCH_RANGE] = {10000.0000};  int matrixIndex = 0;  //calculation loop, adjust here for pixelwise or blockwise  for(imageIndexX = 0; imageIndexX < imageWidth - BLOCK_SIZE; imageIndexX+=BLOCK_SIZE)   for(imageIndexY = 0; imageIndexY < imageHeight - BLOCK_SIZE; imageIndexY+=BLOCK_SIZE){    //smallestSquareSum = 10000.0000;    smallestShifts[0] = 0;    smallestShifts[1] = 0;     int isFirstSumInRange = 1;    //Second loop, in the search range for motion blocks    for(rangeShiftX = -SEARCH_RANGE; rangeShiftX < SEARCH_RANGE; rangeShiftX++)     for(rangeShiftY = -SEARCH_RANGE; rangeShiftY < SEARCH_RANGE; rangeShiftY++){      int isThePositionOutOfRange = 0;      double sum = 0;      //This loop is to compare pixels in motion blocks      for(blockIndexX = imageIndexX; blockIndexX < imageIndexX + BLOCK_SIZE; blockIndexX++)       for(blockIndexY = imageIndexY; blockIndexY < imageIndexY + BLOCK_SIZE; blockIndexY++){                //Control the calculated point inside the image range        if(blockIndexX < imageWidth && blockIndexY < imageHeight && (blockIndexX + rangeShiftX) >= 0 && (blockIndexX + rangeShiftX) < imageWidth && (blockIndexY + rangeShiftY) >= 0 && (blockIndexY + rangeShiftY) < imageHeight){         int grayDiff = getPixel(currentFrame, blockIndexX, blockIndexY) - getPixel(referenceFrame, blockIndexX + rangeShiftX, blockIndexY + rangeShiftY);         sum += grayDiff * grayDiff;        } else{         isThePositionOutOfRange = 1;        }       }      //Out - of - bound control      if(!isThePositionOutOfRange){       if(isFirstSumInRange){        smallestSquareSum = sum;        smallestShifts[0] = rangeShiftX;        smallestShifts[1] = rangeShiftY; 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
 - 57 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
- long referencePoint = 0, index = 1, refIndex = 0, matchNumbers = 0; 
- int groupChanged = 0; 
-  
- vector<string>::iterator iter; 
  
- while(index < (long) srcFileNames.size()){ 
-  IplImage *src1 = NULL, *src2 = NULL,  
-    *grayPlane1 = NULL, *grayPlane2 = NULL,  
-    *shunkedGrayPlane1 = NULL, *shunkedGrayPlane2 = NULL; 
-  BlockMotionVectorPtr headMotionVectorPtr = NULL; 
-  BlockMotionVectorPtr tailMotionVectorPtr = NULL; 
-  DistanceFrequencyNodePtr headDistanceFrequencyPtr = NULL; 
-  DistanceFrequencyNodePtr tailDistanceFrequencyPtr = NULL; 
- 
-  if(groupChanged) 
-   matchNumbers = groupChanged = 0; 
-  // Read image ( same size, same type ) 
-  src1 = cvLoadImage(srcFileNames[refIndex].c_str(), 1); 
-  src2 = cvLoadImage(srcFileNames[index].c_str(), 1); 
-  // File check 
-  if(src1 ==  NULL) {  
-   fprintf(stderr, "Error: Error loading src1!\n"); 
-   exit(-1); 
-  } 
-  if(src2 ==  NULL) {  
-   fprintf(stderr, "Error: Error loading src2!\n"); 
-   exit(-1); 
-  } 
-  //create gray planes 
-  allocateOnDemand(&grayPlane1, cvGetSize(src1), src1->depth, 1); 
-  allocateOnDemand(&grayPlane2, cvGetSize(src2), src2->depth, 1); 
-  cvCvtColor(src1, grayPlane1, CV_BGR2GRAY); 
-  cvCvtColor(src2, grayPlane2, CV_BGR2GRAY); 
-  //shrink images according to pyramid level 
-  shrinkImage(grayPlane1, &shunkedGrayPlane1, PYRAMID_LEVEL); 
-  shrinkImage(grayPlane2, &shunkedGrayPlane2, PYRAMID_LEVEL); 
-  //Find a series of motion vectors for blocks in the current frame 
-  getBlockShift(shunkedGrayPlane1, shunkedGrayPlane2, 
-&headMotionVectorPtr, &tailMotionVectorPtr); 
- 
-  int shiftArray[2] = {0}; 
-  //Find the shift array that stores the x and y shift of the current frame, which 
-will be shifted to do the registration 
-  getImageShift(headMotionVectorPtr, &headDistanceFrequencyPtr, 
-&tailDistanceFrequencyPtr, shiftArray); 
- 
-  if(shiftArray[0] == 0 && shiftArray[1] == 0){ 
-   //Two images match, move to next image, continue comparison 
-   matchNumbers++; 
-   index++; 
-  } else{ 
-   //COMPUTE MOTION VECTOR, ENQUEUE 
-   enqueueImageInfo(headImageInfoNodePtr, tailImageInfoNodePtr, refIndex, 
-matchNumbers, shiftArray[0], shiftArray[1]); 
- 
-   refIndex = index; 
-   index++; 
-   groupChanged = 1; 
+       isFirstSumInRange = 0;       } else{        if(sum <= smallestSquareSum){         smallestSquareSum = sum;         smallestShifts[0] = rangeShiftX;         smallestShifts[1] = rangeShiftY;        }       }      }     }     enqueueMotionVectors(headPtr, tailPtr, imageIndexX, imageIndexY, smallestShifts[0], smallestShifts[1]);    } } /** Function computeDistanceThreshold(BlockMotionVectorPtr motionVectorQueueNode)  *  First version: to calculate the mean value of all distance, which is the simplest method to find a distance threshold  */ double computeDistanceThreshold(BlockMotionVectorPtr motionVectorQueueNode){  long count = 0;  double sum = 0;   if(motionVectorQueueNode == NULL){   fprintf(stderr, "Error: Motion Vector Queue is empty\n");   exit(-1);  } else{   while(motionVectorQueueNode != NULL){    // Computation is limited for non - zero vectors to enhance the motion distance threshold    if(motionVectorQueueNode->shiftX != 0 || motionVectorQueueNode->shiftY !=0){     count++;     sum += sqrt(square(motionVectorQueueNode->shiftX) + square(motionVectorQueueNode->shiftY));    }    motionVectorQueueNode = motionVectorQueueNode->nextPtr;   }    if(sum != 0){    return sum / count;   } else {    return 0;   }  } } /**Function findReferencePoint(ImageInfoNodePtr *headImageInfoNodePtr, ImageInfoNodePtr *tailImageInfoNodePtr, vector<string>& srcFileNames)  *  Try to find the best registration point inorder to do tha fastest registration  * Parameters:  *  srcFileNames: the vector that stores file names in the folder which contains all files in image sequence  * Return:  *  reference number, an integer that denotes the image index which will be select as reference.  */ int findReferencePoint(ImageInfoNodePtr *headImageInfoNodePtr, ImageInfoNodePtr *tailImageInfoNodePtr, vector<string>& srcFileNames){ 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
 - 58 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-  } 
-  free(headMotionVectorPtr); 
-  free(tailMotionVectorPtr); 
-  free(headDistanceFrequencyPtr); 
-  free(tailDistanceFrequencyPtr); 
-  cvReleaseImage(&src1); 
-  cvReleaseImage(&src2); 
-  cvReleaseImage(&grayPlane1); 
-  cvReleaseImage(&grayPlane2); 
-  cvReleaseImage(&shunkedGrayPlane1); 
-  cvReleaseImage(&shunkedGrayPlane2); 
- } 
- //Enqueue the nodes that stores shifting information in the image sequence 
- enqueueImageInfo(headImageInfoNodePtr, tailImageInfoNodePtr, refIndex, 
-matchNumbers, 0, 0); 
- ImageInfoNodePtr tempPtr = NULL; 
- tempPtr = (ImageInfoNodePtr)malloc(sizeof(ImageInfoNode)); 
  
- if(tempPtr != NULL){ 
-  tempPtr = *headImageInfoNodePtr; 
-  int largestMatchNumbers = tempPtr->matchedImageNumbers; 
-  tempPtr = tempPtr->nextPtr; 
- 
-  while(tempPtr != NULL){ 
-   if(tempPtr->matchedImageNumbers > largestMatchNumbers){ 
-    largestMatchNumbers = tempPtr->matchedImageNumbers; 
-    referencePoint = tempPtr->imageIndex; 
-   } 
-   tempPtr = tempPtr->nextPtr; 
-  } 
- } else { 
-  fprintf(stderr, "Error: New Image Info vector is not created, Out of 
-memory?\n"); 
-  exit(-1); 
- } 
- free(tempPtr); 
- return referencePoint; 
-} 
-/** Function computeBackgroundMotion(DistanceFrequencyNodePtr 
-distanceFrequencyQueueNode, int shifts[]) 
- *  Find background motion by frequency, result stored in shifts[] 
- */ 
-void computeBackgroundMotion(DistanceFrequencyNodePtr 
-distanceFrequencyQueueNode, int shifts[]){ 
- long maxFrequency = distanceFrequencyQueueNode->frequency; 
- int shiftX = distanceFrequencyQueueNode->shiftX; 
- int shiftY = distanceFrequencyQueueNode->shiftY; 
- 
- if(distanceFrequencyQueueNode == NULL){ 
-  fprintf(stderr, "Error: Motion Vector Queue is empty\n"); 
-  exit(-1); 
- } else{ 
-  while(distanceFrequencyQueueNode != NULL){ 
-   if(distanceFrequencyQueueNode->frequency > maxFrequency){ 
-    shiftX = distanceFrequencyQueueNode->shiftX; 
-     shiftY = distanceFrequencyQueueNode->shiftY; 
-   } else if(distanceFrequencyQueueNode->frequency == maxFrequency){ 
-    shiftX = (shiftX + distanceFrequencyQueueNode->shiftX) / 2; 
+ long referencePoint = 0, index = 1, refIndex = 0, matchNumbers = 0;  int groupChanged = 0;    vector<string>::iterator iter;   while(index < (long) srcFileNames.size()){   IplImage *src1 = NULL, *src2 = NULL,      *grayPlane1 = NULL, *grayPlane2 = NULL,      *shunkedGrayPlane1 = NULL, *shunkedGrayPlane2 = NULL;   BlockMotionVectorPtr headMotionVectorPtr = NULL;   BlockMotionVectorPtr tailMotionVectorPtr = NULL;   DistanceFrequencyNodePtr headDistanceFrequencyPtr = NULL;   DistanceFrequencyNodePtr tailDistanceFrequencyPtr = NULL;    if(groupChanged)    matchNumbers = groupChanged = 0;   // Read image ( same size, same type )   src1 = cvLoadImage(srcFileNames[refIndex].c_str(), 1);   src2 = cvLoadImage(srcFileNames[index].c_str(), 1);   // File check   if(src1 ==  NULL) {     fprintf(stderr, "Error: Error loading src1!\n");    exit(-1);   }   if(src2 ==  NULL) {     fprintf(stderr, "Error: Error loading src2!\n");    exit(-1);   }   //create gray planes   allocateOnDemand(&grayPlane1, cvGetSize(src1), src1->depth, 1);   allocateOnDemand(&grayPlane2, cvGetSize(src2), src2->depth, 1);   cvCvtColor(src1, grayPlane1, CV_BGR2GRAY);   cvCvtColor(src2, grayPlane2, CV_BGR2GRAY);   //shrink images according to pyramid level   shrinkImage(grayPlane1, &shunkedGrayPlane1, PYRAMID_LEVEL);   shrinkImage(grayPlane2, &shunkedGrayPlane2, PYRAMID_LEVEL);   //Find a series of motion vectors for blocks in the current frame   getBlockShift(shunkedGrayPlane1, shunkedGrayPlane2, &headMotionVectorPtr, &tailMotionVectorPtr);    int shiftArray[2] = {0};   //Find the shift array that stores the x and y shift of the current frame, which will be shifted to do the registration   getImageShift(headMotionVectorPtr, &headDistanceFrequencyPtr, &tailDistanceFrequencyPtr, shiftArray);    if(shiftArray[0] == 0 && shiftArray[1] == 0){    //Two images match, move to next image, continue comparison    matchNumbers++;    index++;   } else{    //COMPUTE MOTION VECTOR, ENQUEUE    enqueueImageInfo(headImageInfoNodePtr, tailImageInfoNodePtr, refIndex, matchNumbers, shiftArray[0], shiftArray[1]);     refIndex = index;    index++;    groupChanged = 1; 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
 - 59 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-    shiftY = (shiftY + distanceFrequencyQueueNode->shiftY) / 2; 
-   } 
-    
-   distanceFrequencyQueueNode = distanceFrequencyQueueNode->nextPtr; 
-  } 
-  *(shifts) = (int)shiftX; 
-  *(shifts + 1) = (int)shiftY; 
- } 
-} 
  
-/** Function getImageShift(BlockMotionVectorPtr motionVectorQueueNode, 
-DistanceFrequencyNodePtr *headPtr, DistanceFrequencyNodePtr *tailPtr, int shiftCo[]) 
- *  Find the shift array that stores the x and y shift of the current frame, which will 
-be shifted to do the registration 
- */ 
-void getImageShift(BlockMotionVectorPtr motionVectorQueueNode, 
-DistanceFrequencyNodePtr *headPtr, DistanceFrequencyNodePtr *tailPtr, int 
-shiftCo[]){ 
-  
- double sum = 0; 
- double distanceThreshold = computeDistanceThreshold(motionVectorQueueNode); 
- 
- printf("%f\n", distanceThreshold); 
- 
- if(motionVectorQueueNode == NULL){ 
-  fprintf(stderr, "Error: Motion Vector Queue is empty\n"); 
-  exit(-1); 
- } else{ 
-  while(motionVectorQueueNode != NULL){ 
-   if(sqrt(square(motionVectorQueueNode->shiftX) + 
-square(motionVectorQueueNode->shiftY)) < distanceThreshold){ 
-    enqueueDistanceFrequency(headPtr, tailPtr, motionVectorQueueNode-
->shiftX, motionVectorQueueNode->shiftY); 
-   }   
-   motionVectorQueueNode = motionVectorQueueNode->nextPtr; 
-  } 
- 
-  if(distanceThreshold != 0){ 
-   //Find background motion by frequency, result stored in shifts[] 
-   computeBackgroundMotion(*headPtr, shiftCo); 
-  } else{ 
-   *shiftCo = 0; 
-   *(shiftCo + 1) = 0; 
-  } 
-  *shiftCo = (*shiftCo) * pow(2.0, PYRAMID_LEVEL); 
-  *(shiftCo + 1) = *(shiftCo + 1) * pow(2.0, PYRAMID_LEVEL); 
- } 
-} 
-/** Function shiftImageSequence(ImageInfoNodePtr imageInfoNode, vector<string>& 
-srcFileNames, vector<string>& dstFileNames) 
- *  Shift the entire sequence one by one, and save to new files 
- * Parameters: 
- *  imageInfoNode: the queue node that stores shift information of the image 
- *  srcFileNames: the vector that includes all source image file names 
- *  dstFileNames: the vector that includes all new image file names where they 
-could be saved 
- */ 
+  }   free(headMotionVectorPtr);   free(tailMotionVectorPtr);   free(headDistanceFrequencyPtr);   free(tailDistanceFrequencyPtr);   cvReleaseImage(&src1);   cvReleaseImage(&src2);   cvReleaseImage(&grayPlane1);   cvReleaseImage(&grayPlane2);   cvReleaseImage(&shunkedGrayPlane1);   cvReleaseImage(&shunkedGrayPlane2);  }  //Enqueue the nodes that stores shifting information in the image sequence  enqueueImageInfo(headImageInfoNodePtr, tailImageInfoNodePtr, refIndex, matchNumbers, 0, 0);  ImageInfoNodePtr tempPtr = NULL;  tempPtr = (ImageInfoNodePtr)malloc(sizeof(ImageInfoNode));   if(tempPtr != NULL){   tempPtr = *headImageInfoNodePtr;   int largestMatchNumbers = tempPtr->matchedImageNumbers;   tempPtr = tempPtr->nextPtr;    while(tempPtr != NULL){    if(tempPtr->matchedImageNumbers > largestMatchNumbers){     largestMatchNumbers = tempPtr->matchedImageNumbers;     referencePoint = tempPtr->imageIndex;    }    tempPtr = tempPtr->nextPtr;   }  } else {   fprintf(stderr, "Error: New Image Info vector is not created, Out of memory?\n");   exit(-1);  }  free(tempPtr);  return referencePoint; } /** Function computeBackgroundMotion(DistanceFrequencyNodePtr distanceFrequencyQueueNode, int shifts[])  *  Find background motion by frequency, result stored in shifts[]  */ void computeBackgroundMotion(DistanceFrequencyNodePtr distanceFrequencyQueueNode, int shifts[]){  long maxFrequency = distanceFrequencyQueueNode->frequency;  int shiftX = distanceFrequencyQueueNode->shiftX;  int shiftY = distanceFrequencyQueueNode->shiftY;   if(distanceFrequencyQueueNode == NULL){   fprintf(stderr, "Error: Motion Vector Queue is empty\n");   exit(-1);  } else{   while(distanceFrequencyQueueNode != NULL){    if(distanceFrequencyQueueNode->frequency > maxFrequency){     shiftX = distanceFrequencyQueueNode->shiftX;      shiftY = distanceFrequencyQueueNode->shiftY;    } else if(distanceFrequencyQueueNode->frequency == maxFrequency){     shiftX = (shiftX + distanceFrequencyQueueNode->shiftX) / 2; 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
 - 60 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-void shiftImageSequence(ImageInfoNodePtr imageInfoNode, vector<string>& 
-srcFileNames, vector<string>& dstFileNames){ 
- long matchedNumber = 0;  
- long index = 0; 
  
- while(imageInfoNode != NULL){ 
-   
-  IplImage  * srcImage = cvLoadImage(srcFileNames[index].c_str(),1); 
- 
-  IplImage  * shiftedImage = cvCreateImage(cvGetSize(srcImage), srcImage-
->depth, srcImage->nChannels); 
-  cvSet(shiftedImage, CV_RGB(255, 255, 255), NULL); 
-  
-  shiftImage(srcImage, imageInfoNode->shiftX, imageInfoNode->shiftY, 
-shiftedImage); 
-  printf("Image: %d, aligned at (%d, %d)!\n", index,  imageInfoNode->shiftX, 
-imageInfoNode->shiftY); 
- 
-  cvSaveImage(dstFileNames[index].c_str(), shiftedImage, 0); 
-  index++; 
-   
-  if(imageInfoNode->matchedImageNumbers == 0){ 
-   imageInfoNode = imageInfoNode->nextPtr; 
-  } else{ 
-   matchedNumber++; 
- 
-   if(matchedNumber > imageInfoNode->matchedImageNumbers){ 
-    matchedNumber = 0; 
-    imageInfoNode = imageInfoNode->nextPtr; 
-   } 
-  }  
- } 
-} 
-/** Function createNewFrame(IplImage ** newFrame, IplImage *refFrame, IplImage 
-*curFrame, BlockMotionVectorPtr motionVectorQueueNode, double threshold) 
- *  Main function of creating the new image between frames  
- */ 
-void createNewFrame(IplImage ** newFrame, IplImage *refFrame, IplImage 
-*curFrame, BlockMotionVectorPtr motionVectorQueueNode, double threshold){  
- int motions[2]; 
- //select the most probable motions 
- adjustMotionBlock(motionVectorQueueNode, threshold, motions); 
- 
- if(motionVectorQueueNode == NULL){ 
-  fprintf(stderr, "Error: Motion Vector Queue is empty\n"); 
-  exit(-1); 
- } else{ 
-  while(motionVectorQueueNode != NULL){ 
-   if(shiftedDistance(motionVectorQueueNode->shiftX, 
-motionVectorQueueNode->shiftY) >= threshold){ 
-    fillMotionBlock(newFrame, curFrame, motionVectorQueueNode->x * 
-(pow(2.0, PYRAMIDLEVEL)), motionVectorQueueNode->y * (pow(2.0, 
-PYRAMIDLEVEL)), (*motions) * (pow(2.0, PYRAMIDLEVEL)), (*(motions + 1)) * 
-(pow(2.0, PYRAMIDLEVEL))); 
-   } else{ 
-    fillBackGroundBlock(newFrame, refFrame, curFrame, 
-motionVectorQueueNode->x * (pow(2.0, PYRAMIDLEVEL)), motionVectorQueueNode-
->y * (pow(2.0, PYRAMIDLEVEL))); 
+    shiftY = (shiftY + distanceFrequencyQueueNode->shiftY) / 2;    }        distanceFrequencyQueueNode = distanceFrequencyQueueNode->nextPtr;   }   *(shifts) = (int)shiftX;   *(shifts + 1) = (int)shiftY;  } }  /** Function getImageShift(BlockMotionVectorPtr motionVectorQueueNode, DistanceFrequencyNodePtr *headPtr, DistanceFrequencyNodePtr *tailPtr, int shiftCo[])  *  Find the shift array that stores the x and y shift of the current frame, which will be shifted to do the registration  */ void getImageShift(BlockMotionVectorPtr motionVectorQueueNode, DistanceFrequencyNodePtr *headPtr, DistanceFrequencyNodePtr *tailPtr, int shiftCo[]){    double sum = 0;  double distanceThreshold = computeDistanceThreshold(motionVectorQueueNode);   printf("%f\n", distanceThreshold);   if(motionVectorQueueNode == NULL){   fprintf(stderr, "Error: Motion Vector Queue is empty\n");   exit(-1);  } else{   while(motionVectorQueueNode != NULL){    if(sqrt(square(motionVectorQueueNode->shiftX) + square(motionVectorQueueNode->shiftY)) < distanceThreshold){     enqueueDistanceFrequency(headPtr, tailPtr, motionVectorQueueNode->shiftX, motionVectorQueueNode->shiftY);    }      motionVectorQueueNode = motionVectorQueueNode->nextPtr;   }    if(distanceThreshold != 0){    //Find background motion by frequency, result stored in shifts[]    computeBackgroundMotion(*headPtr, shiftCo);   } else{    *shiftCo = 0;    *(shiftCo + 1) = 0;   }   *shiftCo = (*shiftCo) * pow(2.0, PYRAMID_LEVEL);   *(shiftCo + 1) = *(shiftCo + 1) * pow(2.0, PYRAMID_LEVEL);  } } /** Function shiftImageSequence(ImageInfoNodePtr imageInfoNode, vector<string>& srcFileNames, vector<string>& dstFileNames)  *  Shift the entire sequence one by one, and save to new files  * Parameters:  *  imageInfoNode: the queue node that stores shift information of the image  *  srcFileNames: the vector that includes all source image file names  *  dstFileNames: the vector that includes all new image file names where they could be saved  */ 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
 - 61 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-   } 
-   motionVectorQueueNode = motionVectorQueueNode->nextPtr; 
-  } 
- } 
-} 
-/** Function void adjustMotionBlock(BlockMotionVectorPtr *motionVectorQueueNode) 
- *  Find the point that needs interpolation and then create a new image 
- */ 
-void adjustMotionBlock(BlockMotionVectorPtr motionVectorQueueNode, double 
-distanceThreshold, int motions[]){ 
- DistanceFrequencyNodePtr headDistanceFrequencyPtr = NULL; 
- DistanceFrequencyNodePtr tailDistanceFrequencyPtr = NULL; 
- BlockMotionVectorPtr headMotionVector = motionVectorQueueNode; 
  
- while(motionVectorQueueNode != NULL){ 
-  if(sqrt(square(motionVectorQueueNode->shiftX) + 
-square(motionVectorQueueNode->shiftY)) >= distanceThreshold){ 
-   enqueueDistanceFrequency(&headDistanceFrequencyPtr, 
-&tailDistanceFrequencyPtr, motionVectorQueueNode->shiftX, 
-motionVectorQueueNode->shiftY); 
-  } 
-  motionVectorQueueNode = motionVectorQueueNode->nextPtr; 
- } 
- 
- long largestFrequency = headDistanceFrequencyPtr->frequency; 
- int likelyMotionX = headDistanceFrequencyPtr->shiftX; 
- int likelyMotionY = headDistanceFrequencyPtr->shiftY; 
- 
- while(headDistanceFrequencyPtr != NULL){ 
-  if(largestFrequency < headDistanceFrequencyPtr->frequency){ 
-   largestFrequency = headDistanceFrequencyPtr->frequency; 
-   likelyMotionX = headDistanceFrequencyPtr->shiftX; 
-   likelyMotionY = headDistanceFrequencyPtr->shiftY; 
-  } 
-  headDistanceFrequencyPtr =  headDistanceFrequencyPtr->nextPtr; 
- } 
- *motions = likelyMotionX; 
- *(motions + 1) = likelyMotionY; 
-} 
-/**Implementation of Function interpolateInSequence(BlockMotionVectorPtr 
-motionVectorQueueNode, double interpolateThreshold) 
- */ 
-void interpolateInSequence(char * directory, vector<string>& fileNames, 
-vector<string>& srcFileNames, double *thresholds, int quantity){ 
- //Find maximum threshold 
- double maxThreshold = *(thresholds); 
- 
- for(int i = 1; i < quantity; i++){ 
-  if(*(thresholds + i) > maxThreshold){ 
-   maxThreshold = *(thresholds + i); 
-  } 
- } 
-   
- for(long i = 0; i < quantity; i++){ 
-  if(*(thresholds + i) >= maxThreshold * INTERPOLATION_RANGE){ 
-   long index = i; 
-   //Read images 
-   IplImage * refFrame = cvLoadImage(srcFileNames[index].c_str()); 
+void shiftImageSequence(ImageInfoNodePtr imageInfoNode, vector<string>& srcFileNames, vector<string>& dstFileNames){  long matchedNumber = 0;   long index = 0;   while(imageInfoNode != NULL){      IplImage  * srcImage = cvLoadImage(srcFileNames[index].c_str(),1);    IplImage  * shiftedImage = cvCreateImage(cvGetSize(srcImage), srcImage->depth, srcImage->nChannels);   cvSet(shiftedImage, CV_RGB(255, 255, 255), NULL);     shiftImage(srcImage, imageInfoNode->shiftX, imageInfoNode->shiftY, shiftedImage);   printf("Image: %d, aligned at (%d, %d)!\n", index,  imageInfoNode->shiftX, imageInfoNode->shiftY);    cvSaveImage(dstFileNames[index].c_str(), shiftedImage, 0);   index++;      if(imageInfoNode->matchedImageNumbers == 0){    imageInfoNode = imageInfoNode->nextPtr;   } else{    matchedNumber++;     if(matchedNumber > imageInfoNode->matchedImageNumbers){     matchedNumber = 0;     imageInfoNode = imageInfoNode->nextPtr;    }   }   } } /** Function createNewFrame(IplImage ** newFrame, IplImage *refFrame, IplImage *curFrame, BlockMotionVectorPtr motionVectorQueueNode, double threshold)  *  Main function of creating the new image between frames   */ void createNewFrame(IplImage ** newFrame, IplImage *refFrame, IplImage *curFrame, BlockMotionVectorPtr motionVectorQueueNode, double threshold){   int motions[2];  //select the most probable motions  adjustMotionBlock(motionVectorQueueNode, threshold, motions);   if(motionVectorQueueNode == NULL){   fprintf(stderr, "Error: Motion Vector Queue is empty\n");   exit(-1);  } else{   while(motionVectorQueueNode != NULL){    if(shiftedDistance(motionVectorQueueNode->shiftX, motionVectorQueueNode->shiftY) >= threshold){     fillMotionBlock(newFrame, curFrame, motionVectorQueueNode->x * (pow(2.0, PYRAMIDLEVEL)), motionVectorQueueNode->y * (pow(2.0, PYRAMIDLEVEL)), (*motions) * (pow(2.0, PYRAMIDLEVEL)), (*(motions + 1)) * (pow(2.0, PYRAMIDLEVEL)));    } else{     fillBackGroundBlock(newFrame, refFrame, curFrame, motionVectorQueueNode->x * (pow(2.0, PYRAMIDLEVEL)), motionVectorQueueNode->y * (pow(2.0, PYRAMIDLEVEL))); 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
 - 62 - 
- Non Ð Linear Time Lapse Photography                                                     TING XU 
-   IplImage * curFrame = cvLoadImage(srcFileNames[index + 1].c_str()); 
  
-   BlockMotionVectorPtr headMotionVectorPtr = NULL; 
-   BlockMotionVectorPtr tailMotionVectorPtr = NULL; 
- 
-   IplImage * refGrayPlane = NULL, * curGrayPlane = NULL,  
-      * shrunkRefPlane = NULL, * shrunkCurPlane = NULL, * 
-interFrame = NULL, * newFrame = NULL; 
- 
-   allocateOnDemand(&interFrame, cvGetSize(curFrame), curFrame->depth, 
-curFrame->nChannels); 
-   allocateOnDemand(&newFrame, cvGetSize(curFrame), curFrame->depth, 
-curFrame->nChannels); 
-   //create grey planes 
-   allocateOnDemand(&refGrayPlane, cvGetSize(refFrame), IPL_DEPTH_8U, 
-1); 
-   cvCvtColor(refFrame, refGrayPlane, CV_BGR2GRAY); 
-   allocateOnDemand(&curGrayPlane, cvGetSize(curFrame), IPL_DEPTH_8U, 
-1); 
-   cvCvtColor(curFrame, curGrayPlane, CV_BGR2GRAY); 
-   //create image pyramid 
-   shrinkImage(refGrayPlane, &shrunkRefPlane, PYRAMIDLEVEL); 
-   shrinkImage(curGrayPlane, &shrunkCurPlane, PYRAMIDLEVEL); 
-   //Do with pyramid to speed up 
-   getBlockShift(shrunkRefPlane, shrunkCurPlane, &headMotionVectorPtr, 
-&tailMotionVectorPtr); 
- 
-   double distanceThreshold = 
-computeDistanceThreshold(headMotionVectorPtr); 
-     
-   //Interpolation 
-   createNewFrame(&interFrame, refFrame, curFrame, headMotionVectorPtr, 
-distanceThreshold); 
-   fillBlankPixels(curFrame, interFrame, &newFrame); 
- 
-   printf("New frame between image %ld and %ld interpolated!\n", index, 
-index + 1); 
-   //new image re - naming 
-   char newName[500]; 
-   strcpy(newName, directory); 
-   strcat(newName, "/inter_"); 
-   strcat(newName, fileNames[index].c_str()); 
- 
-   cvSaveImage(newName, newFrame); 
-   //Release memories 
-   cvReleaseImage(&refFrame); 
-   cvReleaseImage(&curFrame); 
-   cvReleaseImage(&refGrayPlane); 
-   cvReleaseImage(&curGrayPlane); 
-   cvReleaseImage(&shrunkRefPlane); 
-   cvReleaseImage(&shrunkCurPlane); 
-   cvReleaseImage(&interFrame); 
-   cvReleaseImage(&newFrame);   
-  } 
- } 
-} 
+   }    motionVectorQueueNode = motionVectorQueueNode->nextPtr;   }  } } /** Function void adjustMotionBlock(BlockMotionVectorPtr *motionVectorQueueNode)  *  Find the point that needs interpolation and then create a new image  */ void adjustMotionBlock(BlockMotionVectorPtr motionVectorQueueNode, double distanceThreshold, int motions[]){  DistanceFrequencyNodePtr headDistanceFrequencyPtr = NULL;  DistanceFrequencyNodePtr tailDistanceFrequencyPtr = NULL;  BlockMotionVectorPtr headMotionVector = motionVectorQueueNode;   while(motionVectorQueueNode != NULL){   if(sqrt(square(motionVectorQueueNode->shiftX) + square(motionVectorQueueNode->shiftY)) >= distanceThreshold){    enqueueDistanceFrequency(&headDistanceFrequencyPtr, &tailDistanceFrequencyPtr, motionVectorQueueNode->shiftX, motionVectorQueueNode->shiftY);   }   motionVectorQueueNode = motionVectorQueueNode->nextPtr;  }   long largestFrequency = headDistanceFrequencyPtr->frequency;  int likelyMotionX = headDistanceFrequencyPtr->shiftX;  int likelyMotionY = headDistanceFrequencyPtr->shiftY;   while(headDistanceFrequencyPtr != NULL){   if(largestFrequency < headDistanceFrequencyPtr->frequency){    largestFrequency = headDistanceFrequencyPtr->frequency;    likelyMotionX = headDistanceFrequencyPtr->shiftX;    likelyMotionY = headDistanceFrequencyPtr->shiftY;   }   headDistanceFrequencyPtr =  headDistanceFrequencyPtr->nextPtr;  }  *motions = likelyMotionX;  *(motions + 1) = likelyMotionY; } /**Implementation of Function interpolateInSequence(BlockMotionVectorPtr motionVectorQueueNode, double interpolateThreshold)  */ void interpolateInSequence(char * directory, vector<string>& fileNames, vector<string>& srcFileNames, double *thresholds, int quantity){  //Find maximum threshold  double maxThreshold = *(thresholds);   for(int i = 1; i < quantity; i++){   if(*(thresholds + i) > maxThreshold){    maxThreshold = *(thresholds + i);   }  }     for(long i = 0; i < quantity; i++){   if(*(thresholds + i) >= maxThreshold * INTERPOLATION_RANGE){    long index = i;    //Read images    IplImage * refFrame = cvLoadImage(srcFileNames[index].c_str()); 
+Non Ð Linear Time Lapse Photography                                                     TING XU 
 - 63 - 
  
+   IplImage * curFrame = cvLoadImage(srcFileNames[index + 1].c_str());     BlockMotionVectorPtr headMotionVectorPtr = NULL;    BlockMotionVectorPtr tailMotionVectorPtr = NULL;     IplImage * refGrayPlane = NULL, * curGrayPlane = NULL,        * shrunkRefPlane = NULL, * shrunkCurPlane = NULL, * interFrame = NULL, * newFrame = NULL;     allocateOnDemand(&interFrame, cvGetSize(curFrame), curFrame->depth, curFrame->nChannels);    allocateOnDemand(&newFrame, cvGetSize(curFrame), curFrame->depth, curFrame->nChannels);    //create grey planes    allocateOnDemand(&refGrayPlane, cvGetSize(refFrame), IPL_DEPTH_8U, 1);    cvCvtColor(refFrame, refGrayPlane, CV_BGR2GRAY);    allocateOnDemand(&curGrayPlane, cvGetSize(curFrame), IPL_DEPTH_8U, 1);    cvCvtColor(curFrame, curGrayPlane, CV_BGR2GRAY);    //create image pyramid    shrinkImage(refGrayPlane, &shrunkRefPlane, PYRAMIDLEVEL);    shrinkImage(curGrayPlane, &shrunkCurPlane, PYRAMIDLEVEL);    //Do with pyramid to speed up    getBlockShift(shrunkRefPlane, shrunkCurPlane, &headMotionVectorPtr, &tailMotionVectorPtr);     double distanceThreshold = computeDistanceThreshold(headMotionVectorPtr);         //Interpolation    createNewFrame(&interFrame, refFrame, curFrame, headMotionVectorPtr, distanceThreshold);    fillBlankPixels(curFrame, interFrame, &newFrame);     printf("New frame between image %ld and %ld interpolated!\n", index, index + 1);    //new image re - naming    char newName[500];    strcpy(newName, directory);    strcat(newName, "/inter_");    strcat(newName, fileNames[index].c_str());     cvSaveImage(newName, newFrame);    //Release memories    cvReleaseImage(&refFrame);    cvReleaseImage(&curFrame);    cvReleaseImage(&refGrayPlane);    cvReleaseImage(&curGrayPlane);    cvReleaseImage(&shrunkRefPlane);    cvReleaseImage(&shrunkCurPlane);    cvReleaseImage(&interFrame);    cvReleaseImage(&newFrame);     }  } } 

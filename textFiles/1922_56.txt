@@ -8,7 +8,8 @@ codes. However, their secure claim is incorrect and several attacks are given in
 [12,13,14]. This project will give a brief introduction of KP construction and 
 the two attacks: Watanabe’s attack and revised Watanabe’s attack. A series of 
 results would be collected from the programs based on the two attacks and 
-reasonable analysis will be given. 4 
+reasonable analysis will be given. 
+4 
 Contents 
  
 Abstract                  2 
@@ -29,7 +30,8 @@ Acknowledgements                3
  8.2 Evaluation               47 
 9. Further work                49 
 10. bibliography               50 
-11. appendix                52 5 
+11. appendix                52 
+5 
 1. Introduction 
  
  
@@ -60,24 +62,21 @@ the required security level (such like SHA family or MDx, like MD5).
  
 The security level of the hash function usually depends on the output length of 
 hash functions. For a hash function with n bits length output, which means 
-n
-there are 2 possible outputs, the computational complexity of finding a 
-n/2
-collision is about 2 using birthday attack [3]. If we focus on the 
+there are 2n possible outputs, the computational complexity of finding a 
+collision is about 2n/2 using birthday attack [3]. If we focus on the 
 blockcipher-based compression functions [19][20] using an n-bit blockcipher, 
-n/2
-the complexity of collision attack is at most 2 , take AES as an example (n = 
+the complexity of collision attack is at most 2n/2 , take AES as an example (n = 
 128), the computation bounds are almost unacceptable in practice. 
  
 So if we want to get a more secure hash function, one possible way is to get a 
 longer output based on the same input and the same (small) block size. For 
 instance, in 1990s there are several constructions which could output 2n bits 
 (twice as long as those constructions before that time) and the complexity of 
-n n/2
-collision finding would be 2 instead of 2 [7][8]. These constructions usually 
+collision finding would be 2n instead of 2n/2 [7][8]. These constructions usually 
 require a target ouput size (i.e. 2n) to be fixed and the underlying compression 
 function which should also be collision resistant to the birthday attack bound 
-for that length.  6 
+for that length.  
+6 
  
 However, Knudsen and Preneel provided a different construction: for a 
 particular fixed security target, allow the output size change to reach the certain 
@@ -94,48 +93,41 @@ function itself and try to find out attacks against the KP construction. As a
 result, they did find several attacks which could break Knudsen and Preneel’s 
 claim [13]  
  
-More specifically, let f , … , f be the r compression functions used in the KP 
-1 r
+More specifically, let f1 , … , fr be the r compression functions used in the KP 
 construction. The input of each function is the linear combination of the 
 message blocks and chaining variables (each of them has n bits length). The 
 output (rn bits length) of the construction is the concatenation of the outputs of 
 each compression functions. The key part of this construction is how to get the 
-inputs of the underlying compression functions f , … , f . Here they use the 
-1 r
+inputs of the underlying compression functions f1 , … , fr. Here they use the 
 generator matrix G of the corresponding [r, k, d] linear code to compute the 
 input blocks by multiplying the chaining variables (as a row vector) to the 
-generator matrix and get the input to each compression function f from the 
-i 
+generator matrix and get the input to each compression function fi from the 
 product. 
  
 As a result of this construction, a change in the input of the ‘bigger’ 
 compression function will influence the inputs of at least d underlying 
-compression functions in f , … , f . Particularly, when we use a systematic 
-1 r
+compression functions in f1 , … , fr. Particularly, when we use a systematic 
 generator matrix, if two inputs to the systematic part are different, then at least 
 d - 1 inputs to the non-systematic part would be different. So it will require 
-(d-1)n/2 (d-1)n
-time 2 to find a collision and the preimage attack needs time at least 2 . 
+time 2(d-1)n/2 to find a collision and the preimage attack needs time at least 2(d-1)n . 
 This is exactly where Knudsen and Preneel’s security claim come from. 
  
 However, Watanabe has provided a collision finding attack in his manuscript 
 [13]. For a lot of parameter groups, this attack could beat the collision attack 
 given by Knudsen and Preneel. More specifically, his attack works for all 
-n
-parameter sets with r < 2k and with the complexity of k2 . And the paper also 
+parameter sets with r < 2k and with the complexity of k2n . And the paper also 
 showed that the security claim by Knudsen and Preneel is wrong when the 
 parameter set has r < 2k and d > 3. For codes with d = 3 Watanabe’s attack 
 performs the same as the Knudsen and Preneel’s one and for codes with r ≥ 2k 
 his attack does not work. Moreover, this attack could be seen as the first 
-indication that proves the security claim of the compression function given by 7 
+indication that proves the security claim of the compression function given by 
+7 
 Knudsen and Preneel is incorrect. 
  
 Later, another attack against the KP compression function came out (by Özen, 
 Shrimpton and Stam [14] ). They found a preimage attack works for 9 in 16 
-rn/k
-parameter sets that takes time 2 . They also demonstrated an attack that could 
-rn/2k
-find collisions using 2 queries with special argument.  
+parameter sets that takes time 2rn/k . They also demonstrated an attack that could 
+find collisions using 2rn/2k queries with special argument.  
  
 The latest attacks to the KP compression functions are done by Özen and Stam 
 [12] . In that paper four attacks are shown and each of them are able to beat the 
@@ -173,7 +165,8 @@ performs better in practice.
  
  
  
- 8 
+ 
+8 
 2. Background 
  
  
@@ -206,7 +199,8 @@ is equal to the previous one. Or for input m, it should be
 two different inputs whose hash value are the same. Or it should be 
 “computationally infeasible” to find m and m’ such that Hash(m) = 
 Hash(m’). 
- 9 
+ 
+9 
 We won’t describe the meaning of “computationally infeasible” here because it 
 is not important for what we are going to discuss about and readers can find 
 information in [2] where their definitions are givenn. 
@@ -214,27 +208,23 @@ information in [2] where their definitions are givenn.
  
 General Constructions of Hash Functions 
  
-For a compression function f(·, ·) which maps two strings of lengths l and l’ 
+For a compression function f(, ) which maps two strings of lengths l and l’ 
 into fixed length l, the most common method to construction a hash function H 
-is to call f(·, ·) iteratively, which called Merkle-Damgård iterative construction, 
+is to call f(, ) iteratively, which called Merkle-Damgård iterative construction, 
 as follows: 
  
-M = (M , M ,…, M ) 
-1 2 r
-H = f(H , M ), i = 1, 2, …, r 
-i i-1 i
+M = (M1, M2,…, Mr) 
+Hi = f(Hi-1, Mi), i = 1, 2, …, r 
  
-For H = IV as a const value. The message need to be padded so that the length 
-0
-of M is a multiple of l. And the last block of the message, M , usually need be 
-r
+For H0 = IV as a const value. The message need to be padded so that the length 
+of M is a multiple of l. And the last block of the message, Mr, usually need be 
 padded with the length of the message so that the collision finding attack can 
 not faster than the birthday bound (which called the Merkle-Damgård 
 strengthening).  
  
-Clearly, the security of hash function H is closely related to f(·, ·). More 
+Clearly, the security of hash function H is closely related to f(, ). More 
 specifically, Merkle [4] and Damgård [5] have proved the collision resistance 
-of H is dependent on f(·, ·). The similar conclusion for preimage resistance has 
+of H is dependent on f(, ). The similar conclusion for preimage resistance has 
 been proved by Lai in [16] (also see [17][18] for one-way hash functions). So 
 the design of trustable underlying compression functions is the key to the 
 construction of hash functions. Usually, using block ciphers is the most 
@@ -248,24 +238,22 @@ famous implementation of blockciphers could be Data Encryption Standard
 The basic construction using blockcipher is known as the Davies-Meyer 
 scheme which has the following form: 
  
-H = E (H )  H   
-?
-i mi i-1 i-1
+Hi = Emi(Hi-1) ?  Hi-1   
  
-It takes the message m as the key and the previous output H as the plaintext. 
-i i-110 
+It takes the message mi as the key and the previous output Hi-1 as the plaintext. 
+10 
  
 However, the Davies-Meyer construction have a weakness that one can easily 
--1
-find the output value h for any message m by applying h = E (0). This attack 
-m
+find the output value h for any message m by applying h = Em
+-1 (0). This attack 
 can be prevented by using the Merkle-Damgård strengthening described before. 
 Most popular hash function including MD5 and SHA-1 take this construction. 
 But MD5 has been broken in 2009 [15]. Table 1 shows the information of some 
 popular hash algorithms: 
  
  
-Table 1: Information of 7 hash algorithms 11 
+Table 1: Information of 7 hash algorithms 
+11 
 3. Knudsen-Preneel compression function and Watanabe’s attack 
  
  
@@ -275,161 +263,174 @@ Recall the main idea of Knudsen-Preneel construction we know that they want
 to build a hash function based on a ‘bigger’ compression function whose 
 security is better than the underlying compression functions. 
  
-Let f ? Func(cn, n) be the underlying compression functions used in the KP 
-i
-cn n
-construction that f : {0, 1} ? {0, 1} . But for the consistency of [11] and 
-i
-(c-1)n n
-[13] we will write it as f(·, ·) which stands for f : {0, 1} ? {0, 1} ? {0, 
-i i
-n
-1} (just observe the cn-bit input as two parts) in this section. Let M and H 
-i i
+Let fi ?  Func(cn, n) be the underlying compression functions used in the KP 
+construction that fi : {0, 1}
+cn ? {0, 1}n. But for the consistency of [11] and 
+[13] we will write it as fi(, ) which stands for fi : {0, 1}(c-1)n ? {0, 1}n ? {0, 
+1}n (just observe the cn-bit input as two parts) in this section. Let Mi and Hi 
 represent the first and second input to the function respectively, we will get the 
 definition of multiple construction in [11]:  
  
  
 Definition 3: Multiple Construction 
  
-Let f(·, ·) be underlying compression functions which are independent to each 
-i
+Let fi(, ) be underlying compression functions which are independent to each 
 other, then we can get the multiple construction of the target comprssion 
 function with rate  ? = s/r by: 
-1 1
-1
- = ( , ) 
-H h X Y
-i 1 i i
-2 2 2
- = ( , ) 
-H h X Y
-i 2 i i
+H i
+1  = h1 ( X i1  , Y i1 ) 
+H i
+2  = h2 ( X i
+2  , Y i
+2 ) 
 … 
-r r r
- = ( , ) 
-H h X Y
-i r i i
-j j j j '
+H
+r
+i
+ = hr ( X
+r
+i
+ , Y
+r
+i
+) 
 For    ,   are linear combinations of     and     for 1 ≤ j ≤ r and 1 ≤ j’ ≤ 
-M
-X Y H i ?1 i
-i i
 s. 
  
  
 Security claims of [11] 
  
-(c-1)n n
-Let b be a divisor of n such that n = bn’ ,  f : {0, 1} ? {0, 1} ? {0, 
-i
-n e
-1} be the underlying compression functions, given a [r ,k ,d] linear code, 
-2
+Let b be a divisor of n such that n = bn’ ,  fi : {0, 1}
+(c-1)n ? {0, 1}n ? {0, 
+1}n be the underlying compression functions, given a [r ,k ,d]2
+e linear code, 
 then there exists a ideal compression function for which finding a collision 
-(d-1)n/2
-takes at least 2 operations (notice here c = e/b and s = ck - r). 
- 12 
+takes at least 2(d-1)n/2 operations (notice here c = e/b and s = ck - r). 
+ 
+X
+j
+i Y
+j
+i H
+j
+i 1? M
+j
+i
+'
+12 
  
 Example 1: example of KP compression function: 
  
-1
-Consider H = KP ([5, 3, 3] ), there exists a generator matrix G for the [5, 3, 3] 
-4 4
+Consider H = KP1([5, 3, 3]4), there exists a generator matrix G for the [5, 3, 3]4 
 code and by defining ? as follows: 
  
-0 0 1 0 1 1 2 0 1
-? ? ? ? ? ? ? ?
-?(0) = , ?(1) = , ?(w) =  and ?(w ) =  
-? ? ? ? ? ? ? ?
-0 0 0 1 1 0 1 1
-? ? ? ? ? ? ? ?
+?(0) = ?
+?
+??
+?
+?
+00
+00 , ?(1) = ?
+?
+??
+?
+?
+10
+01 , ?(w) = ?
+?
+??
+?
+?
+01
+11  and ?(w2) = ?
+?
+??
+?
+?
+11
+10  
  
 we get 
  
-1 0 0 0 0 0 1 0 1 0
-? ?
-?0 1 0 0 0 0 0 1 0 1 ?
-1 0 0 1 1
-? ?
-?0 0 1 0 0 0 1 0 1 1 ?
-G ?0 1 0 1 w ? and G’ =  
-? ?
-0 0 0 1 0 0 0 1 1 0
-2
-?0 0 1 1 ?
+G
+?
+?
+?
+?
+?
+?
+?
+?
 w
-? ?
-? ?
-0 0 0 0 1 0 1 0 0 1
-? ?
-0 0 0 0 0 1 0 1 1 1
-? ?
+w
+21100
+1010
+11001
+ and G’ = 
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+1110100000
+1001010000
+0110001000
+1101000100
+1010000010
+0101000001
+ 
  
 And the input W is given as ordered chaining variables by the vector: 
  
-1 2 3 4 5 1
-= [ , , , , , ]. 
-V H i ?1 H i ?1 H i ?1 H i ?1 H i ?1 M i
+V = [ H i1 1? , H i2 1? , H i3 1? , H i4 1? , H i5 1? , M i1 ]. 
  
-Then we can compute the product V · G’ and get a vector with 10 elements. The 
-first two correspond to the input to f , the third and the fourth correspond to f 
-1 2
+Then we can compute the product V  G’ and get a vector with 10 elements. The 
+first two correspond to the input to f1, the third and the fourth correspond to f2 
 and so on. Then we get the compression function: 
  
-1 1 2
- = f ( , ) 
-H H H
-i 1 i ?1 i ?1
-2 3 4
- = f ( , ) 
-H i 2 H i ?1 H i ?1
-3 5 1
- = f ( , ), 
-H i 3 H i ?1 M i
-4 1 3 5 2 4 1
- = f ( , ), 
-? ? ? ?
-H i 4 H i ?1 H i ?1 H i ?1 H i ?1 H i ?1 M i
-5 1 3 4 1 2 3 5 1
- = f ( ? ? ? , ? ? ? ) 
-H 5 H H H M H H H M
-i i ?1 i ?1 i ?1 i i ?1 i ?1 i ?1 i
+H i1  = f1( H i1 1? , H i2 1? ) 
+H i2  = f2( H i3 1? , H i4 1? ) 
+H i3  = f3( H i5 1? , M i1 ), 
+H i4  = f4( H i1 1? ? H i3 1? ? H i5 1? , H i2 1? ? H i4 1? ? M i1 ), 
+H i5  = f5( H i1 1? ? H i3 1? ? H i4 1? ? M i1 , H i2 1? ? H i3 1? ? H i5 1? ? M i1 ) 
  
-The output of the compression is the concatenation of outputs of f ,…, f . 
-1 5
+The output of the compression is the concatenation of outputs of f1 ,…, f5 . 
  
  
  
  
- 13 
+ 
+13 
 3.2 Watanabe’s collision-finding attack 
  
 In [13] Watanabe has provided a differential attack which could find a collision 
-n
-in time k2 . As the first proof of incorrectness of Knudsen and Preneel’s 
+in time k2n. As the first proof of incorrectness of Knudsen and Preneel’s 
 security claim, this attack works for all parameters with r < 2k and d > 3. 
  
-(c-1)n n n
-Let f : {0, 1} ? {0, 1} ? {0, 1} be the underlying compression 
-i
-e
-functions and L be a [r ,k ,d] linear code. If given input to L as X = (X ,…, X ), 
-2 1 k
-the corresponding output is Y = (Y ,…, Y ) for Y = L (X ,…, X ), 1 ≤ i ≤ r. And 
-1 r i i 1 k
-we assume L (X ,…, X ) = X , 1 ≤ i ≤ k. Then the attack is shown as follows: 
-i 1 k i
+Let fi : {0, 1}
+(c-1)n ? {0, 1}n ? {0, 1}n be the underlying compression 
+functions and L be a [r ,k ,d]2
+e linear code. If given input to L as X = (X1 ,…, Xk), 
+the corresponding output is Y = (Y1 ,…, Yr) for Yi = Li(X1 ,…, Xk), 1 ≤ i ≤ r. And 
+we assume Li(X1 ,…, Xk) = Xi , 1 ≤ i ≤ k. Then the attack is shown as follows: 
  
  
  
  
  
 If we take example 1 as an example here, the idea of the attack algorithm is to 
-find the collision input pairs to f , f , f without changing the inputs to f and f 
-1 2 3 4 514 
-although their inputs are computed from the inputs to f , f , f . This will be 
-1 2 3
+find the collision input pairs to f1 , f2 , f3 without changing the inputs to f4 and f5 
+14 
+although their inputs are computed from the inputs to f1 , f2 , f3. This will be 
 explained in the next section: 
  
  
@@ -437,29 +438,22 @@ Key of the attack algorithm
  
 Back to the algorithm, the key part of the attack is to find the solution ∆ such 
 that 
-L(∆) = (∆ , . . . ,∆ , 0, . . . , 0).  
-1 k
+L(∆) = (∆1, . . . ,∆k, 0, . . . , 0).  
 So we get 
-f ( L (A ? ∆) ) = f (A ? ∆) = f (A) ,   for 1 ≤ i ≤ k.   
-i i i i
+fi ( Li(A?∆) ) = fi (A?∆) = fi (A) ,   for 1 ≤ i ≤ k.   
 And 
-f ( L (A ? ∆) )  =  f ( L (A) ? L (∆) ) = f ( L (A) ? 0 ) = f ( L (A) ), for k + 1 ≤ i 
-i i i i i i i i i
+fi ( Li(A?∆) )  =  fi ( Li(A)?Li(∆) ) = fi ( Li(A)? 0 ) = fi ( Li(A) ), for k + 1 ≤ i 
 ≤ r. 
-Then A and A ? ∆ are colliding input pair for the whole compression function. 
+Then A and A?∆ are colliding input pair for the whole compression function. 
  
  
 The complexity of the attack 
  
 Apparently, step 1 and step 3 can be seen as costless, so we can concentrate on 
-the second step. For each f , 1 ≤ i ≤ k, we need to compute the output for 
-i
-n
-around 2 inputs to find a collision. Since we have to find the collision input for 
-n
-k underlying compression functions, the total operations are k2 . So the 
-n
-complexity of the whole attack is about k2 . 
+the second step. For each fi , 1 ≤ i ≤ k, we need to compute the output for 
+around 2n inputs to find a collision. Since we have to find the collision input for 
+k underlying compression functions, the total operations are k2n. So the 
+complexity of the whole attack is about k2n. 
  
  
 Flaw of the attack 
@@ -467,13 +461,10 @@ Flaw of the attack
 As the first attack to the KP function, there are a few flaws can be found in this 
 attack. The first one is that this attack only works for parameters that satisfy k > 
 n – k and d > 3. The requirement of k > n – k is to make sure that we are able to 
-find the solution ∆ = (∆ , . . . ,∆ ) of L (X ,…, X ) = 0, k + 1 ≤ i ≤ r (consider k 
-1 k i 1 k
+find the solution ∆ = (∆1, . . . ,∆k) of Li(X1 ,…, Xk) = 0, k + 1 ≤ i ≤ r (consider k 
 unknow numbers with n – k equations). So it works for only servel special 
-parameter sets. And sometimes for a particular ∆ , there is no X such that f (X) 
-i i i
-= f (X ? ∆ ), so we may need to change the whole ∆. Discussion in details of this 
-i i
+parameter sets. And sometimes for a particular ∆i , there is no Xi such that fi(X) 
+= fi(X?∆i), so we may need to change the whole ∆. Discussion in details of this 
 situation can be found in later chapters. 
  
  
@@ -482,7 +473,8 @@ situation can be found in later chapters.
  
  
  
- 15 
+ 
+15 
 4. Preliminaries for revised Watanabe’s attack 
  
  
@@ -495,75 +487,64 @@ and the corresponding attacks.
  
 Compression funcions. 
  
-tn sn
-In cryptography, a compression function H : {0, 1} ? {0,1} is a function 
+In cryptography, a compression function H : {0, 1}tn ? {0,1}sn is a function 
 that maps tn-bit input to sn-bit output for positive integer parameters t > s > 0 
 and blocksize (would be explained later) n > 0. During this project, we usually 
-cn n
-focus on functions which map {0, 1} into {0, 1} , so we let Func(cn, n) be the 
+focus on functions which map {0, 1}cn into {0, 1}n, so we let Func(cn, n) be the 
 set of all functions that compress cn bits into n bits for positive integer c. We 
 call a compression function is a Public Random Funcion (PuRF)-based 
 compression function if it gets its output by accessing to a number of oracles 
-f , … , f , where f , … , f are randomly picked from Func(cn, n) [14]. Here we 
-1 r 1 r
+f1 , … , fr, where f1 , … , fr are randomly picked from Func(cn, n) [14]. Here we 
 won’t consider the feedforward, the calls of the oracles are in parallel and the 
 output would be computed based on only the results of the calls.  
  
-PRE tn cn
-More specifically, for i = 1,…r, let C : {0, 1} ? {0,1} be the 
-i
-POST n r sn
-preprocessing functions and C : ({0, 1} ) ? {0,1} be the postprocessing 
+More specifically, for i = 1,…r, let Ci
+PRE : {0, 1}tn ?  {0,1}cn be the 
+preprocessing functions and CPOST : ({0, 1}n)r ? {0,1}sn be the postprocessing 
 function, for W as the input to the PuRF-based compression function, we 
-f1,…fr 
-compute the Z = H (W). The process could be described as follows: for i = 
-PRE POST
-1,…,r compute x ? C (W) and y = f (x ), then compute Z ? C (y ,…, 
-i i i i i i 1
-y ). See figure 2 [14]:  
-r
+compute the Z = Hf1,…fr (W). The process could be described as follows: for i = 
+1,…,r compute xi ? CiPRE(W) and yi = fi(xi), then compute Z ? CiPOST(y1,…, 
+yr). See figure 2 [14]:  
  
- 16 
+ 
+16 
  
  
  
 Linear error correcting codes. 
  
-e
-A [r ,k ,d] linear error correcting code C is a linear subspace of     with 
-2
+A [r ,k ,d]2
+e linear error correcting code C is a linear subspace of     with 
 length r, dimension k ( r ≥ k ) and minimum distance d which is the minimum 
 Hamming weight. The dual code of a C is defined by: 
-n
-C? = {x ?      | <x,c> = 0 ? c ?C }(<x, c> =  ). Moreover, the 
+C? = {x ?       | <x,c> = 0 ?  c ?C }(<x, c> = ?
 ?
-x c
-i i
-i ?1
+n
+i
+ii cx
+1
+ ). Moreover, the 
 lemma of Singleton bound limits the parameters by r + 1 ≥ d + k, or focusing 
 on d we have d ≤ r – k + 1. Codes fit the Singleton bound can be called as 
 maximum distance separable (MDS). An MDS code has a property that its dual 
 code is also an MDS, then we have d? = k + 1. 
  
-e 
-For a [r ,k ,d] code C, all its codewords can be generated using a matrix G as 
-2
-follows: C = {x · G | x ?     }. Here G is called the generator matrix of C. A 
-generator matrix is systematic if its form is G = [I | P] where I is a k?k 
-k k
-identity matrix and P ?           . 
+For a [r ,k ,d]2
+e code C, all its codewords can be generated using a matrix G as 
+follows: C = {x  G | x ?      }. Here G is called the generator matrix of C. A 
+generator matrix is systematic if its form is G = [Ik | P] where Ik is a k?k 
+identity matrix and P?            . 
  
  
 Special restriction of G by Özen and Stam 
  
-Let I be an index set I ? {1,…,r }, define G ?         as the restriction of 
-I
-G to the columns whose index number are in I. For a code C and any I ? 
-{1,…,r }, they aim to define ? ? {1,…, r} such that G is invertible whit I ? 
-?
-? or ? ? I, especially for |? | = k. It is easy to find such an ? for MDS codes. 
+Let I be an index set I ?  {1,…,r }, define GI ?          as the restriction of 
+G to the columns whose index number are in I. For a code C and any I ?  
+{1,…,r }, they aim to define ? ?  {1,…, r} such that G? is invertible whit I ?  
+? or ? ?  I, especially for |?| = k. It is easy to find such an ? for MDS codes. 
 However, for non-MDS codes, some I does not lead to the ? we want. But for a 
-‘target cardinality’ it is possible to get an I (what they called admissible [12]) 17 
+‘target cardinality’ it is possible to get an I (what they called admissible [12]) 
+17 
 for which such an ? does exist. 
  
  
@@ -577,36 +558,22 @@ scheme in definition 1:
  
 Definition 1: Blockwise-linear scheme 
  
-PRE
-Given positive integer parameters r, t, s, b, c and matrices C ?         , 
-POST b PRE
-C ?        , for all positive integers n with b|n, we set H = BL (C , 
-POST
-C ) be a family of single-layer PuRF-based compression functions H : {0, 
-n
-tn sn
-1} ?{0, 1} . More detailed, for f ,…,f ?Func(cn, n) and n = bn’ , given 
-1 r
-tn f1,…fr 
-input W ?{0, 1} , we compute Z = H (W) as follows: 
+Given positive integer parameters r, t, s, b, c and matrices CPRE ?         , 
+CPOST ?        , for all positive integers n with b|n, we set H = BLb(CPRE, 
+CPOST ) be a family of single-layer PuRF-based compression functions Hn: {0, 
+1}tn ?{0, 1}sn. More detailed, for f1,…,fr ?Func(cn, n) and n = bn’ , given 
+input W ?{0, 1}tn, we compute Z = Hf1,…fr (W) as follows: 
  
-PRE 
-1. X ? (C ? I ) · W ; 
-n´
-2. Parse X = (x ) and y = f (x ) for i = 1…r ; 
-i i = 1…r i i i
-POST
-3. Parse (y ) and output Z = (C ? I ) · Y . 
-i i = 1…r n´
+1. X ? (CPRE ?  In´)  W ; 
+2. Parse X = (xi)i = 1…r and yi = fi(xi) for i = 1…r ; 
+3. Parse (yi)i = 1…r and output Z = (C
+POST ?  In´)  Y . 
  
-Notice here ? denotes the calculation of Kronecker product and I is a n’?
-n´
+Notice here ?  denotes the calculation of Kronecker product and In´ is a n’?
 n’ identity matrix 
  
-PRE
-Here the map in first step will sometimes be written as C and its image 
-PRE rcn 
-?(C ) ? {0, 1}
+Here the map in first step will sometimes be written as CPRE and its image 
+?(CPRE) ?  {0, 1}rcn 
  
  
 Knudsen-Preneel compression function 
@@ -618,30 +585,26 @@ Knudsen and Preneel shown a new construction of hash functions by involving
 the linear error correcting codes in three papers [7][8][9] and the journal 
 version [9] would be considered as the reference frame. Their work aimed to 
 build a blockcipher-based construction and reached an security-delivered 
-transform. By recalling definition 1 we can see that the KP transform is actually 18 
+transform. By recalling definition 1 we can see that the KP transform is actually 
+18 
 an instance of blockwise-linear scheme. 
  
  
 Definition 2: Knudsen-preneel transform 
  
-e
-Given G ?       is the generator matrix of a [r ,k ,d] linear code. And let 
-2
-? :               denote an injective ring homomorphism and ? be the 
+Given G ?       is the generator matrix of a [r ,k ,d]2e linear code. And let 
+? :               denote an injective ring homomorphism and ?  be the 
 component-wise application. (also there is a group homorphism  
-? :           such that ?(gh) = ?(g)·?(h) ). b is a positive divisor of e so that 
-b e
-ek > rb. Then Knudsen-Preneel compression function H = KP ([r, k, d] ) can 
-2
-b PRE POST PRE T POST
-be rewritten into H = BL (C , C ) for C = ? (G ) and C = I . 
-rb
+? :           such that ?(gh) = ?(g)?(h) ). b is a positive divisor of e so that 
+ek > rb. Then Knudsen-Preneel compression function H = KPb([r, k, d]2
+e) can 
+be rewritten into H = BLb(CPRE, CPOST ) for CPRE = ? (GT) and CPOST = Irb. 
  
-b e kcn rn
-From H = KP ([r, k, d] ) we would get H : {0, 1} ? {0, 1} and c = e/b is 
-2 n
+From H = KPb([r, k, d]2
+e) we would get Hn : {0, 1}
+kcn ? {0, 1}rn and c = e/b is 
 defined for all n with b|n. In this project we will focus on the parameter pairs  
-(b, e) ?{(1,2), (2,4),(1,3)} and those parameter sets given in Knudsen and 
+(b, e)?{(1,2), (2,4),(1,3)} and those parameter sets given in Knudsen and 
 Preneel’s papers. 
  
  
@@ -649,11 +612,9 @@ Security claim of Knudsen-Preneel construction
  
 Knudsen and Preneel gave their security claim of the hash function based on 
 the corresponding compression they constructed. Under their assumption, if the 
-b e (d-1)n/2
-KP compression function H = KP ([r, k, d] ), then it takes time at least 2 
-2
-to find a collision in H (see Theorem 3 and 4 in [11]). 
-n
+KP compression function H = KPb([r, k, d]2
+e), then it takes time at least 2(d-1)n/2 
+to find a collision in Hn (see Theorem 3 and 4 in [11]). 
  
  
  
@@ -670,83 +631,71 @@ n
  
  
  
- 19 
+ 
+19 
 5. Revised Watanabe’s Attack 
  
  
 Recall the restrictions of Watanabe’s attack, it works for k > n – k and has 
-n
-complexity k2 . Following we will give an attack which reduces the 
-n
-complexity to d2 . This attack requires k ≥ d (obviously if k < d the new attack 
+complexity k2n . Following we will give an attack which reduces the 
+complexity to d2n . This attack requires k ≥ d (obviously if k < d the new attack 
 won’t run faster than the previous one) and could find many potential 
 collisions. 
  
  
 Corresponding Lemma in [12] 
  
-Given the group isomorphism ? :            such that ?(g?) = (?(g) ? 
-I ) · ?(?) for all g ?     and ? ?    . And same as the ring isomorphism ? 
-n’
-we will defind the component-wise application :              . 
-?
+Given the group isomorphism ? :            such that ?(g?) = (?(g) ?  
+In’)  ?(?) for all g ?      and ? ?     . And same as the ring isomorphism ? 
+we will defind the component-wise application ? :              . 
  
 Then we can have the following lemmas: 
  
 Lemma 1 (Lemma 2 in [12]) 
-PRE
-If g ?     and ? ?     then ? (g ? ?) ? ?(C ) if and only if g ? C or 
+If g ?      and ? ?      then ? (g? ?) ?  ?(CPRE) if and only if g ?  C or 
 ? = 0. 
  
 Lemma 2 (Lemma 3 in [12]) 
-Let n’ be an integer and V =      for i = 1 ,…, r . Let G be the generator 
-i
-e
-matrix for [r, k, d] code. ? ? {1,…, r} such that G is invertible, the inverse 
-2 ?
-?T
-~
-~ 
-is  G  I  . For alli ? ? given x ? V , we will get X = ~ xi . Then 
-i i
-?
-i ?I
-~
-?T
-W = ( ? ( ) ? I ) · X 
-~ 
-n’
-G
+Let n’ be an integer and Vi =      for i = 1 ,…, r . Let G be the generator 
+matrix for [r, k, d]2
+e code. ? ?  {1,…, r} such that G? is invertible, the inverse 
+is      . For alli ?  ? given xi ?  Vi , we will get X
+~  = ? ?Ii ix~ . Then 
+W = (? (  G~
+T
 I
-PRE
-is the only input that satisfies for i ? ?, x ’ = x for X’ = C (W). 
-i i
+? ) ?  In’)  X
+~  
+is the only input that satisfies for i ?  ?, xi’ = xi for X’ = C
+PRE(W). 
  
  
 Revised Watanabe’s Attack 
  
-The key part of Watanabe’s attack is to find the solution ∆ of L (X ,…, X ) = 0, 
-i 1 k
+The key part of Watanabe’s attack is to find the solution ∆ of Li(X1 ,…, Xk) = 0, 
 for  
 k + 1 ≤ i ≤ r. However, in this new attack, we will calculate a new ∆ based on a 
-codeword g ? C and a nonzero multiplier ? by compute ∆ = ? (g ? ?). If we 
+codeword g ?  C and a nonzero multiplier ? by compute ∆ = ? (g? ?). If we 
 choose the codeword g with a lower weight, the attack would performs much 
-better. 20 
+better. 
+ G~
+T
+I
+?
+20 
  
 What we noticed here is that Watanabe’s algorithm allows to find a codeword g 
-such that ?(g) ? {1 ,…, k} so we can find a collision in the systematic part of 
+such that ?(g) ?  {1 ,…, k} so we can find a collision in the systematic part of 
 the code and extend it to a full collision of the function. In the new attack, if we 
 pick a random codeword g, with a high probability that ?(g) may not map to the 
 systematic part. However, the lemma 2 before indicates that I = ?(g) is 
 admissible to complete a full collision. So we get theorem 1 [12] : 
  
 Theorem 1  
-b e
-Given H = KP ([r, k, d] ) with d ≤ k. The algorithm 1 will find collisions for 
-2
-n
-H in time d2 by using a codeword g with weight up to k and a nonzero ?. 
-n
+Given H = KPb([r, k, d]2
+e) with d ≤ k. The algorithm 1 will find collisions for 
+Hn in time d2
+n by using a codeword g with weight up to k and a nonzero ?. 
  
  
  
@@ -761,7 +710,8 @@ n
  
  
  
- 21 
+ 
+21 
 6. The program 
  
 The two attack programs attached (see appendix for part of the codes) are 
@@ -794,10 +744,8 @@ of the attack. First, the Delta file contains the function that return a vaild ∆
 described in the algorithm (can be seen as the step 1 of the algorithm). The file 
 named Attack is the whole attack process of the algorithm (step 2 and 3). More 
 specifically, for i = 0 to k - 1 (which equals 1 to k in the algorithm) the function 
-will take a random x and x ? ∆ until f(x ) = f(x ? ∆ ). However, for some 
-i i i i i i
-particular situation (like for all x that f(x ) and f(x ? ∆ ) are not collided) we 
-i i i i
+will take a random xi and xi?∆i until f(xi) = f(xi?∆i). However, for some 
+particular situation (like for all xi that f(xi) and f(xi?∆i) are not collided) we 
 need to change the ∆ and apply the attack again. So the function in AttackOne 
 file is to make sure we can get a vaild output (collision pair). 
  
@@ -807,8 +755,8 @@ Codeword file) and returns a vaild ∆ based on it. Notice this is the ∆ in the
 revised algorithm (different from the previous one). The QueryPhase file 
 performs as the 2 and 3 (query and degrees of freedom) step in the algorithm  
 which is similar to the step in Watanabe’s attack. The difference is there are d 
-th
-loops instead of k loops and the ∆ is different. The Finalization file is the 4 22 
+loops instead of k loops and the ∆ is different. The Finalization file is the 4th 
+22 
 step in algorithm as its name. The AttackOne file has the same function of the 
 previous one with the same name. 
  
@@ -829,26 +777,19 @@ Problems
  
 There is a significant problem during the implementing of the program. Recall 
 both attack algorithms, the key step of collision finding is, given a fixed ∆, for 
-all x and x ’ = x ? ∆ apply y = f(x ) and y ’ = f(x ’) until y and y ’ collide. This 
-i i i i i i i i i i
-step implies that for a fixed ∆ there exists a collision pair x and x ’ = x ∆ in 
-?
-i i i i i
+all xi and xi’ = xi?∆i apply yi = f(xi) and yi’ = f(xi’) until yi and yi’ collide. This 
+step implies that for a fixed ∆i there exists a collision pair xi and xi’ = xi?∆i in 
 the underlying compression function f(). However, because both KP 
 construction and the attack algorithms assume that the underlying functions are 
 ideal and the attacks do not contains the construction attack to f(), the existence 
-of such a collision for particually ∆ can not be guaranteed. This may lead to the 
-i
-dead loop of the program because usually we pick x as random. To avoid this 
-i
+of such a collision for particually ∆i can not be guaranteed. This may lead to the 
+dead loop of the program because usually we pick xi as random. To avoid this 
 issue, there are two method can be considered. The first one is to use the 
-exhaustive search method to go through every x and if the collision can not be 
-i
+exhaustive search method to go through every xi and if the collision can not be 
 found we step back and change the ∆. Another possible method is to set an 
 upper bound of query times. When the search time reaches this bound we 
 consider it as no collision can be found and change the ∆. If we set the bound 
-cn
-as 2 (the input size of the underlying compression functions) then both 
+as 2cn (the input size of the underlying compression functions) then both 
 methods would perform the same. So in this project the second method would 
 be employed temporally. 
  
@@ -859,7 +800,8 @@ every time we change the ∆. So it is possible that it takes a long time to outpu
 a collision pair but the recorded running time is shorter than the actual running 
 time. But this won’t influence the judgement of both algorithms because the 
 query times will also be used for the evaluation. 
- 23 
+ 
+23 
 7. Results of the program 
  
  
@@ -870,26 +812,25 @@ will see some groups of result of the programs based on the two attack
 algorithms with different parameter sets and message lengths.  
  
 Recall the complexities of Wanatabe’s attack and revised Wanatabe’s attack are 
-n n
-k2 and d2 respectively. It is obviously that the cost of the attack is related to 
+k2n and d2n respectively. It is obviously that the cost of the attack is related to 
 the parameters k, d and the blocksize n. So the choices of vector space’s size (e), 
 codeword length (r) and other less related parameters won’t influence the 
 judgement of whether the attack is effective or not.  
  
-e
-In this chapter we list the results with the parameter sets in the form [r, k, d] 
-2
-2 2 2 2
-for [5,3,3] code, [8,5,3] code, [9,5,4] code and [16,12,4] code with 
-2 2 2 2
+In this chapter we list the results with the parameter sets in the form [r, k, d]2
+e 
+for [5,3,3]2
+2 code, [8,5,3] 2
+2 code, [9,5,4] 2
+2 code and [16,12,4] 2
+2 code with 
 blocksize n = 4, 8, 12 and 16. And we will keep the analysis of the results to the 
 next chapter. 
  
 The choice of the parameter sets are based on the following consideration: first, 
 it is necessary to choose parameters with k > n – k (to make sure Watanabe’s 
 attack works) or d ≤ k (making sure revised Watanabe’s attack works); Second, 
-2
-it is easy to extend the program from GF(2) or GF(2 ) to other vector spaces 
+it is easy to extend the program from GF(2) or GF(22) to other vector spaces 
 (just change the injection ? for different parameter e); However, it is difficult to 
 collect a large number of data for analysis for large blocksize n ( especially for 
 n > 16) under the computation capability of PCs or laptops. If we use AES as 
@@ -907,42 +848,56 @@ softerwares running at the same time), we also list the number of how many
 query operations for the underlying compression function are made during the 
 attack as one of the considerable results. To be clear, the coolision pair below 
 indicates the collided input to the full compression function. For instance, for 
-2
-[5,3,3] code and n = 4, the input length is ckn = 2*3*4 = 24 bits. Notice we 
-2
+[5,3,3]2
+2 code and n = 4, the input length is ckn = 2*3*4 = 24 bits. Notice we 
 will express ∆ and X in hexadecimal string for results which are too long to 
-display in binary. 24 
+display in binary. 
+24 
 7.1 Results of Watanabe’s Attack 
  
-2
-The results for [5,3,3] code 
-2
+The results for [5,3,3]2
+2 code 
  
-2
-For [5,3,3] code, we have 
-2
-1 0 0 0 0 0 1 0 1 0
-? ?
-0 1 0 0 0 0 0 1 0 1
-? ?
-1 0 0 1 1
-? ?
-?0 0 1 0 0 0 1 0 1 1 ?
-G = 0 1 0 1 w and G’= 
-? ?
-?0 0 0 1 0 0 0 1 1 0 ?
-2
-?0 0 1 1 ?
+For [5,3,3]2
+2 code, we have 
+G =
+?
+?
+?
+?
+?
+?
+?
+?
 w
-? ?
-? ?
-0 0 0 0 1 0 1 0 0 1
-? ?
-0 0 0 0 0 1 0 1 1 1
-? ?
+w
+21100
+1010
+11001
+ and G’=
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+1110100000
+1001010000
+0110001000
+1101000100
+1010000010
+0101000001
  
-1
-?. n = 4. 
+ 
+?1 . n = 4. 
  
 Result 1: 
 ∆ = 000000001000100010001000  
@@ -965,13 +920,13 @@ X’= 010000010111010101010111
  
 Running time 
 1615568 ns 
- 25 
+ 
+25 
 Operations 
 34 queries for underlying comperssion function 
  
  
-2
-?. n = 8. 
+?2 . n = 8. 
  
 Result 3: 
 ∆ =000000000001101100011011000000000001101100011011 
@@ -1003,9 +958,9 @@ Operations
  
  
  
- 26 
-3
-?. n = 12. 
+ 
+26 
+?3 . n = 12. 
  
 Result 5: 
 ∆=0x00000313b13b13b13f 
@@ -1021,8 +976,7 @@ Operations
 1366 queries for underlying comperssion function 
  
  
-4
-?. n = 16. 
+?4 . n = 16. 
  
 Result 6: 
 ∆=0x00007aab7aab00007aab7aab 
@@ -1039,128 +993,131 @@ Operations
  
  
 Other results can be seen in Table 2 and Table 3. 
- 27 
+ 
+27 
 Groups blocksize n = 4 n = 8 n = 12 n = 16 
- Running time (ns) (ns) (ns) 
+ Running time 
 (ns) 
-1325587 11941182 94103859 1374257901 
-1 
-220869 1502426 62191424 3731643267 
-2 
-2709283 17713703 115616929 812877055 
-3 
-1282566 11022071 259017557 3353509454 
-4 
-1385092 14268853 75967755 2514280167 
-5 
-2549207 13085182 179566118 1455172934 
-6 
-795632 12810567 292913485 584576531 
-7 
-250869 12627024 67283691 2262891792 
-8 
-2726603 12460802 130956588 1158148312 
-9 
-1826768 11457982 138752830 2195239898 
-10 
+(ns) (ns) (ns) 
+1 1325587 11941182 94103859 1374257901 
+2 220869 1502426 62191424 3731643267 
+3 2709283 17713703 115616929 812877055 
+4 1282566 11022071 259017557 3353509454 
+5 1385092 14268853 75967755 2514280167 
+6 2549207 13085182 179566118 1455172934 
+7 795632 12810567 292913485 584576531 
+8 250869 12627024 67283691 2262891792 
+9 2726603 12460802 130956588 1158148312 
+10 1826768 11457982 138752830 2195239898 
 Average 
-1507247.6 11888979.2 141637023.6 1944259731 
 (10 groups) 
+1507247.6 11888979.2 141637023.6 1944259731 
 Average 
-(100 1238208.8 9028125.5 132549586.9 2079938642.0 
+(100 
 groups) 
-2
-Table 2. Watanabe’s attack running time results with [5,3,3] code and n = 4, 8, 
-2
+1238208.8 9028125.5 132549586.9 2079938642.0 
+Table 2. Watanabe’s attack running time results with [5,3,3]2
+2 code and n = 4, 8, 
 12 and 16 
  
  
  blocksize n = 4 n = 8 n = 12 n = 16 
 Attempts Queries Queries Queries Queries 
-28 290 1366 111317 
-1 
-34 248 2726 291152 
-2 
+1 28 290 1366 111317 
+2 34 248 2726 291152 
 3 64 613 6998 65044 
-22 503 16575 268579 
-4 
-30 799 3564 203804 
-5 
-56 446 12383 111075 
-6 
-13 499 21846 47225 
-7 
-35 663 2994 176435 
-8 
-63 567 8278 87174 
-9 
-43 535 9602 173257 
-10 
+4 22 503 16575 268579 
+5 30 799 3564 203804 
+6 56 446 12383 111075 
+7 13 499 21846 47225 
+8 35 663 2994 176435 
+9 63 567 8278 87174 
+10 43 535 9602 173257 
 Average 
-38.8 516.3 8633.2 153506.2 
 (10 groups) 
+38.8 516.3 8633.2 153506.2 
 Average 
-42.7 606.4 10950.6 168782.4 
 (100 groups) 
+42.7 606.4 10950.6 168782.4 
  
-2
-Table 3. Watanabe’s attack query times with [5,3,3] code and n = 4, 8, 12 and 
-2
+Table 3. Watanabe’s attack query times with [5,3,3]2
+2 code and n = 4, 8, 12 and 
 16 
  
- 28 
  
-2
-The results for [9,5,4] code 
-2
+28 
  
-2
-For [9,5,4] code we have 
-2
-?1 0 0 0 0 0 1 1 w ?
-2
-?0 1 0 0 0 w 1 w ?
+The results for [9,5,4]2
+2 code 
+ 
+For [9,5,4]2
+2 code we have 
+G = 
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+ww
+ww
+ww
+www
 w
+22
 2
-? ?
-0 0 1 0 0 1 0 w
-G =     
-w
 2
-? ?
-0 0 0 1 0 w 1 0
-w
-? ?
-2 2
-0 0 0 0 1 0 1
-w w
-? ?
+2
+1010000
+0101000
+0100100
+100010
+11000001
+    
  
 And  G’= 
-?1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 ?
-?0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 ?
-? ?
-0 0 1 0 0 0 0 0 0 0 1 1 0 1 1 0 1 1
-? ?
-0 0 0 1 0 0 0 0 0 0 0 1 1 1 0 1 0 1
-? ?
-0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 1 1 1
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+?
+111011001000000000
+100110000100000000
+110010100010000000
+100001110001000000
+101100100000100000
+111000010000010000
+101011100000001000
+110110110000000100
+101010000000000010
+110101000000000001
  
-? ?
-0 0 0 0 0 1 0 0 0 0 0 1 0 0 1 1 0 1
-? ?
-0 0 0 0 0 0 1 0 0 0 1 1 1 0 0 0 0 1
-? ?
-0 0 0 0 0 0 0 1 0 0 0 1 0 1 0 0 1 1
-? ?
-0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 0 0 1
-? ?
-0 0 0 0 0 0 0 0 0 1 0 0 1 1 0 1 1 1
-? ?
  
  
-1
-?. n = 4. 
+?1 . n = 4. 
  
 Result 7: 
 ∆ = 1110000000000000111011101110000000000000 
@@ -1175,7 +1132,8 @@ Running time:
 Operations 
 54 queries for underlying comperssion function 
  
- 29 
+ 
+29 
 Result 8: 
 ∆ = 1011000000000000101110111011000000000000 
  
@@ -1190,8 +1148,7 @@ Operations
 100 queries for underlying comperssion function 
  
  
-2
-?. n = 8. 
+?2 . n = 8. 
  
 Result 9: 
 ∆=0x8e0000008e8e8e000000 
@@ -1209,9 +1166,9 @@ Operations
  
  
  
- 30 
-3
-?. n = 12. 
+ 
+30 
+?3 . n = 12. 
  
 Result 10: 
 ∆=0x375000000000375375375000000000 
@@ -1227,8 +1184,7 @@ Operations
 13929 queries for underlying comperssion function 
  
  
-4
-?. n = 16. 
+?4 . n = 16. 
  
 Result 10: 
 ∆=0x8baf0000000000008baf8baf8baf000000000000 
@@ -1243,81 +1199,63 @@ Operations
 13929 queries for underlying comperssion function 
  
 Other resuls can be seen in Table 4 and 5. 
- 31 
-Groups blocksize n = n = 8 n = 12 n = 16 
+ 
+31 
+Groups blocksize n = 
 4 
- Running time (ns) (ns) (ns) 
+n = 8 n = 12 n = 16 
+ Running time 
 (ns) 
-1394870 15166425 169634967 1454506089 
-1 
-1260496 10106592 23091203 4109703049 
-2 
-1542375 22946544 379756086 2919155927 
-3 
-193042 15262555 327808702 4646274112 
-4 
-758756 11762948 93764711 7799585702 
-5 
-378539 11845080 321600092 6487190302 
-6 
-570743 16247037 90013674 4546975663 
-7 
-405080 11288586 454251309 4074450804 
-8 
-866311 13062275 230740779 1351583511 
-9 
-348648 17644231 169784427 2598543111 
-10 
+(ns) (ns) (ns) 
+1 1394870 15166425 169634967 1454506089 
+2 1260496 10106592 23091203 4109703049 
+3 1542375 22946544 379756086 2919155927 
+4 193042 15262555 327808702 4646274112 
+5 758756 11762948 93764711 7799585702 
+6 378539 11845080 321600092 6487190302 
+7 570743 16247037 90013674 4546975663 
+8 405080 11288586 454251309 4074450804 
+9 866311 13062275 230740779 1351583511 
+10 348648 17644231 169784427 2598543111 
 Average 
-771886.0 14533227.3 226044595.0 3998796827 
 (10 groups) 
+771886.0 14533227.3 226044595.0 3998796827 
 Average 
-(100 811762.4 12554847.2 215746882.9 3457682141.6 
+(100 
 groups) 
-2
-Table 4. Watanabe’s attack running time results wiht [9,5,4] code and n = 4, 8, 
-2
+811762.4 12554847.2 215746882.9 3457682141.6 
+Table 4. Watanabe’s attack running time results wiht [9,5,4]2
+2 code and n = 4, 8, 
 12 and 16 
  
  
  
  blocksize n = 4 n = 8 n = 12 n = 16 
 Attempts Queries Queries Queries Queries 
-54 964 13929 107161 
-1 
-122 562 1904 295503 
-2 
-128 1602 29317 218333 
-3 
-27 1267 26547 332671 
-4 
-17 613 6936 575273 
-5 
-43 738 24564 476182 
-6 
-82 1251 7055 321874 
-7 
-56 826 33909 289591 
-8 
-74 861 18066 99059 
-9 
-33 1352 12523 186723 
-10 
+1 54 964 13929 107161 
+2 122 562 1904 295503 
+3 128 1602 29317 218333 
+4 27 1267 26547 332671 
+5 17 613 6936 575273 
+6 43 738 24564 476182 
+7 82 1251 7055 321874 
+8 56 826 33909 289591 
+9 74 861 18066 99059 
+10 33 1352 12523 186723 
 Average 
-63.6 1003.6 17475.0 290237 
 (10 groups) 
+63.6 1003.6 17475.0 290237 
 Average 
-69.2 1097.1 18876.2 309782.0 
 (100 groups) 
-2
-Table 5. Watanabe’s attack query times with [9,5,4] code and n = 4, 8, 12 and 
-2
+69.2 1097.1 18876.2 309782.0 
+Table 5. Watanabe’s attack query times with [9,5,4]2
+2 code and n = 4, 8, 12 and 
 16 
- 32 
+ 
+32 
 Below some results for other parameter sets will be shown. Specially, the 
-2
-results for [16,12,4] code is sightly more important than others because it’s fit 
- 2
+results for [16,12,4] 2
+2 code is sightly more important than others because it’s fit 
 the condition of d > 3 . 
  
  
@@ -1326,39 +1264,31 @@ the condition of d > 3 .
  
  
  
-Groups blocksize n = n = 8 n = 12 n = 16 
+Groups blocksize n = 
 4 
- Running time (ns) (ns) (ns) 
+n = 8 n = 12 n = 16 
+ Running time 
 (ns) 
-962413 11812395 903379340 6142646063 
-1 
-443073 46761530 865324529 4031405389 
-2 
-865753 13705373 303487734 15288131033 
-3 
-1486502 21292371 334869381 9244700933 
-4 
-574374 19939964 284425255 6631596473 
-5 
-613765 21761425 684719147 18475332200 
-6 
-881676 24596143 976243620 8513602707 
-7 
-336914 12433983 206754490 11994216304 
-8 
-1287315 16369678 1020807673 6904349017 
-9 
-601752 39715383 382022576 7076474524 
-10 
+(ns) (ns) (ns) 
+1 962413 11812395 903379340 6142646063 
+2 443073 46761530 865324529 4031405389 
+3 865753 13705373 303487734 15288131033 
+4 1486502 21292371 334869381 9244700933 
+5 574374 19939964 284425255 6631596473 
+6 613765 21761425 684719147 18475332200 
+7 881676 24596143 976243620 8513602707 
+8 336914 12433983 206754490 11994216304 
+9 1287315 16369678 1020807673 6904349017 
+10 601752 39715383 382022576 7076474524 
 Average 
-805353.7 22838824.5 596203374.5 9430245464.3 
 (10 groups) 
+805353.7 22838824.5 596203374.5 9430245464.3 
 Average 
-(100 854423.1 25518567.2 523176234.4 8945326548.4 
+(100 
 groups) 
-2
-Table 6. Watanabe’s attack running time results with [16,12,4] code and n = 4, 
-2
+854423.1 25518567.2 523176234.4 8945326548.4 
+Table 6. Watanabe’s attack running time results with [16,12,4]2
+2 code and n = 4, 
 8, 12 and 16 
  
  
@@ -1372,105 +1302,75 @@ Table 6. Watanabe’s attack running time results with [16,12,4] code and n = 4,
  
  
  
- 33 
+ 
+33 
  
  blocksize n = 4 n = 8 n = 12 n = 16 
 Attempts Queries Queries Queries Queries 
-131 718 62607 449740 
-1 
-111 5114 67427 287685 
-2 
-157 1507 21318 1101924 
-3 
-282 2207 23412 681808 
-4 
-159 1234 18425 473917 
-5 
-179 1662 43876 1271372 
-6 
-152 2120 77125 623033 
-7 
-71 2540 14598 864184 
-8 
-109 1445 71734 474617 
-9 
-170 5177 25613 517565 
-10 
+1 131 718 62607 449740 
+2 111 5114 67427 287685 
+3 157 1507 21318 1101924 
+4 282 2207 23412 681808 
+5 159 1234 18425 473917 
+6 179 1662 43876 1271372 
+7 152 2120 77125 623033 
+8 71 2540 14598 864184 
+9 109 1445 71734 474617 
+10 170 5177 25613 517565 
 Average 
-152.1 2372.4 42613.5 674584.5 
 (10 groups) 
+152.1 2372.4 42613.5 674584.5 
 Average 
-161.4 2552.5 45786.2 705547.1 
 (100 groups) 
-2
-Table 7. Watanabe’s attack query time with [16,12,4] code and n = 4, 8, 12 
-2
+161.4 2552.5 45786.2 705547.1 
+Table 7. Watanabe’s attack query time with [16,12,4]2
+2 code and n = 4, 8, 12 
 and 16 
  
  
  
  
 Groups blocksize n = 4 n = 8 n = 12 n = 16 
- Running time (ns) (ns) (ns) 
+ Running time 
 (ns) 
-543924 10751366 657946471 2196119339 
-1 
-180470 7687010 193307250 5243622024 
-2 
-312051 24035736 149077606 1037508119 
-3 
-4540800 12816992 114619036 1424996194 
-4 
-646730 2338007 142860336 2182842791 
-5 
-4945042 2192737 161427779 1264907691 
-6 
-388597 24338568 167824961 3773910372 
-7 
-457600 14437310 121249489 3202156978 
-8 
-453968 10401601 622428270 6003224712 
-9 
-354793 11982249 134401998 5457425176 
-10 
+(ns) (ns) (ns) 
+1 543924 10751366 657946471 2196119339 
+2 180470 7687010 193307250 5243622024 
+3 312051 24035736 149077606 1037508119 
+4 4540800 12816992 114619036 1424996194 
+5 646730 2338007 142860336 2182842791 
+6 4945042 2192737 161427779 1264907691 
+7 388597 24338568 167824961 3773910372 
+8 457600 14437310 121249489 3202156978 
+9 453968 10401601 622428270 6003224712 
+10 354793 11982249 134401998 5457425176 
 Average 
-1282397.5 12098157.6 246514319.6 3178671340 
 (10 groups) 
-2
-Table 8. Watanabe’s attack running time results with [8,5,3] code and n = 4, 8, 
-2
+1282397.5 12098157.6 246514319.6 3178671340 
+Table 8. Watanabe’s attack running time results with [8,5,3]2
+2 code and n = 4, 8, 
 12 and 16 
  
  
- 34 
+ 
+34 
  blocksize n = 4 n = 8 n = 12 n = 16 
 Attempts Queries Queries Queries Queries 
-94 399 40133 146083 
-1 
-26 129 13705 381052 
-2 
-49 2236 11003 70649 
-3 
-108 489 7660 95819 
-4 
-88 383 10096 153967 
-5 
-125 261 9861 87845 
-6 
-48 2113 11963 279993 
-7 
-65 746 8843 228286 
-8 
-38 313 38763 378180 
-9 
-55 505 9286 408175 
-10 
+1 94 399 40133 146083 
+2 26 129 13705 381052 
+3 49 2236 11003 70649 
+4 108 489 7660 95819 
+5 88 383 10096 153967 
+6 125 261 9861 87845 
+7 48 2113 11963 279993 
+8 65 746 8843 228286 
+9 38 313 38763 378180 
+10 55 505 9286 408175 
 Average 
-69.6 757.4 16131.3 223004.9 
 (10 groups) 
-2
-Table 9. Watanabe’s attack query times with [8,5,3] code and n = 4, 8, 12 and 
-2
+69.6 757.4 16131.3 223004.9 
+Table 9. Watanabe’s attack query times with [8,5,3]2
+2 code and n = 4, 8, 12 and 
 16 
  
  
@@ -1478,55 +1378,46 @@ Table 9. Watanabe’s attack query times with [8,5,3] code and n = 4, 8, 12 and
  
 7.2 Results of Revised Watanabe’s Attack 
  
-2
-The results for [5,3,3] code 
-2
+The results for [5,3,3]2
+2 code 
  
-1
-?. n = 4. 
+?1 . n = 4. 
  
 Result 1: 
 ∆ = 1010100000000000101010000000000010001010 
   
 Coolision pair:  
- = 000100010100110010010100 and  
 ?
-x
 i
-i
-'
- = 101110011110010000011110 
+ix  = 000100010100110010010100 and  
 ?
-x
 i
-i
+ix
+'  = 101110011110010000011110 
 W = 000100010100100101001100 and 
 W’= 101110011110001111100100 
 Running time: 
 2968813 ns 
  
-Operations 35 
+Operations 
+35 
 69 queries for underlying comperssion function 
  
  
-2
-?. n = 8. 
+?2 . n = 8. 
  
 Result 1: 
 ∆=000000000000000010101000101010000000000000000000101
 01000101010001010100010101000  
 Coolision pair:  
-=111111111110010001001100111011111110111101000111  
-? x
-i
-i
-and  
-'
-=010101110100110011100100010001110100011111101111 
 ?
-x
 i
+ix =111111111110010001001100111011111110111101000111  
+and  
+?
 i
+ix
+' =010101110100110011100100010001110100011111101111 
 W = 111001001111111111111111111001000101011111110100  
 and 
 W’= 010011000101011101010111010011001111111101011100 
@@ -1538,24 +1429,21 @@ Operations
 353 queries for underlying comperssion function 
  
  
-3
-?. n = 12. 
+?3 . n = 12. 
  
 Result 1: 
 ∆=0x00088a88a00000000088a000000000  
 Coolision pair:  
- = 0x7f98fe07497b074e97 and  
-? x
-i
-i
-'
- = 0x7f90748fe97b8fee97 
 ?
-x
 i
+ix  = 0x7f98fe07497b074e97 and  
+?
 i
+ix
+'  = 0x7f90748fe97b8fee97 
 W = 0x7f98fe07497b7f9f12 and 
-W’= 0x7f90748fe97b7f9798 36 
+W’= 0x7f90748fe97b7f9798 
+36 
  
 Running time: 
 138732995 ns 
@@ -1564,22 +1452,18 @@ Operations
 9215 queries for underlying comperssion function 
  
  
-4
-?. n = 16. 
+?4 . n = 16. 
  
 Result 1: 
 ∆=0xa8222280a822228000000000000000008aa22280  
 Coolision pair:  
- = 0xebb22135969039378c625dad and  
-? x
-i
-i
-'
- = 0x439003b53eb21bb706c07f2d 
 ?
-x
 i
+ix  = 0xebb22135969039378c625dad and  
+?
 i
+ix
+'  = 0x439003b53eb21bb706c07f2d 
 W = 0xebb2213596903937227ff140 and 
 W’= 0x439003b53eb21bb7227f7be2 
  
@@ -1599,99 +1483,76 @@ More detailed results can be seen in Table 10 and 11.
  
  
  
- 37 
+ 
+37 
 Groups blocksize n = 4 n = 8 n = 12 n = 16 
- Running time (ns) (ns) (ns) 
+ Running time 
 (ns) 
-2968813 1380064 82696824 7253029645 
-1 
-4041575 4267023 138732995 784347452 
-2 
-784457 12689881 265714258 6730154810 
-3 
-402565 15668404 205678920 1834765871 
-4 
-910553 6644700 128469122 3350578510 
-5 
-695619 11372554 195562247 1828295217 
-6 
-1433701 16308257 95383632 1710787544 
-7 
-616559 5034159 186077840 3269671704 
-8 
-4210591 35025680 185652147 4165727208 
-9 
-571860 13934731 372904657 3862045852 
-10 
+(ns) (ns) (ns) 
+1 2968813 1380064 82696824 7253029645 
+2 4041575 4267023 138732995 784347452 
+3 784457 12689881 265714258 6730154810 
+4 402565 15668404 205678920 1834765871 
+5 910553 6644700 128469122 3350578510 
+6 695619 11372554 195562247 1828295217 
+7 1433701 16308257 95383632 1710787544 
+8 616559 5034159 186077840 3269671704 
+9 4210591 35025680 185652147 4165727208 
+10 571860 13934731 372904657 3862045852 
 Average 
-1663629.3 12232545.3 185687264.2 3478940381.3 
 (10 groups) 
+1663629.3 12232545.3 185687264.2 3478940381.3 
 Average 
-(100 11476253.2 10451176.1 197387621.9 2829768230.2 
+(100 
 groups) 
-2
-Table 10. Revised Watanabe’s attack running time results with [5,3,3] code 
-2
+11476253.2 10451176.1 197387621.9 2829768230.2 
+Table 10. Revised Watanabe’s attack running time results with [5,3,3]2
+2 code 
 and n = 4, 8, 12 and 16 
  
  
  
  blocksize n = 4 n = 8 n = 12 n = 16 
 Attempts Queries Queries Queries Queries 
-69 115 5731 342524 
-1 
-33 353 9215 40934 
-2 
-61 745 12825 322790 
-3 
-40 977 9753 91835 
-4 
-23 658 7005 172612 
-5 
-24 707 11709 96708 
-6 
-31 892 5966 85817 
-7 
+1 69 115 5731 342524 
+2 33 353 9215 40934 
+3 61 745 12825 322790 
+4 40 977 9753 91835 
+5 23 658 7005 172612 
+6 24 707 11709 96708 
+7 31 892 5966 85817 
 8 71 596 8465 164607 
-37 680 9535 224959 
-9 
-23 852 16890 242782 
-10 
+9 37 680 9535 224959 
+10 23 852 16890 242782 
 Average 
-41.2 657.5 9709.4 178556.8 
 (10 groups) 
+41.2 657.5 9709.4 178556.8 
 Average 
-44.7 682.4 10846.4 185237.5 
 (100 groups) 
-2
-Table 11. Revised Watanabe’s attack query times with [5,3,3] code and n = 4, 
-2
+44.7 682.4 10846.4 185237.5 
+Table 11. Revised Watanabe’s attack query times with [5,3,3]2
+2 code and n = 4, 
 8, 12 and 16 
  
- 38 
-2
-The results for [9,5,4] code 
-2
  
-1
-?. n = 4. 
+38 
+The results for [9,5,4]2
+2 code 
+ 
+?1 . n = 4. 
  
 Result 1: 
 ∆=100010000000000010001000000000000000000010001000100
 010001000100000000000 
   
 Coolision pair:  
- = 1000111101000010110001111100011110011111 and  
 ?
-x
 i
-i
-'
- = 0000011111001010010011110100111100010111 
+ix  = 1000111101000010110001111100011110011111 and  
 ?
-x
 i
-i
+ix
+'  = 0000011111001010010011110100111100010111 
 W = 1000111110100000010000100010110110010110 and 
 W’= 0000011110101000110010100010010100011110 
  
@@ -1702,27 +1563,23 @@ Operations
 32 queries for underlying comperssion function 
  
  
-2
-?. n = 8. 
+?2 . n = 8. 
  
 Result 1: 
 ∆=0x000022a8000000008aa8a88a22a8a88a0000 
   
 Coolision pair:  
- = 0x3943524040d80c964c6b and  
 ?
-x
 i
-i
-'
- = 0x1bebd8e8e8522e3ee4e1 
+ix  = 0x3943524040d80c964c6b and  
 ?
-x
 i
-i
+ix
+'  = 0x1bebd8e8e8522e3ee4e1 
 W = 0x27393943510028c75240 and 
 W’= 0x271b1bebf9000ae5d8e8 
- 39 
+ 
+39 
 Running time: 
 3892673 ns 
  
@@ -1730,26 +1587,21 @@ Operations
 461 queries for underlying comperssion function 
  
  
-3
-?. n = 12. 
+?3 . n = 12. 
  
 Result 1: 
 ∆=0x0000000000008880000000000000008880000000000008888
 88000 
   
 Coolision pair:  
- = 0xa1e617c7a928c7ad29d5c4f24f2653 
 ?
-x
 i
-i
+ix  = 0xa1e617c7a928c7ad29d5c4f24f2653 
  and  
-'
- = 0xa1e6174f29284f2d29d5cc7ac7a653 
 ?
-x
 i
-i
+ix
+'  = 0xa1e6174f29284f2d29d5cc7ac7a653 
 W = 0xa1e617000928c7a928000000000c7a and 
 W’= 0xa1e6170009284f29280000000004f2 
  
@@ -1761,25 +1613,21 @@ Operations
 7612 queries for underlying comperssion function 
  
  
-4
-?. n = 16. 
+?4 . n = 16. 
  
 Result 1: 
 ∆=0x0000000022aaa88800000000000000000000000022aaa888a
-88822aa22aaa88822aaa888 40 
+88822aa22aaa88822aaa888 
+40 
 Coolision pair:  
- = 0x77a98eca037ce8d4e4c703031be22a2f22d6ff07 
 ?
-x
 i
-i
+ix  = 0x77a98eca037ce8d4e4c703031be22a2f22d6ff07 
  and  
-'
- = 0x5503264221d6405c4c4f21a9394882a7007c578f 
 ?
-x
 i
-i
+ix
+'  = 0x5503264221d6405c4c4f21a9394882a7007c578f 
 W = 0x88ae189e77a98eca0000000000000000000088ae 
  and 
 W’= 0x028c189e5503264200000000000000000000028c 
@@ -1796,70 +1644,56 @@ More results can be seen in Table 12 and 13
  
  
 Groups blocksize n = 4 n = 8 n = 12 n = 16 
- Running time (ns) (ns) (ns) 
+ Running time 
 (ns) 
-1028064 8005487 104892382 1531522861 
-1 
-597841 28401654 195992927 3100538755 
-2 
-1084775 3892673 97398412 2723043273 
-3 
-519061 6729905 165942053 8951065569 
-4 
-801778 14427811 144603875 7348061276 
-5 
+(ns) (ns) (ns) 
+1 1028064 8005487 104892382 1531522861 
+2 597841 28401654 195992927 3100538755 
+3 1084775 3892673 97398412 2723043273 
+4 519061 6729905 165942053 8951065569 
+5 801778 14427811 144603875 7348061276 
 6 333283 3225549 306679453 3538869884 
-266515 11847036 120637610 2452553327 
-7 
-824406 7171023 153844701 7069063805 
-8 
-2288279 13393881 254087068 3690583300 
-9 
-196394 11418490 272103578 5546564996 
-10 
+7 266515 11847036 120637610 2452553327 
+8 824406 7171023 153844701 7069063805 
+9 2288279 13393881 254087068 3690583300 
+10 196394 11418490 272103578 5546564996 
 Average 
-794039.6 10851350.9 181618205.9 4595186705.6 
 (10 groups) 
-Average  
-(100 802547.1 12764980.4 4465870198.2 
+794039.6 10851350.9 181618205.9 4595186705.6 
+Average 
+(100 
 groups) 
-2
-Table 12. Revised Watanabe’s attack running time results with [9,5,4] code 
-2
+802547.1 12764980.4 
+ 
+4465870198.2 
+Table 12. Revised Watanabe’s attack running time results with [9,5,4]2
+2 code 
 and n = 4, 8 and 16 
- 41 
+ 
+41 
  
  blocksize n = 4 n = 8 n = 12 n = 16 
 Attempts Queries Queries Queries Queries 
-128 694 7612 89459 
-1 
-32 610 17612 171868 
-2 
-89 461 4889 153430 
-3 
-52 776 12612 500988 
-4 
-25 1436 15204 444830 
-5 
-35 359 22058 183247 
-6 
-36 1482 8225 133781 
-7 
-86 754 14203 364256 
-8 
-51 1563 19957 200767 
-9 
-15 1401 13574 338369 
-10 
+1 128 694 7612 89459 
+2 32 610 17612 171868 
+3 89 461 4889 153430 
+4 52 776 12612 500988 
+5 25 1436 15204 444830 
+6 35 359 22058 183247 
+7 36 1482 8225 133781 
+8 86 754 14203 364256 
+9 51 1563 19957 200767 
+10 15 1401 13574 338369 
 Average 
-54.9 953.6 13594.6 258099.5 
 (10 groups) 
-Average  
-57.7 976.9 260764.8 
+54.9 953.6 13594.6 258099.5 
+Average 
 (100 groups) 
-2
-Table 13. Revised Watanabe’s attack query times with [9,5,3] code and n = 4, 
-2
+57.7 976.9 
+ 
+260764.8 
+Table 13. Revised Watanabe’s attack query times with [9,5,3]2
+2 code and n = 4, 
 8 and 16 
  
  
@@ -1885,17 +1719,18 @@ Table 13. Revised Watanabe’s attack query times with [9,5,3] code and n = 4,
  
  
  
- 42 
+ 
+42 
 8. Analysis and Evaluation 
  
 In this chapter we will give reasonable analysis to the results collected in the 
 previous chapter and try to fit the theoretical result given in the attack 
-2
-algorithms. Because the program is tested with parameter sets [5,3,3] code, 
-2
-2 2 2
-[8,5,3] code, [9,5,4] code and [16,12,4] code and blocksize n = 4, 8, 12 
- 2 2 2
+algorithms. Because the program is tested with parameter sets [5,3,3]2
+2 code, 
+[8,5,3] 2
+2 code, [9,5,4] 2
+2 code and [16,12,4] 2
+2 code and blocksize n = 4, 8, 12 
 and 16, the analysis will first focus on these data groups. After that we will try 
 to extend the analysis to a more general situation. 
  
@@ -1903,16 +1738,17 @@ to extend the analysis to a more general situation.
 8.1 Results Analysis 
  
 For Watanabe’s attack, we have the theoretical attack bound that the algorithm 
-n
-can find a collision using about k2 query operations. Then, for theoretical 
+can find a collision using about k2n query operations. Then, for theoretical 
 results compared with the average practical results we have the following table:  
  
  
  
  n = 4 n = 8 
-k Theory Average difference Theory Average difference 
-n n
-k2 k2 
+k Theory 
+k2n 
+Average difference Theory 
+k2n 
+Average difference 
 3 48 42.7 11.04% 768 606.4 21.04% 
 5 80 69.2 13.50% 1280 1097.1 14.29% 
 12 192 161.4 15.94% 3072 2552.5 16.91% 
@@ -1925,9 +1761,11 @@ Table 14. Comparison of theoretical and partical results of Watanabe’s attack
  
  
  N = 12 N = 16 
-k Theory Average difference Theory Average difference 
-n n
-k2 k2 
+k Theory 
+k2n 
+Average difference Theory 
+k2n 
+Average difference 
 3 12288 10950.6 10.88% 196608 168782.4 14.15% 
 5 20480 18876.2 7.83% 327680 309782.0 5.46% 
 12 49152 42613.5 13.30% 786432 705547.1 10.29% 
@@ -1936,16 +1774,18 @@ Table 14 Cont.
  
  
  
- 43 
  
-n
-For revised Watanabe’s attack with attack bound d2 we have 
+43 
+ 
+For revised Watanabe’s attack with attack bound d2n we have 
  
  
  n = 4 n = 8 
-d Theory Average difference Theory Average difference 
-n n
-k2 k2 
+d Theory 
+k2n 
+Average difference Theory 
+k2n 
+Average difference 
 3 48 44.7 6.88% 768 682.4 11.15% 
 4 64 57.7 9.84% 1024 976.9 4.60% 
 average   8.36%   7.87% 
@@ -1954,9 +1794,11 @@ attack
  
  
  n = 12 n = 16 
-d Theory Average difference Theory Average difference 
-n n
-k2 k2 
+d Theory 
+k2n 
+Average difference Theory 
+k2n 
+Average difference 
 3 12288 10846.4 11.73% 196608 185237.5 5.78% 
 4 16384  . 262144 260764.8 0.53% 
 average   11.73%   3.16% 
@@ -1983,8 +1825,8 @@ Linear dependence
  
  
 For Watanabe’s attack algorithm, given a fixed blocksize n, the theoretical 
-n
-complexity is k2 which can be seen as constant value c * k . For instance, n = 4, 44 
+complexity is k2n which can be seen as constant value c * k . For instance, n = 4, 
+44 
 the complexity equels to 16*k. Some linear analysis of the result sets will be 
 shown below: 
  
@@ -1992,92 +1834,89 @@ When n = 4, for k = 3, 5, 12, the practical values are 42.7, 62.9 and 161.4
 respectively. So we get the following linear function between k and the results: 
 y = 13.184*x+ 3.2045. 
  
-250
-200
 y = 16x
+y = 13.184x + 3.2045
+0
+50
+100
+150
+200
+250
+0 5 10 15
 practical results
 for n = 4
 theoretical value
-150
 for n = 4
  y = 16x
-100
-y = 13.184x + 3.2045
 linear analysis
-50
-0
-0 5 10 15
  
-4
-Figure 3. Scatter diagram for results with n = 4, 2 =16, and k = 3, 5, 12. 
+Figure 3. Scatter diagram for results with n = 4, 24 =16, and k = 3, 5, 12. 
  
 Also apply the analysis for other sets: 
  
-3500
 y = 256x
-3000
-practical results
+y = 214.06x - 8.403
+0
+500
+1000
+1500
+2000
 2500
+3000
+3500
+0 5 10 15
+practical results
 for n = 8
 theoretical value
-2000
 for n = 8
  y = 256x
-1500
-y = 214.06x - 8.403
 linear analysis
-1000
-500
-0
-0 5 10 15
  
-8
-Figure 4. Scatter diagram for results with n = 8, 2 =256 and k = 3, 5, 12. 
+Figure 4. Scatter diagram for results with n = 8, 28 =256 and k = 3, 5, 12. 
  
- 45 
-60000
-50000
+ 
+45 
 y = 4096x
+y = 3484.9x + 914.01
+0
+10000
+20000
+30000
+40000
+50000
+60000
+0 5 10 15
 practical results
 for n = 12
-40000
 theoretical value
 for n = 12
-30000
  y = 4096x
-y = 3484.9x + 914.01
-20000
 linear analysis
-10000
-0
-0 5 10 15
  
-12
-Figure 5. Scatter diagram for results with n = 12, 2 =4096 and k = 3, 5, 12. 
+Figure 5. Scatter diagram for results with n = 12, 212 =4096 and k = 3, 5, 12. 
  
  
-900000
-800000
 y = 65536x
+y = 60472x - 23109
+0
+100000
+200000
+300000
+400000
+500000
+600000
 700000
+800000
+900000
+0 5 10 15
 practical results
 for n = 16
-600000
 theoretical value
-500000
 for n = 16
  y = 65536x
-400000
-y = 60472x - 23109
-300000
 linear analysis
-200000
-100000
-0
-0 5 10 15
  
-16
-Figure 6. Scatter diagram for results with n = 16, 2 =65536 and k = 3, 5, 12. 
+Figure 6. Scatter diagram for results with n = 16, 216 =65536 and k = 3, 5, 12. 
  
  
  
@@ -2085,83 +1924,97 @@ As can be seen from the previous figures, the test values of each set do linearl
 increse with k. The slope of the line is sightly different from the slope of the 
 line draw by the corresponding theoretical result. So for fixed blocksize n, the 
 attack algorithm can be seen as linear dependent on the factor k ( replace k by d 
-would lead to the same conclusion for revised Watanabe’s attack ). 46 
+would lead to the same conclusion for revised Watanabe’s attack ). 
+46 
  
 Next we will focus on the exponential dependence between the test results and 
 the blocksize n. For instance, in revised Watanabe’s attack, let d = 3 be fixed, 
-n
-the query complexity equals to 3*2 . For n = 4, 8, 12 and 16 the practical 
+the query complexity equals to 3*2n. For n = 4, 8, 12 and 16 the practical 
 results are 44.7, 682.4, 10846.4 and 185237.5 respectively. 
  
  
-200000
-180000
-practical results
-160000
-140000
-theoretical
-120000
-results
-100000 y = 2^x
-80000
-predicted
-60000
-practical graph
-40000
-20000
 0
+20000
+40000
+60000
+80000
+100000
+120000
+140000
+160000
+180000
+200000
 2 7 12 17
+practical results
+theoretical
+results
+y = 2^x
+predicted
+practical graph
  
 Figure 7. Scatter diagram for results with and d = 3 and n = 4, 8, 12 and 16 
  
  
-270000
+-30000
+20000
+70000
+120000
+170000
 220000
+270000
+2 7 12 17
 practical
 results
-170000
 theoretical
 results
 predicted
-120000
 practical graph
 y = 2^x
-70000
-20000
-2 7 12 17
--30000
  
 Figure 8. Scatter diagram for results with and d = 4 and n = 4, 8, 12 and 16 
  
  
-n
-Clearly the predicated practical graph and the graph for function y = 2 , which 
+Clearly the predicated practical graph and the graph for function y = 2n , which 
 indecates the theoretical results, coincide very well. So we might be able to 
 come to the conclusion that the practical and the block length n are exponential 
 dependent. Further conclusion may require more mathematical analysis which 
-is not the purpose of this project, so we will just stop here. 47 
+is not the purpose of this project, so we will just stop here. 
+47 
  
 Besids the analysis of the dependence, another task here is to try to find out 
 which attack performs better in practice. Here the result sets would be divided 
 into two groups: d = k and d < k. 
  
-2
-For d = k = 3([5,3,3] code), the test reults are as follows and we compute W/R 
-2
+For d = k = 3([5,3,3]2
+2 code), the test reults are as follows and we compute W/R 
 equals to the average queries of Watanabe’s attack divided by that of Revised 
 attack. 
  
  n = 4 n = 8 
- Watanabe’ Revise W/R Watanabe’ Revise W/R 
-s attack d attack s attack d attack 
+ Watanabe’
+s attack 
+Revise
+d attack 
+W/R Watanabe’
+s attack 
+Revise
+d attack 
+W/R 
 k=d=3 42.7 44.7 95.53% 606.4 682.4 88.86% 
 k=5,d=4 69.2 57.7 119.93% 1097.1 976.9 112.30% 
 Table 16. Comparison of Watanabe’s attack and Revised Watanabe’s attack 
  
  
  n = 12 n = 16 
- Watanabe Revised W/R Watanabe Revised W/R 
-’s attack attack ’s attack attack 
+ Watanabe
+’s attack 
+Revised 
+attack 
+W/R Watanabe
+’s attack 
+Revised 
+attack 
+W/R 
 k=d=3 10950.6 10846.4 100.96% 196608 185237.5 106.14% 
 k=5,d=4 18876.2  . 309782.0 260764.8 118.80% 
 Table 16. Cont. 
@@ -2184,12 +2037,11 @@ The programs attached which implement the Watanabe and revised Watanabe’s
 attack are the proof of implements. Because both attack programs can find the 
 collision of the KP-constructed compression function in or about the given 
 complexity bound, this task can be considered as achieved successfully. 
-Moreover, based on the analysis above, the revised Watanabe’s attack can be 48 
+Moreover, based on the analysis above, the revised Watanabe’s attack can be 
+48 
 seen as the better attack algorithm. This is an achievement of task two. For the 
-potential risk that given a fixed ∆ there might exist no x such that f(x ) and 
- i i
-f(x ? ∆ ) collide, two possible solutions are given and both can solve the 
-i i
+potential risk that given a fixed ∆ there might exist no xi such that f(xi) and 
+f(xi? ∆i) collide, two possible solutions are given and both can solve the 
 problem with reasonable cost. 
  
 So basically most of the objectives of the project have been finished. Althrough 
@@ -2230,7 +2082,8 @@ the lack of experience, the project is still accomplished as a whole.
  
  
  
- 49 
+ 
+49 
 9. Further work 
  
  
@@ -2274,7 +2127,8 @@ implementing process.
  
  
  
- 50 
+ 
+50 
 10. bibliography 
  
 1. W. Diffie and M. E. Hellman, “New directions in cryptography,” IEEE 
@@ -2318,7 +2172,8 @@ Burt Kaliski, J., Burton, S. (eds.) CRYPTO 1997. LNCS, vol. 1294, pp.
 using nonbinary error-correcting codes. IEEE Transactions on Information 
 Theory 48(9), 2524–2539, 2002. 
  
-12. Onur Özen and Martijn Stam. Collision Attacks against the 51 
+12. Onur Özen and Martijn Stam. Collision Attacks against the 
+51 
 Knudsen-Preneel Compression Functions. In Masayuki Abe, editor, 
 Advances in Cryptography—Asiacrypt 2010, 2010. 
  
@@ -2362,267 +2217,387 @@ Heidelberg, 2009.
  
  
  
- 52 
-    
+ 
+52 
 11. Appendix 
-   Matrix product = 
  
-delt.multiply(p); 
  
-    
 Finding ∆ in Watanabe’s attack 
-  
  
-p u b l i c String findSingleDelta()  w h i l e(!product.compare(zero)) 
- {    { 
-  String str = "";     test = 
-  String temp = ""; ran.nextInt(( i n t)Math.pow(2,k)); 
-  String result = ""; 
-    i f(test == 0) 
-  Random ran = n e w Random();     { 
-        test ++; 
-       } 
-  i f(k*n <=16)     i f(test >= 
-  { 
-Math.pow(2,k)) 
-   r = r*n;     { 
-   k = k*n;     
-   Matrix id = n e w  System.out.println("delta not 
-Matrix(n); found"); 
-   p = p.KroProduct(id); 
-     r e t u r n n u l l; 
-   Matrix delt = n e w     } 
-Matrix(1,k);     str = 
-   Matrix zero = n e w Integer.toBinaryString(test); 
-Matrix(1,r-k);    
-   i n t test =  w h i l e(str.length()<k) 
-ran.nextInt(( i n t)Math.pow(2,k)) ;     { 
-     str = "0"+str; 
-   i f(test == 0) 
-   {     } 
-    test ++;     f o r( i n t i = 0; i < 
-   } str.length(); i++) 
-   str =     { 
-     temp = 
-Integer.toBinaryString(test); 
-   w h i l e(str.length()<k) str.substring(i,i+1); 
-   {     
-    str = "0"+str;  delt.setElement(0, i, 
-   } Integer.parseInt(temp)); 
-    } 
-   f o r( i n t i = 0; i < 
-str.length(); i++)     product = 
-   { delt.multiply(p); 
-    temp =      
-str.substring(i,i+1);    } 
-    delt.setElement(0,     
-i, Integer.parseInt(temp));    result = "";  
-   }     53 
-    
- i f(product.compare(zero))  w h i l e(!product.compare(zero)) 
-   {    { 
-    f o r( i n t l = 0; l < k;     test = 
-l ++) 
-ran.nextInt(( i n t)Math.pow(2,k)); 
-    {     i f(test == 0) 
-     result +=     { 
-Integer.toBinaryString(delt.getE     test ++; 
-lement(0, l));     } 
-    } 
-    i f(test >= 
-    r e t u r n result; Math.pow(2,k)) 
-    { 
-   } e l s e{ 
-    r e t u r n n u l l;     
-   }  System.out.println("delta not 
-found"); 
-  } e l s e{ 
-   Matrix delt = n e w      r e t u r n n u l l; 
-Matrix(1,k);     } 
-   Matrix zero = n e w     str = 
-Matrix(1,r-k); Integer.toBinaryString(test); 
-   
-   i n t test = 
-ran.nextInt(( i n t)Math.pow(2,k));  w h i l e(str.length()<k) 
-    { 
-   i f(test == 0) 
-   {      str = "0"+str; 
-    test ++;     } 
-   } 
-    f o r( i n t i = 0; i < 
-   str = str.length(); i++) 
-    { 
-Integer.toBinaryString(test); 
-       temp = 
- //System.out.println(str); str.substring(i,i+1); 
-    
-   w h i l e(str.length()<k) 
-   {  delt.setElement(0, i, 
-    str = "0"+str; 
-Integer.parseInt(temp)); 
-   }     } 
-   f o r( i n t i = 0; i < k; i++)     product = 
-   { delt.multiply(p); 
-    temp =      
-str.substring(i,i+1);    } 
-    delt.setElement(0,     
-i, Integer.parseInt(temp));    result = "";  
-   }     
-      
-   Matrix product = 
- i f(product.compare(zero)) 
-delt.multiply(p);    { 
-        i n t in = 54 
-ran.nextInt(( i n t)Math.pow(2, n)); 
-The collision finding process of 
-    String str1 = 
-Watanabe’s attack: 
-Integer.toBinaryString(in); 
- 
-   w h i l e(flag) 
-{ 
- w h i l e(str1.length()<n) 
-    { x=ran.nextInt(( i n t)Math.pow(2
-     str1 = "0"+str1; ,n)); 
-    } y = x^delta.getElement(0, i); 
-    String str0 = String xstr = 
-Integer.toBinaryString(0); Integer.toBinaryString(x); 
-   String ystr = 
- w h i l e(str0.length()<n) Integer.toBinaryString(y); 
-    {    
-     str0 = "0"+str0;  w h i l e(xstr.length()<n) 
-    }  { 
-    f o r( i n t l = 0; l < k;    xstr = "0"+xstr; 
-l ++)  } 
-    {  w h i l e(ystr.length()<n) 
-     { 
-   ystr = "0"+ystr; 
- i f(delt.getElement(0, l) == 0) 
-     {  } 
-      result +=      
-str0; i f(p.encode8(xstr).equals(p.e
-     } e l s e ncode8(ystr))) 
+public String findSingleDelta() 
  { 
-i f(delt.getElement(0, l) == 1) 
-     {    flag = f a l s e; 
-      result +=    str1 += xstr; 
-str1;    str2 += ystr; 
-     }     } 
-    } } 
-   counter ++; 
- //System.out.println(delt.toS
-i f (counter >= Math.pow(2, n)) 
-tring()); { 
-    r e t u r n result; System.out.println("no 
-collisions found in f"+i); 
-   } e l s e{ 
-    r e t u r n n u l l;  String[] a = n u l l; 
-   } 
- r e t u r n a; 
-  } } 
- } 
- 
-  
-  
-  
-  
-  55 
-   { 
-Function that used for finding 
-    rv.setElement(0, i, 
-codeword in revised attack 
-ran.nextInt(( i n t)Math.pow(2,e)))
- 
-p u b l i c Matrixs ; 
-findCodeword(Matrixs p, i n t e)     i f(rv.getElement(0, 
- { i)!=0) 
-    { 
-  i n t row = p.getRow(); 
-  i n t column = p.getColumn();      flag = f a l s e; 
-  i f(row%2!=0||column%2!=0)     } 
-  {    } 
-    } 
- 
- System.out.println("generator 
-matrix G size error");  //System.out.println(rv.toStr
-   r e t u r n n u l l; ing()); 
-  }    
-     Rho rho = n e w Rho(e);  
-  Matrixs rhoRv = 
-  Matrixs G = n e w 
-Matrixs(row,row+column); rho.change(rv); 
-  Matrixs I = n e w    
-Matrixs(row);  
-  G.setMatrixElement(I, 0,  //System.out.println(rhoRv.to
-0); String()); 
-  G.setMatrixElement(p, 0,    
-row);   Matrixs rhoResult = 
- rhoRv.multiply(G); 
- //System.out.println(G.toStri   
-ng());  
-    //System.out.println(rhoResul
-   t.toString()); 
+  String str = ""; 
+  String temp = ""; 
+  String result = ""; 
+  Random ran = new Random(); 
    
-  i n t k = row/2; 
-     Matrixs result = 
-rho.changeBack(rhoResult); 
-  Matrixs rv = n e w 
-Matrixs(1,k);    
-  l o n g seed =   r e t u r n result; 
+   
+  if(k*n <=16) 
+  { 
+   r = r*n; 
+   k = k*n; 
+   Matrix id = new 
+Matrix(n); 
+   p = p.KroProduct(id); 
+   Matrix delt = new 
+Matrix(1,k); 
+   Matrix zero = new 
+Matrix(1,r-k); 
+   int test = 
+ran.nextInt((int)Math.pow(2,k)) ; 
+   if(test == 0) 
+   { 
+    test ++; 
+   } 
+   str = 
+Integer.toBinaryString(test); 
+   while(str.length()<k) 
+   { 
+    str = "0"+str; 
+   } 
+   for(int i = 0; i < 
+str.length(); i++) 
+   { 
+    temp = 
+str.substring(i,i+1); 
+    delt.setElement(0, 
+i, Integer.parseInt(temp)); 
+   } 
+    
+   Matrix product = 
+delt.multiply(p); 
+    
+  
+ while(!product.compare(zero)) 
+   { 
+    test = 
+ran.nextInt((int)Math.pow(2,k)); 
+    if(test == 0) 
+    { 
+     test ++; 
+    } 
+    if(test >= 
+Math.pow(2,k)) 
+    { 
+    
+ System.out.println("delta not 
+found"); 
+     return null; 
+    } 
+    str = 
+Integer.toBinaryString(test); 
+   
+ while(str.length()<k) 
+    { 
+     str = "0"+str; 
+    } 
+    for(int i = 0; i < 
+str.length(); i++) 
+    { 
+     temp = 
+str.substring(i,i+1); 
+    
+ delt.setElement(0, i, 
+Integer.parseInt(temp)); 
+    } 
+    product = 
+delt.multiply(p); 
+     
+   } 
+    
+   result = "";  
+    
+53 
+  
+ if(product.compare(zero)) 
+   { 
+    for(int l = 0; l < k; 
+l ++) 
+    { 
+     result += 
+Integer.toBinaryString(delt.getE
+lement(0, l)); 
+    } 
+    return result; 
+   }else{ 
+    return null; 
+   } 
+  }else{ 
+   Matrix delt = new 
+Matrix(1,k); 
+   Matrix zero = new 
+Matrix(1,r-k); 
+   int test = 
+ran.nextInt((int)Math.pow(2,k)); 
+   if(test == 0) 
+   { 
+    test ++; 
+   } 
+   str = 
+Integer.toBinaryString(test); 
+  
+ //System.out.println(str); 
+   while(str.length()<k) 
+   { 
+    str = "0"+str; 
+   } 
+   for(int i = 0; i < k; i++) 
+   { 
+    temp = 
+str.substring(i,i+1); 
+    delt.setElement(0, 
+i, Integer.parseInt(temp)); 
+   } 
+    
+   Matrix product = 
+delt.multiply(p); 
+    
+  
+ while(!product.compare(zero)) 
+   { 
+    test = 
+ran.nextInt((int)Math.pow(2,k)); 
+    if(test == 0) 
+    { 
+     test ++; 
+    } 
+    if(test >= 
+Math.pow(2,k)) 
+    { 
+    
+ System.out.println("delta not 
+found"); 
+     return null; 
+    } 
+    str = 
+Integer.toBinaryString(test); 
+   
+ while(str.length()<k) 
+    { 
+     str = "0"+str; 
+    } 
+    for(int i = 0; i < 
+str.length(); i++) 
+    { 
+     temp = 
+str.substring(i,i+1); 
+    
+ delt.setElement(0, i, 
+Integer.parseInt(temp)); 
+    } 
+    product = 
+delt.multiply(p); 
+     
+   } 
+    
+   result = "";  
+    
+  
+ if(product.compare(zero)) 
+   { 
+    int in = 
+54 
+ran.nextInt((int)Math.pow(2, n)); 
+    String str1 = 
+Integer.toBinaryString(in); 
+   
+ while(str1.length()<n) 
+    { 
+     str1 = "0"+str1; 
+    } 
+    String str0 = 
+Integer.toBinaryString(0); 
+   
+ while(str0.length()<n) 
+    { 
+     str0 = "0"+str0; 
+    } 
+    for(int l = 0; l < k; 
+l ++) 
+    { 
+    
+ if(delt.getElement(0, l) == 0) 
+     { 
+      result += 
+str0; 
+     }else 
+if(delt.getElement(0, l) == 1) 
+     { 
+      result += 
+str1; 
+     }    
+    } 
+   
+ //System.out.println(delt.toS
+tring()); 
+    return result; 
+   }else{ 
+    return null; 
+   } 
+  } 
  } 
-System.nanoTime(); 
  
+ 
+ 
+ 
+ 
+The collision finding process of 
+Watanabe’s attack: 
+ 
+while(flag) 
+{ 
+x=ran.nextInt((int)Math.pow(2
+,n)); 
+y = x^delta.getElement(0, i); 
+String xstr = 
+Integer.toBinaryString(x); 
+String ystr = 
+Integer.toBinaryString(y); 
+   
+ while(xstr.length()<n) 
+ { 
+   xstr = "0"+xstr; 
+ } 
+ while(ystr.length()<n) 
+ { 
+   ystr = "0"+ystr; 
+ } 
+     
+if(p.encode8(xstr).equals(p.e
+ncode8(ystr))) 
+ { 
+   flag = false; 
+   str1 += xstr; 
+   str2 += ystr; 
+ } 
+} 
+counter ++; 
+if (counter >= Math.pow(2, n)) 
+{ 
+System.out.println("no 
+collisions found in f"+i); 
+ String[] a = null; 
+ return a; 
+} 
+ 
+ 
+ 
+ 
+ 
+ 
+55 
+Function that used for finding 
+codeword in revised attack 
+ 
+public Matrixs 
+findCodeword(Matrixs p, int e) 
+ { 
+  int row = p.getRow(); 
+  int column = p.getColumn(); 
+  if(row%2!=0||column%2!=0) 
+  { 
+  
+ System.out.println("generator 
+matrix G size error"); 
+   return null; 
+  } 
+   
+  Matrixs G = new 
+Matrixs(row,row+column); 
+  Matrixs I = new 
+Matrixs(row); 
+  G.setMatrixElement(I, 0, 
+0); 
+  G.setMatrixElement(p, 0, 
+row); 
+ 
+ //System.out.println(G.toStri
+ng()); 
+   
+   
+  int k = row/2; 
+   
+  Matrixs rv = new 
+Matrixs(1,k); 
+  long seed = 
+System.nanoTime(); 
  
  //System.out.println(""+seed)
- 
 ; 
- 
-  Random ran = n e w 
- 
+  Random ran = new 
 Random(seed); 
- 
-  b o o l e a n flag = t r u e; 
- 
-  w h i l e(flag) 
- 
+  boolean flag = true; 
+  while(flag) 
   { 
+   for(int i = 0; i < k; i++) 
+   { 
+    rv.setElement(0, i, 
+ran.nextInt((int)Math.pow(2,e)))
+; 
+    if(rv.getElement(0, 
+i)!=0) 
+    { 
+     flag = false; 
+    } 
+   } 
+  } 
  
-   f o r( i n t i = 0; i < k; i++) 
- 56 
-Find ∆ in revised Watanabe’s attack  
-  
-p u b l i c Matrixs findDelta() 
+ //System.out.println(rv.toStr
+ing()); 
+   
+  Rho rho = new Rho(e);  
+  Matrixs rhoRv = 
+rho.change(rv); 
+   
  
+ //System.out.println(rhoRv.to
+String()); 
+   
+  Matrixs rhoResult = 
+rhoRv.multiply(G); 
+   
+ 
+ //System.out.println(rhoResul
+t.toString()); 
+   
+  Matrixs result = 
+rho.changeBack(rhoResult); 
+   
+  return result; 
+ } 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+56 
+Find ∆ in revised Watanabe’s attack 
+ 
+public Matrixs findDelta() 
  { 
- 
-  l o n g seed = 
- 
+  long seed = 
 System.nanoTime(); 
- 
-  Random ran = n e w 
- 
+  Random ran = new 
 Random(seed); 
- 
-  i n t mul = 
- 
-ran.nextInt(( i n t)Math.pow(2, n)); 
- 
-  i f(mul==0) 
- 
+  int mul = 
+ran.nextInt((int)Math.pow(2, n)); 
+  if(mul==0) 
   { 
- 
    mul++; 
- 
   } 
   String mulStr = 
 Integer.toBinaryString(mul); 
-  w h i l e(mulStr.length()<n) 
+  while(mulStr.length()<n) 
   { 
    mulStr = "0" + mulStr; 
   } 
-  Matrixs mulMatrix = n e w 
+  Matrixs mulMatrix = new 
 Matrixs(1,n); 
-  f o r( i n t i = 0; i < n; i++) 
+  for(int i = 0; i < n; i++) 
   { 
    String s = 
 mulStr.substring(i, i+1); 
@@ -2633,11 +2608,24 @@ i, Integer.parseInt(s, 2));
  //System.out.println(mulMatri
 x.toString()); 
    
-  Rho rho = n e w Rho(2); 
+  Rho rho = new Rho(2); 
   Matrixs result = 
 rho.changeR(g, mulMatrix); 
-  r e t u r n result; 
+  return result; 
  } 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  

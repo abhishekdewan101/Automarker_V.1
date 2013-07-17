@@ -1,3 +1,4 @@
+ i 
 Abstract 
 The company Backflip has built a system that retrieves tweets and subtitles about UK TV 
 series and classifies the sentiment of these Twitter messages. They designated the problem of 
@@ -9,7 +10,7 @@ Throughout the exploration of the different methods of visualising the two datas
 activity and subtitles, conclusions are made for the visualisation methods and technologies for 
 this data. On the other hand, a visualisation toolbox is created for composing the different 
 visualisations into one query system. This toolbox aims to propose an interface for revealing 
-insights into p eop l e’ s  be h a v i our  v i a  v i sua l i sa t i on s  f o r any    T w i t t e r  da ta. 
+insights into people’s behaviour via visualisations for any Twitter data. 
 Finally, three visualisations that allow the display of sentiment and volume of tweets for TV 
 series over time are evaluated by an assessment experiment. These visualisations compose 
 some of the main deliverables of this project, since they can correlate the datasets of Twitter 
@@ -24,7 +25,7 @@ specifically are:
 ? Examination of the visualisation approaches that enhance information retrieval 
 ? Review of commonly used visualisation methods 
 ? Examination of the Twitter content in order to find the data that can be visualised, 
-providing v al uab l e   i ns i g ht s   about peop   l e ’ s  be hav i our  
+providing valuable insights about people’s behaviour  
 ? Testing of different visualisation libraries on various data and analysis of their 
 strengths and weaknesses 
 ? Composition of a toolbox gathering the implemented visualisations, revealing 
@@ -35,8 +36,8 @@ trends analysis
 ? Evaluation of three time-series visualisations about Twitter data in order to find the 
 most capable for knowledge discovery 
  
- 
-i Table of Contents 
+ iii 
+Table of Contents 
 Abstract ..................................................................................................................................................... i 
 Acknowledgements ..................................................................................................................................ii 
 List of Figures .......................................................................................................................................... v 
@@ -56,7 +57,7 @@ List of Tables .................................................................
 3.1 Datasets .................................................................................................................................... 11 
 3.2 Use cases .................................................................................................................................. 14 
 3.2.1 Discovery of trends .......................................................................................................... 14 
-3.2.2 P eo p le’ s   r ea ctio n   to   w h at   is   p l a y ed   o n   T V ....................................................................... 15 
+3.2.2 People’s reaction to what is played on TV ....................................................................... 15 
 3.3 Challenges ................................................................................................................................ 16 
 3.4 Summary .................................................................................................................................. 17 
 4 Implementation ................................................................................................................................ 18 
@@ -68,8 +69,8 @@ List of Tables .................................................................
 4.3 Visualisation toolbox ............................................................................................................... 22 
 4.3.1 Overview .......................................................................................................................... 22 
 4.4 Time-series charts .................................................................................................................... 24 
- 
-iii 4.5 Other visualisations .................................................................................................................. 26 
+ iv 
+4.5 Other visualisations .................................................................................................................. 26 
 4.6 Time-series charts with other visualisations ............................................................................ 30 
 4.7 Summary .................................................................................................................................. 31 
 5 Evaluation methodology .................................................................................................................. 33 
@@ -99,8 +100,8 @@ APPENDIX B: JSON object with retweet data ......................................
 APPENDIX C: Time-series charts source code ..................................................................................... 56 
 APPENDIX D: Experiment Questionnaires ........................................................................................... 60 
 APPENDIX E: Experiment results ......................................................................................................... 62 
- 
-iv List of Figures 
+ v 
+List of Figures 
 Figure 1: A schematic diagram of the visualization process. .................................................... 6 
 Figure 2: The initial dataset of Tweets given by Backflip. ...................................................... 11 
 Figure 3: The final dataset that was used for this project. Extensions to the initial data are 
@@ -117,7 +118,7 @@ Figure 8: Examples of visualisations from Google Chart Tools. (a) Line chart (b)
 chart. Taken from https://developers.google.com/chart/interactive/docs/gallery ............ 19 
 Figure 9: Line chart with multiple value axes, an example from the amChart library. Taken 
 from http://www.amcharts.com/javascript/line-chart-with-multiple-value-axes/ ........... 21 
-Figure 10: The index page of the visualisat i on   t oo l box  “Vis u al i se  I t ”. ................................... 23 
+Figure 10: The index page of the visualisation toolbox “Visualise It”. ................................... 23 
 Figure 11: Example of the visualisation for the use case: Overview each tweet per creation 
 time and gender regarding its sentiment analysis score for the time an episode was on 
 air. In this example the mouse is over a point for a tweet sent by a male at 10:30 with a 
@@ -128,36 +129,36 @@ time interval is from 12:20 to 13:20 and the mouse is over the minute 12:41, sho
 average sentiment analysis score per gender. .................................................................. 25 
 Figure 13: Example of the visualisation for the use case: Relate the volume of tweets and their 
 sentiment analysis with the parts of day: Dawn, Morning, Afternoon and Night for a time 
-interval. I n   t h i s   exa m pl e   t h e   m ouse   i s   ov er   t he   T V   Se r i es   “Pan or am a”   p l ay ed   dur i ng   t he  
+interval. In this example the mouse is over the TV Series “Panorama” played during the 
 Night. ............................................................................................................................... 25 
 Figure 14: Example of the visualisation for the use case: Illustrate the sentiment analysis for 
 each TV series/TV episode on air for a time interval, from the most liked one (highest 
 sentiment analysis score) to the less liked one (lowest sentiment analysis score). In this 
-exa m pl e   t h e   m ouse   i s   ov er   t he   TV   S er i es   “ T he   G r ea t   B r i t i sh   C oun t r y si d e”   w i t h   an  
+example  the  mouse  is  over  the  TV  Series  “The  Great  British  Countryside”  with  an 
 average sentiment analysis score equal to -0.25. ............................................................. 26 
 Figure 15: Example of the visualisation for the use case: Visualise the volume and the 
 sentiment analysis of tweets on a UK map for a time interval. In this example the mouse 
-i s   ov er   t he   U K   c i t y   “Cov ent r y ”   w i t h   on l y   one   t w e et   and   a   po si t i v e   s ent i m ent   a nal y si s  
+is  over  the UK city  “Coventry” with only one  tweet and a positive  sentiment  analysis 
 score. ................................................................................................................................ 27 
- 
-v Figure 16: Example of the visualisation for the use case: Compare the amount of tweets with 
-the amount of retweets for a time interval. I n   t hi s   exa m pl e   t he   m ouse   i s   ov er   t he   t w ee t s’  
+ vi 
+Figure 16: Example of the visualisation for the use case: Compare the amount of tweets with 
+the amount of retweets for a time interval. In this example the mouse is over the tweets’ 
 piece of the pie, representing the 84.03% of the whole volume of tweets and retweets. 27 
 Figure 17: Example of the visualisation for the use case: Overview the devices that were used 
 for tweeting, from the most used one to the less used one, for a time interval. In this 
-exa m pl e   t h e   m ouse   i s   ov e r   t h e   d ev i ce   cor r es p ondi ng   t o   “W e b/ O t her ”,   w h i ch   w as   t h e  
+example  the mouse  is  over  the  device  corresponding  to  “Web/Other”,  which was  the 
 device used for the 62.02% of tweets. ............................................................................. 28 
 Figure 18: Example of the visualisation for the use case: Illustrate all channels from the most 
 discussed one (highest volume) to the least discussed one (lowest volume) and compare 
 the sentiment analysis for them for a time interval. In this example the mouse is over the 
-m ost  di sc u ss ed   cha n nel  “B B C  3”  wit h   av er ag e  ne g at i v e  s en t i m ent  a nal y si s  s c or e. ....... 29 
+most discussed channel “BBC 3” with average negative sentiment analysis score. ....... 29 
 Figure 19: Example of the visualisation for the use case: Overview and compare the sentiment 
 analysis and the volume of tweets for all channels for a time interval. In this example a 
-click on t he   cha n nel “E4”     r ev ea l  i t s   TV  Se r i es  a nd  t he   cor r es po ndi ng   Bubble Chart..... 29 
-Fig ur e   20 :   Ex am pl e   v i sua l i sa t i on   o f   t he   ana l y si s   “M o s t   Fr eque n t   C on ce p t s”   i m pl e m ent ed as a 
+click on the channel “E4” reveal its TV Series and the corresponding Bubble Chart..... 29 
+Figure 20: Example visualisation of the analysis “Most Frequent Concepts” implemented as a 
 Word-Cloud. .................................................................................................................... 30 
 Figure 21: Example of the additional images for the enhancement of information retrieval. It 
-shows   t he   r e sul t s   f o r   t he   c hanne l   “Ch anne l   4 ”,   w hich define that mostly men discussed 
+shows the results for the channel “Channel 4”, which define that mostly men discussed 
 about it sending mostly negative tweets. ......................................................................... 30 
 Figure 22: Example of the visualisation for the use case: Overview each tweet per creation 
 time and gender regarding its sentiment analysis score for the time an episode was on 
@@ -173,7 +174,7 @@ experiment of this research. ...................................................
 Figure 26: Illustration of the first in row online questionnaire. ............................................... 38 
 Figure 27: Demonstration of the Feedback section of the online system for the assessment 
 experiment of this research. ............................................................................................. 38 
-Fig ur e  28 :  I l l ust r a t i on   of t   h e  s ur v ey ’ s  de m og r aphi c s  a b out  ag e  a nd  g ende r . .......................... 40 
+Figure 28: Illustration of the survey’s demographics about age and gender. .......................... 40 
 Figure 29: Illustration of the time measurements for each of the 32 participants, per 
 evaluation process of the three visualisations. ................................................................. 41 
 Figure 30: Illustration of the percentage for correct answers per question and visualisation 
@@ -182,14 +183,14 @@ Figure 31: Illustration of the percentage for wrong answers per question and vis
 experiment. ...................................................................................................................... 43 
 Figure 32: Illustration of the percentage for blank answers per question and visualisation 
 experiment. ...................................................................................................................... 43 
- 
-vi Figure 33: Illustration of the average time per number of correctly answered questions for 
+ vii 
+Figure 33: Illustration of the average time per number of correctly answered questions for 
 each visualisation............................................................................................................. 44 
 Figure 34: Time consumption over the assessment procedure according to the provided 
 feedback. .......................................................................................................................... 45 
  
- 
-vii List of Tables 
+ viii 
+List of Tables 
 Table 1: Special characters and terms as described by Singh et al. (2012) ............................... 3 
 Table 2: Use cases for the visualisation of demographics, sentiment analysis and volume of 
 tweets for trends discovery. ............................................................................................. 14 
@@ -212,13 +213,12 @@ each visualisation..............................................................
 Table 9: All the results retrieved from the Feedback page of the assessment experiment. ..... 65 
  
  
+Introduction 1    1 
  
-viii 1 1 
-Introduction    
  
 1 Introduction 
-“I   had   ( and   s t i l l   hav e)   a   d r eam   t ha t  t he   W eb   coul d   be  l es s   o f   a  t e l ev i s i on  chann el  and   m ore   of  
-an  i n t er a ct i ve  se a   of  s hare d  knowle dge.” 
+“I had (and still have) a dream that the Web could be less of a television channel and more of 
+an interactive sea of shared knowledge.” 
 ? Tim Berners Lee, 1995 
 Since their establishment, Social Network websites have been a keen interest for millions of 
 users, who share plenty of information about their daily activities (Boyd et al., 2007). 
@@ -237,18 +237,18 @@ Furthermore, they developed another system that fetches subtitles from each UK T
 and refines keywords about them, also known as concepts. Regarding to their setup, my goal 
 was to find a way to use and combine all the provided data via visualisation methods, in a 
 way that time-wise relations between Twitter content and concepts enhance trends discovery. 
-A s   f or   t he   us e   of   v i su al i sa t i on   m et hods,   t he   m ot i v at i o n   ca m e   f r om   t he   com pany ’ s   r ea l i sa t i on  
+As for the use of visualisation methods, the motivation came from the company’s realisation 
 that information displayed as plain text is poor for knowledge retrieval. In the same manner, 
 according to Pocock (1981), sight is the sense that helps us perceive the nine-tenths of our 
 external world knowledge. Therefore, this project aims to find the visualisation methods that 
-catch the da t a  a na l y st ’ s attention and help him understand large amounts of different data.  
+catch the data analyst’s attention and help him understand large amounts of different data.  
 More specifically, the objectives of this project are: 
 ? Explore which visualisation methods are more efficient for large-scale data 
 ? Provide interactive visualisations that augment the review of different data 
 ? Correlate in graphs the datasets of Twitter content and subtitles in order to assist the 
 observation of their relations  
 ? Correlate the demographics, provided by the Twitter content, with the sentiment and 
-volume of tweets and create visualisations that imp r ov e   t he   exp l or at i on   of   peop l e ’ s  
+volume of tweets and create visualisations that improve  the exploration of people’s 
 tendencies 
 ? Compose a query system, also referred as toolbox, that gathers all different 
 visualisations in one interface 
@@ -260,15 +260,15 @@ Overall, this project explores the contribution of interactive visualisations in
 decision making. Web 2.0 technologies, as social networks, provide massive data, but only 
 efficient visual techniques can transform such large-scale data to wisdom (Shedroff, 1994). 
 As a result, this research examines visualisation methods that improve knowledge retrieval on 
- 2 2 
-Introduction    
+Introduction 2    2 
+ 
  
 large datasets. On the other hand, another outcome of this project is the evaluation of 
 visualisations that illustrate social network activity over time. This evaluation aims to 
 conclude about time-series visualisations that enhance the discovery of trends from such data. 
 Finally, this project develops a visualisation toolbox for the composition of the most effective 
 visualisations about Twitter content in one interface. This toolbox is meant to be adjustable 
-on Twitter data related to a domain, for the review o f   pe opl e’ s   beha v i ou r s   r e g ar di ng   t hi s  
+on Twitter data related to a domain, for the review of  people’s  behaviours  regarding  this 
 domain. 
 Consequently, the distinct deliverables of this project are: 
 ? A toolbox, which gathers all the visualisations and statistics about TV Twitter 
@@ -296,15 +296,15 @@ estimated, clarifying the achievements regarding the stated objectives of this p
 in the Conclusion section, the project is overviewed and further possible improvements are 
 declared. 
  
- 3 
-Background 
+Background 3 
+ 
  
 2 Background 
 This section briefly defines the key domains related to this project. The following paragraphs 
 describe the terminology that will be used throughout this project. The word or phrase in 
 italics is the keyword, which is followed by the corresponding definition. The described 
 definitions aim to help the reader understand the areas of study that this project involves. 
-Also, related work attempts to provide a basis for this p r o j e ct ’ s   appr ai s al . 
+Also, related work attempts to provide a basis for this project’s appraisal. 
 2.1 Overview and definitions 
 Social Network is a group of nodes or members, who are linked with one or more kinds of 
 relations (Wasserman et al., 1994). Social networking websites are online services providing 
@@ -315,7 +315,7 @@ Twitter is a social networking website, which allows its members to post message
 140 characters. Because of its upper limit about characters, Twitter is also referred to as a 
 microblogging service. According to the research by Makice (2009), microblogging services 
 try to provide a mixture of the three established technologies: Instant Relay Chat (IRC), IM 
-chat status messages, and mobile phones. The same research states that Twitte r’s restriction 
+chat status messages, and mobile phones. The same research states that Twitter’s restriction 
 about post characters adopts the lowest limitation of short message services (SMS), a text 
 messaging service that is mostly a component of mobile phones.  
 Because of its directness and simplicity, Twitter quickly became a popular social networking 
@@ -323,36 +323,36 @@ service, reaching over 140 million active users and more than 340 tweets per day
 Team, 2012). Hence, Backflip chose it as the source for social network activity related to TV 
 series. In order to better understand the later described mechanism that Backflip uses to 
 retrieve tweets and some preprocessing steps I applied on the retrieved data, Table 1 provides 
-def i ni t i o ns  f or T   w i t t er ’ s   sp ec i a l  c har ac t er s  a nd   t e r m s by Singh et al. (2012). 
+definitions for Twitter’s special characters and terms by Singh et al. (2012). 
 Table 1: Special characters and terms as described by Singh et al. (2012) 
 Special Character/Term Definition 
-Designates a reference on another user. This reference is 
-clickable and leads to the related use r   a cc oun t .   Fo r   e x am pl e,   i n  “ I 
-l ove   t he   pi ct u re   @ Al i ce   upl oa ded” t he   w or d   “ @ A l i ce ”   i s  
 @ 
+Designates a reference on another user. This reference is 
+clickable and leads to the related user account. For example, in “I 
+love  the  picture  @Alice  uploaded” the  word  “@Alice”  is 
 clickable and leads to the account related to the username 
-“Ali c e” . 
-This character with a following keyword is k now n   as   “Hash   t ag ” 
-and is used to mention a common subject of discussion. For 
-exa m pl e,   i f   a   u se r   w r i t e s   “# supe r bow l ”   i n   h i s   t w ee t ,   he   i s  
+“Alice”. 
 # 
+This character with a following keyword is known as “Hash tag” 
+and is used to mention a common subject of discussion. For 
+example,  if  a  user  writes  “#superbowl”  in  his  tweet,  he  is 
 implying that his tweet is relevant to this topic. Hash tags are 
 clickable and link to a list of tweets containing them. 
-T h i s   t e r m   com es   f r om   t he   w or d   “ r et w ee t ”   a nd   is used for 
-f or w a r di ng   a   t w e et .   I n   ot he r   w or d s,   a   us er   ca n   r es en d   ( “r e t w ee t ” )  
 RT @ 
-anot h er   u se r ’ s   m es sa g e   t o   hi s   ow n   pr o f i l e   u si ng   t h i s   t er m   as  
+This  term  comes  from  the  word  “retweet”  and  is used for 
+forwarding a tweet. In other words, a user can resend (“retweet”) 
+another  user’s  message  to  his  own  profile  using  this  term  as 
 follows: 
- 4 
-Background 
+Background 4 
+ 
  
 Special Character/Term Definition 
-“RT  @ [ U s er n am e]  [ Repeated Tweet] ”. 
-T h i s   t er m   com es   f r om   t he   phr as e   “Di r ec t   Me ss ag e”   a nd   i s   us ed  
-to send private messages directly to user accounts. For instance, 
-the tweet “D M   @ Pe t e r   I   n ee d   t o   t a l k   t o   you   ASA P” , is displayed 
+“RT @[Username] [Repeated Tweet]”. 
 DM @ 
-on   t he   ac c ount   r e l a t ed   t o   t h e   use r nam e   “Pet er ”   and   onl y   t he   use r  
+This  term comes from the phrase “Direct Message” and  is used 
+to send private messages directly to user accounts. For instance, 
+the tweet “DM @Peter I need to talk to you ASAP”, is displayed 
+on the account related to the username “Peter” and only the user 
 with this username has the privilege to see it. 
  
 Television (TV) Series is also known as TV programme or television show and describes a 
@@ -388,45 +388,40 @@ words in it (Grudin et al., 2005).
 Sentiment Analysis, according to Bifet et al. (2010), is a classification task that attempts to 
 categorise text into two classes, positive and negative, depending on the feeling that is 
 attached to it. Backflip applies a sentiment analysis algorithm on every tweet, the Multinomial 
-N aï ve   Bay es   cl ass i f i er , in order to resolve whether the tweet has a positive or negative 
+Naïve  Bayes  classifier, in order to resolve whether the tweet has a positive or negative 
 sentiment related to it. Despite the short size of tweets, their sentiment analysis is a hard 
 process, since a tweet may contain rich information in a compact form, which may include 
 both positive and negative feelings (Bifet et al., 2010). Therefore, the sentiment analysis 
- 5 
-Background 
+Background 5 
+ 
  
 provided by Backflip, may introduce misclassifications, but this analysis is not part of this 
 study. 
-The M u l t i nom i al   N a ï ve   Ba ye s   c l ass i f i e r   is the most popular algorithm for tweets sentiment 
+The Multinomial Naïve Bayes  classifier  is the most popular algorithm for tweets sentiment 
 analysis, since it provides the best accuracy for this domain compared to other text 
-classification algorithms (Go et al., 2009). T hi s   cl as s i f i er   i s   bas ed   on   B ay es ’   t h e or em ,   w hi ch  
+classification algorithms (Go et al., 2009). This classifier is based on Bayes’ theorem, which 
 denotes the following probability: 
-? ( ? | ? ) ? ? ( ? )
-? ( ? | ? ) = 
-? ( ? )
+?(?|?) =
+?(?|?) ? ?(?)
+?(?)  
 where: 
 ? P(s) – probability of a sentiment s to occur (e.g. P(positive)) 
-? P(w) – p r oba bi l i t y  of  a  wor d  w  t o  oc cur (   e.g .  P(“ D e xt e r ”) ) 
+? P(w) – probability of a word w to occur (e.g. P(“Dexter”)) 
 ? P(s|w) – probability of a sentiment s to occur given it is described by vector of 
-at t r i but es  w  ( e.g .  P(pos i t i v e| ”Dext er ”) ) 
+attributes w (e.g. P(positive|”Dexter”)) 
 ? P(w|s) – probability of an instance with attributes described by w given it comes from 
-t he  s ent i m ent  s   ( e.g .  P(“ D e xt er ”| posi t i v e) ) (   Pak  et  a l ., 2010).  
-1
-For unseen words, where the zero-frequency problem arises, the Laplace correction is used. 
+the sentiment s (e.g. P(“Dexter”|positive)) (Pak et al., 2010).  
+For unseen words, where the zero-frequency problem arises, the Laplace correction1 is used. 
 The above probability is then used in the following formula to classify a tweet, based on its 
 composition of words. 
-( )
-?? ?? ??? ? ? = ?? ?? ??? ?  ?  ?  ?  
-  
-
+????????? = ???????(??)?????????
+?
+ 
 where: 
 ? sentiment – final classification of a tweet 
-? P(s ) – probability of a sentiment i to occur 
-i
-? ∏ ? ( ? | ? ) = ∏ ? ( ? , … , ? | ? ) - the sum of probabilities described by attribute 
-      
-w given they come from the sentiment s . 
-i i
+? P(si) – probability of a sentiment i to occur 
+? ∏ ?(??|??) = ∏ ?(??, ,??|??)??  - the sum of probabilities described by attribute 
+wi given they come from the sentiment si. 
  
 The approach by Backflip is to have two classes for a tweet, positive and negative. They use 2 
 million tweets hand-classified into positive and negative sentiment to train the classifier. 
@@ -436,7 +431,7 @@ so that the final probability, which will be a sum of all the probabilities, wil
 positive value or a negative value, determining positive and negative sentiment respectively.  
 2.2 Information Visualisation 
 As Keim (2002) states, large amount of data without any visual representation of it grows to 
-dat a   “ dum ps” . The same research argues that visual data exploration is useful for retrieving 
+data “dumps”. The same research argues that visual data exploration is useful for retrieving 
 insights about the data, even when the aims for the insights are vague. Accordingly, this 
 project intends to enhance the analysis of TV insights from large-scale social network data 
 using visual data exploration or in other words Information Visualisation.  
@@ -444,12 +439,11 @@ To begin with, visualisation is the process of making data easier to perceive us
 designs that trigger the senses (Dix, 2011). As computer graphics evolved, visualisation 
 methods became easier to use and widely accessible, establishing visualisation as a concrete 
 and considerable case of study. Consequently, visualisation of data is a distinct procedure 
-                                                      
-1
- A way of handling zero probability values (P(w|s)=0), adding 1 to the numerator and the size of the Vocabulary 
+                                                     
+1 A way of handling zero probability values (P(w|s)=0), adding 1 to the numerator and the size of the Vocabulary 
 to the dominator. 
- 6 
-Background 
+Background 6 
+ 
  
 with specific steps for producing a meaningful effect. These steps are defined by Ware (2004) 
 as: 
@@ -458,7 +452,7 @@ as:
 ? Step 3: Handling of graphic hardware and software that enable the representation of 
 the visualization. 
 ? Step 4: Analyzing information by the final observer 
-The above steps are represented in Figure1, i ns pi r ed   by   Wa r e ’ s   equ i v al en t   i l l us t r at i on.   I n   t he  
+The above steps are represented in Figure1, inspired by Ware’s equivalent illustration. In the 
 final analysis, Ware acknowledges the gathering of data (Step 1) as the most demanding and 
 time-consuming process. Note that this step, as well as the analysis by the final observer, is 
 related with the according physical and social environment. 
@@ -472,15 +466,6 @@ form of fields of numbers of vectors, whereas InfoVis methods include data more 
 regarding their format. For instance, the data of InfoVis methods may combine categorical 
 data, as female/male, with continuous data, as time (Dix, 2011).  
  
-Data Investigation
-Analysis 
-Preprocessing and Graphic
-DATA by the ﬁnal 
-transformation Representation
-observer
-Data Data
-Gathering Manipulation
-Physical Environment Social Environment
  
 Figure 1: A schematic diagram of the visualization process. 
 In the same sense, Keim (2002) proposed a designation of the visualisation methods that are 
@@ -488,16 +473,27 @@ in general approved, which reflects the progress of InfoVis. These methods are d
 ? Standard 2D/3D displays, which represent relationships of two or three entities 
 respectively, e.g. bar charts, 
 ? Geometrically transformed displays, which illustrates the correlation between a 
-2
-pair of variables, e.g. a scatter-plot matrix 
+pair of variables, e.g. a scatter-plot matrix2 
 ? Icon based displays, which map data variables onto graphic features, whether they 
 are geometric (e.g. shape, size, orientation) or non-geometric (e.g. color and 
 texture), 
-                                                      
-2
- A type of mathematical diagram using Cartesian coordinates to display values for two variables for a set of data. 
- 7 
-Background 
+                                                     
+2 A type of mathematical diagram using Cartesian coordinates to display values for two variables for a set of data. 
+DATA Preprocessing and 
+transformation
+Graphic
+Representation
+Analysis 
+by the final 
+observer
+Data Investigation
+Data
+Manipulation
+Physical Environment Social Environment
+Data 
+Gathering
+Background 7 
+ 
  
 ? Dense pixel displays, which use pixels to represent dimension values by coloring 
 and gathering them in alongside regions, 
@@ -547,8 +543,8 @@ visualisations.
 All these techniques, except Dynamic Projections, were tested to the given data of this 
 project. The Dynamic Projections found no application, because in my point of view such 
 interactions are difficult to understand by non-scientists. Specifically, this technique is mostly 
- 8 
-Background 
+Background 8 
+ 
  
 used to augment the exploration of multidimensional data, for which I chose less complicated 
 visualisations, as analysed in Section 4, which do not require different viewing angles for 
@@ -582,8 +578,7 @@ visualisations. However, it obligates the user to upload his data in a publicly
 accessible database, if he is using the free edition.  
 ? Many Eyes: is similar with the previous online tools for designing interactive 
 visualisations and was introduced by IBM. It basically shifts data to interactive 
-3
-visualisations, which are written in JavaScript, Java or Adobe Flash . Its main 
+visualisations, which are written in JavaScript, Java or Adobe Flash 3 . Its main 
 advantage is the rich library of different charts available to use, but its drawback is 
 the limit on the size of data a user can upload, which is 5Mb.  
 ? VIDI: a visualisation tool that is designed for the content management system Drupal 
@@ -597,14 +592,12 @@ visualisation applications, while overcoming the constraints about the size and 
 data.  
 In order to achieve that, I used freeware JavaScript libraries that are independent of data size, 
 provide a wide range of visualisations, can take data from any source and are cross-browser 
-                                                      
-3
- Multimedia platform providing animation, video and interactivity between elements 
- 9 
-Background 
+                                                     
+3 Multimedia platform providing animation, video and interactivity between elements 
+Background 9 
  
-4
-compatible. The used libraries embrace the innovations introduced by HTML5 , providing 
+ 
+compatible. The used libraries embrace the innovations introduced by HTML54, providing 
 scalable visualisations that are lightweight and only require JavaScript to run.  
 Specifically, all libraries use the canvas element of HTML5, which allows creation of graphic 
 animations with JavaScript. This element makes the visualisation independent of plug-in 
@@ -621,15 +614,13 @@ that takes the most discussed topics, also known as trends provided by Twitter, 
 related tweets, and used artificial intelligence-based data mining methods to classify them in 
 order to retrieve fashions regarding what is going on in the real world. These data mining 
 methods explore the device used, the gender and the country that are related to each tweet via 
-5
-visualisation methods, meaning bar charts and self-organising maps , to promote knowledge 
+visualisation methods, meaning bar charts and self-organising maps5, to promote knowledge 
 retrieval.  
 Furthermore, the designed toolbox for this project is an inspiration of two different online 
-6 7
-services, the Tweet Archivist and the Sentiment 140 . The first one, as its name defines, is an 
+services, the Tweet Archivist6 and the Sentiment 1407. The first one, as its name defines, is an 
 archive of tweets in an online database available for statistics analysis. This application 
 allows the user to retrieve visualisations about statistics of tweets that include a specific word 
-or   phr as e,   f or   i nst anc e   “Co c a   C ol a ” . These visualisations are about the volume of tweets, the 
+or phrase, for instance “Coca Cola”. These visualisations are about the volume of tweets, the 
 top Twitter users, the top used words, the top URLs where the tweets came from, the device 
 used for sending the tweet and the comparison of tweets with retweets.  
 Moreover, the second application offers a query system that retrieves sentiment analysis of 
@@ -650,18 +641,14 @@ providing high-quality interactive visualisations for data exploration. As in th
 to what is going on in TV, exploiting TV subtitles.  
 In addition, another originality of this project is the more complex analytics that are provided, 
 as retrieval of statistics for UK cities and other unique analyses that are further explained in 
-                                                      
-4
- Hypertext Markup Language Version 5 
-5
- Also known as SOM or self-organising feature map (SOFM). It visualises an artificial neural network trained by 
+                                                     
+4 Hypertext Markup Language Version 5 
+5 Also known as SOM or self-organising feature map (SOFM). It visualises an artificial neural network trained by 
 unsupervised learning on a map.  
-6
- http://www.tweetarchivist.com 
-7
- http://www.sentiment140.com 
- 10 
-Background 
+6 http://www.tweetarchivist.com 
+7 http://www.sentiment140.com 
+Background 10 
+ 
  
 Section 4. The domain of this project is TV Twitter content, but the methodology and the 
 implemented toolbox is meant to be adjustable on any other Twitter content for product 
@@ -677,9 +664,9 @@ Likewise, the forms of interaction in visualisations were examined, as they are 
 final deliverables that are evaluated for the conclusions of this project. In order to inform the 
 reader about what is mostly used for InfoVis and is freeware, some visualisation technologies 
 were also concisely described. Finally, this section ended with the related work that became 
-an  i n spi r a t i on  f o r  t h i s  p r o j e ct ’ s  de l i v er abl es .   
- 11 
-Problem Analysis 
+an inspiration for this project’s deliverables.  
+Problem Analysis 11 
+ 
  
 3 Problem Analysis 
 In this section, the problem is analysed in more depth regarding its initial state and the 
@@ -690,10 +677,8 @@ domain and my approach to resolve this problem.
 Backflip provided the data for this project. As for Twitter content, the data I was given 
 corresponds to real tweets posted during a specific time interval on Twitter, related to UK TV 
 series. The time interval, during which the tweets were posted, was between 23.30 Sunday 
-th th
-24 June and 01.49 Tuesday 26 June. For Backflip, this time interval matches the day 
-th
-Monday 25 June on TV. This is because they fetch tweets half an hour before a day begins 
+24th June and 01.49 Tuesday 26th June. For Backflip, this time interval matches the day 
+Monday 25th June on TV. This is because they fetch tweets half an hour before a day begins 
 and half an hour after the last played TV series for that day finishes. Their approach to define 
 a day on TV like this has to do with the fact that people tend to discuss about a TV series 
 before it is on air and for some time after it is over. 
@@ -706,52 +691,34 @@ hour before the episode is on air, during the on-air time of this episode, and f
 after it is finished. This approach attempts to reassure that the tweets including the keywords 
 match the specific episode, because of the time relation.   
 As a result, the Twitter dataset I was given includes the outcomes of Datasift for the TV 
-th
-series played on Monday 25 June on each UK TV channel. Also, this dataset contains the 
-sentiment analysis score for each tweet as   e st i m at ed   by   t he   N aï v e   B ay es   cl as s i f i er . In more 
+series played on Monday 25th June on each UK TV channel. Also, this dataset contains the 
+sentiment analysis score for each tweet as estimated by  the Naïve Bayes classifier. In more 
 detail, the dataset includes the names of the TV series, the episode, the channel, the times that 
 the retrieval of tweets began (Transmission Start Time) and ended (Transmission End Time), 
 the creation time of the tweet, the user (From User) that sent it, its text (Twitter text), the 
 sentiment analysis score that was assigned to it, and the gender corresponding to it. This 
 dataset is named Tweets and is illustrated in Figure 2.  
-TV channel TV Series TV episode
-Transmission 
-Twitter text
-Start Time
-Tweets
-Transmission
-From User
-End Time
-Sentiment 
-Creation Time Gender
-Analysis Score
  
 Figure 2: The initial dataset of Tweets given by Backflip. 
 In advance, Backflip gave me for each tweet its JavaScript Object Notation (JSON) file, 
 which is the Twitter format of all the information contained in a tweet. As I explain in more 
 depth in Section 4, I preprocessed the JSON file in order to extract the device that was used 
- 12 
-Problem Analysis 
+Tweets
+Transmission
+End TimeFrom User
+GenderSentiment Analysis ScoreCreation Time
+Twitter text Transmission Start Time
+TV channel TV Series TV episode
+Problem Analysis 12 
  
-8
-for tweeting and the location of the Twitter user. The dataset I used eventually for this 
+ 
+for tweeting8 and the location of the Twitter user. The dataset I used eventually for this 
 project is illustrated in Figure 3. Part of this dataset is given in APPENDIX A as an example 
 of the actual data I used.  
-TV channel TV Series TV episode
-Twitter text Device Used
-Tweets
-Location
-From User
-Sentiment 
-Creation Time Gender
-Analysis Score
-Transmission Transmission
-Start Time End Time
  
 Figure 3: The final dataset that was used for this project. Extensions to the initial data are given in green color. 
 Additionally, Backflip gave me a dataset of subtitles, also referred to as the Concepts dataset. 
-th
-This dataset includes, in the same sense as the Tweets dataset, data for Monday 25 June. 
+This dataset includes, in the same sense as the Tweets dataset, data for Monday 25th June. 
 This data contains each subtitle as appeared in TV for each TV series of each UK TV channel 
 extracted by a system the company implemented. Also, it contains the Concept that 
 corresponds to each subtitle, which as aforementioned reflects a keyword that appeared in 
@@ -759,7 +726,7 @@ each subtitle.
 In particular, the Concepts dataset I was given consists of the subtitle text (Sentence text), the 
 name of the episode that it refers to (TV Episode), the name of the TV channel, the times that 
 the retrieval of subtitles began (Transmission Start Time) and ended (Transmission End Time) 
-for this TV series and   t he   s ubt i t l e’ s   cr e at i on   t i m e.   T hi s   dat a se t   i s   i l l u st r at ed   i n   Fi g ur e   4. Part 
+for this TV series and the subtitle’s creation time. This dataset is illustrated in Figure 4. Part 
 of this dataset is given in APPENDIX A as an example of the actual used data.  
 My goal, as earlier explained, was to enhance fashions discovery from the time-wise 
 correlation of these two datasets. In order to correlate the two datasets I matched the fields 
@@ -768,46 +735,59 @@ words, for each tweet I matched the subtitles that were created at the same time
 relevant TV series and channel. This correlation is demonstrated in Figure 5. 
 The Tweets dataset has 149,098 records and the Concepts dataset has 194,248 records. Since 
 one day can fetch this many records, for the purposes of this project I required and used data 
-th
-for one day, Monday 25 June. However, the implementations are adjustable for any amount 
+for one day, Monday 25th June. However, the implementations are adjustable for any amount 
 of data.    
  
-                                                      
-8
- The action of sending a tweet. 
- 13 
-Problem Analysis 
+                                                     
+8 The action of sending a tweet. 
+Tweets
+LocationFrom User
+GenderCreation Time
+Twitter text Device Used
+TV channel TV Series TV episode
+Transmission
+End Time
+Transmission 
+Start Time
+Sentiment 
+Analysis Score
+Problem Analysis 13 
  
-Concept TV channel TV episode
-Sentence Text
-Concepts
-Transmission Transmission 
-Creation Time
-End Time Start Time
+ 
  
 Figure 4: The dataset of Concepts given by Backflip 
  
-TV channel TV Series TV episode
-Twitter text Device Used
-Tweets
-Location
-From User
-Sentiment 
-Creation Time Gender
-Analysis Score
-Transmission Transmission
-Start Time End Time
-Concept TV channel TV episode
-Sentence Text
-Concepts
-Transmission Transmission 
-Creation Time
-End Time Start Time
  
 Figure 5: Illustration of the correlation between the two datasets. The coloured boxes define the fields that were 
 matched in both datasets to retrieve the relevant subtitles for each tweet. 
- 14 
-Problem Analysis 
+Concepts
+Transmission
+End TimeCreation Time
+Concept
+Transmission 
+Start Time
+TV channel TV episode
+Sentence Text
+Tweets
+LocationFrom User
+GenderSentiment Analysis ScoreCreation Time
+Twitter text Device Used
+TV channel TV Series TV episode
+Creation Time
+TV channel TV episode
+Transmission
+End Time
+Transmission 
+Start Time
+Concepts
+Transmission
+End Time
+Concept
+Transmission 
+Start Time
+Sentence Text
+Problem Analysis 14 
+ 
  
 3.2 Use cases 
 According to my goal to improve trends analysis via visualisation methods, I had to create use 
@@ -830,7 +810,7 @@ from each tweet was:
 ? whether a tweet is a Retweet or not 
 This data composes the demographics that can be resolved from Twitter content. They are 
 informative for trends discovery, because demographics allow the discovery of patterns in 
-peopl e’ s  beha v i ou r (   Bhatnagar, 2004). 
+people’s behaviour (Bhatnagar, 2004). 
 In advance, the volume of tweets and the sentiment analysis score for each of them were also 
 used for trends discovery. The volume of tweets shows the amount of people discussing over 
 Twitter for a TV series. It was used in relation with other characteristics, such as time and 
@@ -849,13 +829,12 @@ analysed and the use case provides details of the areas to investigate.
 Table 2: Use cases for the visualisation of demographics, sentiment analysis and volume of tweets for trends 
 discovery. 
 Field of study Use case 
-TV Channel/Series 
-? Overview the average sentiment analysis score of tweets per 
+TV Channel/Series ? Overview the average sentiment analysis score of tweets per 
 minute and by gender for a time interval.  
 ? Relate the volume of tweets and their sentiment analysis 
 with the parts of day: Dawn, Morning, Afternoon and Night 
- 15 
-Problem Analysis 
+Problem Analysis 15 
+ 
  
 Field of study Use case 
 for a time interval. 
@@ -872,36 +851,34 @@ most used one to the less used one, for a time interval.
 TV Episode ? Overview each tweet per creation time and gender regarding 
 its sentiment analysis score for the time an episode was on 
 air. 
-All TV Channels 
-? Overview and compare the sentiment analysis and the 
+All TV Channels ? Overview and compare the sentiment analysis and the 
 volume of tweets for all channels for a time interval. 
- 
-? Illustrate all channels from the most discussed one (highest 
+ ? Illustrate all channels from the most discussed one (highest 
 volume) to the least discussed one (lowest volume) and 
 compare the sentiment analysis for them for a time interval. 
  
 In the above use cases the Concepts dataset are not taken into account. In the next paragraph 
 the use of this dataset is explained regarding the purposes of trends discovery. 
-3.2.2 P e o p le’s rea   c ti o n   to what is played on TV 
-This project, besides revealing insights ab out   peo pl e’ s   beha v i ou r   from demographics, 
+3.2.2 People’s reaction to what is played on TV 
+This project, besides revealing insights about  people’s  behaviour  from demographics, 
 attempts to map this behaviour to what is played on TV. This is achieved by using the 
 Concepts dataset. This dataset, as earlier explained, consists of subtitles about each UK TV 
 series and can reveal what was discussed in TV from the content of the subtitles.  
 Specifically, the Concepts, as Backflip defines, can be thought of as topics of discussion, 
-because they usually include mentioned names. For instance, the Concept of   t he   s ubt i t l e   “Di d  
-A ng el a   as k   f or   m oney ?”   i s   “Ang el a” ,   m ea ni ng   i n   t h i s   subt i t l e   the name “Ang el a” was a topic 
+because they usually include mentioned names. For instance, the Concept of the subtitle “Did 
+Angela ask for money?” is “Angela”, meaning in this subtitle the name “Angela” was a topic 
 of discussion. Having the Concepts and not only the subtitles makes it easier to highlight what 
 exactly is discussed on TV and use it for information retrieval. 
 In order to map Concepts to the rest analysed data, the Concepts dataset was correlated with 
 the Tweets dataset time-wise and by matching the name of TV channel and episode. This 
 mapping allowed the creation of another two use cases for the visualisation of the provided 
-data. These two use cases aim to improve the understanding of   pe opl e’ s   r ea ct i on s   t o   w ha t   i s  
+data. These two use cases aim to improve the understanding of people’s reactions to what is 
 played on TV. Their descriptions are: 
 ? Overview for a TV channel/series the average sentiment analysis and the volume of 
 tweets by gender for a time interval. After the selection of one minute in the 
 visualisation, get the tweets that were retrieved at that minute with their sentiment 
- 16 
-Problem Analysis 
+Problem Analysis 16 
+ 
  
 analysis (positive/negative). Also, get the Top 20 Concepts that were retrieved 10 
 minutes before and up until the selected minute. 
@@ -930,19 +907,19 @@ creating a plan to unfold the problem involved some challenging tasks. In this p
 main challenges are described: the manipulation of data, the transformation of data to 
 knowledge and the evaluation of visualisations as the mean of trends discovery from Twitter 
 data. 
-As in most researches, the data of this project i n t r oduce d   ex t r a   ef f or t   i n   t he   pr ob l em ’ s  
+As in most researches, the data of this project introduced  extra  effort  in  the  problem’s 
 resolution. For this project the Twitter content was the most complex dataset. That is because 
 the JSON object of each tweet, from which the most information can be retrieved, involves 
 many different data that can misguide the information extraction. For instance, in a JSON 
 object there may be demographics about the user who sent the tweet and demographics about 
-t he   us er   w ho ’ s   t w ee t   w a s   r es en d   by   t he   f i r s t   us er .   I n   or der   t o   m ak e   cor r ec t   ext r ac t i on   o f  
+the  user  who’s  tweet  was  resend  by  the  first  user.  In  order  to  make  correct  extraction  of 
 information for this sort of cases, the structure of the JSON object was in depth analysed. The 
 preprocessing method is further analysed in Section 4.  
 In addition, the location, a feature that was part of the demographics was not well defined in 
 the JSON objects and required further preprocessing. This feature was not well defined, 
 because users of Twitter have no constraints about what to enter as their location. In most 
 cases they enter a phrase not related to location or they leave the location blank. As a result, 
-t he   m appi ng   of   t w ee t s’   v ol um e   and   se nt i m ent   an al y si s   t o   a   g eog r aph i c al   m ap   nee ded  
+the  mapping  of  tweets’  volume  and  sentiment  analysis  to  a  geographical  map  needed 
 preprocessed data that refer correctly the name of the city that the user is located. Again, the 
 method for this preprocessing is described in Section 4.  
 As well as manipulating the data, transforming it into knowledge was also a difficult process. 
@@ -952,8 +929,8 @@ representations of data I had to conceive many use cases for data visualisations
 them to Backflip to get their feedback. Since the goals of information retrieval were vague, 
 meaning the company were interested in finding any insights about TV series, many ideas for 
 visualisations were dismissed in the process of finding the essential ones.  
- 17 
-Problem Analysis 
+Problem Analysis 17 
+ 
  
 Even when the goals of information retrieval were more distinct, the quest for the appropriate 
 visualisations was still a difficult task. For example, after the decision that time-series charts 
@@ -970,7 +947,7 @@ researches tend to skip this process (Ellis et al., 2006). However, the results 
 could not be valuable unless an evaluation method defined the efficiency of the main 
 deliverables. 
 In order to conclude to the most appropriate evaluation method extensive research has been 
-done in the area of InfoVis tools ’ evaluation. Eventually, the appropriate evaluation 
+done in the area of InfoVis tools’ evaluation. Eventually, the appropriate evaluation 
 methodology was found, which assessed how people actually manage to retrieve information 
 from a visualisation and the time they need to do so. However, although the methodology was 
 well defined, the process of inviting people to participate and making this evaluation 
@@ -993,8 +970,8 @@ that researchers on the same domain will have a better understanding of the stat
 problem. Also, with the given challenges the resolution of this problem can be critically 
 evaluated.  
  
- 18 
-Implementation 
+Implementation 18 
+ 
  
 4 Implementation 
 This section attempts to describe the implementation process and the final deliverables of this 
@@ -1015,8 +992,7 @@ in pure JavaScript and are provided by Highsoft Solutions AS. The Highcharts lib
 interactive charts, like line, area and column charts. On the other hand, the Highstock library 
 provides time-series charts and its name comes for its design for stock market visualisations. 
 These libraries are developed in JavaScript so that the end user can add or adjust functions in 
-9
-the visualisations. Both of them are cross-browser compatible, including smartphones . They 
+the visualisations. Both of them are cross-browser compatible, including smartphones9. They 
 can be used for free for non-commercial purposes, requiring a relevant trademark on the 
 bottom of each visualisation. All the features and options for the modification of the 
 visualisations are well explained in the provided documentation of each library. 
@@ -1030,18 +1006,15 @@ triggered when a user selects an element in the visualisation.
 Figure 6: Highcharts library examples. (a) Column chart with negative values (b) Basic Line. Taken from 
 http://www.highcharts.com/demo/ 
 Moreover, both of them can load external data and can be updated real-time with the use of 
-10
-Ajax . What is more is that they allow the export of each visualisation in four graphic 
-                                                      
-9
- A mobile phone with an embedded operating system and more advanced utilities than regular mobile phones. 
-10
- Asynchronous JavaScript and XML 
- 19 
-Implementation 
+Ajax10. What is more is that they allow the export of each visualisation in four graphic 
+                                                     
+9 A mobile phone with an embedded operating system and more advanced utilities than regular mobile phones. 
+10 Asynchronous JavaScript and XML 
+Implementation 19 
+ 
  
 formats: PNG, JPEG, PDF and SVG. The PDF and the SVG formats are scalable for printing, 
-an   es se nt i a l   cha r ac t er i s t i c   f or   t he   B ac k f l i p   com pany ’ s   nee d   t o   pr i nt   t he   v i sua l i sa t i o ns   f o r  
+an  essential  characteristic  for  the  Backflip  company’s  need  to  print  the  visualisations  for 
 meeting presentations.   
  
 Figure 7: Highstock library examples. (a) Point markers only (b) Single line series. Taken from 
@@ -1054,8 +1027,7 @@ the Date format is not supported by a visualisation. From the three evaluated ti
 charts, one is implemented using the Highcharts library and one using the Highstocks library.  
 4.1.2 Google Chart Tools 
 The Google Chart Tools application is one of the free products provided by Google 
-11
-Developers and offers a rich gallery of interactive visualisations. Each chart in this gallery is 
+Developers11 and offers a rich gallery of interactive visualisations. Each chart in this gallery is 
 implemented as a JavaScript class, which a user can adjust and embed to his website. All 
 charts are rendered inside a website using the HTML5 and SVG technology, without 
 requiring additional plugins. 
@@ -1070,11 +1042,10 @@ https://developers.google.com/chart/interactive/docs/gallery
 In addition, these tools provide backward compatibility for three years. In other words, if 
 Google decides to discontinue this technology, all visualisations will still be supported for at 
 least 3 years. This feature is essential; because it reassures that no more work needs to be 
-                                                      
-11
- Google website for developer tools, APIs and open-source code.  
- 20 
-Implementation 
+                                                     
+11 Google website for developer tools, APIs and open-source code.  
+Implementation 20 
+ 
  
 done if this technology is deprecated for the visualisations using it. Moreover, this technology 
 allows the display of live data. In particular, they allow continuous data queries supported by 
@@ -1119,8 +1090,8 @@ could also be used for the implementation of time-series charts, since amCharts 
 library JavaScript Stock chart, which is similar to the Highstock library. However, it does not 
 yet support export of the visualisations in graphic formats as the Highstock library does and 
 so it was not used for implementation of the time-series charts.  
- 21 
-Implementation 
+Implementation 21 
+ 
  
  
 Figure 9: Line chart with multiple value axes, an example from the amChart library. Taken from 
@@ -1158,24 +1129,22 @@ However, there was a possibility that the extracted data could refer to the retw
 not the user corresponding to the tweet. Therefore, the different creation times would verify 
 whether the extracted information matches the actual user or the retweeted one. As a result, 
 the extracted information about the device and the location of the user was verified that it 
- 22 
-Implementation 
+Implementation 22 
+ 
  
 corresponds to the user who is related to a particular tweet. However, the recovered data need 
 also further preprocessing for their representation in the visualisations. 
-12
-Particularly, in order to retrieve the UK city from the location field of the JSON object 
+Particularly, in order to retrieve the UK city12 from the location field of the JSON object 
 another preprocessing procedure was needed. This procedure checked whether a word inside 
 the location field corresponds to a UK city and then transformed it to the actual name of the 
-13
-city. The cities of UK were taken from Wikipedia . For example, the location field could 
-include t h e   da t a   “Gr ea t   c i t y   of   l o ndon”   and   a f t e r   t he   pr e pr oc es s i ng   pr oce du r e   t he   l oca t i o n  
-“ London”   w oul d   be   sa v ed   i n   t h e corresponding tweet of the Tweets dataset. This 
+city. The cities of UK were taken from Wikipedia13. For example, the location field could 
+include the  data  “Great  city  of  london”  and  after  the  preprocessing  procedure  the  location 
+“London”  would  be  saved  in  the corresponding tweet of the Tweets dataset. This 
 preprocessing was necessary for the representation of the locations to the map visualisation 
 provided by Google Chart Tools. 
 In the same sense, the device used for tweeting was also preprocessed. This information was 
 held under the field source and could include the device and the application used for tweeting. 
-For example i t   co ul d   c ont ai n   t he   t ext   “ T w i t t e r   f o r   i Phone”.   T h e   pr e pr o ce s si n g   pr oce du r e  
+For example it  could  contain  the  text  “Twitter  for  iPhone”.  The  preprocessing  procedure 
 worked as the previous one for locations. Specifically, it searched for a word in this field 
 corresponding to a device for tweeting, and then inserted the name of the device to the Tweets 
 dataset for the specific tweet. The proper names of the devices were inserted in an array after 
@@ -1198,30 +1167,27 @@ For the domain of TV series the implemented toolbox offers a query system for TV
 series and episodes. However, the visualisation toolbox is designed to be adjustable on any 
 Twitter content. In the next paragraph the structure of this interface is analysed.  
 4.3.1 Overview 
-To begin with, the implemented toolbox is ca l l ed   “ V i sua l i se   I t ”.   I t   i s   an   on l i ne   s er v i ce ,   w h i c h  
+To begin with, the implemented toolbox is called “Visualise It”. It is an online service, which 
 gives a prominent place to its query system for visualisations, as can be seen in Figure 10. It 
 involves two query methods, a search engine and a browse catalog. Via either one of these 
 query methods, the user can retrieve visualisations corresponding to his query, if there are 
 matching results. 
 Specifically, the search engine gives three options: Channel, TV Series, and Episode, which 
 refer to the type of product the user is querying for. The user selects an option, enters his 
-quer y   i n   t he   se ar c h   e ng i ne   and   t hen   c l i ck s   on   “Sea r ch ”   t o   r et r i ev e   t h e   equivalent results. The 
+query in the search engine and then clicks on “Search” to retrieve the equivalent results. The 
 query that has no matches returns a relevant message. On the other hand, the browse catalog 
-                                                      
-12
- Including cities from the countries: England, Scotland, Wales and Northern Ireland. 
-13
- http://en.wikipedia.org/wiki/List_of_cities_in_the_United_Kingdom 
- 23 
-Implementation 
+                                                     
+12 Including cities from the countries: England, Scotland, Wales and Northern Ireland. 
+13 http://en.wikipedia.org/wiki/List_of_cities_in_the_United_Kingdom 
+Implementation 23 
+ 
  
 displays all the Channels, TV series and Episodes for which there are corresponding results in 
-th
-the database. In this implementation all the results are for one day, Monday 25 June. As a 
+the database. In this implementation all the results are for one day, Monday 25th June. As a 
 result, the user is not asked whether he would like to pick results for another day. That is an 
 additional feature to be added in the toolbox, for data archives involving more days. 
  
-Figure 10: The in d e x   p a g e   o f   th e   v isu a li sa ti o n   t o o l b o x   “ V isu a li se   It ” . 
+Figure 10: The index page of the visualisation toolbox “Visualise It”. 
 As analysed in the use cases, in Section 3, the Channels and the TV Series resolve the same 
 visualisations, but for different subjects of information retrieval. Particularly, queries for 
 Channels derive visualisations that analyse the TV series that were played in each Channel. In 
@@ -1235,8 +1201,8 @@ series chart, because it shows the tweets as they are created during the time th
 on air. It is again explained and showed in paragraph 4.5. 
 Above all, there are analyses available, which do not require the user to enter a query. These 
 analyses are displayed on top of the search engine, as can be seen in Figure 10, and are 
-nam ed:   “Ov er al l   Sta t i st i c s” ,   “M os t   Fr eque nt   C on ce p t s ”,   and   “ V o l um e   V S   Sen t i m ent   f or   a l l  
-C hanne l s” .   T h es e   s ec t i on s   of   t he   t oo l box   i nc l ude   v i su al i sa t i on s   t h at   co nce r n   t h e   use   ca se s   f o r  
+named: “Overall Statistics”, “Most Frequent Concepts”, and “Volume VS Sentiment  for all 
+Channels”. These sections of the toolbox include visualisations that concern the use cases for 
 all channels plus a visualisation for the 20 most frequent Concepts on a specific day for all 
 channels. The last use case attempts to capture what has been discussed mostly in all channels 
 and is represented by a Word-cloud.  
@@ -1247,8 +1213,8 @@ visualisation in a new window and in a bigger size. As I mentioned in Section 2,
 Projections were avoided for the representation of multidimensional data, in order to simplify 
 the visualisations. To display such data visualisations that allow multiple axes in two-
 dimensions were used. Such an example is given in paragraph 4.5.   
- 24 
-Implementation 
+Implementation 24 
+ 
  
 4.4 Time-series charts 
 This paragraph describes some of the most essential deliverables of this project; the time-
@@ -1269,8 +1235,8 @@ JavaScript Date object. The Highcharts library allows the display of time like t
 automatically fixes the axis of time to represent fractions of minutes. This visualisation 
 includes Interactive Filtering, allowing the display of the results by gender. Also, it allows 
 Interactive Zooming with controls to return to the initial graph. An example of this 
-v i sua l i sa t i o n   r e t r i ev ed   f r o m   a   quer y   about   t he   epi so de   “Be   C ar ef u l   T om bl i boo s! ”   of the TV 
-se r i es “I   n  t he  Nig ht  G ar d en ”  of t   he   cha nn el “BB   C  2”   can be seen below in Figure 11. 
+visualisation retrieved from a query about the episode “Be Careful Tombliboos!” of the TV 
+series “In the Night Garden” of the channel “BBC 2” can be seen below in Figure 11. 
  
 Figure 11: Example of the visualisation for the use case: Overview each tweet per creation time and gender 
 regarding its sentiment analysis score for the time an episode was on air. In this example the mouse is over a point 
@@ -1280,7 +1246,7 @@ for a time interval.
 For this use case the multiple series chart from the Highstock library was used. In this 
 visualisation the data involves the average sentiment analysis score, the gender category and 
 each broadcast minute of a channel. This data is represented as continuous lines. Each line 
-r epr es e nt s   a   g ende r   c at eg or y ,   m ea ni ng   “Fe m al es ”,   “M al es ”,   “Unk now n”   and   “Al l ”.   For   ea c h  
+represents a gender category, meaning “Females”, “Males”, “Unknown” and “All”. For each 
 minute, which is displayed in the horizontal axis, a gender category either corresponds to an 
 average sentiment analysis score or not. This means that for each minute either tweets were 
 retrieved for some gender categories or not. The vertical axis illustrates the average sentiment 
@@ -1288,8 +1254,8 @@ analysis, from -1 (negative) to 1 (positive). Again, this visualisation offers t
 Filtering technique, providing the option to filter out the displayed lines. Also, it involves the 
 technique Interactive Zooming and Interactive Distortion, meaning it gives the option to 
 zoom in and out, while providing a navigator for the whole visualised data on the bottom of 
- 25 
-Implementation 
+Implementation 25 
+ 
  
 the visualisation. In Figure 12 an example of this visualisation is given, zoomed into the time 
 interval 12:20 to 13:30. 
@@ -1309,13 +1275,13 @@ series and the horizontal axis shows the hours that correspond to the parts of d
 advantage of this visualisation is that it gives a quick overview of the sentiment and volume 
 analyses for each TV series and each part of day. The drawback is that it does not allow 
 Interactive Zooming. An illustration of this visualisation is given in the Figure 13 with results 
-f or t   he   cha nn el “BB   C  1”. 
+for the channel “BBC 1”. 
  
 Figure 13: Example of the visualisation for the use case: Relate the volume of tweets and their sentiment analysis 
 with the parts of day: Dawn, Morning, Afternoon and Night for a time interval. In this example the mouse is over 
-th e   T V   S e ries   “ P a n o ra m a ”   p la y e d   d u ri n g   th e   Nig h t . 
- 26 
-Implementation 
+the TV Series “Panorama” played during the Night. 
+Implementation 26 
+ 
  
 4.5 Other visualisations 
 This paragraph will give an extensive outline of the visualisations embedded in the 
@@ -1334,14 +1300,13 @@ horizontal axis shows the name of each TV series from the one with the highest a
 sentiment analysis score to the one with the lowest one. Each TV series corresponds to a 
 different column colour, so that the end user understands the data visualised are each time for 
 a different TV series. In Figure 14 an example of this visualisation is given, illustrating all the 
-th
-TV   se r i e s   f or   “BB C   1”   f or   Mond ay   25 June according to their average sentiment analysis 
+TV series  for “BBC 1”  for Monday 25th June according to their average sentiment analysis 
 score. 
  
 Figure 14: Example of the visualisation for the use case: Illustrate the sentiment analysis for each TV series/TV 
 episode on air for a time interval, from the most liked one (highest sentiment analysis score) to the less liked one 
-(lowest sentiment analysis score). In   t h is   e x a m p le  t h e   m o u se   is   o v e r   th e   T V   S e ries   “ T h e   G re a t   British 
-Co u n try sid e ”   w it h   a n average sentiment analysis score equal to -0.25. 
+(lowest sentiment analysis score). In this example the mouse is over the TV Series “The Great British 
+Countryside” with an average sentiment analysis score equal to -0.25. 
 Use case: Visualise the volume and the sentiment analysis of tweets on a UK map for a time 
 interval. 
 This visualisation was created with Geo Chart provided by the Google Chart Tools. The 
@@ -1352,50 +1317,50 @@ average sentiment analysis score. The area of the circle denotes the volume, mea
 bigger the volume the bigger the circle in the visualisation. The colour of each circle defines 
 the average sentiment analysis score; positive scores are closer to green, negative scores are 
 closer to red. The location is a contradictable demographic from Twitter content, since people 
- 27 
-Implementation 
+Implementation 27 
+ 
  
 have no constraints about what to enter about it. Also, many times the location is left blank 
 from Twitter users. For these reasons, the data available for this visualisation is not sufficient 
 for information retrieval. In Figure 15 an example of this visualisation is given from the 
-r es u l t s  a bo ut t   he   cha nn el “   B B C  1”. 
+results about the channel “BBC 1”. 
  
 Figure 15: Example of the visualisation for the use case: Visualise the volume and the sentiment analysis of tweets 
-on a UK map for a time interval. In   th is   e x a m p le  t h e   m o u se   is   o v e r   th e   UK   c it y   “ Co v e n tr y ”   w it h   o n l y   o n e   twe e t  
+on a UK map for a time interval. In this example the mouse is over the UK city “Coventry” with only one tweet 
 and a positive sentiment analysis score. 
 Use case: Compare the amount of tweets with the amount of retweets for a time interval. 
 This visualisation was created with the pie chart provided by the Google Chart Tools. This 
 visualisation is very simple as the data it represents. The values for this visualisation are the 
-l abe l s   “ T w ee t s”   and   “Re t w ee t s ”   an d   t hei r   coun t   r ep r es e nt e d   a s   a   pe r ce n t ag e.   T he   pie chart 
+labels  “Tweets”  and “Retweets”  and  their count  represented as  a percentage. The pie chart 
 was picked because of its simplicity to represent the comparison between two values. The 
 goal is that the end user instantly understands the analogy between the tweets and retweets. 
-Fig ur e  16   i l l us t r at e s  t h i s  v i s ual i sa t i o n  f r om  t he  r e sul t s   f or  t h e  c h anne l  “BB C  1”. 
+Figure 16 illustrates this visualisation from the results for the channel “BBC 1”. 
  
 Figure 16: Example of the visualisation for the use case: Compare the amount of tweets with the amount of 
-retweets for a time interval. I n   th i s  ex a m p le  t h e   m o u se   is   o v e r   th e   tw e e ts’   p iec e   o f   th e   p ie,   re p re se n ti n g   th e   8 4 . 0 3 %  
+retweets for a time interval. In this example the mouse is over the tweets’ piece of the pie, representing the 84.03% 
 of the whole volume of tweets and retweets. 
 Use case: Overview the devices that were used for tweeting, from the most used one to the less 
 used one, for a time interval. 
 This use case was implemented with the column chart with images on top by the amCharts 
 library. This visualisation is a simple column chart, but with the ability to add images on the 
 top of each column. In this case the illustrated variables are the volume of tweets in 
- 28 
-Implementation 
+Implementation 28 
+ 
  
 percentage format and the names and images of the used devices. For this visualisation the 
-pre p r oce ss i ng   st e p   f or   t h e   e xt r a ct i on   of   t h e   d ev i ce s ’   n a m es   w as   nec es s ar y ,   as   de sc r i p t ed   i n   t h e  
+preprocessing step for the extraction of the devices’ names was necessary, as descripted in the 
 paragraph 4.2. This visualisation attempts to visualise this data in a way that the end user 
 instantly recognizes the used devices and compares their corresponding volumes. An example 
-of  t h i s  v i s ual i s at i on   i s  g i v en  i n  F i g ur e  17   f r om  t he   r es ul t s  f o r  t he  c h anne l  “BB C  1 ”. 
+of this visualisation is given in Figure 17 from the results for the channel “BBC 1”. 
  
 Figure 17: Example of the visualisation for the use case: Overview the devices that were used for tweeting, from 
 the most used one to the less used one, for a time interval. In this example the mouse is over the device 
-c o rre sp o n d in g   t o   “ W e b /Oth e r” ,   w h ich   w a s  th e   d e v ice   u se d   f o r   th e 6   2 . 0 2 %   o f   tw e e ts. 
+corresponding to “Web/Other”, which was the device used for the 62.02% of tweets. 
 Use case: Illustrate all channels from the most discussed one (highest volume) to the least 
 discussed one (lowest volume) and compare the sentiment analysis for them for a time 
 interval. 
 This use case corresponds to the analysis provided as an option above the search engine with 
-t he   nam e   “ V ol um e   V S   S e nt i m ent ”.   This use case was implemented with the dual axes, line 
+the name “Volume VS Sentiment”. This use case was implemented with the dual axes, line 
 and column chart by the Highcharts library. This is one of the cases where the data includes 
 more than two variables and the Dynamic Projections technique is avoided. In this 
 visualisation the variables that need to be displayed are: the average sentiment analysis score, 
@@ -1404,17 +1369,16 @@ visualisation that allows multiple axes was chosen. In this chart there are two 
 the left one represents the average sentiment analysis score and the right one the volume of 
 tweets. In the horizontal axis the name of each channel is displayed. Again, this visualisation 
 offers the Interactive Filtering technique, providing the option to display the volume or the 
-th
-average sentiment analysis score or both of them in the chart. The results for Monday 25 
+average sentiment analysis score or both of them in the chart. The results for Monday 25th 
 June for this use case are shown in the visualisation in Figure 18.  
 Use case: Overview and compare the sentiment analysis and the volume of tweets for all 
 channels for a time interval.  
-T h i s   us e   ca s e   cor r es ponds   t o   t he   an al y si s   “Ov er al l   Sta t i s t i cs ”   an d   i s   i l l us t r a t e d   usi ng   t h e  
+This  use  case  corresponds  to  the  analysis  “Overall  Statistics”  and  is  illustrated  using  the 
 Treemap provided by Google Chart Tools. This visualisation demonstrates the structure of a 
 data tree, which is a hierarchical format of data linked with each other by some relation. In 
 this graph some elements embed the rest, if they are higher in hierarchy. Specifically, in this 
 use case each channel includes its TV series. Each element in the graph is represented by a 
-rectangle. The rectan g l e’ s   ar ea   de f i nes   t he   v ol um e   o f   t w e et s.   T h e   c ol ou r   of   ea c h   r ec t ang l e  
+rectangle. The rectangle’s  area  defines  the  volume  of  tweets. The  colour  of  each  rectangle 
 defines the average sentiment analysis score; positive scores are closer to green, negative 
 scores are closer to red. This visualisation attempts to accommodate the understanding of the 
 relation between channels regarding the volume of tweets and average sentiment analysis 
@@ -1424,46 +1388,40 @@ used when a user clicks on a channel, besides revealing the TV series on the Tre
 visualisation, the Bubble Chart of Figure 13 appears. This graph again visualises volume and 
 average sentiment analysis score for each TV series of a channel, but also correlates it with 
 the parts of day. The Interactive Linking and Brushing technique is not entirely applied, since 
- 29 
-Implementation 
+Implementation 29 
+ 
  
 only alterations to the Treemap result alterations to the Bubble Chart and not vice versa. The 
-th
-results of this use case for Monday 25 June are displayed in Figure 19. 
+results of this use case for Monday 25th June are displayed in Figure 19. 
  
  
 Figure 18: Example of the visualisation for the use case: Illustrate all channels from the most discussed one 
 (highest volume) to the least discussed one (lowest volume) and compare the sentiment analysis for them for a time 
-interval. I n   t h is   e x a m p le  t h e   m o u se   is   o v e r   th e   m o st  d isc u ss e d   c h a n n e l   “ BBC  3 ”   w it h   a v e ra g e   n e g a t iv e   se n ti m e n t  
+interval. In this example the mouse is over the most discussed channel “BBC 3” with average negative sentiment 
 analysis score. 
  
 Figure 19: Example of the visualisation for the use case: Overview and compare the sentiment analysis and the 
-volume of tweets for all channels for a time interval. In   th is   e x a m p le  a  c li c k   o n   th e   c h a n n e l   “ E 4 ”   re v e a l   it s  T V  
+volume of tweets for all channels for a time interval. In this example a click on the channel “E4” reveal its TV 
 Series and the corresponding Bubble Chart. 
 Above all, additional visualisations were implemented for the improvement of trends 
 discovery. These visualisations are simpler to their development compared to the ones 
-des c r i b ed   ea r l i er .   O ne   su ch   v i sua l i s at i on   i s   t he   an al y si s   “M os t   Fre qu ent   C on ce p t s ”,   w hi ch   i s  
+described earlier. One such visualisation is the analysis “Most Frequent Concepts”, which is 
 illustrated as a Word-cloud. This Word-cloud demonstrates the top 20 most discussed 
-14
-Concepts over all channels and is created with the open-source jQuery plugin by Luna 
-15
-Ongaro, the jQCloud .   T hi s   v i sua l i sa t i o n   ca n   be   s ee n   at   Fig ur e   20,   a s   an   e xam pl e   of   “ Mos t  
-th
-Fre que nt   C once pt s ”   o f   Mo nday   25 June. As can be seen in this exa m pl e,   t he   w o r d   “y ea h ”   i s  
+Concepts over all channels and is created with the open-source jQuery14 plugin by Luna 
+Ongaro, the jQCloud15. This visualisation can be seen at Figure 20, as an example of “Most 
+Frequent Concepts” of Monday 25th June. As can be seen in this example, the word “yeah” is 
 retrieved mostly from all subtitles of all channels as a Concept on this day, since it has the 
-                                                      
-14
- JavaScript library meant to simplify web client-side scripting. 
-15
- http://www.lucaongaro.eu/demos/jqcloud/ 
- 30 
-Implementation 
+                                                     
+14 JavaScript library meant to simplify web client-side scripting. 
+15 http://www.lucaongaro.eu/demos/jqcloud/ 
+Implementation 30 
+ 
  
 biggest size compared to rest words in the visualisation. The colours denoted are the default 
 of this library and designate the volume of each word as well. Less frequent words have a 
 colour close to purple and the most common ones have a colour close to turquoise.  
  
-Figure 20 :   Ex a m p le  v isu a li sa ti o n o   f   th e   a n a ly sis  “ M o st  F re q u e n t   C o n c e p ts”   im p lem e n ted as a Word-Cloud. 
+Figure 20: Example visualisation of the analysis “Most Frequent Concepts” implemented as a Word-Cloud. 
 Besides visualisations, images were used as well in the visualisation toolbox to improve 
 information retrieval. Examples of such images are the representation of genders (female, 
 male) and the representation of sentiment of a tweet (positive, negative). These image 
@@ -1471,7 +1429,7 @@ displays of data are usually part of other visualisations and aim to make the re
 gender and sentiment faster to the end user. These images are given in Figure 21.  
  
 Figure 21: Example of the additional images for the enhancement of information retrieval. It shows the results for 
-th e   c h a n n e l   “ Channel 4 ” ,   w h ich d   e f in e   th a t   mostly men discussed about it sending mostly negative tweets. 
+the channel “Channel 4”, which define that mostly men discussed about it sending mostly negative tweets. 
 4.6 Time-series charts with other visualisations 
 As described in Section 1, some of the crucial deliverables of this project are the time-series 
 visualisations that manage to improve information retrieval. In order to improve knowledge 
@@ -1497,8 +1455,8 @@ corresponding Concepts and tweets are displayed. The visualisation of Concepts i
 the use of the Word-cloud. Again, the image additions explained in the previous paragraph 
 attempt to decrease the time the user needs to understand gender and sentiment. This 
 visualisation with its links is illustrated in Figure 23. 
- 31 
-Implementation 
+Implementation 31 
+ 
  
  
 Figure 22: Example of the visualisation for the use case: Overview each tweet per creation time and gender 
@@ -1509,8 +1467,8 @@ Figure 23: Example of the visualisation for the use case: Overview the average s
 per minute and by gender for a time interval in combination with a Word-cloud about related Concepts. Tweets are 
 also displayed for the selected time interval 00:20-00:30 for all genders. 
 Lastly, the third time-series chart (Figure 13) was used in correlation with other visualisations 
-about   T w i t t e r   con t en t   f o r   t he   u se   ca se   “ Relate the volume of tweets and their sentiment 
-analysis with the parts of day: Dawn, Morning, Afternoon and Night for a time inte r val ”. 
+about  Twitter  content  for  the  use  case  “Relate the volume of tweets and their sentiment 
+analysis with the parts of day: Dawn, Morning, Afternoon and Night for a time interval”. 
 This illustration has been described in the previous paragraph and can be seen in Figure 19. 
 The correlation of the two visualisations attempts to provide the user with an overview of the 
 sentiment analysis and the volume of tweets for each channel on a specific day. From this 
@@ -1528,8 +1486,8 @@ This section described the implementation process required for this project. Thi
 intended to give the reader an overview of the research and work done regarding the 
 visualisation of the given data. It began with an analysis of the used libraries in order to give 
 an insight of the selected tools for the implementation of this project. These libraries are 
- 32 
-Implementation 
+Implementation 32 
+ 
  
 appraised as for their strengths in comparison with other freeware libraries in Section 6, in 
 order to argue my choice to use them. 
@@ -1543,12 +1501,12 @@ information they hold and their functions. They were also examined as for the in
 distortion techniques they involve, which were defined in Section 2. In the end, the time-
 series charts bound with other visualisations are noted. These time-series charts will be part of 
 the evaluation procedure explained in the following section.  
- 33 
-Evaluation methodology 
+Evaluation methodology 33 
+ 
  
 5 Evaluation methodology 
 “One of the great mistakes is to judge policies and programs by their intentions rather than 
-their results ”   
+their results”  
 ? Milton Friedman, 1975 
 It is essential for a research to evaluate its outcomes. The aspect of this research is the 
 knowledge retrieval via visualisation methods. In their research Ellis et al. (2006) argue that 
@@ -1569,7 +1527,7 @@ information gain about Twitter content displayed over time.
 This evaluation methodology is based on the visual tasks by Wehrend and Lewis (1990) and 
 is inspired by a similar approach by Morse et al. (2000). This methodology attempts to assess 
 the three time-series charts implemented for this project isolated from the rest 
-implementations. The reason these implementations are evaluated comes from Backflip ’s 
+implementations. The reason these implementations are evaluated comes from Backflip’s 
 need to find a time-wise representation of TV related Twitter data in order to retrieve insights 
 about TV series. Although the three time-series charts involve different data, their goal is the 
 same, which is the information gain. The used methodology evaluates these visualisations for 
@@ -1591,22 +1549,9 @@ the provided feedback some initial conclusions for the whole process are noted. 
 centered evaluation methodology, since the user defines with his actions (answers, time) the 
 effectiveness of each visualisation regarding knowledge gain. The process of this 
 methodology is illustrated in Figure 24. 
- 34 
-Evaluation methodology 
+Evaluation methodology 34 
  
-Demographics
-Visualisations
-Time
-Visual Tasks
-Signiﬁcance
-Conclusions
-Tests
-Correctness 
-Questions
-of Answers
-Visualisations
-Experiment Results
-Feedback
+ 
  
 Figure 24: The evaluation methodology illustrated. 
 5.2 Visual tasks 
@@ -1620,57 +1565,69 @@ Compare within entities describes the decision about visual elements based on th
 between their attributes. In this project, this action requires the user to observe elements 
 embedded in the visualisation and answer a question related to their characteristics 
 comparison. For instance, if there were two circles in a graph a question for this task could be 
-“W hi c h  c i r cl e  of t   he   t w o  ha s  t he   bi g g es t  a r ea ? ”.   
+“Which circle of the two has the biggest area?”.  
 Associate asks the user to make conclusions about the connections between visual elements in 
 a display. For the purposes of this experiment, this task asks the user to decide which element 
 in the visualisation is correlated with the greatest amount of external to the visualisation data. 
 For example, in a visualisation where clicking on an element retrieves external data a 
-probable question for Associate w ou l d   be   “W hi c h   e l e m ent   i s   a ss oc i a t ed   w i t h   m or e   e xt e r n a l  
-dat a   t ha n  t h e  r es t ?” .   
-Distinguish refers to the action of determining the correct value of a n   el em ent ’ s variable 
+probable question for Associate would be “Which element  is associated with more external 
+data than the rest?”.  
+Distinguish refers to the action of determining the correct value of an  element’s variable 
 given a collection of values. In this project, this task gives the user for an element in the 
 visualisation a value corresponding to one variable and requires him to find the value of 
 another corresponding variable from a collection of multiple-choice answers. Such an 
 example of this task in a visualisation with elements corresponding to two variables would be 
-“W ha t  i s  t h e  v al ue   of X   f   or t   he  e l em en t  hav i ng  t h e  v al u e  Y  for t   he  v ar i ab l e  Z ?” 
+“What is the value of X for the element having the value Y for the variable Z?” 
 Rank is the action of placing in order visual elements according to their values in a 
 visualisation. For this project, this action requires the user to review the values of specific 
 elements and order them as one of the ways described in the multiple-choice answers. For 
-instance, for a visualisation with illustrated circles a task about Rank w oul d   be   “ R ank   ci r cl e s  
-A ,  B ,  C  r eg ar di ng  t h ei r  a r ea ,  f r om  t he  b i g g er  t o  t h e  s m al l e st ”. 
+instance, for a visualisation with illustrated circles a task about Rank would be “Rank circles 
+A, B, C regarding their area, from the bigger to the smallest”. 
 Cluster is the action of gathering the elements that have some attributes in common. For the 
 purposes of this project, this task asks the user to filter the visual elements based on a specific 
 attribute. For example, if a visualisation has circles illustrated in a Cartesian coordinate 
- 35 
-Evaluation methodology 
+Visual Tasks
+Visualisations
+Questions
+Visualisations
+Experiment Results
+Time
+Correctness 
+of Answers
+Significance
+Tests
+Feedback
+Conclusions
+Demographics
+Evaluation methodology 35 
  
-16
-system a ques t i on   f o r   t h i s   t as k   coul d   be   “ Whi ch   circles are centered in the origin of the 
-sy st em ?”.  
+ 
+system16 a question  for  this  task  could  be  “Which  circles are centered in the origin of the 
+system?”.  
 Correlate describes the action of making a decision regarding shared attributes between 
 elements in a visualisation. In this project, this task asks the user which visual elements 
 follow a given rule based on shared characteristics. For instance, in a visualisation where its 
 elements are represented in an axis with integer values from -10 to 10 a probable question 
-about Correlate w ou l d  be   “ Whi c h  e l em ent s  ha v e   positive values ?”. 
+about Correlate would be “Which elements have positive values?”. 
 Locate refers to the action of finding the place in a visualisation where an element should be 
 illustrated. Here, this task asks the user where they would place a new element in the 
-v i sua l i sa t i o n,   g i v en   spe ci f i c   v al ues   f o r   t he   e l em ent ’ s   variables. For example, in a scatter plot 
+visualisation, given specific values for the element’s variables. For example, in a scatter plot 
 chart where the horizontal axis defines the temperature and the vertical axis defines the mm 
-of rain, a   qu es t i on   f o r   t hi s   t as k   w oul d   be   “W h er e   w o u l d   y ou   pl ac e   a point with the attributes 
-(Temperature: 32° C ,   R ai n :   1 00m m ) ?”. An answer to such a question could be something like 
-“Abov e  e l em ent  A  and  on  t he  r i g ht  of el   em ent  B ”. 
+of rain, a question for this task would be “Where would you place a point with the attributes 
+(Temperature: 32°C, Rain: 100mm)?”. An answer to such a question could be something like 
+“Above element A and on the right of element B”. 
 Categorise is the action of finding a description for elements sharing common attributes. In 
 this project, this task asks the user to choose a category that its name describes correctly a 
 collection of elements regarding their attributes. For example, in a visualisation where 
 elements with negative values for one attribute are illustrated with red color, a question for 
-Categorise w ou l d   be   “W h i ch   ca t eg or y   w oul d   de sc r i be   t he   el em ent s   w i t h   r ed   col o r ?”   a n d  
-coul d   hav e  t he  ans w e r  “Ne g at i v es ”. 
+Categorise would  be  “Which  category  would  describe  the  elements  with  red  color?”  and 
+could have the answer “Negatives”. 
 Identify describes the recognition of an element in a visualisation given its characteristics. 
 Here, this task asks the user to find an element in a visualisation, which corresponds to a 
 value of one of his variables. In order to explain the element that is related to this value the 
 answer involves the values of the rest variables. For instance, in a scatter plot where the 
 horizontal axis defines the time and the vertical axis defines a score from 1 to 100 the user 
-coul d   b e   as k ed   “ Whi ch   el e m ent   has   sc o r e   c l ose   t o   50 ?” .   T he   an swer   shou l d   t h en   i nv ol v e   t he  
+could be asked “Which element has score close to 50?”. The answer should then involve the 
 value of the time to describe the related element. 
 Compare between relations assesses whether a user can select an area on a visualisation based 
 on the analogy of the relations between elements. Here, the user is given a rule about the 
@@ -1678,8 +1635,8 @@ relation between elements in a visualisation and he is asked to ignore the part 
 visualisation where the elements are not related according to this rule. This is another way of 
 selecting the part of the visualisation that corresponds to a given analogy of relations. In a 
 visualisation were some parts have negative values and other have positive values a relevant 
-ques t i on   w ou l d   be   “W hich parts of the visualisation would you ignore if you wanted only 
-posi t i v e  v al ue s? ”.   
+question would  be  “Which parts of the visualisation would you ignore if you wanted only 
+positive values?”.  
 Now that the definitions for the visual tasks are given, the experiment can be analysed as for 
 the questionnaire it involves. These questionnaires include questions testing the described 
 visual tasks and are further analysed in the next paragraph.  
@@ -1689,12 +1646,11 @@ this experiment attempted to measure the effectiveness of the three implemented 
 visualisations regarding information retrieval. This experiment retrieved results about: the 
 demographics of the participants, their performance on visual tasks for each visualisation and 
 their feedback about the visualisations and the whole procedure.  
-                                                      
-16
- A coordinate system for which the coordinates of a point are its distances from a set perpendicular lines that 
+                                                     
+16 A coordinate system for which the coordinates of a point are its distances from a set perpendicular lines that 
 intersect at the origin of the system (WordNet, 2012)  
- 36 
-Evaluation methodology 
+Evaluation methodology 36 
+ 
  
 To begin with, this experiment was implemented as an online system, which can be found 
 here: http://www.vis-eval.us. In this system, the Welcome page was introducing the 
@@ -1723,73 +1679,66 @@ an answer or leave the question empty, meaning without a selected answer from th
 choices.  
 For the performance of the visual tasks two measurements were taken: the time to complete 
 each questionnaire and the correctness of the answers. One of these questionnaires is 
-described in Table 3. I n   t hi s   t ab l e   t he   “ T as k ”   no t e s the visual task that is assessed and the 
-“Quest i on ”   g i v es   t he   qu es t i on   as   ap pea r ed   i n   t h e   survey. The questionnaire given in this table 
+described in Table 3. In  this  table  the “Task” notes the visual task that is assessed and the 
+“Question” gives the question as appeared in the survey. The questionnaire given in this table 
 was created for the visualisation of the use case: Overview the average sentiment analysis 
 score of tweets per minute and by gender for a time interval (Figure 12). The illustration of 
 this questionnaire as appeared in the online system is given in Figure 26. The rest 
 questionnaires are given as further reading in APPENDIX D. 
- 37 
-Evaluation methodology 
+Evaluation methodology 37 
+ 
  
 Table 3: The questionnaire for the evaluation of the time-series visualisation illustrated in Figure 12. For each 
 question the corresponding order in the questionnaire (No.) and the relevant visual task (Task) is given. 
 No. Task Question 
-1 Between the times 00:19 and 00:23 Male and Female reach high 
-Compare 
-picks regarding sentiment analysis. Which of them reaches a 
+1 Compare 
 within entities 
+Between the times 00:19 and 00:23 Male and Female reach high 
+picks regarding sentiment analysis. Which of them reaches a 
 higher pick than the other? 
-2 For all genders, which of the following times is associated with 
-Associate 
+2 Associate For all genders, which of the following times is associated with 
 more tweets? 
-3 At 00:21 which gender has average sentiment analysis close to 1 
-Distinguish 
+3 Distinguish At 00:21 which gender has average sentiment analysis close to 1 
 (positive)? 
 4 Rank Rank times 00:21, 00:22 with respect to the amount of concepts 
 that they contain (gender does not affect the result). 
-5 At 00:22 which gender/s has/ve negative sentiment analysis? 
-Cluster 
-6 At 00:25 what is common between all genders regarding 
-Correlate 
+5 Cluster At 00:22 which gender/s has/ve negative sentiment analysis? 
+6 Correlate At 00:25 what is common between all genders regarding 
 sentiment analysis? 
-7 If a new tweet were retrieved with characteristics [female, 00:24, 
-Locate 
+7 Locate If a new tweet were retrieved with characteristics [female, 00:24, 
 0.85] where would you placed it in the visualisation? 
-8 In which general category would you place points in the 
-Categorize 
+8 Categorize In which general category would you place points in the 
 visualisation between minutes 00:24 and 00:25 regarding 
 sentiment analysis?  
-9 Between 00:28 and 00:30 which time has for all genders and 
-Identify 
+9 Identify Between 00:28 and 00:30 which time has for all genders and 
 males the same sentiment analysis? 
-Between times 00:24 and 00:26 which point has values for all 
 10 Compare 
-gender categories? 
 between 
 relations 
+Between times 00:24 and 00:26 which point has values for all 
+gender categories? 
  
 As earlier noted, the time was one of the performance measurements for the effectiveness of 
 each visualisation regarding knowledge retrieval. This idea was an influence from a similar 
 approach by Morse et al. (2000). The time is measured from the moment a participant is led 
 to a questionnaire till the moment he submits his answers. This calculation attempts to show 
 the time needed for each participant to: get familiar with the interface, understand the 
-questions, perform the visual tasks, wait for the visualisation ’s responses and fill his answers. 
+questions, perform the visual tasks, wait for the visualisation’s responses and fill his answers. 
 In addition, the other measurement of this experiment is the correctness of the answers. For 
 this calculation, I counted the number of correct answers, while keeping a trace of all the 
 answers. The trace for each questionnaire included the result for each separate question. 
-Q ues t i ons   l ef t   em pt y   w er e   al so   r ec o r de d   i n   ev er y   ques t i on nai r e ’ s   t r ac e.   All these records will 
-be used for the further investigation of t hi s  s u r v ey ’ s  r e sul t s .    
+Questions left empty were also recorded in every questionnaire’s trace. All these records will 
+be used for the further investigation of this survey’s results.    
 Moreover, the final part of this online survey was the Feedback section. In this section the 
 user was thanked for his  participation and he was given a form to provide his feedback. This 
 feedback was in a form of questions, where the participant could submit his opinion about the 
 preferred chart and also the easier to understand and use chart. Furthermore, he was asked to 
 say how he spend most of his time during this survey. The options for the latter were about 
 spending time to: understand the questions, understand the data, understand the chart and 
- 38 
-Evaluation methodology 
+Evaluation methodology 38 
  
-decide the answer. This Feedback page at t em pt ed   t o   g i v e   a   be t t e r   i ns i g ht   a b out   p eop l e’ s  
+ 
+decide the answer. This Feedback page attempted  to  give  a  better  insight  about  people’s 
 opinion for the visualisations and the assessment experiment. The demonstration of this page 
 is given in Figure 27. Further conclusions will be made from the collection of feedback in the 
 Discussion section.  
@@ -1803,16 +1752,16 @@ For this assessment experiment MSc students from my department and people workin
 Backflip were invited to participate. The survey was online for two weeks in total and had 
 eventually 32 participants, who fully filled each questionnaire. All the retrieved results are 
 given in APPENDIX E. After the collection of the results, the estimates of time and 
-correctness of answers o f   e ac h   v i sua l i s at i on ’ s   ques t i on nai r e   were calculated. In the following 
+correctness of answers of each visualisation’s questionnaire were calculated. In the following 
 paragraphs, these estimates are analysed and statistical tests are used to measure whether the 
 gathered results resolve significant differences between the evaluated visualisations.  
 5.4.1 Statistical testing 
 Statistical testing is necessary in order to discover whether the results of different evaluated 
 methods are statistically significant. In this experiment, the statistical testing is essential to 
 argue about the differences between the results of the three visualisations. In the following 
-paragraphs the results of this survey are examined using the statistical test St u dent ’ s   t -test. 
- 39 
-Evaluation methodology 
+paragraphs the results of this survey are examined using the statistical test Student’s  t-test. 
+Evaluation methodology 39 
+ 
  
 Therefore, this paragraph intends to briefly describe this method and its application in the 
 results of this experiment.  
@@ -1820,16 +1769,13 @@ To begin with, this statistical test was introduced by William Sealey Gosset, wh
 in small samples the sampling distribution is not normal. This test assesses in such samples 
 the statistical significance of the difference between two means (Jackson, 2005). This test is 
 applied using the following formula: 
-?
-?
-? =   
-  
-??? ( ? )
-?   
-where t is the result of the t-test, ? is the difference of the means and   ??? ( ? ) is the standard 
+? =  
+???
+???(?)???
+ 
+where t is the result of the t-test, ??? is the difference of the means and ???(?)??? is the standard 
 deviation of the differences. The result of this equation is a real number and is usually 
-17
-referred to as p value . If the p value is less than 0.05, then it can be assumed that the 
+referred to as p value17. If the p value is less than 0.05, then it can be assumed that the 
 difference between the samples is significant (Vaughan, 2003). For this experiment, I used the 
 two-tailed paired t-test, which is a variation of this method and compares results of different 
 models derived from the same units. In this case the different models are the visualisations 
@@ -1844,35 +1790,22 @@ This online survey was purposed for people who were over 18 years old, had a bas
 educational background (at least Primary/Secondary education) and knew English at some 
 level (Beginner, Intermediate, Advanced, Proficient). Therefore, the Welcome page provided 
 a form to the participants, where this information was required in order to proceed to the 
-f i l l i ng   of   t he   q ues t i o nna i r es .   T h i s   d at a   com pose d   t he   dem og r aphi cs   of   t h i s   expe r i m ent ’ s  
+filling  of  the  questionnaires.  This  data  composed  the  demographics  of  this  experiment’s 
 subjects. 
-The gathered results showed that most participants were men (19/32 ≈   59 .3% )   and   ag es   f o r  
+The gathered results showed that most participants were men (19/32 ≈ 59.3%) and ages for 
 both genders ranged from 23 to 43. The population for men and women for the age groups 
 23-27, 28-32, 33-37, 38-43 is illustrated in Figure 28. The average age of the participants was 
-≈   27.   A l so ,   t he   l ev el   of   e duca t i on   w a s   m ost l y   “Highe r   Educ at i on   ( U n i v er s i t y ) ”   ( 28/ 32   =  
-87.5% )   and   t h e   l ev el   of   Eng l i sh   w as   m ost l y   “Advanced ”   ( 23 / 32   ≈   7 2% ) .   Ther e   w e r e   n o  
+≈  27.  Also,  the  level  of  education  was  mostly  “Higher  Education  (University)”  (28/32  = 
+87.5%)  and  the  level  of  English  was  mostly  “Advanced”  (23/32  ≈  72%).  There  were  no 
 statistically significant differences between the results for any of these demographics.  
-                                                      
-17
- The p-value is a measurement to define if the results of an experiment are caused by chance or not. The lower 
+                                                     
+17 The p-value is a measurement to define if the results of an experiment are caused by chance or not. The lower 
 the p-value the smaller the probability that the results are due to chance. (IFFGD Glossary, 2012) 
- 40 
-Evaluation methodology 
+Evaluation methodology 40 
  
-6.25% 
-48-43 
-33-37 
-9.375% 3.125% 
-Males 
-6.25% 
-28-32 
-Females 
-43.75% 31.25% 
-23-27 
-0 20 40 60 80 
-Percentage of participants 
  
-Figure 28: Illu stra ti o n   o f   th e   s u rv e y ’s  d e m o g ra p h ics   a b o u t   a g e   a n d g   e n d e r. 
+ 
+Figure 28: Illustration of the survey’s demographics about age and gender. 
 5.4.3 Time to completion 
 The time to complete each questionnaire was a measurement for the efficiency of each 
 visualisation. In this paragraph this time is analysed for every visualisation and comparisons 
@@ -1905,25 +1838,40 @@ evaluations of the three visualisations, two-tailed paired t-tests were applied.
 between the times each participant resulted for each visualisation. The times for each 
 visualisation for the 32 participants are illustrated in Figure 29. The test for the first and the 
 second visualisation showed that there is no significant difference between the two sets of 
+0 20 40 60 80 
+23-27 
+28-32 
+33-37 
+48-43 
+43.75% 
+6.25% 
+9.375% 
+31.25% 
+3.125% 
+6.25% 
+Percentage of participants 
+A
+ge
+ g
+ro
+up
+s o
+f p
+ar
+tic
+ip
+an
+ts
  
-Age groups of participants 41 
-Evaluation methodology 
+Males 
+Females 
+Evaluation methodology 41 
  
-results (p ≈ 0.6123). However, the comparison between the first with the third (p ≈   0.000 8 ) 
-and the second with the third (p ≈   0.000 05) showed that the time difference is statistically 
+ 
+results (p ≈ 0.6123). However, the comparison between the first with the third (p ≈ 0.0008) 
+and the second with the third (p ≈ 0.00005) showed that the time difference is statistically 
 significant for the third visualisation. In other words, the test resolved that the assessment of 
 the third visualisation requires significant less time than the rest.  
-1:26:24 
-1:12:00 
-0:57:36 
-0:43:12 Time 1st 
-Time 2nd 
-0:28:48 
-Time 3rd 
-0:14:24 
-0:00:00 
-1 6 11 16 21 26 31 
-Participant 
  
 Figure 29: Illustration of the time measurements for each of the 32 participants, per evaluation process of the three 
 visualisations. 
@@ -1949,13 +1897,27 @@ about the visual task Cluster, with 68.75% counted wrong answers. As noted, this
 is higher than the one for wrong answers regarding the first visualisation. The usually left 
 blank question corresponded to the Rank task, with 15.625% counted blank answers. 
 In the last questionnaire about the third visualisation (Figure 13) people correctly answered 
-on average ≈   7.6 questions. This is the highest calculated average for correct answers from 
+on average ≈ 7.6 questions. This is the highest calculated average for correct answers from 
 the three visualisations, but really close to the equivalent result about the first visualisation. 
 The participants answered most frequently correctly the question about the Compare within 
 entities task, with 96.875% counted correct answers. On the other hand, they usually 
+0:00:00 
+0:14:24 
+0:28:48 
+0:43:12 
+0:57:36 
+1:12:00 
+1:26:24 
+1 6 11 16 21 26 31 
+Ti
+m
+e 
+Participant 
+Time 1st 
+Time 2nd 
+Time 3rd 
+Evaluation methodology 42 
  
-Time 42 
-Evaluation methodology 
  
 answered wrong the question about the Correlate task, with 40.625% counted false answers. 
 Finally, more than half the participants left the question about the Identify task blank, with 
@@ -1970,21 +1932,6 @@ entities, Associate, Distinguish). However, their results differentiate in later
 third and the second visualisation seem to have analogous results for questions 6-8 
 (Correlate, Locate, Categorise). Also, the third visualisation has a big difference in its results 
 regarding the ninth question, which as aforementioned is about the Identify task.    
-100 
-90 
-80 
-70 
-60 
-50 1st Vis. 
-2nd Vis. 
-40 
-3rd Vis. 
-30 
-20 
-10 
-0 
-1 2 3 4 5 6 7 8 9 10 
-Question 
  
 Figure 30: Illustration of the percentage for correct answers per question and visualisation experiment. 
 In Figure 31, the percentages for wrong answered questions are illustrated regarding the 
@@ -2003,54 +1950,99 @@ similar. The highest pick is reached by the third visualisation for the question
 Identify. This percentage explains the equivalent low percentage for true answers for this 
 visualisation.  
  
- 
-Correct Answers (%) 43 
-Evaluation methodology 
- 
-100 
-80 
+0 
+10 
+20 
+30 
+40 
+50 
 60 
+70 
+80 
+90 
+100 
+1 2 3 4 5 6 7 8 9 10 
+C
+or
+re
+ct
+ A
+ns
+w
+er
+s 
+(%
+) 
+Question 
 1st Vis. 
 2nd Vis. 
-40 
 3rd Vis. 
-20 
-0 
-1 2 3 4 5 6 7 8 9 10 
-Question 
+Evaluation methodology 43 
+ 
+ 
  
 Figure 31: Illustration of the percentage for wrong answers per question and visualisation experiment. 
-100 
-80 
-60 
-1st Vis. 
-2nd Vis. 
-40 
-3rd Vis. 
-20 
-0 
-1 2 3 4 5 6 7 8 9 10 
-Question 
  
 Figure 32: Illustration of the percentage for blank answers per question and visualisation experiment. 
 Moreover, the t-test for the first and the second visualisation regarding the correctness of 
 answers revealed that the first visualisation retrieves significantly more correct answers than 
-the second (p ≈   0.00 08) .   H ow ev er ,   t he  di f f e r en ce s   b et w ee n   t h e   f i r s t   an d   t h e   t h i r d  v i sua l i sa t i o n  
-regarding this measure were not statistically significant (p ≈   0.27 ) .   Finally, the comparison of 
+the second (p ≈ 0.0008). However, the differences between the first and the third visualisation 
+regarding this measure were not statistically significant (p ≈ 0.27). Finally, the comparison of 
 the second with the third visualisation with this measure showed that the first results 
-significant more correct answers than the latter (p ≈   0. 000007) . As a result, both the first and 
+significant more correct answers than the latter (p ≈ 0.000007). As a result, both the first and 
 third visualisation have better results than the second, regarding the correctness of answers.  
 5.4.5 Visualisations performances 
 As earlier explained, two measures define the performance of each visualisation regarding the 
 visual tasks: the correctness of answers and the time spent of the equivalent experiment. In 
 order to retrieve the visualisation that achieves the best performance, I calculated for each 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+W
+ro
+ng
+ A
+ns
+w
+er
+s 
+(%
+) 
+Question 
+1st Vis. 
+2nd Vis. 
+3rd Vis. 
+0 
+20 
+40 
+60 
+80 
+100 
+1 2 3 4 5 6 7 8 9 10 
+B
+la
+nk
+ A
+ns
+w
+er
+s 
+(%
+) 
+Question 
+1st Vis. 
+2nd Vis. 
+3rd Vis. 
+Evaluation methodology 44 
  
-Blank Answers (%) Wrong Answers (%) 44 
-Evaluation methodology 
  
 participant and each visualisation the number of correct answers per minute. In other words 
 the performance was calculated according to the module: 
-??? ? ? ?     ? ? ??? ??   ?? ??? ?? ⁄ ????? ? 
+?????? ?? ??????? ??????? ??????⁄  
 For the first visualisation the average performance is close to 0.45. This figure corresponds to 
 spending on average 22 minutes for answering correctly all the questions in the first 
 visualisation assessment. The average performance for the second visualisation is close to 
@@ -2070,38 +2062,40 @@ who gave more correct answers. Another important thing to notice is that for the
 visualisation people spent almost the same amount of time, when answering correctly from 5 
 to 10 questions.  
 Furthermore, the t-test for the performances of the first and the second visualisation revealed 
-that the first achieves significantly better results (p ≈   0. 05) .   I n   t he   same sense, the comparison 
+that the first achieves significantly better results (p ≈ 0.05). In the same sense, the comparison 
 of the second with the third visualisation showed the latter results significant better 
-performance than the first (p ≈   1.21967E -08). Finally, the differences between the first and 
-the third visualisation regarding this measure were as well statistically significant (p ≈  
+performance than the first (p ≈ 1.21967E-08). Finally, the differences between the first and 
+the third visualisation regarding this measure were as well statistically significant (p ≈ 
 1.37548E-07). From all tests about performance one can easily conclude that the third 
 visualisation achieves the better results. 
-1:12:00 
-1:04:48 
-0:57:36 
-0:50:24 
-0:43:12 
-1st Vis. 
-0:36:00 
-2nd Vis. 
-0:28:48 
-3rd Vis. 
-0:21:36 
-0:14:24 
-0:07:12 
-0:00:00 
-0 1 2 3 4 5 6 7 8 9 10 
-Number of correct answers 
  
 Figure 33: Illustration of the average time per number of correctly answered questions for each visualisation. 
+0:00:00 
+0:07:12 
+0:14:24 
+0:21:36 
+0:28:48 
+0:36:00 
+0:43:12 
+0:50:24 
+0:57:36 
+1:04:48 
+1:12:00 
+0 1 2 3 4 5 6 7 8 9 10 
+Ti
+m
+e 
  
-Time  
-??45 
-Evaluation methodology 
+Number of correct answers 
+1st Vis. 
+2nd Vis. 
+3rd Vis. 
+Evaluation methodology 45 
+ 
  
 5.4.6 Feedback  
 The final analysis of this experiment concerns the provided feedback. As earlier described, in 
-the end of the experiment, a Feedback page was displayed ,   as k i ng   peop l e ’ s   opi n i on   abo ut   t h e  
+the end of the experiment, a Feedback page was displayed, asking people’s opinion about the 
 visualisations and the evaluation procedure. This was not a necessary step of the evaluation 
 methodology, but it offered insights about the difficulties a participant might have dealt with 
 during the assessment procedure, and his preferences regarding the visualisations. 
@@ -2126,21 +2120,21 @@ Notably, no participant submitted that he spent time for deciding the answer of 
 So, according to the feedback people spent most of their time understanding the visualised 
 data and the questions. The time consumption according to the provided feedback is 
 illustrated in Figure 34. 
-Feedback about most time-consuming process 
-Understand 
-Chart, 18.75% 
-Understand 
-Questions, 37.5% 
-Understand Data, 
-43.75% 
  
 Figure 34: Time consumption over the assessment procedure according to the provided feedback. 
 5.5 Summary 
 This section gave a thorough description of the evaluation methodology applied in this 
 project. The overview of the methodology intended to inform the reader about the reasons for 
 applying this methodology and the research that it is based on, meaning the visual tasks. 
- 46 
-Evaluation methodology 
+Understand 
+Questions, 37.5% 
+Understand Data, 
+43.75% 
+Understand 
+Chart, 18.75% 
+Feedback about most time-consuming process 
+Evaluation methodology 46 
+ 
  
 Consequently, these tasks were defined, using examples of their application on visualisations 
 like the ones evaluated. Also, the assessment experiment of the evaluation methodology was 
@@ -2156,8 +2150,8 @@ feedback by the participants. This feedback offered an intuition about the visua
 the experiment, independent of the rest results. Overall, this evaluation methodology 
 designated the effectiveness of the three time-series visualisations regarding knowledge 
 retrieval.  
- 47 
-Discussion 
+Discussion 47 
+ 
  
 6 Discussion 
 This section discusses the outcomes of this research. Firstly, it remarks the observations about 
@@ -2199,20 +2193,19 @@ the data led to a better understanding of the available information and to an ex
 ways this information could be visualised. 
 One idea that was aborted was the one of visualising the co-occurrences of Concepts in tweets 
 for different TV series. This idea was an inspiration from a similar visualisation about the co-
-occurrences of characters in different chapters of the book Les   M i s ér ab l es (Victor Hugo) 
- 48 
-Discussion 
+occurrences of characters in different chapters of the book Les  Misérables (Victor Hugo) 
+Discussion 48 
  
-18
-developed by Mike Bostock with the D3.js library. This was not contributing for the 
-com pany ’ s  g oal s,  be ca use t   hey  w er e  m ost l y  i nt e r es t ed   i n  r ev ea l i ng  t r end s  a bou t  t h e  r e l at i on   o f  
+ 
+developed by Mike Bostock 18  with the D3.js library. This was not contributing for the 
+company’s goals, because they were mostly interested in revealing trends about the relation of 
 tweets with Concepts over time and not patterns in general. The logic behind this decision is 
 that the end users of any visualisation will be TV producers and they would be keener to view 
-peopl e’ s  r e ac t i on   on  w ha t  i s  pl ay ed  on T   V t   ha n  obs er v i ng  ot he r  pa t t er ns . 
+people’s reaction on what is played on TV than observing other patterns. 
 One the other hand, another idea that was discarded was the one of visualising live data. For 
 this rejection the main reason was the data. In order to have a live stream of data for the 
 visualisation of trends over time, both datasets about tweets and Concepts should be available 
-si m ul t an eous l y .   B es i des   n ot   h av i ng   t he   ab i l i t y   t o   c onnec t   t o   t he   com pany ’ s   continuously 
+simultaneously.  Besides  not  having  the  ability  to  connect  to  the  company’s  continuously 
 updated databases, it would be infeasible to reassure that the data for both datasets would be 
 synchronised. Also, even if the data were in sync, there would be no point of visualising 
 continuously updated visualisations for trends discovery. The latter stands because of the fact 
@@ -2249,17 +2242,16 @@ better than the performances of the rest. From all the above, it is clear that t
 visualisation is the most adequate for time-wise trends discovery regarding Twitter content. 
 Notably, this is also the easiest visualisation to understand and handle, as ascertained from the 
 provided feedback. 
-                                                      
-18
- L e s  M isé ra b les Co-occurrence, http://bost.ocks.org/mike/miserables/ 
- 49 
-Discussion 
+                                                     
+18 Les Misérables Co-occurrence, http://bost.ocks.org/mike/miserables/ 
+Discussion 49 
+ 
  
 Moreover, the experiment revealed good results for the first visualisation (Figure 12) 
 regarding all the measures. These results were significantly better than the equivalent for the 
 second visualisation. Because of this, it was worth including this visualisation in the final 
 experiment, as it achieved the second best results. However, the second visualisation was the 
-peopl e’ s   choi ce ,   a cc or di ng   t o   t h e   f ee dbac k ,   as   t he   pr ef er r ed   v i sua l i s at i on   f r om   the three. This 
+people’s choice, according to the feedback, as the preferred visualisation from the three. This 
 supports my choice to evaluate this visualisation. The fact that people mostly preferred the 
 second visualisation could be a motivation for editing it to achieve better results or using it on 
 other data for knowledge retrieval.  
@@ -2295,8 +2287,8 @@ more confident results, but this was not possible for this project due to time l
  
  
  
- 50 
-Conclusion 
+Conclusion 50 
+ 
  
 7 Conclusion 
 This study examined the Information Visualisation regarding TV related activity from the 
@@ -2333,14 +2325,14 @@ was not possible during this research, because it was not feasible to find such 
 experiment. 
  
  
- 51 
-Bibliography 
+Bibliography 51 
+ 
  
 8 Bibliography 
 Bhatnagar, A., Ghose, S. (2004). Online information search termination patterns across product 
-categories and consumer demographics. Journal of Retailing, 80(3), pages 221 –228. 
+categories and consumer demographics. Journal of Retailing, 80(3), pages 221–228. 
 Bifet, A., Frank, E. (2010). Sentiment Knowledge Discovery in Twitter Streaming Data, Discovery 
-Science 6332, pages 1 –15.  
+Science 6332, pages 1–15.  
 Boer, T. D., Verkooij, K. (2011). Interactive Visualization Toolkits for Rich Internet Publications. 
 Technical Report, Ultrecht University, Department of Information and Computing Sciences. 
 Boulos, M. N. K., Warren, J., Gong, J., & Yue, P. (2010). Web GIS in practice VIII: HTML5 and the 
@@ -2350,9 +2342,9 @@ Boyd, D. M., Ellison, N. B. (2007). Social Network Sites: Definition, History, a
 Journal of Computer-Mediated Communication, 13(1), pages 210-230. 
 Cheong, M., Lee, V., Stiller, B., Boyle, S. (2009). Integrating Web-based Intelligence Retrieval and 
 Decision-making from the Twitter Trends Knowledge Base. In Proceedings of CIKM 2009 Co-
-Located Workshops: SWSM 2009, pages 1 –8.  
+Located Workshops: SWSM 2009, pages 1–8.  
 Chuah, M. C., Roth, S. F. (1996). On the Semantics of Interactive Visualizations. In proceedings of the 
-I E E E   S ymp o s iu m   o n   I n fo r ma tio n   V is u a lis a tio n   ( I n fo V is ’ 9 6 ) , pages. 26-36. 
+IEEE Symposium on Information Visualisation (InfoVis’96), pages. 26-36. 
 Dix, A. (2011). Information Visualization. PROMISE Winter School 2012, Information Retrieval 
 meets Information Visualization. Zinal, Valais - Switzerland 23 - 27 January 2012 Dundee, 24-
 26 Oct 2011.  
@@ -2360,12 +2352,11 @@ Ellis, G., Dix, A. (2006). An explorative analysis of user evaluation studies in
 visualisation. In proceedings of the 2006 AVI workshop on BEyond time and errors novel 
 evaLuation methods for Information Visualization (BELIV), ACM, 2006. 
 Faisal, S., Cairns, P., Blandford, A. (2007). Challenges of Evaluating the Information Visualisation 
-st
-Experience, In proceedings of the 21 British HCI Group Annual Conference on People and 
+Experience, In proceedings of the 21st British HCI Group Annual Conference on People and 
 Computers: HCI...but not as we know it – Volume 2, BCS-HCI, pages 167-170. 
 Google Chart Tools (2012, September 17). Handling Events. Retrieved September 17, 2012, from 
 https://developers.google.com/chart/interactive/docs/events 
-Gr u d in ,   J . ,   Vié g as,   F.   B . ,   Wattenberg, M. (2005). Tag Clouds and the Case for Vernacular 
+Grudin,  J.,  Viégas,  F.  B.,  Wattenberg, M. (2005). Tag Clouds and the Case for Vernacular 
 Visualization, ACM Interactions, 15(4), pages 223-252. 
 IFFGD Glossary (2012, September 22). P-value definition. Retrieved September 22, 2012, from 
 http://www.iffgd.org/site/learning-center/glossary 
@@ -2375,26 +2366,24 @@ JSON.org (2012, September 18). Introducing JSON. Retrieved September 18, 2012, f
 http://www.json.org 
 Keim, D. a. (2002). Information visualization and visual data mining. IEEE Transactions on 
 Visualization and Computer Graphics, 8(1), pages 1-8. 
- 52 
-Bibliography 
+Bibliography 52 
+ 
  
 Leskovec, J., Adamic, L. a., & Huberman, B. a. (2007). The dynamics of viral marketing. In 
-th
-proceedings of 7 ACM Conference on Electronic Commerce. 
+proceedings of 7th ACM Conference on Electronic Commerce. 
 Machlis, S. (2011, April 20). 22 free tools for data visualization and analysis. ComputerWorld. 
 Retrieved April 19, 2012, from 
 http://www.computerworld.com/s/article/9215504/22_free_tools_for_data_visualization_and_an
 alysis 
 Makice, K. (2009). Twitter API: Up and Running Learn How to Build Applications with the Twitter 
-A P I ,   O’ R e ill y   Me d ia,   I n c. 
+API, O’Reilly Media, Inc. 
 Mazza, R. (2009). Introduction to Information Visualisation. Springer, London, UK. 
 Morse, E., Lewis, M., Olsen, K. (2000). Evaluating visualizations: using a taxonomic guide. 
-International Journal of Human-Computer Studies, 53(5), pages 637 –662.  
+International Journal of Human-Computer Studies, 53(5), pages 637–662.  
 Northman, J. (2008). Learning Named Entity Recognition from Wikipedia. BSc Thesis, The University 
 of Sydney, Australia. 
 Pak, A., Paroubek, P. (2010). Twitter as a Corpus for Sentiment Analysis and Opinion Mining. 
-th
-Computer. In proceedings of the 7 conference on International Language Resources and 
+Computer. In proceedings of the 7th conference on International Language Resources and 
 Evaluation (LREC'10), European Language Resources Association (ELRA), Valletta, Malta 
 Shedroff, N. (1994). Information interaction design: a unified field theory of design. In Jacobson, B.: 
 Information Design. MIT Press (2000). 
@@ -2409,8 +2398,7 @@ Kaufmann Publishers Inc., San Fransisco, CA.
 Wasserman, S., Faust, K. (1994). Social Network Analysis: Methods and Applications. Cambridge 
 University Press, Cambridge, UK. 
 Wehrend, S., Lewis, C. (1990). A Problem-oriented Classification of Visualisation Techniques. In 
-st
-proceedings of the 1 con feren ce   o n   V is u a lis a tio n   ’ 9 0 ( VI S   ’ 9 0 ). Pages 139-143. IEEE Computer 
+proceedings of the 1st conference on Visualisation ’90 (VIS ’90). Pages 139-143. IEEE Computer 
 Society Press Los Alamitos, CA, USA.  
  WordNet Team (2012, September 20). WordNet search: Cartesian coordinate system. Retrieved 
 September 20, 2012, from 
@@ -2422,31 +2410,121 @@ Publishing Co.
 APPENDIX A: Datasets 
 In this appendix, examples of all the used datasets in this project are given.  
 Table 4: Example data from the Tweets dataset. For space economy the tweets are shortened with brackets defining the missing parts.  
-TV TV TV Transmission Transmission Creation From User Twitter Text Sentiment Gender Location Device Used 
-Series Episode Channel Start Time End Time Time Analysis 
+TV 
+Series 
+TV 
+Episode 
+TV 
+Channel 
+Transmission 
+Start Time 
+Transmission 
+End Time 
+Creation 
+Time 
+From User Twitter Text Sentiment 
+Analysis 
 Score 
-The Big The Peanut E4 2012-06-25 2012-06-25 06/25/2012 RyanHorne94 tele would be useless -0.2178   Web 
-Bang Reaction 01:00:00 01:25:00 00:30:50+0 [...] 
-Theory 100 #howimetyourmother 
+Gender Location Device Used 
+The Big 
+Bang 
+Theory 
+The Peanut 
+Reaction 
+E4 2012-06-25 
+01:00:00 
+2012-06-25 
+01:25:00 
+06/25/2012 
+00:30:50+0
+100 
+RyanHorne94 tele would be useless 
+[...] 
+#howimetyourmother 
 #bigbangtheory 
-The Big The Peanut E4 2012-06-25 2012-06-25 06/25/2012 brunanegrona Daora que pra 0.0000   Web 
-Bang Reaction 01:00:00 01:25:00 00:31:59+0 converter tbbt t ?? a 
-Theory 100 meia hora em 99% 
-The Big The Peanut E4 2012-06-25 2012-06-25 06/25/2012 pumpsDISorder Nw Big bang theory  0.1241   iPhone 
-Bang Reaction 01:00:00 01:25:00 00:32:00+0 &lt;3 this show! 
-Theory 100 
-The Big The Peanut E4 2012-06-25 2012-06-25 06/25/2012 niallsmofos69 big bang theory 0.2833   iPhone 
-Bang Reaction 01:00:00 01:25:00 00:32:30+0 marathon ;) sunday 
-Theory 100 nights 
-The Big The Peanut E4 2012-06-25 2012-06-25 06/25/2012 MZhe11oKITTY Bwahaha Sheldon -0.6772   Web 
-Bang Reaction 01:00:00 01:25:00 00:33:05+0 ain't shit 
-Theory 100 #TheBigBangTheory 
-The Big The Peanut E4 2012-06-25 2012-06-25 06/25/2012 Friz1992Ro [...] Big Bang Theory -0.0161   Web 
-Bang Reaction 01:00:00 01:25:00 02:05:18+0 Rubix make your 
-Theory 100 own 12.99 [...] 
+-0.2178   Web 
+The Big 
+Bang 
+Theory 
+The Peanut 
+Reaction 
+E4 2012-06-25 
+01:00:00 
+2012-06-25 
+01:25:00 
+06/25/2012 
+00:31:59+0
+100 
+brunanegrona Daora que pra 
+converter tbbt t?? a 
+meia hora em 99% 
+0.0000   Web 
+The Big 
+Bang 
+Theory 
+The Peanut 
+Reaction 
+E4 2012-06-25 
+01:00:00 
+2012-06-25 
+01:25:00 
+06/25/2012 
+00:32:00+0
+100 
+pumpsDISorder Nw Big bang theory  
+&lt;3 this show! 
+0.1241   iPhone 
+The Big 
+Bang 
+Theory 
+The Peanut 
+Reaction 
+E4 2012-06-25 
+01:00:00 
+2012-06-25 
+01:25:00 
+06/25/2012 
+00:32:30+0
+100 
+niallsmofos69 big bang theory 
+marathon ;) sunday 
+nights 
+0.2833   iPhone 
+The Big 
+Bang 
+Theory 
+The Peanut 
+Reaction 
+E4 2012-06-25 
+01:00:00 
+2012-06-25 
+01:25:00 
+06/25/2012 
+00:33:05+0
+100 
+MZhe11oKITTY Bwahaha Sheldon 
+ain't shit 
+#TheBigBangTheory 
+-0.6772   Web 
+The Big 
+Bang 
+Theory 
+The Peanut 
+Reaction 
+E4 2012-06-25 
+01:00:00 
+2012-06-25 
+01:25:00 
+06/25/2012 
+02:05:18+0
+100 
+Friz1992Ro [...] Big Bang Theory 
+Rubix make your 
+own 12.99 [...] 
 #TBBT #BBT 
 #THINKGEEK 
 #SHELDON 
+-0.0161   Web 
  
   
 Table 5: Example data from the Concepts dataset.  
@@ -2461,20 +2539,26 @@ take E4 Will's Birthday Ag! 06/25/2012 22:03:01.433839+01 2012-06-25 22:00:00+01
 ag E4 Will's Birthday Please put me down now! 06/25/2012 22:02:46.453239+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
 please E4 Will's Birthday Hold on! 06/25/2012 22:02:38.920966+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
 hold E4 Will's Birthday CRIES) '(BRANCHES CRACK)' Aaaagggghhh! 06/25/2012 22:04:30.274349+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
-mango E4 Will's Birthday They like the mango, oh, oh, ohe They like the 06/25/2012 22:13:44.525585+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
+mango E4 Will's Birthday They like the mango, oh, oh, ohe They like the 
 mangoe Mango, mangoe Man-mango, mango, oh, 
 ohe Who like the mango? 
+06/25/2012 22:13:44.525585+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
 let E4 Will's Birthday Let's give that a go. 06/25/2012 22:13:41.5119+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
-clarityn E4 Will's Birthday Now I use Clarityn Rapide With fast-melt 06/25/2012 22:13:05.446335+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
-rapide technology, it dissolves on your tongue in an 
-with instant. 
+clarityn 
+rapide 
+with 
+E4 Will's Birthday Now I use Clarityn Rapide With fast-melt 
+technology, it dissolves on your tongue in an 
+instant. 
+06/25/2012 22:13:05.446335+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
 check E4 Will's Birthday Check. 06/25/2012 22:13:05.278218+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
 check E4 Will's Birthday Check! 06/25/2012 22:13:04.205862+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
 rapide E4 Will's Birthday Clarityn Rapide? 06/25/2012 22:13:04.205862+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
-clarityn E4 Will's Birthday Clarityn Rapide? 06/25/2012 22:13:04.205862+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
+clarityn 
 rapide 
- 55 
-APPENDIX B: JSON object with retweet data 
+E4 Will's Birthday Clarityn Rapide? 06/25/2012 22:13:04.205862+01 2012-06-25 22:00:00+01 2012-06-25 22:35:00+01 
+APPENDIX B: JSON object with retweet data 55 
+ 
  
 APPENDIX B: JSON object with retweet data 
 The following text shows the content of a JSON object with retweet data. 
@@ -2552,191 +2636,286 @@ husband   Cosmo and her son Poof.",
 APPENDIX C: Time-series charts source code 
 In this appendix the code for scatter plot by the Highcharts library (Figure 11) is given. This is an example of the way that the evaluated visualisations were 
 implemented.  
-<!--   $females[$i1]['Hour'] = $res['Hour']; 
-  $females[$i1]['Min'] = $res['Minutes']; 
-  $females[$i1]['Sent'] = $res['sentiment']; 
+<!-- 
  
-  $females[$i1]['Day'] = $res['Day']; 
 First time-series visualisation (Figure 11)  
-  $females[$i1]['Text'] =str_replace("\n", ' 
 File: Time_Series_Vis1.php  
-',$res['ttext']); 
 Description: It develops the scatter plot by  
-  $i1++; 
 Highcharts library for the Twitter dataset. 
- } 
  
-  
 -->  
- //Retrieve the Twitter data about males for the queried 
 <!DOCTYPE HTML> 
-episode 
 <html> 
- $query = 'SELECT ttext, Round(sentiment,4) as sentiment, 
  <head> 
-MID(created_at, 4, 2) AS Day, MID( created_at, 12, 2 ) 
   <meta http-equiv="Content-Type" 
-  AS Hour, MID( created_at, 15, 2) AS Minutes FROM Tweets 
 content="text/html; charset=utf-8"> 
-WHERE Program ="'.$episode.'" AND gender LIKE "%male%"  
 <?php  
-  AND gender NOT LIKE "%female%" ORDER BY created_at LIMIT 
  
- //Connect to remote MySQL database 0,1000'; 
- require "../connect.php";   
-   $data = mysql_query($query)  
-  or die(mysql_error()); 
+ //Connect to remote MySQL database 
+ require "../connect.php"; 
+  
  //Get the name of the episode that was queried 
-  
  $episode = $_GET["q"]; 
- $i2=0; 
-  
   
  //Retrieve the Twitter data about females for the queried 
- while($res = mysql_fetch_array( $data ))  
 episode 
- {  
  $query = 'SELECT ttext, Round(sentiment,4) as sentiment, 
-  $males[$i2]['Hour'] = $res['Hour']; 
 MID(created_at, 4, 2) AS Day, MID( created_at, 12, 2 )  
-  $males[$i2]['Min'] = $res['Minutes']; 
  AS Hour, MID( created_at, 15, 2) AS Minutes FROM Tweets 
-  $males[$i2]['Sent'] = $res['sentiment']; 
 WHERE Program ="'.$episode.'" AND gender LIKE "%female%"  
-  
  ORDER BY created_at LIMIT 0,1000'; 
-  $males[$i2]['Day'] = $res['Day']; 
   
-  $males[$i2]['Text'] = str_replace("\n", ' 
  $data = mysql_query($query)  
-',$res['ttext']); 
   or die(mysql_error()); 
-   
- $i1=0;   $i2++; 
+  
+ $i1=0; 
+  
+ while($res = mysql_fetch_array( $data ))  
+ {  
+  $females[$i1]['Hour'] = $res['Hour']; 
+  $females[$i1]['Min'] = $res['Minutes']; 
+  $females[$i1]['Sent'] = $res['sentiment']; 
+  $females[$i1]['Day'] = $res['Day']; 
+  $females[$i1]['Text'] =str_replace("\n", ' 
+',$res['ttext']); 
+  $i1++; 
  } 
   
-?> 
+ //Retrieve the Twitter data about males for the queried 
+episode 
+ $query = 'SELECT ttext, Round(sentiment,4) as sentiment, 
+MID(created_at, 4, 2) AS Day, MID( created_at, 12, 2 ) 
+  AS Hour, MID( created_at, 15, 2) AS Minutes FROM Tweets 
+WHERE Program ="'.$episode.'" AND gender LIKE "%male%"  
+  AND gender NOT LIKE "%female%" ORDER BY created_at LIMIT 
+0,1000'; 
+  
+ $data = mysql_query($query)  
+  or die(mysql_error()); 
+  
+ $i2=0; 
+  
  while($res = mysql_fetch_array( $data ))  
-<title>Avg Sentiment by Gender for <?php echo $program?></title> 
  {  
+  $males[$i2]['Hour'] = $res['Hour']; 
+  $males[$i2]['Min'] = $res['Minutes']; 
+  $males[$i2]['Sent'] = $res['sentiment']; 
   
-<script type="text/javascript"      hour = hour-1; 
-src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min    var n = "\"" + time + "\""; 
-.js"></script>     var x = n.split(" "); 
-             x = x[4]; 
-<!-- Implement the visualisation using the Highcharts library -->     n = x.split(":"); 
-<script type="text/javascript">     var minutes = n[1]; 
-      var text = this.point.t; 
-$(function () {     var tLength = text.length; 
-var chart;     var newText = new Array(); 
- $(document).ready(function() {      
- chart = new Highcharts.Chart({     if(tLength<40){ 
-  chart: {      newText[0] = text; 
-   renderTo: 'container',     } 
-   type: 'scatter',     else if(tLength >= 40 && 
-   zoomType: 'xy' tLength<80){ 
-  },      newText[0] = 
-  title: { text.substring(0,40) +'<br />'; 
-   text: "Tweets for <?php echo $episode?>      newText[1] = 
-visualised by sentiment, gender and time." text.substring(41,tLength-1); 
-  },     } 
-  subtitle: {     else if(tLength>=80 && 
-   text: 'Source: Backflip' tLength<=120){ 
-  },      newText[0] = 
-  xAxis: { text.substring(0,40)+'<br />'; 
-   type: 'datetime',      newText[1] = 
-   title: { text.substring(41,80)+ "\n"; 
-    enabled: true,      newText[2] = 
-    text: 'Hours ([0-24h].[0-60mins])' text.substring(81,tLength-1); 
-   },     } 
-  },     else { 
-  yAxis: {     newText[0] = 
-   title: { text.substring(0,40)+'<br />'; 
-    text: 'Sentiment (N. Bayes) %'     newText[1] = 
-   } text.substring(41,80)+'<br />'; 
-  },     newText[2] = 
-  tooltip: { text.substring(81,120)+'<br />'; 
-   formatter: function() {     newText[3] = text.substring(121, 
-    var time = new Date(this.point.x); tLength-1); 
-       } 
-    var hour = time.getHours();       
-    if(hour=="00")     var returnText= 'Time: '+ hour + 
-     hour = "23"; ':'+ minutes +'<br />' + 
-    else if(hour=="01")     'Sentiment: ' + this.point.y + '<br 
-     hour = "00"; />' + 
-    else       'Text: '; 
-  
-    var inbetweenText = '';     {// code for IE7+, Firefox, Chrome, 
-    for(i=0; i<newText.length; i++) Opera, Safari 
-    {      xmlhttp=new 
-     inbetweenText+= newText[i]; XMLHttpRequest(); 
-    }     } 
-         else 
-    returnText+=inbetweenText;     {// code for IE6, IE5 
-           xmlhttp=new 
-    return returnText; ActiveXObject("Microsoft.XMLHTTP"); 
-    }           } 
-      
-   },  xmlhttp.onreadystatechange=function() 
-  legend: {     { 
-   layout: 'vertical',     if (xmlhttp.readyState==4 && 
-    align: 'left', xmlhttp.status==200) 
-    verticalAlign: 'top',     { 
-    x: 24,  
-    y: 1,  document.getElementById("txtHint").innerHTML=xmlhttp.resp
-    floating: true, onseText; 
-    backgroundColor: '#FFFFFF',     } 
-    borderWidth: 1    } 
-   },    var d = new Date(event.point.x); 
-   plotOptions: {   
-    scatter: {  xmlhttp.open("GET","getConcepts.php?q="+d+"&e=<?php echo 
-     marker: { str_replace("\\","",$program)?>",true); 
-     radius: 5,    xmlhttp.send(); 
-     states: {   } 
-     hover: {   } 
-     enabled: true,  }, 
-lineColor:  }, 
-'rgb(100,100,100)'       
-     }   //Feed the visualisation with the retrieved data 
-   }      
-   }, series: [{ 
-     states: {     name: 'Female', 
-     hover: {     color: 'rgba(223, 83, 83, .5)', 
-     marker: {        
-     enabled: false data: [<?php  
-     }     for($j=0;$j<$i1;$j++) 
-     }     { 
-   }, if($females[$j]['Hour'][0] 
-   cursor: 'pointer', == "0") 
-   events: {      { 
-    click: function(event) {       echo '{g: "f", x: 
-    if (window.XMLHttpRequest) Date.UTC(2012, 5, '.$females[$j]['Day'].', 
-  
-'.$females[$j]['Hour'][1].','.$females[$j]['Min'].'),y:'.$females   }); 
-[$j]['Sent'].', t: "'.$females[$j]['Text'].'"}';   }); 
-     }    
-     else  }); 
-      echo '{g: "f", x:  </script> 
-Date.UTC(2012, 5, </head> 
-'.$females[$j]['Day'].'.$females[$j]['Hour'].','.$females[$j]['Mi <body style=" background-image:none; background-color:#333;"> 
-n'].'),y:'.$females[$j]['Sent'].', t:  
-"'.$females[$j]['Text'].'"}'; <!-- Import the Highcharts library --> 
-          
-     if(($j+1)!=$i1) <script src="../js/highcharts.js"></script> 
-     { <script src="../js/exporting.js"></script> 
-     echo ","; <link rel="stylesheet" type="text/css" href="../visualiseit.css" 
-     } /> 
-    } <link rel="stylesheet" type="text/css" href="../ddsmoothmenu.css" 
-    ?> /> 
-    ]},   
-    { <!-- Render the visualisation --> 
-    name: 'Male', <div id="container" style="max-width: 1000px; height: 400px; 
-    color: 'rgba(119, 152, 191, .5)', margin: 0 auto"></div> 
-    data: [ <div id="txtHint"><b>Concepts will be listed here</b></div> 
-     <?php   </body> 
-     for($j=0;$j<$i2;$j++) </html> 
-     { 
+  $males[$i2]['Day'] = $res['Day']; 
+  $males[$i2]['Text'] = str_replace("\n", ' 
+',$res['ttext']); 
  
+  $i2++; 
+ } 
+?> 
+<title>Avg Sentiment by Gender for <?php echo $program?></title> 
+  
+<script type="text/javascript" 
+src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min
+.js"></script> 
+         
+<!-- Implement the visualisation using the Highcharts library --> 
+<script type="text/javascript"> 
+  
+$(function () { 
+var chart; 
+ $(document).ready(function() { 
+ chart = new Highcharts.Chart({ 
+  chart: { 
+   renderTo: 'container', 
+   type: 'scatter', 
+   zoomType: 'xy' 
+  }, 
+  title: { 
+   text: "Tweets for <?php echo $episode?> 
+visualised by sentiment, gender and time." 
+  }, 
+  subtitle: { 
+   text: 'Source: Backflip' 
+  }, 
+  xAxis: { 
+   type: 'datetime', 
+   title: { 
+    enabled: true, 
+    text: 'Hours ([0-24h].[0-60mins])' 
+   }, 
+  }, 
+  yAxis: { 
+   title: { 
+    text: 'Sentiment (N. Bayes) %' 
+   } 
+  }, 
+  tooltip: { 
+   formatter: function() { 
+    var time = new Date(this.point.x);
+   
+    var hour = time.getHours(); 
+    if(hour=="00") 
+     hour = "23"; 
+    else if(hour=="01") 
+     hour = "00"; 
+    else 
+     hour = hour-1; 
+    var n = "\"" + time + "\""; 
+    var x = n.split(" "); 
+    x = x[4]; 
+    n = x.split(":"); 
+    var minutes = n[1]; 
+    var text = this.point.t; 
+    var tLength = text.length; 
+    var newText = new Array(); 
+     
+    if(tLength<40){ 
+     newText[0] = text; 
+    } 
+    else if(tLength >= 40 && 
+tLength<80){ 
+     newText[0] = 
+text.substring(0,40) +'<br />'; 
+     newText[1] = 
+text.substring(41,tLength-1); 
+    } 
+    else if(tLength>=80 && 
+tLength<=120){ 
+     newText[0] = 
+text.substring(0,40)+'<br />'; 
+     newText[1] = 
+text.substring(41,80)+ "\n"; 
+     newText[2] = 
+text.substring(81,tLength-1); 
+    } 
+    else { 
+    newText[0] = 
+text.substring(0,40)+'<br />'; 
+    newText[1] = 
+text.substring(41,80)+'<br />'; 
+    newText[2] = 
+text.substring(81,120)+'<br />'; 
+    newText[3] = text.substring(121, 
+tLength-1); 
+    } 
+      
+    var returnText= 'Time: '+ hour + 
+':'+ minutes +'<br />' + 
+    'Sentiment: ' + this.point.y + '<br 
+/>' + 
+      'Text: '; 
+  
+    var inbetweenText = ''; 
+    for(i=0; i<newText.length; i++) 
+    { 
+     inbetweenText+= newText[i]; 
+    } 
+     
+    returnText+=inbetweenText; 
+       
+    return returnText; 
+    } 
+   
+   }, 
+  legend: { 
+   layout: 'vertical', 
+    align: 'left', 
+    verticalAlign: 'top', 
+    x: 24, 
+    y: 1, 
+    floating: true, 
+    backgroundColor: '#FFFFFF', 
+    borderWidth: 1 
+   }, 
+   plotOptions: { 
+    scatter: { 
+     marker: { 
+     radius: 5, 
+     states: { 
+     hover: { 
+     enabled: true, 
+lineColor: 
+'rgb(100,100,100)' 
+     } 
+   } 
+   }, 
+     states: { 
+     hover: { 
+     marker: { 
+     enabled: false 
+     } 
+     } 
+   }, 
+   cursor: 'pointer', 
+   events: { 
+    click: function(event) { 
+    if (window.XMLHttpRequest) 
+    {// code for IE7+, Firefox, Chrome, 
+Opera, Safari 
+     xmlhttp=new 
+XMLHttpRequest(); 
+    } 
+    else 
+    {// code for IE6, IE5 
+    xmlhttp=new 
+ActiveXObject("Microsoft.XMLHTTP"); 
+          } 
+   
+ xmlhttp.onreadystatechange=function() 
+    { 
+    if (xmlhttp.readyState==4 && 
+xmlhttp.status==200) 
+    { 
+ 
+ document.getElementById("txtHint").innerHTML=xmlhttp.resp
+onseText; 
+    } 
+   } 
+   var d = new Date(event.point.x); 
+  
+ xmlhttp.open("GET","getConcepts.php?q="+d+"&e=<?php echo 
+str_replace("\\","",$program)?>",true); 
+   xmlhttp.send(); 
+  } 
+  } 
+ }, 
+ }, 
+      
+  //Feed the visualisation with the retrieved data 
+     
+series: [{ 
+    name: 'Female', 
+    color: 'rgba(223, 83, 83, .5)', 
+       
+data: [<?php  
+    for($j=0;$j<$i1;$j++) 
+    { 
+if($females[$j]['Hour'][0] 
+== "0") 
+     { 
+      echo '{g: "f", x: 
+Date.UTC(2012, 5, '.$females[$j]['Day'].', 
+  
+'.$females[$j]['Hour'][1].','.$females[$j]['Min'].'),y:'.$females
+[$j]['Sent'].', t: "'.$females[$j]['Text'].'"}'; 
+     } 
+     else 
+      echo '{g: "f", x: 
+Date.UTC(2012, 5, 
+'.$females[$j]['Day'].'.$females[$j]['Hour'].','.$females[$j]['Mi
+n'].'),y:'.$females[$j]['Sent'].', t: 
+"'.$females[$j]['Text'].'"}'; 
+         
+     if(($j+1)!=$i1) 
+     { 
+     echo ","; 
+     } 
+    } 
+    ?> 
+    ]},  
+    { 
+    name: 'Male', 
+    color: 'rgba(119, 152, 191, .5)', 
+    data: [ 
+     <?php  
+     for($j=0;$j<$i2;$j++) 
+     { 
      
  if($males[$j]['Hour'][0] == "0") 
       { 
@@ -2758,83 +2937,93 @@ t'].', t: "'.$males[$j]['Text'].'"}';
     } 
     ?> 
     ]}] 
- 60 
-APPENDIX D: Experiment Questionnaires 
+   }); 
+  }); 
+   
+ }); 
+ </script> 
+</head> 
+<body style=" background-image:none; background-color:#333;"> 
+ 
+<!-- Import the Highcharts library --> 
+ 
+<script src="../js/highcharts.js"></script> 
+<script src="../js/exporting.js"></script> 
+<link rel="stylesheet" type="text/css" href="../visualiseit.css" 
+/> 
+<link rel="stylesheet" type="text/css" href="../ddsmoothmenu.css" 
+/> 
+ 
+<!-- Render the visualisation --> 
+<div id="container" style="max-width: 1000px; height: 400px; 
+margin: 0 auto"></div> 
+<div id="txtHint"><b>Concepts will be listed here</b></div> 
+ </body> 
+</html> 
+ 
+APPENDIX D: Experiment Questionnaires 60 
+ 
  
 APPENDIX D: Experiment Questionnaires 
 In this appendix the questionnaires, which were not included in the Section 3 are given. 
 Table 6: The questionnaire for the evaluation of the time-series visualisation illustrated in Figure 11. For each 
 question the corresponding order in the questionnaire (No.) and the relevant visual task (Task) is given. 
 No. Task Question 
-At 00:01 which gender posted the most positive tweet? 
 1 Compare 
 within entities 
-2 Which of the two times 00:39 and 01:03 is associated with more 
-Associate 
+At 00:01 which gender posted the most positive tweet? 
+2 Associate Which of the two times 00:39 and 01:03 is associated with more 
 concepts? 
-At 01:16 a tweet has sentiment analysis close to 1 (positive). 
-3 Distinguish 
+3 Distinguish At 01:16 a tweet has sentiment analysis close to 1 (positive). 
 This point belongs to: 
-4 For females rank times 01:25, 01:30, 01:33 with respect to their 
-Rank 
+4 Rank For females rank times 01:25, 01:30, 01:33 with respect to their 
 sentiment analysis value. 
-5 At 01:05 which sentiment analysis value corresponds to more 
-Cluster 
+5 Cluster At 01:05 which sentiment analysis value corresponds to more 
 than one tweet? 
-At 00:25 what is common between all genders regarding 
-6 Correlate 
+6 Correlate At 00:25 what is common between all genders regarding 
 sentiment analysis? 
-7 During which of the following time periods people tweeted more 
-Locate 
+7 Locate During which of the following time periods people tweeted more 
 frequently? 
-8 Most points after 01:30 are regarding their sentiment analysis: 
-Categorize 
-9 Which gender is the last to tweet about "The Money Pit"? 
-Identify 
-At 01:28 if you wanted tweets with sentiment analysis equal to -
+8 Categorize Most points after 01:30 are regarding their sentiment analysis: 
+9 Identify Which gender is the last to tweet about "The Money Pit"? 
 10 Compare 
-1 which tweet would you ignore? 
 between 
 relations 
+At 01:28 if you wanted tweets with sentiment analysis equal to -
+1 which tweet would you ignore? 
  
 Table 7: The questionnaire for the evaluation of the time-series visualisation illustrated in Figure 13. For each 
 question the corresponding order in the questionnaire (No.) and the relevant visual task (Task) is given. 
 No. Task Question 
-1 Compare For which TV series people tweeted the most during the dawn? 
+1 Compare 
 within entities 
-2 Which TV series (singular) is associated with more tweets than 
-Associate 
+For which TV series people tweeted the most during the dawn? 
+2 Associate Which TV series (singular) is associated with more tweets than 
 the rest? 
-3 Which TV series (singular) has average sentiment analysis equal 
-Distinguish 
+3 Distinguish Which TV series (singular) has average sentiment analysis equal 
 to 0? 
- 61 
-APPENDIX D: Experiment Questionnaires 
+APPENDIX D: Experiment Questionnaires 61 
+ 
  
 No. Task Question 
-4 Rank the TV series Crimewatch Roadshow, Bargain Hunt, 
-Rank 
+4 Rank Rank the TV series Crimewatch Roadshow, Bargain Hunt, 
 Panorama according to their sentiment analysis. 
-During which part of the day did people tweet the least? 
-5 Cluster 
-6 Which part/s of the day has/ve only TV series with negative 
-Correlate 
+5 Cluster During which part of the day did people tweet the least? 
+6 Correlate Which part/s of the day has/ve only TV series with negative 
 sentiment? 
 7 Locate One TV Series has the most positive sentiment analysis 
 compared to the rest TV Series. Where is it located? 
-8 Crimewatch Show... [sentence follows that is related to a 
-Categorize 
+8 Categorize Crimewatch Show... [sentence follows that is related to a 
 category, e.g. TV series on air during dawn and with positive 
 sentiment.] 
-9 Which two TV series have the same volume of tweets during the 
-Identify 
+9 Identify Which two TV series have the same volume of tweets during the 
 dawn? 
-10 If you wanted to observe parts of day that have only TV series 
-Compare 
-with sentiment analysis <=0, which part/s of day would you 
+10 Compare 
 between 
-ignore? 
 relations 
+If you wanted to observe parts of day that have only TV series 
+with sentiment analysis <=0, which part/s of day would you 
+ignore? 
  
  
   
@@ -2845,74 +3034,106 @@ provided feedback.
 Table 8: All the results from the assessment experiment about the time-series visualisations. The first four columns show the demographics of each participant and the rest show the number of 
 correct answers, the time and the answer-trace this participant achieved for each visualisation.  
 English Education Gender Year Born Correct 1st Time 1st Trace 1st Correct 2nd Time 2nd Trace 2nd Correct 3rd Time 3rd Trace 3rd 
-Advanced Higher Male 1977 9 00:12:07 TFTTTTTTTT 8 00:06:16 TFTTFTTTTT 6 00:05:29 TTTTFTFT_F 
+Advanced Higher 
 (University) 
-Advanced Higher Female 1969 4 00:17:17 TFTFFFFTT_ 3 00:16:28 F__FFFTTFT 6 00:08:12 TFTFFTTT_T 
+Male 1977 9 00:12:07 TFTTTTTTTT 8 00:06:16 TFTTFTTTTT 6 00:05:29 TTTTFTFT_F 
+Advanced Higher 
 (University) 
-Advanced Higher Male 1987 8 00:19:28 TFTFTTTTTT 5 00:21:15 TFTFFFTTTF 7 00:07:47 TTTTFFTT_T 
+Female 1969 4 00:17:17 TFTFFFFTT_ 3 00:16:28 F__FFFTTFT 6 00:08:12 TFTFFTTT_T 
+Advanced Higher 
 (University) 
-Intermediate Primary/Second Male 1988 7 00:18:24 TTT_TT__TT 6 00:16:22 TFTTFTF_TT 6 00:08:24 TTFTFTTF_T 
+Male 1987 8 00:19:28 TFTFTTTTTT 5 00:21:15 TFTFFFTTTF 7 00:07:47 TTTTFFTT_T 
+Intermediate Primary/Second
 ary 
-Advanced Higher Female 1971 9 00:17:46 TTTT_TTTTT 6 00:17:09 TTT_FFTTFT 10 00:06:27 TTTTTTTTTT 
+Male 1988 7 00:18:24 TTT_TT__TT 6 00:16:22 TFTTFTF_TT 6 00:08:24 TTFTFTTF_T 
+Advanced Higher 
 (University) 
-Advanced Higher Male 1988 10 00:10:57 TTTTTTTTTT 6 00:13:37 TTTFFFTTTF 7 00:06:51 TTTT_FTT_T 
+Female 1971 9 00:17:46 TTTT_TTTTT 6 00:17:09 TTT_FFTTFT 10 00:06:27 TTTTTTTTTT 
+Advanced Higher 
 (University) 
-Advanced Higher Female 1986 5 00:08:35 TFFFTTTTFF 6 00:09:20 TFTFFTTTTF 7 00:18:11 TTTTTFTT_F 
+Male 1988 10 00:10:57 TTTTTTTTTT 6 00:13:37 TTTFFFTTTF 7 00:06:51 TTTT_FTT_T 
+Advanced Higher 
 (University) 
-Advanced Higher Male 1985 8 00:16:21 TFTTTTTTFT 6 00:23:12 TFTFFFTTTT 6 00:16:21 T_TTFFTTFT 
+Female 1986 5 00:08:35 TFFFTTTTFF 6 00:09:20 TFTFFTTTTF 7 00:18:11 TTTTTFTT_F 
+Advanced Higher 
 (University) 
-Advanced Higher Female 1989 7 00:08:14 TFTFTTTT_T 8 00:10:39 TTTFTTTTTF 8 00:04:41 TTTTTFTT_T 
+Male 1985 8 00:16:21 TFTTTTTTFT 6 00:23:12 TFTFFFTTTT 6 00:16:21 T_TTFFTTFT 
+Advanced Higher 
 (University) 
+Female 1989 7 00:08:14 TFTFTTTT_T 8 00:10:39 TTTFTTTTTF 8 00:04:41 TTTTTFTT_T 
   
 English Education Gender Year Born Correct 1st Time 1st Trace 1st Correct 2nd Time 2nd Trace 2nd Correct 3rd Time 3rd Trace 3rd 
-Advanced Higher Female 1988 7 00:13:42 TFTTTFTTFT 6 00:19:22 TTTFFFT_TT 7 00:08:13 TTTTFFTTFT 
+Advanced Higher 
 (University) 
-Advanced Higher Male 1989 3 00:14:47 FFTFTFFFTF 6 00:28:44 TTFFFTTTTF 6 00:09:10 TFTTTFFT_T 
+Female 1988 7 00:13:42 TFTTTFTTFT 6 00:19:22 TTTFFFT_TT 7 00:08:13 TTTTFFTTFT 
+Advanced Higher 
 (University) 
-Advanced Primary/Second Male 1988 9 00:10:04 TTTFTTTTTT 8 00:06:26 TTTFTTTTTF 9 00:04:52 TTTTTTTT_T 
+Male 1989 3 00:14:47 FFTFTFFFTF 6 00:28:44 TTFFFTTTTF 6 00:09:10 TFTTTFFT_T 
+Advanced Primary/Second
 ary 
-Proficient Higher Male 1978 5 00:20:26 TFFTTTTFT_ 6 00:16:39 TFTFFTTTTF 6 00:10:21 TTTT_TFF_T 
+Male 1988 9 00:10:04 TTTFTTTTTT 8 00:06:26 TTTFTTTTTF 9 00:04:52 TTTTTTTT_T 
+Proficient Higher 
 (University) 
-Advanced Higher Male 1988 10 01:14:12 TTTTTTTTTT 8 01:06:55 TTTFTTTTTF 9 01:03:42 TTTTTTTT_T 
+Male 1978 5 00:20:26 TFFTTTTFT_ 6 00:16:39 TFTFFTTTTF 6 00:10:21 TTTT_TFF_T 
+Advanced Higher 
 (University) 
-Intermediate Higher Male 1987 8 01:09:47 TFTFTTTTTT 4 01:02:24 TFFFTFTFTF 8 00:10:24 TTTTTTFT_T 
+Male 1988 10 01:14:12 TTTTTTTTTT 8 01:06:55 TTTFTTTTTF 9 01:03:42 TTTTTTTT_T 
+Intermediate Higher 
 (University) 
-Advanced Higher Male 1985 6 00:22:08 TFTFTTFT_T 7 00:17:35 TFTTTFTTTF 6 00:11:20 T_TTFFTT_T 
+Male 1987 8 01:09:47 TFTFTTTTTT 4 01:02:24 TFFFTFTFTF 8 00:10:24 TTTTTTFT_T 
+Advanced Higher 
 (University) 
-Proficient Higher Male 1979 9 00:19:47 TTTTTTTTFT 6 00:13:57 TFFTFTFTTT 10 00:12:13 TTTTTTTTTT 
+Male 1985 6 00:22:08 TFTFTTFT_T 7 00:17:35 TFTTTFTTTF 6 00:11:20 T_TTFFTT_T 
+Proficient Higher 
 (University) 
-Advanced Higher Female 1988 7 00:23:18 TTTT_TTT__ 6 00:17:09 TTT_FFTTFT 10 00:06:27 TTTTTTTTTT 
+Male 1979 9 00:19:47 TTTTTTTTFT 6 00:13:57 TFFTFTFTTT 10 00:12:13 TTTTTTTTTT 
+Advanced Higher 
 (University) 
-Advanced Higher Male 1986 10 00:10:57 TTTTTTTTTT 6 00:13:37 TTTFFFTTTF 7 00:06:51 TTTT_FTT_T 
+Female 1988 7 00:23:18 TTTT_TTT__ 6 00:17:09 TTT_FFTTFT 10 00:06:27 TTTTTTTTTT 
+Advanced Higher 
 (University) 
-Proficient Higher Male 1984 8 00:19:28 TFTFTTTTTT 5 00:21:15 TFTFFFTTTF 7 00:07:47 TTTTFFTT_T 
+Male 1986 10 00:10:57 TTTTTTTTTT 6 00:13:37 TTTFFFTTTF 7 00:06:51 TTTT_FTT_T 
+Proficient Higher 
 (University) 
-Advanced Higher Female 1988 7 00:18:24 TTT_TT__TT 8 00:27:22 TFTTTTFTTT 9 00:12:13 TTTTTTTTFT 
+Male 1984 8 00:19:28 TFTFTTTTTT 5 00:21:15 TFTFFFTTTF 7 00:07:47 TTTTFFTT_T 
+Advanced Higher 
 (University) 
-Intermediate Primary/Second Female 1977 9 00:43:37 TTTTTTTFTT 5 00:32:14 TTT_FFT_FT 8 00:16:30 TTTFTTTT_T 
+Female 1988 7 00:18:24 TTT_TT__TT 8 00:27:22 TFTTTTFTTT 9 00:12:13 TTTTTTTTFT 
+Intermediate Primary/Second
 ary 
+Female 1977 9 00:43:37 TTTTTTTFTT 5 00:32:14 TTT_FFT_FT 8 00:16:30 TTTFTTTT_T 
   
 English Education Gender Year Born Correct 1st Time 1st Trace 1st Correct 2nd Time 2nd Trace 2nd Correct 3rd Time 3rd Trace 3rd 
-Advanced Higher Male 1989 6 00:13:11 TT_TT__TFT 8 00:22:10 TTT_TTTTTF 10 00:11:58 TTTTTTTTTT 
+Advanced Higher 
 (University) 
-Advanced Higher Male 1988 6 00:08:21 TFTFTTT_TF 5 00:11:32 TFTFFFTTTF 7 00:05:32 TT_TFTTT_T 
+Male 1989 6 00:13:11 TT_TT__TFT 8 00:22:10 TTT_TTTTTF 10 00:11:58 TTTTTTTTTT 
+Advanced Higher 
 (University) 
-Advanced Higher Male 1986 9 00:24:11 TTTTTTT_TT 7 00:27:13 TFTTFTFTTT 9 00:15:07 TTT_TTTTTT 
+Male 1988 6 00:08:21 TFTFTTT_TF 5 00:11:32 TFTFFFTTTF 7 00:05:32 TT_TFTTT_T 
+Advanced Higher 
 (University) 
-Advanced Higher Female 1989 5 00:08:17 T_TT_T_FFT 6 00:12:18 TTTFFFTTFT 5 00:05:08 TFT_TFFTFT 
+Male 1986 9 00:24:11 TTTTTTT_TT 7 00:27:13 TFTTFTFTTT 9 00:15:07 TTT_TTTTTT 
+Advanced Higher 
 (University) 
-Advanced Higher Female 1988 7 00:19:10 TTT_TTFT_T 3 00:11:02 FFTFFFTT_F 7 00:10:49 TTTT_FTTFT 
+Female 1989 5 00:08:17 T_TT_T_FFT 6 00:12:18 TTTFFFTTFT 5 00:05:08 TFT_TFFTFT 
+Advanced Higher 
 (University) 
-Proficient Higher Female 1985 8 00:37:56 T_TTTTTFTT 7 00:31:24 TFT_TFTTTT 9 00:25:33 TTTTTTTTFT 
+Female 1988 7 00:19:10 TTT_TTFT_T 3 00:11:02 FFTFFFTT_F 7 00:10:49 TTTT_FTTFT 
+Proficient Higher 
 (University) 
-Advanced Higher Male 1982 4 00:06:57 TFFFTTFFFT 2 00:05:22 FFFTFTFF_F 6 00:08:33 TT_TT_TFFT 
+Female 1985 8 00:37:56 T_TTTTTFTT 7 00:31:24 TFT_TFTTTT 9 00:25:33 TTTTTTTTFT 
+Advanced Higher 
 (University) 
-Intermediate Higher Male 1988 7 00:26:32 T_TT_TTFTT 5 00:31:39 T_TFFFTTFT 8 00:15:41 T_TTTTTT_T 
+Male 1982 4 00:06:57 TFFFTTFFFT 2 00:05:22 FFFTFTFF_F 6 00:08:33 TT_TT_TFFT 
+Intermediate Higher 
 (University) 
-Advanced Higher Female 1985 10 00:33:14 TTTTTTTTTT 9 00:42:18 TTTTTT_TTT 10 00:17:32 TTTTTTTTTT 
+Male 1988 7 00:26:32 T_TT_TTFTT 5 00:31:39 T_TFFFTTFT 8 00:15:41 T_TTTTTT_T 
+Advanced Higher 
 (University) 
-Proficient Higher Female 1989 7 00:25:13 T_T_TTTTFT 7 00:38:29 TTTFTFTT_T 9 00:19:22 TTTTTTTT_T 
+Female 1985 10 00:33:14 TTTTTTTTTT 9 00:42:18 TTTTTT_TTT 10 00:17:32 TTTTTTTTTT 
+Proficient Higher 
 (University) 
+Female 1989 7 00:25:13 T_T_TTTTFT 7 00:38:29 TTTFTFTT_T 9 00:19:22 TTTTTTTT_T 
  
  
  
@@ -2937,5 +3158,4 @@ third third third data
 third third third data 
 third third third chart 
 second third third questions 
- 
  

@@ -1,3 +1,5 @@
+1 
+ 
 Executive Summary 
  
 Side channel cryptanalysis is a technique that can be used to break cipher algorithms by 
@@ -29,8 +31,9 @@ process.
 the produced detection system.  
 7. I introduced possible mitigations for these countermeasures. 
   
-1 
-  
+2 
+ 
+ 
  
  
  
@@ -48,8 +51,9 @@ great guidance.
 • My flat mates in Winkworth House, for their essential comments 
 particularly for the demo of the poster day. 
 And to God, who made all things possible. 
-2 
- Contents 
+3 
+ 
+Contents 
 Chapter 1. Introduction ..................................................................................................... 6 
 1.1 Aim and Objectives ..................................................................................................... 7 
 1.2 Added Value ............................................................................................................... 7 
@@ -84,8 +88,9 @@ Chapter 3. Design and Implementation ...........................................
 3.2 Analyze CBSP ............................................................................................................ 37 
 3.2.1 Reading Time Stamp Counter ........................................................................... 37 
 3.2.2 Serialized Instruction ......................................................................................... 38 
-3 
- 3.2.3 No Cache Access ................................................................................................ 39 
+4 
+ 
+3.2.3 No Cache Access ................................................................................................ 39 
 3.2.4 Less System calls ............................................................................................... 39 
 3.3 CBSP Signature based Detection Methods ............................................................... 40 
 3.3.1 Counting based Method .................................................................................... 40 
@@ -105,8 +110,9 @@ Chapter 5. Conclusion ..........................................................
 5.1 Future Work .............................................................................................................. 52 
  
   
-4 
-  
+5 
+ 
+ 
 Figures 
 Figure  1.1: Side Channel Cryptanalysis ..................................................................................... 6 
 Figure  2.1: 2- Way Set Associative Cache Structure ............................................................... 11 
@@ -125,16 +131,15 @@ Figure  3.2: Secure Terminal ...................................................
 Tables 
 Table  2.1 Process Classification Classes .................................................................................. 31 
 Table  2.2:  Confusion Matrix for Malware Classifier. .............................................................. 32 
-Table  4.1: Counting Method Accuracy Results over 2844 binaries in Ubuntu 10.04 with 
-  = ,  = ,  =  ....................................................................................................... 47 
-Table  4.2: Counting Method Accuracy Results over 2665 binaries in Windows Vista with 
-  = ,  = ,  =  ....................................................................................................... 47 
+Table  4.1: Counting Method Accuracy Results over 2844 binaries in Ubuntu 10.04 with   = ,  = ,  =  ....................................................................................................... 47 
+Table  4.2: Counting Method Accuracy Results over 2665 binaries in Windows Vista with   = ,  = ,  =  ....................................................................................................... 47 
 Table  4.3: Counting Method Accuracy Results over 5509 binaries in Ubuntu 10.04 and 
 Windows Vista with   = ,  .......................................................................................... 49 
  
   
-5 
- Chapter 1. Introduction 
+6 
+ 
+Chapter 1. Introduction 
  
 There are two broad approaches for cryptanalysis: the first approach is based on analyzing 
 the theoretical weaknesses in the structure of the cipher algorithm; the second approach is 
@@ -148,21 +153,14 @@ shows the basic idea of side channel attacks.
  
  
  
-Machine 
-Adversary 
  
-Secret 
  
  
   
-Side Channel Information 
- 
-System Input 
- 
-System output 
  
  
-Figure   1  .1: Side Channel Cryptanalysis 
+ 
+ 
  
  
  
@@ -173,8 +171,16 @@ out more than 20 years ago in [1]. The author considered the possibility of leak
 unprivileged data and establishing a covert channel using cache memory. One model to 
 which this kind of cryptanalysis can be applied is the examination of footprints on the 
 operations that are preformed during the execution. A typical way to do this is by running a 
-6 
- process in parallel a so-called spy process with the target process (encryption or decryption 
+Machine 
+Secret 
+Adversary 
+Side Channel Information 
+System Input 
+System output 
+Figure  1.1: Side Channel Cryptanalysis 
+7 
+ 
+process in parallel a so-called spy process with the target process (encryption or decryption 
 process). The spy process then traces the footprints on MA components and obtains 
 information that can lead to security breach. As we will be seen, there are many attacks that 
 have succeeded in breaking the security and recovering the secret key using this model of 
@@ -209,8 +215,9 @@ organizations. The second market is the cloud computing. According to [3], the a
 can leak information from another process once he is successfully be placed co-resident 
 with a target virtual machine in the cloud. This occurs because of the sharing of MA 
 resources between the two virtual machines.  
-7 
- 1.3 Thesis Scope 
+8 
+ 
+1.3 Thesis Scope 
 In this section, we will be presenting the structure of this thesis and topics that will be 
 covered. 
  
@@ -246,8 +253,9 @@ detection algorithms. At the end, a conclusion will be provided in chapter 5 wit
 for an extended work.  
  
   
-8 
- Chapter 2. Technical Basis 
+9 
+ 
+Chapter 2. Technical Basis 
  
 In this chapter, we will be presenting some introduction for various topics which are related 
 for the present project. One can note that the major characteristic in this project requires a 
@@ -277,8 +285,9 @@ needed by CPU in the near future. It is designed to be mapped to the main memory
 so that the CPU can load or store data from or to the main memory in a very short time. 
 They are three mapping technique can be used to map the main memory with the CPU 
 cache: 
-9 
-  
+10 
+ 
+ 
 1. Directed Mapping. In this technique, each memory location in the main memory 
 mapped only to one location in the cache. The common way to do this is using 
 appropriate function with Cache size modulo. For example f(x) = x mod <Cache Size>. 
@@ -312,9 +321,10 @@ request this data from the main memory and fetch a copy for its use. This case i
 cache miss. The retrieved copy will be kept in cache hopefully to be wanted and used by 
 CPU in the near future. 
  
-10 
-  
-Figure   2  .1: 2- Way Set Associative Cache Structure 
+11 
+ 
+ 
+Figure  2.1: 2- Way Set Associative Cache Structure 
  
 The Cache memory can be on-chip or off-chip.  The former one is very fast but due 
 hardware limitation is very small and expensive while the latter is larger and less expensive 
@@ -345,8 +355,9 @@ predication is taken or is not taken. If the prediction has been taken, then a c
 number of cycles will be saved.  If the predication has not been taken, the microprocessor 
 will pay a penalty of mispredication. It is clear that the predication algorithm plays an 
 essential role to avoid the mispredication which is resulting in increasing the clock cycles. 
-11 
- The addresses that have been taken are placed in special buffer which is called Branch 
+12 
+ 
+The addresses that have been taken are placed in special buffer which is called Branch 
 Target Buffer (BTB). Keeping the target addresses in BTB will make these addresses be 
 executed without any need to be fetched for the next time if they needed. However, since 
 BTB has limited size, there is no guarantee that these addresses will be kept for long time. 
@@ -385,8 +396,9 @@ follows:
 1. Created or New: The process is created by being loaded from the secondary storage 
 device and placed into the memory. In this state, the process should have been 
 assigned a Process ID PID. 
-12 
-  
+13 
+ 
+ 
 2. Ready or Waiting: The process is being awaiting the execution on a CPU. 
  
 3. Running: The process is being executed on a CPU. 
@@ -427,23 +439,23 @@ rings can access code of the most privileged ring through a specific system call
  
  
  
-13 
-  
- 
- 
- 
-Figure  2 .2: Process Statuses Diagram 
-  
- 
- 
- 
-Figure  2 .3: Protection Rings 
-  
- 
- 
- 
 14 
- 2.3 Cryptographic Primitives 
+ 
+ 
+ 
+ 
+ 
+Figure  2.2: Process Statuses Diagram 
+ 
+ 
+ 
+Figure  2.3: Protection Rings 
+ 
+ 
+ 
+15 
+ 
+2.3 Cryptographic Primitives 
  
 In this section, some cryptographic algorithms will be presented. These algorithms are 
 provided as an example of cipher algorithms that have been broken by the side channel 
@@ -488,94 +500,118 @@ for the basic operations SubBytes, ShiftRows, MixColumns and AddRoundKey respect
  
  
  
-15 
- T Th he e  h hiig gh h  lle ev ve ell  d de es sc cr riip pt tiio on n  f fo or r  t th he e  e en nc cr ry yp pt tiio on n  p pr ro oc ce es ss s  iis s  a as s  f fo ollllo ow ws s: : 
+ The high level description for the encryption process is as follows:
  
-1. Key Schedule t to o  g ge en ne er ra at te e  t th he e  s su ub bk ke ey ys s. . 
+1. Key Schedule to generate the subkeys.
  
 2. First Round: 
-a. Addround Key: : the plaintext with the actual key 
+a. Addround Key:
  
-3. Middle Rounds: I It te er ra at tiin ng g t th he e  f fo ollllo ow wiin ng g  o op pe er ra at tiio on ns s  9 9, ,  1 11 1  o or r  1 13 3  t tiim me es s  d de ep pe en nd diin ng g  on 
-the key size 1 12 28 8, ,  1 19 92 2  o or r  2 25 56 6  r re es sp pe ec ct tiiv ve elly y. . 
+3. Middle Rounds: Iterating
+the key size 128, 192 or 256 respectively.
 a. SubBytes 
 b. ShiftRows 
 c. MixColumns 
-d. AddRoundKey  
+d. AddRoundKey 
  
-4. F F Fi iin n na a al ll   R R Ro o ou u un n nd d d: : :   i iit t t   s s sa a am m me e e   a a as s s   t t th h he e e   m m mi iid d dd d dl lle e e   r r ro o ou u un n nd d ds s s   b b bu u ut t t   w w wi iit t th h h   n n no o o   M M Mi iix x xC C Co o ol llu u um m mn n ns s s   o o op p pe e er r ra a at t ti iio o on n n. . .   I I It t t   i iis s s   a a as s s   
+4. Final Round: it same as the middle rounds but with no MixColumns operation. It is as 
 follows: 
 a. SubBytes 
 b. ShiftRows 
-c. AddRoundKey  
+c. AddRoundKey 
  
  
  
-Figure  2 .4: SubBytes 
-  
  
- 
- 
-Figure   2  .5: ShiftRows 
  
  
 16 
+ 
+ 
+ the plaintext with the actual key 
+ the following operations 9, 11 or 13 times depending 
+ 
+ 
+Figure  2.4: SubBytes 
+ 
+Figure  2.5: ShiftRows 
+on 
   
-Figure   2  .6: MixColumns 
  
  
+They are two general ways to implement AES. 
+implementation and the lookup table implementation. 
  
-Figure  2 .7: AddRoundKey 
-  
- 
-T Th he ey y  a ar re e  t tw wo o  g ge en ne er ra all  w wa ay ys s  t to o  iim mp plle em me en nt t  A AE ES S. .  We can name them: the s st tr ra aiig gh ht tf fo or rw wa ar rd d  
-implementation and the llo oo ok ku up p  t ta ab blle e  iim mp plle em me en nt ta at tiio on n. .    
- 
-1. S St tr ra ai ig gh ht tf fo or rw wa ar rd d  I Im mp pl le em me en nt ta at ti io on n: is implementing the a af fo or re em me en nt tiio on ne ed d steps of the 
-e en nc cr ry yp pt tiio on n  iin n  t th he e  s sa am me e  w wa ay y  a as s  iit t  d de es sc cr riib be ed d  a ab bo ov ve e. .  T Th hiis s  iim mp plle em me en nt ta at tiio on n  iis s  s su uiit ta ab blle e  iin n  
-8 bits processors s su uc ch h  a as s  d diif ff fe er re en nt t  t ty yp pe es s  o of f  s sm ma ar rt t  c ca ar rd ds s. .  T Th hiis s  iim mp plle em me en nt ta at tiio on n  d do oe es s  
-n n no o ot t t   s s su u uf f ff f fe e er r r   f f fr r ro o om m m   t t th h he e e   c c ca a ac c ch h he e e   t t ti iim m me e e   s s si iid d de e e   c c ch h ha a an n nn n ne e el ll   a a at t tt t ta a ac c ck k ks s s   w w wh h hi iic c ch h h   w w we e e   w w wi iil lll ll   b b be e e   p p pr r re e es s se e en n nt t ti iin n ng g g   i iin n n   
-the next sub-s se ec ct tiio on n. .  H Ho ow we ev ve er r, ,  iit t  m miig gh ht t be slightly s sllo ow we er r  t th ha an n  iit t  c co ou un nt te er rp pa ar rt t, i.e. 
-table lookup i iim m mp p pl lle e em m me e en n nt t ta a at t ti iio o on n n, , ,   p p pa a ar r rt t ti iic c cu u ul lla a ar r rl lly y y   i iif f f   i iit t t   i iis s s   i iim m mp p pl lle e em m me e en n nt t te e ed d d   i iin n n   p p pl lla a at t tf f fo o or r rm m ms s s   w w wi iit t th h h   3 3 32 2 2   
+1. Straightforward Implementation
+encryption in the same way as it d
+8 bits processors such as different types of smart cards. 
+not suffer from the cache time side channel attacks which we will be presenting in 
+the next sub-section. However, it might
+table lookup implementation, particularly if it is implemented in platforms with 32 
 bits processors.  
  
-2. Table Lookup I Im mp pl le em me en nt ta at ti io on n: is combining the following steps S Su ub bB By yt te es s, ,  S Sh hiif ft tR Ro ow w  
-a an nd d  M Miix xC Co ollu um mn ns s  iin nt to o  f fo ou ur r  d different lookup tables. T Th he e  llo oo ok ku up p  t ta ab blle es s  
-	 , 	 , 	  	 f fo or r  t th hiis s  iim mp plle em me en nt ta at tiio on n  a an nd d  t th he e  r ro ou un nd d  t tr ra an ns sf fo or rm ma at tiio on n   are defined 
-
-    
-below. I I It t t   i iis s s   o o ob b bv v vi iio o ou u us s s   t t th h ha a at t t   t t th h hi iis s s   i iim m mp p pl lle e em m me e en n nt t ta a at t ti iio o on n n   r r re e eq q qu u ui iir r re e es s s   m m mo o or r re e e   m m me e em m mo o or r ry y y   t t th h ha a an n n   t t th h he e e   
-s st tr ra aiig gh ht tf fo or rw wa ar rd d  iim mp plle em me en nt ta at tiio on n. .  H Ho ow we ev ve er r, ,  iit t  iis s  m mu uc ch h  f fa as st te er r  a an nd d  m mu uc ch h  s su uiit ta ab ble for 32 
+2. Table Lookup Implementation
+and MixColumns into four d	
+, 	, 	 
+ 	 for this implementation 
+below. It is obvious that this implementation requires more memory than the 
+straightforward implementation. However, it is much faster a
 bits machines.  
  
  
  
 17 
+ 
+Figure  2.6: MixColumns 
+ 
+Figure  2.7: AddRoundKey 
+We can name them: the straightforward 
   
-   
-  . 002   . 003
-  
-  . 002
-	  =   	 =    
-
- 
- 
-   
-  . 003  
+: is implementing the aforementioned
+escribed above. This implementation is suitable in 
+This implementation does 
+ be slightly slower than it counterpart
+: is combining the following steps SubBytes, ShiftRow 
+ifferent lookup tables. The lookup tables 
+and the round transformation 
+nd much suitab
+ steps of the 
+, i.e. 
+are defined 
+le for 32 
+18 
  
- 
-.003 
- 
-	  =   	 =   
- 
-.002 .003
- . 002
  
- = 	    ! 	    ! 	    ! 	    ! '   
- 
+	
+
+ = 
+. 002
+
+
+. 003 	 =  
+
+. 003
+. 002
+
+   
  
-,  ,"#  ,"#  ,"# 
-$ % &
+	
+ =  
+
+.003
+.002
+  	 =  
+
+
+
+.003
+. 002 
+  = 	
+
+,  ! 	
+,"#$  ! 	
+,"#%  ! 	
+,"#&  ! '    
  
 The lookup table implementation is not secure against cache time attacks which we will 
 discuss in the next sub section. More details about AES and about its implementation can be 
@@ -597,25 +633,21 @@ Key Generation:
  
 • The receiver chooses p, q sufficient large prime numbers.  
 • Compute n = pq. 
-• The receiver chooses e and d such that:  
- = 1 )* + , ? 1 .+/ ? 1. where mod is the modular arithmetic. 
+• The receiver chooses e and d such that:   = 1 )* +, ? 1.+/ ? 1. where mod is the modular arithmetic. 
 • The private key i.e. the receiver’s key is (d,p,q) 
 • The public key i.e. the sender’s key is (e,n) 
  
 Encryption: 
  
-• The sender encrypt the message m with the public key (e, n) 
-1
-0 = ) )*  
+• The sender encrypt the message m with the public key (e, n) 0 = )1  )*  
  
  
  
  
-18 
- Decryption: 
-• The receiver decrypt the message c with the private key (d, p,q) 
-2
-) = 0 )*  
+19 
+ 
+Decryption: 
+• The receiver decrypt the message c with the private key (d, p,q) ) = 02  )*  
  
 • For better performance, the decryption operation can be performed by Chinese 
 remainder algorithm described in [10] and [11]. In this case p and q will be used 
@@ -626,27 +658,20 @@ arithmetic algorithms should be employed. For efficient implementation for expon
 left to right binary exponentiation algorithm can be used [10]. The pseudocode for this 
 algorithm is as follows:  
  
-INPUT: 3 ? 5   = +   …   . 8  ,*898: 893;  
-6 6"  
- 
-2
-OUTPUT: 3 
+INPUT: 3 ?  5 
+  =  +66" … 
+. 8 
+ ,*898: 893;  
+OUTPUT: 32  
  
 Algorithm: 
- 
-1. < ? 1 
- 
-2. >*; 8 ?;*) 9 *@ 9* 0 * 9? ?*BB*@83: 
-2.1 < ? < ? < 
-2.2 D?  = 1, 9? < ? < ? 3 
-E
- 
-3. !9F;+<. 
+ 1. < ? 1 
+ 2. >*; 8 ?;*) 9 *@ 9* 0 * 9? ?*BB*@83: 2.1 < ? < ? < 2.2 D? E  =  1, 9? < ? < ? 3 
+ 3. !9F;+<. 
  
 Step 2.2 in the pseudocode of left to right binary exponentiation algorithm can be an 
-appropriate source of information leakage if d was the actual private key.  In step 8,  if 2.2 
-was performed, this will mean that  was set. Otherwise, it was zero. Any side channel 
-E
+appropriate source of information leakage if d was the actual private key.  In step 8 , if 2.2 
+was performed, this will mean that E was set. Otherwise, it was zero. Any side channel 
 information can leak weather 2.2 was performed or not during RSA decryption can be used 
 to recover the private key of RSA.  There are many side channel attacks are discovered due 
 to this vulnerability such as [12] and [13] We will see in section  2.5 examples of micro 
@@ -662,8 +687,9 @@ is a theoretical, it reveals certain strategies which have been used later in de
 practical attacks in DES such as [16] and in AES such as [17]. These strategies are termed 
 time driven and access driven, see section Cache Attacks Strategies. 
  
-19 
- In 2005, Bernstein tried to present a remote cache attack by comparing the timing behavior 
+20 
+ 
+In 2005, Bernstein tried to present a remote cache attack by comparing the timing behavior 
 of the target machine with a known referenced behavior. This requires a prior knowledge of 
 the target machine profile under a known key before running the attack. However, [18] 
 provided an analysis for this attack and showed that it is not realistic remote attack. 
@@ -701,19 +727,17 @@ demonstrated on AES in [19]. It is the first work for efficient cache based atta
 real life setting. In their work, they have considered two modes of attacks. These modes are: 
 synchronous and asynchronous. A description of these attacks will be introduced in the next 
 two sub sections. 
-20 
- 2.4.2 OST Synchronous Attacks 
+21 
+ 
+2.4.2 OST Synchronous Attacks 
  
 The synchronized attack consists of two stages: online and offline. In the first stage, a set of 
 random samples of known plaintext is collected using cache side channel. i.e., cache hit and 
 cache miss. Then, a cryptanalysis of this data is carried out offline. 
  
-The intuition of this mode of attack as follows. Let us denote that the key byte ' and the 
-E
-plaintext bytes , . In the lookup implementation of AES, we have 16 lookup operations per 
-E
-round. This can be concluded because we have 4 lookup tables 	 such that 8 ?G0, 1, 2, 4I 
-E
+The intuition of this mode of attack as follows. Let us denote that the key byte 'E  and the 
+plaintext bytes ,E. In the lookup implementation of AES, we have 16 lookup operations per 
+round. This can be concluded because we have 4 lookup tables 	E such that 8 ? G0, 1, 2, 4I 
 and each table is accessed 4 times per round. In the online stage, the spy process fills the 
 cache with its own data, and then triggers the target process to encrypt  or decrypt one 
 block (i.e. 16 bytes). Next, the spy process tries to read its own data again in order to 
@@ -723,10 +747,8 @@ hit.
  
 In the offline stage, the attacker needs to know which lookup tables have been accessed in 
 the cache of cache miss. The idea is by using the cache hit to eliminate the non accessed set. 
-Since , ?' with known plaintext , , the attacker can discards a large number of candidates 
-E E E
-for' . Doing so in the first round, he can recovers only half of the key bits i.e., the most 
-E
+Since ,E?'E  with known plaintext ,E, the attacker can discards a large number of candidates 
+for'E. Doing so in the first round, he can recovers only half of the key bits i.e., the most 
 significant bits. To complete the full key, the attacker needs to analyze the second round of 
 AES and exploit the relationship between the first round and the second round. This relation 
 can be driven from the Rijndael specification [8]. 
@@ -748,8 +770,9 @@ If the average time is higher, the attacker can conclude that the target process
 suffers a cache miss since its own data has been evicted by the spy process in 
 step b. 
  
-21 
- The authors termed this method Evict+Time due to the eviction operation in step (b) and 
+22 
+ 
+The authors termed this method Evict+Time due to the eviction operation in step (b) and 
 the timing operation in step (c). 
  
 It is clear that this method is very sensitive to various type of external influence, in 
@@ -788,8 +811,9 @@ operation and thus demonstrating this attack under any other mode is luckily muc
  
  
  
-22 
- 2.4.3 OST Asynchronous Attacks 
+23 
+ 
+2.4.3 OST Asynchronous Attacks 
  
 This attack differs from the synchronous one in many aspects. First, the attacker has no 
 prior knowledge with regard to the actual plaintext or ciphertext. Second, this is not an 
@@ -805,44 +829,44 @@ running many processes which is encrypting English text.
  
       
       
+      
+      
+      
+      
+ 
+ 
+      
+      
+      
+      
+      
+      
+ 
+ 
+      
+      
+      
+      
+      
+      
+ 
+ 
+ 
+Figure  2.8: Illustration for Synchronous OTS prime+ probe cache attack 
+ 
+ 
 Spy process fills the cache with 
-      
 known data 
-      
-      
-      
- 
- 
-      
-      
 Target process access the cache 
-      
 depending on a secret key 
-      
-      
-      
- 
- 
-      
-      
 Spy process accesses the cache 
-      
 and times it to figure out cache 
-      
 hits and cache misses 
-      
-      
- 
 Spy process data 
- 
- 
- 
 Target process data 
+24 
  
-Figure  2 .8: Illustration for Synchronous OTS prime+ probe cache attack 
-  
-23 
- 2.5 Branch Prediction Side Channels 
+2.5 Branch Prediction Side Channels 
  
 A few years ago, [5] pointed out another component in many processors that can be used as 
 a source of information leakage. This component is the Branch Prediction Unit (BPU). A Brief 
@@ -872,9 +896,8 @@ Based on the final reduction of Montgomery and whether the branch prediction out
 will be taken or not taken the key will be revealed. 
  
 The attacker will measure the execution time of the samples under one single key. Assume 
-that the attacker knows the 8s ecret bits of the key. It is clear that the first most signification 
-bit is one. Now, the attacker needs to guess the +8 + 1.9? key. We denote it  . Then, he 
-EL
+that the attacker knows the 8 secret bits of the key. It is clear that the first most signification 
+bit is one. Now, the attacker needs to guess the +8 + 1.9? key. We denote it EL. Then, he 
 breaks the samples into 2 sets i.e., 5,000 for each sample. The first set is under the 
 assumption that the bit is one and the second set is under the assumption that the bit is 
 zero. Now, to figure out which set is the right one i.e. which guess is correct, the attacker 
@@ -882,19 +905,11 @@ needs to break each set a second time into two additional sets. This will yield 
 number of four sets. In this time, the attacker is looking for figuring out if the branch 
 prediction taken or not taken. It is obvious that we have four cases during MM as follows. 
  
-24 
-  
-M : misprediction under the assumption  = 1 
- EL
-M : No misprediction under the assumption  = 1 
- EL
-M : misprediction under the assumption  = 0 
- EL
-M : No misprediction under the assumption  = 0 
-N EL
+25 
  
-If the average time of M and M  is more significant than the average time of M and M  then 
-   N
+ M: misprediction under the assumption EL = 1 M: No misprediction under the assumption EL= 1 M: misprediction under the assumption EL= 0 MN: No misprediction under the assumption EL= 0 
+ 
+If the average time of M and M  is more significant than the average time of M and MN  then 
 the actual +8 + 1.9? bit is one. Otherwise, it is zero. It is not clear that what the authors 
 mean by more significant. However, [12] provided a statistical approach to determine the 
 significance based on performing certain statistical tests. 
@@ -904,7 +919,7 @@ The authors of [5] considered also the synchronous case as [19] did in their wor
 should be succeeded if the adversary is able to synchronize the spy process with the 
 intermediate steps of the target process. 
  
-For example, in step no 8i n SM operation, spy process should access the BTB in order to 
+For example, in step no 8 in SM operation, spy process should access the BTB in order to 
 analyze the behavior of the target process. In each step 8, the adversary needs to measure 
 the time of the target process twice before and after running the spy process. In the first 
 time, no modification for BTB is applied by spy process. However, in the second time, the 
@@ -927,8 +942,9 @@ separation basis of the previous attack in section  2.5.1.
 In order that the spy process evicts the previous addresses in BTB, the authors considered 
 three strategies: 
  
-25 
- 1. Full Eviction Method. Spy process clears all addresses. It is clear that this method is 
+26 
+ 
+1. Full Eviction Method. Spy process clears all addresses. It is clear that this method is 
 appropriate when the adversary does not know the target branch addresses. 
  
 2. Partial Eviction Method. Spy process clears partial addresses. 
@@ -966,8 +982,9 @@ Some of these are based on traditional network based IDS techniques, which are p
 in [23], such as misuse detection, anomaly detection and specification based detection.  
 Other categorization such as those presented in [24] divided the detection techniques into 
 signature based and anomaly based where the specification based techniques are subclass 
-26 
- of anomaly techniques. In this report we present a new categorization based on the learning 
+27 
+ 
+of anomaly techniques. In this report we present a new categorization based on the learning 
 model of the detection system. Our categorization is automatic learning approaches and 
 manual learning approaches. Each of them can also be divided into two subclasses which 
 are static and dynamic. In this section, we will discuss each approach in some details. 
@@ -1006,8 +1023,9 @@ classes based on the type of characteristics. They are static methods and dynami
  
 The detector in static approach looks for specific sequences of instructions. These 
 sequences should be determined in the lab once the malware is known. Usually, this step 
-27 
- requires disassembling the binary representation and analyzing the resulting code. One 
+28 
+ 
+requires disassembling the binary representation and analyzing the resulting code. One 
 possible technique that is most potentially to be used by the attackers is obfuscating the 
 code of the malware program. As a result, people who analyze the malware should take into 
 accounts using techniques that able to disassemble the obfuscated codes. There are many 
@@ -1047,8 +1065,9 @@ several basic algorithms will be introduced.
 1. Linear sweep disassembly. In this technique the analyzer starts to decode 
 everything in the machine code segment sequentially i.e. one instruction after 
 another. It is obvious that this approach is straightforward and very simple. 
-28 
- However, it is unable to distinguish the control flow of the program in order to avoid 
+29 
+ 
+However, it is unable to distinguish the control flow of the program in order to avoid 
 misinterpretation [26]. For example, assume that our program contains jump 
 instruction to specific address. In such case, the analyzer will disassemble the jump 
 instruction and anything immediately after jump even if it will never be reached at 
@@ -1088,8 +1107,9 @@ and look for the presence of any instruction sequences, which is called signatur
 code that implement these negative behaviors. Most of the techniques are using control 
 flaw and data flow analysis during this approach. A number of these techniques can be 
 found in [29], [28] and [30]. 
-29 
-  
+30 
+ 
+ 
 The main advantage of this approach is that it covers the entire code and it tends to be 
 much faster. However, the major drawback is that it cannot analyze and detect complex 
 malicious behavior. Since the attack is written by human adversary, it can be written to be 
@@ -1127,8 +1147,9 @@ the system which has more than 80% accuracy level is considered a good detection
 [23]. However, the remaining percentage i.e. 20% may play a significant role to determine 
 whether this system is desirable or not. The incorrect classified instances can be categorized 
 into two parts: 
-30 
-  
+31 
+ 
+ 
 1. False Positive Instances. They are the normal instances which are classified as 
 abnormal (malicious) instances. 
 2. False Negative Instances. They are the abnormal (malicious) instances which are 
@@ -1147,14 +1168,14 @@ correctly, that means it achieved true positive or true negative result. In cont
 detects malicious process or normal process incorrectly, that means it achieved false 
 positive or false negative result.   
  
-Actual Process Detection System Classification Result Name in Literature 
+Actual Process Detection System 
 Decision 
+Classification Result Name in Literature 
 Normal Normal Correct True Negative (TN) 
 Normal Malicious Incorrect False Positive (FP) 
 Malicious Normal Incorrect False Negative (FN) 
 Malicious Malicious Correct True Positive (TP) 
-Table  2 .1 Process Classification Classes 
-  
+Table  2.1 Process Classification Classes 
 Accordingly, the main goal for every malware detection system is to produce as high 
 percentage of TN and TP as possible and as low percentage of FP and FN as possible. These 
 four variables TN, TP, FP & FN are used in a big majority of accuracy models of intrusion 
@@ -1170,37 +1191,29 @@ classes in both column and row i.e., 2x2 matrix. To judge the accuracy of the sy
 non-zero numbers should be located only in the main diagonal of the matrix. The ideal 
 detection system is that which have zero values in the whole matrix unless the diagonal. 
 Table  2.2 shows the layout of the confusion matrix. 
-31 
-  
+32 
  
-Predicated Class 
+ 
+ 
 Confusion Matrix 
+Predicated Class 
 Normal (Negative) Malicious (Positive) 
-Normal (Negative) TN FP 
 Actual Class 
+Normal (Negative) TN FP 
 Malicious (Positive) FN TP 
-Table   2  .2:  Confusion Matrix for Malware Classifier.  
-+ .
-The main diagonal ? consists of TN and TP. Good detection systems should avoid having high values in the non 
+Table  2.2:  Confusion Matrix for Malware Classifier.  
+The main diagonal +?. consists of TN and TP. Good detection systems should avoid having high values in the non 
 diagonal cells. The ideal systems are those which have diagonal matrix. 
  
 From Table  2.2, the following metrics is defined as follows. 
  
-PQLPR PQLPR
-Accuracy (AC) =  =   (Eq 2.1) 
-6S6TU PQLPRLVRLVQ
+Accuracy (AC) =  PQLPR6S6TU = PQLPRPQLPRLVRLVQ   (Eq 2.1) 
  
-VQLVR VQLVR
-Error Rate (ER) = =   (Eq 2.2) 
-6S6TU PQLPRLVRLVQ
+Error Rate (ER) = VQLVR6S6TU = VQLVRPQLPRLVRLVQ   (Eq 2.2) 
  
-WX PR
-True Positive Rate (TPR) =   =  = Sensitivity   (Eq 2.3) 
-YZ[\Y] ^_`a[abc deLPR
+True Positive Rate (TPR) =  WXYZ[\Y] ^_`a[abc  =  PRdeLPR = Sensitivity   (Eq 2.3) 
  
-PQ PQ
-True Negative Rate (TNR) =   =  = Specificity   (Eq 2.4) 
-YZ[\Y] fcgY[abc WeLVR
+True Negative Rate (TNR) =  PQYZ[\Y] fcgY[abc  =  PQWeLVR = Specificity   (Eq 2.4) 
  
 False Positive Rate (FPR)   = 1 ? 	h!    (Eq 2.5) 
  
@@ -1220,21 +1233,18 @@ which are detected as a malware. For example, assume that the system detects 10
 processes as a malware and only 6 of them were truly malware. Then the Precision of this 
 system will be 0.6. The formula of this metric as follows. 
  
-WX PR
-Precision (P) =   =    (Eq 2.7) 
-^jckaZ[ck ^_`a[abc dXLPR
+Precision (P) =  WX^jckaZ[ck ^_`a[abc  =  PRdXLPR   (Eq 2.7) 
  
-32 
- The disadvantage of using only the Precision metric is the fact that it omits the total number 
+33 
+ 
+The disadvantage of using only the Precision metric is the fact that it omits the total number 
 of the actual positive instance that is covered by the classifier. As a result, the system may 
 have a high Precision even if it detects small part of the malicious instances. Therefore, 
 there is another metric can be used for this purpose which is termed Recall.  
  
 Recall metric shows the missing part of Precision. The formula of this metric is: 
  
-WX PR
-Recall (R) = TPR =   =    (Eq 2.8) 
-YZ[\Y] ^_`a[abc deLPR
+Recall (R) = TPR =  WXYZ[\Y] ^_`a[abc  =  PRdeLPR   (Eq 2.8) 
  
 If the classifier classified only 4 instances out of 10 actual positive, Recall value will be 0.4. 
 One may notice that using this metric only is not a good approach as well. This is because it 
@@ -1253,12 +1263,7 @@ Due to what we have discussed, F-Measure metric is introduced in 1992 to evaluat
 of information extraction technology [33]. This metric combines the two previous metrics 
 i.e. Recall and Precision. It can be calculated by the following formula: 
  
- R ?o
-F- Measure =    = 2 ?     (Eq 2.9) 
-$ $
-RLo
-L
-l m
+F- Measure =   $lL$m  = 2 ?  R ?oRLo     (Eq 2.9) 
  
 When a classifier has 100% Precision and Recall, this metric will be 1.0 meaning that the 
 classifier has 0% false alarm and detect 100% of the positive instances. Thus, F-measure is 
@@ -1272,8 +1277,9 @@ be used not only in intrusion and malware detection systems, but also in a large
 practical problems such as medical diagnosis, radiology as well as machine learning and data 
 mining [34]. Historically, it is introduced during World War II to analyse the radar signals 
 [35]. 
-33 
-  
+34 
+ 
+ 
 In the context of the malware detection systems, ROC curves have two main applications. 
 First, it can be used to visualise the relationship between the proportion of malwares that 
 are correctly detected (TPR) and one minus the proportion of normal process that are 
@@ -1302,9 +1308,10 @@ called random classifier.
  
  
  
-Figure   2  .9: ROC Space Analysis 
-34 
- 2.7.2 Performance 
+Figure  2.9: ROC Space Analysis 
+35 
+ 
+2.7.2 Performance 
  
 The evaluation of the intrusion and malware detection systems performance is an important 
 matter. The additional issue on this evaluation involves many factors related to the 
@@ -1324,8 +1331,9 @@ We found out that they are many other metrics in the literature. For example tim
 response, completeness and const sensitivity which are used to evaluate Network IDSs. 
 Since our work is more relevant to malware detection system, we will not cover these 
 metrics.  
-35 
- Chapter 3. Design and Implementation 
+36 
+ 
+Chapter 3. Design and Implementation 
  
 In this project, we have focused on devising a detection system for cache based Spy Process 
 (CBSP). Signature based detection is the technique which we have used for designing the 
@@ -1354,13 +1362,13 @@ There are plenty of commercial and non-commercial disassembles. The one which we
 used in the offline analysis is objdum -d while we have used libdisasm library in the online 
 inspection.  We were interested in using a mature open source disassembler with globally 
 support community. In Figure  3.1: Part of the disassembled of CBSP, a part of the 
-36 
- disassembled code of CBSP in presented. It is the main section that forms the signature. We 
+37 
+ 
+disassembled code of CBSP in presented. It is the main section that forms the signature. We 
 used objdum –d to generate this disassembled code. 
  
  
-Figure  3 .1: Part of the disassembled of CBSP 
-  
+Figure  3.1: Part of the disassembled of CBSP 
 3.2 Analyze CBSP 
  
 After having the disassembled binary of the process under investigation, it is essential to 
@@ -1373,8 +1381,9 @@ instructions are presented.
  
 In CBSP, it is essential to measure the access time for a particular location in the memory in 
 order to conclude the cache hit and cache miss. Since this operation is very fast, using the 
-37 
- ordinary C functions of measuring the execution time such as gettimeofday(), time() or 
+38 
+ 
+ordinary C functions of measuring the execution time such as gettimeofday(), time() or 
 clock() are not precise enough to obtain the correct results. Therefore, reading CPU time 
 stamp counter is used to calculate the execution time of accessing a memory. According to 
 Intel Developer Guide, which can be retrieved from [38], rdtsc is x86 CPU instruction that 
@@ -1413,8 +1422,9 @@ execution processors. The problem is rdtsc may be executed before or after its l
 the source code. This potentially will give inaccurate cycle count leading to misleading 
 determination for cache hit and cache miss.  
  
-38 
- In order to solve this problem and avoid rdtsc from being executed out of order, it is 
+39 
+ 
+In order to solve this problem and avoid rdtsc from being executed out of order, it is 
 essential to use a serialized instruction before using rdtsc. The serialized instruction forces 
 the microprocessor to complete the previous instructions before being executed. Thus, the 
 program will not continue to execute rdtsc before the serialized instruction is complete. 
@@ -1452,8 +1462,9 @@ privileged to the most privileged. The kernel is the most privileged and can acc
 resources. If there is a process needs to access particular hardware resources, it should 
 request this service from the kernel using what is called system call.  
  
-39 
- Most of the normal programs request a service from the kernel in order to execute 
+40 
+ 
+Most of the normal programs request a service from the kernel in order to execute 
 hardware related operations such as reading or writing from the hard disk or printing into 
 the standard output. CBSP does not normally need to use much system calls since its 
 activities are only concentrated on measuring the memory access time. Thus, the number of 
@@ -1474,16 +1485,13 @@ method and Program Flow method. In this section, these two methods will be expla
 In this method the classification for the program under investigation is based on how many 
 number of primary instructions exist in the disassembled code. It counts the number of each 
 primary instruction and takes the decision based on specific parameters which are 
-called p
-, p , q. The main advantage of this method is the performance since there is no 
- 
+called p, p, q. The main advantage of this method is the performance since there is no 
 much complex work needed for this method to be carried out.  
  
 The steps of this method are as follows: 
  
 Inputs:  
-Binary file,  p , p , q 
- 
+Binary file,  p, p, q 
  
 Output:  
 Classifications for binary file either CBSP or non CBSP 
@@ -1494,27 +1502,22 @@ Steps:
 2. Disassemble the binary. 
  
 3. Count the primary instructions as follows: 
-40 
- 3.1 rdtsc_n ? 0*F9 *? ;90 89;F098* 
-3.2 cpuid_n ? 0*F9 *? 0,F8 89;F098* 
-3.3 )*:98_ ? 0*F9 *? )*:98 89;F098* 
-3.4 |_0BB_ ? 0*F9 *? |9)0BB 89F;098* 
+41 
  
-4. Compare  if 
-4.1 rdtsc_n = 0,F8_ ≥ p AND 
-
-4.2 )*:98_ ≥ p AND 
-
-4.3 |_0BB_ ≤ q ? Classify the binary as CBSP and exit 
+3.1 rdtsc_n ? 0*F9 *? ;90 89;F098* 
+3.2 cpuid_n ? 0*F9 *? 0,F8 89;F098* 
+3.3 )*:98_ ? 0*F9 *? )*:98 89;F098* 
+3.4 |_0
+BB_ ? 0*F9 *? |9)0
+BB 89F;098* 
+ 
+4. Compare  if 4.1 rdtsc_n = 0,F8_ ≥ p AND 4.2 )*:98_ ≥ p AND 4.3 |_0
+BB_ ≤ q ? Classify the binary as CBSP and exit 
  
 5. Classify the binary as non-CBSP 
- 
-p & p are the minimum expected number of rdtsc and movnti instruction instructions in 
- 
+ p& p are the minimum expected number of rdtsc and movnti instruction instructions in 
 the source code of the successful CBSP binary.  q is the maximum expected number of the 
-sys_call CPU instructions in the source code of the successful CBSP binary.  We named 
-p & p the existence parameters for the primary instructions while q is the absence 
-  
+sys_call CPU instructions in the source code of the successful CBSP binary.  We named p& p  the existence parameters for the primary instructions while q is the absence 
 parameter for the primary instructions. 
  
 The obvious advantage of this method is its simplicity. There is no much complex work 
@@ -1530,8 +1533,7 @@ The loop in this case should also contain the primary instructions rdtsc and mov
 description of this method is as follows: 
  
 Inputs:  
-Binary file, p , p , q  cache parameters (set, lines, size) 
- 
+Binary file, p, p, q  cache parameters (set, lines, size) 
  
 Output:  
 Classifications for binary file either CBSP or non CBSP 
@@ -1540,8 +1542,9 @@ Steps:
 1. Read the binary under investigation. 
  
 2. Disassemble the binary. 
-41 
-  
+42 
+ 
+ 
 3. Detect the loop primary instructions such as cmp, jge, jmp etc. If no go to 9. 
 4. Check if number of iterations equals to one of the cache parameter. If no go to 9. 
  
@@ -1549,18 +1552,14 @@ Steps:
 go to 9. 
  
 6. Count the frequency of the following primary instructions inside the loop block 
-1.1 rdtsc_n ? 0*F9 *? ;90 89;F098* 
-6.2 cpuid_n ? 0*F9 *? 0,F8 89;F098* 
-6.3 )*:98_ ? 0*F9 *? )*:98 89;F098* 
+1.1 rdtsc_n ? 0*F9 *? ;90 89;F098* 6.2 cpuid_n ? 0*F9 *? 0,F8 89;F098* 6.3 )*:98_ ? 0*F9 *? )*:98 89;F098* 
  
-7. Count outside the loop |_0BB_ ? 0*F9 *? |9)0BB 89F;098* . 
+7. Count outside the loop |_0
+BB_ ? 0*F9 *? |9)0
+BB 89F;098*. 
  
-8. Compare  if 
-8.1 rdtsc_n = 0,F8_ ≥ p AND 
-
-8.2 )*:98_ ≥ p AND 
-
-8.3 |_0BB_ ≤ q ? Classify the binary as CBSP and exit 
+8. Compare  if 8.1 rdtsc_n = 0,F8_ ≥ p AND 8.2 )*:98_ ≥ p AND 8.3 |_0
+BB_ ≤ q ? Classify the binary as CBSP and exit 
  
 9.  Classify the binary as non-CBSP 
  
@@ -1581,8 +1580,9 @@ is named secure terminal. The Two versions will be explained in the next subsect
 In this IDS version, Counting Method for CBSP is implemented as a single program. The aim 
 of this version is to evaluate the Counting Method in different systems and determine the 
 appropriate values for the existence parameters and the absent parameter that are 
-42 
- mentioned in the previous section. The evaluation process involves the error rate as well as 
+43 
+ 
+mentioned in the previous section. The evaluation process involves the error rate as well as 
 measuring the performance. More details about the evaluation results can be found in 
 chapter 4. 
 3.4.2 Version II 
@@ -1611,10 +1611,10 @@ operating system kernel instead of integrated with the terminal. Therefore, we h
 recommended this to be an extended work for this project. 
  
  
-43 
-  
-Figure  3 .2: Secure Terminal 
-  
+44 
+ 
+ 
+Figure  3.2: Secure Terminal 
  
 3.4.3 Kernel Space Version 
  
@@ -1639,8 +1639,9 @@ how the program file will be fully scanned before reaching load_elf_binary() fun
 normal sense for doing that is using basic file operations such open and read. However, 
 opening or reading a file in the kernel space is not recommended operations by many Linux 
 kernel experts [39]. One solution is scanning the file during the loading operation itself. 
-44 
- However, this option is need to be investigated thoroughly in the terms of security, 
+45 
+ 
+However, this option is need to be investigated thoroughly in the terms of security, 
 reliability and performance. 
  
 Another issue that should be considered is disassembling the process in the kernel space. To 
@@ -1649,8 +1650,9 @@ such as arch/x86/lib/insn.c file. This file can be a good starting point since i
 functions that can be used to analysis the x86 instructions. One example of kernel patches 
 that uses these functions is an in-kernel disassembler which is released in April 2012 for 
 kernel debugging purposes [40].   
-45 
- Chapter 4. Evaluation and Discussion  
+46 
+ 
+Chapter 4. Evaluation and Discussion  
  
 In this chapter, we will shed light on some experimental results which have been conducted 
 to evaluate the produced IDS of CBSP. In addition, analysis and discussion for some related 
@@ -1663,8 +1665,7 @@ and some installed binaries for both systems. The targeted binaries in Linux sys
 binaries that are located in the following directories: /bin, /sbin, /usr/bin and /usr/sbin. In 
 Windows system, the targeted binaries are located in C:\Windows\System32 directory. 
 Based on these experiments, recommended values for both existence and absence 
-parameters p , p , q have been set. The experiments have been conducted in Ubuntu 10.04 
- 
+parameters p, p, q have been set. The experiments have been conducted in Ubuntu 10.04 
 Linux distribution and Windows Visa operating systems. The total number of binaries that 
 are scanned in both systems is more than 5500 binary.  
  
@@ -1680,8 +1681,9 @@ process.
 Secondly, we moved to investigate the binaries that do not use system calls heavily. It is 
 clear that using this characteristic only will not be useful. Therefore, we have evaluated the 
 accuracy rate when the detection system method scans for both time stamp counter and 
-46 
- system calls. We found out that the accuracy of the detection system has been increased 
+47 
+ 
+system calls. We found out that the accuracy of the detection system has been increased 
 and the number of the false positive instances has been decreased significantly from 8% to 
 1% in Windows system. 
  
@@ -1690,41 +1692,51 @@ reduce the error rate. After evaluating the detection system when adding movnti
 instruction, the accuracy is increased and we have obtained no false positive instances in 
 both Linux and Windows systems. 
  
-The values that are used for  p , p , q  are very restrictive. They are 2, 1, and 3 respectively. 
- 
+The values that are used for  p, p, q  are very restrictive. They are 2, 1, and 3 respectively. 
 Obtaining zero number of false positive instances is a positive indicator to the ability of the 
 produced system to work in real environment without reporting much number of false 
 alarms. The blow tables summarize the experiments results for both Linux and Windows 
 systems. 
  
  
-False True Error 
 Primary Instruction(s) 
-Positive Negative Rate 
 (Signature) 
-Instances Instances % 
+False 
+Positive 
+Instances 
+True 
+Negative 
+Instances 
+Error 
+Rate 
+% 
 Rdtsc 31 2813 1% 
 Rdtsc & int 0x80 0 2844 0% 
 Rdtsc, int 0x80 & movnti 0 2844 0% 
-Table   4  .1: Counting Method Accuracy Results over 2844 binaries in Ubuntu 10.04 with   = ,  = ,  =  
- 
+Table  4.1: Counting Method Accuracy Results over 2844 binaries in Ubuntu 10.04 with   = ,  = ,  =  
  
  
-False True Error 
 Primary Instruction(s) 
-Positive Negative Rate 
 (Signature) 
-Instances Instances % 
+False 
+Positive 
+Instances 
+True 
+Negative 
+Instances 
+Error 
+Rate 
+% 
 Rdtsc 237  2428  8%  
 Rdtsc & int 0x80 4  2661  1%  
 Rdtsc, int 0x80 & movnti 0  2665  0%  
-Table   4  .2: Counting Method Accuracy Results over 2665 binaries in Windows Vista with   = ,  = ,  =  
- 
+Table  4.2: Counting Method Accuracy Results over 2665 binaries in Windows Vista with   = ,  = ,  =  
  
  
  
-47 
- Finding other instances of spy processes is a matter. We did not find any public source of 
+48 
+ 
+Finding other instances of spy processes is a matter. We did not find any public source of 
 cache based spy process in order to conduct experiments for evaluation the ability of the 
 system to detect the unseen spy processes. We have tried to build a generator for building 
 spy process but we did not find any appropriate method or algorithm that can be used to 
@@ -1760,8 +1772,9 @@ Code Obfuscation is anti reverse engineering techniques which can be used to hid
 source code and make it unreadable by human being. Most of the signature base detection 
 systems suffer from this technique since it will make the disassembly process quite difficult. 
 IDSs for MA spy process are not an exception. The adversary can also obfuscate the spy 
-48 
- process code in order to make the disassembly procedure as hard as possible. As a result, 
+49 
+ 
+process code in order to make the disassembly procedure as hard as possible. As a result, 
 both the offline and the online disassembly stage will become very difficult.  
  
 One way for mitigating this problem is designing behavior base detection method for MA 
@@ -1786,21 +1799,24 @@ Method with system call version. Table  4.3 summarizes the evaluation result and
 the Counting Method with system calls version and Counting Method without system call 
 version.  
  
+Metric 
 False 
-Error 
-Metric Positive 
-Rate % 
+Positive 
 Instances 
+Error 
+Rate % 
+Counting Method with NO sys_calls  
 166 
+3% 
 18  
-Counting Method with NO sys_calls  (Linux) 3% 
+(Linux) 
 148 
 (Windows) 
 Counting Method with sys_calls  0 0 
-Table   4  .3: Counting Method Accuracy Results over 5509 binaries in Ubuntu 10.04 and Windows Vista with   = ,  
- 
-49 
- 4.4 Other Approaches 
+Table  4.3: Counting Method Accuracy Results over 5509 binaries in Ubuntu 10.04 and Windows Vista with   = ,  
+50 
+ 
+4.4 Other Approaches 
  
 After introducing the signature based detection system for CBSP, ideas for using other 
 approaches have been discussed. Examples of these ideas are applying behavior base or 
@@ -1832,8 +1848,9 @@ and non CBSP. Unfortunately, since there is a very rare number of CBSP, machine 
 approach might be inappropriate to be used for classifying CBSP at the moment. 
  
   
-50 
- Chapter 5. Conclusion  
+51 
+ 
+Chapter 5. Conclusion  
  
 In this thesis, we have presented some technical background that would be needed for 
 developing micro - architectural detection system. We have surveyed the current basic CPU 
@@ -1865,8 +1882,9 @@ number of true negative instances. However, it can be bypassed by using some tec
 such as code obfuscation. Behavior based system might be difficult to be circumvented by 
 the adversary but it may need hardware support to be implemented successfully. 
  
-51 
- Finally, the evaluation of the detection method for MA spy process is a significant issue due 
+52 
+ 
+Finally, the evaluation of the detection method for MA spy process is a significant issue due 
 to the rare number of spy processes instances. It can be easy to determine the approximate 
 number of false positive instances for the produced MA spy process IDS. However, the 
 predication of the true positive cases might be a big challenge. In other words, how can we 
@@ -1891,8 +1909,9 @@ be secure enough in some settings. Therefore, developing kernel space’s IDS for 
 most likely increase the overall security of IDS and makes it much harder for the adversary 
 to bypass the system.  
   
-52 
- Bibliography 
+53 
+ 
+Bibliography 
  
  
 [1] W. M. Hu, "Lattice scheduling and covert channels." pp. 52-61. 
@@ -1937,8 +1956,9 @@ branch predictor organization,” Software: Practice and Experience, vol. 34, no. 
 465-487, 2004. 
 [22] O. Aciiçmez, S. Gueron, and J. P. Seifert, "New branch prediction vulnerabilities in 
 OpenSSL and necessary software countermeasures." pp. 185-203. 
-53 
- [23] A. A. Ghorbani, W. Lu, and M. Tavallaee, Network intrusion detection and prevention: 
+54 
+ 
+[23] A. A. Ghorbani, W. Lu, and M. Tavallaee, Network intrusion detection and prevention: 
 concepts and techniques: Springer Publishing Company, Incorporated, 2009. 
 [24] N. Idika, and A. P. Mathur, “A survey of malware detection techniques,” Purdue 
 University, pp. 48, 2007. 
@@ -1976,6 +1996,4 @@ http://lkml.indiana.edu/hypermail/linux/kernel/0005.3/0061.html.
 [41] Hex-Rays. "Interactive DisAssembler IDA," Septermber, 2012; http://www.hex-
 rays.com/products/ida/index.shtml. 
  
- 
-54 
  

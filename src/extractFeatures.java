@@ -67,9 +67,9 @@ public class extractFeatures {
 	//-----------------METHODS---------------------------------
 	public void startExtraction(){
 	//	extractImages();
-	//	extractSubmissionTime();
+		extractSubmissionTime();
 	//  extractWordFeatures();
-		extractTables();
+	//	extractTables();
 	//------DEPRECIATED METHODS AND REPLACED WITH ABOVE METHOD
 	//	extractTotalWord();
 	//	extractWords();   // very long process only uncomment when doing final run. Testing has been done and works correctly.

@@ -1,3 +1,5 @@
+3 
+ 
 Abstract 
 In this project, there are two main components. The first one is robot detects the 
 landmark with Kinect. I propose an algorithm of which the time complexity is O (n),  
@@ -12,8 +14,9 @@ pixel on camera frame can be classified into different regions. Each region repr
 property of the indoor area, such as accessible areas, obstacles.  Therefore, robot can 
 know which area it is able to move toward with these regions.  
   
-3 
-  
+4 
+ 
+ 
 Contents 
 Introduction ..................................................................................................................................... 6 
 Aims and objective ...................................................................................................................... 6 
@@ -44,8 +47,9 @@ How to find the gap between objects.............................................
 The problem of Kinect detect the depth of image ................................................................. 21 
 Improved landmark detection algorithm ............................................................................... 22 
 Remove the noise data ........................................................................................................... 23 
-4 
- EKF-SLAM ............................................................................................................................... 24 
+5 
+ 
+EKF-SLAM ............................................................................................................................... 24 
 How to determine the accessible area .......................................................................................... 27 
 Average Distance Calculation Method ...................................................................................... 27 
 Image Segmentation Method ..................................................................................................... 27 
@@ -74,8 +78,9 @@ Conclusion .....................................................................
 Acknowledgements ....................................................................................................................... 57 
 Reference ...................................................................................................................................... 58 
  
-5 
- Introduction 
+6 
+ 
+Introduction 
 A mobile robot is an automatic machine, which is able to move around in a given 
 environment. Mobile robots are capable of moving around in their environment and are 
 not fixed to one physical location. By contrary, industrial robots usually are made up a 
@@ -112,8 +117,9 @@ from the real world; For example, running around the object or avoiding touching
 obstacles. Because SLAM is a very hard problem for me and I cannot implement it in just 
 two month, so in this project I just learn the EFK algorithm and implement a simple 
 EFK-SLAM application which can simulate how robot makes SLAM with known 
-6 
- landmark. At last, I try to combine the landmark detection and the simple slam, and make 
+7 
+ 
+landmark. At last, I try to combine the landmark detection and the simple slam, and make 
 a real time slam (I have not finished this part) 
  Project Goals 
 1. The main goal of this project is to use 3D point cloud to make a better landmark 
@@ -127,8 +133,9 @@ Kinect.
 2. To implement the simple EKF-SLAM Simulation on windows. 
 3. To combine the EKF-SLAM Simulation and landmark detection algorithm and to 
 make SLAM simple. 
-7 
- The concept of mobile robot navigation 
+8 
+ 
+The concept of mobile robot navigation 
 Navigation is the technique which guides the movement of ships, aircrafts or spacecraftÕs  
 from one place to another place [2].  Autonomous robot only knows where I am and how 
 to move from one position to another position. Therefore, in field of the autonomous 
@@ -163,8 +170,9 @@ autonomous vehicles to build up a map within an unknown environment (without a p
 knowledge), or to update a map within a known environment (with a priori knowledge 
 from a given map), while at the same time keeping track of their current location[5]. 
 SLAM problem can be divided into four basic aspects, as follows: 
-8 
- ? How to describe the environment, how to make use of map to describe the 
+9 
+ 
+? How to describe the environment, how to make use of map to describe the 
 environment. 
 ? How to obtain information from the environment 
 ? How to represent the environment information which is acquired. And update the 
@@ -188,8 +196,9 @@ advantage of grid map is accuracy. And the description of the path planning is e
 the disadvantage is also obvious that the size of the cells must be smaller, in order to get 
 more accurate optimal path. But the search algorithm will increase exponentially and it 
 also needs an abundance of memory storage space. 
-9 
- Feature Mapping 
+10 
+ 
+Feature Mapping 
 Feature mapping refers to the abstract geometrical features which are collected from the 
 environment. These geometric features, also known as landmarks. The environment is 
 described to be the landmark. Figure 2.2(b) is the example of feature mapping. The circle 
@@ -217,8 +226,9 @@ Figure 2.2 the examples of map representation (Xiucai Ji 2008)
 When mobile robot builds map, an appropriate map representation method will be chosen 
 by task and sensor according to the real environment. The method indicates above are 
 flexible and a great number of applications has been used them. 
-10 
- The difficulties and challenges of SLAM 
+11 
+ 
+The difficulties and challenges of SLAM 
 SLAM has a history of 25 years, and has made a large amount of achievements. But there 
 are still many issues need to be resolved. There are 5 major difficulties and challenges [8]. 
 First, there is a challenge from the inherent error of the system. In order to build the map, 
@@ -254,8 +264,9 @@ the contrary, mapping is dependent on hypothesis of static environment. The robo
 only one dynamic object in the environment. Other moving objects can be seen as noise. 
 Therefore, we can set time space into small piece. Each time piece we assumed that 
 environment is static. 
-11 
- Fifth, choose the right path to make exploration. The robot exploration is facing part, 
+12 
+ 
+Fifth, choose the right path to make exploration. The robot exploration is facing part, 
 incomplete environment model, so any feasible exploration strategy must be able to deal 
 with emergency situation. We have to say SLAM problem is the most difficulty problem 
 is robot field.  
@@ -292,8 +303,9 @@ In the process of the establishment of grid map, the sensor mainly use range sen
 as ultrasonic array, laser radar, etc.). A sensor measurement is called as a scan. In general, 
 scanning point does not exist between direct corresponding relationships. Therefore, 
 mobile robot needs to ensure that the same physical entity area from different scanning in 
-12 
- order to acquire the robot relative position. This kind of data association problem is 
+13 
+ 
+order to acquire the robot relative position. This kind of data association problem is 
 named as scanning matching problem. Scan matching process is shown in figure 2.4. 
 Figure (a) indicates the map image the robot gets from sensor in the position of A and B. 
 And they are respected by the dot line and the solid line. The aim of scan matching is to 
@@ -311,8 +323,9 @@ there are 21 landmarks in the map. Figure (b) declares that the distribution of 
 observed landmarks in robot coordinate system and which contains 8 landmarks.  These 8 
 observed landmarks {1,2,3,4,5,6,7,8} is corresponding to the landmark in global 
 map{20,21,18,19,17,16,15}.  
-13 
-  
+14 
+ 
+ 
 Figure 2.4 Local feature data association diagram [15] 
 Loop closure problem 
 SLAM   is a self-positioning process of dead reckoning. The error on robot SLAM 
@@ -332,8 +345,9 @@ back to the start point there may be a large position error. And it is suggested
 other measures to deal with this problem.  
  
 Figure 2.5 Cycle data associated problems diagram [16]  
-14 
-  
+15 
+ 
+ 
 3D point cloud  
 In the 3D world the point consists of the coordinates of x, y and z. And each point in the 
 real world has the 3D world distance. A point cloud is a set of points in a 3D space. You 
@@ -357,8 +371,9 @@ robot mapping in a better detection way.
   
  
  
-15 
-  
+16 
+ 
+ 
  
 Figure 3.1 some point cloud image used as navigation (from Google image search) 
 Kinect  
@@ -380,8 +395,9 @@ This value we can set it as bad data, we can ignore it sometimes and removed in 
 landmark detection algorithm. Although it will effect the obstacle detection, I will solve 
 this problem in next section. Finally, for the issue of cutting down some data, some of the 
 data is useless like the data near the bottom of frame image. From the experience of 
-16 
- human being that when robot make navigation, the information of image center is more 
+17 
+ 
+human being that when robot make navigation, the information of image center is more 
 useful than that of any other range. There are 2 good reasons for the reduction the frame 
 size when robot makes detection. One is reducing the frame size can reduce the size of 
 the data processing. And the other is to avoid some noise affection. Thus, a horizontal 
@@ -399,8 +415,9 @@ vision of the Kinect cameras is limited. The detail is showed below:
 Figure 3.4 (Microsoft Kinect msdn 2010) 
 As the figure 3.4 indicates the view of infrared camera's field is a pyramid shape. If the 
 object is far away from the Kinect cameras, it will have larger field of cross-sectional 
-17 
- area than the object which is close to the Kinect cameras. This means that the height and 
+18 
+ 
+area than the object which is close to the Kinect cameras. This means that the height and 
 the width of the image, such as 640 x 480. It does not correspond to the physical location 
 of the field of the view of the Kinect camera. But the depth value of each pixel is 
 corresponding to the visual field of the object distance from the Kinect camera. Depth 
@@ -431,8 +448,9 @@ determine the position which respects to the Kinect.
 Depth of image data histogram 
 The histogram is a very effective tool for statistical data distribution. Here we are 
 concerned on the distribution of the depth value of image. Histogram can intuitively 
-18 
- reflect the distribution of a given data set. From the histogram, we can see the frequency 
+19 
+ 
+reflect the distribution of a given data set. From the histogram, we can see the frequency 
 of the depth value and aggregation packet. With this information, we are able to 
 determine the threshold values, and use threshold value to filter the image; therefore, this 
 way can make it possible to maximize the depth data information in the depth image. We 
@@ -457,19 +475,31 @@ point as edge of the object.
  
  
 Figure 3.6 
-zz ?
-12
-For the slope pp , ?? tan ? 
-12
-xx ?
-12
-19 
- zz ?
-13
-For the slope pp , ?? tan ? 
-13
-xx ?
-13
+For the slope 1 21 2
+1 2
+, tan
+z z
+p p
+x x
+?
+?
+? ?
+?
+ 
+20 
+ 
+For the slope 1 3
+1 3
+1 3
+, tan
+z z
+p p
+x x
+?
+?
+? ?
+?
+ 
 The Pseudo-code shows as follows 
 For each pixel in image 
 If pixel is a good data 
@@ -494,9 +524,9 @@ of these points. In addition, this algorithm will ignore the landmarks which are
 from the Kinect, even though the landmarks are neighboring pixels. This review is to 
 ensure that the landmark detected is on the confidence which is 1220mm to 3810mm 
 (Microsoft Kinect SDK 1.5 Document).  
-20 
-  
+21 
  
+  
 Figure 3.7 
 In Figure 3.7 the red points represent the pixels which are detected as landmarks. We can 
 see that the landmark on the objects still remains consistent with the objectÕs position, but 
@@ -519,8 +549,9 @@ surface was detected by the Kinect, it would return a special value of depth whi
 Therefore, I improve the landmark detection algorithm and add some color information to 
 the algorithm. 
  
-21 
- Improved landmark detection algorithm 
+22 
+ 
+Improved landmark detection algorithm 
 My experience of viewing the color on the surface of an object is that the color on the 
 surface of an object will be similar or change in a gradual way. In other words, there is 
 little difference in pixel between pixel itself and its neighbor on the surface of the object. 
@@ -533,55 +564,55 @@ object, the color of the edge is blue, and the surface of the desk is the yellow
 Kinect can easily detect the edge.  
  
 Figure 3.9 
-22 
- The figure 3.9 shows the result of searching for the nearest neighbor for the red point. 
+23 
+ 
+The figure 3.9 shows the result of searching for the nearest neighbor for the red point. 
 The voxel center of a plane of the 3D map is shown as black dots. First we compute the 
-slope of D between the position of a point i of the current point and a center k of the 
-ik ,
+slope of 
+,i kD  between the position of a point i  of the current point and a center k  of the 
 current map performed as follows: 
-zz ?
-ki
-D?? tan ? 
-ik ,
-xx ?
-ki
+, tan
+k i
+i k
+k i
+z z
+D
+x x
+?
+?
+? ?
+?
+ 
  
 It is similar with the algorithm which I method in previews sections. We calculate the 
 difference in slope between pixel and its neighbor first. Then in this algorithm we need to 
 calculate more information on the pixel which is the RGB information of pixel and its 
 neighbor. 
-2 2 2
-W ? ((R ? R ) ? (G ?G ) ? (B ? B ) ) 
-color i k i k i k
- 
-W?? ?? W D
-pixel color i,k
-?
-?
-Where + = 1.  And W is the weight of the pixel. The pixel will be detected as the 
-pixel
+2 2 2(( ) ( ) ( ) )color i k i k i kW R R G G B B? ? ? ? ? ?  
+,pixel color i kW W D? ?? ?  
+Where ? + ?  = 1.  And pixelW  is the weight of the pixel. The pixel will be detected as the 
 landmark with bigger weight than that of the thresholds. There are some differences 
 between this algorithm and the algorithm which has been method in previous section. 
 There is some color information in this algorithm. I set different weight for the color and 
-the depth of image. Therefore, how to determine the ? and ? will be the key factor 
+the depth of image. Therefore, how to determine the ? and ?  will be the key factor 
 which affects the result. According to the Microsoft Kinect Document 1.5, the left of the 
 first circle on Kinect is IR Illuminator. IR Illuminator is used to get the depth of the 
 image it will not be affected by the brightness of the environment. In other words, no 
 matter the brightness of the environment, the data of depth information of image will be 
 same. There will be a big effect on the color information of image when the brightness of 
 environment is changed. Therefore, the color detection is more sensitive to the light. So 
-we can set the weight of ? and ? referring to the brightness of environment. If the 
-environment becomes darker, the ? is set to a smaller value and the ? is  a bigger value. 
-?
-If the environment becomes brighter, the  is set to a bigger value and the ? is a smaller 
+we can set the weight of ? and ?  referring to the brightness of environment. If the 
+environment becomes darker, the ?  is set to a smaller value and the ?  is  a bigger value. 
+If the environment becomes brighter, the ?  is set to a bigger value and the ?  is a smaller 
 value.  
 Remove the noise data 
 In the indoor area there is much noise like the dynamic objects (e.g. the moved people, 
 the change of light and so on). Kinect has many good algorithms to detect the human 
 beings. For instance, if there is a human moving into the KinectÕs view, Kinect will detect 
 him and get his information immediately. 
-23 
- EKF-SLAM 
+24 
+ 
+EKF-SLAM 
  
 Figure 3.10 typical SLAM entities [24] 
  
@@ -592,10 +623,12 @@ The following table indicates the similarities and differences between EKF and E
 SLAM. 
 Event SLAM EKF-SLAM 
 Robot moves Robot motion EKF prediction 
-Sensor detects new landmark Landmark State augmentation 
+Sensor detects new landmark Landmark 
 initialization 
-Sensor observes known Map correction EKF correction 
+State augmentation 
+Sensor observes known 
 landmark 
+Map correction EKF correction 
 Mapped landmark is corrupted Landmark deletion State reduction 
 Table 3.1 EKF operations for achieving SLAM [24] 
 (Kalman Filter, KF) is an efficient filter with recursive way. It can estimate the dynamic 
@@ -604,97 +637,103 @@ applied in the Gaussian distribution system. And one of the improvements is exte
 Kalman filter which can be used in nonlinear system. The implementation of EKF-SLAM 
 is based on the establishment of the robot's movement and observation model. Robot 
 movement model is below: 
-x?? f (x ,u ) v 
-k k ?1 k k
-24 
- f() ? is nonlinear function and it describes the movement of robot. u is the control vector 
-k
-which apply in the robot on the time k ?1 and let robot reach state x on the time k . v 
-k k
-is the Gaussian noise. And the covariance Q is used to describe the error on the 
-k
+1( , )k k k kx f x u v?? ?  
+25 
+ 
+( )f ? is nonlinear function and it describes the movement of robot. ku is the control vector 
+which apply in the robot on the time 1k ?  and let robot reach state kx  on the time k . kv  
+is the Gaussian noise. And the covariance kQ  is used to describe the error on the 
 movement of robot. 
 On the movement of the robot, robot uses sensor to detect the landmark on the 
 environment, we use observe model to represent it. And on the time k the observe model 
 is below: 
-z?? h() x w 
-k k k
-Where nonlinear function h() ? is used to describe observes model of robot. w is the 
-k
-Gaussian noise. And the covariance R is used to describe the error on the movement of 
-k
+( )k k kz h x w? ?  
+Where nonlinear function ( )h ?  is used to describe observes model of robot. kw  is the 
+Gaussian noise. And the covariance kR  is used to describe the error on the movement of 
 robot. 
 Taking advantage of these two models, EKF method can be applied into SLAM. EKF-
+SLAM can be realized via the iterative process of forecast, observe and update. kx
 ?
-SLAM can be realized via the iterative process of forecast, observe and update. x stands 
-k
-? ?
-for prior probably estimation (xx ? ), and x for posterior probably estimation. For 
-k k|1 k ? k
+ stands 
+for prior probably estimation ( | 1k k kx x
+?
+?? ), and kx
+?
+ for posterior probably estimation. For 
 other variables, "+" and "-" share the same meaning. 
 1. Predict  
+In this step, the robot state is predicted to be kx
 ?
+ at the moment of k, the covariance is kP
+? . 
+Observing kz
 ?
-In this step, the robot state is predicted to be x at the moment of k, the covariance is P . 
+, the calculation formula is as follows: 
+1( , )k k kx f x u
+? ?
+??  
+( )k kz h x
+? ?
+?  
+1 11k k
+T
+k x k x kP f P f Q? ?
+? ?
+??? ? ?  
+Where, Jacobian matrix 
+1kx
+f
+?
+?  is the ( )f ? taylor expansion at 1kx
+?
+?  
+1
+1| ( , )
 k
-k
+kx k
+f
+f x u
+x?
 ?
-Observing z k , the calculation formula is as follows: 
-??
-x ? f (x ,u ) 
-kk ?1
-k
-??
-zk ? h() xk 
-?? T
-P ? ?f P ?f ? Q 
-k x k ?1 x k
-kk ?? 11
 ?
-Where, Jacobian matrix ?f is the taylor expansion at x 
-f() ? k ?1
-x
-k ?1
 ?
-?f
-?? f | (x ,u ) 
-k ?1
-xk
-k ?1
-?x
+? ?
+?
+ 
 2. Observe 
-After observing x when the robot state is z , the innovation V can be calculated: 
-k k k
-25 
- ?
-V?? z zk 
-kk
+After observing kx  when the robot state is kz , the innovation kV can be calculated: 
+26 
+ 
+kk kV z z
+?
+? ?  
 In the assumption of the good data correlation, the new covariance of innovation is: 
-? T
-S ? ?h P ?h ? R 
-k x k x k
-kk
-Where ?h is the linear approximation of the observe function h() ? 
-x
-k
+k k
+T
+k x k x kS h P h R
+??? ? ?  
+Where 
+kx
+h? is the linear approximation of the observe function ( )h ?  
 3. Update 
+The last step is to update the robot state estimation kx
 ?
-?
-The last step is to update the robot state estimation x and the covariance P . The 
-k
-k
+ and the covariance
+kP
+? . The 
 formula is: 
-??
-x ?? x W V 
-kk
-kk
-?? T
-P?? P W S W 
-k k k k k
-?? T 1
-Where, the gain of Kalman is: W?? p h S 
-k k x k
+k k k kx x W V
+? ?
+? ?  
+T
+k k k k kP P W S W
+? ?? ?  
+Where, the gain of Kalman is: 
+1
 k
+T
+k k x kW p h S
+? ?? ?  
 SLAM can be solved by practicing these three steps iteratively. EKF-SLAM provides a 
 system to solve the problem. And much work has been done on its convergence, the 
 growth of map, the changes of uncertainty and etc. However, EKF-SLAM still has many 
@@ -712,8 +751,9 @@ me to understand the ekf-slam algorithm easier. My target is follow this paper t
 implement a simple ekf-slam simulation software and try to combine the landmark detect 
 algorithm with it. 
   
-26 
-  
+27 
+ 
+ 
 How to determine the accessible area 
 In the last section we have already discussed the algorithm to detect the landmarks in the 
 real world, but it keeps silent on which part or which direction is accessible for the robot. 
@@ -726,8 +766,7 @@ the image is the wall, which part is accessible.
 Average Distance Calculation Method 
 When calculating the distance between the camera and its face objects, we only need to 
 calculate the average distance of the depth of each pixel in the image [25].  
- 
- 
+  
    
 Figure 4.1(camera move close to the object (Obstacle)) 
 Figure 4.1 indicates that camera is approaching the object. The resolution of the camera is 
@@ -739,8 +778,9 @@ this method can roughly estimate the distance between object and camera.
 Image Segmentation Method 
 Image segmentation is the division that an image divided into regions or categories, 
 which is corresponding to different objects or parts of objects [25]. Every pixel in an 
-27 
- image is allocated to one of certain number of related categories. A good segmentation is 
+28 
+ 
+image is allocated to one of certain number of related categories. A good segmentation is 
 typically one in which: 
 ? The value of pixelsÕ grayscale in a same area or category is similar, which is also 
 leading to a connected region being formed. 
@@ -766,10 +806,9 @@ boundary. On the other hand, an edge (even a strong one), which is positioned by
 with no supporting context, is probably not a part of any borders. An assumption could be 
 proposed that strong continuous edges in the image are related to region boundaries of 
 interest. 
-28 
-  
-  
+29 
  
+    
 0-0 1-1 2-0 3-3 
 Figure 4.3 
 ? 0-1 uncertain Ð weak positive, or no influence on edge confidence 
@@ -795,8 +834,9 @@ Mixture of Gaussians
 For one image, Robot is interested in some parts of it. Those parts are occupied in some 
 areas of the image. And some features (Such as wall in room, accessible area, object and 
 obstacles, etc.) are different between the adjacent images. Some of these features could 
-29 
- be obtained easily. But some others might be very subtle, and even tough to be detected 
+30 
+ 
+be obtained easily. But some others might be very subtle, and even tough to be detected 
 by humanÕs eyes. With the development of computer image processing technology, 
 image is possible to be obtained and processed with computing image information. The 
 image segmentation is the foundation of image detection. 
@@ -821,8 +861,9 @@ divide our room space into three categories:
 ? Accessible path or accessible space 
  Therefore, I choose 3 images as the training set represent these three categories as shown 
 in Figure 4.6. 
-30 
-  
+31 
+ 
+ 
 Figure 4.6 
 I took an image shot cut of my indoor area. From this image we could see that 3 
 rectangles are used to set 3 parts as the training set. (The more training set the better 
@@ -830,36 +871,44 @@ Segmentation area for the image) The most pixels in red rectangle are on the sof
 present the obstacles that cannot be accessed. The pixels in green rectangle mean that 
 area is available for robot. And the purple rectangle represents the wall, which means it is 
 the border of the indoor area (the border of the map). The three training set is like below: 
- 
-  
+   
 Sofa (obstacle) Floor (accessible) Wall (border of the map) 
 Figure 4.7(3 train set for my indoor area) 
 The training set need to be processed when we determine the training set. Firstly, we 
 make a statistics for the pixel of the training set. And the histogram of the training class 
 image would be calculated. Then I can get two important parameters. One is the mean of 
-31 
- 2
-the histogram ? and the other is standard deviation ? . Therefore, I can use Gaussians 
+32 
+ 
+the histogram ? and the other is standard deviation 2? . Therefore, I can use Gaussians 
 found to get probability of each pixel. 
 2
-() x ? ?
-1
 2
-2 ?
-f() x ? e 
-?? 2
+( )
+2
+1
+( )
+2
+x
+f x e
+?
+?
+? ?
+?
+?  
 Then we will use the prior and the learned Gaussians base on Bayesian inference measure 
 to predict the most probable content class for each image pixel. 
-p( pixel | class) p(class)
+( | ) ( )
+( | )
+( )
 i
-p(class | pixel ) ? 
 i
-p() pixel
 i
-Therefore, our target is to get each p(class | pixel ) and to compare probability of
-i
-p(class | pixel ) , p(class | pixel ) and p(class | pixel ) . And I classify the pixel to the 
-0 i 1 i 2 i
+p pixel class p class
+p class pixel
+p pixel
+?  
+Therefore, our target is to get each ( | )ip class pixel  and to compare probability of
+0( | )ip class pixel , 1( | )ip class pixel  and 2( | )ip class pixel . And I classify the pixel to the 
 corresponding class which probability is the biggest in three classes. Therefore each pixel 
 can get its own corresponding classes, which belongs to 0, 100, and 200 (RBG value). 
 The detail process is showed below: 
@@ -867,68 +916,64 @@ The detail process is showed below:
 Figure 4.8 
 The figure 4.8 indicates the process how to train with training set and how to use classify 
 set to generate the new segment image. 
-32 
-  
+33 
+ 
+ 
  
 Key Issues: 
-In Bayesian classification, each p() pixel =1. Therefore, I get Bayesian classification 
-i
+In Bayesian classification, each ( )ip pixel =1. Therefore, I get Bayesian classification 
 formula as follows: 
-p(class | pixel ) ? p( pixel | class) p(class) 
-ii
+( | ) ( | ) ( )i ip class pixel p pixel class p class?  
 Three images will be used as the training set. Therefore, the prior probability of each 
-class p() class is set to 1/3. Thus, the key fact that affects the performance is
-p( pixel | class) . In other words, the key fact is the Gaussian distribution for each 
-i
-2
-probability of pixel. According to the Gaussian distribution formula, ? and ? determine 
-2
-the probability of distribution. Therefore, how to calculate ? and ? will be the main 
+class ( )p class  is set to 1/3. Thus, the key fact that affects the performance is
+( | )ip pixel class . In other words, the key fact is the Gaussian distribution for each 
+probability of pixel. According to the Gaussian distribution formula, ? and 2?  determine 
+the probability of distribution. Therefore, how to calculate ? and 2?  will be the main 
 method to increase the accuracy of segmentation. 
-2
-I use two methods to calculate ? and ? . One is using threshold to calculate the ? and
-2 2
-? , the other is to calculate the average value of each pixel to get the ? and ? .  The 
-2
-reason why I use a different method to calculate ? and ? is that different images have 
+I use two methods to calculate ? and 2? . One is using threshold to calculate the ? and
+2?  , the other is to calculate the average value of each pixel to get the ? and 2? .  The 
+reason why I use a different method to calculate ? and 2?  is that different images have 
 different contrasts. Therefore, only use the general way to process all images will get the 
 weak segmentation on some exceptional images. Sometimes using some special way to 
 process some special image will be the better choice.  
 Average value 
 This is an easy way to calculate the ? . The time complexity of this algorithm is O(n). The 
 formula is as follows: 
+1
 n
-pixel
-? i
-i ?1
-? ? 
-n
-n
-2
-() pixel ? ?
-?
 i
-2
-i ?1
-? ?
- 
+i
+pixel
 n
+? ??
+?
+ 
+2
+2 1
+( )
+n
+i
+i
+pixel
+n
+?
+? ?
+?
+?
+?
+ 
 The threshold method 
 To find a threshold we can use an image histogram. First we count how many pixels in 
 the image have each value. Then show peaks around regions of the image. Here is the 
 algorithm to select the global threshold [27]. 
-33 
- 1. An initial estimate will be selected for the threshold T. 
-2. Segment the image using T. This will produce two groups of pixels: G consist of all 
-1
-pixels with grey levels>T and G consisting of pixels with grey values < T. 
-2
-3. Compute values of the average grey level m and m for the pixels in regions G and
-1 2 1
-G . 
-2
-4. Compute a new threshold value: T=( m + m ) /2 
-1 2
+34 
+ 
+1. An initial estimate will be selected for the threshold T. 
+2. Segment the image using T. This will produce two groups of pixels: 1G consist of all 
+pixels with grey levels>T and 2G  consisting of pixels with grey values < T. 
+3. Compute values of the average grey level 1m  and 2m for the pixels in regions 1G  and
+2G . 
+4. Compute a new threshold value: T=( 1m + 2m ) /2 
 5. Repeat steps (2.) though (4.) until convergence. 
  
 Figure 4.9 [27] 
@@ -938,27 +983,30 @@ black dot line is the average values (round 2). The grey line is the threshold a
 The black line is the threshold after round 2.  
 A Gaussian mixture model is consist of M component single Gaussian model with a 
 given weighted.  
+1
+( | ) ( | )
 k
-p(x | ?) ? ? p(x | ? )  
+j j
+j
+p x p x? ? ?
 ?
-jj
-j ?1
-Where ? ?[ ? ,....., ? , ? ,..... ? ]. The overall likelihood of observing x is a weighted 
-11nn
+??   
+Where 1 1[ ,....., , ,..... ]n n? ? ? ? ?? . The overall likelihood of observing x is a weighted 
 mixture of Gaussians. 
 In statistics field, there is an expectationÐmaximization (EM) algorithm. It  is using 
 iterative way to find maximum likelihood or maximum a posteriori (MAP) estimates of 
 parameters in statistical models, where the model depends on unobserved latent variables 
 [26]. The EM iteration alternates between performing an expectation (E) step, which 
-34 
- creates a function for the expectation of the log-likelihood evaluated using the current 
+35 
+ 
+creates a function for the expectation of the log-likelihood evaluated using the current 
 estimate for the parameters, and a maximization (M) step, which computes parameters 
 maximizing the expected log-likelihood found on the E step. These parameter-estimates 
 are then used to determine the distribution of the latent variables in the next E step[26] . 
-Here, our goal is to find blob parameters ? that maximize of the likelihood function: 
-p(data |?? ) ? p(x | ) 
-?
+Here, our goal is to find blob parameters ?  that maximize of the likelihood function: 
+( | ) ( | )
 x
+p data p x? ???  
  
 Expectation Maximization (EM) is divided into two steps. The first step is E-step which 
 given current guess of the blobs, compute ownership of each point.  The second step is 
@@ -966,51 +1014,81 @@ M-step which given ownership probabilities, update blobs to maximize likelihood
 function. Then repeat this two-step until convergence. 
 Expectation Maximization (EM) Details 
 E-step 
-Compute probability that point x is in blob j, given current guess of ? 
-? px ( | ? , ? )
+Compute probability that point x is in blob j, given current guess of ?  
+1
+( | , )
+( | , , )
+( | , )
 j j j
-p( j | x,u , ? ) ? 
-jj
-k
-? px ( | ? , ? )
-? i i i
-i ?1
+j j k
+i i ii
+p x
+p j x u
+p x
+? ? ?
+?
+? ? ?
+?
+?
+?
+ 
 M-step 
 Compute probability that blob j is selected 
-1 K
-new
-? ? p( j | x , ? , ? ) (N data points) 
+1
+1
+( | , , )
+Knew
+j i j ji
+p j x
+N
+? ? ?
 ?
-j i j j
-i ?1
-N
+? ?  (N data points) 
 Mean of blob j  
+1
+1
+( | , , )
+( | , , )
 N
-x p( j | x ,?? , )
-? i i j j
-new
-i ?1
+i i j jnew i
+j N
+i j ji
+x p j x
+p j x
 ? ?
-j N
-p( j | x ,?? , )
-? i j j
-i ?1
- 
+?
+? ?
+?
+?
+?
+?
+?  
 Covariance of blob j  
-N
-new new 2
-(x?? ? )(x ? ) p( j | x , ? , ? )
-? i j i j i j j
-2new
-i ?1
-? ? 
+2
+2 1
+1
+( )( ) ( | , , )
+( | , , )
+N new new
+i j i j i j jnew i
 j N
-p( j | x ,?? , )
-? i j j
-i ?1
+i j ji
+x x p j x
+p j x
+? ? ? ?
+?
+? ?
+?
+?
+? ?
+?
+?
+?
+ 
   
-35 
-  
+36 
+ 
+ 
 Result & Data analysis 
 This section will show the detail of results and analyze the results with previous methods. 
 Following the results of some analyses further questions are posed and additional 
@@ -1034,9 +1112,9 @@ Landmark detection with depth information of then image
 This analysis is based on the method which has been mentioned on section 4.1 I use 3 
 screen-shots via the Kinect to show the result of landmark detection based on the 
 different threshold. The result is showed in figure 5.1 
-36 
-  
-  
+37 
+ 
+   
 Threshold = 0 Threshold = 100 Threshold = 1000 
 Figure 5.2 the landmark detection with 3 different threshold and Kinect resolution is 320 
 x 240 and the process pixel from X: 160 to 320 Y: 120 to 240 (the right bottom part of 
@@ -1061,8 +1139,9 @@ Total landmark 145 77 37
 Good percentage 62% 70% 84% 
 Table 5.1 the statistics of the landmark from 10 frames, the number of landmark is the 
 sum of 10 frames (each threshold for 10 frames) 
-37 
-  
+38 
+ 
+ 
 Figure 5.2 
 As is shown in the table 5.1, we can see that with the increase of threshold the number of 
 good landmarks will increase. The more numbers of good landmark you get hold of, the 
@@ -1084,8 +1163,9 @@ depth of each pixel), the frame may lose data. Each time the function only execu
 If all the operations have not done in 1/30s, the kinectSensor_DepthFrameReady function 
 will not wait but start again to detect new frame. Therefore, some landmark information 
 will stay on memory and affect next frames data. And the bad landmarks will come out. 
-38 
- Kinect problem  
+39 
+ 
+Kinect problem  
 It has been mentioned in previous section that if Kinect detect some objects with sharp or 
 reflective surface the depth of the pixel on the object surface will be -1. Therefore, there 
 is possibility that the pixel around the reflective surface becomes the bad point. 
@@ -1094,8 +1174,7 @@ We cannot change the hardware of the Kinect, so we try to solve it in software w
 try to use another thread to handle the function kinectSensor_DepthFrameReady. The 
 landmark algorithm is processed in this thread. Our target is to confirm the completion of 
 each frame. Even that may reduce the FPS. 
- 
- 
+  
 Figure 5.4 
 Compare with MRPT 3D visual SLAM 
 Comparing with the MRPT 3D visual SLAM, my result will have fewer landmarks than 
@@ -1112,9 +1191,9 @@ same position. This will affect the robot to make localization.
  
 Convert the detect landmark to the 2D map view 
 The real view from Kinect The 2D feature to describe the image left 
-39 
-  
+40 
  
+  
  
 Figure 5.6 
 The figure 5.6 shows the 2D feature to describe my room. But it can be seen that there are 
@@ -1134,8 +1213,9 @@ with a reflective surface are successful. Figure 5.8 shows an example of manipul
 depth data via the Kinect. In figure 5.8, color represents the depth and white represents 
 removed data. As it can be seen, both the human in the scene and the two reflective 
 windows in the background have been detected and removed. 
-40 
- .  
+41 
+ 
+.  
 Figure 5.8 the graph illustrating the ability to remove humans and reflective surfaces 
 from a scene. The color represents the depth. 
  
@@ -1149,12 +1229,17 @@ to calculate the average distance of the depth of each pixel in the image.
 By this way, the time complex is n(o). It is extremely fast for the Kinect 
 to make detection. The result is showed as follows: 
   
-Kinect detect distance is 303mm the real Kinect detect the distance is -0.42mm the 
-distance is 500mm real distance is 300mm 
-41 
-   
-Kinect detect distance is 303mm the real Kinect detect the distance is -0.42mm the 
-distance is 500mm (depth image view) real distance is 300mm 
+Kinect detect distance is 303mm the real 
+distance is 500mm 
+Kinect detect the distance is -0.42mm the 
+real distance is 300mm 
+42 
+ 
+  
+Kinect detect distance is 303mm the real 
+distance is 500mm (depth image view) 
+Kinect detect the distance is -0.42mm the 
+real distance is 300mm 
 Figure 5.9 
 With regard to the depth image, figure 5.8 shows clearly that the color of the bottom part 
 of the image is dark, which means that it is too closed to the object, or the object is with a 
@@ -1180,36 +1265,49 @@ depth value will return to -1. Providing that if there is a big mirror in front 
 even far away from the Kinect, the depth value on the surface of monitor returns to -1. 
 Therefore, if any objects with reflective object in front of the Kinect, this method will be 
 inaccurate. 
-42 
- Image Segmentation Method 
+43 
+ 
+Image Segmentation Method 
 Mixture of Gaussians 
 This analysis is based on the method which has been mentioned on section 4.1, and 
 Gaussian model is used to train the training-se. Thus, the image is divided into different 
 parts in order to let robot know which part can be accessible. The navigation is more 
 intelligence. First, the training I select is as follows: 
- 
-  
+   
 Train as obstacles Train as accessible area Train as wall 
 Table 5.2 
 Then we transform this 3 image into greyscale model.  
  
- 
- 
+  
 Train as obstacles Train as accessible area Train as wall 
 Table 5.3 
   
-43 
-  
+44 
+ 
+ 
 The result shows as follows: 
     
-Kinect 1000mm from Kinect 750mm Kinect 500mm Kinect 250mm 
-the table  from the table from the table from the table 
-  
- 
- 
-Segment image which Segment image Segment image Segment image 
-Kinect 1000mm from which Kinect which Kinect which Kinect 
-table 750mm from table 500mm from table 250mm from table 
+Kinect 1000mm from 
+the table  
+Kinect 750mm 
+from the table 
+Kinect 500mm 
+from the table 
+Kinect 250mm 
+from the table 
+    
+Segment image which 
+Kinect 1000mm from 
+table 
+Segment image 
+which Kinect 
+750mm from table 
+Segment image 
+which Kinect 
+500mm from table 
+Segment image 
+which Kinect 
+250mm from table 
 Table 5.4 
 As I have method above, I use three training-sets to train the image. Each training-set 
 represents three regions (obstacles, accessible area and wall). In the Table 5.4, it can be 
@@ -1218,10 +1316,11 @@ seen that the black region represents the obstacles, the grey region represents 
 In detail, 
  
 Figure 5.10   histograms for three training-sets 
-44 
- Clearly, three training-classes cannot represent three classification regions. We can see 
+45 
+ 
+Clearly, three training-classes cannot represent three classification regions. We can see 
 that pixel in 3 training-sets are similar. There is little coverage of pixel 3 training-sets. 
-(The value of most pixels is about 23,40,51,65,100 É pixel distribution is discrete) 
+(The value of most pixels is about 23,40,51,65,100  pixel distribution is discrete) 
 Therefore, our target is to find a suitable training-set which contains more RGB value 
 information. Thus, we will redefine the training-set. 
  
@@ -1242,44 +1341,56 @@ about 0 to 220). The good method for the histogram of the training-set with many
 intersections is that the more detail of the image can be segmented with more 
 intersections. The disadvantage of the training-set is that the segmented image cannot 
 have a large region for each class. Therefore, small separate region will distribute in the 
-45 
- every part of the image. Each frame with high resolution will be segmented with 
+46 
+ 
+every part of the image. Each frame with high resolution will be segmented with 
 exceptions. 
 The result of new segment method with new training-set 
     
-Kinect 1000mm from Kinect 750mm Kinect 500mm Kinect 250mm 
-the table  from the table from the table from the table 
- 
- 
- 
- 
-Segment image which Segment image Segment image Segment image 
-Kinect 1000mm from which Kinect which Kinect which Kinect 
-table 750mm from table 500mm from table 250mm from table 
+Kinect 1000mm from 
+the table  
+Kinect 750mm 
+from the table 
+Kinect 500mm 
+from the table 
+Kinect 250mm 
+from the table 
+    
+Segment image which 
+Kinect 1000mm from 
+table 
+Segment image 
+which Kinect 
+750mm from table 
+Segment image 
+which Kinect 
+500mm from table 
+Segment image 
+which Kinect 
+250mm from table 
 Table 5.4 
 Now I use Photoshop to define three different areas in the original image as the ground 
 truth. It can simply reflect whether or not the results of the training-set are acceptable or 
 not. 
- 
- 
-  
-Kinect 1000mm from Kinect 750mm Kinect 500mm from Kinect 250mm 
-the table from the table the table from the table 
+    
+Kinect 1000mm from 
+the table 
+Kinect 750mm 
+from the table 
+Kinect 500mm from 
+the table 
+Kinect 250mm 
+from the table 
 Table 5.5 
 The different rate of segment image from ground truth 
-46 
-  
-   
-  
+47 
  
- 
+    
+    
 Difference 65.7% Difference 70.0% Difference 61.1% Difference 49.5% 
 Table 5.6 
- 
- 
+    
   
- 
- 
  
  
 Difference 61.2% Difference 65.7% Difference 58.6% Difference 
@@ -1294,8 +1405,9 @@ better result the segment gets.
  
  
  
-47 
- Compare with two ways to generate the Mu 
+48 
+ 
+Compare with two ways to generate the Mu 
 Method  Average way Threshold way 
 parameter Mu sigma Mu sigma 
 Training set 1 11.11107 22.556 15.196 22.91 
@@ -1303,8 +1415,7 @@ Training set 2 108.2956 61.398 150.31 74.39
 Training set 3 71.314 51.575 81.64 52.50 
 Table 5.8 
 Average way Threshold way 
- 
- 
+  
 Difference 65.7% Difference 62.4% 
 Table 5.9 the segmentation result with different Mu generation.  
  
@@ -1318,14 +1429,12 @@ For the simple image in frames, when the contrast are extremely high between
 background and foreground of the objects, it is better to use the average way to calculate 
 Mu and sigma than that in the Threshold way. 
  
-  
+    
+49 
  
- 
-48 
-  
+    
    
  
-   
  
 Figure 5.12 
 Figure 5.12 shows the results of image segment which are from the same training set in 
@@ -1343,11 +1452,18 @@ discern anything.
  
 Combine the Gaussians model and the depth information of frame 
     
-Kinect 1000 mm Kinect 750 mm from Kinect 500 mm Kinect 250 mm 
-from the table the table from the table from the table 
+Kinect 1000 mm 
+from the table 
+Kinect 750 mm from 
+the table 
+Kinect 500 mm 
+from the table 
+Kinect 250 mm 
+from the table 
  
-49 
- The result shows the situation where the object is closer to the Kinect (the darker part of 
+50 
+ 
+The result shows the situation where the object is closer to the Kinect (the darker part of 
 image). The result shows that the bottom of the image is always black, which is the floor, 
 because the view of the Kinect has dark angles. Therefore, the floor, closed to the Kinect, 
 may be detected as the object or the inaccessible area.  
@@ -1362,8 +1478,9 @@ Kinect 1000 mm from the table
 Figure 5.14 the left is the real view from Kinect and the right image is the color depth 
 (with Gaussian) view 
  And the histogram of the image above is showed as follows: 
-50 
-  
+51 
+ 
+ 
 Figure 5.15 
 The figure 5.15 is the histogram of the image in figure 5.14. The x label is the depth of 
 image; I set the depth range from 0mm to 4500mm. It is clear that most of pixel of which 
@@ -1380,12 +1497,12 @@ program which is not written by me.  The program is named DiversityGridSlam. It 
 an opensource software. But I use the .net reflector to decompile it and get the source 
 code (maybe is not same as the authorÕs code) but I decompile the code and run it to 
 analysis the result. 
- 
- 
+  
 SLAM without EKF SLAM with EKF 
 Figure 5.16 
-51 
-  
+52 
+ 
+ 
 Figure 5.17 the RMSE on SLAM with different methods. 
 The figure 5.8 indicates the result between EKF-SLAM and normal SLAM. It is clearly 
 that the EKF-SLAM has a better map than that by the normal SLAM. The figure 5.9 
@@ -1393,8 +1510,9 @@ indicates the root means square error between the EKF-SLAM and normal SLAM.
  
 Figure 5.18 
  
-52 
-  
+53 
+ 
+ 
 Figure 5.19 EKF-SLAM with 1 round 
  
 Figure 5.20 EKF-SLAM with 2 round 
@@ -1406,8 +1524,9 @@ if the robot keeps moving, the noise will be increased step by step. Therefore, 
 distance between ground truth and the real path is increased. 
  
  
-53 
- Discussion 
+54 
+ 
+Discussion 
 The landmark detection 
 There are several features of the algorithm above. All the pixels are iterated only once. 
 Therefore, the time complexity of algorithm is O (n). This algorithm is improved, 
@@ -1444,8 +1563,9 @@ The Gaussian model
 When I get the landmark, I will tell the robot which part is accessible. I try to use 
 Gaussian model and Bayesian inference methods to segment each image of the frames. 
 And I try to tell the robot to which part the robot move.  
-54 
- Gaussian model also has the advantage and disadvantage for the robot to detect the 
+55 
+ 
+Gaussian model also has the advantage and disadvantage for the robot to detect the 
 directions. The advantage is that we have to get a rule for robot how to classify the pixel 
 in the frame each time before we choose the training-set for robot, because different 
 pixels are classified to different classes. Therefore, based on the classification, robot will 
@@ -1483,8 +1603,9 @@ operation of EKF-SLAM. In the meanwhile, the algorithm depends on the correct mo
 model and observe model, so it is critical to model the robot and the environment. EKF-
 SLAM is usually suggested avoiding using for those applications where it is hard to 
 model the robot and the environment. 
-55 
-  
+56 
+ 
+ 
 Future work 
 As to work in the future, I am interested in the extension of my method to the large environment. 
 My method highly depends on the environmental condition such as brightness of the environment, 
@@ -1508,8 +1629,9 @@ model is mostly affected by the training-set. Therefore, if the conditions which
 detects are different from that of the training set (like sunlight), there will be a significant 
 effect on the result accuracy. And, GM is based on the RGB information of each pixel, so 
 the change color on the objectÕs surface will directly affect the classification results. 
-56 
- Acknowledgements 
+57 
+ 
+Acknowledgements 
 I would like to express my thanks to my supervisor Walterio Mayol-Cuevas, he gives me 
 a lot of help on the project. 
 Thanks also to Xiaochuan Wu and Wei Wang for their help on my project and my 
@@ -1517,8 +1639,9 @@ English writing.
 I would like to greatly thank my family and my girlfriend for their constant support and 
 encouragement. 
   
-57 
-  
+58 
+ 
+ 
  
 Reference 
 [1] Wikipedia/Date [2012-8-17]. http://en.wikipedia.org/wiki/Mobile_robot 
@@ -1542,15 +1665,16 @@ http://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping
 2006, 20(1): 25-42. 
 [9] Hahnel D, Thrun S, Wegbreit B, et al. Towards Lazy Data Association in 
 SLAM.Robotics Research. 2005: 421-431. 
-[10] NeiraJosŽ , Tard— sJuanDomingo. Data association in stochastic mapping using the 
+[10] NeiraJosŽ, Tard—sJuanDomingo. Data association in stochastic mapping using the 
 joint compatibility test. IEEE Transactions on Robotics and Automation. 2001, 17(6): 
 890-897. 
 [11] Besl, P. J, Mckay, N. D. A method for registration of 3-D shapes. IEEE Transactions 
 on Pattern Analysis and Machine Intelligence. 1992, 14(2): 239-256. 
 [12] Lu F, Milios E. Robot pose estimation in unknown environments by matching 
 2Drange scans. Journal of Intelligent and Robotic Systems. 1997, 18: 249Ð275. 
-58 
- [13] Thomas R. Using Histogram Correlation to Create Consistent Laser Scan Maps. 
+59 
+ 
+[13] Thomas R. Using Histogram Correlation to Create Consistent Laser Scan Maps. 
 Proceedings of the IEEE International Conference on Robotics Systems. EPFL, Lausanne, 
 Seitzerland: IEEE, 2002. 625-630. 
 [14] Biber P, Straer W. The Normal Distributions Transform: A New Approach to Laser 
@@ -1581,10 +1705,9 @@ Advanced Robotics. Berlin Heidelberg New York: Springer Verlag, 2007.
 [27]http://www.ece.uvic.ca/~aalbu/computer%20vision%202009/Lecture%2010.%20Seg
 mentation-edge-based.pdf 
 [28] Digital Image Processing, Addison-Wesley Publishing Company, 1992, Chap. 7. 
-59 
- [29] E. Davies Machine Vision: Theory, Algorithms and Practicalities, Academic Press, 
+60 
+ 
+[29] E. Davies Machine Vision: Theory, Algorithms and Practicalities, Academic Press, 
 1990, Chap. 4. 
 [30] D. Vernon Machine Vision, Prentice-Hall, 1991, pp 49 - 51, 86 - 89. 
- 
-60 
  

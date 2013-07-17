@@ -1,5 +1,7 @@
  
  
+2 
+ 
 Abstract                                        
  
  
@@ -43,82 +45,85 @@ methods and an improved classifier for re-ranking the тanimalу images on the web
  
  
  
-2 
-  
+ 
+ 
+4 
  
 Contents                                        
  
-Abstractииииииииииииииииииииииииииииииииииииииии.2 
-Acknowledgementsииииииииииииииииииииииииииииииииии3 
-1  Introductionииииииииииииииииииииииииииииииииииии6 
- 1.1 Object Recognitionииииииииииииииииииииииииииииииии7 
-  1.1.1 Preprocessing ииииииииииииииииииииииииииииииии.8 
-  1.1.2 Feature Extractionииииииииииииииииииииииииииииии.9 
-  1.1.3 Modelingиииииииииииииииииииииииииииииииии...и10 
-  1.1.4 Matchingиииииииииииииииииииииииииииииииии.и...11 
- 1.2 Aims and Objectivesииииииииииииииииииииииииииии.ии.11 
-2  Comparison with Features Extraction Methodsиииииииииииии.иии13 
- 2.1 Color Representationиииииииииииииииииииииииииии.ии..13 
-  2.1.1 Random Subwindowsиииииииииииииииии..ииииииии.ии.14 
-  2.1.2 9 blocks (8bins)иииииииииииииииииииииииииииии.ии15 
-  2.1.3 9 blocks (16bins)ииииииииииииииииииииииииииии.ии.15 
- 2.2 Texture Representationииииииииииииииииииииииииии.ии.15 
-  2.2.1 Gaborииииииииииииииииииииииииииииииииии.ии...16 
-  2.2.2 Local Binary Patternииииииииииииииииииииииииии.ии..17 
-  2.2.3 A Method Fused with LBP and GLCMиииииииииииииииии.ии.18 
- 2.3 Shape Representationииииииииииииииииииииииииии.иии.20 
-  2.3.1 Geometric Blurиииииииииииииииииииииииииииии.ии..21 
-  2.3.2 Histogram of Oriented Gradientиииииииииииииииииииии.и.21 
- 2.4 Extremum Points Representationиииииииииииииииииииииии25 
-  2.4.1 Scale-Invariant Feature Transformиииииииииииииииииии...и26 
-  2.4.2 PCA-SIFTииииииииииииииииииииииииииииииииии.....30 
-3  Implementation and Resultsииииииииииииииииииииииииии...31 
- 3.1 Data Setиииииииииииииииииииииииииииииииииииии..33 
- 3.2 Explanation on Some Detailsиииииииииииииииииииииииии....34 
-4 
-  
- 
- 3.3 Results on Cuesиииииииииииииииииииииииииииииииии.35 
-  3.3.1 Results on Colorиииииииииииииииииииииииииииииии..36 
-  3.3.2 Results on Textureииииииииииииииииииииииииииииии38 
-  3.3.3 Results on Shapeиииииииииииииииииииииииииииииии40 
-  3.3.4 Results on Extremum Pointsииииииииииииииииииииииии..42 
-  3.3.5 Results on Combined Cuesиииииииииииииииииииииииии..43 
-4  Discussionииииииииииииииииииииииииииииииииииии...45 
-5  Evaluation and Conclusionииииииииииииииииииииииииииии47 
-6  Future Workиииииииииииииииииииииииииииииииииии...48 
-7  Referenceиииииииииииииииииииииииииииииииииииии.49 
-8  Appendix: Source Codeиииииииииииииииииииииииииииии...51 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+Abstract.2 
+Acknowledgements3 
+1  Introduction6 
+ 1.1 Object Recognition7 
+  1.1.1 Preprocessing .8 
+  1.1.2 Feature Extraction.9 
+  1.1.3 Modeling...10 
+  1.1.4 Matching....11 
+ 1.2 Aims and Objectives..11 
+2  Comparison with Features Extraction Methods.13 
+ 2.1 Color Representation...13 
+  2.1.1 Random Subwindows....14 
+  2.1.2 9 blocks (8bins).15 
+  2.1.3 9 blocks (16bins)..15 
+ 2.2 Texture Representation..15 
+  2.2.1 Gabor....16 
+  2.2.2 Local Binary Pattern...17 
+  2.2.3 A Method Fused with LBP and GLCM..18 
+ 2.3 Shape Representation..20 
+  2.3.1 Geometric Blur...21 
+  2.3.2 Histogram of Oriented Gradient..21 
+ 2.4 Extremum Points Representation25 
+  2.4.1 Scale-Invariant Feature Transform...26 
+  2.4.2 PCA-SIFT.....30 
+3  Implementation and Results...31 
+ 3.1 Data Set..33 
+ 3.2 Explanation on Some Details....34 
  
  
 5 
-  
+ 
+ 3.3 Results on Cues.35 
+  3.3.1 Results on Color..36 
+  3.3.2 Results on Texture38 
+  3.3.3 Results on Shape40 
+  3.3.4 Results on Extremum Points..42 
+  3.3.5 Results on Combined Cues..43 
+4  Discussion...45 
+5  Evaluation and Conclusion47 
+6  Future Work...48 
+7  Reference.49 
+8  Appendix: Source Code...51 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+6 
  
 1. Introduction                                  
  
@@ -139,9 +144,7 @@ animals.
  
  
  
-Figure 1: An image of monkey on the Wikipedia Figure 2: An image shown on the web site of a 
  
-web site monkey business design   
  
  
 Retrieving the animal images on the web is a hard work to achieve. Actually, in the 
@@ -165,8 +168,13 @@ cues, I could generally get a better result than that only uses one feature.
  
  
  
-6 
-  
+Figure 1: An image of monkey on the Wikipedia 
+web site 
+Figure 2: An image shown on the web site of a 
+monkey business design   
+ 
+ 
+7 
  
 1.1 Object Recognition 
  
@@ -210,8 +218,9 @@ information stands for an evaluation for the object by people. The bottom
 feature is on behalf of color, texture or other image features. This method 
 needs a training set. Applying feature extracting on the training set and using 
 the feature information to be matched by the testing set. My project is very 
-7 
-  
+ 
+ 
+8 
  
 similar to this method. 
  
@@ -253,10 +262,10 @@ transformation could help them match. Image smoothing can be used for
 eliminating random noise of an image. Gaussian smoothing is a common method 
 in this part and it will be used a number of times in this program. Normalization 
 could make some features own invariance under the special conversion.  
-8 
-  
  
-Figure 3: The effect of using Gaussian smoothing. 
+ 
+9 
+ 
  
 1.1.2 - Feature extraction 
  
@@ -282,8 +291,10 @@ would have a good performance in extracting the whole image feature, but they
 are very strict to the training set. Images should be aligned manual in order to get 
 a reasonable training effect.  
  
-9 
-  
+Figure 3: The effect of using Gaussian smoothing. 
+ 
+ 
+10 
  
  
  
@@ -296,10 +307,7 @@ a reasonable training effect.
  
  
  
-Figure 4: A corner detector, Harris 
  
-Figure 5: PCA applied on the face recognition. [12] 
-algorithm. [11] 
 1.1.3 - Modeling 
  
 Some methods would include modeling. The main purpose of modeling is to find 
@@ -328,15 +336,18 @@ words into different рtopicsс based on their frequency.
  
  
  
-10 
-  
+Figure 4: A corner detector, Harris 
+algorithm. [11] 
+Figure 5: PCA applied on the face recognition. [12] 
+ 
+ 
+11 
  
  
  
  
  
  
-Figure 6: Graphical model representation of LDA. [16] 
  
 This project does not employ a model but a simple mathematical method to 
 process the features, because it just needs to detect whether an image depicts 
@@ -357,9 +368,7 @@ get a similarity used for re-ranking.
  
  
  
-Figure 7: A matching between two images with 
  
-different angle.  
  
  
 1.2 Aims and Objectives 
@@ -369,27 +378,20 @@ pictures on the web. They rely on text, color, shape and texture these four simp
 cues to identify images containing categories of animals. On the whole, their 
 system is divided into four stages.  
  
-11 
+Figure 6: Graphical model representation of LDA. [16] 
+Figure 7: A matching between two images with 
+different angle.  
+ 
+ 
+12 
+ 
+ 
   
  
  
-Testing 
-Dataset collecting 
-  
-Training Manual select 
-(Compute similarities of 
-from Internet 
- 
-(LDA) relevant topics text, color, texture, 
-(Pictures + Text) 
- 
-shape) 
  
  
  
-Figure 8: The flow chart of the animals search system 
- 
-in the previous paper 
  
  
 The first stage, it uses a clustering method that is applied to text on web pages to 
@@ -426,8 +428,23 @@ different animals set.
 information. 
  
  
-12 
-  
+Dataset collecting 
+from Internet 
+(Pictures + Text) 
+ 
+Training 
+(LDA) 
+Manual select 
+relevant topics 
+Testing 
+(Compute similarities of 
+text, color, texture, 
+shape) 
+Figure 8: The flow chart of the animals search system 
+in the previous paper 
+ 
+ 
+13 
  
 2. Comparison with Features Extraction Methods   
  
@@ -471,8 +488,9 @@ narrow down the features.
  
 Color set [19] is expressed to the binary feature vector. Therefore, it can use 
 binary search tree to increase search speed, which could be efficient for massive 
-13 
-  
+ 
+ 
+14 
  
 images set. 
  
@@ -505,26 +523,27 @@ much useful information could be strengthen in the color histogram.
  
  
  
-1 2 
- 
-5 
- 
- 
-4 
- 
-3 
  
  
  
-Figure 9: Five random subwindows and one overlap. 
+ 
+ 
+ 
  
  
 For the testing images, I set a subwindows ratio that equals to 150. The ratio used 
 for determining the number of random subwindows, a 640*480 image would have 
 about 1000 random windows. We could not pick random number of subwindows 
 in testing image; they are different with training set. It would decrease precision 
-14 
-  
+ 
+1 2 
+4 
+3 
+5 
+Figure 9: Five random subwindows and one overlap. 
+ 
+ 
+15 
  
 of ranking because the noisy information in real images. 
  
@@ -567,8 +586,9 @@ A good texture extraction should own the following properties:
 ? A small amount of calculation. 
 ? Having a practical application. 
  
-15 
-  
+ 
+ 
+16 
  
 In this part, I choose Gabor, LBP (Local Binary Patterns), and a method fused with 
 LBP and GLCM (Gray-level Co-occurrence Matrix) to be the experimental methods. 
@@ -590,42 +610,42 @@ Gabor is a kind of windowed Fourier transform and the windowed function is
 Gauss function. The substance of Gabor transformation is to make a convolution of 
 two-dimensional image. Two-dimensional Gabor function can be defined by 
  
-     
-        
+   (x,y) = 
+  
+  
+ exp(- 
+         
+   
+) [exp(ik  
  
-  
- (x,y) =  exp(- ) [exp(ik -exp(- ) 
-  
+ -exp(- 
   
  
-    
+) 
  
 Where  
  
+           k =    
+  
+  =  
+       
+       
+  ,    =  
+ 
    
+   ,  
  
-     
-  
+ = u 
  
- 
- 
- 
-    
-           k =  =  ,   =    ,   = u  
- 
-  
-     
-  
  
  
  
 The value of v decides the frequency (scale) of Gabor filter and u means the 
 orientation of Gabor function. K represents the total orientation numbers. The 
-parameter      determines the size of Gauss window. I set      , which is a 
- 
+parameter      determines the size of Gauss window. I set       , which is a 
 common value. In this project, there are 4 scales. Thus, the range of v is 0, 1, 2 and 
 3. Also, there are 6 orientations in the project. So K equals to 6 and the range of u 
-is 0, 1, и, 6. As a consequence of different scale and orientation, there will be 24 
+is 0, 1, , 6. As a consequence of different scale and orientation, there will be 24 
 Gabor functions. 
  
  
@@ -634,8 +654,9 @@ Gabor functions.
  
  
 Figure 10: Gabor function with different scales Figure 11: Gabor function with different orientations 
-16 
-  
+ 
+ 
+17 
  
 2.2.2 п Local Binary Pattern 
  
@@ -648,13 +669,9 @@ computational process is as follows:
  
  
 100 20 36 
-1 0 0 
 89 90 105 
-0  1                 
 221 36 146 
-1 0 1 
  
-Figure 12: The computing process of LBP operator 
  
 As the figure shows, the left matrix depicts the grey level information of a pixel 
 point and its eight surrounding pixels. Based on the threshold of central pixel, the 
@@ -674,19 +691,21 @@ would collect a 36-dimensions feature.
  
  
  
-Figure 13: original texture picture Figure 14: LBP picture 
  
  
 In other situation, the 3*3 block area could be replaced by a round area. LBP 
-operator could be expressed with    , which means there are P pixel points in 
-   
-a round area with radius R. The general operators are    ,    ,    . In 
-           
-17 
-  
+operator could be expressed with      , which means there are P pixel points in 
+a round area with radius R. The general operators are       ,        ,        . In 
+1 0 0 
+0  1                 
+1 0 1 
+Figure 12: The computing process of LBP operator 
+Figure 13: original texture picture Figure 14: LBP picture 
  
-my project, I use the operator    . In short, LBP has a good performance based 
-   
+ 
+18 
+ 
+my project, I use the operator       . In short, LBP has a good performance based 
 on the multi-scale, brightness invariance and rotation invariance.   
  
 2.2.3 п A Method fused with LBP and GLCM 
@@ -700,12 +719,12 @@ correlation of two points with different distance and direction.
 It defines that the orientation of two pixels points is  . One grey-level value is i, 
 another is j. So, I(k,l) = i , I(m,n) = j. (k, l, m, n are coordinates of the points) The 
 probability of occurrence of these two pixels points is defined as P (i, j, d,  ). 
-Generally, there are four optional values of  , namely 0║ , 45║ , 90║ , 135║ . Thus, 
+Generally, there are four optional values of  , namely 0║, 45║, 90║, 135║. Thus, 
 there are four probabilities: 
-P (i, j, d, 0║ ) = # {[(k, l), (m, n)] | k-m=0, |l-n|=d} 
-P (i, j, d, 45║ ) = # {[(k, l), (m, n)] | k-m=d, l-n=d} 
-P (i, j, d, 90║ ) = # {[(k, l), (m, n)] | |k-m|=d, l-n=0} 
-P (i, j, d, 135║ ) = # {[(k, l), (m, n)] | k-m=-d, l-n=-d} 
+P (i, j, d, 0║) = # {[(k, l), (m, n)] | k-m=0, |l-n|=d} 
+P (i, j, d, 45║) = # {[(k, l), (m, n)] | k-m=d, l-n=d} 
+P (i, j, d, 90║) = # {[(k, l), (m, n)] | |k-m|=d, l-n=0} 
+P (i, j, d, 135║) = # {[(k, l), (m, n)] | k-m=-d, l-n=-d} 
 Where т#у represents amount of the set. 
  
 The following figure displays how to calculate GLCM. 
@@ -721,7 +740,7 @@ The following figure displays how to calculate GLCM.
  
  
  
- Figure 15: The GLCM of P(i, j, 1, 0║ ) distribution. (0<i<8 , 0<j<8) 
+ 
  
 As the figure can be seen, when computing the GLCM of a whole image, it needs a 
 matrix with size 256*256 to store the information. It is difficult to use GLCM for 
@@ -729,13 +748,14 @@ extracting texture feature. Therefore, Haralick [25] addressed fourteen features
 used for analyzing the GLCM and collect the texture information. Based on the 
 study of Haralick, there are only 4 features that are not relevant. They not only are 
 easy for calculation, but also could obtain a higher precision of classification. 
-18 
-  
+Figure 15: The GLCM of P(i, j, 1, 0║) distribution. (0<i<8 , 0<j<8) 
+ 
+ 
+19 
  
 1. Angular Second Moment (ASM):  
+   =   
  
- 
-  =   
     
 It indicates the uniformity degree of the grey-level distribution and the thickness 
 degree of texture. If the values of all elements in the GLCM are nearly, ASM would 
@@ -744,56 +764,54 @@ be large. Also, if the elements of GLCM are distributed intensively, ASM would b
 large.  
   
 2. Contrast: 
-     
-  
-  =    ) 
- 
-                  
+   =  
+                    
+   
+   ) 
 Contrast reflects the definition of a picture and depth degree of the texture. If the 
 texture cleft is deep, the contrast would be big and the visual effect would be clear. 
  
 3. Correlation: 
-              
-     
-  =  
+   = 
+                   
+    
  
-  
-  
-  
-Where    =     ,   =     ,   =         ,   =         . 
-              
+Where     =       ,    =       ,    =        
+ 
+    ,    =        
+ 
+    . 
  
 Correlation measures the level of similarity in the row or column of GLCM. 
 Therefore, it indicates the local information of a picture. When the values of 
 elements in a row or a column are near, the correlation would be large. That 
-means if an image has the horizontal texture, the correlation ( =0║ ) will be larger 
+means if an image has the horizontal texture, the correlation ( =0║) will be larger 
 than other correlation of different directions. 
  
 4. Inverse Difference Moment: 
+   =  
  
-  =    
-    
        
+     
 It reflects the homogeneity of the texture, which used for evaluating the degree of 
 the local transformation in a texture part. If inverse difference moment is large, it 
 demonstrates lack of change in different areas of the texture. 
  
 The shortage of LBP is that less spatial texture information is contained in the LBP 
-image. If we use a large P and R of     (P stands for the counts of points and R 
-   
+image. If we use a large P and R of        (P stands for the counts of points and R 
 stands for radius of the operator), the feature dimensions would be large. The 
 noise information would be strengthened and the calculation is more difficult. 
 Additionally, applying feature dimension reduction method may result in loss of 
 the texture feature. In order to extract effective LBP feature, I use a method fused 
 with LBP and GLCM. The steps are as follows: 
  
-(1) Apply the     operator to deal with the image. We can obtain a LBP image 
-   
+(1) Apply the        operator to deal with the image. We can obtain a LBP image 
 at this step. 
-19 
-  
  
-(2) Compute GLCM of the LBP image based on d = 1,   = 0║ , 45║ , 90║ , 135║ . We 
+ 
+20 
+ 
+(2) Compute GLCM of the LBP image based on d = 1,   = 0║, 45║, 90║, 135║. We 
 can get four GLCM at this step. 
 (3) Calculate Angular Second Moment, Contrast, Correlation and Inverse 
 Difference Moment of each GLCM. Combine these four features of each GLCM 
@@ -836,8 +854,9 @@ segmentation.
 4. Other methods.  There are some other methods used for shape feature 
 extraction, such as Finite Element Method [28], Turning Function [29] and 
 Wavelet Descriptor [30]. 
-20 
-  
+ 
+ 
+21 
  
 In short, the shape feature is much related to the edge detection and region 
 recognition. In this project, I use the methods Geometric Blur descriptor and HOG 
@@ -855,21 +874,15 @@ needs to obtain sparse signals first, then applied geometric blur to the sparse
 signals. Thus, it breaks images up into a quantity of channels, which are half-wave 
 rectified oriented edge responses. Additionally, geometric blur in one-dimension 
 is defined to be: 
-                   
- 
-    
+                        
  
  
-Where { } is a coordinate set varying in two dimension, I is a two-dimension 
- 
+Where {  } is a coordinate set varying in two dimension, I is a two-dimension 
 sparse signal, y equals to T(x) that T is a geometric distortion of bounded 
-transforms and      stands for a spatially varying kernel. Let 
- 
- (x,i) =      
-    
+transforms and       stands for a spatially varying kernel. Let 
+    (x,i) =       
 Finally, we can find the best match for a template in a picture by comparing the 
-values of  , which means each level of geometric blur could be compared 
- 
+values of   , which means each level of geometric blur could be compared 
 respectively using convolutions. 
  
  
@@ -883,14 +896,15 @@ respectively using convolutions.
  
  
  
-Figure 16: This is the effect of geometric blur about feature detection and 
  
-template matching. [31] 
  
  
 2.3.2 п Histogram of Oriented Gradient (HOG) 
-21 
-  
+Figure 16: This is the effect of geometric blur about feature detection and 
+template matching. [31] 
+ 
+ 
+22 
  
 HOG descriptors [7] is used for detecting pedestrian in a static picture at first, 
 then it is applied on detecting people in the movie or video, finding vehicle and 
@@ -914,34 +928,19 @@ shadow change.
  
  
  
-Block 
- 
-Cell  
  
  
  
  
  
-Combine 
  
-Normalization 
-histogram 
  
-Color normalization, Create the orientation Normalization for the 
-vectors of 
  
-Input an image 
-and gradient histograms with cell overlapped in the 
-all the 
  
-computation weighed voting blocks 
-blocks to 
  
-be a HOG 
  
-feature 
  
-Figure 17: The process of HOG feature extraction 
+ 
  
  
 ? Color and Gamma normalization  
@@ -950,12 +949,33 @@ image. One hand, because the color information is not useful in the shape
 detection, the color image would be transformed to a grey-scale image. In another 
 hand, Gamma normalization could be applied to decrease the variation of 
 illumination and shadow. The function of Gamma is as follows: 
- 
+              
  
   
-             
-22 
-  
+Cell  
+Block 
+Normalization 
+Input an image 
+Color normalization, 
+and gradient 
+computation 
+Create the orientation 
+histograms with 
+weighed voting 
+Normalization for the 
+cell overlapped in the 
+blocks 
+Combine 
+histogram 
+vectors of 
+all the 
+blocks to 
+be a HOG 
+feature 
+Figure 17: The process of HOG feature extraction 
+ 
+ 
+23 
  
 Where I stands for the grey-level value and (x, y) represents the pointуs coordinate. 
 However, in my experiment, the results would not be changed even if I do not use 
@@ -967,9 +987,7 @@ Gradient computation means calculating the first-order gradient of all pixel poi
 Derivation can not only capture some information of outline and texture, but also 
 weaken the influence of illumination. The functions are as follows: 
 Gradient Size:  
-  
-        
-R(x,y) =                                  
+R(x,y) =                                            
 Gradient orientation:  
 Ang(x,y) = arc cos(I(x+1,y)-I(x-1,y)/R) 
  
@@ -980,7 +998,7 @@ orientation-histogram channel, it uses a weighted voting method to determine
 which bin a pixel point belongs to.  
  
 The orientation-histogram channel is separated into 9bins, so it means each bin 
-own 20║ . Each angle of the gradient would be distributed to the appropriate bin. 
+own 20║. Each angle of the gradient would be distributed to the appropriate bin. 
 Assuming there is an image with size 480*360. Normally, we need to use two 
 vectors of 480*360 dimensions to store the size and orientation separately, but we 
 need two vectors of 480*360*2 dimensions to store these two values. Because, 
@@ -991,25 +1009,26 @@ angle belongs to. So we use gradient size to be a weighted value and need
  
 The aim of this step is to keep the basic posture and appearance sensibility. 
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 Bin0  
- 
 Bin1 
- 
- 
 Bin2 
- 
- 
- 
- 
- 
- 
 Figure 18: Weighted voting method on orientation 
- 
 histogram. (a stands for the  gradient angle and A means 
- 
 the gradient size  
-23 
-  
+ 
+ 
+24 
  
 ? Group the cells together into larger blocks and Normalization 
 Owing to the variations of illumination and foreground-background contrast, the 
@@ -1034,7 +1053,6 @@ pointsу different contribution to a cell.
  
  
  
-Figure 19: The different pixel points in a block have different effect on cells 
  
 As the figure shows, black box stands for a block, red box represents cells and 
 green dotted lines separate each cell to four parts. In this figure, there are 16 parts. 
@@ -1056,8 +1074,10 @@ more and keep a better geometric and photometric invariance.
  
 ?  Combine histogram vectors of all the blocks to be a HOG feature 
 Assuming there is a picture with size 40*40, each block has 2*2 cells, and the size 
-24 
-  
+Figure 19: The different pixel points in a block have different effect on cells 
+ 
+ 
+25 
  
 of cell is 8*8. So there are 4*4 blocks in this picture and the HOG feature has 
 16*4*9 dimensions. In my project, I set the block size to 32*32, cell size to 16*16. 
@@ -1088,7 +1108,6 @@ a: flat point
   c: corner point 
  
  
-Figure 20: The types of points in a picture 
  
  
 If we compute the Ix and Iy of a, b, c,           of тaу would be small; Ix or Iy of тbу 
@@ -1103,9 +1122,11 @@ extremum points. The performance is as follow.
  
  
  
+Figure 20: The types of points in a picture 
 Figure 21: Harris applied on a text 
-25 
-  
+ 
+ 
+26 
  
  
  
@@ -1113,12 +1134,10 @@ Figure 21: Harris applied on a text
 Susan [33]:  
  
  
-Nucleus of mask 
  
  
  
  
-Figure 22: Susan method 
  
 It is a method which applies on the area size. It uses a circle mask to explore the 
 image, in order to find the area illumination similar with the circle. The area is 
@@ -1136,7 +1155,7 @@ background information would cause the interference when finding the features.
 As a result, in my project, I choose a more stable and robust method Sift in this 
 part. 
  
-2.4.1 п Scale пInvariant Feature Transform (Sift) 
+2.4.1 п ScaleпInvariant Feature Transform (Sift) 
  
 Sift [8] is a method which finds the extremum points in the spatial space and 
 collect their position, scale and rotation invariance. The main advantages of Sift 
@@ -1152,8 +1171,11 @@ why I take sift feature to be the fourth cue representation.
 ? Sift is the local feature. It could not only keep the invariance of rotation, scale 
 and illumination, but also maintain stability of blur and affine. 
  
-26 
-  
+Nucleus of mask 
+Figure 22: Susan method 
+ 
+ 
+27 
  
 Now I give a detailed introduction of Sift. There are five steps. 
  
@@ -1165,11 +1187,11 @@ scale-space of a two-dimension image is defined as:
  
 L(x, y,  ) = G(x, y,  )*I(x, y) 
  
-    
-         
-Where G(x, y,  ) =  , (x, y) stands for the coordinate and the   is 
+Where G(x, y,  ) = 
  
-   
+    
+    
+         , (x, y) stands for the coordinate and the   is 
 scale ratio. Scale ratio decides the smoothness degree of an image, which means 
 that a big scale ratio is relevant to low resolution and a small scale ratio is related 
 to high resolution. In order to detect the stable points in the scale-space, it used 
@@ -1202,9 +1224,10 @@ on the last interval of the former octave.
  
  
  
-27 
 Figure 23: Gaussian Pyramid and DOG. (Each octave has five intervals) [8] 
-  
+ 
+ 
+28 
  
  
  
@@ -1239,7 +1262,6 @@ Figure 23: Gaussian Pyramid and DOG. (Each octave has five intervals) [8]
  
  
  
-Figure 24: Gaussian pyramid and DOG applied on an image of frog 
  
  
 2) Detect the spatial extremum points 
@@ -1250,10 +1272,13 @@ As the figures shows, if a point are the biggest or smallest in their 26 surroun
 points, the points could be treated as an extremum point. 
  
  
- Figure 25: the black cross point is 
+ 
+Figure 24: Gaussian pyramid and DOG applied on an image of frog 
+Figure 25: the black cross point is 
 the extremum point. [8] 
-28 
-  
+ 
+ 
+29 
  
 3) Determine the position of extremum  
  
@@ -1272,20 +1297,16 @@ Also, it can wipe out the points of instability or low contrast.
  
  
  
-Figure 26: The extremum points on the frog image 
  
-4) Distribute the extremum points у orientations 
+4) Distribute the extremum pointsу orientations 
  
 There are a number of points adjacent to the extremum point. Based on the 
 gradient orientation of these surrounding points, it could compute the orientation 
 parameters of the extremum point, and make the feature vector having rotation 
 invariance. 
  
-  
-        
-Gradient size:   M(x, y) =                                  
-  
-Gradient orientation:        =                                                
+Gradient size:   M(x, y) =                                            
+Gradient orientation:        =                                                  
  
 Combined of the information with step 3, each extremum point would have three 
 values: Position (x, y), Scale and orientation. As a result, we could get a feature 
@@ -1299,16 +1320,19 @@ keypoint descriptor. Each block would have eight directions. In my project, for 
 sake of higher accuracy, I will use 4*4 blocks to describe an extremum point, so 
 there would be yield the feature vector with 4*4*8 dimensions. 
  
- Figure 27: 
+ 
+ 
+ 
+Figure 26: The extremum points on the frog image 
+Figure 27: 
 Use the 
- 
 neighbor 
- 
 points to 
-29 
 produce the 
+descriptor. [8] 
  
-descriptor. [8]  
+ 
+30 
  
 2.4.2 п PCA-SIFT 
  
@@ -1330,7 +1354,6 @@ Method Time Scale Rotation Blur Illumination Affine
 Sift Common Best Best Common Common good 
 PCA-sift Good Good Good Best Good best 
  
-Figure 28: The comparison of SIFT and PCA-SIFT 
  
  
 The figure indicates that Sift do the best in Scale and Rotation. In fact, this is the 
@@ -1353,8 +1376,10 @@ in the following part.
  
  
  
-30 
-  
+Figure 28: The comparison of SIFT and PCA-SIFT 
+ 
+ 
+31 
  
 3. Implementation and Results                              
  
@@ -1399,26 +1424,22 @@ large dimensions and improve the feature information. So, I use k-means to
 cluster the features from training set. By my experiments, I set 100 clusters for 
 each HOG descriptor and 300 clusters for each Sift descriptor. 
  
-31 
-  
+ 
+ 
+32 
  
 K-means is a method which is based on the distance between cluster points and 
 other points. It uses distance to be the similarity factor, that is, the closer two 
 points are, the more their similarities are. To be brief, the main steps of K-means 
 include:  
  
-1 Choose K vectors  , ,...,  randomly, which would be treated cluster points 
-   
+1 Choose K vectors   ,  ,...,   randomly, which would be treated cluster points 
 at the initialize step. (each point is a multi-dimensional vector) 
 2 Use the following formula to compute the distance between the remaining 
-vectors     и   and the K cluster vectors 
-   
-                     = ||   -   || 
-   
-3 For   , select the nearest cluster vector by comparing the values of all the 
- 
-    , and then class   to this cluster. 
-  
+vectors            and the K cluster vectors 
+                     = ||    -    || 
+3 For    , select the nearest cluster vector by comparing the values of all the 
+    , and then class    to this cluster. 
 4 Determine the new K cluster points, by computing the average of all vectors 
 in their clusters separated. 
 5 Repeat step2 to step4 until the new K cluster vectors are equal to the former 
@@ -1439,7 +1460,6 @@ some methods.
  
  
  
-Figure 29: K-means applied on a two-dimension point set. (K=4) 
  
  
 For each visual cue, I compute the sum of the similarities of features matching 
@@ -1450,42 +1470,24 @@ The four similarities are equally weighted in my program.
  
 At Last, re-ranking the total similarities and output the re-ranked images. 
  
-32 
-  
+Figure 29: K-means applied on a two-dimension point set. (K=4) 
+ 
+ 
+33 
  
  
  
-Color  
- 
-9 blocks(16bins)  
  
  
-Texture 
- 
-Compute Output 
-6 orientation*4 scale 
-Gabor 
- 
-Similarities the 
-Select Training 
- 
-of Re-ranked 
-examples 
-Shape 
-K-means (100clusters) 
- 
-Testing Images 
-HOG 
- 
-Images 
- 
-Extreme points 
-K-means (300clusters) 
- 
-SIFT 
  
  
-Figure 30: The main process of the program 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
 3.1 Data Set 
@@ -1510,14 +1512,41 @@ For the testing images on the web, there are a lot of typical pictures that are 
 fake. They would be shown in the following figure.  
  
 Some characteristics of animal are hard to spot. For example, different color of 
-bearу  r,  the leopardуs stripe, stains of the frog and flexible limbs of monkey. My 
+bearу   r, the leopardуs stripe, stains of the frog and flexible limbs of monkey. My 
 classifier would show a substantial contribution to the performance based on the 
 visual information.  
  
  
  
-33 
-  
+Select Training 
+examples 
+Color 
+9 blocks(16bins) 
+Texture 
+Gabor 
+Shape 
+HOG 
+Extreme points 
+SIFT 
+ 
+ 
+ 
+Compute 
+Similarities 
+of 
+Testing 
+Images 
+6 orientation*4 scale 
+K-means (100clusters) 
+K-means (300clusters) 
+Output 
+the 
+Re-ranked 
+Images 
+Figure 30: The main process of the program 
+ 
+ 
+34 
  
  
  
@@ -1534,7 +1563,6 @@ visual information.
  
  
  
-Figure 31: The training exemplars on five categories 
  
  
  
@@ -1554,7 +1582,6 @@ Figure 31: The training exemplars on five categories
  
  
  
-Figure 32: The testing exemplars on five categories 
  
  
 As the figure of testing exemplars displays, the typical fake images on the web 
@@ -1565,8 +1592,11 @@ animals. By combining 4 cues, my classifier displays a good performance in
 getting rid of these pictures.  
  
  
-34 
-  
+Figure 31: The training exemplars on five categories 
+Figure 32: The testing exemplars on five categories 
+ 
+ 
+35 
  
 3.2 Explanation on Some Details 
  
@@ -1601,7 +1631,7 @@ precision.
 (A)  Real images having searched  
 (B)  Fake images having searched 
 (C)  Real images not having searched 
-(D)  Fake images not having searched 
+(D) Fake images not having searched 
  
  
 Precision = A/ (A+C); Recall = A/ (A+B) 
@@ -1611,9 +1641,11 @@ testing set, precision would be 1/3 when recall reaches 1. We should pay much
 more attention to the images of top similarities and the general result of precision 
 before recall reach 0.5. The former could reflect the whether the top images of 
 re-ranking are real images; the latter could reflect the number of animal images 
-35 
-  
  
+ 
+36 
+ 
+Alligator Bear 
 collected in the higher ranking. Both of them are significant for a good classifier. 
  
 3.3 Results on cues 
@@ -1632,7 +1664,21 @@ For color, I tried the methods of random subwindows, 9 blocks (8bins) and 9
 blocks (16bins).  
  
  
-Alligator Bear 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -1642,25 +1688,11 @@ Alligator Bear
  
  
 Frog Leopard 
- 
- 
- 
- 
- 
- 
- 
- 
 Monkey 
- 
- 
- 
- 
- 
- 
- 
-36 
 Figure 33: The precision and recall of color representation 
-  
+ 
+ 
+37 
  
 As the figures can be seen, random subwindows methods display the worst 
 performance. It is not appropriate to the pictures containing much noisy 
@@ -1696,7 +1728,6 @@ computing the similarity for testing set.
  
  
  
-Figure 34: Top five fake and real images of 9 block (16bins) 
  
 The above images are part of re-ranking result by 9 blocks (16bins). They are the 
 top-five ranked of real and fake images respectively. The fake images are boarded 
@@ -1707,24 +1738,18 @@ distribution, it could not distinguish them. For example, the second picture in 
 1, it is just several flowers with green grass, but it is similar with the alligatorуs 
 habitat; the second picture in row 3, it is a frog toy with lifelike color. If only 
 recognizing animals by color cue, it would be difficult. 
-37 
-  
+Figure 34: Top five fake and real images of 9 block (16bins) 
  
+ 
+38 
+ 
+Frog Leopard 
+Monkey 
 3.3.2 п Results on Texture 
  
 For texture, I tried Gabor filter, LBP descriptor and a method fused with LBP and 
 GLCM. 
  
- Alligator Bear 
- 
- 
- 
- 
- 
- 
- 
- 
-Frog Leopard 
  
  
  
@@ -1734,7 +1759,6 @@ Frog Leopard
  
  
  
-Monkey 
  
  
  
@@ -1744,7 +1768,15 @@ Monkey
  
  
  
-Figure 35: The precision and recall of texture representation 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 From the figures can be seen, we could discover that LBP does the best for 
 alligator but the worst for frog, leopard and monkey. Gabor does the best for bear, 
@@ -1756,8 +1788,11 @@ However, there are some animals, which would have different texture, in this
 situation, the precision of LBP decrease sharply.  
  
 For Gabor filter, it has a bandwidth to distinguish different frequency. So, it is not 
-38 
-  
+Alligator Bear 
+Figure 35: The precision and recall of texture representation 
+ 
+ 
+39 
  
 required to match the texture exactly, for the large quantity of data set, Gabor 
 filter could fit animalуs texture feature better.  
@@ -1775,9 +1810,6 @@ than LBP, but worse than Gabor.
  
  
  
-Figure 36: The left group is texture of alligator, it is so similar. The right group is 
- 
-texture of frog, it show three different kinds of texture.  
  
  
  
@@ -1797,7 +1829,7 @@ texture of frog, it show three different kinds of texture.
  
  
  
-Figure 37: Top five fake and real images of Gabor Filter 
+ 
  
  
 The above pictures are obtained by using Gabor filter. In these five categories, 
@@ -1806,15 +1838,21 @@ and monkey are much smoother. Their fur does not show much distinct spots. As a
 result, the effect of bear seems not very well. Additionally, some leather products 
 have a close texture of animal, like the first, third and fifth pictures in row 1. They 
 would disturb the ranking, when only applying Gabor filter.  
-39 
-  
+Figure 37: Top five fake and real images of Gabor Filter 
+Figure 36: The left group is texture of alligator, it is so similar. The right group is 
+texture of frog, it show three different kinds of texture.  
  
+ 
+40 
+ 
+Alligator Bear 
+Frog Leopard 
+Monkey 
 3.3.3 п Results on Shape 
  
 For shape, I tried Geometric Blur descriptor and HOG descriptor.  
  
  
-Alligator Bear 
  
  
  
@@ -1824,7 +1862,6 @@ Alligator Bear
  
  
  
-Frog Leopard 
  
  
  
@@ -1834,7 +1871,6 @@ Frog Leopard
  
  
  
-Monkey 
  
  
  
@@ -1843,7 +1879,6 @@ Monkey
  
  
  
-Figure 38: The precision and recall of shape representation 
  
  
 As the figure above demonstrates, HOG get a better achievement than Geometric 
@@ -1856,8 +1891,10 @@ mentions, the top results and the precision which is shown before recall reaches
 0.5 are more significant. In these comprehensive situations, a better ranking is 
 achieved by HOG.  
  
-40 
-  
+Figure 38: The precision and recall of shape representation 
+ 
+ 
+41 
  
 Different with color and texture representation, shape features seems more 
 robust for animal recognition. It is because the shape of real animals would 
@@ -1881,7 +1918,6 @@ orientation information and it is very useful for animal recognition.
  
  
  
-Figure 39: Top five fake and real images of HOG 
  
  
 Although HOG do better than texture and color extraction methods, it is also has a 
@@ -1904,9 +1940,12 @@ animals detecting.
  
  
  
-41 
-  
+Figure 39: Top five fake and real images of HOG 
  
+ 
+42 
+ 
+Bear 
 3.3.4 п Results on Extremum Points 
  
 For the extremum points, I use Sift to be the main descriptor in this part. SIFT 
@@ -1923,7 +1962,6 @@ by PCA-Sift, because it just needs to find the most suitable picture. However, f
 this project, it needs to re-rank a lot of images collected on the web, not to detect 
 the best one.  
  
-Bear 
  
  
  
@@ -1933,7 +1971,6 @@ Bear
  
  
  
-Figure 40: The performance of SIFT and PCA-SIFT on bear 
  
 Therefore, Sift seems more reasonable and robust for animal recognition. The 
 following figure is the result of five categories re-ranked by Sift. 
@@ -1946,16 +1983,19 @@ following figure is the result of five categories re-ranked by Sift.
  
  
  
-Figure 40: The performance of SIFT and PCA-SIFT on bear 
  
 For the category of frog, Sift displays an excellent performance, its precision 
 continue to keep 100 percent until the recall reaches about 0.4. However, for the 
 categories of monkey and leopard, it does not achieve a similar result of frog. Frog 
 has a more fixed structure than monkey and leopard. Their limbs are flexible, so 
 they can make a number of postures. In short, for the animals with fixed structure, 
-42 
-  
+Figure 40: The performance of SIFT and PCA-SIFT on bear 
+Figure 40: The performance of SIFT and PCA-SIFT on bear 
  
+ 
+43 
+ 
+Alligator Bear 
 Sift demonstrates a high accuracy.  
  
  
@@ -1975,7 +2015,6 @@ Sift demonstrates a high accuracy.
  
  
  
-Figure 41: Top five fake and real images of Sift 
  
  
 There also many fake images of others animals or people. But these pictures are 
@@ -1992,7 +2031,6 @@ representation. In my project, I combine 9 block (16bins), Gabor filter, HOG and
 Sift for the visual cuesу representation. 
  
  
-Alligator Bear 
  
  
  
@@ -2001,20 +2039,12 @@ Alligator Bear
  
  
  
-43 
-  
+Figure 41: Top five fake and real images of Sift 
  
+ 
+44 
  
 Frog Leopard 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Monkey 
  
  
@@ -2025,7 +2055,16 @@ Monkey
  
  
  
-Figure 42: The performance of original and improved classifier 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 For five categories of animals, the improved classifier shows a better achievement 
 than the original classifier on extracting visual information. Especially, it obtains 
@@ -2051,9 +2090,11 @@ recognition on visual cues.
  
  
  
+Figure 42: The performance of original and improved classifier 
 Figure 43: The top 30 pictures after applying the classifier 
-44 
-  
+ 
+ 
+45 
  
 4. Discussion                                   
  
@@ -2098,8 +2139,9 @@ method on different animal category. That is to say, when deviation becomes lowe
 similarity would become higher. We can find that, the similarity of color is low 
 generally. Similarity of Gabor, HOG and SIFT are close. So perhaps we could 
 compute a weight ratio when processing training set, and then combined with the 
-45 
-  
+ 
+ 
+46 
  
 similarity in order to set flexible weights for different category. 
  
@@ -2114,7 +2156,6 @@ similarity in order to set flexible weights for different category.
  
  
  
-Figure 44: The deviation value of each category on different methods 
  
  
 4) Runtime of the program 
@@ -2146,8 +2187,10 @@ scale. [35]
  
  
  
-46 
-  
+Figure 44: The deviation value of each category on different methods 
+ 
+ 
+47 
  
 5. Evaluation and Conclusion                     
  
@@ -2192,8 +2235,9 @@ needs a lot of work to complete its function.
  
  
  
-47 
-  
+ 
+ 
+48 
  
 6. Future Work                                  
  
@@ -2238,8 +2282,9 @@ re-ranking. Try to research a more general classifier for object recognition.
  
  
  
-48 
-  
+ 
+ 
+49 
  
 7. Reference                                                                   
  
@@ -2284,8 +2329,9 @@ Storage and Retrieval for Image and Video Databases III, volume 2420, page
 381-392, Feb. 1995. 
 [19]. J.R. Smith & S.F. Chang. Tools and Techniques for Color Image Retrieval. 1996. 
 [20]. G. Pass & R. Zabih & J. Miller. Comparing Images Using Color Coherence 
-49 
-  
+ 
+ 
+50 
  
 Vectors. 1996. 
 [21]. J. Huang & S.R. Kumar & M. Mitra & W.J. Zhu & R. Zabih. Image Indexing Using 
@@ -2302,14 +2348,12 @@ Analysis and Machine Intellgence, Vol 24, No7, July 2002.
 Classification[J]. IEEE Transactions on Systems, Man, and Cybernetics, 1973, 3(6): 
 610-621. 
 [26]. J. Jeppe. Hough Transform for Straight Lines. Mini-project in Image Processing, 
-th
-7 semester 2007. 
+7th semester 2007. 
 [27]. D. Zhang & G. Lu. A Comparative Study on Shape Retrieval Using Fourier 
 Descriptors with Different Shape Signatures. 
 [28].U.S. Dixit. Finite Element Method: An Introduction.  
 [29]. C.F.S. Volotao & R.D.C. Santos &G.J. Erthal & L.V. Dutra. Shape Characterization 
-th
-with Turning Functions. IWSSIP 2010 - 17 International Conference on Systems, 
+with Turning Functions. IWSSIP 2010 - 17th International Conference on Systems, 
 Signals and Image Processing. 2010. 
 [30]. D. Shen & H.H.S. IP. Discriminative Wavelet Shape Descriptors for recognition 
 of 2-D patterns. Pattern Recognition 32(1999) 151 п 165. 
@@ -2333,8 +2377,9 @@ Anal. Mach,1998, (10)
  
  
  
-50 
-  
+ 
+ 
+51 
  
 8. Appendix: Source Code                         
  
@@ -2379,8 +2424,9 @@ HOGDescriptor(cvSize(64,64),cvSize(32,32),cvSize(16,16),cvSize(16,16),9);
  vector<float>Hogdescriptors;// result array 
 // sift feature parameters 
  int intvls = SIFT_INTVLS; 
-51 
-  
+ 
+ 
+52 
  
  double sigma = SIFT_SIGMA; 
  double contr_thr = SIFT_CONTR_THR; 
@@ -2426,8 +2472,9 @@ IPL_DEPTH_8U, 1);
   for(int m=0;m<6;m++) 
    for(int n=0;n<4;n++) 
    { 
-52 
-  
+ 
+ 
+53 
  
     gabor1->Init(dPhi[m], iNu[n], Sigma, F); // initialize the parameters     
     gabor1->conv_img(pSrcGrayImg, GaborImg, CV_GABOR_MAG); // use gabor filter 
@@ -2473,8 +2520,9 @@ K-means of Hog and Sift
  readHogFloat2Bin(hogfeaturefile,AllHogfeaturesNum, Hogsamples); 
  cvKMeans2(Hogsamples, KmeansK1, Hogclusters,cvTermCriteria(CV_TERMCRIT_EPS,10,1.0), 3, 
 (CvRNG *)0, KMEANS_USE_INITIAL_LABELS, Hogcenters);  
-53 
-  
+ 
+ 
+54 
  
  cvReleaseMat(&Hogsamples); 
  
@@ -2520,8 +2568,9 @@ K-means of Hog and Sift
  CvMat *Siftsamples=cvCreateMat(SiftTrainNum, SiftDim, CV_32FC1); 
  CvMat *Siftclusters=cvCreateMat(SiftTrainNum, 1, CV_32SC1);  
  CvMat *Siftcenters=cvCreateMat(KmeansK2, SiftDim, CV_32FC1);  
-54 
-  
+ 
+ 
+55 
  
  cvSetZero(Siftclusters);  
  cvSetZero(Siftcenters);  
@@ -2543,7 +2592,7 @@ informations in the matrix
  for(int di=0;di<TrainNum;di++) 
  { 
   Siftp[di]=new int[psiftImgNum[di]]; 
-  for(int K=0;K<psiftImgNum[di];K++)   
+  for(int K=0;K<psiftImgNum[di];K++)  
    Siftp[di][K]=0; 
  } 
  int AFT=0; 
@@ -2567,8 +2616,9 @@ informations in the matrix
     { 
      labelT=Km; 
      SDistMin=dist; 
-55 
-  
+ 
+ 
+56 
  
     } 
     cvReleaseMat(&Matrix); 
@@ -2614,12 +2664,13 @@ for(int qi=0;qi<TestNum;qi++)
  
 // 9 blocks 
   pColorHist->ComputerColorHist(pSrcImCopy,SearchColorHistData); 
-56 
-  
+ 
+ 
+57 
  
 // gabor 
   CvHistogram* hist=cvCreateHist(1,&size,CV_HIST_ARRAY,ranges,1);  
-  int GaborBin=0;  
+  int GaborBin=0; 
   for(int m=0;m<6;m++) 
    for(int n=0;n<4;n++) 
    { 
@@ -2661,8 +2712,9 @@ IPL_DEPTH_8U, 1);
      HogLabel=Km; 
      HogDistMin=dist; 
     } 
-57 
-  
+ 
+ 
+58 
  
     cvReleaseMat(&Matrix); 
    } 
@@ -2708,8 +2760,9 @@ IPL_DEPTH_8U, 1);
    } 
    pSearchSift[i]=Label2;   
   } 
-58 
-  
+ 
+ 
+59 
  
   for (int j=0;j<KmeansK2;j++)   
    s[j]=0;  
@@ -2755,8 +2808,9 @@ for(int FGi=0;FGi<size*6*4;FGi++)
  
  
  
-59 
-  
+ 
+ 
+60 
  
 for(int i=0;i<TestNum;i++) 
   { 
@@ -2768,14 +2822,14 @@ if(HogDeltSum[i]>MaxHog)
     MaxHog=HogDeltSum[i]; 
    if(SiftDeltSum[i]>MaxSift) 
     MaxSift=SiftDeltSum[i]; 
-for(int i=0;i<TestNum;i++)   
+for(int i=0;i<TestNum;i++)  
   { 
    ColorDeltSum[i]=ColorDeltSum[i]/(MaxColor); // color similarity 
    GaborDeltSum[i]=GaborDeltSum[i]/(MaxGabor); // texture similarity 
    HogDeltSum[i]=HogDeltSum[i]/(MaxHog); 
    SiftDeltSum[i]=SiftDeltSum[i]/(MaxSift); // sift similarity  
 /  } 
-for(int i=0;i<TestNum;i++)  
+for(int i=0;i<TestNum;i++) 
   { 
  TotalDeltSum[i]=ColorDeltSum[i]*Wi[0]+GaborDeltSum[i]*Wi[1]+HogDeltSum[i]*Wi[2]+SiftDeltSu
 m[i]*Wi[3]; // the total similarity of each image 
@@ -2790,6 +2844,4 @@ UINT32 *Index_L1=new UINT32 [TestNum];
    Index_L1[i]=i; 
   } 
   sort(TotalDeltSum,Index_L1,TestNum); // re-rank testing images 
- 
-60 
  

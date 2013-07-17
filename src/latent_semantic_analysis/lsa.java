@@ -33,6 +33,7 @@ public class lsa {
 	ArrayList<String> refinedWords;
 	ArrayList<String> documentsList = new ArrayList<String>();
 	final int NUM_FACTORS = 1000;
+	HashMap<Double,Double> finalSet = new HashMap<Double,Double>();
 	
 	public lsa(String textFilesDirectory){
 		textDirectory = textFilesDirectory;
@@ -113,6 +114,7 @@ public class lsa {
 				
 				actualMarks[counter] = actualMark;
 				predictedMarks[counter] = predicted;
+				finalSet.put(actualMark,predicted);
 				counter++;
 				}catch(IOException e){
 				e.printStackTrace();
@@ -261,15 +263,15 @@ public class lsa {
 		}
 		
 		//calculating the TDIF matrix from count Matrix
-		/*double[][] tdif = new double[refinedWords.size()][trainingFiles.length];
+		double[][] tdif = new double[refinedWords.size()][trainingFiles.length];
 		for(int i=0;i<countMatrix.length;i++){
 			for(int j=0;j<countMatrix[i].length;j++){
 				tdif[i][j]= (double) (((double)countMatrix[i][j]*columnAdd(countMatrix,j)))/(((double)countMatrix[i].length * nonZero(countMatrix,i)));
 			}
-		}*/
+		}
 			
 		System.out.println("SVD Started");
-		Matrix A = new Matrix(countMatrix);
+		Matrix A = new Matrix(tdif);
 		SingularValueDecomposition s = A.svd();
 		
 		 U = s.getU();
@@ -370,12 +372,22 @@ public class lsa {
 			correlation[i]=testQuery(testingFiles);
 		}
 		
-		double avgCorrelation = 0.0;
-		for(int i=0;i<correlation.length;i++){
-			avgCorrelation += correlation[i];
-		}
+		double[] aMarks = new double[finalSet.size()];
+		double[] pMarks = new double[finalSet.size()];
 		
-		System.out.println("Average Correlation for 10 fold test is " + avgCorrelation);
+		int i =0;
+		double averageError =0.0;
+		for(Double key:finalSet.keySet()){
+			aMarks[i] = key;
+			pMarks[i] = finalSet.get(key);
+			System.out.println(key +"	"+finalSet.get(key));
+			averageError += key - finalSet.get(key);
+			i++;
+ 		}
+		
+		System.out.println("\n\n\n");
+		System.out.println("Final Correlation of the system is "+ new PearsonsCorrelation().correlation(aMarks, pMarks));
+		System.out.println("Average Error is "+ averageError/finalSet.size());
 	}
 
 	public void getDictionaryWords(){

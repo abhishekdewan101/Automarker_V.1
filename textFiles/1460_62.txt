@@ -1,3 +1,5 @@
+3 
+ 
 Abstract 
 The LCS (Learning Classifier System) is a special approach which has been 
 broadly used on different machine learning problems (Kovacs, January, 2002). 
@@ -29,8 +31,9 @@ Keywords
 Learning Classification Systems (LCS), Accuracy-Based Systems (XCS), “If-
 Then rules”, High Performance Computing (HPC), Parallel Computing, Object 
 Pool    
-3 
- Contents 
+5 
+ 
+Contents 
 Declaration ........................................................................................................... 2 
 Abstract ................................................................................................................. 3 
 Keywords .............................................................................................................. 3 
@@ -56,8 +59,9 @@ Acknowledgements ...............................................................
 2.5.3 Evaluation of Rules in XCS ......................................................... 14 
 2.5.4 The Rules (Classifiers) in XCS .................................................... 14 
 3. Methods ...................................................................................................... 15 
-5 
- 3.1 Common Background (Ternary Tree) ................................................. 15 
+6 
+ 
+3.1 Common Background (Ternary Tree) ................................................. 15 
 3.1.1 Single depth Ternary Tree ............................................................ 16 
 3.1.2 Multi-level Ternary Tree .............................................................. 17 
 3.1.3 Modifications on Ternary Tree ..................................................... 18 
@@ -83,8 +87,9 @@ Acknowledgements ...............................................................
 4.1.2 Results of Experiment .................................................................. 44 
 4.1.3 Analysis of Results ....................................................................... 45 
 4.2 Recursion Optimisation in Ternary Tree ............................................. 47 
-6 
- 4.2.1 Experiment Design ....................................................................... 47 
+7 
+ 
+4.2.1 Experiment Design ....................................................................... 47 
 4.2.2 Results of Experiment .................................................................. 47 
 4.2.3 Analysis of Results ....................................................................... 48 
 4.3 Object Pool ................................................................................... 49 
@@ -104,8 +109,9 @@ Acknowledgements ...............................................................
 Bibliography ....................................................................................................... 61 
  
   
-7 
- 1. Introduction 
+8 
+ 
+1. Introduction 
 Machine learning is an important area in computer science which focuses on 
 optimizing criterion using existed experience (Alpaydin, 2004).  For processing 
 different types of tasks, there are amount of approaches in this area, such as 
@@ -142,8 +148,9 @@ be shown. After each result, the discussion and summary of it would be made
 and analysed.  
 In section 5 and 6, a brief conclusion would be made for this project would be 
 come up with. Also some possible future works would be shown. 
-8 
- 2. Background 
+9 
+ 
+2. Background 
 In this section, the basic backgrounds in this area would be introduced in details. 
 2.1 Genetic Algorithms 
 Genetic algorithm is an important sub-component for LCS. In this section it will 
@@ -178,8 +185,9 @@ The Learning Classifiers Systems (LCS) is first introduced by John Holland
 (Holland, 1975)in 1975. However, at that time, LCS was not as famous as 
 Holland’s another invitation “Genetic Algorithms (GAs)” although GAs was 
 only a sub-part of LCS (Sigaud & Wilson, 2007).  
-9 
- Several years later, the first implementation of LCS was presented by Judith 
+10 
+ 
+Several years later, the first implementation of LCS was presented by Judith 
 Reitman and him (Holland & Reitman, 1977) in 1978. And then Holland 
 himself modified the structure of LCS and gave an example of what a standard 
 LCS look like (Bull, 2004). 
@@ -213,8 +221,9 @@ This file would be iteratively used while training the rule database, so an
 important feature could be noticed here is that due to this fact, every piece of 
 input in the file would be used several times. This feature is important because 
 this could be a point to be optimised to avoid duplicate inserting inputs.  
-10 
- 2.3.3 Rules (classifiers) 
+11 
+ 
+2.3.3 Rules (classifiers) 
 Since LCS is a rule-based system, rules are the most important things in the 
 system. In LCS, the rules are also called classifiers because they are used to 
 judge which class an input should belong to.  
@@ -225,25 +234,22 @@ Then rules”.
 A rule is usually an individual object (structure in C++) which contains its own 
 field of attributes as follows: 
 Attributes Explanation 
+Condition (If part) 
 Condition is the part which is used to do match against inputs. It is 
 usually represented by ternary alphabet {0, 1, #}. “#” here stands 
-Condition (If part) 
 for “don’t care”, if a bit in the condition is “#”, which means this bit 
 would match no matter “1” and “0” at the same bit of input. 
-Action stands for the action (e.g. a classification) which would be 
-Action (Then part) 
-returned once condition part matches 
-The fitness of this classifier which is propotational to the rewards 
-Fitness 
-from outside in LCS 
+Action (Then part) Action stands for the action (e.g. a classification) which would be returned once condition part matches 
+Fitness The fitness of this classifier which is propotational to the rewards from outside in LCS 
 Table 2.3-Attributes in rule of XCS 
 2.4 Process of LCS 
  
 Figure 2-1: Overview of LCS 
 After understanding the basic data in this system, the whole process of it is clear 
 now. 
-11 
- In overview, as can be seen from this diagram, the system mainly consists of 
+12 
+ 
+In overview, as can be seen from this diagram, the system mainly consists of 
 two components: “Reinforcement” and “Evolution Computing” (also discussed 
 in section 2.1 and 2.2). The system communicates with the environment and 
 gets inputs form outside. The inserted inputs would be processed by 
@@ -280,8 +286,9 @@ Table 2.4-Matching Example
 Suppose there are two inputs inside the system and they would be matched 
 against the only rule in the system. In this example, both Input1 and Input2 
 could match this Rule.  
-12 
- 2.4.2 Action Selection and Evaluation of Rules (Classifiers) 
+13 
+ 
+2.4.2 Action Selection and Evaluation of Rules (Classifiers) 
 The set of all classifiers matched in the system at current situation is called the 
 match set [M]. A match set is the source of their corresponding action set [A] 
 (“Then” parts of the chosen classifiers). But for most of time, actions in [M] 
@@ -318,66 +325,58 @@ action set [A]. In this case, the system has two modes. While in the exploration
 mode, XCS just choose a random action in the [A]. And in the exploitation 
 mode, XCS uses some strategies like Greedy to choose which action could get 
 the best reward. 
-13 
- 2.5.3 Evaluation of Rules in XCS 
+14 
+ 
+2.5.3 Evaluation of Rules in XCS 
 In XCS, the approach for evaluation of rules is similar to Q-learning in RL 
 which follows the formula (Sigaud & Wilson, 2007): 
 K stands for the generation, E represents the Expected reward, ? is the learning 
 rate and r is the reward. 
-? ( ? ) = ? ( ? ) + ? [? ? ? ( ? )] 
-? + 1 ? ? + 1 ?
+??+1(?) = ??(?) + ?[??+1 ? ??(?)] 
 And after each time an action was finally chosen, the classifiers in [M] would be 
 modified as follows: 
 1) The expected reward (p) would be updated according to the real reward 
-(r) and the learning rate ? : 
-? = ? + ? ( ? ? ? ) 
+(r) and the learning rate ?: 
+? = ? + ?(? ? ?) 
 2) The prediction error (e) would be updated like this: 
-| |
-? = ? + ? ( ? ? ? ? ? ) 
-3) The raw prediction accuracy (k) for each classifier would be like this (e
-0 
+? = ? + ?(|? ? ?| ? ?) 
+3) The raw prediction accuracy (k) for each classifier would be like this (e0 
 is a threshold): 
-if (e<e ), ? = 1; 
-0
-?
-? ?
-else ? = ? ( ) 
-?
-0
+if (e<e0), ? =  1; 
+else ? = ?( ?
+?0
+)?? 
 4) Do normalization to the prediction accuracy: 
-?
-?
-? = 
-∑
-?
-? ? ? ?
-5) Update the Fitness ( ? ) of classifier finally: 
-? = ? + ? ( ? ? ? ? ) 
+?? = ?
+∑ ?????
+ 
+5) Update the Fitness (?) of classifier finally: 
+? = ? + ?(?? ? ?) 
 2.5.4 The Rules (Classifiers) in XCS 
 The classifiers have been extended with more fields in XCS with new parameter 
 which would take the respond for evaluation of rules. Here is the new table for 
 rules in XCS: 
 Attributes Explanation 
-Condition is the part which is used to do match against inputs. It is 
-Condition (If usually represented by ternary alphabet {0, 1, #}. “#” here stands 
-for “don’t care”, if a bit in the condition is “#”, which means this 
+Condition (If 
 part) 
+Condition is the part which is used to do match against inputs. It is 
+usually represented by ternary alphabet {0, 1, #}. “#” here stands 
+for “don’t care”, if a bit in the condition is “#”, which means this 
 bit would match no matter “1” and “0” at the same bit of input. 
 Action (Then 
+part) 
 Action stands for the action (e.g. a classification) which would be 
 returned once condition part matches 
-part) 
+Prediction 
 Prediction is an average number which records the payoff 
 estimated if this rule is matched and the action is finally taken by 
-Prediction 
 the whole system 
 Prediction Error This is the error from prediction 
-The fitness of this classifier, fitness is a concept of GA which 
-Fitness 
-would be discussed later, it is used to select good rules. 
+Fitness The fitness of this classifier, fitness is a concept of GA which would be discussed later, it is used to select good rules. 
 Table 2.5-XCS Attributes 
-14 
- 3. Methods 
+15 
+ 
+3. Methods 
 As discussed in section 2.4.1, the algorithm of naive matching in LCS is quite 
 simple. But one problem it has to face is the efficiency.  
 In fact, matching has been proved to be the most time consuming part in LCS, 
@@ -414,8 +413,9 @@ Ternary Tree is not only the name of this method but also the data structure use
 in this method. A Ternary Tree has a similar structure to Binary Tree but own 
 three children belong to each node in it. The following figure is a full Ternary 
 Tree. 
-15 
-  
+16 
+ 
+ 
 Figure 3-1: Full Ternary Tree 
 In fact, the first appearance of the concept of Ternary Tree is in 1963. It is used 
 by F.J.M. Barning to represent the set of Primitive Pythagorean triples (Barning, 
@@ -437,8 +437,9 @@ children. According to the construction law of the single depth Ternary Tree, th
 paths have different meanings: 
 1. Left path means rules in this path begin with ‘1’. 
 2. Middle path means rules in this path begin with ‘#’. 
-16 
- 3. Right path means rules in this path begin with ‘0’. 
+17 
+ 
+3. Right path means rules in this path begin with ‘0’. 
 Benefit from this mechanism, while doing the match, we look at the first bit of 
 each input. If it is ‘1’, we just do match in the left node and the middle node 
 (‘#’), and if it is ‘0’, we only do match in the right node and the middle node 
@@ -464,8 +465,9 @@ There are four rules (condition part) in the database which are “#1” ,
 on this is like: 
  
 Figure 3-3: Multi-Level Ternary Tree 
-17 
- This example is the same one in the single-depth, so the difference between the 
+18 
+ 
+This example is the same one in the single-depth, so the difference between the 
 two trees could be seen clearly from their figures. For every time it reaches a 
 new node, the next bit of the rule would be considered to choose the next 
 direction (‘1’ means left, ‘0’ means right, ‘#’, means middle). Finally when it 
@@ -493,8 +495,9 @@ In Ternary Tree implemented in Tsentas' thesis, there is a method which is used
 for deleting rules inside it. However, according to the investigation of this thesis, 
 there is a potential problem with the delete method in this system. In the original 
 method, the system is just deleting rules by simply removing the responding 
-18 
- leaves. This seems to be correct, but in fact this process is producing useless 
+19 
+ 
+leaves. This seems to be correct, but in fact this process is producing useless 
 fragments all over the trees. The following figure may be easier to understand. 
  
 Figure 3-5: Only Removing Leaves Would Cause Problems  
@@ -523,8 +526,9 @@ system would rely on more investigations in the future. This project
 implemented this new deleting method but would not offer an experiment on it 
 because this is not the main purpose of this thesis. 
   
-19 
- 3.2 Data Pre-processing (Hash Matching) 
+20 
+ 
+3.2 Data Pre-processing (Hash Matching) 
 In this section, the first method “Hash Matching” would be introduced. It is the 
 new invention of this thesis. 
 3.2.1 Basic Idea 
@@ -555,8 +559,9 @@ After finding the possible inputs for each rule we would link the possible input
 with the rule. In this case, once an input comes, we can find its corresponding 
 rules directly. The structure of Linked rule database is a 2D-array, and the 
 indexes of them could be retrieved easily from the “possible input table”. 
-20 
- Overview 
+21 
+ 
+Overview 
 An overview of this system would be like the situation in the following figure: 
  
 Figure 3-6: Overview of HashMatch 
@@ -580,8 +585,9 @@ Algorithm 3.2-HashMatch Algorithm
 (4) Experiments 
 The experiment of this method would be shown in section 4.1. 
  
-21 
- 3.3 Recursion Replacement in Ternary Tree 
+22 
+ 
+3.3 Recursion Replacement in Ternary Tree 
 3.3.1 Basic Idea 
 In the algorithm of Ternary Tree, there is a function called “getmatchset()” 
 which is responds for finding the match sets for a given input. This function is 
@@ -621,8 +627,9 @@ recursive function.
 (1) Implementation of Stack and Queue 
 The data structures “stack” and “queue” are already exist in JAVA, but they are 
 for general use which means they would waste some time on several functions 
-22 
- which are useless for the project. Especially for stack in JAVA, it is just an 
+23 
+ 
+which are useless for the project. Especially for stack in JAVA, it is just an 
 extension of the data structure “Vector” which is not so efficient. 
 So in this thesis, a specified stack and queue would be implemented.  
 It is easy to implement those. There would be three components for each of 
@@ -636,8 +643,9 @@ Figure 3-7: Transfer Recursion to Stack
 (3) Experiments 
 The experiment of this method would be shown in section 4.2. 
   
-23 
- 3.4 Object Pool 
+24 
+ 
+3.4 Object Pool 
 3.4.1 Background 
 Design Patterns and Creational Design Patterns 
 There are many design patterns in object-oriented programming. They are 
@@ -666,8 +674,9 @@ without calling constructors any more.
 The simplified flow diagram of general purpose object pool is like this: 
  
 Figure 3-9: General Purpose Object Pool 
-24 
- As can be seen from the figure, there are two important parts in a general 
+25 
+ 
+As can be seen from the figure, there are two important parts in a general 
 purpose object pool system: Object Pool and its Factory.  
 The object pool is the place for storing different types of objects. It controls the 
 process of borrowing and recycling.  
@@ -698,8 +707,9 @@ In order to implement a specified object pool, firstly the mechanism of
 borrowing and recycling should be decided. In this thesis, LIFO is used for 
 managing the objects (nodes in this case). LIFO stands for “Last In First Out” 
 which means the latest object added into the database would be the first one to 
-25 
- be processed later. A classical basic data-structure using LIFO is the stack. In 
+26 
+ 
+be processed later. A classical basic data-structure using LIFO is the stack. In 
 stack, adding element is called “push” and deleting element is called “pop”. 
 While pushing, the element would be pushed to the top of the stack. And while 
 popping, the top element would be popped out. This theory is suitable for 
@@ -712,29 +722,43 @@ In this thesis, there are totally four data structures (all of them are in JAVA
 because the XCS system is in JAVA) tried to implement the LIFO Object Pool, 
 they are: ArrayList, LinkedList, Vector and Stack. 
 Data Structure Description Suitable for LIFO 
-ArrayList ArrayList is similar to Does not have a 
-array which uses dedicated operation for 
-continuous spaces in removing last element in 
-memory. It is a dynamic it. 
+ArrayList ArrayList is similar to 
+array which uses 
+continuous spaces in 
+memory. It is a dynamic 
 array, so it is possible to 
 change its length. 
-Vector This data structure is a Same with ArrayList 
+Does not have a 
+dedicated operation for 
+removing last element in 
+it. 
+Vector This data structure is a 
 thread safe version of 
 ArrayList. 
-LinkedList A LinkedList is a list Has an original method 
-which connects all its for “push” and “pop” in 
-elements by pointers. It its list because of its 
-does not use continuous structure. 
+Same with ArrayList 
+LinkedList A LinkedList is a list 
+which connects all its 
+elements by pointers. It 
+does not use continuous 
 space in the memory 
-Stack The stack in Java is Has an original method 
-actually an extension of for “push” and “pop” in 
-Vector which is not so its list because of its 
-efficient for LIFO structure. But it is not 
+Has an original method 
+for “push” and “pop” in 
+its list because of its 
+structure. 
+Stack The stack in Java is 
+actually an extension of 
+Vector which is not so 
+efficient for LIFO 
+Has an original method 
+for “push” and “pop” in 
+its list because of its 
+structure. But it is not 
 efficient for the structure 
 of Vector 
 Table 3.2- Descriptions of Four Data Structures 
-26 
- (2) Object Pool Ternary Tree 
+27 
+ 
+(2) Object Pool Ternary Tree 
 After choosing the data structure for Object Pool, it would be easy to combine it 
 with Ternary Tree. The Implementation diagram would be like this: 
  
@@ -747,8 +771,9 @@ reuse.
 The experiment of this method would be shown in section 4.3. 
  
   
-27 
- 3.5 Parallel Computing on XCS 
+28 
+ 
+3.5 Parallel Computing on XCS 
 In this section, the classical optimising method “Parallel Computing” would be 
 introduced.  
 Firstly, some backgrounds of “Parallel Computing” would be introduced. 
@@ -784,8 +809,9 @@ used by devices with multiple processors. But now, since the architectures of
 chips have changed a lot, this model becomes the most popular one to be used. 
 This thesis would be based on this model as well. 
 3)   MISD (Multiple instruction streams, single data stream)  
-28 
- No commercial of this type of model till now.  
+29 
+ 
+No commercial of this type of model till now.  
 4)   MIMD (Multiple instruction stream, multiple data streams)  
 Each processor runs its own instructions using its own data. Distributed 
 computing could be seen as an example of this (it could be SIMD as well). In 
@@ -807,8 +833,9 @@ and they could be classified by the chip they are based on. The most used chips
 are CPU and GPU.  
 The second one is the application area of GPU. GPU was seen as an expert who 
 could only help to process images. But now, since more instruction sets have 
-29 
- been added to it, GPU has become a totally different role which could be used 
+30 
+ 
+been added to it, GPU has become a totally different role which could be used 
 for general computing just like CPU.  
  
 a) CPU based approaches 
@@ -846,8 +873,9 @@ Instead of controlling communications among processors, it takes the
 advantage of multicores by using multithreads. The languages supported by 
 it: FORTRAN, C/C++. 
 iii. TBB 
-30 
- The TBB stands for Intel® Threading Building Blocks. Similar to OpenMP, 
+31 
+ 
+The TBB stands for Intel® Threading Building Blocks. Similar to OpenMP, 
 it is a library which includes many functions for taking advantages for 
 multicore CPU. TBB is based on multithreads as well. The language 
 supported by it: C++. 
@@ -889,8 +917,9 @@ the current sub-tasks and parallel call the compute function. The Join part in
 the algorithm is used for waiting all the sub-tasks to finish their works. And 
 at the end, all the results from sub-tasks would be collected. 
 b) GPU based approaches 
-31 
- GPU stands for graphic processing unit. It is a dedicated parallel processor 
+32 
+ 
+GPU stands for graphic processing unit. It is a dedicated parallel processor 
 which optimised for processing graphical computations. However, the definition 
 is not enough for explaining the modern GPU. A modern GPU is massively 
 parallel and fully programmable. Also, the parallel floating point computing 
@@ -920,8 +949,9 @@ CUDA C is ANSI C extended by several specific keywords and constructs
 (Shane Ryoo, et al., 2008). CUDA C enables programmers to create a new type 
 of C functions, called kernels. When the kernels functions are called, it will run 
 N times in parallel by N different CUDA threads. 
-32 
- ii. OpenCL 
+33 
+ 
+ii. OpenCL 
 OpenCL is an API for GPU programming. The main feature of it is that it could 
 allow programmer to compile at run-time. This feature means programmer can 
 get a better control of target GPU. While using OpenCL, unlike CUDA C, the 
@@ -940,7 +970,7 @@ The first one is the different representation method of rules (condition part) i
 the system.  
 In original system rules are stores like “1010##” and the judgement sentence in 
 the naive matching algorithm is: 
-if(rules[i].charAt(j)!=input.charAt(j))&&(rules[i].charAt(j)!='#') 
+if(rules[i].charAt(j)=input.charAt(j))&&(rules[i].charAt(j)='#') 
 As can been from above, this sentence is doing two “not equal” judgements.  
 In Lanzi and Loiacono’s idea, if bitwise operation could be used for the 
 matching, a better performance could be brought. As we already know, the 
@@ -956,8 +986,9 @@ Normal Rule 1100## 101#1#
 FP 110011 101111 
 SP 111100 111010 
 Table 3.3- New Way to Encode Rules 
-33 
- As can be seen from this table, FP is used to stand for the binary values at the 
+34 
+ 
+As can be seen from this table, FP is used to stand for the binary values at the 
 positions like before (while facing the position which is #, whether 0 or 1 would 
 be accepted). SP is used to stand for whether a position is a general bit (#), the 
 value equals to 1 if the position is not a general bit and 0 if the position is a 
@@ -980,8 +1011,9 @@ system is a 2*2 matrix (2 inputs and length of each is 2), the rules in a system
 a 3*2 matrix (3 rules and length of each is 2). In this Lanzi & Loiacono's 
 algorithm, each core only need to process one match process (it is acceptable 
 because there is huge number of cores in GPU compared with CPU). In this 
-34 
- case, core1 will only be respond for doing match for input1 and rule1 while 
+35 
+ 
+case, core1 will only be respond for doing match for input1 and rule1 while 
 core2 will only be respond for input1 and rule2 and so on. 
 c) CUDA Kernel Function Conclusion 
 According to Lanzi & Loiacono's paper, the conclusion they get is for small 
@@ -1012,8 +1044,9 @@ optimising it.
 The idea of parallel using Ternary Tree follows the traditional way of using 
 Fork/Join algorithm (described in Algorithm 3.3). The following figure shows 
 the whole system for parallel Ternary Tree. 
-35 
-   
+36 
+ 
+  
 Figure 3-17: The Whole System of Parallel Ternary Tree 
 The purpose of this algorithm is clear. The whole input set is spilt into several 
 parts for finding their local match set. And at the end of the system, all the 
@@ -1038,8 +1071,9 @@ Algorithm 3.5- Algorithm of Parallel Ternary Tree Based on Fork/Join
 (3) Experiments 
 The experiment of this method would be shown in section 4.4. 
   
-36 
- 3.6 Input Tree 
+37 
+ 
+3.6 Input Tree 
 3.6.1 Basic Idea 
 As discussed in the background section, the basic and key problem with the 
 naive matching is that it has to use for loops to do the traversal thorough all the 
@@ -1060,8 +1094,7 @@ the same parts in other inputs (e.g. Input2 would be totally skipped because it 
 the same with Input1. In Input3, the only bit needed to be match is the last bit). 
 For Rule2, if Input1 does not match it, the first mismatch bit would be recorded 
 and any other inputs with it would not match as well (e.g. Input2-7 would not 
-nd
-match because the 2 bits of them are the same and it is a mismatch). 
+match because the 2nd bits of them are the same and it is a mismatch). 
 However, to implement a program which satisfies this would require a data pre-
 processing before doing match. There are three big problems with this 
 implementation: 
@@ -1071,8 +1104,9 @@ example).
 inputs because for each input we would have to compare how similar it 
 is to the base input. This means we have look at the whole input instead 
 of part of it. 
-37 
- (3) There has to be a mechanism to record the similarities between every 
+38 
+ 
+(3) There has to be a mechanism to record the similarities between every 
 input and the base input. If a big table would be made for this, it would 
 cost too many spaces. 
 Fortunately, there is a data structure which satisfies all of the features needed 
@@ -1082,8 +1116,7 @@ Ternary Tree algorithm, this tree stores all the inputs in the leaves of the tre
 The following figure is a comparison between naive storage method and Binary 
 Tree: 
 Normal 
-Storage 
- 
+Storage  
  
  
  
@@ -1105,8 +1138,9 @@ Any rules stored in a same branch would share a same part, for example.
 (2) For the problem 2, it is easy to find all the similarities between any two 
 inputs. This is because the similarity is just how far an input is from 
 another in input tree. For example. “1111” and “1110” would be quite 
-38 
- similar to each other because the first three parts of path are the same. 
+39 
+ 
+similar to each other because the first three parts of path are the same. 
 This is also the reason that they would be neighbours in input tree.  
 (3) There is no need to record the similarities among them because they are 
 already shown by the structure of tree. 
@@ -1134,8 +1168,9 @@ leaves. During the building process of the Input Tree, the repeating ones are
 ignored automatically by its data structure. 
 There are more good features this Input Tree could bring to us which would be 
 discussed in the next section. 
-39 
- (2) Combine Two Trees 
+40 
+ 
+(2) Combine Two Trees 
 As discussed above, it is valuable to try combining Input Tree with Ternary 
 Tree. Also this approach is the most important one in this thesis which has 
 speeded up the matching part a lot. 
@@ -1154,16 +1189,18 @@ the runtime. Those pictures below would show how this complex algorithm
 works and try to prove this idea is reasonable. 
  
  
-40 
-  
+41 
+ 
+ 
  
  
 Figure 3-21: Algorithm of Matching in Combining Input Tree and Ternary Tree 
 Through this algorithm for matching, the efficiency would be speeded up a lot. 
 The improvements would basically come from three features which would be 
 discussed later in the discussion section. 
-41 
- Here is the simplified algorithm for Input Tree in words: 
+42 
+ 
+Here is the simplified algorithm for Input Tree in words: 
 Current_in_node = inputroot; 
 Current_tt_node = ttreeroot; 
  
@@ -1211,8 +1248,9 @@ If(flag==1)
 } 
 Do the same thing for flag =0; 
 } 
-42 
- 4. Results and Discussions 
+43 
+ 
+4. Results and Discussions 
 This section would show all the test results of the former approaches in section 
 3. For different methods, different experiments were designed to show whether 
 the methods could actually improve the performance of the matching process. 
@@ -1244,13 +1282,25 @@ Input Producing Strategy Random
 General (“#”) Percentage  0%, 33%, 66%, 99% 
 Length 10,15, 20 
 Table 4-1: Experiment Setting of HashMatch 
-43 
- 4.1.2 Results of Experiment 
+44 
+ 
+4.1.2 Results of Experiment 
 The test results are shown here: 
-Length General Naive Total HashMatch Match Part Data Pre-
-Percentage Matching (ns)/ Ratio1 in Processing in 
-(ns)/Ratio1 HashMatch HashMatch 
-(ns)/Ratio2 (ns)/Ratio2 
+Length General 
+Percentage 
+Naive 
+Matching 
+(ns)/Ratio1 
+Total HashMatch 
+(ns)/ Ratio1 
+Match Part 
+in 
+HashMatch 
+(ns)/Ratio2 
+Data Pre-
+Processing in 
+HashMatch 
+(ns)/Ratio2 
 10 0% 2.43E+08/1 1.43E+07/0.059 1.04E+07/1 3.92E+06/0.377 
 10 33% 3.37E+08/1 1.76E+08/0.522 9.97E+06/1 1.66E+08/16.633 
 10 66% 3.48E+08/1 2.64E+08/0.758 3.17E+06/1 2.61E+08/82.332 
@@ -1261,11 +1311,25 @@ Percentage Matching (ns)/ Ratio1 in Processing in
 15 99% 4.90E+08/1 1.76E+10/35.994 1.13E+07/1 1.76E+10/1552.883 
 20 0% 2.51E+08 Fail to Run Fail to Run Fail to Run 
 Table 4-2: Test Result of Experiment for HashMatch 
-Length General Standard Standard Standard Standard Deviation 
-Percentage Deviation Deviation for Deviation for data Pre-
-for Naive Total Hash for Match Processing data(ns) 
-Matching Match data(ns) part 
-data(ns) data(ns) 
+Length General 
+Percentage 
+Standard 
+Deviation 
+for Naive 
+Matching 
+data(ns) 
+Standard 
+Deviation for 
+Total Hash 
+Match data(ns) 
+Standard 
+Deviation 
+for Match 
+part 
+data(ns) 
+Standard Deviation 
+for data Pre-
+Processing data(ns) 
 10 0% 3.1667E+07 4.8263E+06 3.7342E+06 1.1026E+06 
 10 33% 5.8998E+07 5.7588E+07 1.2805E+06 5.6485E+07 
 10 66% 3.6736E+07 1.1202E+08 7.5786E+05 1.1130E+08 
@@ -1285,8 +1349,9 @@ two sub-parts of “HashMatch” which are “Match” and “Data Pre-Processing”.
 The part “Match” stands for the time cost by finding match set while the part 
 “Data Pre-Processing” stands for the time cost by data compilation. There are 
 two ratios in this table, “Ratio1” and “Ratio2”. “Ratio1” is for the comparison 
-44 
- between “Naive Match” and “Total Hash Match” and “Ratio2” is for telling 
+45 
+ 
+between “Naive Match” and “Total Hash Match” and “Ratio2” is for telling 
 how the time proportion is spent by the two parts in “Hash Match”. The 
 following figures are showing the same situation in the table: 
  
@@ -1297,8 +1362,9 @@ In this section, the results of this algorithm would be evaluated and discussed.
 Phenomenon: 
 The algorithm “Hash Match” wins the naive one easily while the “General 
 Percentage” is low, but with the increase of complexity of the rules, this method 
-45 
- becomes worse and worse. And for the experiment with size of 20, the “Hash 
+46 
+ 
+becomes worse and worse. And for the experiment with size of 20, the “Hash 
 Match” would not work. 
 As can be seen from the table, actually, the “Match” part in “HashMatch” 
 always cost little time whereas the time cost by “Data Pre-Processing” increases 
@@ -1328,8 +1394,9 @@ does not usually change the rules (XCS usually changes its rules), because in
 that case, the algorithm would only need to do the “Data Pre-Processing” once 
 and use the “Match” part forever.  
   
-46 
- 4.2 Recursion Optimisation in Ternary Tree 
+47 
+ 
+4.2 Recursion Optimisation in Ternary Tree 
 In this section, the optimisation towards the recursively method “getmatchset()” 
 in Ternary Tree would be tested. 
 4.2.1 Experiment Design 
@@ -1347,26 +1414,22 @@ Table 4-3: Experiment Setting of Recursion Replacement
 4.2.2 Results of Experiment 
 Here is the result of Recursion Replacement: 
  
-Methods for finding match set Ternary Tree Matching Standard Deviation 
+Methods for finding match set Ternary Tree Matching 
 (ns)/Ratio 
-1.27E+08/1 1.5584E+07 
-Recursion 
-6.45E+07/0.506 6.0069E+06 
-OwnQueue 
-6.24E+07/0.489 1.0322E+07 
-OwnStack (Array Version) 
-7.33E+07/0.575 8.6030E+06 
-OwnStack (LinkedList Version) 
-7.52E+07/0.590 1.2472E+07 
-JAVA Queue 
-7.76E+07/0.609 1.0698E+07 
-JAVA LinkedList 
+Standard Deviation 
+Recursion 1.27E+08/1 1.5584E+07 
+OwnQueue 6.45E+07/0.506 6.0069E+06 
+OwnStack (Array Version) 6.24E+07/0.489 1.0322E+07 
+OwnStack (LinkedList Version) 7.33E+07/0.575 8.6030E+06 
+JAVA Queue 7.52E+07/0.590 1.2472E+07 
+JAVA LinkedList 7.76E+07/0.609 1.0698E+07 
 Table 4-4: Test Result of Experiment for Recursion Replacement 
 This is the results of experiment of Recursion Replacement, the first column 
 shows the approaches used for comparison and the second column is the time 
 cost by those methods to find match set. 
-47 
-  
+48 
+ 
+ 
 Figure 4-2: Test Result of Experiment for HashMatch  
 4.2.3 Analysis of Results 
 Phenomenon: 
@@ -1386,8 +1449,9 @@ better than the original recursive method in Ternary Tree. Among them, the nest
 method is the “Own Stack” (Array Version). One advantage of this approach is 
 that this approach could be easily applied to the Ternary Tree directly to 
 optimise its process of finding match set.  
-48 
- 4.3 Object Pool 
+49 
+ 
+4.3 Object Pool 
 In this section, some experiments on testing object pool would be designed. An 
 important thing to mention is that since only the matching parts of XCS has 
 been implemented for all the experiments in this thesis, the process of updating 
@@ -1413,10 +1477,24 @@ situation when “General Percentage = 99%”. It is because that situation is too
 easy for building a Ternary Tree (Most of the rules are all ‘#’, which means a 
 Ternary Tree need only to have a middle line) which is like a special case. 
 4.3.2 Results of Experiment 
-Length General Ternary Standard Object Pool Standard 
-Percentage Tree Deviation of Ternary Tree Deviation of 
-Building Ternary Tree Building (ns)/ Object Pool 
-(ns)/Ratio Building Ratio Ternary Tree 
+Length General 
+Percentage 
+Ternary 
+Tree 
+Building 
+(ns)/Ratio 
+Standard 
+Deviation of 
+Ternary Tree 
+Building 
+Object Pool 
+Ternary Tree 
+Building (ns)/ 
+Ratio 
+Standard 
+Deviation of 
+Object Pool 
+Ternary Tree 
 Building 
 10 0% 1.40E+07/1 3.3932E+06 4.05E+06/0.289 1.0666E+06 
 10 33% 1.50E+07/1 3.4186E+06 7.59E+06/0.507 3.1632E+06 
@@ -1425,8 +1503,9 @@ Building
 30 33% 2.22E+07/1 4.2186E+06 1.96E+07/0.884 3.7450E+06 
 30 66% 2.13E+07/1 4.3851E+06 1.83E+07/0.861 4.4318E+06 
 Table 4-6: Test Result of Experiment for Object Pool 
-49 
- All the results above are from average of results from ten times. The first 
+50 
+ 
+All the results above are from average of results from ten times. The first 
 column is the length of each rule in the database. And the second column is the 
 General (‘#’) Percentage. The columns three and four are the comparison 
 between traditional Ternary Tree Building time cost and Object Pool Ternary 
@@ -1436,8 +1515,9 @@ The following figures are the same situation in the table which is clearer for t
 analysis. 
  
 Figure 4-3: Test Result of Experiment for Object Pool 
-50 
-  
+51 
+ 
+ 
 4.3.3 Analysis of Results 
 In this section, the results from the experiment of Object Pool would be 
 analysed. 
@@ -1466,8 +1546,9 @@ is too simple. Also, more investigations should be done on the recycle process
 in object pool. Since building a tree is just using “borrowing” operation in 
 Object Pool, it is not clear whether the “recycling” operation would affect the 
 efficiency of the system or not.  
-51 
- 4.4 Parallel Computing in XCS 
+52 
+ 
+4.4 Parallel Computing in XCS 
 4.4.1 Experiment Design 
 In this thesis, the idea of using CUDA to optimise XCS would not be tested 
 because that idea is based on the paper written by Lanzi and Loiacono and 
@@ -1488,10 +1569,22 @@ Length 100
 Table 4-7: Experiment Setting of HashMatch 
 4.4.2 Results of Experiment 
 The test results are shown here: 
-Input General Ternary Tree Standard Parallel Ternary Standard 
-Population Percentage (ns)/Ratio Deviation Tree (ns)/Ratio Deviation for 
-for Ternary Parallel 
-Tree Ternary Tree 
+Input 
+Population 
+General 
+Percentage 
+Ternary Tree 
+(ns)/Ratio 
+Standard 
+Deviation 
+for Ternary 
+Tree 
+Parallel Ternary 
+Tree (ns)/Ratio 
+Standard 
+Deviation for 
+Parallel 
+Ternary Tree 
 1000 0% 7.00E+06/1 1.6730E+06 4.79E+06/0.683 1.1787E+06 
 1000 33% 4.28E+07/1 1.0928E+07 5.70E+06/0.133 1.5598E+06 
 1000 66% 4.59E+07/1 8.9743E+06 5.89E+06/0.128 1.1971E+06 
@@ -1501,8 +1594,9 @@ Tree Ternary Tree
 10000 66% 1.00E+08/1 1.1888E+07 2.45E+07/0.245 3.5393E+06 
 10000 99% 1.57E+08/1 1.3467E+07 5.00E+07/0.319 1.0254E+07 
 Table 4-8: Experiment Results of Parallel Ternary Tree 
-52 
- All the results above are from average of results from ten times. The first 
+53 
+ 
+All the results above are from average of results from ten times. The first 
 column of the table shows the number of inputs. And the “General Percentage” 
 in the second column shows the percentage of ‘#’ in each rule. Finally, columns 
 three and four are the execution time of “Ternary Tree” and “Parallel Ternary 
@@ -1510,8 +1604,9 @@ Tree”. The “Ratio” in this table shows the difference between them.
 The following figures are showing the same situation in the table: 
  
 Figure 4-4: Test Result of Experiment for Parallel Ternary Tree 
-53 
- 4.4.3 Analysis of Results 
+54 
+ 
+4.4.3 Analysis of Results 
 In this section, the results of Parallel Ternary Tree would be evaluated and 
 discussed. 
 Phenomenon: 
@@ -1538,8 +1633,9 @@ JAVA. It is valuable to do so because the promoted XCS called JavaXCSF is
 based on JAVA (Stalph & Butz, 2009). What should be investigated about this 
 algorithm is how to find a stable situation to get an accurate stable improvement. 
   
-54 
- 4.5 Input Tree 
+55 
+ 
+4.5 Input Tree 
 This is the most important approach tried in this thesis. In this section, the test 
 result of this method would be evaluated and discussed. 
 4.5.1 Experiment Design 
@@ -1557,8 +1653,16 @@ Table 4-5: Experiment Setting of Input Tree
 4.5.2 Results of Experiment 
 The test results are shown here: 
  
-Input General Naive Matching Ternary Tree Input Tree (Including 
-Population Percentage (ns)/Ratio (ns)/Ratio Tree building time)+ 
+Input 
+Population 
+General 
+Percentage 
+Naive Matching 
+(ns)/Ratio 
+Ternary Tree 
+(ns)/Ratio 
+Input Tree (Including 
+Tree building time)+ 
 Ternary Tree (ns)/Ratio 
 2000 33% 1.01E+08/1 4.46E+07/0.440 3.52E+07/0.348 
 2000 66% 3.72E+08/1 1.44E+08/0.386 7.65E+07/0.205 
@@ -1570,11 +1674,22 @@ Ternary Tree (ns)/Ratio
 50000 66% 1.95E+09/1 3.10E+08/0.159 1.86E+08/0.095 
 Table 4-6: Experiment Results of Input Tree 
  
-55 
-  
-Input General Standard Standard Standard Deviation for 
-Population Percentage Deviation for Deviation for Input Tree and Ternary 
-Naive Matching Ternary Tree Tree 
+56 
+ 
+ 
+Input 
+Population 
+General 
+Percentage 
+Standard 
+Deviation for 
+Naive Matching 
+Standard 
+Deviation for 
+Ternary Tree 
+Standard Deviation for 
+Input Tree and Ternary 
+Tree 
 2000 33% 1.4209e+007 1.0322e+007 1.0286e+007 
 2000 66% 3.0909e+007 1.8321e+007 9.5820e+006 
 10000 33% 4.9090e+007 4.0942e+007 1.4628e+007 
@@ -1592,8 +1707,9 @@ and “Input Tree”. The “Ratio” in this table shows the difference among them.
 Here are the figures for all experiments above which would show the results in a 
 clearer way. 
  
-56 
-  
+57 
+ 
+ 
 Figure 4-5: Test Result of Experiment for Input Tree 
  
 4.5.3 Analysis of Results 
@@ -1614,8 +1730,9 @@ an “Input Tree”, the repeated inputs would be ignored because of its data
 structure. No matter how many inputs there would be in XCS, the 
 number of leaves could only depend on the length a rule. For example, if 
 the length of input is 3, there would at most be 2^3 leaves in a tree. No 
-57 
- matter how many inputs inserted, the Input Tree won’t change any more 
+58 
+ 
+matter how many inputs inserted, the Input Tree won’t change any more 
 after it has become a full tree. 
 (2) Batch Matching. This is the original thought at the beginning and has 
 been achieved by this structure. For any paths in the input tree, they may 
@@ -1636,8 +1753,9 @@ Conclusion:
 Input Tree is a suitable approach to be combined with Ternary Tree to 
 accelerate the matching process a lot. This method could also be possible used 
 with naive matching, but more investigation would be needed.  
-58 
- 5. Conclusion 
+59 
+ 
+5. Conclusion 
 In this section, a summary of this project would be made. 
 In this project, there have been mainly five methods tried to optimise the match 
 process in XCS. Among them, “HashMatch” and “Input tree” try to find 
@@ -1661,8 +1779,9 @@ Tree.
 batch matching algorithm. It could be both used with traditional XCS and 
 Ternary. This thesis also tried to combine it with Ternary Tree and got a good 
 result which could be seen from the test result.  
-59 
- 6. Future Work 
+60 
+ 
+6. Future Work 
 In this section, some possible future work from this thesis will be discussed. 
 For the “Object Pool” approach, although it has a good performance in the test, 
 the operation of recycling objects has not been included. More works on the 
@@ -1681,8 +1800,9 @@ would be hard to fully solve the efficiency problem because the other parts of
 system would become bottleneck after this part has been fully optimised. So it 
 would be better to optimise other parts in XCS as well in the future’s work.  
   
-60 
-  
+61 
+ 
+ 
 Bibliography 
 Alpaydin, E., 2004. Introduction to Machine Learning. Cambridge,MA 02142: 
 Massachusetts Institute of Technology. 
@@ -1716,8 +1836,9 @@ Based Fitness in Learning Classifier Systems, Birmingham, United Kingdom:
 University of Birmingham. 
 L.B. Booker, D. G. J. H., September 1989. Classifier systems and genetic 
 algorithms. Artificial Intelligence, 40(1-3), pp. 235-282. 
-61 
- Lanzi, P. & Loiacono, D., 2010. Speeding Up Matching in Learning Classifier 
+62 
+ 
+Lanzi, P. & Loiacono, D., 2010. Speeding Up Matching in Learning Classifier 
 Systems Using CUDA. In: B. J. Bacardit, et al. eds. Learning Classifier Systems. 
 Berlin / Heidelberg: Springer, pp. 1-20. 
 Lea, D., 2000. A Java Fork/Join Framework. In: Proceedings of the ACM 2000 
@@ -1751,6 +1872,4 @@ Wilson, S. W., 1995. Classifier Fitness Based on Accuracy. Evolutionary
 Computation, 3(2), pp. 149-175. 
  
  
- 
-62 
  

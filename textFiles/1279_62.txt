@@ -1,5 +1,7 @@
                                          Comparison of Parallel Programming Models on Bluecrystal 
  
+   1 
+ 
 EXECUTIVE SUMMARY 
  
 Over the years, there has been a shift in the design of microprocessors which have now become 
@@ -33,8 +35,9 @@ of the five chosen for comparison were self-implemented in OpenMP and MPI.
 comparing the two models in terms of performance and programmability. 
 ? Two models were compared and contrasted by running OpenMP and MPI implementations of 
 five different applications on the cores of BlueCrystal. 
-   1 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   3 
  
  
 TABLE OF CONTENTS 
@@ -67,8 +70,9 @@ INTRODUCTION ...................................................................
 2.2.2 OpenMP ..................................................................................................................................... 18 
 2.2.3 MPI ............................................................................................................................................. 19 
 2.2.4 UPC ............................................................................................................................................ 20 
-   3 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   4 
  
 2.2.5 FORTRESS ................................................................................................................................... 21 
 2.2.6 CUDA .......................................................................................................................................... 21 
@@ -102,8 +106,9 @@ REVIEW .........................................................................
 5.3 Dijkstra’s Algorithm (Graph Traversal) ................................................................................................ 42 
 5.4 1D FFT (Spectral Methods) ................................................................................................................. 44 
 5.5 D2Q9 Lattice Boltzmann (Structured Grid) .......................................................................................... 45 
-   4 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   5 
  
 5.6 PROGRAMMABILITY ........................................................................................................................... 47 
 5.7 REVIEW .............................................................................................................................................. 48 
@@ -121,8 +126,9 @@ APPENDIX .......................................................................
  
  
   
-   5 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   6 
  
 LIST OF FIGURES 
  
@@ -164,8 +170,9 @@ Figure 35: Speedup vs Number of Cores – Lattice Boltzmann ......................
 Figure 37: Speedup vs Relative LOC ....................................................................................................... 47 
 Figure 38: Productivity of MPI and OMP for 5 applications ..................................................................... 47 
       
-   6 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   7 
  
 LIST OF TABLES 
  
@@ -173,7 +180,7 @@ Table 1: Summary of Dwarfs .....................................................
 Table 2: Metrics used in Previous Work ................................................................................................. 27 
 Table 3:Cache Performance- KMeans ..................................................................................................... 37 
 Table 4:Cache Performance- Lattice Boltzmann ..................................................................................... 45 
-Table 5: Languages Supported…………………………………………………………………………………………………………………52 
+Table 5: Languages Supported52 
  
       
  
@@ -195,8 +202,9 @@ Table 5: Languages Supported…………………………………………………………………………………………………………………52
  
  
  
-   7 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   8 
  
      INTRODUCTION 
  
@@ -232,8 +240,9 @@ aid a programmer in making an informed choice of a parallel programming model su
 requirements. We also have the objective of developing and extending our knowledge of parallel 
 computing which is becoming very popular. Our ultimate goal is to produce a work which can serve as 
 a reference to compare to when evaluating new or different programming models. 
-   8 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   9 
  
 1 BACKGROUND 
  
@@ -262,8 +271,9 @@ serial computing. Also, building parallel resources is not expensive so the cost
 ? Provide concurrency - With multiple resources many different independent tasks can be done at a 
 time. For example if one processor we are calculating the velocity of a particle, we can use the 
  other processor for calculating the density which is independent from velocity. 
-   9 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   10 
  
 ? Overcome the limits of serial computing - There are physical and practical constraints on  
 building faster serial computers. The only solution to this is using multiple computers. 
@@ -298,24 +308,28 @@ Access (NUMA) system as shown in Figure 3. In this, processors do not have equal
 memory.                                               
              Figure 2- SMP                                                                                   Figure 3 - NUMA  
                  
-Memory CPU 
-  CPU 
                                                                        
-CPU 
  
- Memory 
  
-  CPU   CPU 
  
-Memory CPU CPU Memory 
-  
+ 
+ 
+ Memory   CPU 
  
   CPU 
-CPU CPU 
+  CPU 
  
+  CPU 
  
-   10 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+Memory CPU 
+CPU 
+Memory CPU 
+CPU 
+Memory CPU 
+CPU 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   11 
  
 1.4.2 Distributed Memory Architecture 
 All the processors have their own private memory and there is no common shared memory. Processors 
@@ -326,12 +340,9 @@ Processors communicate with each other by sending or receiving messages.
  
                                                       Figure 4 – Distributed memory  
  
-Memory 
-Memory CPU CPU 
- network
- kk 
  
-Memory CPU Memory CPU 
+ 
+ 
  
  
 1.4.3 Hybrid Architecture 
@@ -343,16 +354,11 @@ shared bus.
  
                                                    Figure 5 – Hybrid Architecture 
          
-Memory CPU Memory GPU 
- 
-GPU GPU 
- 
- network 
  
  
-Memory CPU Memory CPU 
  
-CPU CPU 
+ 
+ 
  
  
  
@@ -365,26 +371,36 @@ decompose a problem and get parallelism –
  
  
  
-   11 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+ network 
+Memory CPU 
+GPU 
+Memory CPU 
+CPU 
+Memory GPU 
+GPU 
+Memory CPU 
+CPU 
+network
+kk 
+Memory CPU Memory CPU 
+Memory CPU Memory CPU 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
  
+   12 
+ 
+   Figure 6 
  
 1.3.1 Data Parallelism 
  
-   Figure 6 
 The data is partitioned into smaller subsets and tasks are 
-Data array A[100] 
 performed on each subset i.e. identical tasks are performed in 
 parallel [2]. As only one processor directs the activities of all 
 other processing elements, there is a single control flow. Figure 
-   A[0] to A[50]   A[51] to A[99] 
 6 explains the concept where the data A[100] is divided into 
 two subsets and a task of addition is performed on both the sets 
 in parallel by different processors. This kind of parallelism scales 
-Task_Add Task_Add 
 easily as it effectively utilizes the processing elements available.  
  
-CPU1 CPU2 
  
  
  
@@ -392,16 +408,12 @@ CPU1 CPU2
 1.3.2 Task Parallelism 
  
  
-   Figure 7 
 The entire task of the program is partitioned into sub-tasks 
-Data array A[100] 
 which can be run concurrently [2]. Thus unique tasks run in 
 parallel on common data. Degree of parallelism is limited to 
 number of sub-tasks that have been formulated. In the Figure 7 
-Task_Add Task_Avg 
 the data A[100] is used by two processors simultaneously to 
 perform different tasks, add and average. 
-CPU1 CPU2 
  
  
  
@@ -417,8 +429,17 @@ computing.
 Load imbalance occurs when work is not evenly assigned to the parallel working elements like 
 threads or processes [3]. When there is an imbalance in assignment of the load, some working 
 elements finish early and have to wait for the working element having largest amount of work to 
-   12 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+Data array A[100] 
+   A[0] to A[50]   A[51] to A[99] 
+Task_Add Task_Add 
+CPU1 CPU2 
+Data array A[100] 
+Task_Add Task_Avg 
+CPU1 CPU2 
+   Figure 7 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   13 
  
 complete. This leads to idle times and low processor utilization which adversely affects the aim 
 of achieving a linear speedup. 
@@ -429,8 +450,7 @@ WORK
 WORK 
 WORK 
 WORK 
-IDLE 
-IDLE 
+IDLE IDLE 
 IDLE 
                           SYNCHRONIZATION 
  
@@ -460,8 +480,9 @@ programming language which imposes software overhead of parallel compilers, libr
 1.6.2.4 Memory Overhead 
 If a particular application requires N units of memory, it is not necessary that it will require N/4 
 units of memory when run in parallel using four processors. Parallel computations frequently 
-   13 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   14 
  
 require more memory than the sequential computation. Applications with significant memory 
 overhead will experience performance loss. 
@@ -490,8 +511,9 @@ using it. Commonly used terms in parallel computing and their meanings were list
 different parallel computer memory architectures focusing on how the multiple processors are placed and 
 how the memory is accessed. Decomposition of a problem to achieve parallelism is an important and 
 challenging step in parallel programming. We studied two fundamental types of parallelism; data and task 
-   14 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   15 
  
 which are logically contrast to each other. Finally, we briefly described the general reasons for performance 
 loss in parallel computing due which achieving ideal linear speedup is difficult. 
@@ -532,8 +554,9 @@ loss in parallel computing due which achieving ideal linear speedup is difficult
  
  
  
-   15 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   16 
  
 2 SURVEY OF PARALLEL PROGRAMMING MODELS 
  
@@ -570,8 +593,9 @@ synchronization over thousands of processing elements. In future the models shou
 of processors, which will result in a high level of abstraction to the programmers.  
 2.1.3 Data sizes and types supported  
 The parallel research agenda inspires new languages and compilers. For investigating a parallel model, the data 
-   16 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   17 
  
 sizes and types the model supports, should also be analyzed.  Thus the models should support at least the 
 primitive data types which include  
@@ -609,8 +633,9 @@ available and evaluate them on the basis of the criteria mentioned in Section 2.
 popular programming models.  
 2.2.1 Pthreads  
 In shared memory multiprocessor architectures, threads can be used to implement parallelism. Pthreads or  
-   17 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   18 
  
 Portable Operating System Interface (POSIX) threads are defined as a set of C language programming  
 types and procedure calls, implemented with a pthread.h header [6]. Threads must be explicitly created and  
@@ -636,7 +661,7 @@ routines, and environment variables that extend Fortran, C and C++ programs [7].
 shared memory architecture. Threads are the unit of worker. All threads have access to all the memory. It  
 uses the fork-join model of parallel execution. It is intended to support programs that will execute  
 correctly both as parallel programs and as sequential programs. Parallel region is denoted by specifying  
-compiler directive (i) #pragma omp parallel {} for C/C++, and (ii) !$omp parallel and !$omp end parallel  
+compiler directive (i) #pragma omp parallel {} for C/C++, and (ii) $omp parallel and $omp end parallel  
 for Fortran.  The OpenMP program begins execution as a single thread of execution called the master  
 thread. The master thread runs in a serial region until the first parallel construct is encountered, when the  
 master thread creates a team of threads, and becomes master of the team. There are work-sharing  
@@ -645,8 +670,9 @@ members of the team that encounter it. Worker management, division of workload i
 of tasks to thread is implicit. Thus less programming effort is required. The programmer is also relieved  
 from the responsibility of synchronization.                         
               
-   18 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   19 
  
   Figure 11 
            
@@ -676,8 +702,9 @@ than two processes. Figure 12 shows how communication between two processes take
 messages using send() and recv().  When a synchronization point is needed, MPI_Barrier is used which  
 blocks each process from continuing its execution until all processes have entered the barrier.  
 Figure 12 
-   19 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   20 
  
  
 2.2.4 UPC  
@@ -708,8 +735,9 @@ constructs in UPC [9]
 4. Locks - Protect the shared data against multiple processors.  
 5. Memory consistency model - It can be relaxed in which shared data can be reordered during compile 
 time or runtime or strict in which access to shared data is serialized.  
-   20 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   21 
  
 2.2.5 FORTRESS  
 The   Fortress   programming   language   is   a   general-purpose,   statically   typed,   component-based  
@@ -750,8 +778,9 @@ destructions.
               
  
  
-   21 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   22 
  
                                Figure 13 – Memory hierarchy in CUDA 
  
@@ -787,8 +816,9 @@ through queues. Each device must have a queue. When there are multiple devices, 
 queue and synchronization between these queues must be done explicitly. Each queue can execute  
 in order or out of order. There are four distinct memory regions in an OpenCL memory model as shown in  
 Figure 14, taken from [11] 
-   22 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   23 
  
 ? Global Memory 
 ? Constant Memory 
@@ -813,8 +843,9 @@ a strong base for deciding which programming models to choose for comparison. Mo
 what factors to consider while studying a parallel programming model. So in future, if we need to investigate a 
 new parallel model, we know the approach to be taken.  
  
-   23 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   24 
  
 3 LITERATURE SURVEY AND METRICS FOR COMPARISON 
  
@@ -832,79 +863,90 @@ performance. Table 1 summarizes the thirteen dwarfs, giving a brief description 
 application that belong the particular category of dwarf. 
                                                    Table 1 – Dwarf Summary     
 Dwarfs Description Example 
-Data are dense matrices or vectors. They have 
- K-Means, ,Block triadiagonal 
-high ratio of math-to-load operations and a high 
 Dense Linear Algebra 
-Matrix  
+Data are dense matrices or vectors. They have 
+high ratio of math-to-load operations and a high 
 degree of data interdependency between 
 parallel working elements 
+ K-Means, ,Block triadiagonal 
+Matrix  
+Sparse Linear Algebra  
 Data sets include few non-zero values. To 
 reduce space and computation, data is usually 
-Sparse Linear Algebra  Conjugate Gradient, SuperLU  
 stored in compressed form i.e. in a list of values 
 and indices. 
+Conjugate Gradient, SuperLU  
+Spectral Methods  
 The data is transformed to frequency domain 
 from time domain. The execution profile is 
 typically characterized by multiple stages of 
 processing, where dependencies within a stage 
-Spectral Methods  Fast Fourier Transform  
 form a “butterfly” pattern of computation. 
 Typically, spectral methods use multiple 
 butterfly stages, which involves all-to-all 
 communication for some stages and strictly 
 local for others. 
-Involves large number of calculations within a 
-Barnes-Hut, Fast Multipole 
-timestep and all-to-all communication between 
+Fast Fourier Transform  
 N-Body Methods 
-Method  
+Involves large number of calculations within a 
+timestep and all-to-all communication between 
 timesteps. Interactions between many discrete 
 points are calculated. 
+Barnes-Hut, Fast Multipole 
+Method  
+Structured Grids  
 The data is organized in a regular grid format. 
 Points on grid are conceptually updated 
-Structured Grids  Lattice Boltzmann, Game of Life  
 together. Each point on grid is updated using 
 values of neighborhood points. 
-   24 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+Lattice Boltzmann, Game of Life  
+                                         Comparison of Parallel Programming Models on Bluecrystal 
  
+   25 
+ 
+Unstructured Grids  
 Data is irregular grid and connectivity to a 
 neighboring point is made explicit. Update to a 
-Unstructured Grids  Back Propagation  
 point on grid requires determining a list of 
 neighboring points, and then loading values 
 from those neighboring points. 
+Back Propagation  
+Map Reduce  
 Comprises of redundant execution of a ”map” 
 function and results are aggregated using a 
-Map Reduce  Monte Carlo, similarity scores  
 “reduce” function.  Considered embarrassingly 
 parallel. 
+Monte Carlo, similarity scores  
+Combinational Logic  
 Covers applications implemented with bit-level 
-Combinational Logic  Encryption/Decryption  
 logic functions. Simple operations are 
 performed on a very large amount of data.  
+Encryption/Decryption  
+Graph Traversal  
 Number of connected objects are visited and 
-Graph Traversal  Quick Sort, Dijkstra’s  
 evaluated.  Random memory look ups are 
 involved. Latency tends to become a bottleneck.  
-Dynamic A complex problem is solved by solving a series 
-Needleman-Wunsch  
-of simpler subproblems.  
+Quick Sort, Dijkstra’s  
+Dynamic 
 Programming  
+A complex problem is solved by solving a series 
+of simpler subproblems.  Needleman-Wunsch  
+Backtrack 
 A very large space is searched to find an optimal 
-Backtrack Neural Networks  
 solution. To limit the computations, the search 
 space is pruned using an implicit method. 
-Construct Graphical Graphs are constructed in which variables are 
-Bayesian Networks.  
-represented by nodes and conditional 
+Neural Networks  
+Construct Graphical 
 Models 
+Graphs are constructed in which variables are 
+represented by nodes and conditional 
 probability by edges.  
+Bayesian Networks.  
+Finite State Machines  
 Compasses a system whose behavior is defined 
-Finite State Machines  String match, Parser.  
 by state and on input there is a transition in 
 state. 
+String match, Parser.  
  
 The point of these dwarfs is to identify the core computation and communication for important future 
 applications and help in developing programming models that will efficiently run the future applications. It has 
@@ -918,8 +960,9 @@ have been carried out in which same applications are run in different languages 
 analyzed. Following section describes some of the previous works done in comparing parallel 
 programming models.   
  
-   25 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   26 
  
 [13]  has  discussed  the  implementation  details  the  NAS  Parallel  benchmarks in OpenMP (Section 2.2.2). 
 It examines the effectiveness of OpenMP in parallelizing the benchmark suite. It  
@@ -959,8 +1002,9 @@ programming models. Using this suite, the performance and programmability of two
 (Section 2.2.1) and OpenMP is compared. Although no clear conclusion is drawn on the choice between 
 these two models, valuable information on the scaling and speedup characteristics of the models is given 
 and further extension of the evaluation suite is suggested.  
-   26 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   27 
  
 3.3 PREVIOUS WORK ON COMPARING PROGRAMMABILTY 
  
@@ -982,9 +1026,18 @@ those metrics for comparing the programmability which we thought worked well.
 [19] defines a new metric called Development time productivity for evaluation of parallel programming 
 models in terms of programmability. It is basically a ratio of relative runtime performance to relative 
 programmer effort. 
-   27 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
  
+   28 
+ 
+         
+ 
+ 
+ 
+ 
+       
+ 
+  
  
  
  
@@ -1019,16 +1072,11 @@ parallel application when alternate implementations and designs are tried.  It s
 “The performance improvement to be gained from some faster mode of execution is limited by the fraction 
 of the time that the faster mode can be used.” [20] The faster mode of execution implies program 
 parallelization.                                                                                           
- 
        
-          
  
-        
+                                         Comparison of Parallel Programming Models on Bluecrystal 
  
- 
-  
-   28 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+   29 
  
  P = Fraction of program that can be parallelized  
 N = Number of processors running in parallel.     
@@ -1047,8 +1095,9 @@ increasing the number of cores according to this law. Following formula is used 
          np = Fraction of the application that is sequential.  
                                               Figure 16 
  
-   29 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   30 
  
  
  In this project we run the application on different number of cores and for different data set sizes 
@@ -1087,8 +1136,9 @@ observed that programmability is a very subjective issue and quantifying it accu
 many efforts have been made to do so, more work needs to be done in this area.  Using the knowledge 
 gained from past work we decided several metrics which will be used in this project to measure and 
 compare performance and ease-of-use of a programming model.                               
-   30 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   31 
  
 4 DESIGN AND IMPLEMENTATION 
  
@@ -1124,12 +1174,13 @@ those that lie outside are counted as shown in Figure 17.
     Figure 17- Calculating Pi    
  
                                                                     Value of Pi =      Number of sample points inside the circle  
-r = 1 
                                                                                                     Total number of sample points  
  
  
-   31 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+r = 1 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   32 
  
  
 We notice that this application is “embarrassingly parallel” as there is no interaction needed among the 
@@ -1170,8 +1221,9 @@ chosen distance metric. The new centroids are calculated by taking the mean of a
 within each sub-cluster respectively. The algorithm iterates until no data objects move from one sub-
 cluster to another. Figure 18 demonstrates how a standard K-means algorithm works. 
  
-   32 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   33 
  
                                                       Figure 18 – Standard K-Means Algorithm  
  
@@ -1179,16 +1231,10 @@ cluster to another. Figure 18 demonstrates how a standard K-means algorithm work
  
  
  
-Initially, centres are K=3 clusters are Centroid of each cluster 
  
-chosen at random. K=3 created becomes the new mean 
- 
-eeeecccccctrecentre 
  
 The source code for the parallel implementation of the K-Means algorithm in MPI and OpenMP is taken 
- 
 from [21]. It uses data parallelism (Section 1.3.1). Input data objects to be clustered are evenly 
-  
 partitioned across all processes or threads. 
 4.2.3 Dijkstra’s shortest path algorithm – Graph Traversal 
 This algorithm is used to find the length of shortest path between two vertices (source and destination) 
@@ -1210,18 +1256,27 @@ matrix and includes the following steps.
 ? Multiply each matrix element (index r, c) by the twiddle factor which is trigonometric constant 
 coefficient. 
 ? Apply a (length C) transform on each row. 
-   33 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+K=3 clusters are 
+created 
+Initially, centres are 
+chosen at random. K=3 
+ 
+ 
+  
+Centroid of each cluster 
+becomes the new mean 
+eeeecccccctrecentre 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   34 
  
 ? Transpose the Matrix. 
    Figure 19 
-  2 input points 
  The basic computational element of FFT is converting two                          
 complex points into two other complex points and is known as 
 “butterfly” due to its winged appearance as shown in Figure 19. 
                                                                                 
  
- 2 output points 
  
 4.2.5               Lattice Boltzmann – Structured Grid 
               Figure 20 
@@ -1249,8 +1304,11 @@ also be achieved to a certain level. For this, we made a change in the timestep(
 call to function propagate() which was now called from the function accelerate() which resulted in forming a 
 pipeline of the two tasks accelerate() and propagate(). 
 While converting a serial code to parallel, following points were considered to ensure correctness- 
-   34 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+ 2 output points 
+  2 input points 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   35 
  
 ? Avoid race condition which is anomalous behavior caused by the unexpected dependence 
 on the relative timing of events. 
@@ -1284,8 +1342,9 @@ deadlock.
  
  
  
-   35 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   36 
  
                                                 Figure 22 – Exchange of cells 
  
@@ -1317,8 +1376,9 @@ was either taken from the same source from where the source code was obtained or
 input data was randomly generated in the program itself. Table 3 mentions the source of the input data 
 for every application used in the project. 
  
-   36 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   37 
  
            Table 3 – Applications and the source of corresponding Input data sets 
 Application Source of Input Data 
@@ -1357,10 +1417,11 @@ the gettimeofday() function in C.
                                                Figure 23 – Timing the Parallel Program 
   Sequential Part  
 T1  T2  T3  T4  T5  
- 
    Sequential Part 
-   37 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+ 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   38 
  
                    
 4.4 MEASURING PROGRAMMABILITY 
@@ -1401,8 +1462,9 @@ Thus, this chapter summarizes the various tasks performed in this project.
  
  
  
-   38 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   39 
  
 5         RESULTS AND ANALYSIS 
  
@@ -1420,18 +1482,6 @@ increases faster than the number of processors.
 are added                                            
  
   Figure 24                 
-7 
-6 
-5 
-Linear 
-4 
-Super-Linear 
-3 
-Sub-Linear 
-2 
-1 
-0 
-1 2 3 4 5 6 
                             
  
      Using this knowledge, we now discuss the performance of OpenMP and MPI for each application 
@@ -1449,34 +1499,25 @@ summing the total number of samples inside the circle, the slower performance of
 the reduction in MPI works faster than that in OpenMP. Thus if we have to perform sum of a very large array 
 or find maximum or minimum element of an array, we should use MPI as it has a better performance than 
 OpenMP. 
-   39 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+0 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+1 2 3 4 5 6 
+Linear 
+Super-Linear 
+Sub-Linear 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   40 
  
  
                                  Figure 25             Figure 26  
                                                                                         
-30 
-OMP 
-1400 
-MPI 
-25 
-1200 MPI 
-Ideal 
-20 
-1000 
-800 
-15 
-600 
-10 
-400 
-5 
-200 
-0 
-0 
-1 2 4 8 16 32 64 128 
-1 2 4 8 16 24 
-Number of Cores 
-Number of Cores 
  
                              
  
@@ -1498,36 +1539,46 @@ to 10 which means that 10 clusters will be formed of the input data set. Figure 
 obtained for MPI and OpenMP on different number of cores. We can see that up to 4 cores the performance 
 of both the models is comparable but as the cores increase, the performance of OpenMP starts to deviate 
 from the linearity. From 16 cores, the speedup gained flattens indicating parallel saturation. 
-   40 
+0 
+200 
+400 
+600 
+800 
+1000 
+1200 
+1400 
+1 2 4 8 16 32 64 128 
+Ti
+m
+e 
+(m
+s)
  
-Speed Up 
-Time (ms)                                          Comparison of Parallel Programming Models on Bluecrystal 
+Number of Cores 
+MPI 
+0 
+5 
+10 
+15 
+20 
+25 
+30 
+1 2 4 8 16 24 
+Sp
+ee
+d
+ U
+p
+ 
+Number of Cores 
+OMP 
+MPI 
+Ideal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   41 
  
     Figure 27-Data size = 204800                                            Figure 28 – Data size = 819200 
-25 
-20 
-OMP 
-OMP 
-18 
-MPI 
-20 
-16 
-MPI 
-14 
-15 
-12 
-10 
-8 
-10 
-6 
-4 
-5 
-2 
-0 
-0 
-1 2 4 8 16 24 
-1 2 4 8 16 24 
-Number of Cores Number of Cores 
    
  
 The reason behind this is the data locality issue discussed in Section 1.6.3. The number of cache read misses 
@@ -1556,41 +1607,65 @@ graphs are identical to each other. OpenMP still has performance saturation afte
 because if for smaller data size there is data locality issue then for larger data the issue will definitely persist 
 as the cache size remains the same so more data is in the main memory. We see that the performance of 
 MPI still scales very well and the curve has a similar, close to linearity shape as before.  
-   41 
+0 
+2 
+4 
+6 
+8 
+10 
+12 
+14 
+16 
+18 
+20 
+1 2 4 8 16 24 
+Sp
+ee
+d
+ U
+p
  
-Speed Up 
-SpeedUp                                          Comparison of Parallel Programming Models on Bluecrystal 
+Number of Cores 
+OMP 
+MPI 
+0 
+5 
+10 
+15 
+20 
+25 
+1 2 4 8 16 24 
+Sp
+ee
+d
+U
+p
+ 
+Number of Cores 
+OMP 
+MPI 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   42 
  
              Figure 29 
 Figure 29 shows the execution time taken for 
-45 
 running the MPI codes in distributed memory 
 system with a maximum of 128 cores for two 
-40 
 input datasets of size 208400 and 819200. We 
-35 
 notice that the timing curve begins to flatten 
 for smaller data sets from 16 cores whereas for 
-30 
 larger data sets it flattens from 32 cores. This 
 implies that there is more performance gain for 
-25 
 larger data set than for smaller and the reason 
-20 
-204800 
 for this is that in case of the larger data there is 
-819200 more computation and so the computation to 
-15 
+more computation and so the computation to 
 communication ratio is higher than that in case 
-10 
 of smaller data set. Thus processor spend 
 comparatively less time on communication than 
-5 
 on computation due to which the curve does 
 not start to flatten as early as in the case of the 
-0 
-1 2 4 8 16 32 64 128 smaller data set. 
-Number of Cores 
+smaller data set. 
  
 5.3 Dijkstra’s Algorithm (Graph Traversal) 
 The Dijkstra’s shortest path programs for MPI and OpenMP were run initially for 100 graphical nodes. From 
@@ -1602,36 +1677,48 @@ instead of running faster, the program actually runs slower with increase in num
 the application for larger number of nodes that is 20000 nodes. 
  
                                                                 Figure 30          
-3 
-2.5 
-2 
-MPI-100  
-1.5 
-OMP- 100  
-1 
-0.5 
-0 
-1 2 4 8 16 24 
-Number of Cores 
     
-   42 
+0 
+0.5 
+1 
+1.5 
+2 
+2.5 
+3 
+1 2 4 8 16 24 
+Sp
+ee
+d
+U
+P
  
-Time(s) 
-SpeedUP                                          Comparison of Parallel Programming Models on Bluecrystal 
+Number of Cores 
+MPI-100  
+OMP- 100  
+0 
+5 
+10 
+15 
+20 
+25 
+30 
+35 
+40 
+45 
+1 2 4 8 16 32 64 128 
+Ti
+m
+e(
+s)
+ 
+Number of Cores 
+204800 
+819200 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   43 
  
                                                                            Figure 31     
-30 
-25 
-20 
-15 
-OMP 
-MPI 
-10 
-Ideal 
-5 
-0 
-1 2 4 8 16 24 
-Number of Cores 
  
  
 We can see from Figure 31 that now, the application takes advantage of parallelism and the speedup curve 
@@ -1647,32 +1734,57 @@ a bottleneck. Figure 32 shows the execution time taken for the MPI    codes on d
 large number of cores.  
  
                                                                          Figure 32  
-             1400 
- 
-1200 
+             
  
  
-1000 
  
  
-800 
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+0 
+5 
+10 
+15 
+20 
+25 
+30 
+1 2 4 8 16 24 
+Sp
+ee
+d
+U
+p
+ 
+Number of Cores 
+OMP 
 MPI 
-600 
- 
- 
-400 
- 
- 
+Ideal 
+0 
 200 
- 
- 0 
+400 
+600 
+800 
+1000 
+1200 
+1400 
 1 2 4 8 16 32 64 128 
-Number of cores 
-   43 
+Ti
+m
+e(
+m
+s)
  
-SpeedUp 
-Time(ms)                                          Comparison of Parallel Programming Models on Bluecrystal 
+Number of cores 
+MPI 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   44 
  
 5.4 1D FFT (Spectral Methods) 
  As mentioned in Section 4.2.4, FFT is a communication intensive application. So its performance will depend 
@@ -1685,39 +1797,49 @@ communicate by passing messages to each other which involves the issue of latenc
  
                  Figure 33 
                        
-12 
-OMP 
-MPI 
-10 
-8 
-6 
-4 
-2 
-0 
-1 2 4 8 16 24 
-Number of Cores 
      
         
 Figure 34 shows the speedup obtained when the MPI implementation is run on distributed memory. We 
 observe that MPI scales well in this case.  
                                  
                                                                         Figure 34 
-60 
-50 
-40 
-30 
-MPI 
-20 
-10 
+ 
+ 
 0 
-1 2 4 8 16 32 64 128 
+2 
+4 
+6 
+8 
+10 
+12 
+1 2 4 8 16 24 
+Sp
+ee
+d
+ U
+p
+ 
 Number of Cores 
+OMP 
+MPI 
+0 
+10 
+20 
+30 
+40 
+50 
+60 
+1 2 4 8 16 32 64 128 
+Ti
+m
+e(
+s)
  
+Number of Cores 
+MPI 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
  
-   44 
- 
-Speed Up 
-Time(s)                                          Comparison of Parallel Programming Models on Bluecrystal 
+   45 
  
   
 5.5 D2Q9 Lattice Boltzmann (Structured Grid) 
@@ -1730,18 +1852,6 @@ our argument we determine the cache performance using cachegrind.
  
                                            Figure 35 
  
-OMP 
-30 
-MPI 
-Ideal 
-25 
-20 
-15 
-10 
-5 
-0 
-1 2 4 8 16 24 
-Number of Cores 
  
        As it can be noted from Table 5, the miss rates of LLd and D1 caches are lower when 4 cores are used. So   
 when 4 cores are used, not only has the parallelism increased but the cache misses are also reduced which 
@@ -1756,43 +1866,50 @@ cores where the curve deviates from the ideal speedup. The result of running the
 distributed memory architecture is shown in Figure 36.  
  
  
-   45 
+0 
+5 
+10 
+15 
+20 
+25 
+30 
+1 2 4 8 16 24 
+Sp
+e
+e
+d
+U
+p
  
-SpeedUp                                          Comparison of Parallel Programming Models on Bluecrystal 
+Number of Cores 
+OMP 
+MPI 
+Ideal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   46 
  
  
     Figure 36 
  
-MPI 
-160 
  
  
-140 
  
  
-120 
  
  
-100 
  
  
-80 
  
  
-60 
  
  
-40 
  
  
-20 
  
  
-0 
  
-1 2 4 8 16 32 64 128 
  
-Number of cores 
  
  
  We observe that up to 8 cores, the time taken to execute decreases proportionately with 
@@ -1810,9 +1927,26 @@ the time taken to execute the application with 128 processes.
 process will have more data to process. There will definitely be communication bottleneck but at a later 
 stage that 128 cores in case of larger data sets.  
  
-   46 
+0 
+20 
+40 
+60 
+80 
+100 
+120 
+140 
+160 
+1 2 4 8 16 32 64 128 
+Ti
+m
+e(
+s)
  
-Time(s)                                          Comparison of Parallel Programming Models on Bluecrystal 
+Number of cores 
+MPI 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   47 
  
 5.6 PROGRAMMABILITY 
 The aim of the project is not only to compare the models on the basis of their performance but also on the basis 
@@ -1826,28 +1960,6 @@ LOC. This was expected because we knew the LOCs for the parallel codes are alway
 serial code. Also we note that the plots of MPI are farther from 1 than that of OpenMP, indicating that the MPI 
 programs are comparatively longer.                                                                                                   
                                  Figure 37                                                                         Figure 38   
-OMP MPI 
-Ideal SpeedUP 
-8 
-10 
-7 
-6 
-8 
-5 
-OMP 
-6 
-4 
-MPI 
-3 
-4 
-2 
-2 
-1 
-0 
-0 
-Monte K-Means Dijkstra's FFT D2Q9 
-0 1 2 
-Relative LOC Carlo 
  
       
 Figure 38 compares the productivity of each OMP and MPI applications. We note that for Monte Carlo 
@@ -1864,10 +1976,48 @@ OpenMP MPI
 Calculating Pi 2 2 
 D2Q9 Lattice Boltzmann  8 14 
  
-   47 
+0 
+2 
+4 
+6 
+8 
+10 
+0 1 2 
+Sp
+ee
+d
+u
+p
  
-Speedup 
-Productivity                                          Comparison of Parallel Programming Models on Bluecrystal 
+Relative LOC 
+OMP 
+MPI 
+Ideal SpeedUP 
+0 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+Monte 
+Carlo 
+K-Means Dijkstra's FFT D2Q9 
+P
+ro
+d
+u
+ct
+iv
+it
+y
+ 
+OMP MPI 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   48 
  
 Coding the Monte Carlo application was not very difficult and took the same amount of time for MPI and 
 OpenMP. This is because the application did not require interaction between the units of execution.  Thus in 
@@ -1900,8 +2050,9 @@ used to compare the models for their ease-of-use.
  
  
  
-   48 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   49 
  
 6 DISCUSSION 
  
@@ -1942,8 +2093,9 @@ of performance and accuracy before choosing a type of communication.
  
  
  
-   49 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   50 
  
 ?  Data Dependencies 
 The most important point to consider in parallel programming to ensure correctness of the result is 
@@ -1983,8 +2135,9 @@ cachegrind. MPI performed well because the application is not communication inte
 communications were overlapped with computations which saved time.  
  
  
-   50 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   51 
  
 ? Dijkstra’s Algorithm – This is communication intensive application and also involves random memory 
 lookups. The performance of OpenMP is better than MPI because communication becomes a bottleneck 
@@ -2026,8 +2179,9 @@ project because that makes the comparison hardware dependent and specific to the
 memory or cache architecture. OpenMP usually suffers from scalability whereas MPI comes with the 
 cost of communication. 
  
-   51 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   52 
  
 6.3 PROGRAMMABILITY COMPARISON SUMMARY 
 As mentioned earlier, quantifying and measuring programmability is more difficult than measuring performance.  
@@ -2067,8 +2221,9 @@ OpenMP Fortran, C, C++.
 MPI Fortran, C, C++, Python 
  
    
-   52 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   53 
  
 6.5 FEW PROBLEMS FACED DURING THE PROJECT 
 ? It should be mentioned that while choosing the parallel paradigms to be compared, we also intended to 
@@ -2102,8 +2257,9 @@ already begun. Unfortunately we did not have sufficient time left and we had to 
  
  
  
-   53 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   54 
  
 7 CONCLUSIONS AND FUTURE WORK 
  
@@ -2143,8 +2299,9 @@ MPI.
 the worlds (shared memory and message passing models). The future models should be more human-centric, 
 that is, they must be developed in keeping in mind not only the performance of the model but also its ease-of-
 use.  
-   54 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   55 
  
 7.2 FUTURE WORK  
  
@@ -2178,8 +2335,9 @@ continuing to work on projects like this.
  
  
  
-   55 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   56 
  
 BIBLIOGRAPHY 
  
@@ -2188,7 +2346,7 @@ Research?: A View from Berkeley.
 2. Barney, Blaise. "Introduction to Parallel Computing". Lawrence Livermore National Laboratory. 
 3. Burgstaller, B., & Scholz, B. (2011). Performance of Parallel Programs, 1-63. 
 4. Mattson,Sanders, Massingill. (2004) Patterns for Parallel Programming 
-5. Kasim, H., March, V., Zhang, R., & See, S. (2008). Survey on Parallel Programming Model. 
+5. Kasim, H., March, V., Zhang, R., & See, S. (2008). Survey on Parallel Programming Model.  
 6. Barney, Blaise. "POSIX Threads Programming". Lawrence Livermore National Laboratory. 
 7. Architecture, O., Board, R., Architecture, O., Board, R., Architecture, O., & Board, R. (2002). OpenMP C and C ++ 
 Application Program Interface 
@@ -2219,8 +2377,9 @@ http://users.eecs.northwestern.edu/~wkliao/Kmeans/index.html. Last accessed 15th
 24. Nicholas, N. (2004). Dynamic Binary Analysis and Instrumentation or Building Tools is Easy,50-60. 
  
   
-   56 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   57 
  
         APPENDIX 
 RAW READINGS 
@@ -2228,104 +2387,99 @@ RAW READINGS
 1. Monte Carlo application (Time in s)                               2. K-Means Clustering (Time in s) 
  
  
-Cores 2 4 8 16 24 
-Cores 2 4 8 16 24 
-2.77 1.48 1.10 0.56 0.325 
      
-19.99 11.49 6.59 4.44 6.22 
-2.51 1.56 1.04 0.43 0.36 
-18.23 9.9 6.21 4.89 5.14 
  
-2.87 1.32 1.07 0.6 0.28 
-OMP 16.8 12.4 5.89 3.65 5.03 
-OMP 
   
-2.64 1.36 1.20 0.52 0.32 
-22.97 15.6 4.23 4.99 5.10 
  
-2.83 1.52 1.12 0.48 0.36 
-24.4 8.99 7.21 5.21 4.83 
  
-23.05 11.455 5.58 2.79 1.48 
-2.453 1.52 0.945 0.56 0.278 
  
-2.66 1.48 0.90 0.54 0.30 
-21.79 10.44 5.70 2.55 1.63 
-MPI 2.54 1.56 0.98 0.58 0.25 
  
-MPI 
-25.66 13.21 5.23 2.31 1.88 
-2.36 1.58 0.96 0.60 0.28 
- 24.52 11.72 4.91 2.67 1.23 
-2.31 1.48 0.88 0.21 0.30 
-22.59 12.90 6.2 2.92 1.56 
+ 
  
  
 3. Dijkstra’s Algorithm    (Time in ms)                                                      4. 1D FFT       (Time in s) 
  
-Cores 2 4 8 16 24 
-Cores 2 4 8 16 24 
      
-8.9 5.7 3.122 2.6 1.8 
-713 502 174 160 79 
  
-8.6 5.5 3.05 2.5 1.9 
-688 494 185 176 97 
  
-8.4 5.1 3.71 2.8 1.4 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Cores 2 4 8 16 24 
 OMP 
-702 482 180 163.5 87.7 
-OMP 
- 9.2 6.0 2.93 2.53 1.56 
-178 
-710 490 196 90 
- 
-8.56 5.32 3.1 2.48 1.89 
- 
-696 506 199 159 82 
-23.05 11.455 5.58 2.79 1.48 
- 
-941 932 519 360 180 
-22.09 12.31 5.03 2.56 1.59 
- 
-966 938 513 368 169 
+2.77 1.48 1.10 0.56 0.325 
+2.51 1.56 1.04 0.43 0.36 
+2.87 1.32 1.07 0.6 0.28 
+2.64 1.36 1.20 0.52 0.32 
+2.83 1.52 1.12 0.48 0.36 
 MPI 
-24.58 10.98 6.9 3.01 1.12 
-MPI 953 943 524 354 175 
+2.453 1.52 0.945 0.56 0.278 
+2.66 1.48 0.90 0.54 0.30 
+2.54 1.56 0.98 0.58 0.25 
+2.36 1.58 0.96 0.60 0.28 
+2.31 1.48 0.88 0.21 0.30 
+Cores 2 4 8 16 24 
+OMP 
+19.99 11.49 6.59 4.44 6.22 
+18.23 9.9 6.21 4.89 5.14 
+16.8 12.4 5.89 3.65 5.03 
+22.97 15.6 4.23 4.99 5.10 
+24.4 8.99 7.21 5.21 4.83 
+MPI 
+23.05 11.455 5.58 2.79 1.48 
+21.79 10.44 5.70 2.55 1.63 
+25.66 13.21 5.23 2.31 1.88 
+24.52 11.72 4.91 2.67 1.23 
+22.59 12.90 6.2 2.92 1.56 
+Cores 2 4 8 16 24 
+OMP 
+713 502 174 160 79 
+688 494 185 176 97 
+702 482 180 163.5 87.7 
+710 490 196 
+178 
  
-23.11 11.40 6.25 2.15 1.90 
+90 
+696 506 199 159 82 
+MPI 
+941 932 519 360 180 
+966 938 513 368 169 
+953 943 524 354 175 
 948 928 507 363 195 
- 
-21.90 12.01 4.81 2.31 1.57 
 959 930 524 370 188 
+Cores 2 4 8 16 24 
+OMP 
+8.9 5.7 3.122 2.6 1.8 
+8.6 5.5 3.05 2.5 1.9 
+8.4 5.1 3.71 2.8 1.4 
+9.2 6.0 2.93 2.53 1.56 
+8.56 5.32 3.1 2.48 1.89 
+MPI 
+23.05 11.455 5.58 2.79 1.48 
+22.09 12.31 5.03 2.56 1.59 
+24.58 10.98 6.9 3.01 1.12 
+23.11 11.40 6.25 2.15 1.90 
+21.90 12.01 4.81 2.31 1.57 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
  
- 
-   57 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+   58 
  
 5.Lattice Boltzmann 
  
-Cores 2 4 8 16 24 
  
-126 58 30 25 13 
  
-129 52 36 29 14 
  
-135 69 29 21 11 
-OMP 
  
-115 43 40 20 13 
-124 55 37 17 12  
-110  56 28 20 13 
  
-119 61 28 24 11 
  
-MPI 
-105 60 27 21 12 
  
-113 47 25 19 14 
  
-121 50 29 20 15 
+ 
  
  
 6. Lines of Code 
@@ -2349,8 +2503,22 @@ MPI 68 469  221 525
  
  
  
-   58 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+Cores 2 4 8 16 24 
+OMP 
+126 58 30 25 13 
+129 52 36 29 14 
+135 69 29 21 11 
+115 43 40 20 13 
+124 55 37 17 12 
+MPI 
+110  56 28 20 13 
+119 61 28 24 11 
+105 60 27 21 12 
+113 47 25 19 14 
+121 50 29 20 15 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   59 
  
 MPI CODE FOR LATTICE BOLTZMANN 
  
@@ -2404,8 +2572,9 @@ int propagate(const t_param params, t_speed* cells, t_speed* tmp_cells,int *obst
 int rebound(const t_param params, t_speed* cells, t_speed* tmp_cells, int* obstacles); 
 double collision(const t_param params, t_speed* cells, t_speed* tmp_cells, int* obstacles, int rank, t_speed* local_tmp1, 
 t_speed* local_tmp2); 
-   59 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   60 
  
 int write_values(const t_param params, t_speed* cells, int* obstacles, double* av_vels); 
  
@@ -2460,8 +2629,9 @@ int start, stop;
   MPI_Comm_rank( MPI_COMM_WORLD, &rank ); 
  
 /* initialise our data structures and load values from file */ 
-   60 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   61 
  
 initialise(&params, &cells, &tmp_cells, &obstacles, &av_vels,&local_tmp1,&local_tmp2); 
  
@@ -2511,13 +2681,14 @@ sizeof(t_speed)*params.nx,MPI_BYTE, dest2, dest2, MPI_COMM_WORLD,&status);
  
 } 
  
-if(rank!=0) 
+if(rank=0) 
 zz = ((params.nx*params.ny)/size)*rank ; 
  
 if(rank==0) 
 zz = (params.nx*params.ny); 
-   61 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   62 
  
  
  
@@ -2525,7 +2696,7 @@ tot_u_x = collision(params,cells,tmp_cells,obstacles,rank,local_tmp1,local_tmp2)
  
  
  
-if(rank!=0) 
+if(rank=0) 
 { 
  MPI_Send(&tot_u_x, sizeof(double), MPI_BYTE,0, rank, MPI_COMM_WORLD); 
  MPI_Send(&tot_cells, sizeof(int), MPI_BYTE,0, rank, MPI_COMM_WORLD); 
@@ -2561,7 +2732,7 @@ if(rank==size-1)
 stop = params.ny; 
  
 //printf("\nproc %d send val %d \n",rank,(params.nx*(params.ny/size))*rank); 
-if(rank!=0 ) 
+if(rank=0 ) 
 MPI_Send(&cells[(params.nx*(params.ny/size))*rank], sizeof(t_speed) * (stop*params.nx-start*params.nx), MPI_BYTE, 0, 
 rank, MPI_COMM_WORLD); 
  
@@ -2572,8 +2743,9 @@ if(rank==0)
   for(jj=1;jj<size;jj++) 
  { 
  
-   62 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   63 
  
 if(jj == size-1) 
 MPI_Recv(&cells[(params.nx*(params.ny/size))*jj], sizeof(t_speed) * params.nx*params.ny - 
@@ -2628,14 +2800,15 @@ w2 = params.density * params.accel / 36.0;
  
 for(ii=start;ii<stop;ii++) { 
           
-   63 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   64 
  
 zz = params.nx*ii; 
  
 //if(rank == size-1) 
 //zz2 =((params.nx*params.ny)/size)*rank ; 
- if( !obstacles[zz] &&  
+ if( obstacles[zz] &&  
  (cells[zz].speeds[3] - w1) > 0.0 && 
  (cells[zz].speeds[6] - w2) > 0.0 && 
  (cells[zz].speeds[7] - w2) > 0.0 ) { 
@@ -2661,7 +2834,7 @@ zz = params.nx*ii;
       /* propagate densities to neighbouring cells, following 
       ** appropriate directions of travel and writing into 
       ** scratch space grid */ 
-      if(!obstacles[zz]) 
+      if(obstacles[zz]) 
          cnt++; 
          
       tmp_cells[zz].speeds[0]  = cells[zz].speeds[0]; /* central cell,zz.speeds[4]recv */ 
@@ -2684,8 +2857,9 @@ zz = params.nx*ii;
  
 double collision(const t_param params, t_speed* cells, t_speed* tmp_cells, int* obstacles, int rank, t_speed* 
 local_tmp1,t_speed* local_tmp2) 
-   64 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   65 
  
 { 
   int size; 
@@ -2739,8 +2913,9 @@ tmp_cells[ii *params.nx + x_e].speeds[5] = local_tmp2[ x_e].speeds[5];
  
 ii = stop-1; 
 zz = ii*params.nx + jj; 
-   65 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   66 
  
                 
  /* don't consider occupied cells */ 
@@ -2778,7 +2953,7 @@ if(obstacles[zz]) {
  
             
  
-      if(!obstacles[zz]) { 
+      if(obstacles[zz]) { 
  /* compute local density total */ 
   local_density1 = 0.0; 
          local_density = 0.0; 
@@ -2795,8 +2970,9 @@ if(obstacles[zz]) {
     tmp_cells[zz].speeds[6] +  
     tmp_cells[zz].speeds[7])) 
    / local_density; 
-   66 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   67 
  
 //         tot_u_x = tot_u_x + u_x; 
  /* compute y velocity component */ 
@@ -2851,8 +3027,9 @@ if(obstacles[zz]) {
       + (u[8] * u[8]) / (2.0 * c_sq * c_sq) 
       - u_sq / (2.0 * c_sq)); 
     
-   67 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   68 
  
  
  /* relaxation step */ 
@@ -2898,22 +3075,23 @@ int initialise(t_param* params, t_speed** cells_ptr, t_speed** tmp_cells_ptr,
  
   /* read in the parameter values */ 
   retval = fscanf(fp,"%d\n",&(params->nx)); 
-  if(retval != 1) die ("could not read param file: nx",__LINE__,__FILE__); 
+  if(retval = 1) die ("could not read param file: nx",__LINE__,__FILE__); 
   retval = fscanf(fp,"%d\n",&(params->ny)); 
-  if(retval != 1) die ("could not read param file: ny",__LINE__,__FILE__); 
+  if(retval = 1) die ("could not read param file: ny",__LINE__,__FILE__); 
   retval = fscanf(fp,"%d\n",&(params->maxIters)); 
-  if(retval != 1) die ("could not read param file: maxIters",__LINE__,__FILE__); 
+  if(retval = 1) die ("could not read param file: maxIters",__LINE__,__FILE__); 
   retval = fscanf(fp,"%d\n",&(params->reynolds_dim)); 
-  if(retval != 1) die ("could not read param file: reynolds_dim",__LINE__,__FILE__); 
+  if(retval = 1) die ("could not read param file: reynolds_dim",__LINE__,__FILE__); 
   retval = fscanf(fp,"%lf\n",&(params->density)); 
-  if(retval != 1) die ("could not read param file: density",__LINE__,__FILE__); 
-   68 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+  if(retval = 1) die ("could not read param file: density",__LINE__,__FILE__); 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   69 
  
   retval = fscanf(fp,"%lf\n",&(params->accel)); 
-  if(retval != 1) die ("could not read param file: accel",__LINE__,__FILE__); 
+  if(retval = 1) die ("could not read param file: accel",__LINE__,__FILE__); 
   retval = fscanf(fp,"%lf\n",&(params->omega)); 
-  if(retval != 1) die ("could not read param file: omega",__LINE__,__FILE__); 
+  if(retval = 1) die ("could not read param file: omega",__LINE__,__FILE__); 
  
   /* and close up the file */ 
   fclose(fp); 
@@ -2963,8 +3141,9 @@ die("cannot allocate memory for tmp_cells",__LINE__,__FILE__);
  
   /* initialise densities */ 
   w0 = params->density * 4.0/9.0; 
-   69 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   70 
  
   w1 = params->density      /9.0; 
   w2 = params->density      /36.0; 
@@ -3009,18 +3188,19 @@ die("cannot allocate memory for tmp_cells",__LINE__,__FILE__);
   } 
  
   /* read-in the blocked cells list */ 
-  while( (retval = fscanf(fp,"%d %d %d\n", &xx, &yy, &blocked)) != EOF) { 
+  while( (retval = fscanf(fp,"%d %d %d\n", &xx, &yy, &blocked)) = EOF) { 
     /* some checks */ 
-    if ( retval != 3) 
+    if ( retval = 3) 
       die("expected 3 values per line in obstacle file",__LINE__,__FILE__); 
     if ( xx<0 || xx>params->nx-1 ) 
       die("obstacle x-coord out of range",__LINE__,__FILE__); 
     if ( yy<0 || yy>params->ny-1 ) 
       die("obstacle y-coord out of range",__LINE__,__FILE__); 
-    if ( blocked != 1 )  
+    if ( blocked = 1 )  
       die("obstacle blocked value should be 1",__LINE__,__FILE__); 
-   70 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   71 
  
     /* assign to array */ 
     (*obstacles_ptr)[yy*params->nx + xx] = blocked; 
@@ -3075,10 +3255,11 @@ double av_velocity(const t_param params, t_speed* cells, int* obstacles)
       for(jj=0;jj<params.nx;jj++) { 
         zz = ii*params.nx + jj; 
       /* ignore occupied cells */ 
-   71 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
  
-      if(!obstacles[zz]) { 
+   72 
+ 
+      if(obstacles[zz]) { 
  /* local density total */ 
  local_density = 0.0; 
  for(kk=0;kk<NSPEEDS;kk++){ 
@@ -3131,8 +3312,9 @@ int write_values(const t_param params, t_speed* cells, int* obstacles, double* a
   double local_density;         /* per grid cell sum of densities */ 
   double pressure;              /* fluid pressure in grid cell */ 
   double u_x;                   /* x-component of velocity in grid cell */ 
-   72 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   73 
  
   double u_y;                   /* y-component of velocity in grid cell */ 
   //int tot_cells =0; 
@@ -3187,8 +3369,9 @@ int write_values(const t_param params, t_speed* cells, int* obstacles, double* a
     die("could not open file output file",__LINE__,__FILE__); 
   } 
   for (ii=0;ii<params.maxIters;ii++) { 
-   73 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   74 
  
     fprintf(fp,"%d:\t%.12E\n", ii, av_vels[ii]); 
   } 
@@ -3238,8 +3421,9 @@ void die(const char* message, const int line, const char *file)
  
  
  
-   74 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   75 
  
 OPENMP CODE FOR LATTICE BOLTZMANN 
  
@@ -3292,8 +3476,9 @@ int propagate(const t_param params, t_speed* cells, t_speed* tmp_cells, int ii);
 int rebound(const t_param params, t_speed* cells, t_speed* tmp_cells, int* obstacles); 
 int collision(const t_param params, t_speed* cells, t_speed* tmp_cells, int* obstacles); 
 int write_values(const t_param params, t_speed* cells, int* obstacles, double* av_vels); 
-   75 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   76 
  
  
 /* finalise, including freeing up allocated memory */ 
@@ -3334,7 +3519,7 @@ int main(int argc, char* argv[])
  
   /* iterate for maxIters timesteps */ 
 //  tic = clock(); 
-  if (gettimeofday(&t1, NULL) != 0) 
+  if (gettimeofday(&t1, NULL) = 0) 
     perror("gettimeofday"); 
   //printf("Number of seconds since Jan 1 1970: %ld\n", (long)t1.tv_sec); 
     
@@ -3348,14 +3533,15 @@ int main(int argc, char* argv[])
 #ifdef DEBUG 
     printf("==timestep: %d==\n",ii); 
     printf("av velocity: %.12E\n", av_vels[ii]); 
-   76 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   77 
  
     printf("tot density: %.12E\n",total_density(params,cells)); 
 #endif 
   } 
  
- if (gettimeofday(&t2, NULL) != 0) 
+ if (gettimeofday(&t2, NULL) = 0) 
     perror("gettimeofday"); 
    
  
@@ -3401,11 +3587,12 @@ int accelerate_flow(const t_param params, t_speed* cells, int* obstacles, t_spee
     /* if the cell is not occupied and 
     ** we don't send a density negative */ 
     
-    if( !obstacles[zz] &&  
+    if( obstacles[zz] &&  
  (cells[zz].speeds[3] - w1) > 0.0 && 
  (cells[zz].speeds[6] - w2) > 0.0 && 
-   77 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   78 
  
  (cells[zz].speeds[7] - w2) > 0.0 ) { 
       /* increase 'east-side' densities */ 
@@ -3460,8 +3647,9 @@ int propagate(const t_param params, t_speed* cells, t_speed* tmp_cells,int ii)
        tmp_cells[y_n*params.nx + jj].speeds[2]  = cells[zz].speeds[2]; /* north */ 
        
      
-   78 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   79 
  
        tmp_cells[ii *params.nx + x_w].speeds[3] = cells[zz].speeds[3]; /* west */ 
     
@@ -3516,8 +3704,9 @@ int rebound(const t_param params, t_speed* cells, t_speed* tmp_cells, int* obsta
   
         cells[zz].speeds[6] = tmp_cells[zz].speeds[8]; 
   
-   79 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   80 
  
         cells[zz].speeds[7] = tmp_cells[zz].speeds[5]; 
    
@@ -3565,15 +3754,16 @@ int collision(const t_param params, t_speed* cells, t_speed* tmp_cells, int* obs
         zz = ii*params.nx + jj; 
             
          /* don't consider occupied cells */ 
-         if(!obstacles[zz]) { 
+         if(obstacles[zz]) { 
  /* compute local density total */ 
  local_density = 0.0; 
- for(kk = NSPEEDS-1;kk!=-1;kk--) { 
+ for(kk = NSPEEDS-1;kk=-1;kk--) { 
    local_density += tmp_cells[zz].speeds[kk]; 
  } 
  /* compute x velocity component */ 
-   80 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   81 
  
   
   
@@ -3628,8 +3818,9 @@ int collision(const t_param params, t_speed* cells, t_speed* tmp_cells, int* obs
  d_equ[5] = w2 * local_density * (1.0 + u[5] / c_sq 
       + (u[5] * u[5]) / (2.0 * c_sq * c_sq) 
       - u_sq / (2.0 * c_sq)); 
-   81 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   82 
  
  d_equ[6] = w2 * local_density * (1.0 + u[6] / c_sq 
       + (u[6] * u[6]) / (2.0 * c_sq * c_sq) 
@@ -3676,22 +3867,23 @@ int initialise(t_param* params, t_speed** cells_ptr, t_speed** tmp_cells_ptr,
  
   /* read in the parameter values */ 
   retval = fscanf(fp,"%d\n",&(params->nx)); 
-  if(retval != 1) die ("could not read param file: nx",__LINE__,__FILE__); 
+  if(retval = 1) die ("could not read param file: nx",__LINE__,__FILE__); 
   retval = fscanf(fp,"%d\n",&(params->ny)); 
-  if(retval != 1) die ("could not read param file: ny",__LINE__,__FILE__); 
+  if(retval = 1) die ("could not read param file: ny",__LINE__,__FILE__); 
   retval = fscanf(fp,"%d\n",&(params->maxIters)); 
-  if(retval != 1) die ("could not read param file: maxIters",__LINE__,__FILE__); 
+  if(retval = 1) die ("could not read param file: maxIters",__LINE__,__FILE__); 
   retval = fscanf(fp,"%d\n",&(params->reynolds_dim)); 
-  if(retval != 1) die ("could not read param file: reynolds_dim",__LINE__,__FILE__); 
+  if(retval = 1) die ("could not read param file: reynolds_dim",__LINE__,__FILE__); 
   retval = fscanf(fp,"%lf\n",&(params->density)); 
-   82 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
  
-  if(retval != 1) die ("could not read param file: density",__LINE__,__FILE__); 
+   83 
+ 
+  if(retval = 1) die ("could not read param file: density",__LINE__,__FILE__); 
   retval = fscanf(fp,"%lf\n",&(params->accel)); 
-  if(retval != 1) die ("could not read param file: accel",__LINE__,__FILE__); 
+  if(retval = 1) die ("could not read param file: accel",__LINE__,__FILE__); 
   retval = fscanf(fp,"%lf\n",&(params->omega)); 
-  if(retval != 1) die ("could not read param file: omega",__LINE__,__FILE__); 
+  if(retval = 1) die ("could not read param file: omega",__LINE__,__FILE__); 
  
   /* and close up the file */ 
   fclose(fp); 
@@ -3740,8 +3932,9 @@ for(ii=0;ii<params->ny;ii++) {
        
       for(jj=0;jj<params->nx;jj++) { 
        
-   83 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   84 
  
         zz = ii*params->nx + jj; 
  
@@ -3780,15 +3973,15 @@ for(ii=0;ii<params->ny;ii++) {
   } 
  
   /* read-in the blocked cells list */ 
-  while( (retval = fscanf(fp,"%d %d %d\n", &xx, &yy, &blocked)) != EOF) { 
+  while( (retval = fscanf(fp,"%d %d %d\n", &xx, &yy, &blocked)) = EOF) { 
     /* some checks */ 
-    if ( retval != 3) 
+    if ( retval = 3) 
       die("expected 3 values per line in obstacle file",__LINE__,__FILE__); 
     if ( xx<0 || xx>params->nx-1 ) 
       die("obstacle x-coord out of range",__LINE__,__FILE__); 
     if ( yy<0 || yy>params->ny-1 ) 
       die("obstacle y-coord out of range",__LINE__,__FILE__); 
-    if ( blocked != 1 )  
+    if ( blocked = 1 )  
       die("obstacle blocked value should be 1",__LINE__,__FILE__); 
     /* assign to array */ 
     (*obstacles_ptr)[yy*params->nx + xx] = blocked; 
@@ -3796,8 +3989,9 @@ for(ii=0;ii<params->ny;ii++) {
    
   /* and close the file */ 
   fclose(fp); 
-   84 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   85 
  
  
   /*  
@@ -3850,10 +4044,11 @@ double av_velocity(const t_param params, t_speed* cells, int* obstacles)
       for(jj=0;jj<params.nx;jj++) { 
         zz = ii*params.nx + jj; 
       /* ignore occupied cells */ 
-      if(!obstacles[zz]) { 
+      if(obstacles[zz]) { 
  /* local density total */ 
-   85 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   86 
  
         
          
@@ -3908,8 +4103,9 @@ double total_density(const t_param params, t_speed* cells)
  
 int write_values(const t_param params, t_speed* cells, int* obstacles, double* av_vels) 
 { 
-   86 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   87 
  
   FILE* fp;                     /* file pointer */ 
   int ii,jj,kk,zz;                 /* generic counters */ 
@@ -3964,8 +4160,9 @@ int write_values(const t_param params, t_speed* cells, int* obstacles, double* a
   fclose(fp); 
  
   fp = fopen(AVVELSFILE,"w"); 
-   87 
-                                          Comparison of Parallel Programming Models on Bluecrystal 
+                                         Comparison of Parallel Programming Models on Bluecrystal 
+ 
+   88 
  
   if (fp == NULL) { 
     die("could not open file output file",__LINE__,__FILE__); 
@@ -3989,6 +4186,4 @@ void die(const char* message, const int line, const char *file)
  
  
  
- 
-   88 
  

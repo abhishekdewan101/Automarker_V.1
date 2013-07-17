@@ -1,3 +1,7 @@
+ 
+Page 2 
+ 
+  
 Contents 
  
 Declaration .............................................................................................................................................. 4 
@@ -25,9 +29,10 @@ Validation .....................................................................
 Methods ................................................................................................................................................ 46 
 KNN-Classifier ................................................................................................................................. 46 
  
+Page 3 
+ 
   
-Page 2 
-  NAC Classifier .................................................................................................................................. 47 
+NAC Classifier .................................................................................................................................. 47 
 Multidimensional Scaling ................................................................................................................. 48 
 Nearest Centroid Classifier ............................................................................................................... 48 
 Nearest Medoid Classifier ................................................................................................................. 48 
@@ -42,9 +47,10 @@ Bibliography ...................................................................
  
   
  
+Page 5 
+ 
   
-Page 3 
-  Abstract 
+Abstract 
 This report compares a number of distance based learning classifiers for the task of assigning SCOP 
 family level classification to a protein domain, given that the domain has already been assigned a 
 superfamily SCOP classification.  
@@ -67,9 +73,10 @@ and Autumn of 2012 by Sam Neaves BSc(Hons) Internet Communication Systems.
  
   
  
+Page 7 
+ 
   
-Page 5 
-  Introduction 
+Introduction 
 Ever since Charles Darwin and Alfred Wallace first put forward the theory of evolution in 1859 
 (Darwin, 1859), the human race has been engaged in the enormous task of mapping out the tree of life. 
 For a time the endeavour was hampered by the lack of understanding of genetics, it was not until 
@@ -100,9 +107,10 @@ Atoms where the outer shells are full are generally inert and do not form bonds,
 shell are the most chemically reactive.  If a molecule is formed then the electrons are shared between 
 two atoms.  Atoms can chain up to form larger molecules. (Jones, 2005) 
  
+Page 8 
+ 
   
-Page 7 
-   
+ 
 Figure 2 (Universe Review, 2011) 
 DNA molecules can either be found floating in cells in the case of prokaryotes (Two domains of life; 
 the bacteria and the archaea) or in the nucleus of cells in the case of eukaryotes (All other domains of 
@@ -127,12 +135,14 @@ in long chains to form proteins.  All amino acids (And therefore proteins) are c
 hydrogen, oxygen and nitrogen, some have iron, sulphur and phosphorous in addition. (Clayden, 
 Greeves, Warren, & Wothers, 2001) 
  
+Page 9 
+ 
   
-Page 8 
-   
+ 
 Figure 3 Amino Acid 
+The 4
 th
-The 4 covalent bond R represents a variable side chain.  At one end of the protein will be a free NH2 
+ covalent bond R represents a variable side chain.  At one end of the protein will be a free NH2 
 molecule and at the other a COOH, these extremities are called the N and C terminus. The R variants 
 lead to all 20 possible amino acids. 
  
@@ -142,10 +152,11 @@ bond. The Messenger RNA molecule acts as a template for Transfer RNA, the amino 
 bond with the right bit of Messenger RNA. The Amino acids pull up and then bond together, the 
 MRNA detaches and the sequences folds up. The proteins twist or fold to make unique shapes, which 
 are important to the function of a protein. 
+ Page 
+10 
  
   
-Page 9 
-   
+ 
 Figure 5 Amino Acids Floating 
  
 Figure 6 Amino Acid Joining up 
@@ -155,9 +166,11 @@ Three base pairs of DNA make up a codon which codes an amino acid.  For example 
 amino acids 50 * 3 = 150 pairs to code for insulin. This can be described as a gene.  The original word 
 allele which Mendal coined is now used to describe a variant of a gene. 
  
+ Page 
+11 
  
- Page  
- 10   
+  
+ 
 Figure 8 Insulin (Harrison, 2011) 
 Protein sequences that are similar have been shown to normally have similar folding patterns and 
 therefore functions. It is of course more reliable to perform experiments to determine the structure and 
@@ -171,16 +184,18 @@ domain can have a length from 25 to over 500 amino acids.
 The forces of natural selection are slow and as the giraffe’s laryngeal nerve (As well as all other 
 mammals) illustrates it is unable to invent ‘de novo’ nature tinkers up the gradual slope to a peak of 
 ‘mount improbable’ rather than leaping up sheer cliff faces.  The nerve begins in the brain and travels 
-to the voice box, via the heart, which in the case of the giraffe is a needless diversion of over 10ft! 
+to the voice box, via the heart, which in the case of the giraffe is a needless diversion of over 10ft 
 (Dawkins, 1997). Fortunately this curious property of evolution leads to detectable homology between 
 any two DNA sequences.  As DNA replicates a number of changes may take place, including 
 substitution, insertion and deletion of sequence segments. (Clayden, Greeves, Warren, & Wothers, 
 2001). 
  
 Figure 9 Evidence for gradual change in evolution, the laryngeal nerve (Source, 2011) 
+ Page 
+12 
  
- Page  
- 11  This leads to many of the problems in genomic analysis being essentially statistical.  The forces of 
+  
+This leads to many of the problems in genomic analysis being essentially statistical.  The forces of 
 evolution; natural selection, chaotic random mutations and genetic drift create a large amount of noise 
 in the data. One of the challenges of genomic analysis is to cut through this noise to detect the signal 
 of common evolutionary heritage. (Baldi, 2001) 
@@ -216,23 +231,11 @@ consider without computers, the sequences form an effective code that guard thei
 fortunately there are many scientists and technology engineers working hard to work out methods and 
 routines that allows us to decode life itself. 
   
+ Page 
+13 
  
- Page  
- 12  Codes and computer science 
-Detail from a photograph of World 
-War I cryptographers trained by 
-William and Elizebeth Friedman, 
-Aurora, Illinois, early 1918. By 
-facing either forward or sideways, 
-the soldiers formed a coded phrase 
-utilizing Francis Bacon’s biliteral 
-cipher. The intended message was 
-the Baconian motto “Knowledge is 
-power,” but there were insufficient 
-people to complete the r (and the w 
-was compromised by one soldier 
-looking the wrong way). (Sherman, 
-2011) 
+  
+Codes and computer science 
  
 Figure 10 
 Code breaking has been central to the development of computer science, the above picture is an 
@@ -266,9 +269,25 @@ first universal computer.   A number of machines can claim to be the first succe
 including the never completed machine proposed by Charles Babbage, Turing worked in Manchester 
 on the ACE Machine, his work was hampered by war time secrecy rules but the team at Manchester 
 eventually completed the Manchester 1 in 1949 which used the John von Neumann architecture; that 
+Detail from a photograph of World 
+War I cryptographers trained by 
+William and Elizebeth Friedman, 
+Aurora, Illinois, early 1918. By 
+facing either forward or sideways, 
+the soldiers formed a coded phrase 
+utilizing Francis Bacon’s biliteral 
+cipher. The intended message was 
+the Baconian motto “Knowledge is 
+power,” but there were insufficient 
+people to complete the r (and the w 
+was compromised by one soldier 
+looking the wrong way). (Sherman, 
+2011) 
+ Page 
+14 
  
- Page  
- 13  is using the same memory both to store programs and data. In 1950 Turing wrote a paper ‘Computing 
+  
+is using the same memory both to store programs and data. In 1950 Turing wrote a paper ‘Computing 
 machinery and intelligence’   in which Turing addressed the problem of artificial intelligence (AI) 
 (Turing, 1950). He proposed an experiment which became known as the Turing test, an attempt to 
 define a standard for a machine to be called ‘intelligent’.  In the early 50’s both Shannon and Turing 
@@ -279,7 +298,7 @@ convection for indecency and acts of homosexuality, which at the time was illega
 undergo hormone treatments which likely lead to his subsequent tragic suicide.  (Hodges, 1992). 
 As well as his chess work Shannon contributed another core first in AI research with his building of 
 his maze navigating mechanical mouse, which can be said to be the one of the first examples of 
-Machine Learning. (Alcatel-Lucent, 2006)  Shannon’s contributions did not end there! As he also 
+Machine Learning. (Alcatel-Lucent, 2006)  Shannon’s contributions did not end there As he also 
 began to apply his ideas of information entropy to natural language problems in his paper ‘Prediction 
 and Entropy of Printed English’ this was the beginning of the research into Natural Language 
 Processing (NLP) and computational linguistics (Shannon, 1951).  Other developments in information 
@@ -291,15 +310,18 @@ Shannon’s chess work was also important in the field of game theory, which had r
 with the work of John von Newman’s, Shannon is said to have made a lot of money in casinos in the 
 1950’s with these mathematical ideas, many economists also took up the ideas and applied game 
 theory to the worlds of business and markets. Game theory also became useful to the social scientists 
+and much research was carried out in the second half of the 20
 th
-and much research was carried out in the second half of the 20 century.  The biologist John Maynard 
+ century.  The biologist John Maynard 
 Smith first applied some of the game theoretic ideas to evolutionary biology and ecology (Smith J. M., 
 1982).  As well as biologist being inspired by computer scientists, the opposite was also true, with 
 computer scientists being inspired by biology.   
   
+ Page 
+15 
  
- Page  
- 14  Neural Networks 
+  
+Neural Networks 
 As early as 1943 McCulloch and Pitts  had proposed a model of neuron that corresponds to the now 
 well known perceptron algorithm (McCulloch & Pitts, 1943) . Artificial Neural Networks (ANN) are 
 built out of densely connected simple units, where each unit takes a number of inputs and outputs a 
@@ -314,29 +336,24 @@ models invented by Frank Rosenblatt  (Rosenblatt, 1959) and further investigated
 Hoff in the 60’s. (Widrow & Hoff, 1960)  A perceptron works by inputting vectors of real numbers; it 
 performs a calculation to combine these inputs and then out puts a Boolean value. 
  
-                   
-       
-( )
-         
-  
-            
+ (       )               
+                          
 Equation 1 
-Where   is a real valued constant or weight that determines the contribution of    .  The threshold 
-  
-that must be surpassed for the perceptron to output a one is indicated by   
- 
+Where   is a real valued constant or weight that determines the contribution of     .  The threshold 
+that must be surpassed for the perceptron to output a one is indicated by    
  
 Figure 11 
 Therefore perceptrons can be used to represent most Boolean functions for example the AND function 
-would be modelled by a perceptron with                     (Mitchell, 1997) 
-   
+would be modelled by a perceptron with                       (Mitchell, 1997) 
 However it became apparent that Boolean functions such as exclusive or(one or the other but not both: 
 XOR) could not be computed using single layer perceptrons as they are only able to represent linear 
 decision surfaces and ANN fell out of fashion. The second graph here shows an XOR learning task, 
 i.e. it is a learning task that is non-linearly separable. 
+ Page 
+16 
  
- Page  
- 15   
+  
+ 
 Figure 12 
 In a learning task, starting with an individual perceptron the aim is to learn the appropriate weight 
 vector that delivers the correct +-1 output for each training example.  One way to do this is called the 
@@ -346,16 +363,17 @@ linearly separable this rule can be proven to converge in a finite number of ste
 correctly classifies all training examples.  (Minsky & Papert, 1969) This method converges on the 
 thresholded part of the perceptron.  
 Another approach is gradient decent or delta rule, this converges on the unthresholded part of 
-perceptron, i.e. the first stage of a perceptron without the threshold weight  . It will converge 
- 
+perceptron, i.e. the first stage of a perceptron without the threshold weight   . It will converge 
 (perhaps requiring unbounded time) even if the examples are non-linearly separable. 
  
  
 Figure 13 
+ Page 
+17 
  
- Page  
- 16  A function is used to calculate the steepest decent along the hypothesis surface using a derivative E 
-with respect to each component of the vector  ?? .  The steps need to be small in order not to leap over a 
+  
+A function is used to calculate the steepest decent along the hypothesis surface using a derivative E 
+with respect to each component of the vector ?? .  The steps need to be small in order not to leap over a 
 local minimum. (Mitchell, 1997) 
 After the hiatus in ANN research throughout the 70’s work resurged in the mid 1980’s with the 
 invention of Backpropagation algorithm in 1986, this uses a gradient decent approach (which was 
@@ -373,9 +391,11 @@ have very fast evaluations of learned target functions. A disadvantage of ANN’s 
 composed can be difficult for humans to understand. (Mitchell, 1997). One application of neural 
 networks to biological sequences was Chou and Zhang  in 1995. (Chou & Zhang, 1995).  
   
+ Page 
+18 
  
- Page  
- 17  A different learning method: Decisions trees 
+  
+A different learning method: Decisions trees 
 Decisions tree learning began in 1966 with Hunt, Friedman and Breiman’s work resulting in the cart 
 system and Quinlans ID3 system. (Hunt, 1966), (Quinlan, 1986). Decision trees today are practical 
 methods for inductive inference. They are robust to noisy data and capable of learning disjunctive 
@@ -387,20 +407,12 @@ particular property.  The lower terminals of the tree are called leaves and repr
 of an example. A tree can be said to represent a disjunction of conjunctions of constraints on the 
 attributes of instances. (Mitchell, 1997). 
  
-A 
-B 
- 
-K=X 
-B C 
  
  
-D 
-K=Y K=X K=X 
  
  
-K=X K=Y 
  
-Figure 15 
+ 
  
 Decision trees are easily used when instances are represented by attribute value pairs or where each 
 attribute can take on a small number of distinct values. E.G. Sex -> {M,F}. However it is possible to 
@@ -414,29 +426,35 @@ with Id3, and its successor C4.5 and higher versions use the principles of infor
 down by Shannon. (Shannon, 1948.) 
 If the target attribute can take c different values, then the entropy S relative to this c-wise 
 classification is defined:  
+       ( )  ∑          
  
-       ( ) ∑       
-    
    
+ 
 Equation 2 
+A 
+C B 
+D 
+B 
+K=Y K=X K=X 
+K=X K=Y 
+K=X 
+Figure 15 
+ Page 
+19 
  
- Page  
- 18  Where   is the proportion of S belonging to class i. This returns entropy measured in bits.  This 
- 
+  
+Where    is the proportion of S belonging to class i. This returns entropy measured in bits.  This 
 allows us to use a measure called information gain, which is the expected reduction in entropy to 
 decide which attribute to chose next in building the decision tree.  
+    (   )         ( )   ∑
+|  |
 | |
- 
-( ) ( )
-                  ∑       ( ) 
- 
-| |
+       (  )
         ( )
+ 
 Equation 3 
-Where Values(A) is the set of all possible values of an attribute A, and   is the subset of S for which 
- 
-attribute A has value v (i.e.,         | ( )  }). The information gain is recalculated for each 
- 
+Where Values(A) is the set of all possible values of an attribute A, and    is the subset of S for which 
+attribute A has value v (i.e.,          | ( )   }). The information gain is recalculated for each 
 branching point in the tree until each branch ends with a classification i.e. the entropy =0. 
 This algorithm is effectively searching through the hypothesis   space of all possible trees starting 
 with the simple empty tree and progressively adding complexity until the tree matches the hypothesis.  
@@ -452,9 +470,11 @@ Because the learning search in trees can quickly grow to a very large number of 
 people developed algorithms that attempt to prune away decisions branches in order to make the 
 computation feasible.  (Mitchell, 1997). 
   
+ Page 
+20 
  
- Page  
- 19  Machine learning in general 
+  
+Machine learning in general 
 Over the last 60 years machine learning has begun to mature as a field of research with a lot of 
 published work not only on computational learning theory but also the practical applications of the 
 developed techniques. Tom Mitchell gives a widely accepted definition: 
@@ -486,22 +506,12 @@ classifying the exact same examples. The projected relative performance of these
 on ‘real’ data is shown below, which demonstrates that the simpler representation performs best. 
  
  
+ Page 
+21 
  
- Page  
- 20   
-P
-e
-r
-f
-o
-r
-m
-a
-n
-c
-e 
+  
  
-Previously seen ? Unseen examples 
+ 
 Figure 17 
 Different learning approaches can be classified by their inductive bias. It is preferable to make the 
 inductive bias of learning algorithm explicit, as this can help explain the behaviour and performance 
@@ -520,9 +530,8 @@ from a fixed yet unknown distribution, the learner will probably learn a hypothe
 approximately correct with an error  , as long as computational effort and training examples grow 
 only polynomially . (Mitchell, 1997) 
 Within the setting of the PAC learning model, any consistent learner using a finite hypothesis space 
-( )
-  where     will with a probability    out put a hypothesis within error   of the target 
-concept after observing   randomly drawn training examples. This gives a bound to the number of 
+  where     will with a probability (   )out put a hypothesis within error   of the target 
+concept after observing  randomly drawn training examples. This gives a bound to the number of 
 training examples sufficient for successful learning under the PAC model. In the PAC model it is 
 assumed that the learning model knows in advance that the learning concept belongs to the subset, an 
 alternative approach is agnostic learning model which makes no assumptions of the class from which 
@@ -534,10 +543,23 @@ complexity of the space is the Vapnik-Chervonenkis (VC) dimension, which is the 
 can be shattered by  . (Vapnik & Chervonenkis, 1971). 
 Another learning model is the mistake bound model it is used to analyse the number of training 
 examples a learner will misclassify before it exactly learns the target concept. There is the halving 
+Previously seen ? Unseen examples 
+P
+e
+r
+f
+o
+r
+m
+a
+n
+c
+e 
+ Page 
+22 
  
- Page  
- 21  algorithm which will make     mistakes before exactly learning any target concept from  . The 
- 
+  
+algorithm which will make      mistakes before exactly learning any target concept from  . The 
 weighted majority algorithm combines the weighted votes of prediction algorithms to classify new 
 instances. It learns weights for each of these prediction algorithms based on errors made over a 
 sequences of examples. 
@@ -561,43 +583,41 @@ quality of Guinness in 1908. The test is therefore called the t-test or student 
 both measure the comparative accuracy of two hypotheses as well as two different learning methods. 
 This then takes into account both estimation bias, and the variance in sampling.  
 This equation gives the confidence boundaries:  
-     ( )(       ( ))
-  
-√
-     ( )   
-  
+      ( )    √
+      ( )(        ( ))
+ 
  
 Equation 4 
  
  
 Figure 18 
   
+ Page 
+23 
  
- Page  
- 22  Further methods based on statistics and probability 
+  
+Further methods based on statistics and probability 
 As well as statistics and probability being useful to measure the effectiveness of ML algorithms some 
 algorithms employ statistics in a central manner to perform induction. Bayesian methods are a basis 
 for probabilistic learning, that require knowledge about prior probabilities, they allow assigning of 
 posterior probabilities to determine the most probable hypothesis given the data, the maximum a 
 posterior (MAP) hypothesis, this is the optimal hypothesis in the sense it is most likely, the most 
 probable      given observed data  , the MAP hypotheses: 
-      
-   ( | ) 
-  
-       
+           
+       ( | ) 
 Equation 5 
+ These methods were built on the theory Reverend Thomas Bayes had developed in the 18
 th
- These methods were built on the theory Reverend Thomas Bayes had developed in the 18 century.  
+ century.  
 Bayes Theorem : 
- ( | ) ( )
  ( | )  
+ ( | ) ( )
  ( )
+ 
 Equation 6 
-( | )
-In Ml we are interested in     the probability that   holds given  , Bayes theorem allows us to 
+In Ml we are interested in  ( | ) the probability that   holds given  , Bayes theorem allows us to 
 calculate this when we have the probability  ( ) the probability of hypothesis, together with  ( ) 
-( | )
-the probability of data, and    , the probability of data given a hypothesis. 
+the probability of data, and  ( | ), the probability of data given a hypothesis. 
 The Bayes optimal classifier combines predictions to calculate the most probable calculation; this has 
 the problem that lots of prior conditional probabilities are required to be known. Therefore the Naïve 
 bayes classifier was developed in 1973 which made the naïve assumption that probabilities were 
@@ -612,10 +632,8 @@ probability of a hypothesis, for instance sequence A has an 80% chance of being 
 B. Bayes classification can incur significant computational costs, which makes it unsuitable for some 
 tasks.  
 Naive Bayes Classifier: 
-      
-    ( )∏ ( | ) 
-     
-        
+             
+        (  )∏ (  |  )
  
  
 Equation 7 
@@ -623,9 +641,11 @@ If the prior probabilities of data are unknown they estimated based on their occ
 data, background knowledge can easily be incorporated as further prior probabilities.  
 A compromise between the optimal bayes classifier and the Naive bayes classifier is a Bayesian 
 Belief Network, which allow conditional probabilities to be applied to subsets of attributes. A BBN 
+ Page 
+24 
  
- Page  
- 23  represents the joint probability distribution for a set of variables. Two things are needed to be known, 
+  
+represents the joint probability distribution for a set of variables. Two things are needed to be known, 
 one is the structure of the belief network dependencies and the other is the associated probabilities in 
 the arcs of the network, if the network structures  are known methods similar to neural nets can be 
 used such as gradient decent to estimate the conditional probabilities, if the network structure is 
@@ -655,11 +675,6 @@ phenomena are known as orthologues and paralogues respectively. (Durbin & etal, 
  
  
  
- 
-Figure 20 My (and yours!) nth 
-Figure 19 The tree of life 
-cousin 
- 
 In order to detect how closely related two sequences are, we decide what kind of alignment we are 
 looking for and then we need to know how to rank an alignment by giving it a score that corresponds 
 to the evidence they have diverged from a common ancestor by mutation and selection. Insertions and 
@@ -668,8 +683,15 @@ deletions are gaps, whiles substitutions are changes in residues in sequences.
  
  
  
- Page  
- 24  HBA_HUMAN GSAQVKGHGKKVADALTNAVAHVDDMPNALSALSDLHAHKL 
+Figure 19 The tree of life 
+ 
+Figure 20 My (and yours) nth 
+cousin 
+ Page 
+25 
+ 
+  
+HBA_HUMAN GSAQVKGHGKKVADALTNAVAHVDDMPNALSALSDLHAHKL 
 G+ +VK+HGKKV  A+++++AH+D++ +++++LS+LH  KL 
 HBB_HUMAN GNPKVKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKL 
  
@@ -682,49 +704,48 @@ expected that large changes are less likely than small changes. This means that 
 be more frequent than large changes. In an addictive scoring scheme each change is presumed to be 
 non dependent, which of courses is not always the case. This assumption seems to hold well for DNA 
 and protein sequences but nor RNA sequences. (Durbin & etal, 1998) 
-For protein sequence we would have an alphabet   {A,R,N,D,C,Q,E,G,H,I,L,K,M,F,P,S,T,W,Y,V} 
+For protein sequence we would have an alphabet  {A,R,N,D,C,Q,E,G,H,I,L,K,M,F,P,S,T,W,Y,V} 
 of the 20 amino acids,   would be sequence 1 and   sequence 2,    would be     in   and   be     in 
- ,   will have length   and   length  . 
-In a simple random model  , a letter would occur independently with some frequency  . Therefore 
- 
+ ,   will have length   and   length . 
+In a simple random model  , a letter would occur independently with some frequency   . Therefore 
 the probability of the two sequences is the product of each amino acid. 
- (   | ) ∏ ∏  
-  
-  
-  
+ (   | )  ∏   
+ 
+∏   
+ 
+ 
 Equation 8 
 Of course in the Match model, aligned pairs will have a joint probability, which is the probability that 
   and   were both derived from an original residue  . Giving 
-( | )
-      ∏  
-  
-  
+ (   | )  ∏     
+ 
  
 Equation 9 
 The ratio of both of these is called the odds ratio, to get an addivitive scoring we lake the log, which 
 gives the log odds ratio 
-∏  
  (   | )
+ (   | )
+ 
+∏       
+∏    ∏      
+ ∏
      
+       
+ 
+ 
+ 
+  ∑ (     )       (   )      (
+   
     
-  ∏ 
- (   | ) ∏ ∏   
-      
-    
+)
  
- 
- 
- 
-  
-  ∑ (   )        (   )     ( ) 
-  
-  
-  
  
 Equation 10 
+ Page 
+26 
  
- Page  
- 25  The  (   ) scores in the sum of individual scores of each aligned pair or residues. In proteins this can 
+  
+The  (   ) scores in the sum of individual scores of each aligned pair or residues. In proteins this can 
 be arranged in a 20 by 20 matrix which is called a score matrix. Where    is the gap open penalty and 
   is the gap extension penalty. Once a scoring mechanism is in place, then an algorithm is needed, a 
 large number of algorithms have been developed. If    , then there exist one optimum alignment, 
@@ -756,9 +777,11 @@ be faster or more comprehensive.  (Durbin & etal, 1998). When two sequences are 
 then the significance can be tested with two methods either the Bayesian approach or the traditional 
 hypothesis testing statistical approach.  
   
+ Page 
+27 
  
- Page  
- 26  Hidden Markov models 
+  
+Hidden Markov models 
 In the 1960’s Hidden Markov models were first described, by Leonard E. Baum building on Markov 
 and Newmans work on Monte Carlo random number generation. They are a special case of Andrey 
 Markov’s chains which he investigated in 1906 (Markov, 1906). In general a Markov model is a 
@@ -781,19 +804,18 @@ and Thomson. HMM’s can be used to ask if a sequence belongs to a certain family 
 able to tell us about a proteins internal structure. 
  
  
+ Page 
+28 
  
- Page  
- 27  The Viterbi algorithm is a method for finding the most probable path through a HMM 
+  
+The Viterbi algorithm is a method for finding the most probable path through a HMM 
+           
       
- 
-( )
-        
-         
+ (   )  
 Equation 11 
  
 Where   is a path. The Viterbi algorithm does not allow us to answer all questions we may wish to 
-ask, for instance what is the probability that observation   came from state k given the observed 
- 
+ask, for instance what is the probability that observation    came from state k given the observed 
 sequence. To calculate this we would use ‘the backward’ algorithm in which we calculate the 
 probability of the entire sequence with the ith  symbol being produced by state k.  
 A difficult problem when using HMMs is specifying the model, the states need be defined as well as 
@@ -816,9 +838,11 @@ Figure 24
 Two prominent packages which have been developed which use Profile HMMs are SAM and 
 HMMER a review of these and some other motif tools was completed by (Eddy, 1998). 
   
+ Page 
+29 
  
- Page  
- 28  Genetic programming for machine learning 
+  
+Genetic programming for machine learning 
 There is a certain symbolic irony and symmetrical  satisfaction in using genetic algorithms to tackle 
 problems in biological sequences,  soon after Watson and Crick had discovered the structure of DNA 
 computer scientists began researching genetic programming, programming influenced in an 
@@ -849,9 +873,11 @@ Lamarckism as there is no theoretical reasons why this would not be a viable tec
 not how life works here on earth. Koza has showed how GA’s can be used for classifying segments of 
 protein molecules amongst other tasks. (Koza & etal, 1996). 
   
+ Page 
+30 
  
- Page  
- 29  Lazy Machine Learning Methods  
+  
+Lazy Machine Learning Methods  
 In these methods, the generalising beyond the examples is postponed until a new instance is 
 encountered. Training examples are simply stored; further instances may or may not then be 
 incorporated into the model.  They are known as lazy as no calculation is performed during training, 
@@ -864,11 +890,11 @@ attributes.  Therefore it is important to consider which attributes should be in
 For K nearest neighbour all instances correspond to points in n-dimensional space where n is the 
 attributes of an instance. The nearest neighbours of an instance are measured using standard Euclidian 
 vectors. 
+ (     )   √∑(  (  )     (  ))
  
  
- (   )  √∑( ( )   ( )) 
-      
    
+ 
 Equation 12 
 K nearest neighbour can be refined by giving a weight to how far away an instance is, as well as 
 utilising a collative vote or average from all instances, all though this can significantly increase 
@@ -878,9 +904,11 @@ Sheppard’s method (Shepard, 1968). The inductive bias of K- nearest neighbour is
 that the correct classification of an instance is most similar to the classification of other instances.  
  
 Figure 25 (Mitchell, 1997)  
+ Page 
+31 
  
- Page  
- 30  Support vector machines as an extension of perceptrons 
+  
+Support vector machines as an extension of perceptrons 
 A method that has been gaining ground for the last decade is Vladimir Vapnik’s Support Vector 
 Machines (SVM), these can be seen as an extension to the perceptron ANN approach and they also 
 have similarities to K-Nearest Neighbour methods. SVMs create a plane that divides the training 
@@ -890,31 +918,31 @@ dimensionality space, to allow them to be linearly separable, SVMs in their stan
 capable of binary classification, in order to do multiple class classification a problem needs to be 
 broken into steps for dividing the classification into binary problems, one approach is to do this is ‘All 
 or nothing’. (Vapnik, 1995). SVMs learns a classification function from a set of positive examples   
- 
 and negative examples  . The function is of the form: 
+ ( )   ∑    (    )   ∑    (    ) 
+       
  
- ( )  ∑  (   )  ∑  (   )   
-    
-          
-    
-The non negative weights    are computed during training by maximizing a quadratic objective 
+       
  
+The non negative weights     are computed during training by maximizing a quadratic objective 
 function, the so called Kernal function, any new instance is then predicated to be positive if the 
-( )
-function     is positive. 
+function  ( )  is positive. 
  
 Figure 26 
  
  
 Figure 27  (Raghava, 2011) 
   
+ Page 
+32 
  
- Page  
- 31  Machine Learning Methods based on Logic 
+  
+Machine Learning Methods based on Logic 
 Another approach to machine learning is try to use the well understood rules of logic which have been 
 studied by philosophers for many millennia, in common with many disciplines Epistemology the 
+study of knowledge experienced great expansions in the 20
 th
-study of knowledge experienced great expansions in the 20 Century.  
+ Century.  
 In regard to computer science and machine learning the aim is to build computing languages and 
 methods which are more expressive and powerful than straight propositional logic. The English 
 philosopher and polemist Bertrand Russell ventured in the early 1900’s to produce solid axiomatic 
@@ -952,16 +980,18 @@ able to navigate the danger of infinite branches, It is possible to set FOIL par
 accuracy, coverage and complexity to adequately handle noisy data.  (Quinlan, Learning Logical 
 definintions from relations, 1990). 
 There exists an alternative approach which supposes that induction can be modelled as the converse of 
+deduction. This insight was first brought to attention by W.S. Jevons in the 19
 th
-deduction. This insight was first brought to attention by W.S. Jevons in the 19 century. Given some 
+ century. Given some 
 data D, and some background knowledge B, the task to generate a hypothesis that together with B 
 explain D. 
-( ?   ( )?   )(      )  ( ) 
-    
+( ?    (  )?    )(       )   (  ) 
 Equation 13 
+ Page 
+33 
  
- Page  
- 32   This advantageously allows us to use the many algorithms developed for performing deduction, the 
+  
+ This advantageously allows us to use the many algorithms developed for performing deduction, the 
 idea is to design inverse entailment operators as their maybe many operators capable of doing this, a 
 common heuristic employed is that of Minimum Description Length principle, another advantage is 
 that incorporating background knowledge allows the search to be guided rather than a search amongst 
@@ -971,27 +1001,19 @@ search space can become intractable due to the expressive nature of first order 
 In 1965 Robinson devised a standard method for automated deduction called resolution rule, which 
 was both sound and complete (Robinson, 1965), in 1988 Muggleton and Buntine successfully 
 reversed the rule to create an inverse entailment operator which they named CIGOL (Muggleton & 
-Buntine, 1988). CIGOL uses a sequential covering algorithm to generate candidate hypotheses  , that 
- 
-satisfy (      )  ( ) these are then added to the background knowledge and the process iterates. 
-  
+Buntine, 1988). CIGOL uses a sequential covering algorithm to generate candidate hypotheses   , that 
+satisfy (       )   (  ) these are then added to the background knowledge and the process iterates. 
 The process to generate first-order expressions is based on unifying two input clauses by means of a 
-substitution , finding one Literal  from clause   and one literal   from  ,  such that a unifying 
-    
-substitution   can be found for     . The resolvent C can be found using: 
-  
-( }) }
-       (   )  
-    
+substitution , finding one Literal   from clause    and one literal    from   ,  such that a unifying 
+substitution   can be found for      . The resolvent C can be found using: 
+  (      })  (      })  
 Equation 14 
 Which leads to the inverse resolution rule: 
-    
- } }
-  (  (    ) )       
-        
+   (  (       })  )  
+           
+  } 
 Equation 15 
-This may generate multiple hypotheses but they will all satisfy  (      )  ( ) in contrast to 
-  
+This may generate multiple hypotheses but they will all satisfy  (       )   (  ) in contrast to 
 FOIL which as it builds its rule sets may generate hypotheses that do not. A major problem with 
 inverse entailment is that it often leads to a computational explosion, making many problems 
 intractable. Between  1992 and 1995 Progol was developed by Muggleon, which just generates the 
@@ -1009,9 +1031,11 @@ algorithm.  By employing PRISM a user can build a system that models as effectiv
 classification or Hidden Markov models as well as many other probabilistic methods all in one place, 
 without losing efficiency. (Kameya, 2008). 
 Table 1: Time complexity comparisons  
+ Page 
+34 
  
- Page  
- 33  Analytical Learning 
+  
+Analytical Learning 
 Methods of machine learning such as decision trees and neural networks require a large number of 
 training examples, a different approach similar to research into how humans learn is called 
 explanation based learning (Qin & etal, 1992). It is useful when there are not many training examples 
@@ -1047,9 +1071,11 @@ theory is perhaps a version of ‘wisdom of crowds’ but crowds of classifiers rath
 can be randomly constructed or using heuristics, a recent review of these methods was provided by 
 Eastwood. (Eastwood, 2010). 
   
+ Page 
+35 
  
- Page  
- 34  Superfamily database 
+  
+Superfamily database 
 In the new millennium a project was set up to develop a database called Superfamily. The 
 Superfamily database uses HMMs for remote homology detection, that is decide if the two proteins 
 are related. Proteins with similar structure are likely to be related. It aims to combine sequence 
@@ -1093,9 +1119,11 @@ quality of the alignment and the number and diversity of the sequence it contain
 2.       A profile HMM of the superfamily is built from the multiple sequence alignment. The model 
 building program uses information derived from the alignment along with prior knowledge of the 
 nature of proteins. 
+ Page 
+36 
  
- Page  
- 35  3.       A model scoring program is used to assign a score with respect to the model to a sequence of 
+  
+3.       A model scoring program is used to assign a score with respect to the model to a sequence of 
 interest, the better the score, the higher the chance that the query sequence is a member of the protein 
 superfamily represented by the model. 
 The two preeminent software tools for profile sequence alignment and modelling, SAM and HMMER 
@@ -1129,9 +1157,11 @@ of the existing profile library that is provided by Superfamily database this me
 computational costs. (Gough, 2006) 
  
   
+ Page 
+37 
  
- Page  
- 36  The Task 
+  
+The Task 
 The aim is to improve the hybrid method in the task of assigning family level SCOP classifications to 
 protein domains, given that they have already been assigned a superfamily. Although the hybrid 
 method out performs simple alignment comparisons, it is appreciated that it does not perform 
@@ -1157,9 +1187,11 @@ given that you have already classified the sequence into the correct SCOP superf
 use of all the models in superfamily database it just uses the top scoring model and the top scoring 
 model for the next family as using multiple models increased the computational cost but with little 
 improvement. (Gough, 2006)  
+ Page 
+38 
  
- Page  
- 37  Description of the data 
+  
+Description of the data 
 The sequences of each domain in SCOP are obtained from the ASTRAL database, sharing no more 
 than 90% sequence identity. (PDB 90%) This filter results in a data set consisting of proteins domains 
 no two of which have 90% or more residue identity- this eliminates a large number of essentially 
@@ -1181,9 +1213,11 @@ Figure 29
 The scores for the alignment between the submitted domain and sequence in the database is then 
 calculated  using a substitution matrix, various substitution matrices were tried by Gough but the 
 default BLOSUM62 matrix was found to be best. (Gough, 2006). 
+ Page 
+39 
  
- Page  
- 38  Similarly to pairwise methods affine gap penalties are used. Gough determined that a gap open 
+  
+Similarly to pairwise methods affine gap penalties are used. Gough determined that a gap open 
 penalty of 3 and a gap extend penalty of 0.8 were good choices, it is to note however that the  gap 
 penalties are lower than the BLAST default values. This is due to the fact that the alignment is handed 
 down from the superfamily based HMM. The comparative importance of each location in the HMM 
@@ -1193,8 +1227,9 @@ can then be multiplied by the weight for that position in the model to include t
 However Gough ultimately found that the optimal performance was achieved without weighting. 
 This procedure will result in data that can be illustrated thus:  
  (TC = True Classification, FC= family classification of hit) 
-Submitted Hit 1 Hit 2 Hit 3 Hit 4 Hit 5 Hit 6 Hit 7 
+Submitted 
 Domain 
+Hit 1 Hit 2 Hit 3 Hit 4 Hit 5 Hit 6 Hit 7 
   TC FC Score FC Score FC Score FC Score FC Score FC Score FC Score 
 A 1 1 120 1 110 1 95 2 87 3 96 3 84 4 32 
 B 1 2 100 1 95 2 90 3 70 2 60 2 40 2 15 
@@ -1212,9 +1247,11 @@ from each of the submitted domains to the corresponding hit domains, in some unk
 dimensionality space.  
  
 Figure 30 
+ Page 
+40 
  
- Page  
- 39  The advantage of viewing the scores in this manner, is that discriminative distance based learning 
+  
+The advantage of viewing the scores in this manner, is that discriminative distance based learning 
 techniques can be easily applied to classify the submitted domains into the most likely classification 
 by taking into account the distance from the submitted domain to all of the hit domains. A lot of 
 biological information is incorporated in one scalar value, that is already calculated as part of the 
@@ -1232,25 +1269,22 @@ labels simply correspond to correct incorrectly classified.
  
  
   
+ Page 
+41 
  
- Page  
- 40  Evaluating Results 
+  
+Evaluating Results 
 When evaluating the results of the classifiers, different techniques and issues will need to be taken 
 into account depending on if the problem has been framed as a multiclass problem or as a binary 
 classification problem. The first measure that could be used in either frame is to measure the accuracy: 
 For this we can represent classification results as a contingency matrix A with: 
+                      } 
+Where   is the number of possible target values and     } is the number of times that a data 
+instancewith the true label    was classified as label   . Accuracy is then defined as: 
+          
+∑     
+∑ ∑      
  
-                  } 
-    
-Where   is the number of possible target values and   is the number of times that a data 
-   }
-instancewith the true label   was classified as label  . Accuracy is then defined as: 
-  
-∑ 
-   
-           
-∑∑ 
-    
 However accuracy is not a good measure when the balance of classes is out of proportion. If we had a 
 classification task where 95% of the instances belong to one class then a classifier that simply always 
 classified instances into this class would record 95% accuracy.  This is unsatisfactory and inadequate. 
@@ -1263,34 +1297,45 @@ developed through the investigation of detection problems.  We can use Receiver 
 Characteristics curves and F- measure. This is how the problem has been framed in previous work. 
 In order to plot a ROC curve we can construct a confusion matrix and calculate the precision and 
 recall values for a classifier.  
+ 
 actual class 
- (expectation) 
-tp fp 
-(true positive) (false positive) 
-Correct result Unexpected result 
+(expectation) 
 predicted class 
 (observation) 
-fn tn 
-(false negative) (true negative) 
-Missing result Correct absence of result 
+tp 
+(true positive) 
+Correct result 
+fp 
+(false positive) 
+Unexpected result 
+fn 
+(false negative) 
+Missing result 
+tn 
+(true negative) 
+Correct absence of result 
 Precision and recall are then defined as: 
+          
   
-           
-     
-  
-        
      
  
+       
+  
+     
  
  
- Page  
- 41  Generally for a two label classification task, the confusion matrix is 2 by2 so the number of off 
+ 
+ Page 
+42 
+ 
+  
+Generally for a two label classification task, the confusion matrix is 2 by2 so the number of off 
 diagonal cells is the same as the number of on-diagonal cells. So Precision and Recall give a good 
 summary of the confusion matrix. In some settings such as this one we want to know if there are a lot 
 of true negatives. Precision and recall are a better measure than accuracy when the classification 
 frequencies are out of balance which is the case here. 
 The true positive rate is also known as sensitivity, and the false negative rate is also known as 
-speciﬁcity. A ROC analysis investigates the relationship between these two values. The normal 
+specificity. A ROC analysis investigates the relationship between these two values. The normal 
 practise is to plot the sensitivity against the false positive rate which is 1- the true positive rate. A 
 ROC curve can be used to address where a decision threshold should be to minimise the error rate or 
 misclassification cost under a cost distribution (That is where specific error types are assigned 
@@ -1301,16 +1346,17 @@ however in machine learning scenarios it can sometimes be useful to reformulate 
 signal coming from a mixture distribution consisting of two distributions with different means.  The 
 detection problem is then: given a received signal which distribution was it drawn from? 
 An important statistic used with ROC curves, is the Area Under Curve (AUC).  The curve is located 
-in a unit square AUC is    and    . If AUC =1 then the classifier is perfect, if it is ? then the 
+in a unit square AUC is   and    . If AUC =1 then the classifier is perfect, if it is ? then the 
 classifier is normally effectively making a random guess, however it could also be the case that the 
 costing of a classifier could result in this outcome.  Any value less than a half can be inverted by 
 simply taking the opposite value the classifier chooses. AUC can be interpreted as the expectation that 
 a randomly drawn positive receives a higher score than a randomly drawn negative.  (Flach, 2012) 
 The F-Measure combines precision and recall it is the harmonic mean of precision and recall. The 
 Balanced F-score is calculated by: 
+    
                 
-     
                 
+ 
 In tasks with multiple classifications the confusion matrix expands so that there are many cells of the 
 diagonal, each with a unique cost. Confusion matrices can be useful for diagnosing common 
 confusion results.  
@@ -1323,16 +1369,19 @@ Other approaches to try and measure multiclass errors include The Balanced Error
 average of errors on each class, another approach is to use mutual information. Mutual information is 
 a quantity that measures the dependence of random variables measured in bits.  For two variables this 
 would be calculated by: 
+ (   )  ∑ ∑  (   )    (
  (   )
- (   ) ∑ ∑ (   )   ( ) 
-( )
-   ( )
+ ( ) ( )
+)
       
+ 
 However this approach has a critical problem in that perfectly bad predictions will have perfect 
 mutual information exactly as a perfectly good prediction would.  
+ Page 
+43 
  
- Page  
- 42  Essentially most methods, not including the mutual information method work be evaluating the 
+  
+Essentially most methods, not including the mutual information method work be evaluating the 
 contingency table and weighting the predictions of class membership. 
 For our purposes here, it seems that framing the problem as a binary signal detection task will be of 
 more utility. As a potentially a separate costing would likely need to be applied to each of the 
@@ -1348,38 +1397,40 @@ of assumptions. First of all we assume that the data we are learning from has be
 from the true underlying distribution.  
 Our data and loss functions 
 We have our labelled data D 
-  ((   )   (   )) 
-    
-And we have a finite set of models         } for example    could be the   in k-nearest 
+  ((     )   (     )) 
+And we have a finite set of models        } for example   could be the   in k-nearest 
 neighbour.  If our models were not finite, then we could discretize them but this will only be effective 
 for one parameter. More than one continues parameter will result in too many discretized models in a 
 high dimensionality space.  
 We want to choose which model will be ‘best’ from a decision theoretic point of view, i.e. to 
 minimize our expected loss. So we can have a loss function   and our error  . 
-      (   ( )) 
-  
+       (    ( )) 
 The prediction function   is dependant both on the model and the data.  
-We assume that (   )    are random distributed variables according to the probability distribution 
+We assume that (   )     are random distributed variables according to the probability distribution 
   where   is the true unknown distribution.  
 Validation 
 We assume that our data set was drawn IID from the true distribution P. We don’t know the true 
 distribution P so we try and estimate it. 
-For validation we split our data set into training and validation sets. We train for each model   on the 
-training set and then evaluate the performance on the validation set.  And choose the   with the 
-smallest error. However a model   could perform well or badly due to chance. 
+For validation we split our data set into training and validation sets. We train for each model  on the 
+training set and then evaluate the performance on the validation set.  And choose the  with the 
+smallest error. However a model  could perform well or badly due to chance. 
  
  
+ Page 
+44 
  
- Page  
- 43  Cross validation 
+  
+Cross validation 
 To counter for the fact that a model could perform well by chance, we repeat the splitting of the data 
 set into training and validation sets multiple times.   
 The first step for cross validation is to randomly permute our data.  
 The second step is to split our data into K-folds.  E.g. K is 5. So for example if n = 100 each fold 
 would be a subset of 20 points. 
  
-   
-Data  
+Data 
+ 
+ 
+  
      
 Randomly Permuted data 
      
@@ -1397,28 +1448,28 @@ Validation
 Figure 31 
 Each fold then takes its turn as the validation set, with the training set being made up of the remaining 
 four folds in the round.   
-The process is then repeated for each               
-Then for each   we get an estimate of the error  ?  }  would denote the error for      model in the 
-  
+The process is then repeated for each              
+Then for each  we get an estimate of the error   ?   }  would denote the error for     model in the 
 first round. We can then average the empirical error on each of the rounds with:  
+  ?  
  
  
- ? ∑ ?  } 
-    
+∑  ?   }
  
    
  
-The fourth step is to choose   to minimise   ? , we can then make the maximum use of our data by 
-  
  
+The fourth step is to choose  to minimise    ? , we can then make the maximum use of our data by 
 retraining   on all of  . 
 How do we choose the number of folds  ? Often either 5 or 10 folds are chosen however we want to 
 make the best use of our data and the number that we are training on is not prohibitive so we can use 
 Leave-one-out-cross-validation this is  -fold cross validation where    . As we will then have   
-rounds, we don’t need to permute our data. We train model   on     and test on datapoint  . 
+rounds, we don’t need to permute our data. We train model  on     and test on datapoint  . 
+ Page 
+45 
  
- Page  
- 44  So in our leave one out experimental methodology. The sequences of each SCOP family are taken as 
+  
+So in our leave one out experimental methodology. The sequences of each SCOP family are taken as 
 positive examples and the proteins outside the family but within the same superfamily are taken as 
 negative training examples.  
 It is important to reiterate and make clear that there are two potential bias in our approach the first is 
@@ -1438,9 +1489,11 @@ take into account this effect when choosing the best method.
  
  
   
+ Page 
+46 
  
- Page  
- 45  Methods 
+  
+Methods 
 The methods selected for trial were initially distance based methods that could make use of the pre 
 calculated scores which when inverted were treated as distance metrics.  Any method that made use of 
 these would have a great computational advantage over any method that directly took the protein 
@@ -1450,21 +1503,20 @@ models at the family level than at the superfamily level and the number of fully
 to build each model would be an order of a magnitude less due to the distribution of available data 
 over the required models.  
 KNN-Classifier 
-( )
-In K-nearest neighbour the normal formulation of the data is of pairs       (   ) where   is a 
-     
- 
-feature vector     and the labels           } where   represents a particular classification 
-      
+In K-nearest neighbour the normal formulation of the data is of pairs (     )   (     ) where    is a 
+feature vector     
+  and the labels               } where    represents a particular classification 
 and   is the total number of classifications. The task then would be when presented with a new   what 
 classification label should it be given. This is done by taking a majority vote amongst it’s K-nearest 
 neighbours.  This would be done by using a distance metric normally Euclidian distance: 
+ (     )
+  ?     ?
+ 
+ ∑(        )
  
  
-  
- (   ) ?   ? ∑(   ) 
-         
    
+ 
 However in our case the distance metric has already been calculated in the form of the score, so this 
 can just be used directly.  
  
@@ -1477,14 +1529,14 @@ The algorithm we used was adjusted so that if K was larger than the number of hi
 domain, then K would be reduced to the number of hits. Any ties were broken by a roulette wheel 
 simulation.  
 The K-Nearest Neighbour algorithm can be given a probabilistic formulation as:  
+ Page 
+47 
  
- Page  
- 46  ( ) ( )
-                                        with a class such that      
-   
+  
+          ( )                            ( )  with a class such that       
+This is sometimes written as  ?    ( |   )          
       
-This is sometimes written as  ?   ( |  ) to show that it depends on the data and on  , but it 
-          
+to show that it depends on the data and on  , but it 
 is technically not a conditional probability as it is not defined on a joint distribution. Which is to say 
 for each possible value of   compute the probability/fraction of points and choose the value of   for 
 which this is maximised.  
@@ -1497,22 +1549,25 @@ can be seen as part of its inductive bias.
  
 Figure 33 
 For each   with label  ,  
+  
  
  
-  ∑?  ? 
+∑?     ?
+ 
    
  
-   
+ ?   
       
- ?  
  
 We then calculate the distance to each mean centre from the domain being classified. The shortest 
 distance is the then the label assigned to the domain being classified.  
  
   
+ Page 
+48 
  
- Page  
- 47  Multidimensional Scaling 
+  
+Multidimensional Scaling 
 It was appreciated that the assumption made for the Nearest Average Classifier that all the testing data 
 points sat on a straight line was unlikely to be the case. However to get a better approximation of 
 where a central point might lie for a family group and then to work out the distance from our domain 
@@ -1526,29 +1581,26 @@ takes into account the information gained from the superfamily HMM alignments bu
 a dimensional space that the distance based methods fail due to the incorporation of uninformative 
 features.  
 For each superfamily we have a dissimilarity matrix: 
+  (
+         
    
-      
-  (   ) 
-   
-      
- 
-The aim of MDS is given    to find   vectors        such that ?   ?   for all       
-       
+         
+) 
+The aim of MDS is given    to find   vectors         
+  such that ?     ?       for all       
 The MDS was implemented using the Matlab function cmdscale (Mathworks, 2012). 
 The main problem with MDS is that depending on the implication it can be computationally costly 
- 
-with some algorithms taking  ( ) time. However in our case n <100 in all cases, and in the majority 
+with some algorithms taking  (  ) time. However in our case n <100 in all cases, and in the majority 
 of superfamilies’ n<10. So this is not an impossible task.  
 Nearest Centroid Classifier 
 Once we have a set of co-ordinates for our data points we can then calculate the centroid of all points 
 belonging to a particular family classification, this will give a better measure of the central point than 
 the Nearest Average Classifier.  
+The centroid of a finite set of   points               
+  is: 
+  
+          
  
-The centroid of a finite set of   points              is: 
-   
-       
-   
-   
  
 By calculating all of the centroids for each of the families in a superfamily, we can then measure the 
 distance from our submitted domains to each centroid and assign the family classification to the 
@@ -1560,42 +1612,47 @@ object of a cluster of data, whose average dissimilarity to all the objects in t
 Medoids are always members of the data set. It is possible for there to be more than one medoid in 
 which case the closest medoid is used to represent the cluster.  
   
+ Page 
+49 
  
- Page  
- 48  Results 
+  
+Results 
 The following plots first show the performance of different values of K in K-Nearest Neighbour , and 
 then a comparison of the best performing 1-NN to the NAC, NCC and NMC classifiers.  
-1.2
-1
+ 
+ 
+0
+0.2
+0.4
+0.6
 0.8
+1
+1.2
+0 0.2 0.4 0.6 0.8 1 1.2
 1-Knn
 2-knn
-0.6
 3-knn
 4-knn
-0.4 5-knn
-0.2
+5-knn
 0
-0 0.2 0.4 0.6 0.8 1 1.2
- 
-Figure 34 
-1.2
-1
+0.2
+0.4
+0.6
 0.8
+1
+1.2
+0 0.2 0.4 0.6 0.8 1 1.2
 1-Knn
 NAC
-0.6
 NCC
 NMC
-0.4
-0.2
-0
-0 0.2 0.4 0.6 0.8 1 1.2
- 
 Figure 34 
+Figure 34 
+ Page 
+50 
  
- Page  
- 49   
+  
+ 
 The following table summarises the results for the average values taken from the leave one out tests: 
 The Null Hypothesis in each case is that the differences come from a normal distribution with mean 0 
 and unknown standard deviation.       . 
@@ -1604,44 +1661,39 @@ Method Accuracy Sensitivity Specificity AUC F-Measure Significant
 1-NN 90.2% 87.9% 94.4% 0.963 0.910341 No 
 2-NN 90.0% 87.5% 94.4% 0.962 0.908191 No 
 3-NN 88.2% 87.5% 89.5% 0.954 0.884887 No 
-4-NN 87.3% 88.2% 85.0% 0.952 Yes 
-0.865704 
-5-NN 86.3% 88.6% 81.3% 0.944 Yes 
-0.847932 
-NAC 89.7% 86.8% 95.0% 0.946 No 
-0.907151 
-NCC 86.3% 81.8% 94.4% 0.925 Yes 
-0.876495 
-NMC 85.7% 81.5% 93.3% 0.911 Yes 
-0.870017 
+4-NN 87.3% 88.2% 85.0% 0.952 0.865704 Yes 
+5-NN 86.3% 88.6% 81.3% 0.944 0.847932 Yes 
+NAC 89.7% 86.8% 95.0% 0.946 0.907151 No 
+NCC 86.3% 81.8% 94.4% 0.925 0.876495 Yes 
+NMC 85.7% 81.5% 93.3% 0.911 0.870017 Yes 
 Table 3 
   
+ Page 
+51 
  
- Page  
- 50  E-value calibration 
+  
+E-value calibration 
 In order to be useful to biologists the classifications need to be given an E-value,  as the best 
 performing classifier was the simple nearest neighbour results, the E-Value calibration can be the 
 same as from Goughs earlier work.  (Gough, 2006). 
  
+        
  
-          
-    
+   (  (   
+    )   (       ))
   
-(  (   )   (   ))
-  
-   
 Equation 16 
 Where          are coefficients and n is the length of the target sequence, S is the raw score and 
 subscripts 1 and 2 refer to the top scoring hit and the next highest scoring hit out side of the top 
-scoring family. If there are no values for   then it is set to 180 which is the average domain length 
- 
-and  is set to 0 for no alignment. (Gough, 2006). 
-  
+scoring family. If there are no values for    then it is set to 180 which is the average domain length 
+and    is set to 0 for no alignment. (Gough, 2006). 
  
   
+ Page 
+52 
  
- Page  
- 51  Discussion/analysis 
+  
+Discussion/analysis 
 The first graph illustrates the performance of the k-nearest neighbour algorithm through values of 
           averaged over the leave one out validated data sets.  
 It is clear the simplest nearest neighbour algorithm performs at a superior rate, any attempt to smooth 
@@ -1673,9 +1725,11 @@ sometimes used in Bayesian methods, but this would at best be a guess for these 
 it would not be possible to increase performance without more information content being inputted into 
 the training of the classifiers.   
   
+ Page 
+53 
  
- Page  
- 52  Alternative methods 
+  
+Alternative methods 
 An alternative server to Superfamily, which also uses profile HMMs is HHpred system, which offers 
 a method of sequence searching similar to Blast at the more sensitive level than plain HMM’s provide, 
 this systems connects directly to databases such as SCOP, Pfam, Cog and CDD. The authors of this 
@@ -1723,9 +1777,11 @@ which could be decision trees or SVMs, but in this case they use SVMs. Thus far 
 incorporated structural or phylogenetic tree information, which could be an obvious  extension to their 
 approach. Their method was used to evaluate protein recognition within the same superfamily, the 
 performance compared well with the other published methods, but with the advantage that their 
+ Page 
+54 
  
- Page  
- 53  method provided comprehensible sets of logical rules that help ascertain the functions of proteins. 
+  
+method provided comprehensible sets of logical rules that help ascertain the functions of proteins. 
 (Bernades, Carbone, & Zaverucha, 2011). 
 An interesting and innovative approach to the sequence alignment problem has been implemented by 
 a team at McGill University, their approach is to try and harness the collective power of human 
@@ -1739,9 +1795,11 @@ instigated a large number of successful projects, from the open source computing
 the success of Wikipedia and can even be seen in people sharing video information on Youtube, this 
 is sometimes known as crowdsourcing.  
   
+ Page 
+55 
  
- Page  
- 54  Conclusions and Summary 
+  
+Conclusions and Summary 
  
 The project has evaluated and reviewed a number of machine learning techniques applied to the task 
 of assigning SCOP family level classifications to protein domains by using existing Superfamily 
@@ -1786,22 +1844,26 @@ effectively used to assign family level classifications to unclassified domain s
 improve this by smoothing out the jitter using central distance learning methods proved complex, 
 resource intensive and did not deliver improvements in performance. In order to improve the 
 performance of family level classification beyond these scores new information content will have to 
+ Page 
+56 
  
- Page  
- 55  be inputted into the characteristics of different family domains, whether this can be done without the 
+  
+be inputted into the characteristics of different family domains, whether this can be done without the 
 need to build a full library of family level models remains the subject of future work.  
 The work on protein classification and homology detection is a very active area of research as it 
 remains a challenging multifeature, multi class problem, methods continue to be improved and it is 
 hoped that this project will have made a contribution to these improvements. 
  
   
+ Page 
+57 
  
- Page  
- 56  Bibliography 
+  
+Bibliography 
 Alcatel-Lucent. (2006). Bell Labs Advances Intelligent Networks. Retrieved May 04, 2011, from 
 alcatel-lucent: http://www.alcatel-
-lucent.com/wps/portal/!ut/p/kcxml/04_Sj9SPykssy0xPLMnMz0vM0Y_QjzKLd4w39w3RL8
-h2VAQAGOJBYA!!?LMSG_CABINET=Bell_Labs&LMSG_CONTENT_FILE=News_Feat
+lucent.com/wps/portal/ut/p/kcxml/04_Sj9SPykssy0xPLMnMz0vM0Y_QjzKLd4w39w3RL8
+h2VAQAGOJBYA?LMSG_CABINET=Bell_Labs&LMSG_CONTENT_FILE=News_Feat
 ures/News_Feature_Detail_000025 
 Altschul, & etal. (1990). Basic local alignment search tool. Journal of molecular biology, 215. 403-
 410. 
@@ -1831,9 +1893,11 @@ Dawkins, R. (1997). Climbing Mount Improbable . Penguin.
 Dempster, A., Laird, N., & Rubin, D. (1977). Maximum likilihood from incomplete data via the EM 
 algorithm. Journal or the Royal Statistical society, 39, 1-38. 
 Durbin, R., & etal. (1998). Biological sequence analysis. Cambridge Uk: Cambridge University Press. 
+ Page 
+58 
  
- Page  
- 57  Eastwood, M. (2010). Building well performing classifier ensembles, model and decison level 
+  
+Eastwood, M. (2010). Building well performing classifier ensembles, model and decison level 
 combination. Bournemouth University Thesis. 
 Eddy, S. (1998). Profile Hidden Markov Models. Bioinformatics. 
 Gotoh, O. (1982). An improved algorithm for matching biological sequences. Journal of Molecular 
@@ -1868,9 +1932,11 @@ conference on Evolutionary Computation, 1-10.
 Langton, C. (1998). Artifical life - an overview. Cambridge UsA: MIT Press. 
 Leslie, C., Eskin, E., & Noble, W. (2002). The spectrum Kernel: A string Kernal for SVM protein 
 classification. Pacific Symposium of Biocomputing, 7: 566-575. 
+ Page 
+59 
  
- Page  
- 58  Leslie, C., Eskin, E., Cohen, A., Weston, j., & Noble, W. (2004). Mismatch String Kernels for 
+  
+Leslie, C., Eskin, E., Cohen, A., Weston, j., & Noble, W. (2004). Mismatch String Kernels for 
 discriminative protein classification. Bioinformatics, Vol 20 467-476. 
 Liao, L., & Noble, W. (2002). Combining pairwise sequance similarity and support vector machines 
 for remote homology detection. Proceedings of the sixth Annual international conference on 
@@ -1904,9 +1970,11 @@ Ray, O. (2011). Learning from structured data. Retrieved May 04, 2011, from Bris
 http://www.cs.bris.ac.uk/Teaching/Resources/COMSM0301/ 
 Ridley, M. (2000). Genome: The Autobiography of a Species in 23 Chapters. Fourth Estate; New Ed 
 edition . 
+ Page 
+60 
  
- Page  
- 59  Robinson, R. (1965). A machine oriented logic based on the resolution principle. Journal of the ACM, 
+  
+Robinson, R. (1965). A machine oriented logic based on the resolution principle. Journal of the ACM, 
 12, 23-41. 
 Rosenblatt, F. (1959). The perceptron: a probabilsitic model for information storage and organisation 
 in the brain. Psychological review, 65. 386-408. 
@@ -1941,9 +2009,11 @@ review.ca/F13-atom.htm
 Vapnik. (1995). Support-vector networks . Machine Learning, 20, 273-297. 
 Vapnik, V., & Chervonenkis, A. (1971). On the uniform covergence of relative freuencies of events to 
 their probabilities. Theroy of probability and its applications, 16, 264-280. 
+ Page 
+61 
  
- Page  
- 60  Venter, C. (2001). The Sequence of the Human Genome. Science, 1304. 
+  
+Venter, C. (2001). The Sequence of the Human Genome. Science, 1304. 
 Vries, H. d. (1889). Intracellulare pangenesis. Jena. 
 Widrow, B., & Hoff, M. (1960). Adaptive switching circuits. IRE Wescon convention record, 4, 96-
 104. 
@@ -1951,6 +2021,3 @@ WikiCommons. (2011, May 03). http://en.wikipedia.org/wiki/File:DNA-structure-and
 Retrieved from www.wikipedia.org: http://en.wikipedia.org/wiki/File:DNA-structure-and-
 bases.png 
  
- 
- Page  
- 61  

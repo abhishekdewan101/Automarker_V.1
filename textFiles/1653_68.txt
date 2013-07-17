@@ -19,8 +19,7 @@ process of allocating markers to projects required more advanced technologies to
 extract knowledge from markers profiles in order to achieve optimum allocation 
 to projects. This is why a text mining approach has become a real necessity. 
 The developed system has integrated a textual matching approach through 
-1
-employing SubSift , a text mining application with open access web service 
+employing SubSift1, a text mining application with open access web service 
 Application Programming Interface (API). This project applies SubSift to rank 
 markers for most suitability to mark projects. ASP is then applied for final 
 allocation of markers by optimising the process toward selecting the projects 
@@ -41,10 +40,12 @@ content. The new API is an interface to SubSift API.
 selections with constraint satisfaction. The algorithm was adapted from the 
 bottleneck algorithm proposed by (Proll, 1972). 
                                                              
-1
- Available from http://subsift.ilrt.bris.ac.uk   4 
+1 Available from http://subsift.ilrt.bris.ac.uk   
+4 
  
  
+ 
+  
 Acknowledgments 
  
 I would like to thank Dr Oliver Ray, the project supervisor, for his 
@@ -54,10 +55,11 @@ Simon Price for his support in providing the access to SubSift web services API.
 Special thanks goes to my family, for their love, understanding and continuous 
 support. 
  
+5 
  
-  5 
  
  
+  
 Table of Contents 
 Executive Summary ----------------------------------------------------------------------------------------- 3 
 Acknowledgments ------------------------------------------------------------------------------------------- 4 
@@ -93,10 +95,11 @@ Table of Figures ---------------------------------------------------------------
 4.3 Building the Blocks --------------------------------------------------------------------------- 42 
 4.3.1 Implementing the Architecture – Fornt-end Layer ----------------------------- 43 
 4.3.2 Implementing the Architecture – Back-end Layer ------------------------------ 45 
+6 
  
-  6 
  
  
+  
 4.3.3 SubSift implementation --------------------------------------------------------------- 46 
 4.3.4 ASP Optimisation – behind the seen ----------------------------------------------- 50 
 4.3.5 Decorating with CSS ------------------------------------------------------------------- 54 
@@ -117,10 +120,11 @@ Appendix III – Markers-Projects Allocation Program -----------------------------
 Appendices IV – Source Code --------------------------------------------------------------------------- 73 
  
  
+7 
  
-  7 
  
  
+  
 Table of Figures 
 Figure 1- project proposals page ------------------------------------------------------------------------ 11 
 Figure 2 - process flowchart of current system ------------------------------------------------------ 12 
@@ -152,8 +156,7 @@ Figure 27 - Number of markers with respect to SubSift Rank ---------------------
 Figure 28 - A Comparison of time required for selecting projects ------------------------------ 64 
 Figure 29 -  SubSiftorder of current projects obtained in student search results ------------ 65 
  
- 
-  8 
+8 
  
  
 1 Introduction 
@@ -192,9 +195,12 @@ Of course this aim requires achieving an optimal allocation algorithm that can b
 adopted with constraint satisfaction. 
 To achieve this ambition, this project will start by developing an automated 
 system for optimal allocation in one real-world application area. Assigning 
-projects to students in the University of Bristol is a good start pilot for achieving ? 1 Introduction  9 
+projects to students in the University of Bristol is a good start pilot for achieving 
+?1 Introduction  9 
  
  
+ 
+  
 the aim. This allocation requires taking into account the loads on each supervisor, 
 and the students’ preferences over projects. Moreover, assigning markers to 
 projects is another interesting objective that the project intends to accomplish.  
@@ -233,10 +239,11 @@ Background: This chapter starts with defining the problem type and discussing
 its computational complexity. It moves then to the subject of optimisation and 
 reviews a range of optimal allocation algorithms from the literature. The reader is 
 then directed to reviewing a constraint programming language that can be used 
+?1 Introduction  10 
  
-  ? 1 Introduction  10 
  
  
+  
 for solving such problems; ASP, through real-world scenarios. An innovative 
 method for text mining through SubSift application is then discussed and 
 alternative text mining techniques are outlined. 
@@ -263,8 +270,8 @@ Conclusion and future work: The project is concluded in this chapter and
 opportunities for future work for improving the system are discussed. 
  
  
+11 
  
-  11 
  
  
 2 Motivation 
@@ -280,8 +287,6 @@ system is very simple and only provides information about published projects.
 Around 120 students were required to go through the list manually one by one 
 and read the description regarding any project which they think it is suitable for 
 them to be able to select a project. 
-Figure 1- project proposals page 
-Captured from the University of Bristol department of Computer Science website 
  
 Although the current front-end system provides some sorting options, it is 
 not sufficient to find about projects by just sorting the list. Searching and 
@@ -294,25 +299,15 @@ just go through the description of each project in this list where still they re
 to research externally about some. 
 The list of projects needs to be reduced in reasonable way and only brings 
 those projects which are best suitable for any individual student, based on the set 
- ? 2 Motivation  12 
+Figure 1- project proposals page 
+Captured from the University of Bristol department of Computer Science website 
+?2 Motivation  12 
+ 
+ 
  
  
 of criteria and preferences each student provide. The whole process of the 
 current student project selection is shown by the flowchart in Figure 2.  
-No Yes 
-Escalate to 
-Deadline 
-administrator 
-No 
-Student 
-Supervisors Publish Yes 
-Student 
-contact 
-propose Projects for 
-Start Agreement Assigned End 
-supervisor 
-projects students 
-Project 
  
 Figure 2 - process flowchart of current system 
 When a student manages to choose a project, he/she is required to make an 
@@ -342,8 +337,29 @@ Next chapter reviews the literature and leads the reader from understanding
 the basic concepts, and progresses toward selecting the right technologies to 
 better understand how the allocation problem is optimally solved. 
  
+Yes 
+Yes 
+No 
+Student 
+contact 
+supervisor 
+Student 
+Assigned 
+Project 
+No 
+End 
+Supervisors 
+propose 
+projects 
+Publish 
+Projects for 
+students 
+Escalate to 
+administrator 
+Start Agreement 
+Deadline 
+13 
  
- 13 
  
  
 3 Background 
@@ -363,8 +379,7 @@ technologies to solve it effectively. In the following sections, computational
 complexity is discussed in more detail in addition to the mentioned disciplines. 
  
 3.1 Computational Complexity  
-1
-In theoretical computer science and mathematics, computational problems are 
+In theoretical computer science and mathematics, computational problems1 are 
 classified into complexity classes based on their difficulty; i.e. how much work 
 they require to be solved (Tovey, 2002). Complexity classes are studied in the 
 context of languages rather than problems it covers. Thus, any problem can be 
@@ -384,9 +399,10 @@ known names include NP-complete and NP-hard. Interestingly, not all problems
 that belong to these classes are NP. For instance, An NP-hard problem is at least 
 as hard as any other NP problem, but is not necessarily to be NP. While an NP-
                                                              
-1
- A problem that can be solved by a computer 
- ? 3 Background  14 
+1 A problem that can be solved by a computer 
+?3 Background  14 
+ 
+ 
  
  
 complete problem is both NP and NP-hard (Tovey, 2002). Figure 3 illustrates 
@@ -408,10 +424,7 @@ solve X assuming there already exist an
 algorithm for solving Y. Reduction is 
 discussed in more detail in (Arora & Barak, 
 2009). Other NP-hardness proof techniques 
-Figure 3 – Computational complexity classes 
-relationships, from (Tovey, 2002) 
 are explained thoroughly in (Tovey, 2002). 
- 
 Realising that the computational 
 complexity of this problem is NP-hard would provide more confidence in 
 researching the literature to find out how this problem would be solved. 
@@ -434,8 +447,12 @@ between markers and projects with some constraint to be applied like load
 balancing. 
 There have been many efforts to solve this type of problems and this resulted 
 in a variety of algorithms for optimal allocation in diversity of fields. More 
+Figure 3 – Computational complexity classes 
+relationships, from (Tovey, 2002) 
  
- ? 3 Background  15 
+?3 Background  15 
+ 
+ 
  
  
 advanced techniques may be required to be adopted with these algorithms to 
@@ -452,7 +469,7 @@ specific number of projects from available list of proposed projects, and the
 selected projects list should be ranked by the student according to his/her 
 preferences. Then the ranked project lists are collected and a student-project 
 matrix is constructed such that an intersection of each student and project in this 
-matrix will be filled by the student ranking number for that project (e.g. 1, 2,… 
+matrix will be filled by the student ranking number for that project (e.g. 1, 2, 
 or, any other valid ranking). 
 For the purpose of applying the bottleneck algorithm, this matrix should be 
 converted into a square matrix. Usually, the number of projects are more than the 
@@ -461,34 +478,33 @@ by number 1. For any project that is not ranked by a student, the entry will be
 equated to L+1; where L is the number of projects ranked by this student. Now 
 the collected data is ready for applying the algorithm. The main rule (Proll, 1972) 
 applied to solve this problem is: 
- 
-Optimal total rank of assigned projects =         ∑    
-    
+Optimal total rank of assigned projects =         
      
+∑        
+ 
       
+ 
+where      {
                                            
-where    { 
-  
                                                              
-and   is student   rank of project  . 
-  
-  
-                                             
-   {                   
-  
+ 
+and     is student   rank of project  . 
+     {
+                                               
                                             
+                   
                         
 M is the total number of students and N is the total number of projects.       
 L is the number of projects ranked by a student as mentioned earlier. 
 If the number of projects is more than the number of students, which is the 
 case usually, the remaining entries are assigned as 1 to complete the square 
 matrix as indicated below; 
+?3 Background  16 
  
- ? 3 Background  16 
  
  
-                          
-  
+ 
+                            
 This is a min-max problem (KO & LIN, 1995) and it means that the worst 
 case (maximum cost) total sum of the assigned projects’ ranks is minimised as 
 much as possible.  
@@ -522,14 +538,13 @@ This type of assignment functions - also referred to as Stable Marriage Assignme
 - considers the preferences of both sides of the assignment. The assignment is 
 said to be stable if there is no case of other unassigned pair with both sides prefer 
 each other. In other words, if we have two lists P and X assigned to each other, 
-this assignment function is stable if and only if there is no   and   in P that are 
-  
-assigned to   and   from X respectively where   prefers   and   prefers  . 
-      
+this assignment function is stable if and only if there is no    and    in P that are 
+assigned to    and    from X respectively where    prefers    and    prefers   . 
 Extended stability holds if and only if there is no better assignment result that can 
 be obtained by permutation of assigned items. 
+?3 Background  17 
  
- ? 3 Background  17 
+ 
  
  
 For the Stable marriage assignment function, there are four requirements 
@@ -564,37 +579,35 @@ network channels (Fischer, et al., 2007), and allocating tasks to distributed
 processing sites. In both cases, neither channels nor processors have preferences. 
 They are assigned based on balancing load among them. 
 Processing sites (servers) in a distributed network are allocated tasks based 
-on their loads  (Lu & Carey, 1986). In this paper, load   on each site   
- 
+on their loads  (Lu & Carey, 1986). In this paper, load   on each site    
 corresponds to the number of tasks    waiting to be executed at this site, thus: 
-  
-             (1) 
-  
+                 (1) 
 To evaluate the task distribution balance of the whole system, the load 
 unbalance factor     indicates the difference of loads between sites. With   sites, 
 LUF can be defined as following: 
+?3 Background  18 
  
- ? 3 Background  18 
  
  
-       (2) 
-   | ( )     | 
-  
+ 
+        
        
+| (  )       |   (2) 
  
 Using (1) and (2), the variance of the load distribution becomes: 
+    
+∑   (  )   ? 
   
-  
-? ????
-∑ ∑
-  ( )      ( )    
-  
-      
-       
-  
+   
  
-????
-Where    is the average number of tasks of each site after allocation. 
+  
+∑    (  )    ?? ??  
+  
+   
+ 
+ 
+ 
+Where  ?? ??  is the average number of tasks of each site after allocation. 
 Based on above optimisation measure, tasks are allocated to sites. 
 The unbalance factor measure     can be applied in this project by balancing 
 loads on supervisors and markers such that the variance on each is as small as 
@@ -625,8 +638,9 @@ that require weighted solutions (Çakmak, et al., 2009). The problem in this proj
 involves: (i) solving assignments of equal preference (indifference), (ii) assigning 
 markers to more than one project and vice versa, and (iii) refusing particular 
 assignment (Incomplete List). This makes ASP a suitable candidate (Lifschitz, 
+?3 Background  19 
  
- ? 3 Background  19 
+ 
  
  
 2008) for solving the project allocation problem with high performance and less 
@@ -665,20 +679,20 @@ paper papId
 where exp may take any of the following values: 
  
  
+?3 Background  20 
  
- ? 3 Background  20 
  
  
-Note:  
-exp value Level of expertise 
+ 
+exp value Level of expertise Note:  
 conflict (value 0) may arise when 
-0 Conflict 
 this reviewer is also an author of 
 this paper or biased due to some 
-1 Low 
 conditions like being in the same 
-2 moderate 
 academic body. 
+0 Conflict 
+1 Low 
+2 moderate 
 3 High 
 Expertise values are specified by automatically examining reviewer expertise 
 based on their published works. The paper applies SPARQL queries (explained 
@@ -687,8 +701,8 @@ Reviewers biddings for papers are expressed in the form:
 reviewerBid(revId,papId,bid) 
 where bid may take one of the following values: 
 bid 
-Preference 
 value 
+Preference 
 level 
 0 Conflict 
 1 No bid 
@@ -715,41 +729,40 @@ scenarios and constraints that relates to work nature, availability of workers,
 skills, fairness of workloads, and work turnover between duty shifts. Regardless 
 of the specific details about these constraints, ASP has been adopted to encode 
 the problem using a variety of predicates some of them are outlined in table 1. 
+?3 Background  21 
  
- ? 3 Background  21 
+ 
  
  
 Table 1 - Some Team Allocation problem predictaes 
 Requirement Predicate Comments 
 Skills association hasSkill(employee, skill)  
-absent(employee, shift) 
-Availability  
-manuallyExcluded(employee, shift) 
-Manual exclusion  
+Availability absent(employee, shift)  
+Manual exclusion manuallyExcluded(employee, shift)  
 Shifts duration shift(shiftId, duration)  
-shift? 
 Shift sequence previousShift(shift, shift?) 
+shift? 
 precedes shift 
-n is the number 
 Resource 
-neededEmployees(shift, skill, n) 
-of employees 
 requirement 
+neededEmployees(shift, skill, n) 
+n is the number 
+of employees 
 required 
-Hours worked up 
 Past allocation 
-workedWeeklyHours(employee, hours) 
-to current 
-workedDailyHours(employee, hours) 
 statistics 
+workedWeeklyHours(employee, hours) 
+workedDailyHours(employee, hours) 
+Hours worked up 
+to current 
 allocation 
-workedWeekOvertimeHours(employee, hours)  
-Overtime 
-dailyHours(hours) 
+Overtime workedWeekOvertimeHours(employee, hours)  
 Maximum hours 
-weekHours(hours)  
 constraints 
+dailyHours(hours) 
+weekHours(hours) 
 weekOvertime(hours) 
+ 
 The problem is then solved by specifying some rules based on the given 
 input and by considering the predefined constraints. The following rules from 
 (Ricca, et al., 2011) are some rules used for assigning workers: 
@@ -779,8 +792,9 @@ The paper addresses the inconsistencies that might occur as a result of
 combining the rules by prioritising constraints into a modified version of the 
 program. The modified version is used only when no admissible solutions are 
 found.  
+?3 Background  22 
  
- ? 3 Background  22 
+ 
  
  
 These two applications and other experiences in literature demonstrate that 
@@ -817,27 +831,24 @@ understand how text mining approaches operate.
 There are various techniques for text mining available in the literature 
 ranging from querying languages to full text mining applications. One of the 
 querying languages that can be used to extract and match information from 
-1
-diverse data sources (like web text documents) is SPARQL . SPARQL 
+diverse data sources (like web text documents) is SPARQL1. SPARQL 
 (Prud'hommeaux & Seaborne, 2008) is a query language used for querying RDF 
                                                              
-1
- W3C recommendation on http://www.w3.org/TR/rdf-sparql-query   
+1 W3C recommendation on http://www.w3.org/TR/rdf-sparql-query   
+?3 Background  23 
  
- ? 3 Background  23 
+ 
  
  
 based documents (Resource Description Framework RDF is a W3C specification 
-1
-family for data interchange on the web) . 
+family for data interchange on the web)1. 
 From querying languages to text mining applications, SubSift is one free-
 open source application that can be tailored to serve a spectrum of text mining 
 situations. The following section provides more detail about SubSift followed by 
 a section discussing alternate text mining approaches. 
  
 3.4.1 SubSift 
-2
-Submission Sifting (SubSift ) is an innovative text mining application developed 
+Submission Sifting (SubSift2) is an innovative text mining application developed 
 by the Intelligent Systems group at the University of Bristol. It was developed 
 originally for matching reviewers and papers for an academic conference (Price, 
 et al., 2010). The application discovers similarities between papers and reviewers 
@@ -855,9 +866,7 @@ requires no installation
 efforts and can be used 
 through its API. Figure 6 
 shows the system 
-Figure 5 - SubSift Architecture 
 architecture of SubSift. 
-From (Price, et al., 2010) 
  
 The main theoretical concept of SubSift for profiling and matching text is 
 based on the information retrieval algorithm: vector space model. This model 
@@ -865,31 +874,27 @@ discovers similarity between a text query and documents by applying a
 weighting scheme that considers term frequencies in documents. SubSift 
 performs profiling and matching by applying this scheme but with considering 
 both matching documents for term frequencies calculation as following: 
- 
       
-  
-  
-                  ( )                        
-         
-∑   
-    
+   
+∑     
+                (
+       
+   
+)                             
                                                              
-1
- http://www.w3.org/RDF   
-2
- Available from http://subsift.ilrt.bris.ac.uk   
+1 http://www.w3.org/RDF   
+2 Available from http://subsift.ilrt.bris.ac.uk   
+Figure 5 - SubSift Architecture 
+From (Price, et al., 2010) 
+?3 Background  24 
  
- ? 3 Background  24 
  
  
-Where    is the frequency   of term   in document   divided by the total 
-      
-number of terms in this document.     is the inverse document frequency which 
  
-is based on the number of documents    from both document collections (  and 
-  
- ) containing this term. The weight of each term is then obtained by multiplying 
- 
+Where      is the frequency     of term    in document    divided by the total 
+number of terms in this document.      is the inverse document frequency which 
+is based on the number of documents     from both document collections (   and 
+  ) containing this term. The weight of each term is then obtained by multiplying 
 the two values. All the weights or scores of terms in a document are form 
 document profile. Profiles of one collection (e.g. submissions) is matched up with 
 all profiles of the other collection (e.g. reviewers). A final score is calculated for 
@@ -908,8 +913,9 @@ bookmarks lists profiling, and other useful applications. Figure 8 shows the
 original SubSift workflow design pattern. 
  
 Figure 7 - Original SubSift workflow design pattern From (Price, et al., 2010) 
+?3 Background  25 
  
- ? 3 Background  25 
+ 
  
  
 SubSift is a suitable tool that can be integrated in this project to efficiently 
@@ -938,8 +944,8 @@ selecting and implementing the right tools for applying textual matching in this
 project. At this point, I can say that we have reviewed the required knowledge 
 for implementing such system efficiently and achieve the pre-set objectives. 
  
+26 
  
- 26 
  
  
 4 Methods 
@@ -962,9 +968,7 @@ methodology for implementing
 this project. Figure 9 illustrates the 
 various phases of this 
 methodology. The iterative 
-           Figure 8 - Microsoft Solutions Framework, from 
 characteristic allows flexible 
-http://technet.microsoft.com 
 feedback of processes which 
 provides more creativity.  
 The life cycle starts with the envisioning phase where project vision and 
@@ -982,7 +986,11 @@ cycle. In this project, those changes may include changing existing or adopting
 new constraints. Other changes may extend to adding totally new functionalities 
 to the system like the  optimal allocation of time slots for project marking 
 process. Despite of its type, any change needs to start a new sub-cycle of MSF. 
- ? 4 Methods  27 
+           Figure 8 - Microsoft Solutions Framework, from 
+http://technet.microsoft.com 
+?4 Methods  27 
+ 
+ 
  
  
 This means that its feasibility needs to be studied and if feasible, it gets added to 
@@ -1016,27 +1024,27 @@ with allocating projects to students and markers to projects. It is important at
 very early stage to identify the objects involved and how they are related to each 
 other. This will have great impact on how the system is designed and 
 implemented. For this, a 
-0 …1 0 …1 
-Marker 
-Supervisor 
 high level UML class 
-is a 
 diagram would provide 
-1 …1 
-2 …* 
 necessary intuition of 
-supervise propose 
-marks 
 the various objects 
-1 …* 
 involved. Figure 10 
-1 …* 
-shows the main entities Student Project 
-1 …1 
-in this project. 1 …1 1 …* 
+shows the main entities 
+in this project. 
+Supervisor 
+Student Project 
+Marker 
+01 
+1* 1* 
+11 11 1* 
+01 
+marks supervise propose 
+is a 
 Figure 9 – High level UML diagram 
+11 2* 
+?4 Methods  28 
  
- ? 4 Methods  28 
+ 
  
  
 The UML diagram shows that this project has four strong entities, namely 
@@ -1064,61 +1072,32 @@ in the current system.
 For easy comparison and to figure out what changes are made, the current 
 and the new processes for allocating projects to students are sketched in figures 
 11 and 12. 
-Current student project allocation 
-Propose Projects 
-If project 
-Supervisor  Find a Project 
-published  
-If agreed 
-Contact supervisor 
-Student 
-Assign project to 
-If not agreed 
-Coordinator 
-student 
  
 Figure 10 – Use Case Diagram of the current student project allocation process 
- 
- ? 4 Methods  29 
- 
- 
-New student project allocation 
-Propose projects 
-Search for a Project 
-If project 
-Supervisor  
-published  
-SubSift suggestion 
-If agreed 
+Propose Projects 
+Supervisor  Find a Project 
 Student 
+Current student project allocation 
+If project 
+published  
 Contact supervisor 
-Coordinator If not agreed 
-Run Automatic Assign project to 
-ASP Allocation student 
+Assign project to 
+student 
+If agreed 
+Coordinator 
+If not agreed 
+?4 Methods  29 
+ 
+ 
+ 
+ 
    
 Figure 11 - Use Case Diagram for the new student project allocation process 
 Similarly, figures 13 and 14 illustrate use case diagrams for the project 
 marker allocation process, current and new respectively. 
-Current marker project allocation 
-If project 
-assigned  
-Manually allocate markers 
-Marker 
-Coordinator 
-mark project 
  
 Figure 12 - Use Case Diagram for the current marker project allocation 
  
-New marker project allocation 
-If project 
-assigned  
-Get SubSift suggestion 
-Marker 
-Coordinator 
-mark project 
-Run automatic ASP 
-allocation 
-Assign markers 
  
 Figure 13 - Use Case Diagram for the new marker project allocation 
  
@@ -1127,46 +1106,43 @@ The project of optimal allocation is designed to operate a web-based software
 which is comprised of three main layers as shown in Figure 15.  These three 
 layers are Front-end, Controlling, and Back-end. Layers and their components’ 
 planned specifications are described in more detail below. 
- 
- ? 4 Methods  30 
- 
- 
-Front-end Controlling  Back-end 
-Offline data files from 
-Web site 
-university system 
- 
+Propose projects 
+Supervisor  
 Student 
+New student project allocation 
+If project 
+published  
+Contact supervisor 
+Assign project to 
+student 
+If agreed 
+SubSift suggestion 
+Search for a Project 
+Run Automatic 
+ASP Allocation 
+Coordinator If not agreed 
+Manually allocate markers 
+Coordinator 
+mark project 
+Marker 
+Current marker project allocation 
+If project 
+assigned  
+Run automatic ASP 
+allocation 
+Assign markers 
+Get SubSift suggestion 
+Coordinator 
+mark project 
+Marker 
+New marker project allocation 
+If project 
+assigned  
+?4 Methods  30 
  
-Text mining 
-Selects 
-project 
- Students 
- 
-Projects 
-Constraints Management 
-Supervisors 
- 
-project Assignment 
-Markers 
-Administrator 
-Marker Assignment   
  
  
-ASP 
-Engine 
-ASP 
-Propose 
  
-Supervisors 
-constraints 
-projects 
- 
-View assigned 
-Markers 
- 
-projects  
-Figure 14 – Project system architecture  
  
 Front-end Specification 
 The Front-end layer is the top level of the application which is a part of the 
@@ -1188,8 +1164,47 @@ combination of two or more filters.
 Students will be able to distinguish the queue on each project during 
 arranging his preferred project list by displaying the number of students 
 having these projects in their lists.  
+Figure 14 – Project system architecture  
  
- ? 4 Methods  31 
+Front-end Controlling  Back-end 
+ 
+ 
+ 
+Text mining 
+ 
+ 
+ 
+ASP 
+Engine 
+ Administrator 
+Constraints Management 
+project Assignment 
+Marker Assignment 
+Supervisors 
+Propose 
+projects 
+Markers 
+View assigned 
+projects 
+Web site 
+ 
+Student 
+Selects 
+project 
+ 
+ASP 
+constraints 
+ 
+ 
+ Students 
+Projects 
+Supervisors 
+Markers 
+Offline data files from 
+university system 
+?4 Methods  31 
+ 
+ 
  
  
 The system will perform the filtering and categorising of projects by 
@@ -1230,8 +1245,9 @@ with links to submitted students documents.
 Controlling specification 
 The Controlling layer or middle tier is the logical layer between the Front-end 
 (user interface) and the Back-end (data bases) layers. 
+?4 Methods  32 
  
- ? 4 Methods  32 
+ 
  
  
 The main application processes encompass in this layer are the process of 
@@ -1269,48 +1285,41 @@ Ls1 = { p1, p3}    Ls2 = { p3, p4}    Ls3 = { p1, p2}
 Where Ls is the preference list of the respective student.  
  
   
+?4 Methods  33 
  
- ? 4 Methods  33 
+ 
  
  
 Then the Rank Matrix  
-  p1 p2 p3 p4 
-(of ranks  )  becomes: 
-  
+(of ranks    )  becomes: 
    
-   
-   
-s1  1 3 2 3 
  
-s2  3 3 
-1 2 
  
-s3  1 2 3 3 
  
- -  1 1 1 1 
  
  
  
 The bottleneck assignment problem is solved by finding the optimal (minimum) 
 of the worst (maximum) total rank among assigned projects: 
- 
-      ∑    
-Optimal total rank = 
-    
+Optimal total rank =       
      
+∑       
+ 
    
+ 
   
 By trying all possibilities by hand, an optimal instance of the possible solutions 
 would be as outlined in table 2 . 
 Table 2 – an optimal solution using bottleneck algorithm 
-            
-        
+                    
 1 1 1 1 1 
 1 2 3 0 0 
 1 3 2 0 0 
 1 4 3 0 0 
-   Min 1 
-  
+   Min 
+ 
+1 
+ 
 2 1 3 0 0 
 2 2 3 0 0 
 2 3 1 1 1 
@@ -1329,8 +1338,16 @@ Note that the same project cannot be assigned to more than one student which
 reduces the possible solutions considerably.  
 Maximum (worst) score for each student would be 3. The idea here is to 
 avoid these max scores as much as possible and assign the project that gives the 
+  p1 p2 p3 p4 
+      
+s1  1 3 2 3 
+s2  3 3 1 2 
+s3  1 2 3 3 
+-  1 1 1 1 
  
- ? 4 Methods  34 
+?4 Methods  34 
+ 
+ 
  
  
 minimum score (projects of lower rank). Trying to find the minimum of the total 
@@ -1369,13 +1386,14 @@ rank(2,1,3;;2,2,3;;2,3,1;;2,4,2).  % rankings of student 2
 rank(3,1,1;;3,2,2;;3,3,3;;3,4,3).  % rankings of student 3 
 Now, the one-to-one assignment statement can be written as:  
 1{assign(S,P):project(P)}1 :- student(S). 
+?4 Methods  35 
  
- ? 4 Methods  35 
+ 
  
  
 Assigning the same project to more than one student can be restricted with the 
 following constraint (where symbol :- means not):  
-:- assign(S1,P), assign(S2,P), S1 != S2. 
+:- assign(S1,P), assign(S2,P), S1 = S2. 
 The optimisation is then applied by finding the rank of each assigned project 
 (bad predicate), and then looking for the total worst rank among all assigned 
 projects and finally minimise the worst total quantity by using #minimize:  
@@ -1417,8 +1435,9 @@ others, another minimisation is required:
 #minimize [worst(R)=R]. 
 This will make sure ranks selected are the best and also with best total. The 
 output produced is:  
+?4 Methods  36 
  
- ? 4 Methods  36 
+ 
  
  
 Answer: 1 
@@ -1436,9 +1455,9 @@ bottleneck algorithm as following:
 Table 3 - Addition to the original bottleneck algorithm 
  
      For all projects             
-          
-Optimal rank of any individual assigned project =     
+Optimal rank of any individual assigned project =       
      
+        
   
 There is another alternative approach that can be followed which is 
 minimising the individual project rank without minimising the total rank. But 
@@ -1460,27 +1479,11 @@ automated approaches of text mining should be employed that is able to extract
 these type of information. SubSift is a suitable candidate that can be used to 
 perform text mining process based on Information Extraction and all its auxiliary 
 processes such as data pre-processing. 
- 
- ? 4 Methods  37 
- 
- 
-Data             
-pre-processing 
-Web 
-Data 
-Information 
-Reporting 
-Text Mining 
-Extracting 
+?4 Methods  37 
  
  
-Sorting based 
-System 
-on similarity 
-Database 
-Analyzing 
-Data collection 
-       Figure 15 – Text Mining process breakdown 
+ 
+ 
  
 Designing text mining for each of the two areas are discussed below in more 
 details. 
@@ -1491,73 +1494,94 @@ required is mostly available in text databases. Regardless of the type of
 information available, SubSift arranges them in a specific folder structure to 
 perform the final matching. Figure 17 shows the folder structure plan for markers 
 matching to projects. 
-Projects 
-documents 
-document document document 
-folder 
-Projects 
-profiles 
-profile 
-profile profile 
-folder 
-Markers Markers  Markers 
-documents folder profiles folder 
-bookmarks folder 
-match match 
-match 
-document profile 
-bookmark 
-match match 
-match 
-document profile 
-bookmark 
-Projects-markers matches folder 
-Figure 16 – SubSift model for matching markers and projects 
-Matched items as XML 
  
 Creation of this folder structure requires invoking the right Methods using 
 the SubSift web services API. The sequence of these method calls for this project 
 is planned as outlined in table 4. 
+Web 
+Data 
+System 
+Database 
+Data collection 
+Information 
+Extracting 
+Text Mining 
  
- ? 4 Methods  38 
+Sorting based 
+on similarity 
+Analyzing 
+Reporting 
+ 
+Data             
+pre-processing 
+       Figure 15 – Text Mining process breakdown 
+Matched items as XML 
+Markers 
+bookmarks folder 
+bookmark 
+bookmark 
+Projects 
+documents 
+folder 
+Projects 
+profiles 
+folder 
+Projects-markers matches folder 
+Markers 
+profiles folder 
+Markers  
+documents folder 
+match match 
+match match match 
+match 
+profile profile 
+profile 
+profile 
+document 
+profile 
+document document 
+document 
+document 
+Figure 16 – SubSift model for matching markers and projects 
+?4 Methods  38 
+ 
+ 
  
  
 Table 4 - SubSift matching plan for Markers 
- 
-Description Method URI format Parameters 
+ Description Method URI format Parameters 
 Step 1 Create markers bookmark folder POST   /bookmarks/markers  
-  /bookmarks/markers/items items_list 
-Step 2 Create markers bookmark items POST 
+Step 2 Create markers bookmark items POST   /bookmarks/markers/items items_list 
 the list of all 
 markers 
 URLs as a 
 string 
-Step 3 Create markers documents POST  /documents/markers  
+Step 3 Create markers documents 
 folder 
- /documents/markers/import/markers 
-Step 4 import markers document items POST  
+POST  /documents/markers  
+Step 4 import markers document items 
 from web pages (bookmarks) 
-Step 5 Create markers profiles POST  /profiles/from/markers  
+POST  /documents/markers/import/markers  
+Step 5 Create markers profiles POST  /profiles/from/markers 
  Or just: 
  /profiles 
+ 
 Similarly, projects folder structure needs to be created before matching with 
 markers can be performed. The steps for projects is quite the same as those of 
 markers, except that projects do not require bookmarks structure. Table 5 
 outlines the plan for projects. 
 Table 5 - SubSift matching plan for Projects 
- 
-Description Method URI format Parameters 
- /documents/projects 
-Step 1 Create projects documents folder POST  
- /documents/projects/items items_list 
-Step 2 Create projects documents items POST 
+ Description Method URI format Parameters 
+Step 1 Create projects documents folder POST  /documents/projects  
+Step 2 Create projects documents items POST  /documents/projects/items items_list 
 the list of all 
 projects 
 abstracts as a 
 string 
-Step 3 Create projects profiles POST  /profiles/from/projects  
+Step 3 Create projects profiles POST  /profiles/from/projects 
  Or just: 
  /profiles 
+ 
 Folders can be named differently for each type of folders, but for simplicity, 
 the same name is recommended to be used; i.e. all markers related folders are  
 named as markers, and projects name is used for all projects folders. 
@@ -1565,16 +1589,18 @@ Finally, for matching markers and projects, SubSift calculate scores (tf.idf) of
 the two profiles and provides the result in the format specified by the user.  
 Textual matching of markers and projects can be achieved by following the plan 
 outlined in table 6. 
+?4 Methods  39 
  
- ? 4 Methods  39 
+ 
  
  
 Table 6 - SubSift matching plan between Markers and Projects 
- 
-Description Method URI format Parameters 
-Step 1 Matching markers and projects POST    /matches/markers_projects/profiles   
-   /markers/with/projects 
+ Description Method URI format Parameters 
+Step 1 Matching markers and projects 
 Profiles 
+POST    /matches/markers_projects/profiles  
+   /markers/with/projects 
+ 
 Step 2 Get Matching results GET   / matches/markers_projects/items profiles_id 
 this parameter 
 can be given 
@@ -1596,42 +1622,46 @@ description and abstract) for categorising them. Again, SubSift can be used in a
 similar way to the markers’, but this time, the item to be matched with projects is 
 the search term. Figure 18 shows the folder structure for projects-search 
 matching. 
-Projects 
-documents 
-document document document 
-folder 
-Projects 
-profiles 
-profile 
-profile profile 
-folder 
-Search  term Search term 
-documents folder profiles folder 
-match match 
-match 
-document profile 
-search-projects matches folder 
-Figure 17 – SubSift model for matching projects and search term 
-Matched items as XML 
  
 Projects plan for SubSift matching is exactly as outlined in table 5. 
 Interestingly, projects can be prepared only once for the use of both areas of 
 application; i.e. with markers and with student search. For the search term, 
 similar plan can be followed except projects folder name needs to be replaced 
+Matched items as XML 
+Projects 
+documents 
+folder 
+Projects 
+profiles 
+folder 
+search-projects matches folder 
+Search term 
+profiles folder 
+Search  term 
+documents folder 
+match match match 
+profile profile 
+profile 
+document 
+profile 
+document document 
+document 
+Figure 17 – SubSift model for matching projects and search term 
+?4 Methods  40 
  
- ? 4 Methods  40 
+ 
  
  
 with another name like search. In this matching, the difference is that there is only 
 one item to be matched to a group of items. the final matching plan is outlined in 
 table 7. 
 Table 7 - SubSift matching plan between Projects and Search term 
- 
-Description Method URI format Parameters 
-   /matches/projects_search/profiles  
-Step 1 Matching projects and search  POST  
-   /projects/with/search 
+ Description Method URI format Parameters 
+Step 1 Matching projects and search  
 Profiles 
+POST    /matches/projects_search/profiles  
+   /projects/with/search 
+ 
 Step 2 Get Matching results GET   / matches/projects_search/items profiles_id 
 this parameter 
 can be given 
@@ -1664,8 +1694,9 @@ projects to student, when they search for a project, could be extracted from the
 project proposal pages, or from any other data source which the administrator 
 specifies. In addition to the abstract or short description that each supervisor 
 provides with the proposed project, keywords entered by supervisors can also be 
+?4 Methods  41 
  
- ? 4 Methods  41 
+ 
  
  
 utilised. Subsequently, by using a tool like SubSift, we can extract information 
@@ -1681,69 +1712,32 @@ other online published publications.
 This project combines a beautiful bunch of concepts that require a diversity of 
 technologies for applying them. Following is an outline of the technologies to be 
 used for each of these concepts: 
+Answer Set Programming 
 Solver: 
 gringo 3.0.4    for windows 
-Answer Set Programming 
 Output: 
 clasp 2.1.0 
 Text mining SubSift REST API 
+System framework and front-
+end 
 ASP.NET (C#) using Visual Studio 
-System framework and front- 2010 
-end (since all what a client would require 
+2010 
+(since all what a client would require 
 to run the system is a browser) 
 Styles Cascaded Style Sheets (CSS) 
-SQL Server 
 Data 
+SQL Server 
 CSV text files 
  
 4.2.8 The final model 
 All plans described previously can be combined in one general overview of the 
 expected functionalities from the new system. Figure 18 sketches all features to 
 get a better intuition of the system. 
+?4 Methods  42 
  
- ? 4 Methods  42 
  
  
-SQL DB         
-Supervisors 
-file system 
-propose projects 
-Administrator  
-Students search  
-runs automatic 
-allocation and rank projects 
-Markers web-pages       projects       student search 
-W e b R e q u e s t 
-W e b R e s p o n s e 
-Suggest projects matching 
-Suggest markers 
-student search 
-for each project 
-projects 
-markers 
-1    1     2     3 … Students  
-1    1     2     3 … 
-… 
-2     1     2     3 … 
-2     1     2     3 rank projects 
-gringo 
  
-clasp
-Considering 
-Students 
-Markers assigned 
-Projects assigned to 
-preferences and 
-to projects students 
-load on 
-projects 
-markers 
-supervisors and 
-1   
-1         
-markers 
-2   
-2          
  
 Figure 18 - System Design Overview 
  
@@ -1753,16 +1747,83 @@ system. Therefore, this stage would include building the planned system
 architecture first and then accommodate all components in one integrated 
 environment. Implementation details are explained in the following sections. 
  
+Considering 
+Students 
+preferences and 
+load on 
+supervisors and 
+markers 
+Markers web-pages       projects       student search 
+Students search  
+and rank projects 
+SQL DB         
+file system Supervisors 
+propose projects 
+Administrator  
+runs automatic 
+allocation 
+W e b  R e q u e s t  
+Suggest markers 
+for each project 
+Students  
+rank projects 
+Suggest projects matching 
+student search 
+W e b  R e s p o n s e  
  
  
-projects 
-projects 
-… 
-… 
+
+ 
+1    1     2     3 
+2     1     2     3 
+markers 
+p
+ro
+je
+ct
+s  
+ 
+
+ 
+1    1     2     3 
+2     1     2     3 
+st
+u
+d
+e
+n
+ts
+ projects 
+gringo 
+clasp  
+Markers assigned 
+to projects 
+Projects assigned to 
 students 
-students 
-… 
-… ? 4 Methods  43 
+
+ 
+1         
+2          
+markers 
+p
+ro
+je
+ct
+s 
+
+ 
+1   
+2   
+st
+u
+d
+e
+n
+ts
+ projects 
+?4 Methods  43 
+ 
+ 
  
  
 4.3.1 Implementing the Architecture – Fornt-end Layer 
@@ -1800,8 +1861,9 @@ When projects gets published, students can easily find appropriate projects
 without going throw a long list of projects and even with no need to open the 
 links of any project to read their abstracts. Following is a description of how 
 students find and get allocated a project. 
+?4 Methods  44 
  
- ? 4 Methods  44 
+ 
  
  
 Figure 21 shows students page for finding a project. First, any student selects 
@@ -1829,8 +1891,9 @@ displaying only their titles and get expanded by clicking on their titles (one a
 time). This style behaviour is called Accordion control and it is discussed in the 
 section about Styles. This will help students for viewing projects – as mentioned - 
 with no need for leaving the current page. 
+?4 Methods  45 
  
- ? 4 Methods  45 
+ 
  
  
  
@@ -1857,8 +1920,9 @@ The back-end layer in the system architecture comprises the system database,
 data files, and ASP constraints. ASP constraints component is explained in the 
 following section in the context of the optimisation problem solution. In this 
 project, a light-weight relational database is developed for managing and relating 
+?4 Methods  46 
  
- ? 4 Methods  46 
+ 
  
  
 various data to each other. Although data are supplied to the system as plain text 
@@ -1899,8 +1963,9 @@ For calling SubSift methods, two versions of method SubSiftMethod are
 created in this class: one for requesting SubSift without parameters, and the other 
 with parameters. 
 public static bool SubSiftMethod(string url, string method) 
+?4 Methods  47 
  
- ? 4 Methods  47 
+ 
  
  
  
@@ -1938,8 +2003,9 @@ StreamReader reader = new StreamReader(receiveStream, Encoding.UTF8);
 string content = reader.ReadToEnd(); 
 Now, knowing how to invoke SubSift methods, we can move to see how this 
 code is generalised to serve any matching application. 
+?4 Methods  48 
  
- ? 4 Methods  48 
+ 
  
  
 Preparing SubSift Text 
@@ -1992,8 +2058,9 @@ SubSiftMethod("http://subsift.ilrt.bris.ac.uk/user/matches/" +
 SubSiftGetMatchedItems("http://subsift.ilrt.bris.ac.uk/user/matches/" +  
 firstTextId + "_" + secondTextId + "/items?profiles_id=" + secondTextId, 
 "GET"); 
+?4 Methods  49 
  
- ? 4 Methods  49 
+ 
  
  
 Everything is prepared now for using it, but how all this is used? 
@@ -2030,8 +2097,9 @@ search, but this time the bookmark URL addresses will replace the text; i.e.
 <marker-id>,<marker-URL>. 
 All these functionalities are available as one of the features in the coordinator 
 workspace as in figure 23. 
+?4 Methods  50 
  
- ? 4 Methods  50 
+ 
  
  
  
@@ -2052,14 +2120,13 @@ summarised in table 8:
 Table 8 - Fact predicates required for allocating projects to students 
  
  Predicate Source 
-rank(<student-id>, <project-id>, <rank>) 
-1 StudentRank database table 
-project(<project-id>,<supervisor-id>) 
-2 Project database table 
+1 rank(<student-id>, <project-id>, <rank>) StudentRank database table 
+2 project(<project-id>,<supervisor-id>) Project database table 
 3 student(<student-id>) Student database table 
 4 staff(<staff-id>, <load>) Staff database table 
+?4 Methods  51 
  
- ? 4 Methods  51 
+ 
  
  
 All these ground facts are written to a .pl file. Then all other ASP code 
@@ -2069,8 +2136,8 @@ becomes:
 Some constraints need to be applied to ensure a one-to-one assignment of 
 students to projects which will make sure no project is assigned to more than one 
 student, and no student is assigned more than one project:  
-:- assign(S1,P,_), assign(S2,P,_), S1 != S2. 
-:- assign(S,P1,_), assign(S,P2,_), P1 != P2. 
+:- assign(S1,P,_), assign(S2,P,_), S1 = S2. 
+:- assign(S,P1,_), assign(S,P2,_), P1 = P2. 
 To manage load on supervisors, and having load specified for each 
 supervisor, the assignments can be counted for each supervisor and the count 
 should be restricted to this supervisor’s pre-set load value. This will prohibit any 
@@ -2083,7 +2150,7 @@ minimisation; one is for minimising the worst rank among all assigned projects:
 bad(S,R) :- assign(S,P,_), rank(S,P,R). 
  
 % some student S2 is worse off than S1 
-worse(S1) :- bad(S1,R1), bad(S2,R2), R1<R2, S1 != S2. 
+worse(S1) :- bad(S1,R1), bad(S2,R2), R1<R2, S1 = S2. 
  
 % R is score of worst off student 
 worst(R) :- bad(S,R), not worse(S). 
@@ -2097,8 +2164,9 @@ is available in appendix II.
 Now, the ASP pl file is ready for execution using both gringo and clasp. The 
 command line statement for running the program (here is named Predicate.pl) 
 with some clasp options for enhancing the optimisation is shown below:  
+?4 Methods  52 
  
- ? 4 Methods  52 
+ 
  
  
 gringo Predicate.pl | clasp --opt-value=15,15 
@@ -2123,18 +2191,17 @@ Allocating markers to projects
 This allocation has few differences than the previous one. Although the 
 predicates seem to be the same, they are slightly different in the source of the 
 information. The predicates used in this problem are outlined in table 9 below.  
+?4 Methods  53 
  
- ? 4 Methods  53 
+ 
  
  
  
 Table 9 - Fact predicates required for allocating markers to projects 
  
  Predicate Source 
-rank(<project-id>, <staff-id>, <rank>) 
-1 SubSift xml result 
-project(<project-id>,<supervisor-id>) 
-2 ProjectAssignment database table (as 
+1 rank(<project-id>, <staff-id>, <rank>) SubSift xml result 
+2 project(<project-id>,<supervisor-id>) ProjectAssignment database table (as 
 only those projects that are assigned 
 need to be allocated markers) 
 3 staff(<staff-id>, <load>) Staff database table 
@@ -2166,8 +2233,9 @@ worst(N,R) :- bad(N,P,R), not worse(N,P).          % R is score of worst off pro
  
 totalSum(N,T) :- T = #sum [bad(N,_,R)=R]. 
 #minimize [totalSum(2,T)=T]. 
+?4 Methods  54 
  
- ? 4 Methods  54 
+ 
  
  
 #minimize [totalSum(1,T)=T]. 
@@ -2197,8 +2265,9 @@ configured by creating a Virtual Directory that points to the physical folder
 location. Deployment phase is out of the scope of this project, but this section 
 provides links to online resources as guidance for deploying the application. 
 Once deployed to server, users can access the application through its URL and 
+?4 Methods  55 
  
- ? 4 Methods  55 
+ 
  
  
 there will be no need for any other configuration from client side. Following is an 
@@ -2224,8 +2293,8 @@ well as inserting data into the created tables.
  
  
  
+56 
  
- 56 
  
  
 5 Results 
@@ -2262,14 +2331,15 @@ Procedure Student menu > select Student id > select filters and/or enter
 search words > specify number of projects to show > Submit 
 Result Correct number of projects comes up in the accordion list. 
 Discussion This list is a result of SubSift matching between projects and 
- ? 5 Results  57 
+?5 Results  57 
+ 
+ 
  
  
 search terms. Although can be assessed by eye, to make sure the 
 displayed projects are really the best for this search, following 
 procedure is performed: 
-1
-From online SubSift REST API Explorer > select method as GET 
+From online SubSift REST API Explorer1 > select method as GET 
 > enter URL: /<user>/matches/search_projects/items > add two 
 parameters: profiles_id with value search, full with value 1 
  
@@ -2302,10 +2372,10 @@ cannot submit again which is correct.
 5.3 Scenarios Group 3: Coordinator Tasks 
 Scenario Assign projects to students 
                                                              
-1
- http://subsift.ilrt.bris.ac.uk/demo/explorer 
+1 http://subsift.ilrt.bris.ac.uk/demo/explorer 
+?5 Results  58 
  
- ? 5 Results  58 
+ 
  
  
 Procedure Coordinator menu > click “Assign projects to students” link > 
@@ -2349,8 +2419,9 @@ around 5 minutes.
  
  
 Scenario Assign markers to projects 
+?5 Results  59 
  
- ? 5 Results  59 
+ 
  
  
 Procedure Coordinator menu > click “Assign markers to projects” link > 
@@ -2363,8 +2434,8 @@ doesn’t exceed the pre-set loads.
 I also executed the ASP program in DOS command line and 
 checked the output which matches the one displayed in the 
 coordinator page.  
+60 
  
- 60 
  
  
 6 Evaluation 
@@ -2378,7 +2449,7 @@ him (should have rank 1). Based on this assumption, a scenario is implemented
 for allocating 182 projects to these 121 students by creating a sample rank list for 
 a selected number of students (12) with the currently allocated project as first 
 choice. The rest of each rank list is selected randomly from available proposed 
-projects (e.g. rank 2, rank 3 …).  
+projects (e.g. rank 2, rank 3 ).  
 Then running the system on this setup, the output was studied and those 
 selected students allocations were checked. The algorithm provides 100% 
 accuracy (12/12) in assigning projects to students. 
@@ -2402,23 +2473,11 @@ maximum loads to consider the projects already assigned, and those are to be
 assigned in this experiment. I then run the allocation algorithm on this setup and 
 the results were satisfying – see figure 25. Note that the run took around 2 
 seconds on average. 
- ? 6 Evaluation  61 
+?6 Evaluation  61 
  
  
-Student count of each project preferent value 
-using optimal allocation algorithm 
-14
-12
-10
-8
-Student
-6
-Count
-4
-2
-0
-1 2 3 4 5
-Preference Rank Value 
+ 
+ 
  
 Figure 25 - Optimal allocation result for student-project allocation 
 The output of this experiment gives an optimum value of rank 2 as a 
@@ -2443,9 +2502,38 @@ to select from (at the moment) for assigning to available projects. Consequently
 in reality we have larger list of markers and projects and SubSift result will be the 
 ranks of all markers regarding any project so the markers assignment will be 
 more precise regarding their expertise. 
+0
+2
+4
+6
+8
+10
+12
+14
+1 2 3 4 5
+N
+u
+m
+b
+e
+r 
+o
+f 
+st
+u
+d
+e
+n
+ts
+ 
+Preference Rank Value 
+Student count of each project preferent value 
+using optimal allocation algorithm 
+Student
+Count
+?6 Evaluation  62 
  
  
-Number of students ? 6 Evaluation  62 
  
  
 Table 10 - Marker-project allocation result 
@@ -2453,42 +2541,36 @@ Table 10 - Marker-project allocation result
 Figure 26 shows the assigned markers’ SubSift ranks for the results outlined 
 in table 10. The figure shows the trend of optimising marker 1 and marker 2 
 ranks and obviously shows that marker 1 has the higher priority in optimisation.  
-Optimal SubSift ranks of markers allocated to 
-projects through ASP 
-8
-7
-6
-5
-4
-marker 2
-3
-marker 1
-2
-1
-0
-1 2 3 4 5 6 7 8 9 10 11 12
-Projects 
  
 Figure 26 - SubSift ranks of markers allocated using ASP 
+0
+1
+2
+3
+4
+5
+6
+7
+8
+1 2 3 4 5 6 7 8 9 10 11 12
+Su
+b
+Si
+ft
+ R
+an
+k 
+Projects 
+Optimal SubSift ranks of markers allocated to 
+projects through ASP 
+marker 2
+marker 1
+?6 Evaluation  63 
  
  
-SubSift Rank ? 6 Evaluation  63 
  
  
 Figure 27 also shows the count of projects in each marker rank. 
-Number of allocated markers in each            
-SubSift rank  
-7
-6
-5
-4
-3 marker 1
-2
-marker 2
-1
-0
-1 2 3 4 5
-SubSift Rank 
  
 Figure 27 - Number of markers with respect to SubSift Rank 
 The optimisation problem is hard and these results prove that this project has 
@@ -2507,32 +2589,38 @@ process is complex and would create unnecessary work on the coordinators.
 For students, a sample was selected and interviewed for checking and 
 comparing the time required for project selection between the current and the 
 new system, results are shown in figure 28. 
- 
- 
-Number of Markers ? 6 Evaluation  64 
- 
- 
-Time Required for Student Project Selection 
-10
-9
-Current System
-8
-7
-Expected with
-6
-new system
-5
-Linear (Current
-System)
-4
-3 Linear
-(Expected with
-2
-new system)
-1
 0
-0 2 4 6 8 10
-Student 
+1
+2
+3
+4
+5
+6
+7
+1 2 3 4 5
+N
+u
+m
+b
+e
+r 
+o
+f 
+M
+ar
+ke
+rs
+ 
+SubSift Rank 
+Number of allocated markers in each            
+SubSift rank  
+marker 1
+marker 2
+?6 Evaluation  64 
+ 
+ 
+ 
+ 
  
 Figure 28 - A Comparison of time required for selecting projects 
 between the current and the new system 
@@ -2553,30 +2641,62 @@ Table 11 - Students questionnaire for assessing users satisfaction
  
 Question  S1 S2 S3 S4 S5 S6 
 Did the current system consume your time 
-more than necessary for finding the right Yes Yes Yes Yes Yes Yes 
+more than necessary for finding the right 
 project? 
-Did you go through projects which are 
 Yes Yes Yes Yes Yes Yes 
+Did you go through projects which are 
 completely not relevant to your expertise? 
+Yes Yes Yes Yes Yes Yes 
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+0 2 4 6 8 10
+Ti
+m
+e
+ (
+ d
+ay
+s 
+) 
+Student 
+Time Required for Student Project Selection 
+Current System
+Expected with
+new system
+Linear (Current
+System)
+Linear
+(Expected with
+new system)
+?6 Evaluation  65 
  
  
-Time ( days ) ? 6 Evaluation  65 
  
  
 Do you think the current system is better to 
 be replaced by new system which provides 
-Yes Yes Yes Yes Yes Yes 
 you only those projects which are suitable 
 regarding your expertise? 
-Do you think the new system will reduce the 
 Yes Yes Yes Yes Yes Yes 
-time required for finding a suitable project? 
 Do you think the new system will reduce the 
-effort required to be spent by a student for Yes Yes Yes Yes Yes Yes 
+time required for finding a suitable project? 
+Yes Yes Yes Yes Yes Yes 
+Do you think the new system will reduce the 
+effort required to be spent by a student for 
 finding a project? 
+Yes Yes Yes Yes Yes Yes 
 Has your current project appeared in your 
-Yes Yes  Yes Yes Yes Yes 
 search? 
+Yes Yes  Yes Yes Yes Yes 
 If yes please mention its order in the list? 1 5 33 18 46 9 
 Although the order of each student actual project in the suggested list varied 
 (figure 29), but still most of them found their actual projects among the first 20 
@@ -2584,32 +2704,46 @@ projects provided by the system, and all of them acknowledged that finding a
 suitable project among this list is more easier  and require less effort than 
 previous system and also most of them found  that all the suggested projects are 
 related to what they are looking for.  
-SubSift Order of Current Project in Student Search Result 
-50
-45
-40
-35
-30
-SubSift Order
-25
-Linear (SubSift
-20
-Order)
-15
-10
-5
-0
-0 2 4 6 8
-Student 
  
 Figure 29 -  SubSiftorder of current projects obtained in student search results 
 We can improve the process of finding a suitable project and make it even 
 more easier and consuming less effort of students to discover a right project in a  
 minimum time by only: 
 - Advise supervisors to include some key words in their proposed projects; 
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+0 2 4 6 8
+C
+u
+rr
+e
+n
+t 
+P
+ro
+je
+ct
+ O
+rd
+er
+ 
+Student 
+SubSift Order of Current Project in Student Search Result 
+SubSift Order
+Linear (SubSift
+Order)
+?6 Evaluation  66 
  
  
-Current Project Order ? 6 Evaluation  66 
  
  
 - Improving students’ knowledge about the way they can search and the 
@@ -2625,8 +2759,8 @@ practical and  more efficient to select a project from the suggested projects li
 which is close to their expertise and interest. 
  
  
+67 
  
- 67 
  
  
 Conclusion and future work 
@@ -2662,7 +2796,8 @@ Finally, combining Constraint Programming via ASP, and textual matching
 via SubSift, and adopt them into wider range of applications would have much 
 impact on the optimality of the outcomes. 
  
- 68 
+68 
+ 
  
  
 References  
@@ -2681,7 +2816,7 @@ Feldman, R. & Dagan, I., 1995. Knowledge Discovery in Textual Databases
 (KDT).  
 Feldman, R. & Sanger, J., 2007. The Text Mining Handbook: Advanced Approaches to 
 Analyzing Unstructured Data. Cambridge, England: Cambridge University Press. 
-Feng, X., Shen, J. & Fan, Y., 2009. REST ?An Alternative to RPC for Web Services 
+Feng, X., Shen, J. & Fan, Y., 2009. REST?An Alternative to RPC for Web Services 
 Architecture. First International Conference on Future Information Networks, pp. 7 - 
 10. 
 Fischer, S., Petrova, M., Mahonen, P. & Vocking, B., 2007. Distributed Load 
@@ -2699,7 +2834,9 @@ Applications, Kluwer Academic Publishers, Boston, p. 219–239.
 Leite, J., Alferes, J. & Mito, B., 2009. Resource Allocation with Answer-Set 
 Programming. Proceedings of The 8th International Conference on Autonomous Agents 
 and Multiagent Systems, pp. 649 - 656. 
- References  69 
+References  69 
+ 
+ 
  
  
 Lifschitz, V., 2008. What Is Answer Set Programming. Proceedings of the AAAI 
@@ -2729,8 +2866,8 @@ Womersley, R., 2001. The Travelling Salesman Problem and Computational
 complexity. Parabola, pp. Volume 37, Issue 2. 
  
  
+70 
  
- 70 
  
  
 Appendix I – Database structure 
@@ -2738,7 +2875,8 @@ Appendix I – Database structure
 Database structure and relations between tables: 
 (Note that fields in bold are primary keys) 
  
- 71 
+71 
+ 
  
  
 Appendix II – Students-Projects Allocation 
@@ -2797,14 +2935,14 @@ staff(csxor,4).
  
 1{assign(S,P,V):project(P,V)}1 :- student(S). 
  
-:- assign(S1,P,_), assign(S2,P,_), S1 != S2. 
-:- assign(S,P1,_), assign(S,P2,_), P1 != P2. 
+:- assign(S1,P,_), assign(S2,P,_), S1 = S2. 
+:- assign(S,P1,_), assign(S,P2,_), P1 = P2. 
  
 % student S has badness R under the assignment 
 bad(S,R) :- assign(S,P,_), rank(S,P,R). 
  
 % some student S2 is worse off than S1 
-worse(S1) :- bad(S1,R1), bad(S2,R2), R1<R2, S1 != S2. 
+worse(S1) :- bad(S1,R1), bad(S2,R2), R1<R2, S1 = S2. 
  
 % don't assign if exceed load 
 :- assign(_,_,V), staff(V,L), B = #count{assign(_,_,V)}, B > L. 
@@ -2821,7 +2959,8 @@ totalSum(T) :- T = #sum [bad(_,R)=R].
 #show bad/2. 
  
  
- 72 
+72 
+ 
  
  
 Appendix III – Markers-Projects Allocation 
@@ -2900,7 +3039,8 @@ totalSum(N,T) :- T = #sum [bad(N,_,R)=R].
 #hide. 
 #show assign/3. 
 #show bad/3. 
- 73 
+73 
+ 
  
  
 Appendices IV – Source Code 
@@ -2916,701 +3056,816 @@ Supervisor Main Page
 Student Main Page 
  
  
-     public class SubSift 
-        //method 'SubSiftGetMatchedItems' returns match result 
-    {    /* 'prepareSubSiftBookmarkText' method prepares markers data (from webpages) for SubSift matching          public static string SubSiftGetMatchedItems(string url, string method) { 
-1 2 
-         * the passed text is created in folders with given name textId e.g. abstracts, search, markers, .. */.             try { 
-        public static string prepareSubSiftBookmarkText(string textId, string bookmarkItems) {                 WebRequest myReq = WebRequest.Create(url); 
-            bool done;                 myReq.Method = method; 
- 
-            deleteTextAll(textId);//delete all folders, items previously created by SubSift                 WebResponse wr = myReq.GetResponse(); 
-            // Create Bookmark folder (step 1)                 Stream receiveStream = wr.GetResponseStream(); 
-            done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/bookmarks/" + textId, "POST");                 StreamReader reader = new StreamReader(receiveStream, Encoding.UTF8); 
-            //Create bookmark Items (step 2)                             string content = reader.ReadToEnd(); 
- done=SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/bookmarks/"+textId+"/items.xml","POST",                 return content; 
-   "items_list",bookmarkItems);             } catch (Exception){return "error";}}      
-            //Create documents folder (step 3) 
-       //methods for deleting all previousely created folders, items, matched results 
   
-            done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/documents/" + textId, "POST");         public static bool deleteTextAll(string folderName) 
-            //import document items from web pages (bookmarks) (step 4)         { 
-            done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/documents/" + textId + "/import/" +              SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/bookmarks/" + folderName, "DELETE"); 
-   textId, "POST"); 
-            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/bookmarks/" + folderName + "/items", "DELETE"); 
-            Thread.Sleep(300000); //delay 5 minutes as require for SubSift to fetch all data from webpages 
-            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/documents/"+folderName, "DELETE"); 
-            //Create Profiles (step 5) 
-            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/documents/"+folderName+"/items", "DELETE"); 
-            done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/profiles/" + textId, "POST");             SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/profiles/"+folderName, "DELETE"); 
-            return "";     //return empty string means preparing bookmark items is finished successfully 
-            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/profiles/"+folderName+"/items", "DELETE");                         
-        } 
-            return true; 
-     /* 'prepareSubSiftText' method prepares projects abstracts or students search terms 'text' for SubSift matching  
-        }        
-      the passed text is created in folders with given name textId e.g. abstracts, search, markers, ... */ 
-        private static bool deleteMatches(string firstTextId, string secondTextId) 
-        public static string prepareSubSiftText(string textId, string text) { 
-        { 
+ 
+  
+    public class SubSift 
+    {    /* 'prepareSubSiftBookmarkText' method prepares markers data (from webpages) for SubSift matching  
+         * the passed text is created in folders with given name textId e.g. abstracts, search, markers, .. */. 
+        public static string prepareSubSiftBookmarkText(string textId, string bookmarkItems) { 
             bool done; 
-            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/matches/" + firstTextId + "_" +  
-            deleteTextAll(textId);//delete all folders, items from previously created by SubSift 
-   secondTextId, "DELETE"); 
-            //Create Documents Folder (step 1) 
-            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/matches/" + firstTextId + "_" +   
+            deleteTextAll(textId);//delete all folders, items previously created by SubSift 
+            // Create Bookmark folder (step 1) 
+            done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/bookmarks/" + textId, "POST"); 
+            //Create bookmark Items (step 2)             
+ done=SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/bookmarks/"+textId+"/items.xml","POST", 
+   "items_list",bookmarkItems); 
+            //Create documents folder (step 3) 
             done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/documents/" + textId, "POST"); 
-   secondTextId+"/items", "DELETE"); 
-            //Create document Items (step 2) 
-            return true; 
-            done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/documents/" + textId + "/items", "POST",  
-        }}} 
-   "items_list", text); 
-/*----------------------------------------------------------------------------------------------------------------*/ 
-            //Create Profiles (step 3) 
-    public class SQL 
-            done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/profiles/" + textId + "/from/" +  
-    { 
+            //import document items from web pages (bookmarks) (step 4) 
+            done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/documents/" + textId + "/import/" +  
    textId, "POST"); 
-        // 'conn' represents a connection to a SQL Server DB 
-            return "";      //return empty string means preparing text is finished successfully         static SqlConnection conn =  
-        }          new SqlConnection(ConfigurationManager.ConnectionStrings["ProjectAllocConnectionString"].ConnectionString); 
-         /* method match is for matching between projects abstracts and markers or students search terms */         static SqlDataAdapter da; 
+            Thread.Sleep(300000); //delay 5 minutes as require for SubSift to fetch all data from webpages 
+            //Create Profiles (step 5) 
+            done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/profiles/" + textId, "POST"); 
+            return "";     //return empty string means preparing bookmark items is finished successfully 
+        } 
+     /* 'prepareSubSiftText' method prepares projects abstracts or students search terms 'text' for SubSift matching  
+      the passed text is created in folders with given name textId e.g. abstracts, search, markers, ... */ 
+        public static string prepareSubSiftText(string textId, string text) { 
+            bool done; 
+            deleteTextAll(textId);//delete all folders, items from previously created by SubSift 
+            //Create Documents Folder (step 1) 
+            done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/documents/" + textId, "POST"); 
+            //Create document Items (step 2) 
+            done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/documents/" + textId + "/items", "POST",  
+   "items_list", text); 
+            //Create Profiles (step 3) 
+            done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/profiles/" + textId + "/from/" +  
+   textId, "POST"); 
+            return "";      //return empty string means preparing text is finished successfully 
+        } 
+         /* method match is for matching between projects abstracts and markers or students search terms */ 
         public static string match(string firstTextId, string secondTextId) { 
-        //method 'getAbstracts'returns abstracts from DB for SubSift projects items 
-            bool done;         public static string getAbstracts(bool assignedOnly) {  
-            try {             string abstracts = ""; conn.Open(); 
-                deleteMatches(firstTextId, secondTextId);//delete matches results from previously created by SubSift             if(assignedOnly)     //only those abstracts that assigned to students 
-                //Matching first text and second text Profiles (step 1)                 da = new SqlDataAdapter("SELECT * from Project WHERE ProjectId IN (SELECT ProjectId FROM 
-                done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/matches/" + firstTextId + "_" +  ProjectAssignment)", conn); 
-   secondTextId + "/profiles/" + firstTextId + "/with/" + secondTextId, "POST");             else                // select all projects abstracts from DB 
-                if (!done){return "Error Matching " + firstTextId + " and " + secondTextId + " Profiles ";}                 da = new SqlDataAdapter("SELECT * from Project", conn); 
-                //Get Matched results (step 2). profiles_id parameter is to select which text to group by             DataSet ds = new DataSet(); da.Fill(ds, "abstracts"); 
-                string content = SubSiftGetMatchedItems("http://subsift.ilrt.bris.ac.uk/dabbas/matches/" +             foreach (DataRow r in ds.Tables["abstracts"].Rows) { 
-                    firstTextId + "_" + secondTextId + "/items?profiles_id=" + secondTextId, "GET");                 string description = r["Title"] + " " + r["Abstract"] + " " + r["SkillRequired"]; 
-                if (content == ""){return "Error getting Matched " + firstTextId + " and " + secondTextId;} 
-                description = description.Replace('"', ' '); 
-                return content;                 description = description.Replace(';', ' '); 
-            }                 description = description.Replace('&', ' '); 
-            catch (Exception ex1) { return ex1.Message;}                 description = description.Replace('\n', ' '); 
-        } 
-                description = description.Replace('\r', ' '); 
-          // method 'SubSiftMethod' is takes two parameters url and method (e.g. POST, GET,...)       * 
-                abstracts += r["ProjectId"] + "," + description + "\n"; 
-        public static bool SubSiftMethod(string url, string method) { 
-            } 
+            bool done; 
             try { 
-            conn.Close(); return abstracts; 
-                //initialising a new WebRequest instance for the url then adding new values to the Headers 
-        } 
-                WebRequest myReq = WebRequest.Create(url);  
-        // 'getMarkersList' returns staffs details 
-                myReq.Headers.Add("Token", "2134712a45e47f6eb2482aa73149e3c31b80d14c"); 
-        public static string getMarkersList() { 
-                myReq.Method = method; 
-            string markers = ""; conn.Open(); 
-                WebResponse wr = myReq.GetResponse();//getting a response from given url                 
-            da = new SqlDataAdapter("SELECT * from staff", conn); 
-                return true;  //if no error return true otherwise return false      
-            DataSet ds = new DataSet(); da.Fill(ds, "markers"); 
- } catch (Exception){return false;} 
-            foreach (DataRow r in ds.Tables["markers"].Rows) 
-        } 
-                markers += r["StaffId"] + "," + r["FName"] + " " + r["LName"] + "," + r["URL"] + "\n"; 
-         // 'SubSiftMethod' takes 4 parameters URL, method (e.g.POST,...),  
-            conn.Close(); return markers; 
-         // parameterName e.g. "items_list", and parameterValue (text)  
-        } 
-        public static bool SubSiftMethod(string url, string method, string parameterName, string parameterValue) {  
-        //'GenerateNewProjectId' return new project id for new project to be published 
-            try {         public static long GenerateNewProjectId() { 
-                //initialising a new WebRequest instance for the url, then adding new values to the Headers 
-            conn.Open(); 
-                WebRequest myReq = WebRequest.Create(url); 
-            da = new SqlDataAdapter("SELECT MAX(ProjectId) AS MaxId FROM Project", conn); 
-                myReq.Headers.Add("Token", "2134712a45e47f6eb2482aa73149e3c31b80d14c"); 
-            DataSet ds = new DataSet(); da.Fill(ds, "ProjectId"); 
-                myReq.Method = method;             DataRow dr = ds.Tables["ProjectId"].Rows[0]; conn.Close(); 
-                string postString = parameterName + "=" + parameterValue;              if (dr["MaxId"] == DBNull.Value) return 1; //first time will be 1 otherwise the max number + 1 
-                StreamWriter requestWriter = new StreamWriter(myReq.GetRequestStream());             else return Convert.ToInt64(dr["MaxId"]) + 1;             
-                requestWriter.Write(postString);         } 
-                requestWriter.Close();         //'createPredicates' method read from DB required data and convert them to predicate shape 
- 
-                WebResponse wr = myReq.GetResponse();//provides a response from given url         public static string createPredicates(bool assignedOnly) { 
-                return true;             conn.Open(); 
- 
-            } catch (Exception e){Console.WriteLine(e.Message); return false;}             string predicates = "\n"; 
-        }             if(assignedOnly)     // select only those projects which assign to students           //Read all lines from selected file and assign to string array variable. 
-                da = new SqlDataAdapter("SELECT ProjectId,StaffId FROM Project WHERE ProjectId IN " +  
-          string[] fileContent = File.ReadAllLines(filePath); 
-4 
-3 
-     "(SELECT ProjectId FROM ProjectAssignment)", conn); 
-          //Checks fileContent count > 0 then we have some lines in the file. If = 0 then file is empty 
-            Else da = new SqlDataAdapter("SELECT ProjectId,StaffId FROM Project", conn);   // select all projects  
-          if (fileContent.Count() > 0) { 
-            DataSet ds = new DataSet(); da.Fill(ds, "projects"); 
-              //In CSV file, 1st line contains column names. When you read CSV file, each delimited by ','. 
- 
-            da = new SqlDataAdapter("SELECT StudentId FROM Student", conn);  da.Fill(ds, "students"); 
-              //fileContent[0] contains 1st line and splitted by ','. columns string array contains list of columns. 
-            foreach (DataRow r in ds.Tables["projects"].Rows)// loop on selected projects  
-              string[] columns = fileContent[0].Split(','); 
-                predicates += "project(" + r["ProjectId"] + ", " + r["StaffId"] + ").\n"; 
-              for (int i = 0; i < columns.Count(); i++) {dtDataSource.Columns.Add(columns[i]);} 
-            predicates += "\n";  //new line 
-              //Same logic for row data. 
-            foreach (DataRow r in ds.Tables["students"].Rows)// loop on selected students 
-              for (int i = 1; i < fileContent.Count(); i++) { string[] rowData = fileContent[i].Split(','); 
-                predicates += "student(" + r["StudentId"] + ").\n"; 
-                  dtDataSource.Rows.Add(rowData); 
-            predicates += "\n"; da = new SqlDataAdapter("SELECT StaffId FROM staff", conn); 
-          }   } return dtDataSource; 
-            da.Fill(ds, "staff"); 
-      } 
-  
-            foreach (DataRow r in ds.Tables["staff"].Rows)//loop on selected staffs 
-      //method for running ASP command and result of ASP will be saved in file 'outputFile' 
-                predicates += "staff(" + r["StaffId"] + ",4).\n"; //staff load as '4' but it can be changed  
-      public static bool runCommand(string inputFile, string outputFile, string workingDir) { 
-            predicates += "\n"; conn.Close(); return predicates; 
-          //run ASP file from commandline  
-        } 
-          try {   //string predicatePath = Server.MapPath("~"); 
-        // method for deleting records in DB (from the passed table name)               System.Diagnostics.Process si = new System.Diagnostics.Process(); 
-        public static bool deleteRecords(string table) {               si.StartInfo.WorkingDirectory = workingDir; 
-            conn.Open(); 
-              si.StartInfo.UseShellExecute = false; 
-            SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; 
-              si.StartInfo.FileName = "cmd.exe"; 
-            cmd.CommandText = "DELETE FROM " + table; cmd.Connection = conn;                           si.StartInfo.Arguments = "/c gringo " + inputFile + " | clasp > " + outputFile; 
-            try { cmd.ExecuteNonQuery();  conn.Close(); return true;               si.StartInfo.CreateNoWindow = true; 
-            } catch (Exception) { conn.Close(); return false; }               si.StartInfo.RedirectStandardInput = true; 
-        }               si.StartInfo.RedirectStandardOutput = true; 
-        //method for updating students rank after submission of their ranked project list               si.StartInfo.RedirectStandardError = true; 
-        public static void UpdateStudentRank(string StudentID, string ProjectID, int Rank) {               si.Start(); 
-            conn.Open();               string output = si.StandardOutput.ReadToEnd(); 
-            SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text;  cmd.Connection = conn;                si.Close(); return true; 
-            cmd.Parameters.AddWithValue("@StudentId", StudentID);           } catch (Exception){ return false;} 
-            cmd.Parameters.AddWithValue("@ProjectId", ProjectID);       } } 
-            cmd.Parameters.AddWithValue("@Rank", Rank); /*----------------------------------------------------------------------------------------------------------------*/ 
-            cmd.Parameters.AddWithValue("@RankDate", DateTime.Now);      public partial class Projects : System.Web.UI.Page 
-            cmd.CommandText = "UPDATE StudentRank SET " +     { 
-                "Rank = @Rank,RankDate = @RankDate  " + 
-        SqlConnection conn; SqlDataAdapter da; DataTable dt; 
-                "WHERE ProjectId=@ProjectId AND StudentId = @StudentId"; 
-        protected void Page_Load(object sender, EventArgs e) { 
-            cmd.ExecuteNonQuery(); conn.Close(); 
- conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ProjectAllocConnectionString"].ConnectionString); 
-        }}}        }/*-----------------------------------------------------------------------------------------* 
-/*----------------------------------------------------------------------------------------------------------------*/ 
-         *  ‘btnPrepareMarkers’ is the button for Preparing marekers 
-    public class Utilities 
-         * ----------------------------------------------------------------------------------------*/ 
-    { 
-        protected void btnPrepareMarkers_Click(object sender, EventArgs e)  { 
-        //method for reading files taking file path as the parameter and returns file content 
-            string markersList = SQL.getMarkersList();  //read Markers data from DB (calling SQL class) 
-        public static string ReadFile(string filepath) { 
-            // "markers" is the name that SubSift will use for naming text folders 
-            try{ StreamReader sr = new StreamReader(HttpContext.Current.Server.MapPath(filepath)); 
-            // markersList is information about markers 'Staff id, Staff name, URL ' 
-                string fileContent = ""; 
-            string message = SubSift.prepareSubSiftBookmarkText("markers", markersList); 
-                while (!sr.EndOfStream) fileContent += sr.ReadLine() + "\n"; 
-            lblMessage.Text = message; //Display return message on label 'lblMessage' 
-                return fileContent; 
-        }/*------------------------------------------------------------------------------------------* 
-            } catch (Exception){return "";} 
-         *  when button 'Prepare Projects' is clicked the following will be performed 
-        } 
-         *------------------------------------------------------------------------------------------*/          
-        //method for writing to files and returns path of file that written in 
-        protected void btnPrepareProjects_Click(object sender, EventArgs e) { 
-        public static string writeToFile(string fileContent, string fileName) { 
-            string projectsText = SQL.getAbstracts(true);//read projects from DB (true means only assigned projects) 
-            string path = HttpContext.Current.Server.MapPath(fileName); 
-            // "abstracts" is the name that SubSift will use for naming text folders 
-            using (StreamWriter sw = File.CreateText(path))// Create a file to be written in 
-            // projectsText is the text content 
-            { sw.Write(fileContent); } return path; 
-            string message = SubSift.prepareSubSiftText("abstracts", projectsText); 
-        }                 }/*-----------------------------------------------------------------------------------------* 
-    //method for appending data to an existing file          * when button Match is Clicked 
-      public static void appendFile(string pathTo, string pathFrom, string predicateName) {           *-----------------------------------------------------------------------------------------*/         
-            // Open the file to read from         
-        protected void btnMatch_Click(object sender, EventArgs e) { 
-            using (StreamReader sr = File.OpenText(pathFrom))             //calling method 'match' in SubSift class, to match between 'markers' and 'abstracts' 
-            {   string s = "";             string SubSiftResult = SubSift.match("markers", "abstracts"); 
-                // Create a file to write to if not exist             SubSiftMatchResult(SubSiftResult);  }              //calling method 'SubSiftMatchResult' 
-                using (StreamWriter sw = File.AppendText(pathTo))         /*-----------------------------------------------------------------------------------------* 
-                {   if (predicateName == "code") { //if ASP code read and write to the file with no change          *  method SubSiftMatchResult reads from SubSifit result in xml format 
-                        sw.WriteLine("\n");          *-----------------------------------------------------------------------------------------*/ 
-                        while ((s = sr.ReadLine()) != null) sw.WriteLine(s);         private void SubSiftMatchResult(string SubSiftResult) { 
-                    } if (predicateName == "staff") {             //string 'result' will be used only for displaying ranked markers for each project 
-                        sw.WriteLine("\n");             string result = "Project Id,Project Title,Marker 1, Marker 2, Marker 3, Marker 4, Marker 5, Marker 6\n"; 
-                        sw.WriteLine("%(staff(username,first name,last name, accepted load)"); 
-            string rankingMarker = "";  // variable to hold ranked markers for each project 
-                        while ((s = sr.ReadLine()) != null) sw.WriteLine(predicateName + "(" + s + "," + 8 + ").");             XmlDocument matchedResult = new XmlDocument(); matchedResult.Load(new StringReader(SubSiftResult)); 
-                    } sw.WriteLine("\n");             XmlNodeList projectNodes = matchedResult.SelectNodes("result/match");//find key words result and match  
-                    while ((s = sr.ReadLine()) != null) sw.WriteLine(predicateName + "(" + s + ").");             foreach (XmlNode project in projectNodes) { //loop on projectNodes 
-        }   }   }    
-                rankingMarker += "\nrank(";     // the word 'rank' used in predicate file for running ASP 
-       //appending coming string to the target file 
-                XmlNodeList markerNodes = project.SelectNodes("item");  //find 'item' in the current node 
-      public static void appendFile(string pathTo, string content) { 
-                string projecId=project.SelectSingleNode("id").InnerText;//read project id & store it in 'projecId'                 
-          using (StreamWriter sw = File.AppendText(pathTo)) 
-                conn.Open();//open the connection to DB and read title from 'Project' table 
-          { sw.Write(content);} 
-                da = new SqlDataAdapter("SELECT Title FROM Project WHERE ProjectId ="+projecId,conn); 
- 
-      } 
-                DataSet ds = new DataSet(); da.Fill(ds,"title");   
-      //reference: http://forums.asp.net/t/1705264.aspx/1 
-                result += projecId + ", " + ds.Tables["title"].Rows[0]["Title"] + ","; 
- 
-      public static DataTable ReadToEnd(string filePath) { 
-                conn.Close();       // close the connection to DB 
-          DataTable dtDataSource = new DataTable(); 
-                int i = 0;      //variable 'i' is for rank number                 foreach (XmlNode marker in markerNodes) { i++; 
-            string aspOutput = Utilities.ReadFile("ASPStudentsAssign.txt"); 
-                    if (i <= markerNodes.Count)//if still not reach end of the node  
-            int start = aspOutput.LastIndexOf("Answer")+10; 
-5 6 
-                    //append to the string result the'projec Id' ,"description" name of markers and their userid 
-            int end0 = aspOutput.LastIndexOf("assign("); int end = aspOutput.IndexOf(" ",end0); 
-                       result += marker.SelectSingleNode("description").InnerText + " (" +  
-            string assign = aspOutput.Substring(start, end - start); 
-    marker.SelectSingleNode("id").InnerText + ")"; 
-            assign = assign.Replace("assign(", ""); assign = assign.Replace(")", "");             
- 
-       //append to the string rankingMarker 'projec Id' ,',' and marker id. 'i' is marker rankes for this project 
-            string[] a = assign.Split(' '); //the required data is stored in array string 'a' 
-                        rankingMarker += projecId + ", " + marker.SelectSingleNode("id").InnerText + ", " + i; 
-            conn.Open();//open connection and loop on 'a' 
-                        if (i < markerNodes.Count){rankingMarker += ";; "; result += ",";} } 
-            for (int i = 0; i < a.Length; i++) { 
-                //append to the strings rankingMarker close bracket and comments, and result new line 
-                int Coma1 = a[i].IndexOf(",");  int Coma2 = a[i].LastIndexOf(","); 
-                rankingMarker += ")." + "  % ranked markers for project " + projecId;  result += "\n"; } 
-                //store student id in 'StudentId' and project id in 'ProjectId' then insert into DB 
-            Utilities.writeToFile(result, "~/Result.csv");// writing the result in file 
-                string StudentId=a[i].Substring(0, Coma1); string ProjectId=a[i].Substring(Coma1+1, Coma2-Coma1-1);  
-            //for future a page can be devoloped for coordinater to enter name and path of files 
-                SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; 
-            string path = Utilities.writeToFile(rankingMarker, "~/Predicate.pl"); // predicate file for running ASP  
-                cmd.Parameters.AddWithValue("@ProjectId", ProjectId); 
- 
-            //create project, student, and staff predicates from database tables 
-                cmd.Parameters.AddWithValue("@StudentId", StudentId); 
-            string predicates = SQL.createPredicates(true); 
-                cmd.Parameters.AddWithValue("@AssignedOn", DateTime.Now); 
-            Utilities.appendFile(path, predicates);//appending all above predicates to the file 'Predicate.pl' 
-                cmd.CommandText = "INSERT INTO ProjectAssignment (ProjectId, StudentId, AssignedOn) " + 
-//reading and ap pending all following (panel,cohort, ...) fi les to the 'Predicate.pl' file 
-                                  "VALUES (@ProjectId, @StudentId, @AssignedOn)"; 
-            string path3 = Server.MapPath("~/App_Data/panel.csv"); 
-                cmd.Connection = conn; 
-            Utilities.appendFile(path, path3, "panel");                 try {cmd.ExecuteNonQuery();} catch (Exception) {}                                 
-            string path4 = Server.MapPath("~/App_Data/cohort.csv"); 
-            } conn.Close(); 
-            Utilities.appendFile(path, path4, "cohort"); 
-        } 
-            string path5 = Server.MapPath("~/App_Data/tutor.csv"); 
-        // method to store the result of projects assignment to markers in the DB  
-            Utilities.appendFile(path, path5, "tutor"); 
-        private void StoreMarkerResultsToDB() { 
-            string path9 = Server.MapPath("~/App_Data/markerAssignCode.txt"); 
-            //reading the result of ASP assignments and extracting the requred information to be inserted into DB 
-            Utilities.appendFile(path, path9, "code"); 
-            string aspOutput = Utilities.ReadFile("ASPMarkersRank.txt"); 
-            lblMessage.Text = "";//clear the message label 
-            int start = aspOutput.LastIndexOf("Answer") + 10; 
-        } 
-            int end0 = aspOutput.LastIndexOf("assign("); int end = aspOutput.IndexOf(" ", end0); 
-        /*-----------------------------------------------------------------------------------------* 
-            string assign = aspOutput.Substring(start, end - start); 
-         * when button 'Assign Markers' is clicked  
-            assign = assign.Replace("assign(", ""); assign = assign.Replace(")", ""); 
-         *-----------------------------------------------------------------------------------------*/ 
-            string[] a = assign.Split(' ');         //array string 'a' for storing the extracted data 
-        protected void btnASPAssignment_Click(object sender, EventArgs e) { 
-            SQL.deleteRecords("MarkerAssignment");  //delete old data from DB 
-            string workingDirectory = Server.MapPath("~"); 
-        //open connection and loop on 'a' for inserting the result of ASP assignment of markers to projects into DB 
-            // Calling method' runCommand' in Utilities class to run ASP command  
-            conn.Open(); 
-            bool done = Utilities.runCommand("Predicate.pl", "ASPMarkersRank.txt", workingDirectory);  
-            for (int i = 0; i < a.Length; i++) { 
-            if (!done)lblMessage.Text = "Error Assigning Markers to Projects..."; 
-                int Coma1 = a[i].IndexOf(",");  int Coma2 = a[i].LastIndexOf(","); 
-            else{StoreMarkerResultsToDB(); gvStudentASPResult.DataBind();} 
-                string order = a[i].Substring(0, Coma1);  //order indicate that this marker is marker 1 or 2 
-        } 
-                string ProjectId = a[i].Substring(Coma1 + 1, Coma2 - Coma1 - 1); 
-        protected void btnSubSiftResult_Click(object sender, EventArgs e) {Response.Redirect("SubSiftResult.aspx");} 
-                string StaffId = a[i].Substring(Coma2 + 1, a[i].Length - Coma2 - 1); 
-        protected void btnASPResult_Click(object sender, EventArgs e) { gvASPResult.Visible = true; } 
-                SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; 
-        protected void btnAssignProjectToStudents_Click(object sender, EventArgs e) { 
-                cmd.Parameters.AddWithValue("@ProjectId", ProjectId); 
-            conn.Open(); string StudentsRankes = "";  
-                cmd.Parameters.AddWithValue("@StaffId", StaffId); 
-            da = new SqlDataAdapter("SELECT StudentId FROM Student ", conn); //select all students 
-                cmd.Parameters.AddWithValue("@MarkerOrder", Convert.ToInt16(order)); 
-            DataSet ds = new DataSet(); da.Fill(ds, "Student");             
-                cmd.Parameters.AddWithValue("@AssignOn", DateTime.Now); 
-         da=new SqlDataAdapter("SELECT ProjectId FROM Project ", conn);da.Fill(ds, "Project"); //select all projects 
-                cmd.CommandText = "INSERT INTO MarkerAssignment (ProjectId, StaffId, AssignOn, MarkerOrder) " + 
-            foreach (DataRow rs in ds.Tables["Student"].Rows) { 
-                                  "VALUES (@ProjectId, @StaffId, @AssignOn, @MarkerOrder)"; 
-                string StudentId = rs["StudentId"] + ""; 
-                cmd.Connection = conn; 
-                StudentsRankes += "rank(" + StudentId+","; int i = 0; 
-                try { cmd.ExecuteNonQuery(); } catch (Exception) {} 
-                foreach (DataRow rp in ds.Tables["Project"].Rows) { i++; 
-            } conn.Close(); 
-                    string ProjectId = rp["ProjectId"] + ""; 
-        } 
-                    StudentsRankes += ProjectId+",";  
-        // method to get student max rank and return 1 if student not ranked any project otherwise max+1 
-                    da = new SqlDataAdapter("SELECT StudentId, ProjectId, Rank FROM StudentRank "+ 
-        private int getStudentMaxRank(string StudentId) { 
-                        "WHERE StudentId ='" + StudentId + "' AND ProjectId=" + ProjectId, conn); 
-            da = new SqlDataAdapter("SELECT MAX(Rank) AS MaxRank FROM StudentRank WHERE StudentId ='" +  
-                    DataSet dsRank = new DataSet(); da.Fill(dsRank, "StudentRank"); 
-   StudentId+"'", conn); 
-                    if (dsRank.Tables["StudentRank"].Rows.Count != 0) { 
-            DataSet ds = new DataSet(); da.Fill(ds, "MaxRank"); 
-                        DataRow rr = dsRank.Tables["StudentRank"].Rows[0]; 
-            DataRow dr = ds.Tables["MaxRank"].Rows[0]; 
-                        if (i != ds.Tables["Project"].Rows.Count) StudentsRankes += rr["Rank"] + ";; "; 
-            //first time will be 1 otherwise the max number + 1 
-                    } else { 
-            if (dr["MaxRank"] == DBNull.Value) return 1; else return Convert.ToInt32(dr["MaxRank"]) + 1; 
-                        //if this project is not ranked by the student, the rank is defaulted to max rank + 1 
-        } 
-                   if (i != ds.Tables["Project"].Rows.Count) StudentsRankes += getStudentMaxRank(StudentId) + ";; "; 
-        // button to display the result of ASP result for assigning students to projects 
-                    } if (i != ds.Tables["Project"].Rows.Count) StudentsRankes += StudentId + ","; 
-        protected void btnStudentASPResult_Click(object sender, EventArgs e) {gvStudentASPResult.Visible = true;} 
-                } StudentsRankes += getStudentMaxRank(StudentId);  StudentsRankes += ").\n"; 
-        protected void gvASPResult_RowDataBound(object sender, GridViewRowEventArgs e) { 
-            } conn.Close(); 
-            if (e.Row.RowType == DataControlRowType.DataRow) { //perfomance for rows without header and footer 
-            string path = Utilities.writeToFile(StudentsRankes, "~/StudentRankPredicate.pl"); 
-           ((SqlDataSource)e.Row.FindControl("SqlDataSourceMarkersAssign")).SelectParameters[0].DefaultValue = 
-            //create project, student, and staff predicates from database tables 
-                ((Label)e.Row.FindControl("lblProjectId")).Text; 
-            string predicates = SQL.createPredicates(false); Utilities.appendFile(path, predicates); 
-                ((GridView)e.Row.FindControl("GridView1")).DataBind(); 
-            string path4 = Server.MapPath("~/App_Data/studentAssignCode.txt"); 
-        }   } 
-            Utilities.appendFile(path, path4, "code"); string workingDirectory = Server.MapPath("~"); 
-        protected void gvStudentASPResult_RowDataBound(object sender, GridViewRowEventArgs e) { 
-            bool done = Utilities.runCommand("StudentRankPredicate.pl", "ASPStudentsAssign.txt", workingDirectory); 
-            if (e.Row.RowType == DataControlRowType.DataRow) { 
-            if (!done) lblMessage.Text = "Error Assigning Projects to Students..."; 
-                string StudentId = ((Label)e.Row.FindControl("lblStudentId")).Text; 
-            else { lblMessage.Text = "Projects assigned to students successfully, please click Show Results..."; 
-                string ProjectId = ((Label)e.Row.FindControl("lblProjectId")).Text; 
-                StoreResultsToDB();           //inserting the result of assigning markers to projects into DB 
-                da = new SqlDataAdapter("SELECT Rank FROM StudentRank WHERE StudentId='"+ StudentId  
-                gvStudentASPResult.DataBind();        //updata the grid view (table which displayed for user) 
-   + "' AND ProjectId=" + ProjectId, conn); 
-        }   } 
-                DataSet ds = new DataSet(); da.Fill(ds, "rank"); 
-        /*-----------------------------------------------------------------------------------------* 
-                if (ds.Tables["rank"].Rows.Count == 0) ((Label)e.Row.FindControl("lblRank")).Text = "1"; 
-         * method for inserting the result of projects assignment to students into the DB  
-                else { DataRow r=ds.Tables["rank"].Rows[0]; ((Label)e.Row.FindControl("lblRank")).Text=r["Rank"]+""; 
-         * ----------------------------------------------------------------------------------------*/ 
-} }     } 
- 
-        private void StoreResultsToDB() { 
-/*----------------------------------------------------------------------------------------------------------------*/ 
-            // call method deleteRecords in SQL class paramete "ProjectAssignment" is the table name 
-    public partial class SupervisorMainPage : System.Web.UI.Page 
- 
-            SQL.deleteRecords("ProjectAssignment"); 
-    { 
-            //reading the result of ASP assignments and extracting the requred information to be inserted into DB 
-        SqlConnection conn; SqlDataAdapter da, daType;  
-          //  On page load populate all dropdown lists for availabel project types from DB 
-   + ddlSupervisor.SelectedValue + "'", conn); 
-        protected void Page_Load(object sender, EventArgs e) {             DataSet ds = new DataSet(); 
-7 8 
-            conn = new             da.Fill(ds,"Supervisor"); 
-SqlConnection(ConfigurationManager.ConnectionStrings["ProjectAllocConnectionString"].ConnectionString);             //if this supervisor is found in DB display his/her name on the label 'lblSupervisorName' 
-            if (!IsPostBack) {             if(ds.Tables["Supervisor"].Rows.Count !=0) { 
- 
-                conn.Open();                 DataRow r = ds.Tables["Supervisor"].Rows[0]; 
-                daType = new SqlDataAdapter("SELECT * FROM Type", conn);//read from DB all project types                 lblSupervisorName.Text = r["FName"] + " " + r["LName"]; 
-                DataSet ds = new DataSet(); daType.Fill(ds, "type");             } conn.Close(); reset(); 
-                //add empty row in all dropdown lists, so by default not selected any type         } 
-                Utilities.addEmptyItem(ddlProjectType1);         /*-----------------------------------------------------------------------------------------* 
-                Utilities.addEmptyItem(ddlProjectType2);          * GridView1 is the place on right side of the page where displayed all projects that are published for  
-                Utilities.addEmptyItem(ddlProjectType3); 
-         * the current staff. The publish projects are obtained from DB. By selecting any project from this list 
-                int i = 1;           * the project will be displayed on the page so the staff can update or delete them 
- 
-                foreach(DataRow r in ds.Tables["type"].Rows) {          * ----------------------------------------------------------------------------------------*/ 
-                    //add available types which obtained from DB to dropdown lists         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e) 
-                   ddlProjectType1.Items.Insert(i,new ListItem(r["Type"]+": "+r["description"],r["TypeId"]+"")); 
-        { 
- 
-                   ddlProjectType2.Items.Insert(i, new ListItem(r["Type"]+": "+r["description"], r["TypeId"]+ "")); 
-            conn.Open(); 
-                   ddlProjectType3.Items.Insert(i, new ListItem(r["Type"]+": "+r["description"], r["TypeId"]+ "")); 
-            da = new SqlDataAdapter("SELECT * FROM Project WHERE ProjectId='"+GridView1.SelectedValue+"'", conn); 
-                   i++;             DataSet ds = new DataSet(); 
-                } conn.Close(); 
-            da.Fill(ds, "Project"); 
- 
-        }   } 
-            DataRow dr = ds.Tables["Project"].Rows[0]; 
-         //  when button 'Submit' is clicked insert the proposed project into DB by reading data from page 
-            txtProjectTitle.Text = dr["Title"]+""; 
-        protected void btnSubmitProject_Click(object sender, EventArgs e) { 
-            txtProjectAbstract.Text = dr["Abstract"]+""; 
-            conn.Open(); 
-             txtSkillReqDescription.Text = dr["SkillRequired"]+""; 
-            long ProjectId = SQL.GenerateNewProjectId();  //method automatically generate an id for new project          
-       da = new SqlDataAdapter("SELECT * FROM ProjectType WHERE ProjectId='" + GridView1.SelectedValue + "'", conn); 
-            SqlCommand cmd = new SqlCommand(); 
-            da.Fill(ds, "ProjectType"); 
-            cmd.CommandType = CommandType.Text; 
-            int j = 1; 
- 
-            cmd.Parameters.AddWithValue("@ProjectId",ProjectId); 
-            foreach(DataRow dr2 in ds.Tables["ProjectType"].Rows) { 
-            cmd.Parameters.AddWithValue("@Title",txtProjectTitle.Text); 
-                switch(j) { 
-            cmd.Parameters.AddWithValue("@Abstract",txtProjectAbstract.Text); 
-                    case 1: ddlProjectType1.SelectedValue = dr2["TypeId"]+""; break; 
-            cmd.Parameters.AddWithValue("@SkillRequired", txtSkillReqDescription.Text); 
-                    case 2: ddlProjectType2.SelectedValue = dr2["TypeId"]+""; break; 
- 
-            cmd.Parameters.AddWithValue("@StaffId",ddlSupervisor.SelectedValue); 
-                    case 3: ddlProjectType3.SelectedValue = dr2["TypeId"]+""; break; 
-            cmd.Parameters.AddWithValue("@VettedOn",DateTime.Now); 
-                } j++;             
-            cmd.CommandText = "INSERT INTO Project (ProjectId, Title, Abstract, " +  
+                deleteMatches(firstTextId, secondTextId);//delete matches results from previously created by SubSift 
+                //Matching first text and second text Profiles (step 1) 
+                done = SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/matches/" + firstTextId + "_" +  
+   secondTextId + "/profiles/" + firstTextId + "/with/" + secondTextId, "POST"); 
+                if (done){return "Error Matching " + firstTextId + " and " + secondTextId + " Profiles ";} 
+                //Get Matched results (step 2). profiles_id parameter is to select which text to group by 
+                string content = SubSiftGetMatchedItems("http://subsift.ilrt.bris.ac.uk/dabbas/matches/" + 
+                    firstTextId + "_" + secondTextId + "/items?profiles_id=" + secondTextId, "GET"); 
+                if (content == ""){return "Error getting Matched " + firstTextId + " and " + secondTextId;} 
+                return content; 
             } 
-                                 "SkillRequired, StaffId, Vet tedOn) VALUES (@ProjectId, @Title,"+   da = new SqlDataAdapter("SELECT * FROM ProjectResearchGroup WHERE ProjectId='"+GridView1.SelectedValue+"'", conn); 
-                                "@Abstract, @SkillRequired, @StaffId, @VettedOn)";             da.Fill(ds, "ProjectGroup"); 
-            cmd.Connection = conn; cmd.ExecuteNonQuery();             int k = 1; 
-            //call method for inserting project type for any project proposed by supervisor 
-            foreach (DataRow dr3 in ds.Tables["ProjectGroup"].Rows) { 
-            addProjectType(ProjectId, ddlProjectType1.SelectedValue);                 switch (k) { 
-            addProjectType(ProjectId, ddlProjectType2.SelectedValue);                     case 1: ddlResearchGroup1.SelectedValue = dr3["GroupId"] + ""; break;  
-            addProjectType(ProjectId, ddlProjectType3.SelectedValue);                     case 2: ddlResearchGroup2.SelectedValue = dr3["GroupId"] + ""; break;  
-            //call method for inserting project group for any project proposed by supervisor                     case 3: ddlResearchGroup3.SelectedValue = dr3["GroupId"] + ""; break; 
-            addProjectGroup(ProjectId, ddlResearchGroup1.SelectedValue);                 } k++; 
-            addProjectGroup(ProjectId, ddlResearchGroup2.SelectedValue);             } btnDeleteProject.Visible = true; btnUpdateProject.Visible = true; btnSubmitProject.Visible = false;             
-            addProjectGroup(ProjectId, ddlResearchGroup3.SelectedValue);         } 
-            conn.Close();  GridView1.DataBind(); reset();         // when button 'DELETE PROJECT' pressed that project will be flaged as 'Archive' 
-        }         protected void btnDeleteProject_Click(object sender, EventArgs e) { 
-        //method reset for cleaning the page and make the page ready for supervisor to propose a new project              conn.Open();                        
-        private void reset() { // clears all fields content – suppressed } 
-            SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; 
-        //method for adding new proposed project type to DB             cmd.CommandText = "UPDATE Project SET Archive = 1 WHERE ProjectId='" + GridView1.SelectedValue + "'"; 
-        private void addProjectType(long ProjectId, string TypeId) {             cmd.Connection = conn; cmd.ExecuteNonQuery(); 
-            if (!TypeId.Equals("")) {             GridView1.DataBind(); reset(); 
-                SqlCommand cmd = new SqlCommand(); 
+            catch (Exception ex1) { return ex1.Message;} 
         } 
-                cmd.CommandType = CommandType.Text; 
-        // when button 'UPDATE PROJECT' pressed that project record will be modified in DB and 
-                cmd.Parameters.AddWithValue("@ProjectId", ProjectId); 
-        protected void btnUpdateProject1_Click(object sender, EventArgs e) { 
-                cmd.Parameters.AddWithValue("@TypeId", Convert.ToInt32(TypeId)); 
-            conn.Open();             
-                cmd.CommandText = "INSERT INTO ProjectType (ProjectId, TypeId) " + 
-            SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; cmd.Connection = conn;  
-                                  "VALUES (@ProjectId, @TypeId)"; 
-            long ProjectId = Convert.ToInt64(GridView1.SelectedValue); 
-                cmd.Connection = conn; 
-            cmd.Parameters.AddWithValue("@ProjectId", GridView1.SelectedValue); 
-                try {cmd.ExecuteNonQuery();} 
-            cmd.Parameters.AddWithValue("@Title", txtProjectTitle.Text); 
-                catch(Exception){} 
-            cmd.Parameters.AddWithValue("@Abstract", txtProjectAbstract.Text); 
-        }   } 
-            cmd.Parameters.AddWithValue("@SkillRequired", txtSkillReqDescription.Text); 
-        //method for adding research group of new proposed project to DB 
-            cmd.CommandText = "UPDATE Project SET Title = @Title, Abstract = @Abstract,"+ 
-        private void addProjectGroup(long ProjectId, string GroupId) { 
-                "SkillRequired = @SkillRequired WHERE ProjectId=@ProjectId"; 
-            if (!GroupId.Equals("")) { 
-            cmd.ExecuteNonQuery(); 
-                SqlCommand cmd = new SqlCommand(); 
-            cmd.CommandText = "DELETE FROM ProjectType WHERE ProjectId=@ProjectId"; cmd.ExecuteNonQuery(); 
-                cmd.CommandType = CommandType.Text; 
-            addProjectType(ProjectId, ddlProjectType1.SelectedValue); 
-                cmd.Parameters.AddWithValue("@ProjectId", ProjectId);             addProjectType(ProjectId, ddlProjectType2.SelectedValue); 
-                cmd.Parameters.AddWithValue("@GroupId", Convert.ToInt32(GroupId)); 
-            addProjectType(ProjectId, ddlProjectType3.SelectedValue);  
-                cmd.CommandText = "INSERT INTO ProjectResearchGroup (ProjectId, GroupId) " + 
-            cmd.CommandText = "DELETE FROM ProjectResearchGroup WHERE ProjectId=@ProjectId"; cmd.ExecuteNonQuery(); 
-                                  "VALUES (@ProjectId, @GroupId)"; 
-            addProjectGroup(ProjectId, ddlResearchGroup1.SelectedValue); 
-                cmd.Connection = conn; cmd.ExecuteNonQuery();             addProjectGroup(ProjectId, ddlResearchGroup2.SelectedValue); 
-        }   }             addProjectGroup(ProjectId, ddlResearchGroup3.SelectedValue); 
-        /*-----------------------------------------------------------------------------------------*             conn.Close(); GridView1.DataBind(); reset(); 
-         *  when supervisors select their user name from dropdown list the system displays supervisor name by             } 
-         * reading from DB         private void updateProjectType(long ProjectId, string TypeId) { 
- 
-         * ----------------------------------------------------------------------------------------*/                 if (!TypeId.Equals("")) { 
-        protected void ddlSupervisor_SelectedIndexChanged(object sender, EventArgs e) {                 SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; 
- 
-            conn.Open();                 cmd.Parameters.AddWithValue("@TypeId", Convert.ToInt32(TypeId)); 
-            da = new SqlDataAdapter("SELECT FName, LName FROM Staff WHERE StaffId = '"                  cmd.CommandText = "UPDATE ProjectType SET TypeId = @TypeId  WHERE ProjectId='" + ProjectId + "'";                 cmd.Connection = conn; cmd.ExecuteNonQuery();                     string id = project.SelectSingleNode("id").InnerText; 
-    }   }  } 
-            XmlNode searchNode = matchedResult.SelectNodes("result/match")[0];  //select the 'search' node 
-9 10 
- 
-                    da = new SqlDataAdapter("SELECT * FROM Project WHERE ProjectId=" + id, conn); 
-/*----------------------------------------------------------------------------------------------------------------*/ 
-                    DataSet ds = new DataSet(); da.Fill(ds, "Project"); 
-    public partial class StudentMainPage : System.Web.UI.Page 
- 
-                    if (ds.Tables[0].Rows.Count != 0) { 
-    { 
-                        DataRow projectRow = ds.Tables["Project"].Rows[0]; 
-        SqlConnection conn; SqlDataAdapter daType, da; DataTable dt;  
-                        row["Order"] = i;     // add order number to row 
-        protected void Page_Load(object sender, EventArgs e) { 
-                        row["ProjectId"] = projectRow["ProjectId"];    //add project id 
-            conn =  
-                        row["Title"] = projectRow["Title"];    //add project Title 
-      new SqlConnection(ConfigurationManager.ConnectionStrings["ProjectAllocConnectionString"].ConnectionString); 
-                        row["Abstract"] = projectRow["Abstract"];    //add Abstract 
-            if (!IsPostBack) { 
-                    } dt.Rows.Add(row);  } } 
- /* Ran geValidator is used for validating the number of projects for display entered by user 
-            ProjectAccordion.DataSource = dt.DefaultView; ProjectAccordion.DataBind(); 
-                RangeValidator1.MaximumValue = (SQL.GenerateNewProjectId() - 1)+""; 
-        }// button when student want to see all projects 
-                RangeValidator1.ErrorMessage += RangeValidator1.MaximumValue; 
-        protected void btnShowAllProjects_Click(object sender, EventArgs e) 
-                txtBestFit.Text = RangeValidator1.MaximumValue;  
- 
+          // method 'SubSiftMethod' is takes two parameters url and method (e.g. POST, GET,...)       * 
+        public static bool SubSiftMethod(string url, string method) { 
+            try { 
+                //initialising a new WebRequest instance for the url then adding new values to the Headers 
+                WebRequest myReq = WebRequest.Create(url);  
+                myReq.Headers.Add("Token", "2134712a45e47f6eb2482aa73149e3c31b80d14c"); 
+                myReq.Method = method; 
+                WebResponse wr = myReq.GetResponse();//getting a response from given url                 
+                return true;  //if no error return true otherwise return false      
+ } catch (Exception){return false;} 
+        } 
+         // 'SubSiftMethod' takes 4 parameters URL, method (e.g.POST,...),  
+         // parameterName e.g. "items_list", and parameterValue (text)  
+        public static bool SubSiftMethod(string url, string method, string parameterName, string parameterValue) {  
+            try { 
+                //initialising a new WebRequest instance for the url, then adding new values to the Headers 
+                WebRequest myReq = WebRequest.Create(url); 
+                myReq.Headers.Add("Token", "2134712a45e47f6eb2482aa73149e3c31b80d14c"); 
+                myReq.Method = method; 
+                string postString = parameterName + "=" + parameterValue;  
+                StreamWriter requestWriter = new StreamWriter(myReq.GetRequestStream()); 
+                requestWriter.Write(postString); 
+                requestWriter.Close(); 
+                WebResponse wr = myReq.GetResponse();//provides a response from given url 
+                return true; 
+            } catch (Exception e){Console.WriteLine(e.Message); return false;} 
+        } 
+        //method 'SubSiftGetMatchedItems' returns match result 
+        public static string SubSiftGetMatchedItems(string url, string method) { 
+            try { 
+                WebRequest myReq = WebRequest.Create(url); 
+                myReq.Method = method; 
+                WebResponse wr = myReq.GetResponse(); 
+                Stream receiveStream = wr.GetResponseStream(); 
+                StreamReader reader = new StreamReader(receiveStream, Encoding.UTF8); 
+                string content = reader.ReadToEnd(); 
+                return content; 
+            } catch (Exception){return "error";}}      
+       //methods for deleting all previousely created folders, items, matched results 
+        public static bool deleteTextAll(string folderName) 
         { 
-         // populate all dropdown lists for availabel project types from DB          
-        Response.Redirect("https://www.cs.bris.ac.uk/project/proposals/index.jsp?ticket=ST-10677980-
-                conn.Open(); 
-dWW1Fkad5AoqtjFFCcit-nAC10040C2095"); 
-                daType = new SqlDataAdapter("SELECT * FROM Type", conn); 
- 
+            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/bookmarks/" + folderName, "DELETE"); 
+            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/bookmarks/" + folderName + "/items", "DELETE"); 
+            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/documents/"+folderName, "DELETE"); 
+            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/documents/"+folderName+"/items", "DELETE"); 
+            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/profiles/"+folderName, "DELETE"); 
+            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/profiles/"+folderName+"/items", "DELETE");                         
+            return true; 
+        }        
+        private static bool deleteMatches(string firstTextId, string secondTextId) 
+        { 
+            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/matches/" + firstTextId + "_" +  
+   secondTextId, "DELETE"); 
+            SubSiftMethod("http://subsift.ilrt.bris.ac.uk/dabbas/matches/" + firstTextId + "_" +   
+   secondTextId+"/items", "DELETE"); 
+            return true; 
+        }}} 
+/*----------------------------------------------------------------------------------------------------------------*/ 
+    public class SQL 
+    { 
+        // 'conn' represents a connection to a SQL Server DB 
+        static SqlConnection conn =  
+         new SqlConnection(ConfigurationManager.ConnectionStrings["ProjectAllocConnectionString"].ConnectionString); 
+        static SqlDataAdapter da; 
+        //method 'getAbstracts'returns abstracts from DB for SubSift projects items 
+        public static string getAbstracts(bool assignedOnly) {  
+            string abstracts = ""; conn.Open(); 
+            if(assignedOnly)     //only those abstracts that assigned to students 
+                da = new SqlDataAdapter("SELECT * from Project WHERE ProjectId IN (SELECT ProjectId FROM 
+ProjectAssignment)", conn); 
+            else                // select all projects abstracts from DB 
+                da = new SqlDataAdapter("SELECT * from Project", conn); 
+            DataSet ds = new DataSet(); da.Fill(ds, "abstracts"); 
+            foreach (DataRow r in ds.Tables["abstracts"].Rows) { 
+                string description = r["Title"] + " " + r["Abstract"] + " " + r["SkillRequired"]; 
+                description = description.Replace('"', ' '); 
+                description = description.Replace(';', ' '); 
+                description = description.Replace('&', ' '); 
+                description = description.Replace('\n', ' '); 
+                description = description.Replace('\r', ' '); 
+                abstracts += r["ProjectId"] + "," + description + "\n"; 
+            } 
+            conn.Close(); return abstracts; 
         } 
-                DataSet ds = new DataSet(); daType.Fill(ds, "type"); 
-        //button for adding the student selected projects to his/her favourite list for later ranking them 
-                int i = 1; 
-        protected void btnAddToFavorite_Click(object sender, EventArgs e) { 
-                foreach (DataRow r in ds.Tables["type"].Rows) { 
- 
+        // 'getMarkersList' returns staffs details 
+        public static string getMarkersList() { 
+            string markers = ""; conn.Open(); 
+            da = new SqlDataAdapter("SELECT * from staff", conn); 
+            DataSet ds = new DataSet(); da.Fill(ds, "markers"); 
+            foreach (DataRow r in ds.Tables["markers"].Rows) 
+                markers += r["StaffId"] + "," + r["FName"] + " " + r["LName"] + "," + r["URL"] + "\n"; 
+            conn.Close(); return markers; 
+        } 
+        //'GenerateNewProjectId' return new project id for new project to be published 
+        public static long GenerateNewProjectId() { 
             conn.Open(); 
-                    ddlProjectType1.Items.Insert(i, new ListItem(r["Type"]+": "+r["description"], r["TypeId"]+"")); 
-      // loop on all projects on page,checking if any project is selected by student to be added to favourite list 
-                    ddlProjectType2.Items.Insert(i, new ListItem(r["Type"]+": "+r["description"], r["TypeId"]+ "")); 
-            for (int i = 0; i < ProjectAccordion.Panes.Count; i++ ) {  
-                    ddlProjectType3.Items.Insert(i, new ListItem(r["Type"]+": "+r["description"], r["TypeId"]+ "")); 
-                AccordionPane ap = ProjectAccordion.Panes[i]; 
-                    i++; }  conn.Close(); 
-                CheckBox c = (CheckBox)ap.FindControl("cbSelect"); 
+            da = new SqlDataAdapter("SELECT MAX(ProjectId) AS MaxId FROM Project", conn); 
+            DataSet ds = new DataSet(); da.Fill(ds, "ProjectId"); 
+            DataRow dr = ds.Tables["ProjectId"].Rows[0]; conn.Close(); 
+            if (dr["MaxId"] == DBNull.Value) return 1; //first time will be 1 otherwise the max number + 1 
+            else return Convert.ToInt64(dr["MaxId"]) + 1;             
+        } 
+        //'createPredicates' method read from DB required data and convert them to predicate shape 
+        public static string createPredicates(bool assignedOnly) { 
+            conn.Open(); 
+            string predicates = "\n"; 
+1 2 
+  
+ 
+  
+            if(assignedOnly)     // select only those projects which assign to students 
+                da = new SqlDataAdapter("SELECT ProjectId,StaffId FROM Project WHERE ProjectId IN " +  
+     "(SELECT ProjectId FROM ProjectAssignment)", conn); 
+            Else da = new SqlDataAdapter("SELECT ProjectId,StaffId FROM Project", conn);   // select all projects  
+            DataSet ds = new DataSet(); da.Fill(ds, "projects"); 
+            da = new SqlDataAdapter("SELECT StudentId FROM Student", conn);  da.Fill(ds, "students"); 
+            foreach (DataRow r in ds.Tables["projects"].Rows)// loop on selected projects  
+                predicates += "project(" + r["ProjectId"] + ", " + r["StaffId"] + ").\n"; 
+            predicates += "\n";  //new line 
+            foreach (DataRow r in ds.Tables["students"].Rows)// loop on selected students 
+                predicates += "student(" + r["StudentId"] + ").\n"; 
+            predicates += "\n"; da = new SqlDataAdapter("SELECT StaffId FROM staff", conn); 
+            da.Fill(ds, "staff"); 
+            foreach (DataRow r in ds.Tables["staff"].Rows)//loop on selected staffs 
+                predicates += "staff(" + r["StaffId"] + ",4).\n"; //staff load as '4' but it can be changed  
+            predicates += "\n"; conn.Close(); return predicates; 
+        } 
+        // method for deleting records in DB (from the passed table name) 
+        public static bool deleteRecords(string table) { 
+            conn.Open(); 
+            SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; 
+            cmd.CommandText = "DELETE FROM " + table; cmd.Connection = conn;             
+            try { cmd.ExecuteNonQuery();  conn.Close(); return true; 
+            } catch (Exception) { conn.Close(); return false; } 
+        } 
+        //method for updating students rank after submission of their ranked project list 
+        public static void UpdateStudentRank(string StudentID, string ProjectID, int Rank) { 
+            conn.Open(); 
+            SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text;  cmd.Connection = conn;  
+            cmd.Parameters.AddWithValue("@StudentId", StudentID); 
+            cmd.Parameters.AddWithValue("@ProjectId", ProjectID); 
+            cmd.Parameters.AddWithValue("@Rank", Rank); 
+            cmd.Parameters.AddWithValue("@RankDate", DateTime.Now);  
+            cmd.CommandText = "UPDATE StudentRank SET " + 
+                "Rank = @Rank,RankDate = @RankDate  " + 
+                "WHERE ProjectId=@ProjectId AND StudentId = @StudentId"; 
+            cmd.ExecuteNonQuery(); conn.Close(); 
+        }}} 
+/*----------------------------------------------------------------------------------------------------------------*/ 
+    public class Utilities 
+    { 
+        //method for reading files taking file path as the parameter and returns file content 
+        public static string ReadFile(string filepath) { 
+            try{ StreamReader sr = new StreamReader(HttpContext.Current.Server.MapPath(filepath)); 
+                string fileContent = ""; 
+                while (sr.EndOfStream) fileContent += sr.ReadLine() + "\n"; 
+                return fileContent; 
+            } catch (Exception){return "";} 
+        } 
+        //method for writing to files and returns path of file that written in 
+        public static string writeToFile(string fileContent, string fileName) { 
+            string path = HttpContext.Current.Server.MapPath(fileName); 
+            using (StreamWriter sw = File.CreateText(path))// Create a file to be written in 
+            { sw.Write(fileContent); } return path; 
+        }         
+    //method for appending data to an existing file 
+      public static void appendFile(string pathTo, string pathFrom, string predicateName) {  
+            // Open the file to read from         
+            using (StreamReader sr = File.OpenText(pathFrom)) 
+            {   string s = ""; 
+                // Create a file to write to if not exist 
+                using (StreamWriter sw = File.AppendText(pathTo)) 
+                {   if (predicateName == "code") { //if ASP code read and write to the file with no change 
+                        sw.WriteLine("\n"); 
+                        while ((s = sr.ReadLine()) = null) sw.WriteLine(s); 
+                    } if (predicateName == "staff") { 
+                        sw.WriteLine("\n"); 
+                        sw.WriteLine("%(staff(username,first name,last name, accepted load)"); 
+                        while ((s = sr.ReadLine()) = null) sw.WriteLine(predicateName + "(" + s + "," + 8 + ")."); 
+                    } sw.WriteLine("\n"); 
+                    while ((s = sr.ReadLine()) = null) sw.WriteLine(predicateName + "(" + s + ")."); 
+        }   }   }    
+       //appending coming string to the target file 
+      public static void appendFile(string pathTo, string content) { 
+          using (StreamWriter sw = File.AppendText(pathTo)) 
+          { sw.Write(content);} 
+      } 
+      //reference: http://forums.asp.net/t/1705264.aspx/1 
+      public static DataTable ReadToEnd(string filePath) { 
+          DataTable dtDataSource = new DataTable(); 
+          //Read all lines from selected file and assign to string array variable. 
+          string[] fileContent = File.ReadAllLines(filePath); 
+          //Checks fileContent count > 0 then we have some lines in the file. If = 0 then file is empty 
+          if (fileContent.Count() > 0) { 
+              //In CSV file, 1st line contains column names. When you read CSV file, each delimited by ','. 
+              //fileContent[0] contains 1st line and splitted by ','. columns string array contains list of columns. 
+              string[] columns = fileContent[0].Split(','); 
+              for (int i = 0; i < columns.Count(); i++) {dtDataSource.Columns.Add(columns[i]);} 
+              //Same logic for row data. 
+              for (int i = 1; i < fileContent.Count(); i++) { string[] rowData = fileContent[i].Split(','); 
+                  dtDataSource.Rows.Add(rowData); 
+          }   } return dtDataSource; 
+      } 
+      //method for running ASP command and result of ASP will be saved in file 'outputFile' 
+      public static bool runCommand(string inputFile, string outputFile, string workingDir) { 
+          //run ASP file from commandline  
+          try {   //string predicatePath = Server.MapPath("~"); 
+              System.Diagnostics.Process si = new System.Diagnostics.Process(); 
+              si.StartInfo.WorkingDirectory = workingDir; 
+              si.StartInfo.UseShellExecute = false; 
+              si.StartInfo.FileName = "cmd.exe"; 
+              si.StartInfo.Arguments = "/c gringo " + inputFile + " | clasp > " + outputFile; 
+              si.StartInfo.CreateNoWindow = true; 
+              si.StartInfo.RedirectStandardInput = true; 
+              si.StartInfo.RedirectStandardOutput = true; 
+              si.StartInfo.RedirectStandardError = true; 
+              si.Start(); 
+              string output = si.StandardOutput.ReadToEnd(); 
+              si.Close(); return true; 
+          } catch (Exception){ return false;} 
+      } } 
+/*----------------------------------------------------------------------------------------------------------------*/ 
+    public partial class Projects : System.Web.UI.Page 
+    { 
+        SqlConnection conn; SqlDataAdapter da; DataTable dt; 
+        protected void Page_Load(object sender, EventArgs e) { 
+ conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ProjectAllocConnectionString"].ConnectionString); 
+       }/*-----------------------------------------------------------------------------------------* 
+         *  ‘btnPrepareMarkers’ is the button for Preparing marekers 
+         * ----------------------------------------------------------------------------------------*/ 
+        protected void btnPrepareMarkers_Click(object sender, EventArgs e)  { 
+            string markersList = SQL.getMarkersList();  //read Markers data from DB (calling SQL class) 
+            // "markers" is the name that SubSift will use for naming text folders 
+            // markersList is information about markers 'Staff id, Staff name, URL ' 
+            string message = SubSift.prepareSubSiftBookmarkText("markers", markersList); 
+            lblMessage.Text = message; //Display return message on label 'lblMessage' 
+        }/*------------------------------------------------------------------------------------------* 
+         *  when button 'Prepare Projects' is clicked the following will be performed 
+         *------------------------------------------------------------------------------------------*/          
+        protected void btnPrepareProjects_Click(object sender, EventArgs e) { 
+            string projectsText = SQL.getAbstracts(true);//read projects from DB (true means only assigned projects) 
+            // "abstracts" is the name that SubSift will use for naming text folders 
+            // projectsText is the text content 
+            string message = SubSift.prepareSubSiftText("abstracts", projectsText); 
+        }/*-----------------------------------------------------------------------------------------* 
+         * when button Match is Clicked 
+         *-----------------------------------------------------------------------------------------*/         
+        protected void btnMatch_Click(object sender, EventArgs e) { 
+            //calling method 'match' in SubSift class, to match between 'markers' and 'abstracts' 
+            string SubSiftResult = SubSift.match("markers", "abstracts"); 
+            SubSiftMatchResult(SubSiftResult);  }              //calling method 'SubSiftMatchResult' 
+        /*-----------------------------------------------------------------------------------------* 
+         *  method SubSiftMatchResult reads from SubSifit result in xml format 
+         *-----------------------------------------------------------------------------------------*/ 
+        private void SubSiftMatchResult(string SubSiftResult) { 
+            //string 'result' will be used only for displaying ranked markers for each project 
+            string result = "Project Id,Project Title,Marker 1, Marker 2, Marker 3, Marker 4, Marker 5, Marker 6\n"; 
+            string rankingMarker = "";  // variable to hold ranked markers for each project 
+            XmlDocument matchedResult = new XmlDocument(); matchedResult.Load(new StringReader(SubSiftResult)); 
+            XmlNodeList projectNodes = matchedResult.SelectNodes("result/match");//find key words result and match  
+            foreach (XmlNode project in projectNodes) { //loop on projectNodes 
+                rankingMarker += "\nrank(";     // the word 'rank' used in predicate file for running ASP 
+                XmlNodeList markerNodes = project.SelectNodes("item");  //find 'item' in the current node 
+                string projecId=project.SelectSingleNode("id").InnerText;//read project id & store it in 'projecId'                 
+                conn.Open();//open the connection to DB and read title from 'Project' table 
+                da = new SqlDataAdapter("SELECT Title FROM Project WHERE ProjectId ="+projecId,conn); 
+                DataSet ds = new DataSet(); da.Fill(ds,"title");   
+                result += projecId + ", " + ds.Tables["title"].Rows[0]["Title"] + ","; 
+                conn.Close();       // close the connection to DB 
+                int i = 0;      //variable 'i' is for rank number 
+3 4 
+  
+ 
+ 
+  
+                foreach (XmlNode marker in markerNodes) { i++; 
+                    if (i <= markerNodes.Count)//if still not reach end of the node  
+                    //append to the string result the'projec Id' ,"description" name of markers and their userid 
+                       result += marker.SelectSingleNode("description").InnerText + " (" +  
+    marker.SelectSingleNode("id").InnerText + ")"; 
+       //append to the string rankingMarker 'projec Id' ,',' and marker id. 'i' is marker rankes for this project 
+                        rankingMarker += projecId + ", " + marker.SelectSingleNode("id").InnerText + ", " + i; 
+                        if (i < markerNodes.Count){rankingMarker += ";; "; result += ",";} } 
+                //append to the strings rankingMarker close bracket and comments, and result new line 
+                rankingMarker += ")." + "  % ranked markers for project " + projecId;  result += "\n"; } 
+            Utilities.writeToFile(result, "~/Result.csv");// writing the result in file 
+            //for future a page can be devoloped for coordinater to enter name and path of files 
+            string path = Utilities.writeToFile(rankingMarker, "~/Predicate.pl"); // predicate file for running ASP  
+            //create project, student, and staff predicates from database tables 
+            string predicates = SQL.createPredicates(true); 
+            Utilities.appendFile(path, predicates);//appending all above predicates to the file 'Predicate.pl' 
+//reading and appending all following (panel,cohort, ...) files to the 'Predicate.pl' file 
+            string path3 = Server.MapPath("~/App_Data/panel.csv"); 
+            Utilities.appendFile(path, path3, "panel"); 
+            string path4 = Server.MapPath("~/App_Data/cohort.csv"); 
+            Utilities.appendFile(path, path4, "cohort"); 
+            string path5 = Server.MapPath("~/App_Data/tutor.csv"); 
+            Utilities.appendFile(path, path5, "tutor"); 
+            string path9 = Server.MapPath("~/App_Data/markerAssignCode.txt"); 
+            Utilities.appendFile(path, path9, "code"); 
+            lblMessage.Text = "";//clear the message label 
+        } 
+        /*-----------------------------------------------------------------------------------------* 
+         * when button 'Assign Markers' is clicked  
+         *-----------------------------------------------------------------------------------------*/ 
+        protected void btnASPAssignment_Click(object sender, EventArgs e) { 
+            string workingDirectory = Server.MapPath("~"); 
+            // Calling method' runCommand' in Utilities class to run ASP command  
+            bool done = Utilities.runCommand("Predicate.pl", "ASPMarkersRank.txt", workingDirectory);  
+            if (done)lblMessage.Text = "Error Assigning Markers to Projects..."; 
+            else{StoreMarkerResultsToDB(); gvStudentASPResult.DataBind();} 
+        } 
+        protected void btnSubSiftResult_Click(object sender, EventArgs e) {Response.Redirect("SubSiftResult.aspx");} 
+        protected void btnASPResult_Click(object sender, EventArgs e) { gvASPResult.Visible = true; } 
+        protected void btnAssignProjectToStudents_Click(object sender, EventArgs e) { 
+            conn.Open(); string StudentsRankes = "";  
+            da = new SqlDataAdapter("SELECT StudentId FROM Student ", conn); //select all students 
+            DataSet ds = new DataSet(); da.Fill(ds, "Student");             
+         da=new SqlDataAdapter("SELECT ProjectId FROM Project ", conn);da.Fill(ds, "Project"); //select all projects 
+            foreach (DataRow rs in ds.Tables["Student"].Rows) { 
+                string StudentId = rs["StudentId"] + ""; 
+                StudentsRankes += "rank(" + StudentId+","; int i = 0; 
+                foreach (DataRow rp in ds.Tables["Project"].Rows) { i++; 
+                    string ProjectId = rp["ProjectId"] + ""; 
+                    StudentsRankes += ProjectId+",";  
+                    da = new SqlDataAdapter("SELECT StudentId, ProjectId, Rank FROM StudentRank "+ 
+                        "WHERE StudentId ='" + StudentId + "' AND ProjectId=" + ProjectId, conn); 
+                    DataSet dsRank = new DataSet(); da.Fill(dsRank, "StudentRank"); 
+                    if (dsRank.Tables["StudentRank"].Rows.Count = 0) { 
+                        DataRow rr = dsRank.Tables["StudentRank"].Rows[0]; 
+                        if (i = ds.Tables["Project"].Rows.Count) StudentsRankes += rr["Rank"] + ";; "; 
+                    } else { 
+                        //if this project is not ranked by the student, the rank is defaulted to max rank + 1 
+                   if (i = ds.Tables["Project"].Rows.Count) StudentsRankes += getStudentMaxRank(StudentId) + ";; "; 
+                    } if (i = ds.Tables["Project"].Rows.Count) StudentsRankes += StudentId + ","; 
+                } StudentsRankes += getStudentMaxRank(StudentId);  StudentsRankes += ").\n"; 
+            } conn.Close(); 
+            string path = Utilities.writeToFile(StudentsRankes, "~/StudentRankPredicate.pl"); 
+            //create project, student, and staff predicates from database tables 
+            string predicates = SQL.createPredicates(false); Utilities.appendFile(path, predicates); 
+            string path4 = Server.MapPath("~/App_Data/studentAssignCode.txt"); 
+            Utilities.appendFile(path, path4, "code"); string workingDirectory = Server.MapPath("~"); 
+            bool done = Utilities.runCommand("StudentRankPredicate.pl", "ASPStudentsAssign.txt", workingDirectory); 
+            if (done) lblMessage.Text = "Error Assigning Projects to Students..."; 
+            else { lblMessage.Text = "Projects assigned to students successfully, please click Show Results..."; 
+                StoreResultsToDB();           //inserting the result of assigning markers to projects into DB 
+                gvStudentASPResult.DataBind();        //updata the grid view (table which displayed for user) 
         }   } 
-                if (c.Checked) { string id = ((Label)ap.FindControl("lblProjectId")).Text;                     
-        //button for displaying matched students search projects 
-                    SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; 
-        protected void btnProjectsFilter_Click(object sender, EventArgs e) {  
-                    cmd.Parameters.AddWithValue("@ProjectId", id); 
-            string SubSiftResult="";    //storing student entry in a variable          
-                    cmd.Parameters.AddWithValue("@StudentId", ddlStudent.SelectedValue.ToString());                     
-            string studentSearch = "studentSearch, " + ddlProjectType1.SelectedItem.Text + " " + 
-                    cmd.CommandText = "INSERT INTO StudentRank (ProjectId, StudentId, Rank) " + 
-                ddlProjectType2.SelectedItem.Text + " " + ddlProjectType3.SelectedItem.Text + " " + 
-                                      "VALUES (@ProjectId, @StudentId, 0)"; 
-                ddlResearchGroup1.SelectedItem.Text + " " + ddlResearchGroup2.SelectedItem.Text + " " + 
-                    cmd.Connection = conn;  try { cmd.ExecuteNonQuery(); } catch (Exception) { } 
-                ddlResearchGroup3.SelectedItem.Text + " " + txtSearch.Text; 
-            }   } conn.Close(); GridView1.DataBind(); 
-        // prepare the search query (first and second parties) for SubSift matching by calling the method    
-            if(GridView1.Rows.Count!=0) btnStudentRank.Visible = true; 
-        * 'prepareSubSiftText' 
-        }//button for submiting the student projects ranked list 
-        * in SubSift class. "search" and "projects" is the name that SubSift will use for naming text folders           
-        protected void btnStudentRank_Click1(object sender, EventArgs e) { 
-            string search = "search"; 
-            string StudentID = ddlStudent.SelectedValue.ToString();//reading student id from dropdown list  
-            string message = SubSift.prepareSubSiftText(search , studentSearch); lblMessage.Text = message;  
-            int rank=0; 
-            if (message.Equals("")) { //if there is no error message in preparing student terms  
-            foreach (GridViewRow r in GridView1.Rows) { //loop on ranked projects 
-                string projectsText = SQL.getAbstracts(false);  string projects = "projects";  
-                if (((TextBox)r.FindControl("txtRank")).Text != "") 
-                message = SubSift.prepareSubSiftText(projects, projectsText); lblMessage.Text = message; 
-                    rank = Convert.ToInt32(((TextBox)r.FindControl("txtRank")).Text);//read rank for this project 
-       /* if there is no error message in preparing abstracts then match between two parties projects abstracts and  
-                string ProjectID = ((Label)r.FindControl("lblProjectId")).Text;//read project id for this project 
-        * student search terms then store the result in variable 'SubSiftResult'*/ 
-               SQL.UpdateStudentRank(StudentID, ProjectID, rank);//insert into DB                        
-                if (message.Equals(""))  {  
-            } DeleteStudentRank(StudentID); //remove temporarily favourite list from DB 
-                    SubSiftResult = SubSift.match(projects, search); 
-            GridView1.DataBind(); txtConfirmation.Text = "Your project list has been successfully submitted"; 
-                    showResults(SubSiftResult); // method to displays the result of SubSift 
-            btnStudentRank.Visible = false;  btnAddToFavorite.Visible = false; 
-                    ProjectAccordion.Visible = true; 
-       }//method removing the temporarily saved fovourite list of projects before submission ranked projects 
-     //if student not already submited his/her favourite ranked list the submit button set visible to this student 
-        private void DeleteStudentRank(string StudentID) { 
-                    if (!studentSubmitted(ddlStudent.SelectedValue.ToString())) btnAddToFavorite.Visible = true; 
-            conn.Open(); SqlCommand cmd = new SqlCommand(); 
-        }   }   } 
-            cmd.CommandType = CommandType.Text; cmd.Connection = conn; 
-        //method check if student already submit his/her projects ranked list 
-            cmd.Parameters.AddWithValue("@StudentId", StudentID);                        
-        private bool studentSubmitted(string StudentId) { 
-            cmd.CommandText = "DELETE FROM StudentRank WHERE "+"StudentId = @StudentId AND Rank = 0"; 
-            da = new SqlDataAdapter("SELECT * FROM StudentRank WHERE StudentId = '" + StudentId + 
-            cmd.ExecuteNonQuery(); conn.Close(); } 
-                "' AND Rank <> 0", conn); 
-    //when student select his/her user name from dropdown list the system will fetch student full name from DB 
-            DataSet ds = new DataSet(); da.Fill(ds,"StudentRank"); 
-        protected void ddlStudent_SelectedIndexChanged1(object sender, EventArgs e) { 
-            if (ds.Tables[0].Rows.Count != 0) return true; 
+        /*-----------------------------------------------------------------------------------------* 
+         * method for inserting the result of projects assignment to students into the DB  
+         * ----------------------------------------------------------------------------------------*/ 
+        private void StoreResultsToDB() { 
+            // call method deleteRecords in SQL class paramete "ProjectAssignment" is the table name 
+            SQL.deleteRecords("ProjectAssignment"); 
+            //reading the result of ASP assignments and extracting the requred information to be inserted into DB 
+            string aspOutput = Utilities.ReadFile("ASPStudentsAssign.txt"); 
+            int start = aspOutput.LastIndexOf("Answer")+10; 
+            int end0 = aspOutput.LastIndexOf("assign("); int end = aspOutput.IndexOf(" ",end0); 
+            string assign = aspOutput.Substring(start, end - start); 
+            assign = assign.Replace("assign(", ""); assign = assign.Replace(")", "");             
+            string[] a = assign.Split(' '); //the required data is stored in array string 'a' 
+            conn.Open();//open connection and loop on 'a' 
+            for (int i = 0; i < a.Length; i++) { 
+                int Coma1 = a[i].IndexOf(",");  int Coma2 = a[i].LastIndexOf(","); 
+                //store student id in 'StudentId' and project id in 'ProjectId' then insert into DB 
+                string StudentId=a[i].Substring(0, Coma1); string ProjectId=a[i].Substring(Coma1+1, Coma2-Coma1-1);  
+                SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; 
+                cmd.Parameters.AddWithValue("@ProjectId", ProjectId); 
+                cmd.Parameters.AddWithValue("@StudentId", StudentId); 
+                cmd.Parameters.AddWithValue("@AssignedOn", DateTime.Now); 
+                cmd.CommandText = "INSERT INTO ProjectAssignment (ProjectId, StudentId, AssignedOn) " + 
+                                  "VALUES (@ProjectId, @StudentId, @AssignedOn)"; 
+                cmd.Connection = conn; 
+                try {cmd.ExecuteNonQuery();} catch (Exception) {}                                 
+            } conn.Close(); 
+        } 
+        // method to store the result of projects assignment to markers in the DB  
+        private void StoreMarkerResultsToDB() { 
+            //reading the result of ASP assignments and extracting the requred information to be inserted into DB 
+            string aspOutput = Utilities.ReadFile("ASPMarkersRank.txt"); 
+            int start = aspOutput.LastIndexOf("Answer") + 10; 
+            int end0 = aspOutput.LastIndexOf("assign("); int end = aspOutput.IndexOf(" ", end0); 
+            string assign = aspOutput.Substring(start, end - start); 
+            assign = assign.Replace("assign(", ""); assign = assign.Replace(")", ""); 
+            string[] a = assign.Split(' ');         //array string 'a' for storing the extracted data 
+            SQL.deleteRecords("MarkerAssignment");  //delete old data from DB 
+        //open connection and loop on 'a' for inserting the result of ASP assignment of markers to projects into DB 
             conn.Open(); 
-            return false; 
-            da = new SqlDataAdapter("SELECT FName, LName FROM Student WHERE StudentId = '" + 
-        }//method to displays list of projects which sorted by SubSift with regard to any student search  
-ddlStudent.SelectedValue + "'", conn); 
-        private void showResults(string SubSiftResult) { 
-            DataSet ds = new DataSet(); da.Fill(ds, "Student"); 
-            //create datatable for Accordion             
-            if (ds.Tables["Student"].Rows.Count != 0) { 
-            dt = new DataTable("projects"); 
-                DataRow r = ds.Tables["Student"].Rows[0]; lblStudentName.Text = r["FName"] + " " + r["LName"]; 
-            dt.Columns.Add(new DataColumn("Order")); dt.Columns.Add(new DataColumn("ProjectId")); 
-            } conn.Close(); } 
-            dt.Columns.Add(new DataColumn("Title")); dt.Columns.Add(new DataColumn("Abstract"));                                                
-        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e) { 
-            XmlDocument matchedResult = new XmlDocument(); matchedResult.Load(new StringReader(SubSiftResult));             
+            for (int i = 0; i < a.Length; i++) { 
+                int Coma1 = a[i].IndexOf(",");  int Coma2 = a[i].LastIndexOf(","); 
+                string order = a[i].Substring(0, Coma1);  //order indicate that this marker is marker 1 or 2 
+                string ProjectId = a[i].Substring(Coma1 + 1, Coma2 - Coma1 - 1); 
+                string StaffId = a[i].Substring(Coma2 + 1, a[i].Length - Coma2 - 1); 
+                SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; 
+                cmd.Parameters.AddWithValue("@ProjectId", ProjectId); 
+                cmd.Parameters.AddWithValue("@StaffId", StaffId); 
+                cmd.Parameters.AddWithValue("@MarkerOrder", Convert.ToInt16(order)); 
+                cmd.Parameters.AddWithValue("@AssignOn", DateTime.Now); 
+                cmd.CommandText = "INSERT INTO MarkerAssignment (ProjectId, StaffId, AssignOn, MarkerOrder) " + 
+                                  "VALUES (@ProjectId, @StaffId, @AssignOn, @MarkerOrder)"; 
+                cmd.Connection = conn; 
+                try { cmd.ExecuteNonQuery(); } catch (Exception) {} 
+            } conn.Close(); 
+        } 
+        // method to get student max rank and return 1 if student not ranked any project otherwise max+1 
+        private int getStudentMaxRank(string StudentId) { 
+            da = new SqlDataAdapter("SELECT MAX(Rank) AS MaxRank FROM StudentRank WHERE StudentId ='" +  
+   StudentId+"'", conn); 
+            DataSet ds = new DataSet(); da.Fill(ds, "MaxRank"); 
+            DataRow dr = ds.Tables["MaxRank"].Rows[0]; 
+            //first time will be 1 otherwise the max number + 1 
+            if (dr["MaxRank"] == DBNull.Value) return 1; else return Convert.ToInt32(dr["MaxRank"]) + 1; 
+        } 
+        // button to display the result of ASP result for assigning students to projects 
+        protected void btnStudentASPResult_Click(object sender, EventArgs e) {gvStudentASPResult.Visible = true;} 
+        protected void gvASPResult_RowDataBound(object sender, GridViewRowEventArgs e) { 
+            if (e.Row.RowType == DataControlRowType.DataRow) { //perfomance for rows without header and footer 
+           ((SqlDataSource)e.Row.FindControl("SqlDataSourceMarkersAssign")).SelectParameters[0].DefaultValue = 
+                ((Label)e.Row.FindControl("lblProjectId")).Text; 
+                ((GridView)e.Row.FindControl("GridView1")).DataBind(); 
+        }   } 
+        protected void gvStudentASPResult_RowDataBound(object sender, GridViewRowEventArgs e) { 
             if (e.Row.RowType == DataControlRowType.DataRow) { 
+                string StudentId = ((Label)e.Row.FindControl("lblStudentId")).Text; 
+                string ProjectId = ((Label)e.Row.FindControl("lblProjectId")).Text; 
+                da = new SqlDataAdapter("SELECT Rank FROM StudentRank WHERE StudentId='"+ StudentId  
+   + "' AND ProjectId=" + ProjectId, conn); 
+                DataSet ds = new DataSet(); da.Fill(ds, "rank"); 
+                if (ds.Tables["rank"].Rows.Count == 0) ((Label)e.Row.FindControl("lblRank")).Text = "1"; 
+                else { DataRow r=ds.Tables["rank"].Rows[0]; ((Label)e.Row.FindControl("lblRank")).Text=r["Rank"]+""; 
+} }     } 
+/*----------------------------------------------------------------------------------------------------------------*/ 
+    public partial class SupervisorMainPage : System.Web.UI.Page 
+    { 
+        SqlConnection conn; SqlDataAdapter da, daType;  
+ 
+5 6 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+         //  On page load populate all dropdown lists for availabel project types from DB 
+        protected void Page_Load(object sender, EventArgs e) { 
+            conn = new 
+SqlConnection(ConfigurationManager.ConnectionStrings["ProjectAllocConnectionString"].ConnectionString); 
+            if (IsPostBack) { 
+                conn.Open(); 
+                daType = new SqlDataAdapter("SELECT * FROM Type", conn);//read from DB all project types 
+                DataSet ds = new DataSet(); daType.Fill(ds, "type"); 
+                //add empty row in all dropdown lists, so by default not selected any type 
+                Utilities.addEmptyItem(ddlProjectType1); 
+                Utilities.addEmptyItem(ddlProjectType2); 
+                Utilities.addEmptyItem(ddlProjectType3); 
+                int i = 1;  
+                foreach(DataRow r in ds.Tables["type"].Rows) { 
+                    //add available types which obtained from DB to dropdown lists 
+                   ddlProjectType1.Items.Insert(i,new ListItem(r["Type"]+": "+r["description"],r["TypeId"]+"")); 
+                  ddlProjectType2.Items.Insert(i, new ListItem(r["Type"]+": "+r["description"], r["TypeId"]+ "")); 
+                   ddlProjectType3.Items.Insert(i, new ListItem(r["Type"]+": "+r["description"], r["TypeId"]+ "")); 
+                   i++; 
+                } conn.Close(); 
+        }   } 
+         //  when button 'Submit' is clicked insert the proposed project into DB by reading data from page 
+        protected void btnSubmitProject_Click(object sender, EventArgs e) { 
+            conn.Open(); 
+            long ProjectId = SQL.GenerateNewProjectId();  //method automatically generate an id for new project          
+            SqlCommand cmd = new SqlCommand(); 
+            cmd.CommandType = CommandType.Text; 
+            cmd.Parameters.AddWithValue("@ProjectId",ProjectId); 
+            cmd.Parameters.AddWithValue("@Title",txtProjectTitle.Text); 
+            cmd.Parameters.AddWithValue("@Abstract",txtProjectAbstract.Text); 
+            cmd.Parameters.AddWithValue("@SkillRequired", txtSkillReqDescription.Text); 
+            cmd.Parameters.AddWithValue("@StaffId",ddlSupervisor.SelectedValue); 
+            cmd.Parameters.AddWithValue("@VettedOn",DateTime.Now); 
+            cmd.CommandText = "INSERT INTO Project (ProjectId, Title, Abstract, " +  
+                               "SkillRequired, StaffId, VettedOn) VALUES (@ProjectId, @Title,"+ 
+                                "@Abstract, @SkillRequired, @StaffId, @VettedOn)"; 
+            cmd.Connection = conn; cmd.ExecuteNonQuery(); 
+            //call method for inserting project type for any project proposed by supervisor 
+            addProjectType(ProjectId, ddlProjectType1.SelectedValue); 
+            addProjectType(ProjectId, ddlProjectType2.SelectedValue); 
+            addProjectType(ProjectId, ddlProjectType3.SelectedValue); 
+            //call method for inserting project group for any project proposed by supervisor 
+            addProjectGroup(ProjectId, ddlResearchGroup1.SelectedValue); 
+            addProjectGroup(ProjectId, ddlResearchGroup2.SelectedValue); 
+            addProjectGroup(ProjectId, ddlResearchGroup3.SelectedValue); 
+            conn.Close();  GridView1.DataBind(); reset(); 
+        } 
+        //method reset for cleaning the page and make the page ready for supervisor to propose a new project  
+        private void reset() { // clears all fields content – suppressed } 
+        //method for adding new proposed project type to DB 
+        private void addProjectType(long ProjectId, string TypeId) { 
+            if (TypeId.Equals("")) { 
+                SqlCommand cmd = new SqlCommand(); 
+                cmd.CommandType = CommandType.Text; 
+                cmd.Parameters.AddWithValue("@ProjectId", ProjectId); 
+                cmd.Parameters.AddWithValue("@TypeId", Convert.ToInt32(TypeId)); 
+                cmd.CommandText = "INSERT INTO ProjectType (ProjectId, TypeId) " + 
+                                  "VALUES (@ProjectId, @TypeId)"; 
+                cmd.Connection = conn; 
+                try {cmd.ExecuteNonQuery();} 
+                catch(Exception){} 
+        }   } 
+        //method for adding research group of new proposed project to DB 
+        private void addProjectGroup(long ProjectId, string GroupId) { 
+            if (GroupId.Equals("")) { 
+                SqlCommand cmd = new SqlCommand(); 
+                cmd.CommandType = CommandType.Text; 
+                cmd.Parameters.AddWithValue("@ProjectId", ProjectId); 
+                cmd.Parameters.AddWithValue("@GroupId", Convert.ToInt32(GroupId)); 
+                cmd.CommandText = "INSERT INTO ProjectResearchGroup (ProjectId, GroupId) " + 
+                                  "VALUES (@ProjectId, @GroupId)"; 
+                cmd.Connection = conn; cmd.ExecuteNonQuery(); 
+        }   } 
+        /*-----------------------------------------------------------------------------------------* 
+         *  when supervisors select their user name from dropdown list the system displays supervisor name by     
+         * reading from DB 
+         * ----------------------------------------------------------------------------------------*/     
+        protected void ddlSupervisor_SelectedIndexChanged(object sender, EventArgs e) { 
+            conn.Open(); 
+            da = new SqlDataAdapter("SELECT FName, LName FROM Staff WHERE StaffId = '"  
+   + ddlSupervisor.SelectedValue + "'", conn); 
+            DataSet ds = new DataSet(); 
+            da.Fill(ds,"Supervisor"); 
+            //if this supervisor is found in DB display his/her name on the label 'lblSupervisorName' 
+            if(ds.Tables["Supervisor"].Rows.Count =0) { 
+                DataRow r = ds.Tables["Supervisor"].Rows[0]; 
+                lblSupervisorName.Text = r["FName"] + " " + r["LName"]; 
+            } conn.Close(); reset(); 
+        } 
+        /*-----------------------------------------------------------------------------------------* 
+         * GridView1 is the place on right side of the page where displayed all projects that are published for  
+         * the current staff. The publish projects are obtained from DB. By selecting any project from this list 
+         * the project will be displayed on the page so the staff can update or delete them 
+         * ----------------------------------------------------------------------------------------*/ 
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e) 
+        { 
+            conn.Open(); 
+            da = new SqlDataAdapter("SELECT * FROM Project WHERE ProjectId='"+GridView1.SelectedValue+"'", conn); 
+            DataSet ds = new DataSet(); 
+            da.Fill(ds, "Project"); 
+            DataRow dr = ds.Tables["Project"].Rows[0]; 
+            txtProjectTitle.Text = dr["Title"]+""; 
+            txtProjectAbstract.Text = dr["Abstract"]+""; 
+            txtSkillReqDescription.Text = dr["SkillRequired"]+""; 
+       da = new SqlDataAdapter("SELECT * FROM ProjectType WHERE ProjectId='" + GridView1.SelectedValue + "'", conn); 
+            da.Fill(ds, "ProjectType"); 
+            int j = 1; 
+            foreach(DataRow dr2 in ds.Tables["ProjectType"].Rows) { 
+                switch(j) { 
+                    case 1: ddlProjectType1.SelectedValue = dr2["TypeId"]+""; break; 
+                    case 2: ddlProjectType2.SelectedValue = dr2["TypeId"]+""; break; 
+                    case 3: ddlProjectType3.SelectedValue = dr2["TypeId"]+""; break; 
+                } j++;             
+            } 
+  da = new SqlDataAdapter("SELECT * FROM ProjectResearchGroup WHERE ProjectId='"+GridView1.SelectedValue+"'", conn); 
+            da.Fill(ds, "ProjectGroup"); 
+            int k = 1; 
+            foreach (DataRow dr3 in ds.Tables["ProjectGroup"].Rows) { 
+                switch (k) { 
+                    case 1: ddlResearchGroup1.SelectedValue = dr3["GroupId"] + ""; break;  
+                    case 2: ddlResearchGroup2.SelectedValue = dr3["GroupId"] + ""; break;  
+                    case 3: ddlResearchGroup3.SelectedValue = dr3["GroupId"] + ""; break; 
+                } k++; 
+            } btnDeleteProject.Visible = true; btnUpdateProject.Visible = true; btnSubmitProject.Visible = false;             
+        } 
+        // when button 'DELETE PROJECT' pressed that project will be flaged as 'Archive' 
+        protected void btnDeleteProject_Click(object sender, EventArgs e) { 
+            conn.Open();                        
+            SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; 
+            cmd.CommandText = "UPDATE Project SET Archive = 1 WHERE ProjectId='" + GridView1.SelectedValue + "'"; 
+            cmd.Connection = conn; cmd.ExecuteNonQuery(); 
+            GridView1.DataBind(); reset(); 
+        } 
+        // when button 'UPDATE PROJECT' pressed that project record will be modified in DB and 
+        protected void btnUpdateProject1_Click(object sender, EventArgs e) { 
+            conn.Open();             
+            SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; cmd.Connection = conn;  
+            long ProjectId = Convert.ToInt64(GridView1.SelectedValue); 
+            cmd.Parameters.AddWithValue("@ProjectId", GridView1.SelectedValue); 
+            cmd.Parameters.AddWithValue("@Title", txtProjectTitle.Text); 
+            cmd.Parameters.AddWithValue("@Abstract", txtProjectAbstract.Text); 
+            cmd.Parameters.AddWithValue("@SkillRequired", txtSkillReqDescription.Text); 
+            cmd.CommandText = "UPDATE Project SET Title = @Title, Abstract = @Abstract,"+ 
+                "SkillRequired = @SkillRequired WHERE ProjectId=@ProjectId"; 
+            cmd.ExecuteNonQuery(); 
+            cmd.CommandText = "DELETE FROM ProjectType WHERE ProjectId=@ProjectId"; cmd.ExecuteNonQuery(); 
+            addProjectType(ProjectId, ddlProjectType1.SelectedValue); 
+            addProjectType(ProjectId, ddlProjectType2.SelectedValue); 
+            addProjectType(ProjectId, ddlProjectType3.SelectedValue);  
+            cmd.CommandText = "DELETE FROM ProjectResearchGroup WHERE ProjectId=@ProjectId"; cmd.ExecuteNonQuery(); 
+            addProjectGroup(ProjectId, ddlResearchGroup1.SelectedValue); 
+            addProjectGroup(ProjectId, ddlResearchGroup2.SelectedValue); 
+            addProjectGroup(ProjectId, ddlResearchGroup3.SelectedValue); 
+            conn.Close(); GridView1.DataBind(); reset(); 
+        } 
+        private void updateProjectType(long ProjectId, string TypeId) { 
+            if (TypeId.Equals("")) { 
+                SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; 
+                cmd.Parameters.AddWithValue("@TypeId", Convert.ToInt32(TypeId)); 
+                cmd.CommandText = "UPDATE ProjectType SET TypeId = @TypeId  WHERE ProjectId='" + ProjectId + "'"; 
+7 8 
+  
+ 
+ 
+ 
+ 
+ 
+                cmd.Connection = conn; cmd.ExecuteNonQuery(); 
+    }   }  } 
+ 
+/*----------------------------------------------------------------------------------------------------------------*/ 
+    public partial class StudentMainPage : System.Web.UI.Page 
+    { 
+        SqlConnection conn; SqlDataAdapter daType, da; DataTable dt;  
+        protected void Page_Load(object sender, EventArgs e) { 
+            conn =  
+      new SqlConnection(ConfigurationManager.ConnectionStrings["ProjectAllocConnectionString"].ConnectionString); 
+            if (IsPostBack) { 
+ /* RangeValidator is used for validating the number of projects for display entered by user 
+                RangeValidator1.MaximumValue = (SQL.GenerateNewProjectId() - 1)+""; 
+                RangeValidator1.ErrorMessage += RangeValidator1.MaximumValue; 
+                txtBestFit.Text = RangeValidator1.MaximumValue;  
+         // populate all dropdown lists for availabel project types from DB          
+                conn.Open(); 
+                daType = new SqlDataAdapter("SELECT * FROM Type", conn); 
+                DataSet ds = new DataSet(); daType.Fill(ds, "type"); 
+                int i = 1; 
+                foreach (DataRow r in ds.Tables["type"].Rows) { 
+                    ddlProjectType1.Items.Insert(i, new ListItem(r["Type"]+": "+r["description"], r["TypeId"]+"")); 
+                    ddlProjectType2.Items.Insert(i, new ListItem(r["Type"]+": "+r["description"], r["TypeId"]+ "")); 
+                    ddlProjectType3.Items.Insert(i, new ListItem(r["Type"]+": "+r["description"], r["TypeId"]+ "")); 
+                    i++; }  conn.Close(); 
+        }   } 
+        //button for displaying matched students search projects 
+        protected void btnProjectsFilter_Click(object sender, EventArgs e) {  
+            string SubSiftResult="";    //storing student entry in a variable          
+            string studentSearch = "studentSearch, " + ddlProjectType1.SelectedItem.Text + " " + 
+                ddlProjectType2.SelectedItem.Text + " " + ddlProjectType3.SelectedItem.Text + " " + 
+                ddlResearchGroup1.SelectedItem.Text + " " + ddlResearchGroup2.SelectedItem.Text + " " + 
+                ddlResearchGroup3.SelectedItem.Text + " " + txtSearch.Text; 
+        // prepare the search query (first and second parties) for SubSift matching by calling the method    
+        * 'prepareSubSiftText' 
+        * in SubSift class. "search" and "projects" is the name that SubSift will use for naming text folders           
+            string search = "search"; 
+            string message = SubSift.prepareSubSiftText(search , studentSearch); lblMessage.Text = message;  
+            if (message.Equals("")) { //if there is no error message in preparing student terms  
+                string projectsText = SQL.getAbstracts(false);  string projects = "projects";  
+                message = SubSift.prepareSubSiftText(projects, projectsText); lblMessage.Text = message; 
+       /* if there is no error message in preparing abstracts then match between two parties projects abstracts and  
+        * student search terms then store the result in variable 'SubSiftResult'*/ 
+                if (message.Equals(""))  {  
+                    SubSiftResult = SubSift.match(projects, search); 
+                    showResults(SubSiftResult); // method to displays the result of SubSift 
+                    ProjectAccordion.Visible = true; 
+     //if student not already submited his/her favourite ranked list the submit button set visible to this student 
+                    if (studentSubmitted(ddlStudent.SelectedValue.ToString())) btnAddToFavorite.Visible = true; 
+        }   }   } 
+        //method check if student already submit his/her projects ranked list 
+        private bool studentSubmitted(string StudentId) { 
+            da = new SqlDataAdapter("SELECT * FROM StudentRank WHERE StudentId = '" + StudentId + 
+                "' AND Rank <> 0", conn); 
+            DataSet ds = new DataSet(); da.Fill(ds,"StudentRank"); 
+            if (ds.Tables[0].Rows.Count = 0) return true; 
+            return false; 
+        }//method to displays list of projects which sorted by SubSift with regard to any student search  
+        private void showResults(string SubSiftResult) { 
+            //create datatable for Accordion             
+            dt = new DataTable("projects"); 
+            dt.Columns.Add(new DataColumn("Order")); dt.Columns.Add(new DataColumn("ProjectId")); 
+            dt.Columns.Add(new DataColumn("Title")); dt.Columns.Add(new DataColumn("Abstract"));                                                
+            XmlDocument matchedResult = new XmlDocument(); matchedResult.Load(new StringReader(SubSiftResult));             
             //select all project items below <match> tag 
-                string projectId = ((Label)e.Row.FindControl("lblProjectId")).Text; 
             XmlNodeList projectNodes = searchNode.SelectNodes("item"); 
-                da = new SqlDataAdapter("SELECT Title FROM Project WHERE ProjectId=" + projectId, conn); 
- 
             int i = 0; 
-                DataSet ds = new DataSet(); da.Fill(ds, "ProjectTitle"); 
             foreach (XmlNode project in projectNodes) { 
- 
-                DataRow r = ds.Tables["ProjectTitle"].Rows[0]; 
                 DataRow row = dt.NewRow(); i++; // 'txtBestFit' is number of projects displayed for current student 
-                ((HyperLink)e.Row.FindControl("lblTitle")).Text = r["Title"] + ""; 
                 if (i > Convert.ToInt32(txtBestFit.Text)) break; 
-} }} 
                     //extract 'project Id'  from SubSift result then find matched project from DB 
  
+                    string id = project.SelectSingleNode("id").InnerText; 
+            XmlNode searchNode = matchedResult.SelectNodes("result/match")[0];  //select the 'search' node 
+                    da = new SqlDataAdapter("SELECT * FROM Project WHERE ProjectId=" + id, conn); 
+                    DataSet ds = new DataSet(); da.Fill(ds, "Project"); 
+                    if (ds.Tables[0].Rows.Count = 0) { 
+                        DataRow projectRow = ds.Tables["Project"].Rows[0]; 
+                        row["Order"] = i;     // add order number to row 
+                        row["ProjectId"] = projectRow["ProjectId"];    //add project id 
+                        row["Title"] = projectRow["Title"];    //add project Title 
+                        row["Abstract"] = projectRow["Abstract"];    //add Abstract 
+                    } dt.Rows.Add(row);  } } 
+            ProjectAccordion.DataSource = dt.DefaultView; ProjectAccordion.DataBind(); 
+        }// button when student want to see all projects 
+        protected void btnShowAllProjects_Click(object sender, EventArgs e) 
+        { 
+        Response.Redirect("https://www.cs.bris.ac.uk/project/proposals/index.jsp?ticket=ST-10677980-
+dWW1Fkad5AoqtjFFCcit-nAC10040C2095"); 
+        } 
+        //button for adding the student selected projects to his/her favourite list for later ranking them 
+        protected void btnAddToFavorite_Click(object sender, EventArgs e) { 
+            conn.Open(); 
+      // loop on all projects on page,checking if any project is selected by student to be added to favourite list 
+            for (int i = 0; i < ProjectAccordion.Panes.Count; i++ ) {  
+                AccordionPane ap = ProjectAccordion.Panes[i]; 
+                CheckBox c = (CheckBox)ap.FindControl("cbSelect"); 
+                if (c.Checked) { string id = ((Label)ap.FindControl("lblProjectId")).Text;                     
+                    SqlCommand cmd = new SqlCommand(); cmd.CommandType = CommandType.Text; 
+                    cmd.Parameters.AddWithValue("@ProjectId", id); 
+                    cmd.Parameters.AddWithValue("@StudentId", ddlStudent.SelectedValue.ToString());                     
+                    cmd.CommandText = "INSERT INTO StudentRank (ProjectId, StudentId, Rank) " + 
+                                      "VALUES (@ProjectId, @StudentId, 0)"; 
+                    cmd.Connection = conn;  try { cmd.ExecuteNonQuery(); } catch (Exception) { } 
+            }   } conn.Close(); GridView1.DataBind(); 
+            if(GridView1.Rows.Count=0) btnStudentRank.Visible = true; 
+        }//button for submiting the student projects ranked list 
+        protected void btnStudentRank_Click1(object sender, EventArgs e) { 
+            string StudentID = ddlStudent.SelectedValue.ToString();//reading student id from dropdown list  
+            int rank=0; 
+            foreach (GridViewRow r in GridView1.Rows) { //loop on ranked projects 
+                if (((TextBox)r.FindControl("txtRank")).Text = "") 
+                    rank = Convert.ToInt32(((TextBox)r.FindControl("txtRank")).Text);//read rank for this project 
+                string ProjectID = ((Label)r.FindControl("lblProjectId")).Text;//read project id for this project 
+               SQL.UpdateStudentRank(StudentID, ProjectID, rank);//insert into DB                        
+            } DeleteStudentRank(StudentID); //remove temporarily favourite list from DB 
+            GridView1.DataBind(); txtConfirmation.Text = "Your project list has been successfully submitted"; 
+            btnStudentRank.Visible = false;  btnAddToFavorite.Visible = false; 
+       }//method removing the temporarily saved fovourite list of projects before submission ranked projects 
+        private void DeleteStudentRank(string StudentID) { 
+            conn.Open(); SqlCommand cmd = new SqlCommand(); 
+            cmd.CommandType = CommandType.Text; cmd.Connection = conn; 
+            cmd.Parameters.AddWithValue("@StudentId", StudentID);                        
+            cmd.CommandText = "DELETE FROM StudentRank WHERE "+"StudentId = @StudentId AND Rank = 0"; 
+            cmd.ExecuteNonQuery(); conn.Close(); } 
+    //when student select his/her user name from dropdown list the system will fetch student full name from DB 
+        protected void ddlStudent_SelectedIndexChanged1(object sender, EventArgs e) { 
+            conn.Open(); 
+            da = new SqlDataAdapter("SELECT FName, LName FROM Student WHERE StudentId = '" + 
+ddlStudent.SelectedValue + "'", conn); 
+            DataSet ds = new DataSet(); da.Fill(ds, "Student"); 
+            if (ds.Tables["Student"].Rows.Count = 0) { 
+                DataRow r = ds.Tables["Student"].Rows[0]; lblStudentName.Text = r["FName"] + " " + r["LName"]; 
+            } conn.Close(); } 
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e) { 
+            if (e.Row.RowType == DataControlRowType.DataRow) { 
+                string projectId = ((Label)e.Row.FindControl("lblProjectId")).Text; 
+                da = new SqlDataAdapter("SELECT Title FROM Project WHERE ProjectId=" + projectId, conn); 
+                DataSet ds = new DataSet(); da.Fill(ds, "ProjectTitle"); 
+                DataRow r = ds.Tables["ProjectTitle"].Rows[0]; 
+                ((HyperLink)e.Row.FindControl("lblTitle")).Text = r["Title"] + ""; 
+} }} 
  
+9 10 

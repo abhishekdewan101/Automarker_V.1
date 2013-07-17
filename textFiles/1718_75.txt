@@ -1,3 +1,5 @@
+2 
+ 
 Executive Summary 
  
 Compressed main memory system is a memory system intended to preserve some main memory 
@@ -48,8 +50,8 @@ memory based system. (refer to sub-chapter 7.2)
 5. I have implemented and run all my wrapper designs including compressed main memory system 
 in Xilinx Virtex 5 FPGA board. This proves that my design does not generate latches, in which 
 this indicates a good design implementation on FPGA. (refer to sub-chapter 7.4). 
-2 
-  
+ 4 
+ 
  
 Table of Contents 
 Declaration ............................................................................................................................................ 1 
@@ -89,8 +91,8 @@ Chapter 6: System Design & Solutions ...........................................
 6.2.4 SDRAM Problem ............................................................................................................ 39 
 6.2.5 AHBRAM as Main Memory ........................................................................................... 40 
 6.2.6 Modeling SDRAM-based System performance on AHBRAM-based System ................... 42 
-4 
-  
+ 5 
+ 
 6.3 CM0_wrapper Design ............................................................................................................ 43 
 6.3.1 CM0_wrapper Design Process ......................................................................................... 43 
 6.3.2 Modeling SDRAM-based System Performance with CM0_busdelaycont_wrapper .......... 46 
@@ -127,8 +129,8 @@ B.3 Cpu_ahbbuffer_bridge.vhd in CM0X_wrapper ...................................
 B.4 Comdec_ahbbuffer_bridge.vhd in CM0X_wrapper ............................................................ 86 
  
  
-5 
-  
+ 6 
+ 
 List of Abbreviations 
  
 AHB  Advanced High Performance Bus 
@@ -140,10 +142,12 @@ CBAT  Compressed Block Address Table
 COMDEC Compressor-Decompressor 
 CCRP  Code Compression RISC Processor 
 CCTP  Code Compression Thumb Processor 
+CLB
 1
-CLB  Cache Line Address LookAside Buffer 
+  Cache Line Address LookAside Buffer 
+CLB
 2
-CLB  Configurable Logic Block 
+  Configurable Logic Block 
 DBB  Decompression Block Buffer 
 DDR2  Dual Data Rate 2 
 FPGA  Field Programmable Gate Array 
@@ -183,8 +187,8 @@ VHDL  Very-High-Speed-Intergrated-Circuit Hardware Description Language
  
  
  
-6 
-  
+ 7 
+ 
 Chapter 1: Motivation 
  
 Computer technology throughout history has shown a remarkable evolution since the introduction of 
@@ -228,28 +232,27 @@ with previous approaches to further improving code density.
  
  
  
-7 
-  
-Data/instructions  here 
-Data/instructions here 
-travel in original form 
-travel in compressed 
-(uncompressed)
-form
-Memory Read Process 
-(decompression)
+ 8 
+ 
 Main Memory 
-Compressor/
 RAM
-decompressor 
-CPU (data and instructions 
-engine
+(data and instructions 
 resides here in 
 compressed state)
+Compressor/
+decompressor 
+engine
+CPU
+Memory Read Process 
+(decompression)
 Memory Write Process
 (compression)
- 
-Figure 1.0: General idea of compressed main memory system 
+Data/instructions  here 
+travel in original form 
+(uncompressed)
+Data/instructions here 
+travel in compressed 
+form
  
  
 In brief, the main idea of compressed main memory system is to allow content of the main memory 
@@ -276,8 +279,10 @@ memory system is expected to show positive impact on improving system performanc
 off-chip RAM. 
  
  
-8 
-  
+Figure 1.0: General idea of compressed main memory system 
+ 
+ 9 
+ 
 Chapter 2: Aims & Objectives 
  
 This project is categorized as type II research project. However, considerable amount of hardware 
@@ -322,8 +327,8 @@ decompression buffer.
 memory based system. 
  
  
-9 
-  
+ 10 
+ 
 Chapter 3: Literature Review 
  
 This section contains comprehensive literature reviews of hardware main memory compression 
@@ -370,8 +375,8 @@ and has a broad flexibility in enhancing the compression algorithm. The first id
 main memory compression emerged in early 1990s by Wilson who proposed a new level of memory 
 hierarchy to store memory pages in compressed form [11]. It was later found that software based 
 memory compression can be classified into adaptive and static [12] .The adaptive approach analyzes 
-10 
-  
+ 11 
+ 
 applications which memory can be most optimized to boost performance while static approach relies 
 on mathematical model and less effective compared to adaptive one. 
 The hardware-based memory compression is more favored although it is a harder approach compared 
@@ -422,8 +427,8 @@ compression-decompression engine which employs compression algorithm as fast as 
 Howsoever, the integration of compression engine to the system is certainly not trivial and exhibited 
 many challenges in order to integrate it seamlessly without additional overhead from the compression 
 engine. 
-11 
-  
+ 12 
+ 
 3.2 Compression-Decompression Engine and Algorithm 
 One of the main challenges in compressed main memory system is to reduce compression-
 decompression overhead to maximize the advantage of having the main memory compressed. A key 
@@ -468,48 +473,20 @@ due to the nature of arithmetic encoding.
  
  
  
-12 
-  
+ 13 
+ 
 Dictionary compression relies on the dictionary-based encoding that simply searches for common 
 instructions sequence, assign them with an index that points to dictionary entry and put them into an 
 entry in dictionary as illustrated in figure 3.2-1 .The dictionary itself contains frequently occurring 
 instructions and the indexes are chosen to be smaller in size compared to the encoded instructions 
 [20]. 
  
-Uncompressred Compressed 
-Dictionary 
-  
  
  
-#1  lbz         r9,0(r28) 
-lbz  r9,0(r28) CODEWORD #1 
-clrlwi    r11,r9,24 
-Clrlwi  r11,r9,24 ble            cr1,000401c8 
- addi      r0,r11,1 
-addi  r0,r11,1 cmplwi  cr1,r11,7 
-cmplwi  cr1,r0,8 bgt            cr1,00041d34 
-ble  cr1,000401c8  
- 
-cmplwi  cr1,r11,7 CODEWORD #2 
-#2  lwz        r9,4(r28) 
-bgt  cr1,00041d34 b  00041d38 
- 
-stb         r18,0(r28) 
-lwz  r9,4(r28)  
-stb  r18,0(r28) CODEWORD #1 
-… … 
-b  00041d38 bgt  cr1,00041c98 
- 
-lbz  r9,0(r28)  
-clrlwi  r11,r9,24 
- 
-addi  r0,r11,1 
-cmplwi  cr1,r0,8 
-bgt  cr1,00041c98 
  
  
-Figure 3.2-1: Illustration of dictionary compression 
-[17] 
+ 
+ 
  
  
 Dictionary-based algorithm is widely adopted by state-of-art compression technique such as Ziv-
@@ -541,8 +518,50 @@ newer version was created because the non-parsing X-MatchPRO does not perform we
 compressing human readable data (ie. Text, html). Although the VW version is far superior to the 
 non-parsing version, they are based on X-Match algorithm principle and thus similarities exist 
 between both. Since our concern regarding compressor-decompressor engine is only to understand its 
-13 
-  
+#1  lbz         r9,0(r28) 
+clrlwi    r11,r9,24 
+addi      r0,r11,1 
+#2  lwz        r9,4(r28) 
+stb         r18,0(r28) 
+… … 
+Figure 3.2-1: Illustration of dictionary compression 
+[17] 
+ 
+lbz  r9,0(r28) 
+Clrlwi  r11,r9,24 
+addi  r0,r11,1 
+cmplwi  cr1,r0,8 
+ble  cr1,000401c8 
+cmplwi  cr1,r11,7 
+bgt  cr1,00041d34 
+lwz  r9,4(r28) 
+stb  r18,0(r28) 
+b  00041d38 
+lbz  r9,0(r28) 
+clrlwi  r11,r9,24 
+addi  r0,r11,1 
+cmplwi  cr1,r0,8 
+bgt  cr1,00041c98 
+ 
+CODEWORD #1 
+ble            cr1,000401c8 
+cmplwi  cr1,r11,7 
+bgt            cr1,00041d34 
+ 
+CODEWORD #2 
+b  00041d38 
+ 
+CODEWORD #1 
+bgt  cr1,00041c98 
+ 
+Uncompressred 
+ 
+Compressed 
+ 
+Dictionary 
+ 
+ 14 
+ 
 main working principle, we are going to explain the non-parsing version of X-MatchPRO algorithm 
 instead of X-MatchPROVWalgorithm as it is less complex and more practical to be presented in this 
 research review.  
@@ -563,72 +582,73 @@ MatchPRO algorithms are capable to be compared with other commercial algorithms,
 deemed to be state-of-the-art compression technology available at the moment. 
  
  
-Figure 3.2-2: Compression ratio against range of compression 
-block sizes on memory for various algorithms [7] 
- 
  
 X-MatchPROVWhardware architecture is far more complex compared to non-parsing X-MatchPRO. 
 To include complete explanation of X-MatchPROVWhardware operation is not practical in this 
 research review. Therefore, since X-MatchPROVWis based on non-parsing X-MatchPRO and both 
 are having some similarities, we will use non-parsing X-MatchPRO to elaborate its hardware 
 operation principle.  
-14 
-  
+Figure 3.2-2: Compression ratio against range of compression 
+block sizes on memory for various algorithms [7] 
+ 
+ 15 
+ 
+CAM
+(Compression
+Dictionary)
+Priority 
+Logic
+Move 
+Generation 
+Logic
+ODA
+Logic
+Best 
+Match 
+Decision 
+Logic
+Main
+Coder
+RLI 
+Coder
+Bit 
+Assembly 
+Logic
+Width 
+Adaptation 
+Logic
+Coder Packer
+Compressed 
+Output
 Uncompressed 
 Input
-Coder Packer
-Priority 
-Bit 
-Main
-Logic
-Assembly 
-CAM
-Compressed 
-Coder
-Best 
-Logic
-(Compression
-Output
-Match 
-Dictionary)
-Decision Width 
-RLI 
-Logic
-Adaptation 
-Move 
-Coder
-ODA
-Logic
-Generation 
-Logic
-Logic
-Decoder Unpacker
-Bit 
-Main
-Disassembly 
-Decoder Compressed 
-Logic
-Move 
-RAM Input
-ODA
-Pointer
-Generation 
+RAM
 (Decompression
-Logic Width 
-Array
-Logic
-RLI 
 Dictionary)
-Adaptation 
-Decoder
-Logic
 Tuple
 Assembly
+Move 
+Generation 
+Logic
+ODA
+Logic
+Pointer
+Array
+Main
+Decoder
+RLI 
+Decoder
+Bit 
+Disassembly 
+Logic
+Width 
+Adaptation 
+Logic
+Decoder Unpacker
+Compressed 
+Input
 Uncompressed 
-Output
- 
-Figure 3.2-3: Non-Parsing X-MatchPRO Compression and Decompression hardware operation flow [23] 
- 
+Output  
  
 The hardware of non-parsing X-MatchPRO basically contains compressor and decompressor 
 mechanism, in which overview of the architecture is described as follows (refer to figure 3.2-3): 
@@ -659,8 +679,10 @@ Dictionary in X-Match decompression hardware is based on RAM which stores previo
 seen data. Content of RAM during decompression and CAM during compression must be the 
 same. This is achieved by Pointer Array Logic that maps CAM’s content addresses to RAM 
 for decompression [24]. 
-15 
-  
+Figure 3.2-3: Non-Parsing X-MatchPRO Compression and Decompression hardware operation flow [23] 
+ 
+ 16 
+ 
 3.3 Managing Compressed Block 
 The most problematic part in integrating online compressor-decompressor engine to a memory system 
 is when dealing with control transfer functions such as conditional or unconditional branches. The 
@@ -708,27 +730,41 @@ eight compressed adjacent instruction blocks. The base address is 3 bytes pointe
 of the first compressed instruction block L0. Following to that, the subsequent each 5 bits represents 
 the length of the “next” compressed instruction block. This length value ranges from 1 to 31. If the 
 length is 0, it represents the length of the next instruction block that is uncompressed. Thus, each of 
-16 
-  
+ 17 
+ 
 compressed address can be found by adding the length to the base address. Computing the 
 compressed block address in LAT is done by Cache Line Address LookAside Buffer (CLB) to 
 retrieve the starting address of any compressed block. Since starting address of compressed address is 
 known, then branch instruction problem is solved. 
+CPU
+Instruction Memory 
+(Compressed)
+Instruction 
+Cache
 Cache Refill 
-Instruction Instruction Memory 
-CPU Engine with CLB LAT
-Cache (Compressed)
+Engine with 
 Decompressor
+LATCLB
  
-Figure 3.3-1: CCRP Memory Organization [4] 
  
- 
+Base Address L0 L1 L2 L3 L4 L7L6L5
+5 
+bits
+5 
+bits
+5 
+bits
+5 
+bits
+5 
+bits
+5 
+bits
+5 
+bits
+5 
+bits
 LAT Entry
-Base Address L0 L1 L2 L3 L4 L5 L6 L7
-5 5 5 5 5 5 5 5 
-bits bits bits bits bits bits bits bits
- 
-Figure 3.3-2: LAT Entry in CCRP [4] 
  
  
 CLB actually contains Address Computation Unit and Content Addressable Memory (CAM). Thus, 
@@ -756,8 +792,12 @@ simply a modified CCRP with goal to support ARM processor employing THUMB instru
 accommodate ARM/THUMB instruction set, instruction block size to be compressed must be 
 increased from 32 KB (as in original CCRP) to block size that gives optimum compression ratio for 
 THUMB code, which is 256 KB in this case[14].  
-17 
-  
+Figure 3.3-1: CCRP Memory Organization [4] 
+ 
+Figure 3.3-2: LAT Entry in CCRP [4] 
+ 
+ 18 
+ 
 CCTP actually employs the same LAT which was renamed as Compressed Block Address Table 
 (CBAT). Nevertheless, CCTP replaces CLB with Decompression Block Buffer (DBB). The 
 difference between CLB and DBB is that DBB is located in Data Memory (RAM) with intention to 
@@ -777,23 +817,21 @@ view, this resulting L1 Data Cache also needs to be connected to decompression e
 Figure 3.3-3. Through CCTP, we have learned some important things that need to be taken care when 
 we implement our compressed main memory system with ARM processor.  
  
+CPU
 Instruction Memory 
-CBAT
 (Compressed)
 L1 
 Instruction 
 Cache
-CPU
 Decompression 
 Engine
+CBAT
 L1 
 Data Cache
 Data Memory, RAM 
-DBB
 (Uncompressed)
+DBB
  
- 
-Figure 3.3-3: CCTP Memory Organization [3] 
  
  
  
@@ -808,8 +846,10 @@ MXT’s memory hierarchy consist of main memory L4, shared L3 cache with compresse
 controller and L1/L2 caches. Data is stored in Main memory L4 (8 GB available space and up to 
 16GB due to compression) in compressed form. The L3 cache is shared by all processor and IO 
 devices, in which it stores uncompressed data and hides latency for main memory access. Controller 
-18 
-  
+Figure 3.3-3: CCTP Memory Organization [3] 
+ 
+ 19 
+ 
 performs compression and decompression between main memory and L3 caches. L1/L2 cache 
 performs normal cache operations to each processor. 
 The controller employs modified version of Lempel-Ziv “Adaptive Dictionary” algorithm that 
@@ -828,21 +868,23 @@ resulting to possible compression ratio of 64 to 1 because 1 kilo bytes is essen
 bytes. This 64 to 1 compressibility only occurs when block of data is compressible to be less than 121 
 bits, which then be stored entirely in STT entry as “trivial line” format and replaces the four address 
 pointer (256 bytes sector) instead of being stored in physical memory.  
-I/O
-L1 L2 
-CPU
-Cache Cache
-STT
 L3 Shared & 
 Controller 
 (Uncompressed) L4 Main Physical 
 Memory 
 (Compressed)
-L1 L2 
 CPU
-Cache Cache
- 
-Figure 3.3-4: MXT Memory Organization [22]. 
+L1 
+Cache
+L2 
+Cache
+CPU
+L1 
+Cache
+L2 
+Cache
+STT
+I/O
  
  
 Among three previously discussed mapping table methods (LAT, CBAT and STT), clearly STT is the 
@@ -859,8 +901,10 @@ by 1.3% compared to standard system yet at least there is no performance degrada
 overhead of compression engine. 
  
  
-19 
-  
+Figure 3.3-4: MXT Memory Organization [22]. 
+ 
+ 20 
+ 
  3.3.4 Fixed-Length Compressed Block. 
 All previous related projects we have described typically aim for high compression ratio while 
 sacrificing performance (except for MXT). This is due to the utilization of mapping table that 
@@ -887,8 +931,6 @@ done and mapping table is not required.
  
  
  
-Figure 3.3-5: Fixed-length compressed block translation [28]. 
- 
 However, for us to attempt fixed-length compressed block method, the modification for compression 
 engine might be required since Lefurgy et al [28] and Lee et al[21] developed their own compression 
 engine. Modification in compression engine may require huge effort and it is not our main concern in 
@@ -901,8 +943,10 @@ variable-size block resulting more compact size than fixed-size block.
  
  
  
-20 
-  
+Figure 3.3-5: Fixed-length compressed block translation [28]. 
+ 
+ 21 
+ 
 3.4 Optimization with Decompression Buffer 
 We have understood that compression-decompression overhead is the main factor that suppresses the 
 optimum potential of compressed main memory system. Having learnt the related projects, some 
@@ -916,27 +960,26 @@ blocks. Therefore, when CPU requests the same instruction that has already been 
 before, CPU can fetches directly from that buffer’s entry and there is no decompression process 
 executed. We assume that it would reduce significant overhead since we have seen how CLB reduces 
 the decompression overhead from 12.5% to 3.125% [15]. 
+ 
+Main Memory 
+RAM
+(data and 
+instructions 
+resides here in 
+compressed 
+state)
+Compressor/
+decompressor 
+engine
+CPU
+Decompression 
+Buffer
+Memory Read Process
+ (decompression)
 Recently decompressed data are stored 
 in this buffer. Thus, decompression 
 process is skipped if the requested data 
 by CPU is already in the buffer.
-Memory Read Process
- (decompression)
-Decompression 
-Buffer
-Main Memory 
-RAM
-Compressor/
-(data and 
-decompressor 
-CPU
-instructions 
-engine
-resides here in 
-compressed 
-state)
-Figure 3.3-6: Simple illustration of decompression buffer 
-  
  
 This buffer is actually has been implemented by Lee et al [21]. The buffer is called decompression 
 buffer and does exactly like we mentioned previously. Lee et al integrated decompression buffer in 
@@ -956,8 +999,10 @@ decompression overhead reduction with reasonable implementation cost [21].
  
  
  
-21 
-  
+Figure 3.3-6: Simple illustration of decompression buffer 
+ 
+ 22 
+ 
 3.5 Concluding Remarks 
 By examining our literature review, we have achieved all the objectives of the first aim of our 
 research project. In this sub-chapter we would conclude what we have gained from the literature 
@@ -993,8 +1038,8 @@ commercial system uses off-chip memory to save memory cost.
  
  
  
-22 
-  
+ 23 
+ 
 Chapter 4: Hardware Specifications 
  
 As mentioned in section 2 (Aims & Objectives), our project includes the implementation of the 
@@ -1040,8 +1085,8 @@ developed by ARM and it is considered as “simplified” form of AMBA AHB since it 
 protocols such as multiple bus masters protocol, arbiter protocol etc. AMBA AHB is intended to be a 
 high performance system backbone bus. It allows low power efficient connection between processor, 
 on-chip memory and off-chip memory [32, 33].  
-23 
-  
+ 24 
+ 
 4.1.1 Basic CPU Transfer of ARM Cortex-M0DS 
 In order to integrate Cortex-M0DS into our desired SoC, the most important fundamental to 
 understand is its basic CPU transaction which is also called “single transfer”. A transfer is basically an 
@@ -1065,38 +1110,40 @@ HREADY signal to low in purpose of waiting the data arriving to the CPU.
  
  
  
-Figure 4.1-1: Cortex-M0DS Top-Level interface which adopts AHB-Lite 
- 
-Master interface since it acts as a master. [29] 
  
  
-Write Transfer
-Read Transfer Address Phase Data Phase
-Address Phase Data Phase
-CLOCK
-CLOCK
-HREADY
-HREADY
-HTRANS HTRANS
-10 00 10 00
-HADDR A B A
-HADDR B
-HWRITE
-HWRITE
-HWDATA HWDATA
+A B
 Data A
+CLOCK
+HADDR
+HWRITE
+HWDATA
 HRDATA
-Data A HRDATA
- 
-Figure 4.1-2: Basic ARM Cortex-M0DS transfer [32] 
+Read Transfer Address Phase Data Phase
+HREADY
+A B
+Data A
+CLOCK
+HADDR
+HWRITE
+HWDATA
+HRDATA
+Write Transfer Address Phase Data Phase
+HREADY
+10 00HTRANS10 00HTRANS
  
  
 For more details regarding the function of each signal in the figure, please refer to AHB-Lite Protocol 
 Specification [32]. 
 From this point, it is important to know that we use the terminology Cortex-M0, Cortex-M0DS and 
 CPU interchangeably. 
-24 
-  
+Figure 4.1-1: Cortex-M0DS Top-Level interface which adopts AHB-Lite 
+Master interface since it acts as a master. [29] 
+ 
+Figure 4.1-2: Basic ARM Cortex-M0DS transfer [32] 
+ 
+ 25 
+ 
 4.2 Aeroflex Gaisler GRLIB IP Core Library System-on-Chip (SoC) 
 The system on chip environment we are using in this project is based on Aeroflex Gaisler GRLIB IP 
 Core. IP core is a semiconductor intellectual property building block (core) that can be used within 
@@ -1114,25 +1161,34 @@ the capability for automatically configuring themselves against the underlying h
 software applications used in this core need not to be specifically created solely for this system. 
 Portability is also another advantage of using GRLIB [5]. Since GRLIB is technology independent, it 
 can be easily implemented in FPGA technology as we intend to do in our project. 
-Essential cores region for the project
 LEON3 CPU
-AHB
-Memory AHB Serial dbg JTAG dbg 
+AHB 
+Controller
+Memory 
+Controler
+PROM I/OSDRAMAHBRAM
 USB
-link link
-Controler Controller
-AHBRAM SDRAM PROM I/O Ethernet Spacewire CAN 2.0 
-MAC link link
+Serial dbg 
+link
 AHB/APB 
-PCI
 Bridge
-APB
-*AHB = Advanced High-Performance Bus
+JTAG dbg 
+link
+Ethernet 
+MAC
+Spacewire 
+link
+CAN 2.0 
+link
+PCI
+VGA PS2 UART Timer IRQ
 I/O 
-VGA PS2 UART Timer IRQ *APB = Advanced Peripheral Bus
 Port
- 
-Figure 4.2-1: GRLIB SoC diagram with Leon3 processor [5] 
+AHB
+APB
+Essential cores region for the project
+*AHB = Advanced High-Performance Bus
+*APB = Advanced Peripheral Bus
  
  
 Figure 4.2-1 shows the SoC implementation using GRLIB IP Library, in which Leon3 processor is 
@@ -1142,93 +1198,144 @@ It is worth to know at this point that the first implementation phase of this pr
 Processor shown in the figure above with Cortex-M0DS. Elaboration on how it is done is further 
 discussed in section 4.4. 
  
-25 
-  
+Figure 4.2-1: GRLIB SoC diagram with Leon3 processor [5] 
+ 
+ 26 
+ 
+Initialize UBSR
+CS <= ‘0’;
+RW <= ‘0’;
+ADDRESS <= "1001";
+CONTROLW <= [Block Size]
+Initialize CR
+CS <= ‘0’;
+RW <= ‘0’;
+ADDRESS <= "1000";
+CONTROLW <= X"00004080";
+BUS_REQUEST_DC = ‘0 ‘ and 
+Compressed data is ready ?
+BUS_ACKNOWLEDGE_DC <= ‘0’;
+Compressed data is placed on 
+C_DATAIN every clock cycle.
+FINISHED_D = ‘0’? U_DATA_VALID = ‘0’?
+decompressed data is transferred 
+from U_DATAOUT to recipient’s 
+port every clock cycle.
+BUS_REQUEST_DU = ‘0’  and 
+recipient is ready to receive 
+decompressed data ?
+BUS_ACKNOWLEDGE_DU <= ‘0’;
+Decompression process is finished.
+All ports are reinitialized.
+Yes
+Yes
+Yes
+Yes
+No
+No
+No
+No
 4.3 X-MatchPROVW VHDL Module 
 We have discussed X-MatchPROVW engine’s theory, its capabilities and its hardware architecture 
 quite detail in literature review (sub-chapter 3.2.2). In this sub-chapter, we do not repeat what has 
 already mentioned previously rather we describes its ports interface and how to control X-
 MatchPROVW to perform compression and decompression function.  
+XMatchPROVW 
+Processor Channel
 CS
 RW
-CLEAR
 CONTROLW
-XMatchPROVW 
-CLOCK
-ADDRESS Processor Channel
+ADDRESS
 INTERRUPT_REQUEST
 INTERRUPT_ACKNOWLEDGE
+CLEAR
+CLOCK
+Compression 
+Channel
 C_DATAOUT
-U_DATAIN U_DATAOUT
-COMPRESSING
-DECOMPRESSING C_DATAIN
 BUS_REQUEST_CU
-FLUSHING_C U_DATA_VALID
-BUS_REQUEST_DC
 BUS_ACKNOWLEDGE_CU
-BUS_REQUEST_DU
-C_DATA_VALID
-BUS_ACKNOWLEDGE_DC
-Compression Decompression 
-BUS_ACKNOWLEDGE_DU
 WAIT_CU
-Channel CODING_OVERFLOW Channel
-WAIT_DC
-WAIT_DU
-BUS_REQUEST_CC
 FINISHED_C
-DECODING_OVERFLOW
-FINISHED_D
+CRC_ERROR
+COMPRESSING
+FLUSHING_C
+C_DATA_VALID
+CODING_OVERFLOW
+BUS_REQUEST_CC
 BUS_ACKNOWLEDGE_CC
-CRC_ERROR FLUSHING_D
+U_DATAIN
 WAIT_CC
- 
-Figure 4.3-1: X-MatchPROVW Interface [41] 
+Decompression 
+Channel
+U_DATAOUT
+DECOMPRESSING
+U_DATA_VALID
+BUS_REQUEST_DU
+BUS_ACKNOWLEDGE_DU
+WAIT_DU
+DECODING_OVERFLOW
+FLUSHING_D
+C_DATAIN
+BUS_REQUEST_DC
+BUS_ACKNOWLEDGE_DC
+WAIT_DC
+FINISHED_D
  
  
 Figure 4.3-1 shows the port interface of X-MatchPROVW module written in VHDL. Its interface 
 inherently is divided into three parts which are processor channel, compression channel and 
 decompression channel. The details for each port’s function can be referred from [41]. 
  
-Initialize UBSR Initialize CR
-CS <= ‘0’; CS <= ‘0’;
-BUS_REQUEST_DC = ‘0 ‘ and 
-RW <= ‘0’; RW <= ‘0’;
  
-Compressed data is ready ?
-ADDRESS <= "1001"; ADDRESS <= "1000";
-No
-CONTROLW <= [Block Size] CONTROLW <= X"00004080";
  
-Yes
  
-Yes
-BUS_ACKNOWLEDGE_DC <= ‘0’; BUS_REQUEST_DU = ‘0’  and 
  
-Compressed data is placed on recipient is ready to receive BUS_ACKNOWLEDGE_DU <= ‘0’;
-C_DATAIN every clock cycle. decompressed data ?
  
-No
  
-FINISHED_D = ‘0’?
-U_DATA_VALID = ‘0’?
  
-No
-No
-Yes
-Yes
  
-decompressed data is transferred 
-Decompression process is finished.
  
-from U_DATAOUT to recipient’s 
-All ports are reinitialized.
-port every clock cycle.
+ 
+Figure 4.3-1: X-MatchPROVW Interface [41] 
  
 Figure 4.3-2: Flow chart of XMatchPROVW decompression 
 procedure 
-26 
-  
+ 27 
+ 
+Initialize UBSR
+CS <= ‘0’;
+RW <= ‘0’;
+ADDRESS <= "1101";
+CONTROLW <= [Block Size]
+Initialize CR
+CS <= ‘0’;
+RW <= ‘0’;
+ADDRESS <= "1100";
+CONTROLW <= X"00004088";
+BUS_REQUEST_CU = ‘0 ‘ and 
+Uncompressed data is ready ?
+BUS_ACKNOWLEDGE_CU <= ‘0’;
+Uncompressed data is placed on 
+U_DATAIN every clock cycle.
+FINISHED_C = ‘0’? C_DATA_VALID = ‘0’?
+Compressed data is transferred 
+from C_DATAOUT to recipient’s 
+port every clock cycle.
+BUS_REQUEST_CC = ‘0’  and 
+recipient is ready to receive 
+compressed data ?
+BUS_ACKNOWLEDGE_CC <= ‘0’;
+Compression process is finished.
+All ports are reinitialized.
+Yes
+Yes
+Yes
+Yes
+No
+No
+No
+No
 Figure 4.3-2 shows the procedure to perform decompression function of X-MatchPROVW. We 
 explain the decompression process first because it is the process that always executed first once 
 system starts. To start decompression, two register which are Uncompressed Block Size Register 
@@ -1257,44 +1364,22 @@ used by compression process are those from compression channel. Once we understa
 decompression process, it will be easy for us to understand the compression part as shown by figure 
 4.3-3. 
  
-Initialize UBSR Initialize CR
-CS <= ‘0’; CS <= ‘0’;
-BUS_REQUEST_CU = ‘0 ‘ and 
-RW <= ‘0’; RW <= ‘0’;
  
-Uncompressed data is ready ?
-ADDRESS <= "1101"; ADDRESS <= "1100";
-No
-CONTROLW <= [Block Size] CONTROLW <= X"00004088";
  
-Yes
  
-Yes
-BUS_ACKNOWLEDGE_CU <= ‘0’; BUS_REQUEST_CC = ‘0’  and 
  
-Uncompressed data is placed on recipient is ready to receive BUS_ACKNOWLEDGE_CC <= ‘0’;
-U_DATAIN every clock cycle. compressed data ?
  
-No
  
-FINISHED_C = ‘0’? C_DATA_VALID = ‘0’?
  
-No No
  
-Yes Yes
  
-Compressed data is transferred 
-Compression process is finished.
-from C_DATAOUT to recipient’s 
-All ports are reinitialized.
-port every clock cycle.
+ 
  
  
 Figure 4.3-3: Flow chart of XMatchPROVW compression procedure 
  
+ 28 
  
-27 
-  
 4.4 Xilinx Virtex 5 XUPV5-LX110T Board & FPGA Implementation Flow 
 We are implementing our system design in this project using Xilinx Virtex 5 XUPV5-LX110T FPGA 
 board (from now we can call it XUPV5 board). We use XUPV5 (XUP stands for Xilinx University 
@@ -1319,18 +1404,16 @@ NGC (contains logical design data and constraints). Then, the resulting netlist 
 implementation process.  
  
 HDL Design 
-Behavioral 
-Synthesis
 Code / Schematic
+Behavioral 
 Simulation
-ISE Implementation Process
+Synthesis
 Translate Map Place & Route
-Bit  File 
 Timing Simulation
+Bit  File 
 Generation
+ISE Implementation Process
  
- 
-Figure 4.4-1: Typical Implementation flow in Xilinx ISE [38, 39]  
  
  
 ISE Implementation process consists of translate (merges multiple netlists and constraints into Xilinx 
@@ -1346,8 +1429,10 @@ and route is the most time consuming process and its output is also saved in NCD
           After  ISE implementation  process  is  done,  timing  simulation  is  conducted  to  produce 
 timing report of the design and lastly, the design is converted to Bitstream file (.Bit file) so that it can 
 be downloaded to Virtex-5 FPGA via USB JTAG cable or converted to PROM file. 
-28 
-  
+Figure 4.4-1: Typical Implementation flow in Xilinx ISE [38, 39]  
+ 
+ 29 
+ 
 Chapter 5: Understanding Previous Work 
  
 5.1 Overview of the Previous Work 
@@ -1361,16 +1446,17 @@ on-the-fly decompression functionality was integrated.
  
  
  
-Figure 5.1-1: LED blinking application with decompression simulation.[40]  
-  
+ 
 The above figure is one of his simulation screenshot showing that his system is able to decompress 
 instruction on-the-fly and run LED blinking application. The area marked by red circle shows the 
 decompression activity.  
  
  
  
-29 
-  
+Figure 5.1-1: LED blinking application with decompression simulation.[40]  
+ 
+ 30 
+ 
 5.2 Unresolved Problem on Previous Work 
 Although Piekarek was able to integrate the on-the-fly decompression function, his system is only 
 able to run “properly” one ARM Cortex-M0 application which is LED blinking program. This LED 
@@ -1419,23 +1505,24 @@ memory (in this case we write to address “0x00000404”)  and then read it back ag
 Therefore, we expect from the program that when 0xAAAA5555 is being written to the memory, 
 LED turns on, and when data is being read from the memory, LED also turns on. Between write and 
 read of 0xAAAA5555, we deliberately turn off the LED. This simple program can be found in 
-30 
-  
+ 31 
+ 
 submitted zip file: “Sourcecodes_forassessment_ms1718\CompletelyDesigned by 
 AGHA\ARM_Cortex-M0 C program.” 
 This program which is called Write_Read.c also can be understood in figure 5.2-1. 
+*write_test_address = 0xAAAA5555; 
+(LED turns on)
 Delay
+LED = 0xF0F0F0F0;
+(LED turns off)
+LED = *write_test_address;
+(LED turns on)
 Delay
-*write_test_address = 0xAAAA5555; LED = 0xF0F0F0F0; LED = *write_test_address; LED = 0xF0F0F0F0;
-(LED turns on) (LED turns off) (LED turns on) (LED turns off)
- 
-Figure 5.2-1: Expected LED signal behavior for Write_Read.c program. 
-*write_test_address points to location 0x00000404. 
+LED = 0xF0F0F0F0;
+(LED turns off)
  
  
  
- 
-Figure 5.2-2: Simulation of Write_Read.c program on previous work’s basic single transfer system.   
  
  
 Piekarek developed his system step-by-step from building basic single transfer system to system 
@@ -1457,9 +1544,30 @@ problem. Fortunately, we have identified the cause of write problem and provide 
 to fix it, which would be explained in the next chapter.  
  
  
-31 
- Wrapper 
+Figure 5.2-1: Expected LED signal behavior for Write_Read.c program. 
+*write_test_address points to location 0x00000404. 
  
+Figure 5.2-2: Simulation of Write_Read.c program on previous work’s basic single transfer system.   
+ 
+ 32 
+ 
+LE
+ON
+3 C
+PU
+AHB 
+Controller
+Memory 
+Controler
+USB
+Serial dbg 
+link
+JTAG dbg 
+link
+AHB
+Wrapper 
+removed
+replace
 Chapter 6: System Design & Solutions 
  
 6.1 Overview of the Design Phases and Methodology. 
@@ -1476,17 +1584,9 @@ this project. It is also the same case when we integrate X-MatchPROVW into the S
 everything else we need to make compressed main memory system are designed and integrated in this 
 wrapper. 
  
-replace
- 
-removed
- 
-AHB
-Memory AHB Serial dbg JTAG dbg 
-USB
-Controler Controller link link
  
  
-Figure 6.1-1: GRLIB SoC partial diagram having Leon3 being replaced by our wrapper design.   
+ 
  
  
 There are several design phases we need to conduct in this project, in which they are listed as follows: 
@@ -1511,9 +1611,10 @@ that we can get the implementation report of the design and also to generate the
 downloaded into the FPGA board. Keil MDK is used to design Cortex-M0 application programs 
 written in C-programming language, in which these programs are to be executed by our system to 
 check if Cortex-M0 works properly as CPU. 
-32 
+Figure 6.1-1: GRLIB SoC partial diagram having Leon3 being replaced by our wrapper design.   
  
-LEON3 CPU 
+ 33 
+ 
 6.2 Solution to Previously Unresolved Problem 
 6.2.1 The Cause of Write Operation Problem 
 As discussed in chapter 5, we have identified further that inability of the system to do write operation 
@@ -1556,8 +1657,7 @@ To prove that the fix we implemented in our new wrapper design works, we tried t
  
  
  
-33 
-  
+ 34 
  
  
  
@@ -1565,9 +1665,7 @@ To prove that the fix we implemented in our new wrapper design works, we tried t
  
  
  
-A B 
  
-Figure 6.2-1: Simulation of CM0_SDRAM_wrapper design running Write_Read.c  
  
 From figure 6.2-1, it can be seen that there are two LED blinks, in which the LED behavior matches 
 with LED behavior expectation diagram from figure 5.2-1. In addition, we provide two other 
@@ -1583,8 +1681,6 @@ that particular address.
  
  
  
-Figure 6.2-2: Evidence of writing 0xAAAA5555 data to address 0x00000404 in SDRAM from running Write_Read.c 
- 
 In figure 6.2-2, we can observe the red circle shows haddr = 0x00000404 and we see that hwrite is 
 high along that particular address. This means that CPU is performing address phase of write transfer. 
 Normally, before CPU try to write a data, it reads the data first from memory. Therefore, we see 
@@ -1599,9 +1695,14 @@ version of 0xAAAA5555 which means that the data is being written to SDRAM.
  
  
  
+Figure 6.2-1: Simulation of CM0_SDRAM_wrapper design running Write_Read.c  
+ 
+Figure 6.2-2: Evidence of writing 0xAAAA5555 data to address 0x00000404 in SDRAM from running Write_Read.c 
+ 
 Figure 6.2-3: Evidence of reading 0xAAAA5555 data from address 0x00000404 in SDRAM from running Write_Read.c 
-34 
-  
+A B 
+ 35 
+ 
 In figure 6.2-3, blue circle marks haddr = 0x00000404 and hwrite = 0 which indicate address phase 
 for read transfer for that particular address. Afterwards, we can observe in purple circle that the big-
 endian version of 0xAAAA5555 comes from SDRAM in ahbso.hrdata and transferred to CPU hrdata. 
@@ -1647,8 +1748,26 @@ Read-Write region. We divide equally 32 KB total memory size into 16 KB for Read
 stack memory region and 8 KB heap memory region.  
  
  
-35 
-  
+ 36 
+ 
+0x4000
+0x6000
+0x8000
+Address
+ slot
+00x0
+4096
+6144
+8192
+Read-Only
+Read-Write
+Read-Write
+Instructions
+Data - Stack
+Data - Heap
+Address 
+number in 
+hex
 It is important to understand that we intend to implement 32 KB or accurately 32768 bytes AHBRAM 
 size which has 32 bits data width for each address. In other words, each address contains 4 bytes of 
 binary information and therefore there are 8192 address slots to construct 32768 bytes memory size. 
@@ -1657,37 +1776,20 @@ called memory depth) in the figure below. Address slot is simply 32768 bytes div
 bits) equal to 8192 slots. Address number in hex is simply address number corresponds to each byte, 
 in which the last address number (0x8000) corresponds to address of byte 32768 (the last byte). 
  
-Address 
- 
-number in Address
- 
-hex slot
-8192
-0x8000
- 
-Read-Write
- 
-Data - Heap
- 
-0x6000 6144
-Read-Write
- 
- 
-Data - Stack
- 
-0x4000 4096
-Read-Only
- 
- 
-Instructions
  
  
  
-0x0
-0
  
  
-Figure 6.2-4: AHBRAM or main RAM layout design. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
 After we understand the layout of memory we are going to map in the hardware, we would describe 
@@ -1702,8 +1804,9 @@ Read-Write region, in which it starts from 0x4000 to 0x7FFF.
  
  
  
-36 
-  
+Figure 6.2-4: AHBRAM or main RAM layout design. 
+ 
+ 37 
  
  
  
@@ -1715,7 +1818,6 @@ Read-Write region, in which it starts from 0x4000 to 0x7FFF.
  
  
  
-Figure 6.2-5: “Target” tab in “Option for target” window of Keil MDK 
  
  
 Afterwards, we switch to “Linker” tab as shown by figure 6.2-6. In this tab, we set Read-Write base 
@@ -1734,26 +1836,27 @@ entry of the program as shown by green circle below. The entry of the program po
  
  
  
-Figure 6.2-6: “Linker” tab in “Option for target” window of Keil MDK 
- 
  
 For startup.s and scatter file, these files are provided in 
 Sourcecodes_forassessment_ms1718\PartiallyModified by AGHA\ARM Keil files . However, we 
 would like to highlight the crucial part of startup.s code as shown in figure 6.2-7 below. Area marked 
 by red circle indicates the stack memory size and area marked by blue circle indicates heap memory 
 size, in which we allocated 8192 bytes (8KB) (in hex: 0x00002000) for each of them. 
-37 
+Figure 6.2-5: “Target” tab in “Option for target” window of Keil MDK 
+ 
+Figure 6.2-6: “Linker” tab in “Option for target” window of Keil MDK 
+ 
+ 38 
+ 
+ 
   
  
-  
  
  
  
  
  
  
-Figure 6.2-7: Part of code in startup.s file which defines stack and heap size. 
-  
 Regarding the scatter file as shown in figure 6.2-8 below, we must configure them to map the same 
 address as shown in figure 6.2-5. Keep in mind that size for Read-Only region is 16384 bytes (16KB) 
 which is the same as Read-Write region size. 
@@ -1762,7 +1865,6 @@ which is the same as Read-Write region size.
  
  
  
- Figure 6.2-8: Content of scatter file (CMODS.sct)  which defines the memory map. 
  
 With all these setups we have shown, we have made sure that the memory map is defined properly 
 according to our specifications.  
@@ -1778,8 +1880,12 @@ according to our specifications.
  
  
  
-38 
-  
+Figure 6.2-7: Part of code in startup.s file which defines stack and heap size. 
+ 
+Figure 6.2-8: Content of scatter file (CMODS.sct)  which defines the memory map. 
+ 
+ 39 
+ 
 6.2.4 SDRAM Problem 
 After we successfully managed to fix stack and heap operation problem, we still find problem that 
 hampers us to run proper program (that can read and write), in which the problem lies on the SDRAM 
@@ -1797,8 +1903,7 @@ extension) which contains our desired Cortex-M0 program.
  
  
  
-Figure 6.2-9: Simulation of program executing startup file when SDRAM was used.   
-  
+ 
 However, we came to know that when we initializes SDRAM with program containing startup.s file, 
 not all desired SDRAM memory addresses are initialized properly. For instance, in figure 6.2-9, we 
 can observe at red circle that CPU requested data from address 0x000001C0. Few clock cycles after 
@@ -1812,8 +1917,6 @@ This clearly shows that there was a mismatch between what was intended to be put
 with what was actually placed in the memory. 
  
  
-Figure 6.2-10: Few last lines of SDRAM initialization file (sdram.srec) for simulation figure 6.2-9.   
- 
 The cause of this problem is still unclear, however, we suspect that the problem may be originated 
 from the GRLIB IP Library SoC itself in translating .srec extension file or the process of creating .srec 
 file in Keil MDK itself is flawed. The first suspicion seems to be more accurate since we tried to 
@@ -1826,8 +1929,12 @@ purposes of conducting our project, in which to see how much improvement gain we
 between normal system and our system when off-chip RAM is used. Therefore, we need to add a 
 mechanism in our system to make the AHBRAM behaving like SDRAM. This SDRAM-based system 
 behavior modeling on AHBRAM would be carefully explained in the later sub-chapter. 
-39 
-  
+Figure 6.2-9: Simulation of program executing startup file when SDRAM was used.   
+ 
+Figure 6.2-10: Few last lines of SDRAM initialization file (sdram.srec) for simulation figure 6.2-9.   
+ 
+ 40 
+ 
 6.2.5 AHBRAM as Main Memory  
 Because of the SDRAM problem we are having, we decided for our project to utilize AHBRAM 
 instead of SDRAM as main memory for the basic transfer Cortex-M0 system and compressed main 
@@ -1848,8 +1955,6 @@ creating main_ram using Xilinx Block Memory Generator, which is time consuming. 
 specifications for creating main_ram are described by figure 6.2-11 below. 
  
  
-Figure 6.2-11: Single port main_ram configuration in Xilinx Block Memory Generator 
- 
  
 From figure above, notice that Write Depth = 8192. This is because write depth refers to number of 
 address slots that we need because 8192 x 4 bytes = 32768 bytes. Write and read width is 32 because 
@@ -1860,8 +1965,9 @@ because we found that there were glitches if we use other modes.
  
  
  
-40 
-  
+Figure 6.2-11: Single port main_ram configuration in Xilinx Block Memory Generator 
+ 
+ 41 
  
  
  
@@ -1874,7 +1980,6 @@ because we found that there were glitches if we use other modes.
  
  
  
-Figure 6.2-12: Loading .coe file to to create .mif file 
  
 Figure 6.2-12 shows the block memory generator page where we load the file to create .mif file. The 
 file used to create .mif file is called .coe file. This .coe file is obtained by converting binary file of 
@@ -1897,8 +2002,10 @@ In addition, we also have to modify config.vhd file to change parameter AHBRSZ =
 AHBRAM would work with our 32KB size main_ram. 
  
  
-41 
-  
+Figure 6.2-12: Loading .coe file to to create .mif file 
+ 
+ 42 
+ 
 6.2.6 Modeling SDRAM-based System performance on AHBRAM-based System 
 We have described that AHBRAM is used to replace SDRAM because of the problem occurred in 
 SDRAM. However, AHBRAM as on-chip RAM is too fast and therefore we need to provide a 
@@ -1908,15 +2015,12 @@ every transfer consist of address phase and data phase. In the case of using AHB
 would last as fast as only a single clock cycle, which is clearly depicted by figure 4.1-2 in that sub-
 chapter. In the other hand, as can be seen from figure 6.2-13 below, data phase of SDRAM lasts at 
 least 7 clock cycles, which is 7 times slower than AHBRAM.   
-7 clock cycles of data phase 
  
  
  
  
  
  
- Figure 6.2-13: Simulation of SDRAM-based system, which highlights number of clock cycles 
-during data phase. 
  
  
 Therefore, now we know that we need to extend the data phase of AHBRAM-based system to be as 
@@ -1940,8 +2044,33 @@ and CM0X_wrapper, we would discuss each of the method more detail in the later s
  
  
  
-42 
-  
+Figure 6.2-13: Simulation of SDRAM-based system, which highlights number of clock cycles 
+during data phase. 
+ 
+7 clock cycles of data phase 
+ 43 
+ 
+CM0_Wrapper
+HRDATA
+HADDR
+HREADY
+HWRITE
+HWDATA
+HSIZE
+HPROT
+Cortex-M0
+CPU
+AHBMO
+AHBMI
+Led_detector LED
+AHB
+Main_ram
+AHBRAM
+Cpu_ahb_bridge
+AHBSI AHBSO
+HTRANS
+Clock
+Reset
 6.3 CM0_wrapper Design 
 6.3.1 CM0_wrapper Design Process 
 This sub-chapter explains the second phase of designing compressed main memory system. In this 
@@ -1952,45 +2081,22 @@ As explained in sub-chapter 4.2, GRLIB SoC was chosen for our project because it
 (Advanced High-Performance Bus) as its main bus system which is compatible for Cortex-M0. Thus, 
 the key of integrating Cortex-M0 to the SoC resides on the interfacing between Cortex-M0 to AHB of 
 the SoC. 
-CM0_Wrapper
- 
- 
-HTRANS
-HADDR
-HWRITE
- 
-HWDATA
-AHBMO
-Cortex-M0
-Cpu_ahb_bridge
-HSIZE
-HPROT
-CPU
- 
-HRDATA
-AHBMI
-HREADY
- 
-Clock
-Reset
- 
-Led_detector LED
  
  
  
-AHB
- 
-AHBSI AHBSO
- 
- 
-AHBRAM
  
  
  
-Main_ram
  
  
-Figure 6.3-1: Simplified schematic of GRLIB SoC with CM0_wrapper 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
 As can be seen from figure 6.3-1, CM0_wrapper is connected as master to AHB through AHBMI (MI 
@@ -2000,8 +2106,10 @@ Notice that AHBRAM as top-level module contains main_ram module we created in pr
 chapter. Not forget to mention that every module in the wrapper is connected to clock and reset port, 
 however, the connections are not shown to provide better visibility of the schematic. 
  
-43 
-  
+Figure 6.3-1: Simplified schematic of GRLIB SoC with CM0_wrapper 
+ 
+ 44 
+ 
 AHBMO and AHBMI are both declared as record types in VHDL code which means each of them 
 contains one or more ports (think like structures in C code). AHBMO contains all necessary ports to 
 interface Cortex-M0 output ports listed in Cortex_M0 box in the figure such as ahbmo.htrans, 
@@ -2022,33 +2130,34 @@ understand the AHB interface and it results to reduced complexity since we have 
 cpu_ahb_bridge module. In addition, we coded cpu_ahb_bridge using “two processes” VHDL coding 
 style [45], in which we registered all necessary ports so that those ports are synchronized with clock 
 and latches are easily avoided. 
+Ahbmo.hbusreq <= ‘1’ Ahbmo.hbusreq <= ‘0’
+HRDATA <= 0
+HRDATA <= ahbmi.hrdata
 Ahbo.hbusreq <= ‘0’,
 HRDATA <= 0
-No
-Address Phase
-Data Phase
 Ahbmi.hready = ‘1’?
-HRDATA <= 0
 Yes
 Yes
-Yes No
-Ahbmo.hbusreq <= ‘1’ HTRANS = “10” ? Ahbmo.hbusreq <= ‘0’ HWRITE_Prev = ‘1’?
+Yes
 No
+No
+No
+Address Phase Data Phase
 Ahbmo.haddr    <= HADDR
 Ahbmo.hwrite   <= HWRITE
 Ahbmo.hwdata  <= HWDATA
-HRDATA <= ahbmi.hrdata
 Ahbmo.hsize     <= HSIZE
 Ahbmo.hprot     <= HPROT
 HREADY         <= ahbmi.hready
+HTRANS = “10” ? HWRITE_Prev = ‘1’?
+ 
+ 
  
  
 Figure 6.3-2: Flow chart of cpu_ahb_bridge module. 
  
+ 45 
  
- 
-44 
-  
 The flow chart in figure 6.3-2 shows the interfacing mechanism inside cpu_ahb_bridge module we 
 designed. It can be seen that we only control ahbmo.hbusreq and HRDATA ports. Other Cortex-M0 
 ports such as HADDR, HREADY etc. are directly connected to AHB ports as shown in the figure 6.3-
@@ -2088,39 +2197,60 @@ The VHDL code of this wrapper design can be observed in submitted zip file :
  
  
  
-45 
-  
+ 46 
+ 
+CM0_busdelaycont_wrapper
+HRDATA
+HADDR
+HREADY
+HWRITE
+HWDATA
+HSIZE
+HPROT
+Cortex-M0
+CPU
+AHBMO
+AHBMI
+Led_detector LED
+Cpu_ahb_bridge
+HTRANS
+Bus_delay_controller
+MO
+MI
+Clock
+Reset
+Store address 
+phase parameters 
+to register.
+Delaycount = X ?
+Delaycount++
+Transfer address phase parameter 
+from register to bus.
+Addres phase is progressing.
+MI.hready <= ‘0’, 
+CPU is halting.
+MI.hready <= ‘1’,
+CPU is idle,
+Data phase is progressing
+HTRANS = “10”?
+Yes
+No
+Yes
+No
+stReady
+stHalt
 6.3.2 Modeling SDRAM-based System Performance with CM0_busdelaycont_wrapper 
 In sub-chapter 6.2.6, we have briefly discussed about the motivation of modifying our system to 
 perform as it was using SDRAM. We also have briefly mentioned that we need to create an additional 
 module called bus_delay_controller to delay the data phase of AHBRAM-based system. 
-CM0_busdelaycont_wrapper
- 
- HTRANS
-HADDR
-MO
-AHBMO
-HWRITE
- 
-HWDATA
-Cortex-M0
-Cpu_ahb_bridge
-HSIZE
-Bus_delay_controller Clock
-HPROT
-CPU
- Reset
-MI
-HRDATA
-AHBMI
-HREADY
- 
- 
-Led_detector LED
  
  
  
-Figure 6.3-3: Simplified schematic of CM0_busdelaycont_wrapper. 
+ 
+ 
+ 
+ 
+ 
  
 As shown in figure 6.3-3, we designed a new wrapper for basic transfer Cortex-M0 system that also 
 integrated bus_delay_controller inside. This wrapper is used only for simulation in order to conduct 
@@ -2129,41 +2259,26 @@ From the figure above, we notice that cpu_ahb_bridge is connected to bus_delay_c
 (Master In) and MO (Master Out) signals. These signals are record type signals which have exactly 
 same structure as AHBMI and AHBMO. 
  
-MI.hready <= ‘1’,
-stReady
-CPU is idle,
- 
-Data phase is progressing
- 
-No
-HTRANS = “10”?
- 
-Yes
- 
-Store address 
- phase parameters 
-to register.
  
  
-stHalt
-MI.hready <= ‘0’, 
  
-CPU is halting.
  
- Transfer address phase parameter 
-Yes
-Delaycount = X ? from register to bus.
-Addres phase is progressing.
  
-No
  
-Delaycount++
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 6.3-3: Simplified schematic of CM0_busdelaycont_wrapper. 
  
 Figure 6.3-4: Flow chart of bus_delay_controller state machine. 
  
-46 
-  
+ 47 
+ 
 As can be seen from figure 6.3-4, the state machine in bus_delay_controller inherently has two states 
 which are stReady and stHalt. StReady is the state whereby Cortex-M0 is idle and accepting data 
 phase while at some point it will perform address phase. The state changes to stHalt after Cortex-M0 
@@ -2196,7 +2311,11 @@ exist in the real system (since this module is just to temporarily overcome SDRA
 research purpose only). Having to use CM0_busdelaycont_wrapper for implementation may result to 
 inaccurate reference comparison to the compressed main memory system we are developing in term 
 of power consumption, logic utilization in FPGA and etc. 
-3 clock cycles 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -2204,18 +2323,14 @@ of power consumption, logic utilization in FPGA and etc.
  
 Figure 6.3-5: CM0_busdelaycont_wrapper having 3 clock cycles of data phase. Limit X = 1. 
  
+Figure 6.3-6: CM0_busdelaycont_wrapper having 7 clock cycles data phase. Limit X = 5. 
+ 
+3 clock cycles 
  
 7 clock cycles 
  
+ 48 
  
- 
- 
- 
- 
-Figure 6.3-6: CM0_busdelaycont_wrapper having 7 clock cycles data phase. Limit X = 5. 
- 
-47 
-  
 6.4 CM0X_wrapper Design 
 6.4.1 Overview of CM0X_wrapper Design 
 Finally we have come into the third phase of the project which is the main design we have been 
@@ -2228,33 +2343,45 @@ compressed and decompressed are instructions and data in heap memory region. Sta
 compressed or decompressed because stack data traffic is very dynamic. In other words, since data in 
 stack regions changes frequently, large overhead may occur if we compress or decompress stack data 
 on-the-fly because the compression-decompression engine might be overworked unnecessarily. 
-Comrpressed Cortex-M0 program 
-Cortex-M0 is running Cortex-M0 performs 
-Cortex-M0 program are decompressed CPU transaction is stack 
-System starts and performing transactions directly 
-is stored in main and stored in buffer operation?
-transaction with bus (AHB)
-Yes
-memory memory.
-No – it is instruction fetch or heap data operation
+Comrpressed 
+Cortex-M0 program 
+is stored in main 
+memory
+System starts
+Cortex-M0 program 
+are decompressed 
+and stored in buffer 
+memory.
+Cortex-M0 is running 
+and performing 
+transaction
+CPU transaction is stack 
+operation?
+Cortex-M0 performs 
+transactions directly 
+with bus (AHB)
 Cortex-M0 performs 
 transactions with 
 buffer memory
-No
-No
 Heap region in buffer 
- Cortex-M0 needs heap data 
 memory has been written 
-located in main memory?
 for 2 KB ?
-Yes Yes
-Compress 2 KB Decompress 2 KB 
-block of heap data block of heap data  
-from buffer memory from main memory 
-and store it into and store it into 
-main memory. buffer memory.
- 
-Figure 6.4-1: Simplified flow chart of our compressed main memory system working principle. 
+Compress 2 KB 
+block of heap data 
+from buffer memory 
+and store it into 
+main memory.
+ Cortex-M0 needs heap data 
+located in main memory?
+Decompress 2 KB 
+block of heap data  
+from main memory 
+and store it into 
+buffer memory.
+Yes
+No – it is instruction fetch or heap data operation
+YesYes
+NoNo
  
  
 As can be seen from figure 6.4-1, the working principle of our compressed main memory system is 
@@ -2271,8 +2398,50 @@ Afterwards, when Cortex-M0 requests heap data that is located in main memory, 2 
 data is decompressed and placed into buffer memory so that Cortex-M0 can fetch the heap data.  
  
  
-48 
-  
+Figure 6.4-1: Simplified flow chart of our compressed main memory system working principle. 
+ 
+ 49 
+ 
+HRDATA
+HADDR
+HREADY
+HWRITE
+HWDATA
+HSIZE
+HPROT
+Cortex-M0
+CPU
+HTRANS
+Led_detector
+addrb
+dinb
+doutb
+web
+enb
+addra
+dina
+douta
+wea
+ena
+cpu2ahb
+ahb2cpu
+AHBMO
+AHBMI
+LED
+CM0X_wrapper
+cpu_ 
+ahbbuffer_ 
+bridge
+comdec_
+ahbbuffer_ 
+bridge
+Port 
+A
+Port 
+B
+XMatchPROVW
+Clock
+Resetbuffer_ram
 Since our focus in this project is to build working compressed main memory system for research 
 purpose only, we designed the system in a simple manner in which the process of on-the-fly 
 compression-decompression and managing the compressed blocks are handled in straightforward 
@@ -2291,45 +2460,16 @@ but can be found in the submitted zip file: “\Sourcecodes forassessment ms1718\C
 by AGHA\XMatchPROVW standaloneCompression wrapper files” 
 6.4.2 Schematic of CM0X_wrapper Design 
  
-CM0X_wrapper
- 
-cpu2ahb
-AHBMO
-HTRANS
-HADDR
- ahb2cpu
-AHBMI
-HWRITE
-cpu_ 
-HWDATA
-comdec_
-Cortex-M0
-ahbbuffer_ 
- HSIZE Clock
-ahbbuffer_ 
-HPROT
-CPU bridge
-addrb buffer_ram addra
-bridge Reset
-enb ena
- 
-HRDATA
-web wea
-HREADY
-Port Port 
-dinb dina
- 
-B A
-doutb douta
  
  
-XMatchPROVW
  
  
-Led_detector LED
  
  
-Figure 6.4-2: Simplified schematics of CM0X_wrapper 
+ 
+ 
+ 
+ 
  
  
 Figure 6.4-2 above illustrates CM0X_wrapper schematic, in which its signals description is 
@@ -2341,8 +2481,35 @@ we designed in this wrapper are comdec_ahbbuffer_bridge, buffer_ram and cpu_ahbb
 The source code for CM0_wrapper can be found in submitted zip file : 
 “Sourcecodes_forassessment_ms1718\CompletelyDesigned by AGHA\CM0_wrapper files” 
  
-49 
-  
+Figure 6.4-2: Simplified schematics of CM0X_wrapper 
+ 
+ 50 
+ 
+stdec_decompressing
+stcomp_init_ubsr
+stdec_init_cr
+stdec_init_ubsr
+st_idle
+stdec_finish
+stcomp_init_cr
+stcomp_compressing
+stcomp_finish
+Comp_start = ‘1’
+Dec_start = ‘1’
+BUS_
+REQUEST_DC = ‘0’
+FINISHED_D = ‘0’
+BUS_
+REQUEST_CU = ‘0’
+FINISHED_C = ‘0’
+After 1 
+clock cycle
+After 1 
+clock cycle
+After 1 
+clock cycle
+After 1 
+clock cycle
 6.4.3 Comdec_ahbbuffer_bridge Module Design 
 Comdec_ahbbuffer_bridge is a module we designed to bridge AHB, X-MatchPROVW, buffer_ram 
 and cpu_ahbbuffer_bridge. The bridge’s responsibilities are listed as follows: 
@@ -2359,73 +2526,51 @@ decompression function in X-MatchPROVW module works as explained in sub-chapter 
  
  
  
-Comp_start = ‘1’
-Dec_start = ‘1’ st_idle
  
  
-stdec_init_ubsr stcomp_init_ubsr
  
  
-After 1 
-After 1 
-clock cycle
- 
-clock cycle
- 
-stcomp_init_cr
-stdec_init_cr
  
  
-BUS_
-BUS_
-REQUEST_CU = ‘0’
- 
-REQUEST_DC = ‘0’
  
  
-stdec_decompressing stcomp_compressing
  
  
-FINISHED_D = ‘0’
-FINISHED_C = ‘0’
  
-After 1 After 1 
-clock cycle clock cycle
  
-stdec_finish stcomp_finish
+ 
+ 
+ 
+ 
+ 
  
  
 Figure 6.4-3: Comdec_ahbbuffer_bridge state machine diagram. 
- 
- 
-50 
-  
+ 51 
  
 st_idle
- 
+Dec_start = ‘1’? Comp_start = ‘1’?
 Bypass Cortex-M0’s stack operation address 
 phase and data phase to AHB.
- 
-Yes
- 
-Yes
-Dec_start = ‘1’? Comp_start = ‘1’?
- 
-No
-No
- 
- 
-From stcomp_finish/stdec_finish
- 
-(compression/decompression process 
 To stdec_init_ubsr
+(decompression process)
 To stcomp_init_ubsr
+(compression process)
+YesYes
+No No
+From stcomp_finish/stdec_finish
+(compression/decompression process 
 is finished)
  
-(decompression process)
-(compression process)
  
-Figure 6.4-4  Initial state in comdec_ahbbuffer_bridge state machine. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 Figure 6.4-4 shows the initial state of the state machine in this module called st_idle. In this idle state, 
 the module bypasses Cortex-M0 transaction for stack operation directly to AHB. As seen in figure 
@@ -2452,70 +2597,75 @@ address initialization comes from outside of the module to support modularity of
  
  
  
-51 
-  
-From st_idle
- 
-stdec_init_ubsr
+Figure 6.4-4  Initial state in comdec_ahbbuffer_bridge state machine. 
+ 52 
  
 Initialize UBSR for decompression process
- 
- 
+stdec_init_ubsr
+ Initialize CR for decompression process
+ Initialize AHBRAM read starting address
+ Initialize Buffer RAM write starting address (addra)
 stdec_init_cr
- 
-· Initialize CR for decompression process
-· Initialize AHBRAM read starting address BUS_REQUEST_DC = ‘0’? No
- 
-· Initialize Buffer RAM write starting address (addra)
-Yes
- 
+BUS_REQUEST_DC = ‘0’?
 Send request to AHB for burst read transfer
- 
 stdec_decompressing
- 
-No
-Yes
- 
-AHB is ready ? FINISHED_D = ‘0’?
-No
- 
-Yes
- BUS_ACKNOWLEDGE_DC <= ‘0’;
-No
+AHB is ready ?
+BUS_REQUEST_DC = ‘1’?
+FINISHED_D = ‘0’?
+BUS_ACKNOWLEDGE_DC <= ‘0’;
 For every clock cycle:
-BUS_REQUEST_DC = ‘1’? · Fetches compressed data from AHBRAM to C_DATAIN port 
- 
-· Increments current AHBRAM read address
-· Preserves previous AHBRAM read address
-Yes
- 
+ Fetches compressed data from AHBRAM to C_DATAIN port 
+ Increments current AHBRAM read address
+ Preserves previous AHBRAM read address
 Suspend compressed data fetch from AHBRAM
- 
-· BUS_ACKNOWLEDGE_DC <= ‘1’;
-· Current read address is previous read address.
- 
- 
-Yes
- 
+ BUS_ACKNOWLEDGE_DC <= ‘1’;
+ Current read address is previous read address.
+ Dec_finished <= ‘1’;
+ Reinitialized all necessary ports
 DECOMPRESSING  = ‘0’? U_DATA_VALID = ‘0’?
-No No
- 
-Yes
 For every clock cycle:
- 
-· U_DATAOUT writes decompressed data to 
+ U_DATAOUT writes decompressed data to 
 buffer RAM port A (dina)
- 
-· Increments port A address (addra)
- 
- 
+ Increments port A address (addra)
 stdec_finish
- 
-· Dec_finished <= ‘1’;
+No
+Yes
+YesNo
+No
+Yes
+Yes
+No
+Yes
+Yes
+No No
 Back to st_idle
-· Reinitialized all necessary ports
+From st_idle
  
- Figure 6.4-5: Flow chart of on-the-fly decompression states in comdec_ahbbuffer_bridge. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 Decompression process starts when engine is ready to accept data from AHBRAM (indicated by 
 BUS_REQUEST_DC = ‘0’) and state changes to stdec_decompressing.  In stdec_decompressing, 
 there are two mechanisms that work in parallel. The first mechanism is to fetch compressed data from 
@@ -2523,72 +2673,76 @@ AHBRAM to C_DATAIN port every clock cycle once condition is satisfied. The secon
 is to write uncompressed data from U_DATAOUT port of the engine to port A of buffer_ram every 
 clock cycle. Once decompression process is finished, engine drives FINISHED_D port to zero and 
 state changes to stdec_finish which then go back to st_idle. 
-52 
-  
-From st_idle
- 
- 
-stcomp_init_ubsr
+Figure 6.4-5: Flow chart of on-the-fly decompression states in comdec_ahbbuffer_bridge. 
+ 53 
  
 Initialize UBSR for compression process
- 
+stcomp_init_ubsr
+ Initialize CR for compression process
+ Initialize AHBRAM write starting address
+ Initialize Buffer RAM read starting address (addra)
 stcomp_init_cr
- 
-· Initialize CR for compression process
-· Initialize AHBRAM write starting address BUS_REQUEST_CU = ‘0’?
- 
-· Initialize Buffer RAM read starting address (addra)
- 
-Yes
- 
+BUS_REQUEST_CU = ‘0’?
 stcomp_compressing
- 
- 
-No Yes
-AHB is ready ? FINISHED_C = ‘0’?
- 
-No
-Yes
-BUS_ACKNOWLEDGE_CU <= ‘0’;
- 
-for every clock cycle:
-No
-· Fetches uncompressed data from Port A Buffer 
+AHB is ready ?
 BUS_REQUEST_CU = ‘1’?
- 
+FINISHED_C = ‘0’?
+BUS_ACKNOWLEDGE_CU <= ‘0’;
+for every clock cycle:
+ Fetches uncompressed data from Port A Buffer 
 RAM (douta) to U_DATAIN. 
-· Increments current Buffer RAM read address (addra)
-Yes
-· Preserves previous Buffer RAM read address (addra)
- 
+ Increments current Buffer RAM read address (addra)
+ Preserves previous Buffer RAM read address (addra)
 Suspend uncompressed data fetch from Buffer RAM
- 
-· BUS_ACKNOWLEDGE_CU <= ‘1’;
-· Current addra is previous addra
- 
- No
-Yes
-Send request to AHB 
+ BUS_ACKNOWLEDGE_CU <= ‘1’;
+ Current addra is previous addra
+ Comp_finished <= ‘1’;
+ Reinitialized all necessary ports
 COMPRESSING  = ‘0’? C_DATA_VALID = ‘0’?
- for burst write transfer
-No
- 
-Yes
 For every clock cycle:
- 
-· C_DATAOUT writes compressed 
+ C_DATAOUT writes compressed 
 data to AHBRAM
- 
-· Increments AHBRAM address
- 
+ Increments AHBRAM address
 stcomp_finish
- 
-· Comp_finished <= ‘1’;
+Send request to AHB 
+for burst write transfer
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+No
+No
+No
+No
+No
 Back to st_idle
+From st_idle 
  
-· Reinitialized all necessary ports
  
-Figure 6.4-6: Flow chart of on-the-fly compression process in comdec_ahbbuffer_bridge. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 On-the-fly compression procedure done in comdec_ahbbuffer_bridge has some similarities with the 
 decompression procedure as can be seen in figure 6.4-6. The major difference we should notice here 
@@ -2597,8 +2751,22 @@ then compressed and stored into AHBRAM.
 The source code for comdec_ahbbuffer_bridge can be found in submitted zip file : 
 “Sourcecodes_forassessment_ms1718\CompletelyDesigned by AGHA\CM0X_wrapper files” 
  
-53 
-  
+Figure 6.4-6: Flow chart of on-the-fly compression process in comdec_ahbbuffer_bridge. 
+ 54 
+ 
+st_idle
+st_waitfirstdecst_start
+Dec_finished = ‘1’
+st_read_inst st_readwrite_data
+After address phase 
+of  data operation 
+After address phase 
+of instruction fetch 
+After 1 clock cycle
+After address phase 
+of  data operation 
+After address phase 
+of instruction fetch 
 6.4.4 Cpu_ahbbuffer_bridge Module Design 
 Cpu_ahbbuffer_bridge is a module we designed to bridge CPU, buffer_ram and 
 comdec_ahbbuffer_bridge. The bridge has several responsibilities as follows: 
@@ -2619,77 +2787,75 @@ other operation (that may be related to peripheral of SoC). In order to further 
 of each state, we provide flow charts that describe each states as shown by figure 6.4-8, 6.4-9 and 6.4-
 10. 
  
-After 1 clock cycle
- 
- 
-st_start st_waitfirstdec
- 
- 
-Dec_finished = ‘1’
  
  
  
-st_idle
-After address phase After address phase 
- 
-of instruction fetch of  data operation 
  
  
  
-st_read_inst st_readwrite_data
  
-After address phase 
  
-of  data operation 
  
-After address phase 
-of instruction fetch 
+ 
+ 
+ 
+ 
+ 
  
  
  
 Figure 6.4-7: Cpu_ahbbuffer_bridge state machine diagram. 
-54 
-  
+ 55 
  
 st_start
-· Dec_start <= ‘1’;
- 
-· Initialize necessary signals
- 
+ Dec_start <= ‘1’;
+ Initialize necessary signals
 st_waitfirstdec
- 
 Dec_finished = ‘1’ ?
-No
-Yes
- 
 Dec_start <= ‘0’;
- 
- 
 st_idle
-HRDATA <= 0;
 READY = ‘1’?
- 
+HRDATA <= 0;
 HREADY <= 0;
-Yes
- From st_read_inst or 
-st_readwrite_data
 HTRANS = “10” ?
- 
-No
-Yes
- 
 Instruction fetch ? Stack Operation ? Heap Operation ? Other Operation ?
- 
-Yes Yes Yes Yes
- 
-Instruction fetch Stack operation Heap operation Other operation 
-address phase to address phase to address phase to address phase to 
- 
-Buffer RAM AHB Buffer RAM AHB
- 
- 
+Instruction fetch 
+address phase to 
+Buffer RAM
+Stack operation 
+address phase to 
+AHB
+Heap operation 
+address phase to 
+Buffer RAM
+Other operation 
+address phase to 
+AHB
 To st_read_inst To st_readwrite_data
-Figure 6.4-8: Flow chart of the first three states in cpu_ahbbuffer_bridge state machine. 
+Yes
+Yes
+Yes
+Yes Yes Yes Yes
+No
+No
+From st_read_inst or 
+st_readwrite_data
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 When system has just started, this module has a role to request the first decompression process by 
 driving dec_start port to ‘1’. Then in the next state, the module waits until dec_finished is ‘1’ which 
@@ -2711,98 +2877,122 @@ transaction is initiated in this state (indicated by HTRANS = “10”) and perform 
 according to the type of the transaction operation. For new transaction other than instruction fetch, it 
 causes state to change to st_readwrite_data after the address phase issuance.  
  
-55 
-  
-From st_idle or st_readwrite_data
- 
-st_read_inst HRDATA <= 0;
- 
-READY = ‘1’?
-HREADY <= 0;
-No
- 
-Yes
- Data phase of 
-HTRANS = “00” ?
- 
-instruction fetch
-Yes
-Back to st_idle
-No
- 
-HTRANS = “10” ?
-No
- 
-Yes
- 
-Instructon fetch ? Stack operation ? Heap operation ? Other operation ?
- 
-Yes
-Yes Yes
-Yes
-· Address phase of  · Address phase of · Address phase of 
-stack operation heap operation to other operation 
-to AHB Buffer RAM to AHB 
-Address & Data phase 
- 
-of instruction fetch
-· Data phase of · Data phase of · Data phase of 
-instruction fetch instruction fetch instruction fetch 
- 
-with Buffer RAM with Buffer RAM with Buffer RAM
- 
- 
-To st_readwrite_data
- 
-Figure 6.4-9: Flow chart of st_read_inst state. 
- 
- 
-From st_idle or st_read_inst
- 
+Figure 6.4-8: Flow chart of the first three states in cpu_ahbbuffer_bridge state machine. 
+ 56 
  
 st_readwrite_data
-HRDATA <= 0;
 READY = ‘1’?
-HREADY <= 0;
- No
 Yes
- 
- Data phase of 
+No
 HTRANS = “00” ?
+HTRANS = “10” ?
+Instructon fetch ?Stack operation ? Heap operation ? Other operation ?
+ Address phase of 
+stack operation 
+to AHB 
+ Data phase of 
+[data operation] 
+ Address phase of 
+heap operation to 
+Buffer RAM 
+ Data phase of 
+[data operation] 
+ Address phase of 
+other operation 
+to AHB 
+ Data phase of 
+[data operation] 
+ Data phase of 
 [data operation]
-Yes
- 
 Back to st_idle
 No
- 
+Yes
+HRDATA <= 0;
+HREADY <= 0;
+Yes
+No
+YesYes Yes Yes
+From st_idle or st_read_inst
+To st_read_inst
+ Address phase of 
+Instruction fetch 
+to Buffer RAM 
+ Data phase of 
+[data operation] 
+st_read_inst
+READY = ‘1’?
+Yes
+No
+HTRANS = “00” ?
 HTRANS = “10” ?
+Address & Data phase 
+of instruction fetch
+Instructon fetch ? Stack operation ? Heap operation ? Other operation ?
+ Address phase of 
+stack operation 
+to AHB 
+ Data phase of 
+instruction fetch 
+with Buffer RAM
+ Address phase of 
+heap operation to 
+Buffer RAM 
+ Data phase of 
+instruction fetch 
+with Buffer RAM
+ Address phase of 
+other operation 
+to AHB 
+ Data phase of 
+instruction fetch 
+with Buffer RAM
+ Data phase of 
+instruction fetch
+Back to st_idle
 No
 Yes
- 
- 
-Stack operation ? Heap operation ? Other operation ?
-Instructon fetch ?
- Yes Yes
+HRDATA <= 0;
+HREADY <= 0;
 Yes
-Yes
-· Address phase of · Address phase of · Address phase of 
-· Address phase of 
- 
-stack operation heap operation to other operation 
-Instruction fetch 
-to AHB Buffer RAM to AHB to Buffer RAM 
- · Data phase of · Data phase of · Data phase of 
-· Data phase of 
-[data operation] [data operation] [data operation] 
-[data operation] 
+No
+Yes Yes Yes Yes
+From st_idle or st_readwrite_data
+To st_readwrite_data
  
  
  
-To st_read_inst
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 6.4-9: Flow chart of st_read_inst state. 
 Figure 6.4-10: Flow chart of st_readwrite_data state. 
-56 
-  
+ 57 
+ 
 St_readwrite_data as shown in figure 6.4-10 is a state designed to perform data phase of stack, heap 
 and other operation (we group and call these operations as “data operation”). The concept inside 
 st_readwrite_data is roughly similar to st_read_inst. However, clear difference can be easily seen on 
@@ -2833,15 +3023,15 @@ write depth is number of address slots in the memory. Thus, 4096 x 4 bytes equal
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
 Figure 6.4-11: Configuration to create buffer_ram in Xilinx Block Memory Generator 
+ 58 
  
- 
- 
- 
- 
- 
-57 
-  
 Chapter 7: Results and Analysis 
 7.1 Functional Verification Results. 
 In order to acknowledge that our designs work properly, we performed functional verification on all 
@@ -2864,10 +3054,6 @@ program is very simple and only require Cortex-M0 to do read operation.
  
  
  
-Figure 7.1-1: LED_Blinking.c program runs in CM0_wrapper. 
- 
-th
-Time marker marks the end of 5 LED blink. 
  
 In figure 7.1-1, the red circle marks the impact of using startup.s file, in which it makes program to 
 perform startup sequence that initializes stack and heap memory region to zero. After the startup 
@@ -2884,8 +3070,10 @@ can properly perform stack operation.
  
  
  
-58 
-  
+Figure 7.1-1: LED_Blinking.c program runs in CM0_wrapper. 
+Time marker marks the end of 5th LED blink. 
+ 
+ 59 
  
  
  
@@ -2895,7 +3083,6 @@ can properly perform stack operation.
  
  
  
-Figure 7.1-2: Recursive_Fibonacci.c runs in CM0_wrapper. 
  
 The area marked by blue circle in figure 7.1-2 shows that LED blinked three times in different 
 durations. The bigger the generated Fibonacci number the longer the LED is being turned on due to 
@@ -2912,8 +3099,6 @@ AGHA\ARM_Cortex-M0 C program”
  
  
  
-Figure 7.1-3: Heap_write_read2KB_CR05.c runs in CM0_wrapper. 
- 
  
 The last program we tested was a program which exercised heap memory operation.  This program is 
 called “Heap_write_read2KB_CR05.c ”, in which it firstly writes 512 32-bits data in heap memory 
@@ -2928,8 +3113,12 @@ previous sub-chapters. The difference is that Heap_write_read2KB_CR05.c uses sta
 perform more write operations by writing 2 KB of data to main memory. We can clearly compare 
 figure 6.2-1 and 7.1-3 that there were not many HWRITE activity in figure 6.2-1 as compared to 
 figure 7.1-3. This is because heap operation is always accompanied by stack operation and resulting 
-59 
-  
+Figure 7.1-2: Recursive_Fibonacci.c runs in CM0_wrapper. 
+ 
+Figure 7.1-3: Heap_write_read2KB_CR05.c runs in CM0_wrapper. 
+ 
+ 60 
+ 
 CPU to write frequently as shown by yellow and green circle in figure 7.1-3. Figure 7.1-4 and 7.1-5 
 show proofs that the system wrote and read to heap region (starting from address 0x00006000). 
  
@@ -2940,8 +3129,6 @@ show proofs that the system wrote and read to heap region (starting from address
  
  
  
-Figure 7.1-4: Simulation of CM0_wrapper writing 0xAAAA5555 to heap address 0x00006000. LED turned on before 
-writing because data has to be brought to CPU first (from instruction memory region) before being written by CPU. 
  
  
  
@@ -2950,9 +3137,6 @@ writing because data has to be brought to CPU first (from instruction memory reg
  
  
  
- 
- 
-Figure 7.1-5: Simulation of CM0_wrapper reading from heap address 0x00006000 and turned on LED. 
  
 Now that we have verified that the basic transfer Cortex-M0 SoC we developed works properly to 
 perform stack and heap operations. It is important to restate that both CM0_SDRAM_wrapper (sub-
@@ -2970,8 +3154,35 @@ As we compare the execution time with figures in CM0_wrapper functional simulati
 have execution time marked in the figures), we can notice CM0_busdelaycont_wrapper as 
 significantly higher execution time. This is due to the virtue of our bus_delay_controller module. 
  
-60 
-  
+Figure 7.1-4: Simulation of CM0_wrapper writing 0xAAAA5555 to heap address 0x00006000. LED turned on before 
+writing because data has to be brought to CPU first (from instruction memory region) before being written by CPU. 
+ 
+Figure 7.1-5: Simulation of CM0_wrapper reading from heap address 0x00006000 and turned on LED. 
+ 
+ 61 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -2982,34 +3193,12 @@ significantly higher execution time. This is due to the virtue of our bus_delay_
  
  
 Figure 7.1-6: LED_Blinking.c program runs in CM0_busdelaycont_wrapper. 
- 
-th
-Time marker marks the end of 5 LED blink. 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- Figure 7.1-7: Recursive Fibonacci.c program runs in CM0_busdelaycont_wrapper. 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+Time marker marks the end of 5th LED blink. 
+Figure 7.1-7: Recursive Fibonacci.c program runs in CM0_busdelaycont_wrapper. 
 Figure 7.1-8: Heap_write_read2KB_CR05.c  program runs in 
- 
 CM0_busdelaycont_wrapper. 
+ 62 
  
-61 
-  
 7.1.3 CM0X_wrapper Functional Simulation 
  
  
@@ -3022,7 +3211,6 @@ CM0_busdelaycont_wrapper.
  
  
  
-Figure 7.1-9: Compressed LED_Blinking.c runs in CM0X_wrapper 
  
  
  
@@ -3033,7 +3221,6 @@ Figure 7.1-9: Compressed LED_Blinking.c runs in CM0X_wrapper
  
  
  
-Figure 7.1-10: Compressed Recursive_Fibonacci.c runs in CM0X_Wrapper 
  
 From both compressed LED_Blinking.c and Recursive_Fibonacci.c simulation figure, we can observe 
 that on-the-fly decompression worked at the beginning of each program as marked by red circle. The 
@@ -3048,8 +3235,10 @@ are two on-the-fly decompression and one on-the-fly compression. The first decom
 at the beginning of the program execution (marked by blue circle), which was to fetch compressed 
 instructions from main memory, decompressed it and placed it to buffer_ram. After that, on-the-fly 
 compression happened after 2KB of heap data has been written to buffer_ram (marked by red circle).  
-62 
-  
+Figure 7.1-9: Compressed LED_Blinking.c runs in CM0X_wrapper 
+Figure 7.1-10: Compressed Recursive_Fibonacci.c runs in CM0X_Wrapper 
+ 63 
+ 
 Afterwards, Cortex-M0 requested data from the first heap memory location which triggered the on-
 the-fly decompression to fetch compressed heap and placed it to buffer_ram (marked by white circle). 
  
@@ -3062,32 +3251,52 @@ the-fly decompression to fetch compressed heap and placed it to buffer_ram (mark
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 Figure 7.1-11: Compressed Heap_write_read2KB_CR05.c runs in CM0X_Wrapper 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-Figure 7.1-12: First on-the-fly decompression in Heap_write_read2KB_CR05.c simulation CM0X_Wrapper 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 Figure 7.1-13: On-the-fly compression in Heap_write_read2KB_CR05.c simulation CM0X_Wrapper. 
 Notice that compressed data (c_dataout) has approximately half data density than the origina data( u_datain) 
 due to compression ratio 0.5 
-63 
-  
+Figure 7.1-12: First on-the-fly decompression in Heap_write_read2KB_CR05.c simulation CM0X_Wrapper 
+ 64 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -3098,30 +3307,10 @@ due to compression ratio 0.5
  
  
 Figure 7.1-14: Second on-the-fly heap decompression in Heap_write_read2KB_CR05.c simulation CM0X_Wrapper 
- 
- 
- 
- 
- 
- 
 Figure 7.1-14: Beginning of heap compression. Proof that 0xAAAA5555 was only the first few data. 
- 
- 
- 
- 
- 
- 
 Figure 7.1-14: Beginning of heap decompression. Proof that 0xAAAA5555 was only the first few data. 
+ 65 
  
- 
- 
- 
- 
- 
- 
- 
-64 
-  
 7.2 Evaluating the Impact of CM0X_wrapper on SDRAM-based System 
 After we are convinced that our compressed main memory system works, we performed some 
 experiments to evaluate the advantage and overheads of having compressed main memory system. 
@@ -3169,8 +3358,8 @@ additional number of cycles introduced by SDRAM performance. In our research, we
 Heap_write_read2KB_CR05.c . The details of approximating those three activities are explained in 
 the next sub-chapter. 
  
-65 
-  
+ 66 
+ 
 7.2.1 Approximation on Number of Main Memory Access in Startup Sequence. 
 We already know that startup sequence initializes stack and heap memory region to zero. Thus, the 
 number of transaction involved in stack write and heap write operation can be approximated as long 
@@ -3210,8 +3399,8 @@ first decompression since these 440 data are fetched from main memory to X-Match
 the first decompression.  
  
  
-66 
-  
+ 67 
+ 
 For compression part, 2KB (accurately 2048 bytes) of heap data are compressed to 1100 bytes 
 (compression ratio of 0.537)Thus, there are 275 transactions affected by SDRAM for the compression 
 since these 275 data are fetched from main memory to X-MatchPROVW during the first 
@@ -3234,94 +3423,67 @@ total execution time of Heap_write_read2KB_CR05.c in our compressed main memory 
 was using SDRAM.  
 To do that, we originally come up with the approximation formula below that can be applied to any 
 easily predictable program as long as we have CM0_wrapper and CM0X_wrapper. 
-(TEcmo – TDMcmo ) + (TDMcmo * Cdd ) + TX = TEcmox 
-onram onram onram offram offram
-In which TX = TXeb + TXem
-onram offram 
+(TEcmoonram – TDMcmoonram) + (TDMcmoonram * Cddoffram ) + TX = TEcmoxoffram 
+In which TX = TXebonram + TXemoffram 
  
-TEcmox  = Total execution time of a particular program executed in CM0X_wrapper while off-
-offram
+TEcmoxoffram  = Total execution time of a particular program executed in CM0X_wrapper while off-
 chip RAM was being used. 
-TEcmo = Total execution time of a particular program executed in CM0_wrapper while on-
-onram  
+TEcmoonram  = Total execution time of a particular program executed in CM0_wrapper while on-
 chip RAM having a single clock cycle of data phase is being used. 
-TDMcmo  = Total data phase executions time belong only to main memory access in a particular 
-onram 
+TDMcmoonram   = Total data phase executions time belong only to main memory access in a particular 
 program, in which the program is executed in CM0_wrapper while on-chip RAM having a single 
 clock cycle of data phase is being used. 
-Cdd = Number of clock cycle of a data phase executed by off-chip RAM. 
-offram 
+Cddoffram = Number of clock cycle of a data phase executed by off-chip RAM. 
 TX   = Total X-MatchproVW overhead in time. 
-TXeb  = Total “engine-buffer memory” overheads in time while on-chip RAM is being used 
-onram
-TXem  = Total “engine-main memory” overheads in time while off-chip RAM is being used 
-offram
+TXebonram  = Total “engine-buffer memory” overheads in time while on-chip RAM is being used 
+TXemoffram  = Total “engine-main memory” overheads in time while off-chip RAM is being used 
  
-67 
-  
+ 68 
+ 
 We understand that it is little bit difficult to understand the formula at a glance. Therefore we are 
 going to explain step by step the implementation of the approximation formula on 
 Heap_write_read2KB_CR05.c  
 1. Firstly, we get the total execution time of Heap_read_write2KB_CR05.c done by 
 CM0_wrapper, which is 868416 ns as shown by figure 7.1-3.  
-TEcmo 868416 ns 
-onram = 
+TEcmoonram =  868416 ns 
  
 2. Then, we remove portion of time related to data phases of main memory access 
-(TDMcmo ) from TEcmo . This results to having a total execution time of 
-onram onram
+(TDMcmoonram) from TEcmoonram. This results to having a total execution time of 
 Heap_read_write2KB_CR05.c without having execution time related to data phases of main 
-memory access when system using fastest memory (TEcmo - TDMcmo ). We want 
-onram onram
-this because total execution time of  data phases of main memory access (TDMcmo ) is 
-onram
+memory access when system using fastest memory (TEcmoonram - TDMcmoonram). We want 
+this because total execution time of  data phases of main memory access (TDMcmoonram) is 
 the only portion of time which get affected by SDRAM performance in our compressed main 
 memory system (remember that SDRAM or slower memory extends data phase execution). 
 This also implies that total program execution time without total data phase of main memory 
-access execution time (TEcmo - TDMcmo ) is the same for both CM0_wrapper and 
-onram onram
-CM0X_wrapper. Thus, by having TDMcmo removed, we can extend it (TDMcmo ) 
-onram onram
-depending on how slow the off-chip RAM (SDRAM) and add it back to TEcmo - 
-onram
-TDMcmo so that we get a new total execution time of the program with new TDMcmo 
-onram onram
+access execution time (TEcmoonram - TDMcmoonram) is the same for both CM0_wrapper and 
+CM0X_wrapper. Thus, by having TDMcmoonram removed, we can extend it (TDMcmoonram) 
+depending on how slow the off-chip RAM (SDRAM) and add it back to TEcmoonram - 
+TDMcmoonram so that we get a new total execution time of the program with new TDMcmoonram 
 that has been extended several times by SDRAM performance.  
  
-To get TDMcmo , we need firstly sum number of main memory accesses we calculated in 
-onram
+To get TDMcmoonram, we need firstly sum number of main memory accesses we calculated in 
 previous section, in which 3828 + 4096 = 7924 (excluding engine’s overhead).Inherently, 
 data phase of main memory access for on-chip RAM is only one clock cycle for each main 
-memory access. Thus, TDMcmo = 7924 * 1 clock cycle * 20 ns (50MHz system clock 
-onram
+memory access. Thus, TDMcmoonram = 7924 * 1 clock cycle * 20 ns (50MHz system clock 
 frequency) = 158480 ns. 
  
-Hence, now TEcmo – TDMcmo = 868416 ns - 158480 ns = 709936 ns. 
-onram onram
+Hence, now TEcmoonram – TDMcmoonram = 868416 ns - 158480 ns = 709936 ns. 
  
-3. Then, we extend TDMcmo by data phase clock cycle of off-chip RAM (Cdd ) , in 
-onram offram
-which in this case Cdd = 7 clock cycle since we model SDRAM. 
-offram 
-TDMcmo * Cdd = 158480 ns * 7 = 1109360 ns. 
-onram offram 
+3. Then, we extend TDMcmoonram by data phase clock cycle of off-chip RAM (Cddoffram) , in 
+which in this case Cddoffram = 7 clock cycle since we model SDRAM. 
+TDMcmoonram * Cddoffram  = 158480 ns * 7 = 1109360 ns. 
  
 4. Afterwards, we calculate total overhead by X-MatchPROVW (TX).   
-TXeb = 990 * 20 ns * Cdd = 990 * 20 ns * 7 = 138600 ns.  
-onram offram 
-TXem = 9548 ns (as stated in section 7.2.3). 
-offram 
-TX = TXeb + TXem = 138600 + 9548 = 148148 ns. 
-onram offram 
+TXebonram = 990 * 20 ns * Cddoffram  = 990 * 20 ns * 7 = 138600 ns.  
+TXemoffram = 9548 ns (as stated in section 7.2.3). 
+TX = TXebonram + TXemoffram  = 138600 + 9548 = 148148 ns. 
  
 5. Lastly, we sum them resulting to 
-(TEcmo – TDMcmo ) + (TDMcmo * Cdd ) + TX = TEcmox 
-onram onram onram offram offram
+(TEcmoonram – TDMcmoonram) + (TDMcmoonram * Cddoffram ) + TX = TEcmoxoffram 
 709936 + 1109360 + 148148 = 1967444 ns  
  
 Now that we have the total execution time of Heap_write_read2KB_CR05.c executed in 
-CM0X_wrapper which is TEcmox = 1967444 ns.  
-offram
+CM0X_wrapper which is TEcmoxoffram = 1967444 ns.  
 To see how good this number represents, we compare this execution time with execution time of the 
 same program executed by CM0_budelaycont_wrapper when it is set to perform as slow as SDRAM. 
 We compare with it because it represents a working normal Cortex-M0 SoC that is able to perform 
@@ -3330,13 +3492,20 @@ like SDRAM. As we saw in figure 7.1-8, the execution time of CM0_busdelaycont_wr
 improvement ((4242596-1967444)/4242596) for executing Heap_write_read2KB_CR05.c in our 
 compressed main memory system (CM0X_wrapper) as compared to normal Cortex-M0 SoC. 
  
-68 
-  
+ 69 
  
-Cdd Execution time of Execution time of % Speed gain by 
-offram 
-(clock CM0_busdelaycont_wrapper CM0X_wrapper CM0X_wrapper 
-cycles) (ns) (ns) 
+ 
+Cddoffram 
+(clock 
+cycles) 
+Execution time of 
+CM0_busdelaycont_wrapper
+(ns) 
+Execution time of 
+CM0X_wrapper 
+(ns) 
+% Speed gain by 
+CM0X_wrapper 
 3 1978176 1254324 36.6 
 5 3110376 1610884 48.2 
 7 4242596 1967444 53.6 
@@ -3345,13 +3514,9 @@ cycles) (ns) (ns)
 13 7639176 3037124 60.2 
 20 11601876 4285084 63.1 
 30 17261636 6067884 64.8 
-Table 7.2-1: Heap_write_read2KB_CR05.c execution time in two different systems with varying main 
  
-memory performance. Cdd = 7 is equivalent to SDRAM performance 
-offram 
  
-Since CM0_busdelaycont_wrapper we developed has the ability to vary Cdd , we conducted 
-offram
+Since CM0_busdelaycont_wrapper we developed has the ability to vary Cddoffram, we conducted 
 experiment to see how much improvement our compressed main memory system can deliver at 
 varying main memory performance. Table 7.2-1 shows that if we use slower main memory, we get 
 more percentage speed gain. 
@@ -3379,32 +3544,41 @@ block size because the duration of compressing and decompressing 8 KB of data us
 compression block size is lesser than compressing or decompressing 8KB of data using 2KB 
 compression block size. 
  
-69 
-  
+Table 7.2-1: Heap_write_read2KB_CR05.c execution time in two different systems with varying main 
+memory performance. Cddoffram = 7 is equivalent to SDRAM performance 
+ 70 
  
-60000
-50000
- 
-1.8x 
-40000
- 
-30000
-Compression
- 
-2.1x 
-20000
-Decompression
- 
-10000
 0
- 
+10000
+20000
+30000
+40000
+50000
+60000
 2 4 8
+D
+u
+r
+a
+ti
+o
+n
+ (
+n
+s)
  
 Compression Block Size (kilobyte) 
+Compression
+Decompression
  
-Figure 7.3-1: Histogram of compression and decompression duration against compression block size 
  
-  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 For example, the duration is of 2KB compression block size is 14196 ns and duration of 8KB 
 compression block size is 53936 ns as roughly shown in the figure above. if we compress 8KB size of 
 data using 2KB compression block size, the total duration would be 14196 * 4 (four times consecutive 
@@ -3434,11 +3608,14 @@ data having compression ratio of 0.5 during execution of Recursive_Fibonacci.c p
  
  
  
+2.1x 
+1.8x 
+Figure 7.3-1: Histogram of compression and decompression duration against compression block size 
+  
 Figure 7.3-2: Proof of 8 KB data being decompressed and compressed while performing 
 Recursive_Fibonacci.c program. 
-70 
+ 71 
  
-Duration (ns)  
 7.4 Implementation Results 
 7.4.1 Zero Latches 
 After we have developed the designs and verify its functionality, we implemented CM0_wrapper and 
@@ -3461,21 +3638,18 @@ be found in “Macro Statistics “section inside synthesis report, in which no latc
 statistics.  
 7.4.2 Logic Resources Utilization and Power Consumption Estimation. 
  
-CM0_wrapper CM0X_wrapper 
+  
+CM0_wrapper 
+whole system 
+CM0X_wrapper 
+whole system 
 Differences % Differences 
-  whole system whole system 
-85.4% 
-No. of Slice Registers used 3058 units 5670 units 2612 units 
-100% 
-Utilization of slice registers 4% 8% 4% 
-76.3% 
-No. of Sice LUTs used 7849 units 13842 units 5993 units 
-81% 
-Utilization of slice LUTs 11% 20% 19% 
-1.8% 
-Total on-chip power 2293mW 2336 mW 43mW 
+No. of Slice Registers used 3058 units 5670 units 2612 units 85.4% 
+Utilization of slice registers 4% 8% 4% 100% 
+No. of Sice LUTs used 7849 units 13842 units 5993 units 76.3% 
+Utilization of slice LUTs 11% 20% 19% 81% 
+Total on-chip power 2293mW 2336 mW 43mW 1.8% 
  
-Table 7.4-1: Comparison of Logic Utilization and Estimated Power Consumption. 
 The table above compares important points of implementation reports between CM0_wrapper and 
 CM0X_wrapper generated by Xilinx ISE. CM0_wrapper represents normal Cortex-M0 SoC and 
 CM0X_wrapper represents our compressed main memory system.  
@@ -3489,8 +3663,9 @@ comdec_ahbbuffer_bridge consumes only 0.05 mW.
 We believe that high logic utilization can be further optimized once our system is designed using 
 ASIC (Application Specific Integrated Circuit). The most important point from our system is that it 
 saves space, improves execution speed and negligible power consumption overhead. 
-71 
-  
+Table 7.4-1: Comparison of Logic Utilization and Estimated Power Consumption. 
+ 72 
+ 
 Chapter 8: Conclusion and Future Work 
  
 8.1 Conclusion 
@@ -3532,8 +3707,8 @@ that our compressed main memory system works and there is no latches introduced 
  
  
  
-72 
-  
+ 73 
+ 
 8.2 Future Work 
 By completing this dissertation, we have just opened the first gate of compressed main memory 
 system implementation with ARM Cortex-M0 CPU, X-MatchPROVW compression-decompression 
@@ -3570,8 +3745,8 @@ behave like cache-based system and able to run much larger program.
  
  
  
-73 
-  
+ 74 
+ 
 Bibliography 
  
 [1] Ekman, M.; Stenstrom, P.;, "A robust main-memory compression scheme," Computer 
@@ -3625,8 +3800,8 @@ February 1999,ISSN 1383-7621,doi:10.1016/S1383-7621(98)00006-X
  
 [14] Xianhong Xu; Jones, S.; , "Code Compression for the Embedded ARM/THUMB Processor " 
 Intelligent Data Acquisition and Advanced Computing Systems: Technology and Applications, 
-74 
-  
+ 75 
+ 
 2003. Proceedings of the Second IEEE International Workshop on , vol., no., pp.31-35, 8-10 
 Sept. 2003,doi: 10.1109/IDAACS.2003.1249510 
  
@@ -3681,8 +3856,8 @@ compressor ," EUROMICRO 96. 'Beyond 2000: Hardware and Software Design Strategie
 Proceedings of the 22nd EUROMICRO Conference , vol., no., pp.423-430, 2-5 Sep 1996 
 doi: 10.1109/EURMIC.1996.546466 
  
-75 
-  
+ 76 
+ 
 [26] Pagiamtzis, K.; Sheikholeslami, A.; , "Content-addressable memory (CAM) circuits and 
 architectures: a tutorial and survey," Solid-State Circuits, IEEE Journal of , vol.41, no.3, pp. 712- 
 727, March 2006 
@@ -3721,16 +3896,17 @@ URL: http://www.xilinx.com/support/documentation/user_guides/ug190.pdf
  
 [37] Xilinx, “Simulation Libraries” internet: 
 http://www.xilinx.com/support/documentation/sw_manuals/xilinx11/ise_c_simulation_libraries.h
+tm, 2009 [10
 th
-tm, 2009 [10 April 2012]. 
+ April 2012]. 
  
 [38] FPGA Central, “FPGA Synthesis and Implementation (Xilinx Design Flow)”, Internet: 
 http://www.fpgacentral.com/docs/fpga-tutorial/fpga-synthesis-and-implementation-xilinx, 2009 
+[10
 th
-[10 April 2012]. 
+ April 2012]. 
  
-st
-[39] Xilinx, Synthesis and Simulation Guide, Version 12.3, 21 September 2010.                                 
+[39] Xilinx, Synthesis and Simulation Guide, Version 12.3, 21st September 2010.                                 
 URL: http://www.xilinx.com/support/documentation/sw_manuals/xilinx12_4/sim.pdf 
  
 [40] Piekarek M. “Compressed Main Memory System for an ARM Cortex System-On-Chip”.    
@@ -3740,16 +3916,18 @@ MEng. thesis, University of Bristol, 2012.
 Preliminary Information, Dept. of Electrical and Electronic Engineering, Loughborough 
 University, May 2002. 
  
-76 
-  
-th
-[42]  Xilinx, Xilinx Power Tools Tutorial, Version 1.0, 15 March 2010                                                    
+ 77 
+ 
+[42]  Xilinx, Xilinx Power Tools Tutorial, Version 1.0, 15th March 2010                                                    
 URL: http://www.xilinx.com/support/documentation/sw_manuals/xilinx11/ug733.pdf 
  
 [43] Bidmead C., “ARM Creators  Sophie Wilson and Steve Furber”. Internet: 
 http://www.reghardware.com/2012/05/03/unsung_heroes_of_tech_arm_creators_sophie_wilson_
-rd th
-and_steve_furber/ , 3 May 2012 [12 May 2012] 
+and_steve_furber/ , 3
+rd
+ May 2012 [12
+th
+ May 2012] 
  
 [44] Wikipedia, Endianness, retrieved 19:49, September 30, 2012                                                   
 URL: http://en.wikipedia.org/w/index.php?title=Special:Cite&page=Endianness&id=515258095 
@@ -3779,21 +3957,15 @@ Applications. Gaisler Research.URL:http://www.gaisler.com/doc/vhdl2proc.pdf
  
  
  
-77 
-  
+ 78 
+ 
 Appendix 
  
 Appendix A: Proof of stack behavior in Heap_write_read2KB_CR05.c 
  
-Figure 1: Proof that there is 2 stack read operation and one 1 stack write operation everytime CPU writes to heap in 
- 
-Heap_write_read2KB_CR05.c 
  
  
  
-Figure 2: Proof that there is 2 stack read operation and one 1 stack write operation everytime CPU reads from heap in 
- 
-Heap_write_read2KB_CR05.c 
  
  
 We can see that blue circle marks heap write operation as 0x00006000 belong to heap address. Then 
@@ -3813,8 +3985,14 @@ with hrwrite = 1 is stack write operation , otherwise read operation.
  
  
  
-78 
-  
+Figure 1: Proof that there is 2 stack read operation and one 1 stack write operation everytime CPU writes to heap in 
+Heap_write_read2KB_CR05.c 
+ 
+Figure 2: Proof that there is 2 stack read operation and one 1 stack write operation everytime CPU reads from heap in 
+Heap_write_read2KB_CR05.c 
+ 
+ 79 
+ 
  
 Appendix B: Source codes designed by Agha
 B.1 Cpu_ahb_bridge.vhd in CM0_wrapper 
@@ -3822,46 +4000,86 @@ This is trimmed version, full version can be observed in submitted zip file.: \S
 AGHA\CM0_wrapper files 
  
  
- vreg.m0_hrdata := (others =>'0');--cpu should 
-begin not receive any data other than 0. 
- else 
-NMI <= '0'; vreg.m0_hrdata := ahbmi.hrdata; 
-IRQ <= (others=>'0'); end if; 
-RXEV <= '0';    vreg.ahbmo_hbusreq := '0';--if cpu is idle , 
- wrapper should stop request to bus. 
-ahbmo.hlock <= HMASTLOCK; end if; 
-ahbmo.hburst<= HBURST; else-- when bus is not ready 
-ahbmo.hirq<= (others=>'0'); vreg.ahbmo_hbusreq := '0';-- wrapper should 
- not/stop request to bus 
-HRESP <= '0'; vreg.m0_hrdata := (others =>'0');-- cpu should 
- not receive any data other than 0. 
-cpuahb_bridge: end if; 
-process(PresSTATE,HWDATA,HSIZE,regin,regout,H 
-WRITE,HPROT,HTRANS,ahbmi.hrdata,ahbmi.hread 
-y,HADDR)             regin <=  vreg; 
-variable vreg : reg_type; ahbmo.hbusreq <= vreg.ahbmo_hbusreq; 
-begin ahbmo.haddr   <= vreg.ahbmo_haddr; 
-vreg := regout; ahbmo.htrans  <= vreg.ahbmo_htrans; 
- ahbmo.hwdata  <= vreg.ahbmo_hwdata; 
-vreg.ahbmo_hwdata  := HWDATA; ahbmo.hwrite  <= vreg.ahbmo_hwrite; 
-vreg.ahbmo_hsize   := HSIZE; ahbmo.hsize   <= vreg.ahbmo_hsize; 
-vreg.ahbmo_hwrite  := HWRITE; ahbmo.hprot   <= vreg.ahbmo_hprot; 
-vreg.ahbmo_hprot   := HPROT; HREADY <= vreg.m0_hready;            
-vreg.ahbmo_htrans  := HTRANS; HRDATA <= vreg.m0_hrdata; 
-vreg.ahbmo_haddr   := HADDR; end process; 
-vreg.m0_hrdata := ahbmi.hrdata;  
-vreg.m0_hready := ahbmi.hready;  
-  
-if ahbmi.hready = '1' then-- when bus is ready seq: process(RST,CLK) 
-if HTRANS = "10" then-- and if cpu wants to do begin 
-transaction if rising_edge (CLK) then 
-vreg.ahbmo_hbusreq := '1';-- wrapper request to HWRITE_Prev <= HWRITE;-- way to get previous 
-the bus state of hwrite 
- regout <= regin;    
-else-- else if cpu is idle      
-if HWRITE_Prev = '1' then-- if previous cycle was end if; 
-writing, (this if-else to prevent glitches and errors end process; 
-after write operation.)   
+ 
+begin 
+ 
+NMI <= '0'; 
+IRQ <= (others=>'0'); 
+RXEV <= '0';    
+ 
+ahbmo.hlock <= HMASTLOCK; 
+ahbmo.hburst<= HBURST; 
+ahbmo.hirq<= (others=>'0'); 
+ 
+HRESP <= '0'; 
+ 
+cpuahb_bridge: 
+process(PresSTATE,HWDATA,HSIZE,regin,regout,H
+WRITE,HPROT,HTRANS,ahbmi.hrdata,ahbmi.hread
+y,HADDR)             
+variable vreg : reg_type; 
+begin 
+vreg := regout; 
+ 
+vreg.ahbmo_hwdata  := HWDATA; 
+vreg.ahbmo_hsize   := HSIZE; 
+vreg.ahbmo_hwrite  := HWRITE; 
+vreg.ahbmo_hprot   := HPROT; 
+vreg.ahbmo_htrans  := HTRANS; 
+vreg.ahbmo_haddr   := HADDR; 
+vreg.m0_hrdata := ahbmi.hrdata; 
+vreg.m0_hready := ahbmi.hready; 
+ 
+if ahbmi.hready = '1' then-- when bus is ready 
+if HTRANS = "10" then-- and if cpu wants to do 
+transaction 
+vreg.ahbmo_hbusreq := '1';-- wrapper request to 
+the bus 
+ 
+else-- else if cpu is idle 
+if HWRITE_Prev = '1' then-- if previous cycle was 
+writing, (this if-else to prevent glitches and errors 
+after write operation.)  
+vreg.m0_hrdata := (others =>'0');--cpu should 
+not receive any data other than 0. 
+else 
+vreg.m0_hrdata := ahbmi.hrdata; 
+end if; 
+vreg.ahbmo_hbusreq := '0';--if cpu is idle , 
+wrapper should stop request to bus. 
+end if; 
+else-- when bus is not ready 
+vreg.ahbmo_hbusreq := '0';-- wrapper should 
+not/stop request to bus 
+vreg.m0_hrdata := (others =>'0');-- cpu should 
+not receive any data other than 0. 
+end if; 
+ 
+ 
+regin <=  vreg; 
+ahbmo.hbusreq <= vreg.ahbmo_hbusreq; 
+ahbmo.haddr   <= vreg.ahbmo_haddr; 
+ahbmo.htrans  <= vreg.ahbmo_htrans; 
+ahbmo.hwdata  <= vreg.ahbmo_hwdata; 
+ahbmo.hwrite  <= vreg.ahbmo_hwrite; 
+ahbmo.hsize   <= vreg.ahbmo_hsize; 
+ahbmo.hprot   <= vreg.ahbmo_hprot; 
+HREADY <= vreg.m0_hready;            
+HRDATA <= vreg.m0_hrdata; 
+end process; 
+ 
+ 
+ 
+seq: process(RST,CLK) 
+begin 
+if rising_edge (CLK) then 
+HWRITE_Prev <= HWRITE;-- way to get previous 
+state of hwrite 
+regout <= regin;    
+     
+end if; 
+end process; 
+ 
 end behavioral; 
  
  
@@ -3877,70 +4095,120 @@ end behavioral;
  
  
  
-79 
-  
+ 80 
+ 
 B.2 CM0_busdelaycont_wrapper.vhd in CM0_busdelaycont_wrapper  
 This is trimmed version, full version can be observed in submitted zip file.: Sourcecodes_forassessment_ms1718\CompletelyDesigned by 
 AGHA\CM0_busdelaycont_wrapper filesbegin 
  
- if vreg.delaycount = 5  then   -- defines duration of 
-begin data phase to delay the bus and mimic slower 
-vreg := regout; memory. for mimicking SDRAM, put value as 5 
- vreg.delaycount := 0; 
-if RST = '0' then vreg.ahbmo_hbusreq := '1';-- bus is requested for 
-vreg.delaycount := 0; 1 cycle 
-vreg.ahbmo_hbusreq := '0'; -- busreq lasts for 1 vreg.ahbmo_htrans := "10"; -- htrans lasts for 1 
-cycle only cycle only 
-vreg.ahbmo_htrans := "00"; -- htrans lasts for 1 vreg.ahbmo_haddr := regout.MO_haddr; 
-cycle only vreg.ahbmo_hsize := regout.MO_hsize; 
-vreg.ahbmo_haddr := (others=>'0'); vreg.ahbmo_hwrite:= regout.MO_hwrite; 
-vreg.ahbmo_hsize := (others=>'0'); vreg.ahbmo_hprot := regout.MO_hprot; 
-vreg.ahbmo_hwrite:= '0'; vreg.ahbmo_hburst:= regout.MO_hburst; 
-vreg.ahbmo_hwdata:= (others=>'0'); NextSTATE <= stReady; 
-vreg.ahbmo_hprot := (others=>'0'); else 
-vreg.ahbmo_hburst:= (others=>'0'); vreg.delaycount := regout.delaycount + 1; 
- end if; 
-vreg.MI_hrdata := (others=>'0'); end case; 
-vreg.MI_hready := '0'; end if; 
-NextSTATE <= PresSTATE;  
-else  
- regin <= vreg; 
-  
-NextSTATE <= PresSTATE ; -- avoiding latch. AHBMO.HBUSREQ <= vreg.ahbmo_hbusreq; 
- AHBMO.HTRANS <= vreg.ahbmo_htrans; 
-case PresSTATE is AHBMO.HADDR  <= vreg.ahbmo_haddr; 
- AHBMO.HSIZE  <= vreg.ahbmo_hsize; 
-when stReady =>  AHBMO.HWRITE <= vreg.ahbmo_hwrite; 
-vreg.MI_hrdata := AHBMI.HRDATA;  -- AHBMO.HPROT  <= vreg.ahbmo_hprot; 
-transfer data from bus to cpu. AHBMO.HWDATA <= vreg.ahbmo_hwdata; 
-vreg.MI_hready := AHBMI.HREADY;  -- AHBMO.HBURST <= vreg.ahbmo_hburst; 
-transparents ready signal from bus to cpu  
- MI.HRDATA <= vreg.MI_hrdata; 
-vreg.ahbmo_hbusreq := '0';   --request to MI.HREADY <= vreg.MI_hready; 
-the bus should not happen in this moment  
-vreg.ahbmo_htrans := "00";   end process;   
-if MO.htrans = "10" then        -- when cpu wants  
-to do a transaction, store its requests parameter to process(CLK,RST) 
-register, state goes to halt state. begin 
-vreg.MO_haddr := MO.HADDR;     if RST = '0' then 
-vreg.MO_hprot := MO.HPROT; PresSTATE <= stReady; 
-vreg.MO_hsize := MO.HSIZE; regout <= regin;  
-vreg.MO_hwrite:= MO.HWRITE; elsif rising_edge (CLK) then 
-vreg.MO_hwdata:= MO.HWDATA; regout <= regin; 
-vreg.MO_hburst:= MO.HBURST; PresSTATE <= NextSTATE; 
-NextSTATE <= stHalt; end if; 
-end if; end process; 
-  
- end behavioral; 
-  
-when stHalt  =>      
-    -- stHalt . hold  
-issuance to bus for "delaycount" + 1 cycles.  
-vreg.MI_hready := '0';  
-vreg.MO_hwdata:= MO.HWDATA;   
-  -- hwdata should be transparent  
-from cpu to bus when halting.  
-vreg.ahbmo_hwdata:= regout.MO_hwdata;  
+ 
+begin 
+vreg := regout; 
+ 
+if RST = '0' then 
+vreg.delaycount := 0; 
+vreg.ahbmo_hbusreq := '0'; -- busreq lasts for 1 
+cycle only 
+vreg.ahbmo_htrans := "00"; -- htrans lasts for 1 
+cycle only 
+vreg.ahbmo_haddr := (others=>'0'); 
+vreg.ahbmo_hsize := (others=>'0'); 
+vreg.ahbmo_hwrite:= '0'; 
+vreg.ahbmo_hwdata:= (others=>'0'); 
+vreg.ahbmo_hprot := (others=>'0'); 
+vreg.ahbmo_hburst:= (others=>'0'); 
+ 
+vreg.MI_hrdata := (others=>'0'); 
+vreg.MI_hready := '0'; 
+NextSTATE <= PresSTATE; 
+else 
+ 
+ 
+NextSTATE <= PresSTATE ; -- avoiding latch. 
+ 
+case PresSTATE is 
+ 
+when stReady =>  
+vreg.MI_hrdata := AHBMI.HRDATA;  --
+transfer data from bus to cpu. 
+vreg.MI_hready := AHBMI.HREADY;  --
+transparents ready signal from bus to cpu 
+ 
+vreg.ahbmo_hbusreq := '0';   --request to 
+the bus should not happen in this moment 
+vreg.ahbmo_htrans := "00";   
+if MO.htrans = "10" then        -- when cpu wants 
+to do a transaction, store its requests parameter to 
+register, state goes to halt state. 
+vreg.MO_haddr := MO.HADDR;     
+vreg.MO_hprot := MO.HPROT; 
+vreg.MO_hsize := MO.HSIZE; 
+vreg.MO_hwrite:= MO.HWRITE; 
+vreg.MO_hwdata:= MO.HWDATA; 
+vreg.MO_hburst:= MO.HBURST; 
+NextSTATE <= stHalt; 
+end if; 
+ 
+ 
+ 
+when stHalt  =>     
+    -- stHalt . hold 
+issuance to bus for "delaycount" + 1 cycles. 
+vreg.MI_hready := '0'; 
+vreg.MO_hwdata:= MO.HWDATA;  
+  -- hwdata should be transparent 
+from cpu to bus when halting. 
+vreg.ahbmo_hwdata:= regout.MO_hwdata; 
+ 
+if vreg.delaycount = 5  then   -- defines duration of 
+data phase to delay the bus and mimic slower 
+memory. for mimicking SDRAM, put value as 5 
+vreg.delaycount := 0; 
+vreg.ahbmo_hbusreq := '1';-- bus is requested for 
+1 cycle 
+vreg.ahbmo_htrans := "10"; -- htrans lasts for 1 
+cycle only 
+vreg.ahbmo_haddr := regout.MO_haddr; 
+vreg.ahbmo_hsize := regout.MO_hsize; 
+vreg.ahbmo_hwrite:= regout.MO_hwrite; 
+vreg.ahbmo_hprot := regout.MO_hprot; 
+vreg.ahbmo_hburst:= regout.MO_hburst; 
+NextSTATE <= stReady; 
+else 
+vreg.delaycount := regout.delaycount + 1; 
+end if; 
+end case; 
+end if; 
+ 
+ 
+regin <= vreg; 
+ 
+AHBMO.HBUSREQ <= vreg.ahbmo_hbusreq; 
+AHBMO.HTRANS <= vreg.ahbmo_htrans; 
+AHBMO.HADDR  <= vreg.ahbmo_haddr; 
+AHBMO.HSIZE  <= vreg.ahbmo_hsize; 
+AHBMO.HWRITE <= vreg.ahbmo_hwrite; 
+AHBMO.HPROT  <= vreg.ahbmo_hprot; 
+AHBMO.HWDATA <= vreg.ahbmo_hwdata; 
+AHBMO.HBURST <= vreg.ahbmo_hburst; 
+ 
+MI.HRDATA <= vreg.MI_hrdata; 
+MI.HREADY <= vreg.MI_hready; 
+ 
+end process;   
+ 
+process(CLK,RST) 
+begin 
+if RST = '0' then 
+PresSTATE <= stReady; 
+regout <= regin;  
+elsif rising_edge (CLK) then 
+regout <= regin; 
+PresSTATE <= NextSTATE; 
+end if; 
+end process; 
+ 
+end behavioral; 
  
  
  
@@ -3948,616 +4216,1139 @@ vreg.ahbmo_hwdata:= regout.MO_hwdata;
  
  
  
-80 
-  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 81 
+ 
 B.3 Cpu_ahbbuffer_bridge.vhd in CM0X_wrapper  
 This is trimmed version, full version can be observed in submitted zip file.: Sourcecodes_forassessment_ms1718\CompletelyDesigned by 
 AGHA\CM0X_wrapper files 
  
  
-begin else 
-vreg:= regout; NextSTATE <= st_waitfirstdec; 
- end if; 
-voffsetaddr := HADDR - X"4000";  
-vHADDR_rw_buffer := "00" & voffsetaddr(31 -- idle state to wait for cpu transaction request 
-downto 2); -- and acts as address phase of a transaction 
- when st_idle => 
- vreg.hready := READY; 
-voffsetaddr_prev := HADDR_Prev - X"4000"; vreg.heapbufferaccess := '0'; 
-vHADDR_rw_buffer_Prev := "00"& vreg.enb := '0'; 
-voffsetaddr_prev (31 downto 2); vreg.web := '0'; 
-  
-if RST = '0' then if vreg.hready = '1' then 
-vreg.comp_start := '0';  
-vreg.dec_start := '0'; -- **case of read instructions address phase. 
-vreg.buffer_read_startaddr := (others => '0'); Communicate with buffer 
-vreg.buffer_write_startaddr := (others => '0'); if HTRANS = "10" and HADDR < rw_stack_base 
-vreg.ahbram_read_startaddr := (others => '0'); then                               
-vreg.ahbram_write_startaddr := (others => '0'); vreg.addrb := HADDR_ro (11 downto 0); 
-vreg.delayready := '0'; vreg.enb:= HTRANS(1); 
-vreg.heapwritecount := 0; NextSTATE <= st_read_inst; 
-vreg.count0x6000 := 0;  
-vreg.startup_done := '0'; -- **case of stack operation address phase, 
-vreg.comptest_done := '0'; communicate directly with bus 
-NextSTATE <= PresSTATE; elsif HTRANS = "10" and HADDR >= 
- rw_stack_base and HADDR < rw_heap_base then  
-else vreg.enb := '0'; 
- vreg.cpu2ahb_htrans := HTRANS; 
-NextSTATE <= PresSTATE; -- to avoid latches vreg.cpu2ahb_hwdata := HWDATA; 
-vreg.startup_done := regout.startup_done; vreg.cpu2ahb_hprot  := HPROT; 
-vreg.comptest_done := regout.comptest_done; vreg.cpu2ahb_hsize  := HSIZE; 
-case PresSTATE is vreg.cpu2ahb_haddr  := HADDR; 
- vreg.cpu2ahb_hwrite := HWRITE; 
--- start first decompression and initializes signals vreg.cpu2ahb_hbusreq := '1'; 
-when st_start =>     NextSTATE <= st_readwrite_data; 
-vreg.dec_start := '1'; -- start decompression  
-vreg.hready := '0'; -- **case of heap operation address phase. 
-vreg.hrdata := (others=>'0'); Communicate with buffer 
-vreg.enb := '0'; elsif HTRANS = "10" and HADDR >= 
-vreg.addrb := (others=>'0'); rw_heap_base and HADDR < rw_heap_top then --  
- vreg.enb := HTRANS(1); 
-vreg.web := '0'; vreg.addrb := vHADDR_rw_buffer(11 downto 0); 
-vreg.dinb := (others =>'0'); vreg.heapbufferaccess := '1'; 
- NextSTATE <= st_readwrite_data; 
-vreg.comp_start := '0';  
-vreg.buffer_read_startaddr := (others => '0'); -- **case of other operation address phase. 
-vreg.buffer_write_startaddr := (others => '0'); Communicate directly with bus 
-vreg.ahbram_read_startaddr := (others => '0'); elsif HTRANS = "10" and HADDR >= rw_heap_top 
-vreg.ahbram_write_startaddr := (others => '0'); then 
-vreg.comptest_done := '0'; vreg.enb := '0'; 
- vreg.cpu2ahb_htrans := HTRANS; 
-vreg.cpu2ahb_htrans := (others => '0'); vreg.cpu2ahb_hwdata := HWDATA; 
-vreg.cpu2ahb_hwdata := (others => '0'); vreg.cpu2ahb_hprot  := HPROT; 
-vreg.cpu2ahb_hprot  := (others => '0'); vreg.cpu2ahb_hsize  := HSIZE; 
-vreg.cpu2ahb_hsize  := (others => '0'); vreg.cpu2ahb_haddr  := HADDR; 
-vreg.cpu2ahb_haddr  := (others => '0'); vreg.cpu2ahb_hwrite := HWRITE; 
-vreg.cpu2ahb_hwrite := '0'; vreg.cpu2ahb_hbusreq := '1'; 
-vreg.cpu2ahb_hbusreq := '0'; NextSTATE <= st_readwrite_data; 
-NextSTATE<= st_waitfirstdec; else 
- NextSTATE <= st_idle; 
--- wait until first decompression is finished. end if; 
-when st_waitfirstdec => else 
-if dec_finished = '1' then -- if hready is 0 then hrdata should be 0 
-vreg.dec_start := '0'; vreg.hrdata := (others=>'0'); 
-NextSTATE <= st_idle; NextSTATE <= st_idle; 
-81 
-  
-end if; else null; 
-  
- end if; 
--- state of data phase of reading instruction.  
-when st_read_inst => else 
-vreg.hready := READY; vreg.hrdata := (others=>'0'); 
-vreg.heapbufferaccess := '0';  NextSTATE <= st_read_inst; 
-vreg.web := '0'; end if;  
-if vreg.hready = '1' then  
--- **if cpu removes transaction request at this -- state of data phase of reading/writing data.   
-point when st_readwrite_data=> 
-if HTRANS = "00" then  vreg.hready := READY; 
--- Data Phase of read_inst only  
-vreg.hrdata := doutb; if vreg.hready = '1' then 
-vreg.addrb := HADDR_ro (11 downto 0); -- **if cpu removes transaction request at this 
-vreg.enb:= HTRANS (1); point 
-NextSTATE <= st_idle; if HTRANS = "00" then 
- -- Data Phase of reading/writing data.  
--- **if another address phase of read_inst happens -- if heap operation is happening, data phase of 
-at this point heap operation 
-elsif HTRANS = "10" and HADDR < rw_stack_base if vreg.heapbufferaccess = '1' then 
-then  vreg.heapbufferaccess := '0'; 
--- Address phase  & Data phase of read_inst if HWRITE_Prev = '1' then --heap write transfer 
-vreg.hrdata := doutb; data phase 
-vreg.addrb := HADDR_ro (11 downto 0); vreg.enb := '1'; 
-vreg.enb:= HTRANS (1); vreg.web := '1'; 
-NextSTATE <= st_read_inst; vreg.addrb := vHADDR_rw_buffer_Prev (11 
- downto 0); 
--- **if address phase of stack operation happens vreg.dinb := HWDATA; -- although htrans is 0, 
-at this point processor still in its dataphase for writing. 
-elsif HTRANS = "10" and HADDR >= important. 
-rw_stack_base and HADDR < rw_heap_base then   vreg.hrdata := (others => '0'); 
--- Data phase of read_inst NextSTATE <= st_idle; 
-vreg.hrdata := doutb;  else --heap read transfer data phase 
-vreg.enb := HTRANS (1); vreg.enb := '0'; 
--- Address phase of stack operation vreg.web := '0'; 
-vreg.cpu2ahb_htrans := HTRANS; vreg.hrdata := doutb; 
-vreg.cpu2ahb_hwdata := HWDATA; NextSTATE <= st_idle; 
-vreg.cpu2ahb_hprot  := HPROT; end if; 
-vreg.cpu2ahb_hsize  := HSIZE;  
-vreg.cpu2ahb_haddr  := HADDR; -- if stack operation is happening, data phase of 
-vreg.cpu2ahb_hwrite := HWRITE; stack operation 
-vreg.cpu2ahb_hbusreq := '1'; else 
-NextSTATE <= st_readwrite_data; vreg.cpu2ahb_htrans := HTRANS; 
- vreg.cpu2ahb_hwdata := HWDATA; 
--- **if address phase of heap operation happens at vreg.cpu2ahb_hprot  := HPROT; 
-this point vreg.cpu2ahb_hsize  := HSIZE; 
-elsif HTRANS = "10" and HADDR >= vreg.cpu2ahb_haddr  := HADDR; 
-rw_heap_base and HADDR < rw_heap_top then  vreg.cpu2ahb_hwrite := HWRITE; 
--- Data phase of read_inst vreg.cpu2ahb_hbusreq := '0'; 
-vreg.hrdata := doutb; vreg.HRDATA := ahb2cpu_hrdata;  
-vreg.enb := HTRANS (1); vreg.enb := '0'; 
--- Address phase of heap operation NextSTATE <= st_idle; 
-vreg.addrb := vHADDR_rw_buffer(11 downto 0); end if; 
-vreg.heapbufferaccess := '1';  
-NextSTATE <= st_readwrite_data; --**if address phase of read_inst happens at this 
- point   
--- **if address phase of other operation happens elsif HTRANS = "10" and HADDR < rw_stack_base 
-at this point then   
-elsif HTRANS = "10" and HADDR >= rw_heap_top --Address phase of read_inst 
-then vreg.addrb := HADDR_ro (11 downto 0); 
-vreg.enb := HTRANS (1); vreg.enb:= HTRANS (1); 
-vreg.hrdata := doutb;  NextSTATE <= st_read_inst; 
-vreg.cpu2ahb_htrans := HTRANS;  
-vreg.cpu2ahb_hwdata := HWDATA; -- Data Phase of reading/writing data.  
-vreg.cpu2ahb_hprot  := HPROT; -- if heap operation is happening, data phase of 
-vreg.cpu2ahb_hsize  := HSIZE; heap operation 
-vreg.cpu2ahb_haddr  := HADDR; if vreg.heapbufferaccess = '1' then 
-vreg.cpu2ahb_hwrite := HWRITE; vreg.heapbufferaccess := '0'; 
-vreg.cpu2ahb_hbusreq := '1'; if HWRITE_Prev = '1' then --heap write transfer 
-NextSTATE <= st_readwrite_data; data phase 
-82 
-  
-vreg.enb := '1';  
-vreg.web := '1';  
-vreg.addrb := vHADDR_rw_buffer_Prev (11 --**if address phase of heap operation happens 
-downto 0); again at this point 
-vreg.dinb := HWDATA; -- although htrans is 0, elsif HTRANS = "10" and HADDR >= 
-processor still in its dataphase for writing. rw_heap_base and HADDR < rw_heap_top then 
-important. -- Address phase of heap operation 
-vreg.hrdata := (others => '0'); vreg.enb := HTRANS (1); 
- vreg.addrb := vHADDR_rw_buffer(11 downto 0); 
-vreg.delayready := '1'; NextSTATE <= st_readwrite_data; 
-else --heap read transfer data phase  
-vreg.hrdata := doutb; -- Data Phase of reading/writing data.  
-end if; -- if heap operation is happening, data phase of 
- heap operation      
--- if stack operation is happening, data phase of if vreg.heapbufferaccess = '1' then 
-stack operation  --vreg.heapbufferaccess := '0'; 
-else if HWRITE_Prev = '1' then --heap write transfer 
-vreg.cpu2ahb_htrans := HTRANS; data phase 
-vreg.cpu2ahb_hwdata := HWDATA; vreg.enb := '1'; 
-vreg.cpu2ahb_hprot  := HPROT; vreg.web := '1'; 
-vreg.cpu2ahb_hsize  := HSIZE; vreg.addrb := vHADDR_rw_buffer_Prev (11 
-vreg.cpu2ahb_haddr  := HADDR; downto 0); 
-vreg.cpu2ahb_hwrite := HWRITE; vreg.dinb := HWDATA; -- although htrans is 0, 
-vreg.cpu2ahb_hbusreq := '0'; processor still in its dataphase for writing. 
-vreg.HRDATA := ahb2cpu_hrdata;--at this time, important. 
-still reading from bus due to and data phase of vreg.hrdata := (others => '0'); 
-rw_region else --heap read transfer data phase 
-vreg.enb:= HTRANS(1); vreg.hrdata := doutb; 
-end if; end if; 
-  
---**if address phase of stack operation happens -- if stack operation is happening, data phase of 
-again at this point     stack operation  
-elsif HTRANS = "10" and HADDR >= else 
-rw_stack_base and HADDR < rw_heap_base then  vreg.heapbufferaccess := '1'; 
---Address phase of stack_operation, directly to bus vreg.cpu2ahb_htrans := HTRANS; 
-vreg.cpu2ahb_htrans := HTRANS; vreg.cpu2ahb_hwdata := HWDATA; 
-vreg.cpu2ahb_hwdata := HWDATA; vreg.cpu2ahb_hprot  := HPROT; 
-vreg.cpu2ahb_hprot  := HPROT; vreg.cpu2ahb_hsize  := HSIZE; 
-vreg.cpu2ahb_hsize  := HSIZE; vreg.cpu2ahb_haddr  := HADDR; 
-vreg.cpu2ahb_haddr  := HADDR; vreg.cpu2ahb_hwrite := HWRITE; 
-vreg.cpu2ahb_hwrite := HWRITE; vreg.cpu2ahb_hbusreq := '0'; 
-vreg.cpu2ahb_hbusreq := '1'; end if; 
-NextSTATE <= st_readwrite_data;  
- --**if address phase of other operation happens 
--- Data Phase of reading/writing data.  again at this point 
--- if heap operation is happening, data phase of elsif HTRANS = "10" and HADDR >= rw_heap_top 
-heap operation then 
-if vreg.heapbufferaccess = '1' then -- Address phase of other operation, directly to bus 
-vreg.heapbufferaccess := '0'; vreg.cpu2ahb_htrans := HTRANS; 
-if HWRITE_Prev = '1' then --heap write transfer vreg.cpu2ahb_hwdata := HWDATA; 
-data phase vreg.cpu2ahb_hprot  := HPROT; 
-vreg.enb := '1'; vreg.cpu2ahb_hsize  := HSIZE; 
-vreg.web := '1'; vreg.cpu2ahb_haddr  := HADDR; 
-vreg.addrb := vHADDR_rw_buffer_Prev (11 vreg.cpu2ahb_hwrite := HWRITE; 
-downto 0); vreg.cpu2ahb_hbusreq := '1'; 
-vreg.dinb := HWDATA; -- although htrans is 0, NextSTATE <= st_readwrite_data; 
-processor still in its dataphase for writing.  
-important. -- Data Phase of reading/writing data.  
-vreg.hrdata := (others => '0'); -- if heap operation is happening, data phase of 
-else --heap read transfer data phase heap operation 
-vreg.hrdata := doutb; if vreg.heapbufferaccess = '1' then 
-end if; vreg.heapbufferaccess := '0'; 
- if HWRITE_Prev = '1' then --heap write transfer 
--- if stack operation is happening, data phase of data phase 
-stack operation  vreg.enb := '1'; 
-else vreg.web := '1'; 
-vreg.HRDATA := ahb2cpu_hrdata; --at this time, vreg.addrb := vHADDR_rw_buffer_Prev (11 
-still reading from bus due to and data phase of downto 0); 
-rw_region vreg.dinb := HWDATA; -- although htrans is 0, 
-vreg.enb:= HTRANS(1); processor still in its dataphase for writing. 
-end if; important. 
-83 
-  
-vreg.hrdata := (others => '0');  
-else --heap read transfer data phase vreg.heapwritecount := 0;--reset counter to 0 
-vreg.hrdata := doutb; vreg.comp_start := '1'; -- start comp 
-end if; end if; 
-  
--- if stack operation is happening, data phase of  
-stack operation if comp_finished = '1' then  
-else vreg.comp_start := '0'; 
-vreg.HRDATA := ahb2cpu_hrdata; --at this time, vreg.ahbram_write_curaddr := 
-still reading from bus due to and data phase of ahbram_write_lastaddr; 
-rw_region end if; 
-vreg.enb:= HTRANS(1);  
-end if; if vreg.heapbufferaccess = '1' and HWRITE = '0' 
-end if; and HADDR = X"00006000" and HADDR_Prev /= 
-else X"00004004" then 
-vreg.hrdata := (others=>'0'); vreg.dec_start := '1'; 
-NextSTATE <= st_readwrite_data; vreg.ahbram_read_startaddr := X"00006000"; 
-end if; vreg.buffer_write_startaddr := X"00000800"; 
- end if; 
-  
-when others => null;  
-  
-end case;  
-  
-end if; end if; 
-  
--- if doutb = X"abcd1234" then 
-=============================== vreg.ahbram_read_startaddr := X"00000270"; 
-========================= vreg.buffer_write_startaddr := X"00000800"; 
--- Comdec Ignitor  vreg.dec_start := '1'; 
--- section below is to start elsif doutb = X"1234abcd" and 
-compression/decompression vreg.comptest_done = '0' then 
--- for future works, this area of code may be vreg.ahbram_write_startaddr := X"00000270"; 
-replaced with address decoding vreg.buffer_read_startaddr := X"00000800"; 
--- or use tranlation table vreg.comp_start := '1'; 
--- vreg.comptest_done := '1'; 
-=============================== 
-=========================   else null; 
-if HADDR = X"00006000" and HWRITE = '1' then end if; 
-vreg.count0x6000 := vreg.count0x6000 + 1;  
-vreg.startup_done := '0';  
- if comp_finished = '1' then  
-elsif regout.count0x6000 = 2 then vreg.comp_start := '0'; 
-vreg.startup_done := '1'; vreg.ahbram_write_curaddr := 
-vreg.buffer_read_curaddr := X"00000800"; ahbram_write_lastaddr; 
-vreg.ahbram_write_curaddr := X"00006000"; end if; 
-vreg.heapwritecount := regout.heapwritecount +  
-1; --integer if dec_finished = '1' then 
-vreg.count0x6000 := 0; vreg.dec_start := '0'; 
-else end if; 
-vreg.startup_done := regout.startup_done;     
-end if; --
- ===============================
- ============================= 
---end if; -- end of Comdec Ignitor 
- --
-if vreg.startup_done = '1' then ===============================
-if vreg.heapbufferaccess = '1' and HWRITE = '1' =============================
-then       
-vreg.heapwritecount := regout.heapwritecount +  
-1; --integer regin <= vreg; 
-elsif regout.heapwritecount = 512 then  --2048 dec_start <= regout.dec_start; 
-bytes HRDATA <= vreg.hrdata; 
-vreg.buffer_read_startaddr :=  
-regout.buffer_read_curaddr; -- important to solve clash of heap write data 
-vreg.buffer_read_curaddr := phase and read instruction address phase  
-regout.buffer_read_curaddr + "100"; -- increment if vreg.delayready = '1' then 
-the current buffer read address pointer by 256 HREADY <= '0'; 
-location for the next heap compression. regin.delayready <= '0'; 
-vreg.ahbram_write_startaddr := else 
-regout.ahbram_write_curaddr; HREADY <= vreg.hready; 
-84 
-  
-end if;  
-  
-  
-addrb <= vreg.addrb;  
-enb <= vreg.enb;  
-web(0) <= vreg.web;  
-dinb <= vreg.dinb;  
-heapbufferaccess<= vreg.heapbufferaccess;  
-  
-  
-comp_start <= vreg.comp_start;  
-buffer_read_startaddr <=  
-vreg.buffer_read_startaddr;  
-buffer_write_startaddr <=  
-vreg.buffer_write_startaddr;  
-ahbram_read_startaddr  <=  
-vreg.ahbram_read_startaddr;  
-ahbram_write_startaddr <=  
-vreg.ahbram_write_startaddr;  
-  
-cpu2ahb_htrans <= vreg.cpu2ahb_htrans;  
-cpu2ahb_hwdata<=vreg.cpu2ahb_hwdata;  
-cpu2ahb_hprot<=vreg.cpu2ahb_hprot;  
-cpu2ahb_hsize<=vreg.cpu2ahb_hsize;  
-cpu2ahb_haddr<=vreg.cpu2ahb_haddr;  
-cpu2ahb_hwrite<=vreg.cpu2ahb_hwrite;  
-cpu2ahb_hbusreq<=vreg.cpu2ahb_hbusreq;  
-  
-end process;  
-  
-  
-  
-seq: process (CLK,RST)  
-begin  
-  
-if RST = '0' then  
-PresSTATE <= st_start;  
-elsif rising_edge (CLK) then  
-PresSTATE <= NextSTATE;  
-HADDR_Prev <= HADDR;  
-HWRITE_Prev <= HWRITE;  
-regout <= regin;  
-else null;  
-end if;  
-  
-end process;  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+begin 
+vreg:= regout; 
  
-85 
-  
+voffsetaddr := HADDR - X"4000"; 
+vHADDR_rw_buffer := "00" & voffsetaddr(31 
+downto 2); 
+ 
+ 
+voffsetaddr_prev := HADDR_Prev - X"4000"; 
+vHADDR_rw_buffer_Prev := "00"& 
+voffsetaddr_prev (31 downto 2); 
+ 
+if RST = '0' then 
+vreg.comp_start := '0'; 
+vreg.dec_start := '0'; 
+vreg.buffer_read_startaddr := (others => '0'); 
+vreg.buffer_write_startaddr := (others => '0'); 
+vreg.ahbram_read_startaddr := (others => '0'); 
+vreg.ahbram_write_startaddr := (others => '0'); 
+vreg.delayready := '0'; 
+vreg.heapwritecount := 0; 
+vreg.count0x6000 := 0; 
+vreg.startup_done := '0'; 
+vreg.comptest_done := '0'; 
+NextSTATE <= PresSTATE; 
+ 
+else 
+ 
+NextSTATE <= PresSTATE; -- to avoid latches 
+vreg.startup_done := regout.startup_done; 
+vreg.comptest_done := regout.comptest_done; 
+case PresSTATE is 
+ 
+-- start first decompression and initializes signals 
+when st_start =>     
+vreg.dec_start := '1'; -- start decompression 
+vreg.hready := '0'; 
+vreg.hrdata := (others=>'0'); 
+vreg.enb := '0'; 
+vreg.addrb := (others=>'0'); 
+ 
+vreg.web := '0'; 
+vreg.dinb := (others =>'0'); 
+ 
+vreg.comp_start := '0'; 
+vreg.buffer_read_startaddr := (others => '0'); 
+vreg.buffer_write_startaddr := (others => '0'); 
+vreg.ahbram_read_startaddr := (others => '0'); 
+vreg.ahbram_write_startaddr := (others => '0'); 
+vreg.comptest_done := '0'; 
+ 
+vreg.cpu2ahb_htrans := (others => '0'); 
+vreg.cpu2ahb_hwdata := (others => '0'); 
+vreg.cpu2ahb_hprot  := (others => '0'); 
+vreg.cpu2ahb_hsize  := (others => '0'); 
+vreg.cpu2ahb_haddr  := (others => '0'); 
+vreg.cpu2ahb_hwrite := '0'; 
+vreg.cpu2ahb_hbusreq := '0'; 
+NextSTATE<= st_waitfirstdec; 
+ 
+-- wait until first decompression is finished. 
+when st_waitfirstdec => 
+if dec_finished = '1' then 
+vreg.dec_start := '0'; 
+NextSTATE <= st_idle; 
+else 
+NextSTATE <= st_waitfirstdec; 
+end if; 
+ 
+-- idle state to wait for cpu transaction request 
+-- and acts as address phase of a transaction 
+when st_idle => 
+vreg.hready := READY; 
+vreg.heapbufferaccess := '0'; 
+vreg.enb := '0'; 
+vreg.web := '0'; 
+ 
+if vreg.hready = '1' then 
+ 
+-- **case of read instructions address phase. 
+Communicate with buffer 
+if HTRANS = "10" and HADDR < rw_stack_base 
+then                               
+vreg.addrb := HADDR_ro (11 downto 0); 
+vreg.enb:= HTRANS(1); 
+NextSTATE <= st_read_inst; 
+ 
+-- **case of stack operation address phase, 
+communicate directly with bus 
+elsif HTRANS = "10" and HADDR >= 
+rw_stack_base and HADDR < rw_heap_base then  
+vreg.enb := '0'; 
+vreg.cpu2ahb_htrans := HTRANS; 
+vreg.cpu2ahb_hwdata := HWDATA; 
+vreg.cpu2ahb_hprot  := HPROT; 
+vreg.cpu2ahb_hsize  := HSIZE; 
+vreg.cpu2ahb_haddr  := HADDR; 
+vreg.cpu2ahb_hwrite := HWRITE; 
+vreg.cpu2ahb_hbusreq := '1'; 
+NextSTATE <= st_readwrite_data; 
+ 
+-- **case of heap operation address phase. 
+Communicate with buffer 
+elsif HTRANS = "10" and HADDR >= 
+rw_heap_base and HADDR < rw_heap_top then --  
+vreg.enb := HTRANS(1); 
+vreg.addrb := vHADDR_rw_buffer(11 downto 0); 
+vreg.heapbufferaccess := '1'; 
+NextSTATE <= st_readwrite_data; 
+ 
+-- **case of other operation address phase. 
+Communicate directly with bus 
+elsif HTRANS = "10" and HADDR >= rw_heap_top 
+then 
+vreg.enb := '0'; 
+vreg.cpu2ahb_htrans := HTRANS; 
+vreg.cpu2ahb_hwdata := HWDATA; 
+vreg.cpu2ahb_hprot  := HPROT; 
+vreg.cpu2ahb_hsize  := HSIZE; 
+vreg.cpu2ahb_haddr  := HADDR; 
+vreg.cpu2ahb_hwrite := HWRITE; 
+vreg.cpu2ahb_hbusreq := '1'; 
+NextSTATE <= st_readwrite_data; 
+else 
+NextSTATE <= st_idle; 
+end if; 
+else 
+-- if hready is 0 then hrdata should be 0 
+vreg.hrdata := (others=>'0'); 
+NextSTATE <= st_idle; 
+ 82 
+ 
+end if; 
+ 
+ 
+-- state of data phase of reading instruction. 
+when st_read_inst => 
+vreg.hready := READY; 
+vreg.heapbufferaccess := '0';  
+vreg.web := '0'; 
+if vreg.hready = '1' then 
+-- **if cpu removes transaction request at this 
+point 
+if HTRANS = "00" then  
+-- Data Phase of read_inst only 
+vreg.hrdata := doutb; 
+vreg.addrb := HADDR_ro (11 downto 0); 
+vreg.enb:= HTRANS (1); 
+NextSTATE <= st_idle; 
+ 
+-- **if another address phase of read_inst happens 
+at this point 
+elsif HTRANS = "10" and HADDR < rw_stack_base 
+then  
+-- Address phase  & Data phase of read_inst 
+vreg.hrdata := doutb; 
+vreg.addrb := HADDR_ro (11 downto 0); 
+vreg.enb:= HTRANS (1); 
+NextSTATE <= st_read_inst; 
+ 
+-- **if address phase of stack operation happens 
+at this point 
+elsif HTRANS = "10" and HADDR >= 
+rw_stack_base and HADDR < rw_heap_base then   
+-- Data phase of read_inst 
+vreg.hrdata := doutb;  
+vreg.enb := HTRANS (1); 
+-- Address phase of stack operation 
+vreg.cpu2ahb_htrans := HTRANS; 
+vreg.cpu2ahb_hwdata := HWDATA; 
+vreg.cpu2ahb_hprot  := HPROT; 
+vreg.cpu2ahb_hsize  := HSIZE; 
+vreg.cpu2ahb_haddr  := HADDR; 
+vreg.cpu2ahb_hwrite := HWRITE; 
+vreg.cpu2ahb_hbusreq := '1'; 
+NextSTATE <= st_readwrite_data; 
+ 
+-- **if address phase of heap operation happens at 
+this point 
+elsif HTRANS = "10" and HADDR >= 
+rw_heap_base and HADDR < rw_heap_top then  
+-- Data phase of read_inst 
+vreg.hrdata := doutb; 
+vreg.enb := HTRANS (1); 
+-- Address phase of heap operation 
+vreg.addrb := vHADDR_rw_buffer(11 downto 0); 
+vreg.heapbufferaccess := '1'; 
+NextSTATE <= st_readwrite_data; 
+ 
+-- **if address phase of other operation happens 
+at this point 
+elsif HTRANS = "10" and HADDR >= rw_heap_top 
+then 
+vreg.enb := HTRANS (1); 
+vreg.hrdata := doutb;  
+vreg.cpu2ahb_htrans := HTRANS; 
+vreg.cpu2ahb_hwdata := HWDATA; 
+vreg.cpu2ahb_hprot  := HPROT; 
+vreg.cpu2ahb_hsize  := HSIZE; 
+vreg.cpu2ahb_haddr  := HADDR; 
+vreg.cpu2ahb_hwrite := HWRITE; 
+vreg.cpu2ahb_hbusreq := '1'; 
+NextSTATE <= st_readwrite_data; 
+else null; 
+ 
+end if; 
+ 
+else 
+vreg.hrdata := (others=>'0'); 
+NextSTATE <= st_read_inst; 
+end if;  
+ 
+-- state of data phase of reading/writing data.   
+when st_readwrite_data=> 
+vreg.hready := READY; 
+ 
+if vreg.hready = '1' then 
+-- **if cpu removes transaction request at this 
+point 
+if HTRANS = "00" then 
+-- Data Phase of reading/writing data.  
+-- if heap operation is happening, data phase of 
+heap operation 
+if vreg.heapbufferaccess = '1' then 
+vreg.heapbufferaccess := '0'; 
+if HWRITE_Prev = '1' then --heap write transfer 
+data phase 
+vreg.enb := '1'; 
+vreg.web := '1'; 
+vreg.addrb := vHADDR_rw_buffer_Prev (11 
+downto 0); 
+vreg.dinb := HWDATA; -- although htrans is 0, 
+processor still in its dataphase for writing. 
+important. 
+vreg.hrdata := (others => '0'); 
+NextSTATE <= st_idle; 
+else --heap read transfer data phase 
+vreg.enb := '0'; 
+vreg.web := '0'; 
+vreg.hrdata := doutb; 
+NextSTATE <= st_idle; 
+end if; 
+ 
+-- if stack operation is happening, data phase of 
+stack operation 
+else 
+vreg.cpu2ahb_htrans := HTRANS; 
+vreg.cpu2ahb_hwdata := HWDATA; 
+vreg.cpu2ahb_hprot  := HPROT; 
+vreg.cpu2ahb_hsize  := HSIZE; 
+vreg.cpu2ahb_haddr  := HADDR; 
+vreg.cpu2ahb_hwrite := HWRITE; 
+vreg.cpu2ahb_hbusreq := '0'; 
+vreg.HRDATA := ahb2cpu_hrdata;  
+vreg.enb := '0'; 
+NextSTATE <= st_idle; 
+end if; 
+ 
+--**if address phase of read_inst happens at this 
+point   
+elsif HTRANS = "10" and HADDR < rw_stack_base 
+then   
+--Address phase of read_inst 
+vreg.addrb := HADDR_ro (11 downto 0); 
+vreg.enb:= HTRANS (1); 
+NextSTATE <= st_read_inst; 
+ 
+-- Data Phase of reading/writing data.  
+-- if heap operation is happening, data phase of 
+heap operation 
+if vreg.heapbufferaccess = '1' then 
+vreg.heapbufferaccess := '0'; 
+if HWRITE_Prev = '1' then --heap write transfer 
+data phase 
+ 83 
+ 
+vreg.enb := '1'; 
+vreg.web := '1'; 
+vreg.addrb := vHADDR_rw_buffer_Prev (11 
+downto 0); 
+vreg.dinb := HWDATA; -- although htrans is 0, 
+processor still in its dataphase for writing. 
+important. 
+vreg.hrdata := (others => '0'); 
+ 
+vreg.delayready := '1'; 
+else --heap read transfer data phase 
+vreg.hrdata := doutb; 
+end if; 
+ 
+-- if stack operation is happening, data phase of 
+stack operation  
+else 
+vreg.cpu2ahb_htrans := HTRANS; 
+vreg.cpu2ahb_hwdata := HWDATA; 
+vreg.cpu2ahb_hprot  := HPROT; 
+vreg.cpu2ahb_hsize  := HSIZE; 
+vreg.cpu2ahb_haddr  := HADDR; 
+vreg.cpu2ahb_hwrite := HWRITE; 
+vreg.cpu2ahb_hbusreq := '0'; 
+vreg.HRDATA := ahb2cpu_hrdata;--at this time, 
+still reading from bus due to and data phase of 
+rw_region 
+vreg.enb:= HTRANS(1); 
+end if; 
+ 
+--**if address phase of stack operation happens 
+again at this point     
+elsif HTRANS = "10" and HADDR >= 
+rw_stack_base and HADDR < rw_heap_base then  
+--Address phase of stack_operation, directly to bus 
+vreg.cpu2ahb_htrans := HTRANS; 
+vreg.cpu2ahb_hwdata := HWDATA; 
+vreg.cpu2ahb_hprot  := HPROT; 
+vreg.cpu2ahb_hsize  := HSIZE; 
+vreg.cpu2ahb_haddr  := HADDR; 
+vreg.cpu2ahb_hwrite := HWRITE; 
+vreg.cpu2ahb_hbusreq := '1'; 
+NextSTATE <= st_readwrite_data; 
+ 
+-- Data Phase of reading/writing data.  
+-- if heap operation is happening, data phase of 
+heap operation 
+if vreg.heapbufferaccess = '1' then 
+vreg.heapbufferaccess := '0'; 
+if HWRITE_Prev = '1' then --heap write transfer 
+data phase 
+vreg.enb := '1'; 
+vreg.web := '1'; 
+vreg.addrb := vHADDR_rw_buffer_Prev (11 
+downto 0); 
+vreg.dinb := HWDATA; -- although htrans is 0, 
+processor still in its dataphase for writing. 
+important. 
+vreg.hrdata := (others => '0'); 
+else --heap read transfer data phase 
+vreg.hrdata := doutb; 
+end if; 
+ 
+-- if stack operation is happening, data phase of 
+stack operation  
+else 
+vreg.HRDATA := ahb2cpu_hrdata; --at this time, 
+still reading from bus due to and data phase of 
+rw_region 
+vreg.enb:= HTRANS(1); 
+end if; 
+ 
+ 
+--**if address phase of heap operation happens 
+again at this point 
+elsif HTRANS = "10" and HADDR >= 
+rw_heap_base and HADDR < rw_heap_top then 
+-- Address phase of heap operation 
+vreg.enb := HTRANS (1); 
+vreg.addrb := vHADDR_rw_buffer(11 downto 0); 
+NextSTATE <= st_readwrite_data; 
+ 
+-- Data Phase of reading/writing data.  
+-- if heap operation is happening, data phase of 
+heap operation      
+if vreg.heapbufferaccess = '1' then 
+--vreg.heapbufferaccess := '0'; 
+if HWRITE_Prev = '1' then --heap write transfer 
+data phase 
+vreg.enb := '1'; 
+vreg.web := '1'; 
+vreg.addrb := vHADDR_rw_buffer_Prev (11 
+downto 0); 
+vreg.dinb := HWDATA; -- although htrans is 0, 
+processor still in its dataphase for writing. 
+important. 
+vreg.hrdata := (others => '0'); 
+else --heap read transfer data phase 
+vreg.hrdata := doutb; 
+end if; 
+ 
+-- if stack operation is happening, data phase of 
+stack operation  
+else 
+vreg.heapbufferaccess := '1'; 
+vreg.cpu2ahb_htrans := HTRANS; 
+vreg.cpu2ahb_hwdata := HWDATA; 
+vreg.cpu2ahb_hprot  := HPROT; 
+vreg.cpu2ahb_hsize  := HSIZE; 
+vreg.cpu2ahb_haddr  := HADDR; 
+vreg.cpu2ahb_hwrite := HWRITE; 
+vreg.cpu2ahb_hbusreq := '0'; 
+end if; 
+ 
+--**if address phase of other operation happens 
+again at this point 
+elsif HTRANS = "10" and HADDR >= rw_heap_top 
+then 
+-- Address phase of other operation, directly to bus 
+vreg.cpu2ahb_htrans := HTRANS; 
+vreg.cpu2ahb_hwdata := HWDATA; 
+vreg.cpu2ahb_hprot  := HPROT; 
+vreg.cpu2ahb_hsize  := HSIZE; 
+vreg.cpu2ahb_haddr  := HADDR; 
+vreg.cpu2ahb_hwrite := HWRITE; 
+vreg.cpu2ahb_hbusreq := '1'; 
+NextSTATE <= st_readwrite_data; 
+ 
+-- Data Phase of reading/writing data.  
+-- if heap operation is happening, data phase of 
+heap operation 
+if vreg.heapbufferaccess = '1' then 
+vreg.heapbufferaccess := '0'; 
+if HWRITE_Prev = '1' then --heap write transfer 
+data phase 
+vreg.enb := '1'; 
+vreg.web := '1'; 
+vreg.addrb := vHADDR_rw_buffer_Prev (11 
+downto 0); 
+vreg.dinb := HWDATA; -- although htrans is 0, 
+processor still in its dataphase for writing. 
+important. 
+ 84 
+ 
+vreg.hrdata := (others => '0'); 
+else --heap read transfer data phase 
+vreg.hrdata := doutb; 
+end if; 
+ 
+-- if stack operation is happening, data phase of 
+stack operation 
+else 
+vreg.HRDATA := ahb2cpu_hrdata; --at this time, 
+still reading from bus due to and data phase of 
+rw_region 
+vreg.enb:= HTRANS(1); 
+end if; 
+end if; 
+else 
+vreg.hrdata := (others=>'0'); 
+NextSTATE <= st_readwrite_data; 
+end if; 
+ 
+ 
+when others => null; 
+ 
+end case; 
+ 
+end if; 
+ 
+--
+===============================
+========================= 
+-- Comdec Ignitor  
+-- section below is to start 
+compression/decompression 
+-- for future works, this area of code may be 
+replaced with address decoding 
+-- or use tranlation table 
+--
+===============================
+=========================   
+if HADDR = X"00006000" and HWRITE = '1' then 
+vreg.count0x6000 := vreg.count0x6000 + 1; 
+vreg.startup_done := '0'; 
+ 
+elsif regout.count0x6000 = 2 then 
+vreg.startup_done := '1'; 
+vreg.buffer_read_curaddr := X"00000800"; 
+vreg.ahbram_write_curaddr := X"00006000"; 
+vreg.heapwritecount := regout.heapwritecount + 
+1; --integer 
+vreg.count0x6000 := 0; 
+else 
+vreg.startup_done := regout.startup_done;    
+end if; 
+ 
+ 
+--end if; 
+ 
+if vreg.startup_done = '1' then 
+if vreg.heapbufferaccess = '1' and HWRITE = '1' 
+then 
+vreg.heapwritecount := regout.heapwritecount + 
+1; --integer 
+elsif regout.heapwritecount = 512 then  --2048 
+bytes 
+vreg.buffer_read_startaddr := 
+regout.buffer_read_curaddr; 
+vreg.buffer_read_curaddr := 
+regout.buffer_read_curaddr + "100"; -- increment 
+the current buffer read address pointer by 256 
+location for the next heap compression. 
+vreg.ahbram_write_startaddr := 
+regout.ahbram_write_curaddr; 
+ 
+vreg.heapwritecount := 0;--reset counter to 0 
+vreg.comp_start := '1'; -- start comp 
+end if; 
+ 
+ 
+if comp_finished = '1' then  
+vreg.comp_start := '0'; 
+vreg.ahbram_write_curaddr := 
+ahbram_write_lastaddr; 
+end if; 
+ 
+if vreg.heapbufferaccess = '1' and HWRITE = '0' 
+and HADDR = X"00006000" and HADDR_Prev /= 
+X"00004004" then 
+vreg.dec_start := '1'; 
+vreg.ahbram_read_startaddr := X"00006000"; 
+vreg.buffer_write_startaddr := X"00000800"; 
+end if; 
+ 
+ 
+ 
+ 
+ 
+end if; 
+ 
+if doutb = X"abcd1234" then 
+vreg.ahbram_read_startaddr := X"00000270"; 
+vreg.buffer_write_startaddr := X"00000800"; 
+vreg.dec_start := '1'; 
+elsif doutb = X"1234abcd" and 
+vreg.comptest_done = '0' then 
+vreg.ahbram_write_startaddr := X"00000270"; 
+vreg.buffer_read_startaddr := X"00000800"; 
+vreg.comp_start := '1'; 
+vreg.comptest_done := '1'; 
+ 
+else null; 
+end if; 
+ 
+ 
+if comp_finished = '1' then  
+vreg.comp_start := '0'; 
+vreg.ahbram_write_curaddr := 
+ahbram_write_lastaddr; 
+end if; 
+ 
+if dec_finished = '1' then 
+vreg.dec_start := '0'; 
+end if; 
+ 
+--
+===============================
+============================= 
+-- end of Comdec Ignitor 
+--
+===============================
+=============================
+      
+ 
+regin <= vreg; 
+dec_start <= regout.dec_start; 
+HRDATA <= vreg.hrdata; 
+ 
+-- important to solve clash of heap write data 
+phase and read instruction address phase  
+if vreg.delayready = '1' then 
+HREADY <= '0'; 
+regin.delayready <= '0'; 
+else 
+HREADY <= vreg.hready; 
+ 85 
+ 
+end if; 
+ 
+ 
+addrb <= vreg.addrb; 
+enb <= vreg.enb; 
+web(0) <= vreg.web; 
+dinb <= vreg.dinb; 
+heapbufferaccess<= vreg.heapbufferaccess; 
+ 
+ 
+comp_start <= vreg.comp_start; 
+buffer_read_startaddr <= 
+vreg.buffer_read_startaddr; 
+buffer_write_startaddr <= 
+vreg.buffer_write_startaddr; 
+ahbram_read_startaddr  <= 
+vreg.ahbram_read_startaddr; 
+ahbram_write_startaddr <= 
+vreg.ahbram_write_startaddr; 
+ 
+cpu2ahb_htrans <= vreg.cpu2ahb_htrans; 
+cpu2ahb_hwdata<=vreg.cpu2ahb_hwdata; 
+cpu2ahb_hprot<=vreg.cpu2ahb_hprot; 
+cpu2ahb_hsize<=vreg.cpu2ahb_hsize; 
+cpu2ahb_haddr<=vreg.cpu2ahb_haddr; 
+cpu2ahb_hwrite<=vreg.cpu2ahb_hwrite; 
+cpu2ahb_hbusreq<=vreg.cpu2ahb_hbusreq; 
+ 
+end process; 
+ 
+ 
+ 
+seq: process (CLK,RST) 
+begin 
+ 
+if RST = '0' then 
+PresSTATE <= st_start; 
+elsif rising_edge (CLK) then 
+PresSTATE <= NextSTATE; 
+HADDR_Prev <= HADDR; 
+HWRITE_Prev <= HWRITE; 
+regout <= regin; 
+else null; 
+end if; 
+ 
+end process; 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 86 
+ 
 B.4 Comdec_ahbbuffer_bridge.vhd in CM0X_wrapper 
 This is trimmed version, full version can be observed in submitted zip file.: Sourcecodes_forassessment_ms1718\CompletelyDesigned by 
 AGHA\CM0X_wrapper files 
  
- 
-begin ahb2cpu_hrdata <= (others=>'0'); 
+begin 
 ahbmo.hbusreq  <= '0'; 
- 
 ahbmo.hwrite  <= '0'; 
-case PresSTATE is 
-ahbmo.hprot  <= "0011";  
-ahbmo.hsize <="010"; -- when state in idle, it directs the transaction from 
+ahbmo.hprot  <= "0011"; 
+ahbmo.hsize <="010"; 
 ahbmo.hwdata  <= (others=>'0'); 
-cpu to bus.  
 ahbmo.htrans  <= "00"; 
--- This kind of transaction is only for STACK 
-ahbmo.haddr  <= (others=>'0'); operation.   
-ahbmo.hburst  <= (others=>'0'); when st_idle =>    
+ahbmo.haddr  <= (others=>'0'); 
+ahbmo.hburst  <= (others=>'0'); 
 ahbmo_haddr_prev <= (others => '0'); 
-ahbmo.htrans <= cpu2ahb_htrans; 
  
-ahbmo.haddr <= cpu2ahb_haddr; 
- ahbmo.hwrite <= cpu2ahb_hwrite; 
- ahbmo.hprot <= cpu2ahb_hprot; 
+ 
+ 
 ADDRESS  <= (others => '0');    
-ahbmo.hsize <= cpu2ahb_hsize; 
-CONTROLW  <= (others=>'0'); ahbmo.hwdata <= cpu2ahb_hwdata; 
-CS  <= '1'; ahbmo.hbusreq <= cpu2ahb_hbusreq; 
+CONTROLW  <= (others=>'0'); 
+CS  <= '1'; 
 RW  <= '1'; 
-ahb2cpu_hrdata <= ahbmi.hrdata; 
  
-s_READY <= ahbmi.hready; 
-C_DATAIN <= (others=>'0');  
+C_DATAIN <= (others=>'0'); 
 BUS_ACKNOWLEDGE_DC <= '1'; 
- 
 BUS_ACKNOWLEDGE_DU <= '1'; 
-if comp_start = '1' then 
 dec_finished <= '0'; 
-NextSTATE <= stcomp_init_ubsr; 
---waitfirst_cdatain <= '1'; s_READY <= '0'; 
+--waitfirst_cdatain <= '1'; 
 waitfirst_udataout <= '1'; 
  
+dina <= (others=>'0'); 
+wea(0) <= '0'; 
+ena <= '0'; 
+addra <= (others=>'0'); 
+ 
+ 
+regin.cdatain <= (others=>'0'); 
+regin.ahbmo_haddr <= (others=>'0'); 
+regin.addra <= (others=>'0'); 
+regin.busack_dc <= '1'; 
+regin.ahbmo_htrans <= (others=>'0'); 
+regin.wea <= '0'; 
+regin.dina <= (others=>'0'); 
+regin.ena <= '0'; 
+ 
+regin.ahbmo_hwdata <= (others=>'0'); 
+ 
+regin.ahbmo_hbusreq <= '0'; 
+ 
+regin.ahbmo_hwrite <= '0'; 
+regin.busack_cu <= '1'; 
+ 
+regin.udatain <= (others=>'0'); 
+ 
+regin.addra_prev <= buffer_read_startaddr(11 
+downto 0); -- important signals 
+regin.ahbmo_haddr_prev <= (others=>'0'); 
+ 
+comp_finished <= '0'; 
+BUS_ACKNOWLEDGE_CC <= '1'; 
+BUS_ACKNOWLEDGE_CU <= '1'; 
+waitfirst_cdataout <= '1'; 
+waitfirst_udatain <= '1'; 
+wait_cu <= '1'; 
+U_DATAIN <= (others=>'0'); 
+ 
+NextSTATE <= PresSTATE; 
+ 
+s_READY <= ahbmi.hready; 
+s_ahbram_write_lastaddr <= (others=> '0'); 
+ 
+ahb2cpu_hrdata <= (others=>'0'); 
+ 
+case PresSTATE is 
+ 
+-- when state in idle, it directs the transaction from 
+cpu to bus.  
+-- This kind of transaction is only for STACK 
+operation.   
+when st_idle =>    
+ahbmo.htrans <= cpu2ahb_htrans; 
+ahbmo.haddr <= cpu2ahb_haddr; 
+ahbmo.hwrite <= cpu2ahb_hwrite; 
+ahbmo.hprot <= cpu2ahb_hprot; 
+ahbmo.hsize <= cpu2ahb_hsize; 
+ahbmo.hwdata <= cpu2ahb_hwdata; 
+ahbmo.hbusreq <= cpu2ahb_hbusreq; 
+ahb2cpu_hrdata <= ahbmi.hrdata; 
+s_READY <= ahbmi.hready; 
+ 
+ 
+if comp_start = '1' then 
+NextSTATE <= stcomp_init_ubsr; 
+s_READY <= '0'; 
  
 elsif dec_start  = '1' then 
-dina <= (others=>'0'); 
 s_READY <= '0'; 
-wea(0) <= '0'; NextSTATE <= stdec_init_ubsr; 
-ena <= '0'; 
+NextSTATE <= stdec_init_ubsr; 
 else 
-addra <= (others=>'0'); 
 s_READY <= ahbmi.hready; 
- NextSTATE <= st_idle; 
- end if;  
-regin.cdatain <= (others=>'0'); 
+NextSTATE <= st_idle; 
+end if;  
 --
-regin.ahbmo_haddr <= (others=>'0'); ****************************************
-regin.addra <= (others=>'0'); ************* 
-regin.busack_dc <= '1'; 
+****************************************
+************* 
 --Decompression STATES 
-regin.ahbmo_htrans <= (others=>'0'); 
 --
-regin.wea <= '0'; ****************************************
-regin.dina <= (others=>'0'); ************* 
-regin.ena <= '0'; 
+****************************************
+************* 
 -- initialize ubsr for decompression 
- 
 when stdec_init_ubsr=> 
-regin.ahbmo_hwdata <= (others=>'0');  
- ahbmo.hburst<= "001"; 
-regin.ahbmo_hbusreq <= '0'; 
+ 
+ahbmo.hburst<= "001"; 
 C_DATAIN <= (others=>'0'); 
- 
 BUS_ACKNOWLEDGE_DC <= '1'; 
-regin.ahbmo_hwrite <= '0'; CS <= '0'; 
-regin.busack_cu <= '1'; RW <= '0'; 
- 
+CS <= '0'; 
+RW <= '0'; 
 ADDRESS <= "1001"; 
-regin.udatain <= (others=>'0'); CONTROLW <= X"00000BFF"; -- 3071Bblock 
- --CONTORL <= X"00000400"; -- 1024B block 
-regin.addra_prev <= buffer_read_startaddr(11 
+CONTROLW <= X"00000BFF"; -- 3071Bblock 
+--CONTORL <= X"00000400"; -- 1024B block 
 --CONTROL <= X"00001000"; -- 4096B block 
-downto 0); -- important signals --CONTROL <= X"00002000"; -- 8192B block 
-regin.ahbmo_haddr_prev <= (others=>'0'); --CONTROL <= X"00003000"; -- 12288B block 
- 
+--CONTROL <= X"00002000"; -- 8192B block 
+--CONTROL <= X"00003000"; -- 12288B block 
 --CONTROL <= X"00004000"; -- 16384B block 
-comp_finished <= '0'; 
 s_READY <= '0'; 
-BUS_ACKNOWLEDGE_CC <= '1';  
-BUS_ACKNOWLEDGE_CU <= '1'; NextSTATE <= stdec_init_cr; 
-waitfirst_cdataout <= '1'; 
  
-waitfirst_udatain <= '1'; 
+NextSTATE <= stdec_init_cr; 
+ 
 -- initialize cr for decompression 
-wait_cu <= '1'; when stdec_init_cr => 
-U_DATAIN <= (others=>'0');  
+when stdec_init_cr => 
  
 CS <= '0'; 
-NextSTATE <= PresSTATE; 
 RW <= '0'; 
- ADDRESS <= "1000"; 
-s_READY <= ahbmi.hready; CONTROLW <= X"00004200"; 
-s_ahbram_write_lastaddr <= (others=> '0'); 
+ADDRESS <= "1000"; 
+CONTROLW <= X"00004200"; 
 ahbmo.hburst<= "001";  
-86 
-  
- waitfirst_udataout <= '1'; 
-regin.cdatain <= (others=>'0'); end if;                
-regin.ahbmo_haddr <= ahbram_read_startaddr; --  
-initialize ahbmo.haddr for reading instructions. BUS_ACKNOWLEDGE_DU <= BUS_REQUEST_DU;  
-regin.addra <= buffer_write_startaddr(11 downto  
-0) - '1'; -- initialize buffer address for writing. regin <= vreg; 
-regin.busack_dc <= '1'; BUS_ACKNOWLEDGE_DC <= regout.busack_dc; 
-regin.ahbmo_htrans <= "10"; C_DATAIN <= regout.cdatain; 
-regin.wea <= '0'; ahbmo.htrans <= regout.ahbmo_htrans; 
-regin.dina <= (others=>'0'); ahbmo.haddr <= regout.ahbmo_haddr; 
-regin.ena <= '0'; ahbmo_haddr_prev <= 
-s_READY <= '0'; regout.ahbmo_haddr_prev; 
-  
--- start requesting to bus wea(0)<=regout.wea; 
-if BUS_REQUEST_DC = '0' then ena <= regout.ena; 
-CS <= '1'; dina <= regout.dina; 
-RW <= '1'; addra <= regout.addra; 
-CONTROLW <= (others=>'0');  
-ADDRESS <= (others=>'0'); -- when decompression finishes, re-initialize 
-ahbmo.hbusreq <= '1'; signals.  
-ahbmo.htrans <= "10"; --nonseq   when stdec_finish =>   
- s_READY <= '0'; 
-NextSTATE <= stdec_decompressing; BUS_ACKNOWLEDGE_DC <= '1'; 
-else BUS_ACKNOWLEDGE_DU <= '1'; 
-NextSTATE <= stdec_init_cr; ahbmo.hbusreq <= '0'; 
-end if; ahbmo.htrans <= "00"; 
- waitfirst_cdatain <= '1'; 
--- state for decompression process  waitfirst_udataout <= '1'; 
-when stdec_decompressing => wea(0) <= '0'; 
-vreg:= regout;  ena <= '0'; 
- dec_finished<= '1'; 
-ahbmo.hburst<= "001";  
-s_READY <= '0'; ahbmo.hburst<= "000"; 
-if FINISHED_D ='0' then       
-NextSTATE <= stdec_finish; NextSTATE <= st_idle; 
- --
-elsif ahbmi.hready = '1' then ****************************************
- ************* 
--- to prevent problem when bus request dc is high.  --End of Decompression STATES 
-if BUS_REQUEST_DC = '1' then  --
-vreg.busack_dc := '1'; ****************************************
-vreg.ahbmo_haddr := vreg.ahbmo_haddr_prev; *************   
-else  
--- fetching data from main_ram to comdec engine --
-vreg.busack_dc := '0'; ****************************************
-vreg.cdatain := to_bitvector(ahbmi.hrdata); ************* 
-vreg.ahbmo_htrans := "11"; --Compression STATES 
-vreg.ahbmo_haddr := vreg.ahbmo_haddr + "100"; --
-vreg.ahbmo_haddr_prev :=  regout.ahbmo_haddr ****************************************
-- "100"; *************   
-NextSTATE <= stdec_decompressing; -- initialize ubsr for compression 
-end if; when stcomp_init_ubsr => 
-else  s_READY <= '0'; 
-NextSTATE <= stdec_decompressing;      CS <= '0'; 
-end if; RW <= '0'; 
-  
- ADDRESS <= "1101"; 
- CONTROLW <= X"00000BFF"; -- 3071B 
-if Decompressing = '0' then --CONTORL <= X"00000400"; -- 1024B block 
-vreg.wea := '1'; --CONTROL <= X"00001000"; -- 4096B block 
-vreg.ena := '1'; --CONTROL <= X"00002000"; -- 8192B block 
-else null;    --CONTROL <= X"00003000"; -- 12288B block 
-end if;   --CONTROL <= X"00004000"; -- 16384B block 
-  
---filling the buffer with uncompressed data  
-if U_DATA_VALID = '0' then  
-vreg.dina := U_DATAOUT; NextSTATE <= stcomp_init_cr; 
-vreg.addra := vreg.addra + '1'; -- incrementing  
-buffer address. -- initialize cr for compression 
- when stcomp_init_cr => 
-else  s_READY <= '0'; 
-87 
-  
-ADDRESS <= "1100"; vreg.ahbmo_hwrite := '1'; 
-CONTROLW <= X"00004208";  vreg.ahbmo_hbusreq := '1'; 
--- 0x4080 for test mode of compression  
--- 0x4088 for normal mode of compression else 
-CS <= '0'; null; 
-RW <= '0'; end if; 
-  
-if BUS_REQUEST_CU = '0' then --filling the main_ram with compressed data 
-CS <= '1'; if C_DATA_VALID = '0' then   -- when writing , 
-RW <= '1'; address and data are asserted in the same clock 
---ena <= '1';  
- vreg.ahbmo_hwdata := C_DATAOUT; 
-regin.ahbmo_hwdata <= (others=>'0'); vreg.ahbmo_haddr := regout.ahbmo_haddr + 
-regin.ahbmo_htrans <= "00"; "100";   -- here change the address to rw region 
-regin.ahbmo_hbusreq <= '0';  
-regin.ahbmo_haddr  <= ahbram_write_startaddr; else 
--- initialize main_ram address for writing. null; 
-regin.ahbmo_hwrite <= '0'; end if; 
-regin.busack_cu <= '1';  
- BUS_ACKNOWLEDGE_CC <= BUS_REQUEST_CC; 
-regin.udatain <= (others=>'0');  
-regin.addra <= buffer_read_startaddr(11 downto regin <= vreg; 
-0) - '1'; -- initialize buffer address for reading ahbmo.hwdata <= vreg.ahbmo_hwdata; 
-regin.addra_prev <= buffer_read_startaddr(11 ahbmo.htrans <= vreg.ahbmo_htrans; 
-downto 0);  ahbmo.hbusreq <= vreg.ahbmo_hbusreq; 
-regin.ena <= '1'; ahbmo.haddr <= vreg.ahbmo_haddr; 
- ahbmo.hwrite <= vreg.ahbmo_hwrite; 
-NextSTATE <= stcomp_compressing; BUS_ACKNOWLEDGE_CU <= vreg.busack_cu; 
-else  
-NextSTATE <= stcomp_init_cr; U_DATAIN <= vreg.udatain; 
-end if; addra <= vreg.addra; 
- addra_prev <= vreg.addra_prev; 
--- state for compression process ena <= vreg.ena; 
-when stcomp_compressing => s_ahbram_write_lastaddr <= vreg.ahbmo_haddr; 
-vreg:=regout;  
-s_READY <= '0'; when stcomp_finish => 
-if FINISHED_C ='0' then s_READY <= '0'; 
- BUS_ACKNOWLEDGE_CC <= '1'; 
-vreg.ahbmo_hwdata := (others=>'0'); -- BUS_ACKNOWLEDGE_CU <= '1'; 
-important, due to the nature of bus write, at this ahbmo.htrans <= "00"; 
-cycle ,  ahbmo.hbusreq <= '0'; 
---it still writes the prev hwdata value, so it must ahbmo.hwrite <= '0'; 
-be neutralized to avoid chaos waitfirst_cdataout <= '1'; 
- waitfirst_udatain <= '1'; 
-NextSTATE <= stcomp_finish; wea(0) <= '0'; 
-elsif ahbmi.hready = '1' then ena <= '0'; 
- wait_cu <= '1'; 
-if BUS_REQUEST_CU = '1' then comp_finished <= '1'; 
-vreg.busack_cu := '1'; NextSTATE <= st_idle; 
-vreg.addra := vreg.addra_prev; --
-else ****************************************
- ************* 
--- fetch data/instructions from buffer to comdec --End of Compression STATES 
-engine --
-vreg.ena := '1'; ****************************************
-vreg.busack_cu := '0'; *************       
-vreg.udatain := to_bitvector(douta); when others => s_READY <= '0'; 
-vreg.addra := vreg.addra + '1'; s_ahbram_write_lastaddr <= (others=>'0'); 
-vreg.addra_prev := vreg.addra - '1';  
- end case; 
-NextSTATE <= stcomp_Compressing; end process; 
-end if; STMseq: process (CLK,RST) 
-else begin 
-NextSTATE <= stcomp_Compressing;    
-end if; if RST = '0' then 
- PresSTATE <= st_idle; 
- elsif rising_edge (CLK) then 
- PresSTATE<= NextSTATE; 
-if Compressing = '0' then HRDATA_Prev <= HRDATA; 
-vreg.ahbmo_htrans := "11"; regout<= regin;end if;
+ 87 
  
-88 
+ 
+regin.cdatain <= (others=>'0'); 
+regin.ahbmo_haddr <= ahbram_read_startaddr; -- 
+initialize ahbmo.haddr for reading instructions. 
+regin.addra <= buffer_write_startaddr(11 downto 
+0) - '1'; -- initialize buffer address for writing. 
+regin.busack_dc <= '1'; 
+regin.ahbmo_htrans <= "10"; 
+regin.wea <= '0'; 
+regin.dina <= (others=>'0'); 
+regin.ena <= '0'; 
+s_READY <= '0'; 
+ 
+-- start requesting to bus 
+if BUS_REQUEST_DC = '0' then 
+CS <= '1'; 
+RW <= '1'; 
+CONTROLW <= (others=>'0'); 
+ADDRESS <= (others=>'0'); 
+ahbmo.hbusreq <= '1'; 
+ahbmo.htrans <= "10"; --nonseq   
+ 
+NextSTATE <= stdec_decompressing; 
+else 
+NextSTATE <= stdec_init_cr; 
+end if; 
+ 
+-- state for decompression process  
+when stdec_decompressing => 
+vreg:= regout;  
+ 
+ahbmo.hburst<= "001"; 
+s_READY <= '0'; 
+if FINISHED_D ='0' then      
+NextSTATE <= stdec_finish; 
+ 
+elsif ahbmi.hready = '1' then 
+ 
+-- to prevent problem when bus request dc is high.  
+if BUS_REQUEST_DC = '1' then  
+vreg.busack_dc := '1'; 
+vreg.ahbmo_haddr := vreg.ahbmo_haddr_prev; 
+else 
+-- fetching data from main_ram to comdec engine 
+vreg.busack_dc := '0'; 
+vreg.cdatain := to_bitvector(ahbmi.hrdata); 
+vreg.ahbmo_htrans := "11"; 
+vreg.ahbmo_haddr := vreg.ahbmo_haddr + "100"; 
+vreg.ahbmo_haddr_prev :=  regout.ahbmo_haddr 
+- "100"; 
+NextSTATE <= stdec_decompressing; 
+end if; 
+else  
+NextSTATE <= stdec_decompressing;      
+end if; 
+ 
+ 
+ 
+if Decompressing = '0' then 
+vreg.wea := '1'; 
+vreg.ena := '1'; 
+else null;    
+end if;   
+ 
+--filling the buffer with uncompressed data 
+if U_DATA_VALID = '0' then 
+vreg.dina := U_DATAOUT; 
+vreg.addra := vreg.addra + '1'; -- incrementing 
+buffer address. 
+ 
+else  
+waitfirst_udataout <= '1'; 
+end if;                
+ 
+BUS_ACKNOWLEDGE_DU <= BUS_REQUEST_DU;  
+ 
+regin <= vreg; 
+BUS_ACKNOWLEDGE_DC <= regout.busack_dc; 
+C_DATAIN <= regout.cdatain; 
+ahbmo.htrans <= regout.ahbmo_htrans; 
+ahbmo.haddr <= regout.ahbmo_haddr; 
+ahbmo_haddr_prev <= 
+regout.ahbmo_haddr_prev; 
+ 
+wea(0)<=regout.wea; 
+ena <= regout.ena; 
+dina <= regout.dina; 
+addra <= regout.addra; 
+ 
+-- when decompression finishes, re-initialize 
+signals.  
+when stdec_finish =>   
+s_READY <= '0'; 
+BUS_ACKNOWLEDGE_DC <= '1'; 
+BUS_ACKNOWLEDGE_DU <= '1'; 
+ahbmo.hbusreq <= '0'; 
+ahbmo.htrans <= "00"; 
+waitfirst_cdatain <= '1'; 
+waitfirst_udataout <= '1'; 
+wea(0) <= '0'; 
+ena <= '0'; 
+dec_finished<= '1'; 
+ 
+ahbmo.hburst<= "000"; 
+ 
+NextSTATE <= st_idle; 
+--
+****************************************
+************* 
+--End of Decompression STATES 
+--
+****************************************
+*************   
+ 
+--
+****************************************
+************* 
+--Compression STATES 
+--
+****************************************
+*************   
+-- initialize ubsr for compression 
+when stcomp_init_ubsr => 
+s_READY <= '0'; 
+CS <= '0'; 
+RW <= '0'; 
+ 
+ADDRESS <= "1101"; 
+CONTROLW <= X"00000BFF"; -- 3071B 
+--CONTORL <= X"00000400"; -- 1024B block 
+--CONTROL <= X"00001000"; -- 4096B block 
+--CONTROL <= X"00002000"; -- 8192B block 
+--CONTROL <= X"00003000"; -- 12288B block 
+--CONTROL <= X"00004000"; -- 16384B block 
+ 
+ 
+ 
+NextSTATE <= stcomp_init_cr; 
+ 
+-- initialize cr for compression 
+when stcomp_init_cr => 
+s_READY <= '0'; 
+ 88 
+ 
+ADDRESS <= "1100"; 
+CONTROLW <= X"00004208";  
+-- 0x4080 for test mode of compression 
+-- 0x4088 for normal mode of compression 
+CS <= '0'; 
+RW <= '0'; 
+ 
+if BUS_REQUEST_CU = '0' then 
+CS <= '1'; 
+RW <= '1'; 
+--ena <= '1'; 
+ 
+regin.ahbmo_hwdata <= (others=>'0'); 
+regin.ahbmo_htrans <= "00"; 
+regin.ahbmo_hbusreq <= '0'; 
+regin.ahbmo_haddr  <= ahbram_write_startaddr; 
+-- initialize main_ram address for writing. 
+regin.ahbmo_hwrite <= '0'; 
+regin.busack_cu <= '1'; 
+ 
+regin.udatain <= (others=>'0'); 
+regin.addra <= buffer_read_startaddr(11 downto 
+0) - '1'; -- initialize buffer address for reading 
+regin.addra_prev <= buffer_read_startaddr(11 
+downto 0);  
+regin.ena <= '1'; 
+ 
+NextSTATE <= stcomp_compressing; 
+else 
+NextSTATE <= stcomp_init_cr; 
+end if; 
+ 
+-- state for compression process 
+when stcomp_compressing => 
+vreg:=regout; 
+s_READY <= '0'; 
+if FINISHED_C ='0' then 
+ 
+vreg.ahbmo_hwdata := (others=>'0'); -- 
+important, due to the nature of bus write, at this 
+cycle ,  
+--it still writes the prev hwdata value, so it must 
+be neutralized to avoid chaos 
+ 
+NextSTATE <= stcomp_finish; 
+elsif ahbmi.hready = '1' then 
+ 
+if BUS_REQUEST_CU = '1' then 
+vreg.busack_cu := '1'; 
+vreg.addra := vreg.addra_prev; 
+else 
+ 
+-- fetch data/instructions from buffer to comdec 
+engine 
+vreg.ena := '1'; 
+vreg.busack_cu := '0'; 
+vreg.udatain := to_bitvector(douta); 
+vreg.addra := vreg.addra + '1'; 
+vreg.addra_prev := vreg.addra - '1'; 
+ 
+NextSTATE <= stcomp_Compressing; 
+end if; 
+else 
+NextSTATE <= stcomp_Compressing;   
+end if; 
+ 
+ 
+ 
+if Compressing = '0' then 
+vreg.ahbmo_htrans := "11"; 
+vreg.ahbmo_hwrite := '1'; 
+vreg.ahbmo_hbusreq := '1'; 
+ 
+else 
+null; 
+end if; 
+ 
+--filling the main_ram with compressed data 
+if C_DATA_VALID = '0' then   -- when writing , 
+address and data are asserted in the same clock 
+ 
+vreg.ahbmo_hwdata := C_DATAOUT; 
+vreg.ahbmo_haddr := regout.ahbmo_haddr + 
+"100";   -- here change the address to rw region 
+ 
+else 
+null; 
+end if; 
+ 
+BUS_ACKNOWLEDGE_CC <= BUS_REQUEST_CC; 
+ 
+regin <= vreg; 
+ahbmo.hwdata <= vreg.ahbmo_hwdata; 
+ahbmo.htrans <= vreg.ahbmo_htrans; 
+ahbmo.hbusreq <= vreg.ahbmo_hbusreq; 
+ahbmo.haddr <= vreg.ahbmo_haddr; 
+ahbmo.hwrite <= vreg.ahbmo_hwrite; 
+BUS_ACKNOWLEDGE_CU <= vreg.busack_cu; 
+ 
+U_DATAIN <= vreg.udatain; 
+addra <= vreg.addra; 
+addra_prev <= vreg.addra_prev; 
+ena <= vreg.ena; 
+s_ahbram_write_lastaddr <= vreg.ahbmo_haddr; 
+ 
+when stcomp_finish => 
+s_READY <= '0'; 
+BUS_ACKNOWLEDGE_CC <= '1'; 
+BUS_ACKNOWLEDGE_CU <= '1'; 
+ahbmo.htrans <= "00"; 
+ahbmo.hbusreq <= '0'; 
+ahbmo.hwrite <= '0'; 
+waitfirst_cdataout <= '1'; 
+waitfirst_udatain <= '1'; 
+wea(0) <= '0'; 
+ena <= '0'; 
+wait_cu <= '1'; 
+comp_finished <= '1'; 
+NextSTATE <= st_idle; 
+--
+****************************************
+************* 
+--End of Compression STATES 
+--
+****************************************
+*************       
+when others => s_READY <= '0'; 
+s_ahbram_write_lastaddr <= (others=>'0'); 
+ 
+end case; 
+end process; 
+STMseq: process (CLK,RST) 
+begin 
+ 
+if RST = '0' then 
+PresSTATE <= st_idle; 
+elsif rising_edge (CLK) then 
+PresSTATE<= NextSTATE; 
+HRDATA_Prev <= HRDATA; 
+regout<= regin;end if;
  

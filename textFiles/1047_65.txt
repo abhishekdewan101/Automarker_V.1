@@ -1,3 +1,5 @@
+1 
+ 
 Executive Summary 
  
 Google’s mobile operating system Android offers a pattern lock mechanism, which 
@@ -29,8 +31,9 @@ behaviour: again, no previous study has studied human set patterns (see
 pages 30-50). 
 • We propose a new lock mechanism that is immune to all the attacks above, 
 but prone to psychological PIN attacks (see pages 51-57).  
-1 
- Contents 
+3 
+ 
+Contents 
  
 Executive Summary 1 
 Acknowledgements 2 
@@ -59,8 +62,9 @@ Acknowledgements 2
 3.1  Smudge Attacks 24 
 3.1.1  Optical Camera Attack 24 
 3.1.2  Microscope Attack 26 
-3 
- 3.2  Thermal Attack 27 
+4 
+ 
+3.2  Thermal Attack 27 
 4  Attacks on Human Behaviour 30 
 4.1  Survey Details 30 
 4.2  Questions 31 
@@ -89,8 +93,9 @@ Acknowledgements 2
 4.3.6.4  4-grams 50 
 5  A Possible Solution 51 
 5.1  Extended Pattern Lock 51 
-4 
- 5.2  Auto-hidden Numerical Wheel Lock 52 
+5 
+ 
+5.2  Auto-hidden Numerical Wheel Lock 52 
 5.2.1.  Options 53 
 5.2.1.1  Numerical Wheels' Initial Positions 53 
 5.2.1.2  Number of Wheels 54 
@@ -105,10 +110,10 @@ Acknowledgements 2
 8  Bibliography 60 
 9  Appendices 63 
  
+  
+6 
  
- 
-5 
- 1  Introduction 
+1  Introduction 
  
 In the modern world, passwords are part of our daily routine. We need them for 
 bank accounts, email accounts, websites, companies, information, computation etc. 
@@ -137,8 +142,10 @@ not deal with the authentication protocol itself but human factors.
 With the expansion of touchscreen devices -especially in mobile platforms-, 
 graphical passwords became a real alternative to text-based ones. Android employs 
 such a mechanism under the name of pattern lock (Google, 2012). 
-6 
- Android pattern lock is a locking mechanism alternative to the traditional PIN code 
+7 
+ 
+Figure 1. A 30 or 60 degree line is hard to draw. 
+Android pattern lock is a locking mechanism alternative to the traditional PIN code 
 keypad. Similar to the keypad, it consists of 9 nodes in 3x3 grid formation. The user 
 starts a pattern by touching one of the dots to make it the start point and the 
 anchor. Then, by swiping his/her finger on the screen towards other dots, he/she 
@@ -163,10 +170,11 @@ horizontal, vertical, or diagonal line.
  
  
  
- Figure 1. A 30 or 60 degree line is hard to draw. Figure 2. Erroneous patterns are shown on 
+ Figure 2. Erroneous patterns are shown on 
 screen no matter what. 
-7 
- Due to these constraints, there are a total of 389112 possible patterns. This value is 
+8 
+ 
+Due to these constraints, there are a total of 389112 possible patterns. This value is 
 calculated both by brute force (Aviv, et al., 2010), and by an algorithm provided by a 
 Google engineer (Zhou, Y., 2011). A standard implementation of the system allows 
 user to try 20 patterns before it asks for Google Account for any further action. 
@@ -196,8 +204,9 @@ and stores it in this state, without any salting. The file that holds the hash i
 in system/ directory, which requires root access to the device. 
  
   
-8 
- 1.3  Aims and Objectives 
+9 
+ 
+1.3  Aims and Objectives 
  
 In this study we aim to: 
 • Investigate how secure the Android pattern lock mechanism is against soft-
@@ -224,8 +233,9 @@ sections’ results, the fourth section provides an alternative lock mechanism. Th
 report concludes with conclusion and future work. All the sections and their 
 subsections are critically evaluated when possible. 
   
-9 
- 2  Background 
+10 
+ 
+2  Background 
  
 2.1  Text-based Passwords vs Graphical Passwords 
  
@@ -256,8 +266,9 @@ a password such that it is memorisable by the user, and yet still hard to guess 
 the attacker. However, the graphical passwords can also have their weaknesses. We 
 investigate this in the following section. 
  
-10 
- 2.2  Psychology on Setting Graphical Passwords 
+11 
+ 
+2.2  Psychology on Setting Graphical Passwords 
  
 Previous section has shown that graphical password mechanisms were solid and 
 potentially better alternatives to text-based ones. Yet, taking into consideration the 
@@ -289,8 +300,9 @@ Except the last study, rest of the studies may not seem relevant to the Android
 pattern lock at first, but the fact that humans have similar preferences on graphical 
 passwords provides a solid enough ground to look for frequent sub-patterns 
 preferred in Android pattern lock. It would also be interesting to see how users 
-11 
- would behave when it comes to Android pattern lock’s nodes, which do not 
+12 
+ 
+would behave when it comes to Android pattern lock’s nodes, which do not 
 differentiate from place to place as in background images or faces. 
  
 2.3  Methods of PIN and Pattern Retrieval 
@@ -320,8 +332,9 @@ unusable. Apart from the ideal photograph capturing angles to retrieve the
 smudges, the experiments focus on various states a touchscreen can be in such as: 
 • pattern entered using normal or light touches, 
 • pattern entered before or after phone usage, 
-12 
- • phone put in a pocket and removed after pattern entry, or the same with 
+13 
+ 
+• phone put in a pocket and removed after pattern entry, or the same with 
 the addition of intentionally wiping the screen with a cloth prior to usage. 
 Note that the notions of “normal” and “light” touches are not quantitative in this 
 study, and thus must be intuitively guessed. For this reason, we assume the light 
@@ -332,8 +345,6 @@ These patterns are tested on two phones, namely HTC G1 and HTC Nexus 1. It is of
 importance since they give different results in terms of smudge persistence. This 
 indicates that Android phones, even from the same manufacturer, may have 
 different touchscreen surfaces. 
-Figure 3. HTC G1 hashed with streaks after Figure 4. HTC G1 with normal touches. (Aviv, et al., 
-pattern entry. (Aviv, et al., 2010, p.7) 2010, p.6) 
 When all of the angle setups are taken into consideration, the best result is 
 obtained when the pattern is entered using normal amount of pressure after the 
 phone is held against the face: 68% of the tries resulted in complete retrieval of the 
@@ -342,8 +353,13 @@ Although this result was achieved with HTC G1, it is not known how well HTC Nexu
 1 would perform under the same scenario as it is only involved in normal touch 
 scenario (without contact with the face, thus much less oily residue on the screen). 
 Having said so, it is found out that the best angle to retrieve a pattern was 60 
-13 
- degrees, with 80% of the lighting scenarios resulting in “perfect or nearly perfect 
+Figure 3. HTC G1 hashed with streaks after 
+pattern entry. (Aviv, et al., 2010, p.7) 
+Figure 4. HTC G1 with normal touches. (Aviv, et al., 
+2010, p.6) 
+14 
+ 
+degrees, with 80% of the lighting scenarios resulting in “perfect or nearly perfect 
 retrieval” (Aviv, et al., 2010). 
 It is also noted that the directionality was discernible as each consecutively drawn 
 line overwrites the previous one right at the node. This is particularly important to 
@@ -373,8 +389,9 @@ Aviv, et al.’s approach, the use of thermal camera to retrieve the PIN codes is 
 already existing attack on other devices such as ATM keypads. We believe that this 
 method is applicable to Android pattern lock, and thus investigate how this is 
 executed. 
-14 
- Mowery, Meiklejohn and Savage (2011) examines the efficiency of a thermal 
+15 
+ 
+Mowery, Meiklejohn and Savage (2011) examines the efficiency of a thermal 
 camera for obtaining the PIN codes from ATM keypads. To conduct their 
 experiments, they use an A320 FLIR thermal camera with 320x240 resolution. This 
 is a relatively high resolution, which in return allows them to place the camera at 28 
@@ -393,11 +410,7 @@ touchscreen devices.
  
  
  
-Figure 6. Percentage of correct key combinations Figure 5. Thermal image right after PIN entry. 
-found at 28 inches. (Mowery, Meiklejohn and 
-(Mowery, Meiklejohn and Savage, 2011, p.3) 
  
-Savage, 2011, p.5) 
 Data gathered from 21 people and 27 PIN combinations display that the heat 
 transferred to the keypad depends on the amount of pressure exerted to the keys 
 as well as the warmth of the hand. However, the heat of the ATM was not taken 
@@ -407,8 +420,14 @@ between 71.5°F and 74.1°F: although the ambient temperature is lacking, the imag
 shows a clear distinction between the background and the touched keys. The 
 thermal image captured right after the entry of PIN displays which buttons are 
 pressed and in which order with no difficulty. 
-15 
- To analyse the data, the researchers take the last frame before the hand obscures 
+Figure 6. Percentage of correct key combinations 
+found at 28 inches. (Mowery, Meiklejohn and 
+Savage, 2011, p.5) 
+Figure 5. Thermal image right after PIN entry. 
+(Mowery, Meiklejohn and Savage, 2011, p.3) 
+16 
+ 
+To analyse the data, the researchers take the last frame before the hand obscures 
 the key pad for PIN entry as the calibration frame, and compare it with frames after 
 the PIN entry. To evaluate whether a button is pressed or not, the keypad’s buttons 
 are taken as Region of Interests (ROIs). Then, three different methods are applied to 
@@ -440,8 +459,11 @@ dimly lit place, for instance, would benefit from thermal imaging. However, the
 most interesting use of thermal imaging can be when the screen of a smartphone is 
 on. While a normal camera cannot capture smudges at this stage, a thermal camera 
 may overcome this issue, provided that the screen does not immediately warm up. 
-16 
-  
+17 
+ 
+Figure 7. Vertical PIN. (AlRowaily and AlRubaian, 
+2011, p.301) 
+ 
 2.4  Prevention 
  
 As previous methods indicate, it is possible and quite easy to attack the pattern lock 
@@ -459,16 +481,17 @@ vertical slide to unlock the device. While this
 seems a good solution, it is not guaranteed 
 that the swipe would overlap all the 
 fingerprints since the buttons’ width allows 
-Figure 7. Vertical PIN. (AlRowaily and AlRubaian, 
-2011, p.301) 
 having fingerprints on a wider area. Another 
 issue with this idea is that it has a very 
 limited amount of possible combinations: with 5 buttons, there are only 5! 
 combinations. Furthermore, it only uses swiping for hiding the entered PIN, making 
 it more of a text-based lock mechanism. 
   
-17 
- 2.4.2  WhisperCore 
+18 
+ 
+Figure 8. WhisperCore. (AlRowaily and AlRubaian, 
+2011, p.301) 
+2.4.2  WhisperCore 
 The second solution mentioned is 
 WhisperCore, an application that first 
 lets the user enter the Android lock 
@@ -478,8 +501,6 @@ slide gesture to unlock the device. This
 application maintains the swiping 
 feature; however it adds a security layer 
 that is not user friendly. Although it 
-Figure 8. WhisperCore. (AlRowaily and AlRubaian, 
-2011, p.301) 
 heightens the security by overwriting 
 the pattern smudge, it renders the 
 unlocking a long and uneasy procedure. 
@@ -498,14 +519,15 @@ fingerprint is obtained, it can be replicated and used as
 a fake finger. This would let the attacker unlock the 
 device successfully without worrying about a passcode 
 change. Considering we touch everything around us, 
-Figure 9. Fingerprint on 
 the proposed method may prove the weakest security 
-touchscreen. (AlRowaily and 
 of them all. 
+  
+Figure 9. Fingerprint on 
+touchscreen. (AlRowaily and 
 AlRubaian, 2011, p.302) 
-  
-18 
-  
+19 
+ 
+ 
 2.4.4  Multi-tap Circle Lock 
 Another alternative to pattern lock is 
 proposed by Shin, Park, Lee and Park 
@@ -518,9 +540,7 @@ allows users to use the same circles
 multiple times, and renders a flawless 
 attack using standard or thermal optics 
 highly unlikely. Incorporating this lock 
-Figure 10. Multi-tap circle lock. (Shin, Park, Lee and 
 method with accelerometer, they 
-Park, 2012, p.705) 
 propose a guest user unlocking by 
 shaking the phone instead of entering the correct sequence. This allows the guest 
 limited access to the resources and apps of the device. While the proposed idea is 
@@ -540,8 +560,11 @@ to the pattern drawn. This includes:
 according to the thumb and index finger’s initial position. 
 • length invariance: the pattern is proportionally normalized as each attempt 
 may not be at the exact same length otherwise. 
-19 
- • dynamic time warping algorithm: “The distance between two time-series 
+Figure 10. Multi-tap circle lock. (Shin, Park, Lee and 
+Park, 2012, p.705) 
+20 
+ 
+• dynamic time warping algorithm: “The distance between two time-series 
 signals with different lengths is defined as the sum of the distance at the 
 optimal non-linear path such that the distance or matching cost sum is 
 minimized” (Sae-Bae, Kowsar, Isbister and Memon, 2012). 
@@ -559,8 +582,6 @@ fixed thumb counter clockwise pattern
 with 93%. 
 This mechanism is definitely a well 
 thought and tested one, and thus is 
-Figure 11. Biometric-Rich Gestures. (Sae-Bae, 
-Kowsar, Isbister and Memon, 2012, p.977 
 distinctive. However, it is not stated 
 clearly whether it is secure against 
 mimicking the gesture or not. Another issue is that it requires a big touchscreen, 
@@ -575,16 +596,18 @@ fingerprint reader on the top back of it, allowing the users to unlock their pho
 fingerprint. Similar to the previous case proposed AlRowaily and AlRubaian (2011), 
 this method is only secure until the fingerprint is retrieved, from a glass for 
 example. Once a fake finger is made, the smartphone will always fall victim to the 
-20 
- attacker since its user cannot change their fingerprint. The only solution thus lies in 
+Figure 11. Biometric-Rich Gestures. (Sae-Bae, 
+Kowsar, Isbister and Memon, 2012, p.977 
+21 
+ 
+attacker since its user cannot change their fingerprint. The only solution thus lies in 
 the changing of the lock mechanism. 
  
  
  
  
  
- Figure 12. Motorola Atrix’s fingerprint scanner. 
-(GSM Arena, 2012) 
+ 
  
 2.4.7  Biometrically Enhanced Android Pattern Lock 
 Another study takes a different approach, and rather than replacing Android 
@@ -606,8 +629,11 @@ prove undesired. Furthermore, the system requires 25 pattern drawings for an EER
 of 13.84%. It is doubtful that users would like to input their pattern a few dozen 
 times to initialise a secure mechanism on their touchscreen devices. 
  
-21 
- 2.4.8  Combination Lock 
+Figure 12. Motorola Atrix’s fingerprint scanner. 
+(GSM Arena, 2012) 
+22 
+ 
+2.4.8  Combination Lock 
 There also exist some solutions in Google Play (formerly known as Android Market), 
 the app/movie/music store of Android. 
 Combination Lock by Oskari Anttalainen (2012) lets 
@@ -625,8 +651,6 @@ of retries since the application checks if the
 combination entered is correct after each button 
 press. Unlimited number of trials allows a brute 
 force attack, rendering the lock mechanism 
-Figure 13. Combination Lock. 
-(Anttalainen, O., 2012) 
 insecure. 
  
 2.4.9  iLockit 
@@ -639,8 +663,9 @@ tap, a long tap, or a part of the multi-tap along with another one. While this a
 may avoid attempts of pattern retrieval with a normal camera in terms of sequence, 
 thermal imaging may prove more successful. 
   
-22 
-  
+Figure 13. Combination Lock. 
+(Anttalainen, O., 2012) 
+23 
  
  
  
@@ -650,8 +675,8 @@ thermal imaging may prove more successful.
  
  
  
-Figure 14. iLockit. (Appsolute 
-Solutions LLC, 2012) 
+ 
+ 
  
 It is important to note is that these apps do not require root access, which, when 
 acquired, lets the application modify system files. The root access is not an official 
@@ -666,8 +691,11 @@ placeholder instead of the embedded locking mechanisms, root access and system
 modification is necessary (Shabtai et al., 2010). However, the ideas are the scope of 
 our research, so we simply ignore the apps’ robustness at this point. 
   
-23 
- 3  Physical Attacks 
+Figure 14. iLockit. (Appsolute 
+Solutions LLC, 2012) 
+24 
+ 
+3  Physical Attacks 
  
 3.1  Smudge Attacks 
  
@@ -697,11 +725,12 @@ easier retrieval of the
 pattern. The hard light 
 source we used in the 
 experiments is a desk lamp 
-Figure 15. Screen surface right after the pattern is drawn. 
 with a spot light, which is by 
 no means a special source but rather a source that can be found at many desks. 
-24 
- We performed an optical camera attack on three different surface states.  The first 
+Figure 15. Screen surface right after the pattern is drawn. 
+25 
+ 
+We performed an optical camera attack on three different surface states.  The first 
 one was an attempt to retrieve the pattern drawn on a clean screen without any 
 manipulation. It is evident that the pattern can be retrieved without any difficulty at 
 this stage. 
@@ -713,7 +742,6 @@ this stage.
  
  
  
-Figure 16. Screen surface after light cleanup. 
  
 The second test adds a light cleanup to the first state. The “lightness” of the 
 cleanup is indeed subjective, and in our case, it involves rubbing the smartphone 
@@ -729,8 +757,8 @@ rid of all the oily residues on the screen at once. In this attempt, most of the
 is lost, except one diagonal line. Due to increased entropy, it is also not possible to 
 tell the directionality of the pattern. 
  
-25 
-  
+Figure 16. Screen surface after light cleanup. 
+26 
  
  
  
@@ -738,7 +766,8 @@ tell the directionality of the pattern.
  
  
  
-Figure 17. Screen surface after heavy cleanup. 
+ 
+ 
  
  
 One can argue that leaving the pattern on the screen without tampering with it may 
@@ -757,16 +786,17 @@ retrieval of a pattern compared to optical camera.
 For this experiment, we used a USB microscope with 400x magnification. The 
 microscope employs a manual focus ring, and adjustable LED lights. We captured 
 the images using its own software. 
-26 
- Our experiment included the same three cases of 
+Figure 17. Screen surface after heavy cleanup. 
+27 
+ 
+Our experiment included the same three cases of 
 the optical camera attack. However, in the 
 microscope case, we assume that the attacker 
 already retrieved the smartphone, and is able to 
 investigate the screen as long as desired. 
 Similar to optical camera results, the microscope 
 performed well during the first two cases. Lines 
-Figure 18. Microscope photo after 
-and directionalities were very easily seen. It is pattern is drawn. 
+and directionalities were very easily seen. It is 
 particularly easy to realise the directionality whilst 
 using a microscope as it is possible to see which 
 smudge overwrites the other. There is, however, 
@@ -775,18 +805,14 @@ Although both the lines and the directionality are
 visible, the cloth strokes blur the fingerprint’s oily 
 residue. 
 For the heavy cleanup case, the microscope 
-Figure 19. Microscope photo after light 
 performed slightly better than the compact 
-cleanup. 
 camera, providing more detail of smudge 
 residues. However, assuming that an attacker can 
 make use of a DSLR in a controlled environment, 
 he/she can gather similar results without the need 
 of a microscope. 
  
-Figure 20. Microscope photo after heavy 
  
-cleanup. 
  
 3.2  Thermal Attack 
  
@@ -794,8 +820,15 @@ Although there have been many research papers done with thermal imaging, none
 that we are aware of has a focus on the Android pattern lock. However, similar 
 research has been conducted on ATM machine keypads (Mowery, Meiklejohn and 
 Savage, 2011), and can be used as a basis. 
-27 
- With this physical side-channel attack, the goal is to retrieve the pattern by 
+Figure 18. Microscope photo after 
+pattern is drawn. 
+Figure 19. Microscope photo after light 
+cleanup. 
+Figure 20. Microscope photo after heavy 
+cleanup. 
+28 
+ 
+With this physical side-channel attack, the goal is to retrieve the pattern by 
 examining the heat trace left by the finger on the device surface. Thus, it is only 
 possible to retrieve the pattern within a specific time interval as opposed to oily 
 residues, which can be used to retrieve the pattern any time unless the surface is 
@@ -813,8 +846,9 @@ The test environment for this attack had the following properties:
 • The ambient temperature was 26 degree Celsius. 
 • The ambient light was low, and there was no direct sunlight coming to or 
 Figure 21. Thermal attack on pattern lock. 
-28 
- near the device. It was not possible to capture the smudges with an optical 
+29 
+ 
+near the device. It was not possible to capture the smudges with an optical 
 camera. 
 • There was one notebook dissipating thermal emission within 30cm of the 
 device. 
@@ -839,8 +873,9 @@ voltages are lowered, and new display technologies are developed.
  
  
   
-29 
- 4  Attacks on Human Behaviour 
+30 
+ 
+4  Attacks on Human Behaviour 
  
 While studies have been made to analyse human behaviour on picture based 
 passwords (Thorpe and van Oorschot, 2007), no research has been done that 
@@ -872,8 +907,9 @@ coded for both mouse and touch devices. In this way, we aimed to maximise the
 number of participants. One limitation was the RaphaëlJS's use of SVG for vector 
 graphics, which is not supported by Android versions older than 3.0. We tested 
 alternative libraries to RaphaëlJS that do not make use of SVG in order to see 
-30 
- whether a transition was feasible. Conducting the test on Samsung Galaxy S, one of 
+31 
+ 
+whether a transition was feasible. Conducting the test on Samsung Galaxy S, one of 
 the most sold Android devices for version 2.x, we came to conclusion that the 
 device simply cannot handle these JavaScript libraries well enough to provide an 
 acceptable performance. Given the fact that the majority of other smartphones of 
@@ -901,18 +937,26 @@ Of the participants, 95 were male, and 49 were female. That is 65.97% and 34.03%
 respectively. 
  
  
-31 
-  
+32 
  
+1
+117
+22
+4
+-18
+18-29
+30-49
+50+
 49
- 
+95
 Female
 Male
  
-95
  
  
-Figure 22. Participants by gender. 
+ 
+ 
+ 
  
 4.2.2  Question 2 
 How old are you? 
@@ -926,23 +970,24 @@ participants respectively. The main reason for the high percentage of 18-29 year
 old participants is a direct result of the social network connections and MSc 
 students being mostly within this age bracket. 
  
-1
-4
- 
-22
--18
- 
-18-29
-30-49
- 
-50+
-117
  
  
  
-Figure 23. Participants by age brackets. 
-32 
- 4.2.3  Question 3 
+ 
+ 
+ Figure 23. Participants by age brackets. 
+Figure 22. Participants by gender. 
+33 
+ 
+115
+29
+Yes
+No
+106
+9
+Yes
+No
+4.2.3  Question 3 
 Have you ever owned a touchscreen smartphone? 
 • Yes 
 • No 
@@ -957,25 +1002,33 @@ smartphone cannot answer this question as it is blocked.
 92.17% of them currently own a smartphone. 
  
  
-9
-29
- 
-Yes
-Yes
- 
-No No
- 
-115
-106
  
  
  
-Figure 25. Participants that have ever owned a Figure 24. Participants that currently own a 
-smartphone. smartphone. 
+ 
+ 
+ 
  
   
-33 
- 4.2.5  Question 5 
+Figure 25. Participants that have ever owned a 
+smartphone. 
+Figure 24. Participants that currently own a 
+smartphone. 
+34 
+ 
+43
+4
+51
+6
+1
+1
+Android
+Blackberry
+iOS
+Symbian
+Windows
+Other
+4.2.5  Question 5 
 What is your current smartphone’s mobile operating system? 
 • Android 
 • Blackberry 
@@ -984,27 +1037,14 @@ What is your current smartphone’s mobile operating system?
 • Windows Phone 
 • Other 
  
-1
-1
- 
-6
- 
-Android
- 
-Blackberry
-43
-iOS
- 
-Symbian
- 
-Windows
-51
-Other
- 
-4
  
  
-Figure 26. Operating system breakdown. 
+ 
+ 
+ 
+ 
+ 
+ 
  
 This question is dependent on the Question 3 and 4: it is only visible if the 
 participant answered “Yes” for both of these questions. Thus, the smartphone 
@@ -1014,8 +1054,16 @@ of the participants use iOS, and 40.57% use Android. Symbian and Blackberry foll
 with 5.67% and 3.78% respectively. 
  
   
-34 
- 4.2.6  Question 6 
+Figure 26. Operating system breakdown. 
+35 
+ 
+24
+49
+42
+-1
+1-2
+3+
+4.2.6  Question 6 
 How long did/have you been using a touchscreen smartphone? 
 • Less than a year 
 • 1-2 years 
@@ -1028,18 +1076,11 @@ usage has been more than doubled in two years. It is a remarkable growth, which
 indicates how important smartphone security has become. 
  
  
-24
-42
--1
- 
-1-2
- 
-3+
- 
-49
  
  
-Figure 27. Smartphone experience by # of years. 
+ 
+ 
+ 
  
 4.2.7 Question 7 
 Have you ever used an Android phone, if so, how long? 
@@ -1049,25 +1090,26 @@ Have you ever used an Android phone, if so, how long?
 • 3+ years 
 Android experience data is collected from participants who ever owned a 
 smartphone. 58 participants have experienced Android platform. Of those 58, 
-35 
- 41.38% has less than a year of experience, 48.28% has 1-2 years of experience, and 
-only 10.34% has 3 or more years of experience.  
+Figure 27. Smartphone experience by # of years. 
+36 
  
-6
- 
-None
-28
- 
--1
 57
- 
+24
+28
+6
+None
+-1
 1-2
 3+
+41.38% has less than a year of experience, 48.28% has 1-2 years of experience, and 
+only 10.34% has 3 or more years of experience.  
  
-24
  
  
-Figure 28. Android experience by # of years. 
+ 
+ 
+ 
+ 
  
 This result is in correlation with the market share of Android. While Android had 
 only 4.7% of the market share in 2009, it now has 68.1% for Q2 2012 according to 
@@ -1082,18 +1124,24 @@ figures are annual for Figure 29, and quarterly for Figure 30.
  
  
  
+ 
+Figure 28. Android experience by # of years. 
 Figure 29. Android market share in 2009. Also notice the market penetration rate.  (Canalys, 
 2010) 
+37 
  
-36 
-  
+68
+76
+Yes
+No
  
  
  
  
  
  
- Figure 30. Android market share in Q2 2011 and Q2 2012. (Canalys, 2012) 
+ 
+ 
  
 4.2.8  Question 8 
 Are you using any screen lock on your mobile phone which requires PIN, password, 
@@ -1105,16 +1153,26 @@ pattern etc. to unlock?
  
  
  
-68 Yes
- 
-No
-76
  
  
  
+ 
+Figure 30. Android market share in Q2 2011 and Q2 2012. (Canalys, 2012) 
 Figure 31. Lock usage of the participants. 
-37 
- 4.2.9  Question 9 
+38 
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+4.2.9  Question 9 
 What are the reasons you use a screen lock? 
 • I want to protect my personal data (contacts, messages, photos, mail etc.). 
 • I have sensitive data regarding my business. 
@@ -1122,28 +1180,16 @@ What are the reasons you use a screen lock?
 • I just don’t like others fiddling with my phone. 
 • Other 
  
-50
-45
- 
-40
- 
-35
-30
- 
-25
- 
-20
- 
-15
-10
- 
-5
- 
-0
  
  
  
-Figure 32. Lock reasons including custom responses. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 This question is only asked to participants who lock their phones, since forcing the 
 participants not using a lock mechanism to answer it could lead to pollution of data 
@@ -1152,8 +1198,10 @@ multiple options, as well as entering their own reasons for locking their device
 According to the results, most of the participants have their phones locked either to 
 protect personal data or to prevent others fiddling with the device. While these 
 options have been chosen by 46 and 40 participants respectively, the option of 
-38 
- locking to prevent calls while away from the phone has been selected by 21 
+Figure 32. Lock reasons including custom responses. 
+39 
+ 
+locking to prevent calls while away from the phone has been selected by 21 
 participants. Only 12 participants ticked the option "I have sensitive data regarding 
 my business". 
 We also had participants providing additional reasons. One of the locking reasons 
@@ -1181,40 +1229,40 @@ Although we employed thermal and microscope attack, such options are
 deliberately left out in order to observe if any participant would recognise it as a 
 risk. 
   
-39 
-  
-150
-140
- 
-130
-120
- 
-110
- 
-100
-90
- 
-#4
-80
-#3
- 
-70
-#2
-60
- 
-#1
-50
-40
- 
-30
- 
-20
-10
+40 
  
 0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+100
+110
+120
+130
+140
+150
 Shoulder surfing Cameras Smudges
+#4
+#3
+#2
+#1
  
-Figure 33. Risks of passcode retrieval by importance: Given choices. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 In this graph, we have aggregated the answers given to each option, and stacked 
 the results from the highest risk (#1) to the lowest risk (#4). 
@@ -1230,8 +1278,20 @@ passcode. According to the aggregated results, he person who requests the
 passcode can be a family member, a friend, or a police officer. It is followed by the 
 risk of the passcode being written down somewhere. This is a common mistake 
 made by users with text passwords, but the Android pattern lock would be less 
-40 
- likely prone to this type of risk as it is a graphical passcode. Another risk is the 
+Figure 33. Risks of passcode retrieval by importance: Given choices. 
+41 
+ 
+0
+1
+2
+3
+4
+Forced to tell Trials Writing down Weak code Reflection
+#4
+#3
+#2
+#1
+likely prone to this type of risk as it is a graphical passcode. Another risk is the 
 reflection. The particular entry talks about reflection through glasses can reveal the 
 passcode. It is possible to expand the idea by adding window glasses and mirrors as 
 reflective surfaces that could be used to retrieve a passcode without direct line of 
@@ -1245,23 +1305,12 @@ There was no mention of a thermal attack or an attack using a microscope by any
 participant, which means these are not expected type of attacks. Yet as shown, they 
 at least pose a threat to the Android pattern lock. 
  
-4
  
-3
-#4
  
-#3
-2
  
-#2
-1
-#1
  
-0
  
-Forced to tell Trials Writing down Weak code Reflection
  
-Figure 34. Risks of passcode retrieval by importance: Others. 
  
 4.2.11  Question 11 
 Would you consider using the "secure" pattern you entered in everyday life? 
@@ -1269,8 +1318,18 @@ Would you consider using the "secure" pattern you entered in everyday life?
 • No 
 57.64% of the participants thought the secure pattern is usable in everyday life, 
 while 42.36% did not. 
-41 
- 4.2.12  Question 12 
+Figure 34. Risks of passcode retrieval by importance: Others. 
+42 
+ 
+83
+61
+Yes
+No
+51
+93
+Yes
+No
+4.2.12  Question 12 
 Do you think the "easy to remember" pattern you entered is secure enough? 
 • Yes 
 • No 
@@ -1279,16 +1338,10 @@ enough, while 64.58% did not.
  
  
  
-51
-61
- 
-Yes Yes
-No No
- 83
-93
  
  
-Figure 35. Is secure pattern’s usable in everyday life? Figure 36. Is easy pattern secure enough? 
+ 
+ 
  
 For Question 11 and Question 12, we deliberately used specific terms such as 
 “secure enough”, and “everyday life” in order to let participants impose their 
@@ -1296,8 +1349,21 @@ subjective opinions.
  
  
   
-42 
- 4.3  Secure Pattern Analysis 
+Figure 36. Is easy pattern secure enough? Figure 35. Is secure pattern’s usable in everyday life? 
+43 
+ 
+4
+4.5
+5
+5.5
+6
+6.5
+7
+Average secure pattern length Average easy pattern length
+Male
+Female
+All
+4.3  Secure Pattern Analysis 
  
 4.3.1  Average Pattern Lengths 
 As part of our analysis, we calculated the average pattern length of the secure and 
@@ -1314,28 +1380,32 @@ female secure pattern average definitely provides valuable information regarding
 the perception of security between the two sexes. As a result, it is easier to fully 
 retrieve a female user's pattern compared to a male user's pattern on average. 
  
-7
- 
-6.5
- 
-6
- 
-Male
-5.5
- 
-Female
-All
-5
  
  
-4.5
  
-4
-Average secure pattern length Average easy pattern length
+ 
+ 
+ 
+ 
   
 Figure 37. Average pattern lengths by gender. 
-43 
- 4.3.2  Average Number of  Direction Changes 
+44 
+ 
+1
+1.5
+2
+2.5
+3
+3.5
+4
+Average secure pattern direction 
+changes
+Average easy pattern direction 
+changes
+Male
+Female
+All
+4.3.2  Average Number of  Direction Changes 
 Another indication of how secure a pattern is the number of direction changes 
 made per pattern. Note that at least one direction change must be done to draw a 
 valid pattern. We assume that, for humans, a direction change is a more difficult 
@@ -1350,60 +1420,62 @@ more direction changes with respect to their lengths, rendering them more
 complex. As observed in average pattern lengths, female participants make less 
 direction changes whilst setting a pattern.  
  
-4
  
-3.5
  
-3
  
-Male
-2.5
  
-Female
-2
- All
-1.5
  
-1
  
-Average secure pattern direction Average easy pattern direction 
-changes changes
+ 
   
 Figure 38. Average number of direction changes by gender. 
-44 
- 4.3.3  Entropy 
+45 
+ 
+4.3.3  Entropy 
 In the following sections of survey data analysis, we calculated the Shannon's 
 entropy while studying sub-patterns, and start and end points for the secure 
 patterns. The sub-patterns' entropies are calculated bearing in mind the conditional 
 probabilities. For the conditional entropy calculations we used the Shannon's 
 formula (Shannon, 1951): 
-       
-  =	?      ,  ?log     ,   +	      log       
-             
- ,   
-where   is (N-1)-gram, 
- 
-   is an arbitrary dot that has not yet been chosen, and 
-   
-     ,  is the probability of the N-gram   ,  . 
-   
-       
-Note that in the case of sub-patterns, we take     ,  as     ||  , where || stands 
-   
-for concatenation. For instance, if   = “01”, and   = “2”, then 
- 
+ =	?	
+ , 
+ ? log 	
+ , 
+
+,
++		
+ log 	
+
+
+
  
-#	        !   	"  	#$  %&  ’	"012"
-      ,    =	    "012"  = 	. 
- 
-! ’	 "	        !   	"  	&((	#$  %&  ’!	
+where 	
+  is (N-1)-gram, 
+  is an arbitrary dot that has not yet been chosen, and 
+ 	
+ , 
+ is the probability of the N-gram 	
+ , . 
+Note that in the case of sub-patterns, we take 	
+ , 
+ as 	
+||
+, where || stands 
+for concatenation. For instance, if 	
+  = “01”, and  = “2”, then 
+ 
+	
+ , 
+ = 	"012"
+ =
+#	 !	"	#$%&'	"012"
+!'	"	 !	"	&((	#$%&'!		. 
  
 4.3.4  Start Points 
 One of the major results we obtained is about how the participants preferred to 
 start their secure patterns. More than half, 52.08%, of the participants started their 
 secure patterns from top left dot. Entropy of the start points is 2.35 bits, as 
-opposed to a maximum of log 9 = 3.17 bits for which all the dots must have the 
- 
+opposed to a maximum of log 9 = 3.17 bits for which all the dots must have the 
 same probability. This imposes heavy bias, and makes the first dot highly 
 predictable. This surprising result may have a few factors affecting it. 
 The first one is the shape of the human hand. While holding a phone on the right 
@@ -1411,8 +1483,9 @@ hand, the thumb naturally idles near the top left of the screen. This fact makes
 effortless to start a pattern from the top left dot. It is important to note that the 
 survey did not examine whether the user is right-handed, left-handed, or 
 ambidextrous. Additionally, the survey could be filled using a computer, which 
-45 
- means participants might have used a 
+46 
+ 
+means participants might have used a 
 mouse to draw the pattern. Nevertheless, 
 participants consistently chose the top left 
 dot as the starting point. 
@@ -1425,9 +1498,7 @@ alphabets consist of Latin characters, and
 consequently their writing starts from the 
 top left, and ends in the bottom right. In 
 addition, the survey's language is English, 
-Figure 39. Start point visualisation. Radius depicts 
 which may make the participants think in 
-the frequency. 
 Latin language style even if he/she has a 
 non-Latin based native alphabet. As a result, the participants may be inclined to 
 start from top left, as it is a more natural start point for them. The survey is not 
@@ -1446,8 +1517,11 @@ not represent a suitable start point.
 We then checked the ending dots for secure patterns. While there was not a single 
 dot on which most participants preferred to end their secure pattern, the bottom 
 right was the most selected one with 20.83%. The entropy calculated is 3.00 bits for 
-46 
- the probabilities of end points. The ending 
+Figure 39. Start point visualisation. Radius depicts 
+the frequency. 
+47 
+ 
+the probabilities of end points. The ending 
 dots were mostly focused on right and 
 bottom. As expected, this result also 
 conforms to the assumption about the 
@@ -1458,8 +1532,6 @@ suitable end point.
  
  
  
-Figure 40. End point visualisation. Radius depicts 
-the frequency. 
  
 4.3.6  Sub-patterns 
 One of the main purposes for conducting the survey was to look for popular sub-
@@ -1477,9 +1549,12 @@ significant bias towards any of the dots; they
 are more or less equally used in patterns, 
 hence the entropy of the monograms is 3.16 
 bits.  
+Figure 40. End point visualisation. Radius depicts 
+the frequency. 
 Figure 41. Monogram visualization. 
-47 
- 4.3.6.2  Bigrams 
+48 
+ 
+4.3.6.2  Bigrams 
 We then looked for bigrams, a sub-pattern consisting of two dots. Since bigrams 
 and other longer n-grams create a path, the directionality is taken into account 
 while analysing. 
@@ -1495,9 +1570,7 @@ represents 23.61%. Using Shannon’s
 entropy, bigrams’ entropy is 
 calculated as 5.47 – 3.16 = 2.31 bits. 
 The maximum entropy for the 
-bigrams is log 72 = 6.17 bits. Out of 
-Figure 42. Most frequent bigrams. 
- 
+bigrams is log 72 = 6.17 bits. Out of 
 72 different combinations possible, 64 
 of them were drawn at least by one participant. 
  
@@ -1507,10 +1580,12 @@ of them were drawn at least by one participant.
  
  
  
-Figure 43. Bigrams sorted by the frequency. 
   
-48 
- 4.3.6.3  Trigrams 
+Figure 42. Most frequent bigrams. 
+Figure 43. Bigrams sorted by the frequency. 
+49 
+ 
+4.3.6.3  Trigrams 
 Continuing with trigrams, the analysis 
 shows that 18.75% of the participants 
 drew a path from top left dot to top 
@@ -1519,12 +1594,10 @@ patterns. The thinnest path in the
 figure on the right represents 14.58%. 
 The trigram entropy is 6.99 – 5.47 = 
 1.32 bits. The maximum entropy for 
-the trigrams is log 504 = 8.98 bits. 
- 
+the trigrams is log 504 = 8.98 bits. 
 Out of 504 different combinations 
 possible, 203 of them were drawn at 
 least by one participant.  
-Figure 44. Most frequent trigrams. 
  
  
  
@@ -1538,8 +1611,10 @@ Figure 45. Trigrams sorted by the frequency.
  
  
   
-49 
- 4.3.6.4  4-grams 
+Figure 44. Most frequent trigrams. 
+50 
+ 
+4.3.6.4  4-grams 
 Finally, we made 4-gram analysis. 
 Three 4-grams particularly stood out 
 of the rest with two of them being 
@@ -1553,9 +1628,7 @@ psychological behaviour the
 participants display. The 4-gram 
 entropy is 7.75 - 6.99 = 0.76 bits. The 
 maximum entropy for the trigrams is 
-Figure 46. Most frequent 4-grams. 
-log 3024 = 11.56 bits. Out of 3024 
- 
+log 3024 = 11.56 bits. Out of 3024 
 different combinations possible, 283 of them were drawn at least by one 
 participant. 
  
@@ -1565,11 +1638,13 @@ participant.
  
  
  
-Figure 47. 4-grams sorted by the frequency. 
  
   
-50 
- 5  A Possible Solution 
+Figure 46. Most frequent 4-grams. 
+Figure 47. 4-grams sorted by the frequency. 
+51 
+ 
+5  A Possible Solution 
  
 The results obtained from the physical attacks and the survey demonstrate that 
 Android pattern lock is not secure against smudge attacks, even if the smudge has 
@@ -1599,11 +1674,12 @@ freely and not in strict lines, the oily residue
 left on the screen whilst drawing the first 
 path (left to right) would be slightly different 
 than the oily residue left whilst drawing the 
-Figure 48. Extended pattern lock mockup. 
 second path (right to left). This variation 
 would allow smudge attacks to gather some 
-51 
- information about the first path since there would be a part of the first path not 
+Figure 48. Extended pattern lock mockup. 
+52 
+ 
+information about the first path since there would be a part of the first path not 
 overwritten by the second path. While it is also possible to gather the same 
 information using the thermal attack, one may need higher end equipment and a 
 larger difference between the paths to be able to discern the two paths. 
@@ -1634,8 +1710,9 @@ rendering the user able to scroll the digit for that wheel towards the correct
 position. The correct position is the centre of the wheel, just as in briefcase locks. 
 The wheel gets hidden again when the user releases his/her finger from the phone. 
 After adjusting all the wheels to their right positions the user presses Unlock button 
-52 
- to unlock the device. If the PIN is correct, the device unlocks, otherwise it asks again 
+53 
+ 
+to unlock the device. If the PIN is correct, the device unlocks, otherwise it asks again 
 for the correct PIN. In case of wrong PIN, the wheels are not reset to their initial 
 position, making corrections easier. The maximum number of trials can be set 
 depending on the implementation, but the default is the same as Android PIN lock.  
@@ -1649,8 +1726,6 @@ depending on the implementation, but the default is the same as Android PIN lock
  
  
  
-Figure 49. Initial state of the auto-hidden Figure 50. State upon touching a wheel. 
-numerical wheel lock. 
  
  
 5.2.1.  Options 
@@ -1661,8 +1736,12 @@ wheel is rolled and stopped in a random digit. This randomization occurs once pe
 unlock session, i.e. if the first unlocking trial fails, the wheels are not randomized 
 again but instead stand wherever they were left by the user. 
  
-53 
- 5.2.1.2  Number of Wheels 
+Figure 49. Initial state of the auto-hidden 
+numerical wheel lock. 
+Figure 50. State upon touching a wheel. 
+54 
+ 
+5.2.1.2  Number of Wheels 
 By default, the number of numerical wheels follows the PIN code standard, and 
 therefore it is four. However, depending on the width of the wheels, this value can 
 be increased up to six. 
@@ -1691,8 +1770,9 @@ session by default. This randomization invalidates the previous claims about the
 directionality and length of the smudges, rendering them obsolete for any 
 information retrieval about the PIN. 
  
-54 
- 5.2.2.2  Thermal Attack 
+55 
+ 
+5.2.2.2  Thermal Attack 
 Similar to smudge attacks, thermal attacks on screen do not provide any particular 
 hint regarding PIN. Neither the directionality, nor the position, nor the length 
 indicate any information about the PIN due to the exact same reasons listed in the 
@@ -1724,8 +1804,9 @@ The fact that it takes longer to unlock the device by setting each wheel separat
 prolongs the observation duration to fully retrieve the passcode. The longer the 
 observation duration gets, the more likely it is to have some obstruction between 
 the screen and the observer, which would lead to a partial retrieval of PIN. 
-55 
-  
+56 
+ 
+ 
 5.2.3  Disadvantages & Constraints 
 The auto-hidden numerical wheel lock has its own disadvantages. 
 Having four to six separate wheels to scroll renders the unlocking process longer 
@@ -1756,8 +1837,9 @@ We can always prepare a custom ROM that includes this lock mechanism, but it
 would be an unnecessary effort without any support behind the ROM. To make the 
 auto-hidden numerical wheel lock mechanism a viable option, we would require the 
 support of Google or one of the many manufacturers that customize and release 
-56 
- their own official ROMs. Being part of such a ROM, the lock mechanism can reach a 
+57 
+ 
+their own official ROMs. Being part of such a ROM, the lock mechanism can reach a 
 large amount of users, and thus be an effective alternative to other lock 
 mechanisms. 
 Home screens, i.e. the screen that welcomes the user when the device is unlocked, 
@@ -1777,8 +1859,9 @@ completely disable the user interaction of the notification bar. As a result, it
 that it is not a valid option to implement a lock mechanism in a home launcher. 
  
   
-57 
- 6  Conclusions 
+58 
+ 
+6  Conclusions 
  
 Our background research showed that there was a lack of literature on Android 
 pattern lock analysis. While an optical attack against smudges was studied, attacks 
@@ -1809,8 +1892,9 @@ attacks, our solution is also immune to attacks the Android pattern lock suffers
 it is prone to standard PIN attacks that rely on personal information. Additionally, it 
 is more robust against shoulder surfing and video recording compared to Android 
 pattern lock. 
-58 
- 7  Future Work 
+59 
+ 
+7  Future Work 
  
 Since this study contains many firsts, we believe there is room for future work. 
 For instance, the picture captured using optical or thermal attacks may be 
@@ -1825,8 +1909,9 @@ be less intrusive on bigger devices.
 Last but not least, the effectiveness of the smudge resistant oleophobic screen 
 protectors can be analysed against physical attacks. 
   
-59 
- 8  Bibliography 
+60 
+ 
+8  Bibliography 
  
 Airowaily, K. and Alrubaian, M., 2011. Oily residuals security threat on smart 
 phones.  International conference on robot, vision and signal processing. Kaohsiung, 
@@ -1853,8 +1938,9 @@ powered by domestic vendors | Canalys. [online] Available at:
 <http://www.canalys.com/newsroom/stellar-growth-sees-china-take-27-global-
 smart-phone-shipments-powered-domestic-vendors> [Accessed 27 September 
 2012]. 
-60 
- Corning Incorporated, 2012. CORNING® GORILLA® GLASS | SAMSUNG. [online] 
+61 
+ 
+Corning Incorporated, 2012. CORNING® GORILLA® GLASS | SAMSUNG. [online] 
 Available at: <http://www.corninggorillaglass.com/products-with-gorilla/samsung> 
 [Accessed 27 September 2012]. 
 Go Launcher Dev Team, 2012. Go Launcher Ex. [online] Available at: 
@@ -1882,8 +1968,9 @@ android: a comprehensive security assessment. IEEE Security and Privacy, 8, pp.3
 44. 
 Shannon, C. E., 1951. Prediction and entropy of printed English. The Bell System 
 Technical Journal, 30, pp.50-64. 
-61 
- Thorpe, J. and van Oorschot, P. C., 2007. Human-seeded attacks and exploiting hot-
+62 
+ 
+Thorpe, J. and van Oorschot, P. C., 2007. Human-seeded attacks and exploiting hot-
 spots in graphical passwords. 16th USENIX security symposium. Boston, USA, 6-10 
 August 2007. USENIX Association. 
 Tryfonas, T., 2011. Authentication and access control. [lecture notes] September 
@@ -1897,315 +1984,603 @@ Zhou, Y., 2011. How many combinations does Android 9 point unlock have? – Quora.
 Android-9-point-unlock-have/answer/Yoyo-Zhou> [Accessed 27 September 2012]. 
  
   
-62 
- 9  Appendices 
+63 
+ 
+9  Appendices 
  
 Monograms 
+Monogram 
 # participants 
-4 109 
-Monogram who drew it 
-5 83 
+who drew it 
 0 114 
-6 93 
 1 106 
-7 98 
 2 99 
-8 97 
 3 92 
+4 109 
+5 83 
+6 93 
+7 98 
+8 97 
  
 Bigrams
+Bigram 
 # participants 
-31 4 58 23 
-Bigram who drew it 
-32 4 60 1 
+who drew it 
 01 46 
-34 14 61 4 
 03 29 
-35 6 62 2 
 04 24 
-36 26 63 19 
 05 2 
-37 12 64 11 
 07 1 
-38 5 65 5 
 08 3 
-40 9 67 34 
 10 12 
-41 19 70 1 
 12 47 
-42 5 71 2 
 13 13 
-43 17 72 2 
 14 17 
-45 21 73 4 
 15 9 
-46 17 74 5 
 16 3 
-47 13 75 8 
 17 7 
-48 22 76 28 
 21 19 
-50 2 78 35 
 23 4 
-51 6 81 5 
 24 23 
-52 23 82 1 
 25 26 
-53 5 83 1 
 26 7 
-54 18 84 13 
 27 1 
-56 1 85 24 
 30 13 
-57 7 87 22 
+31 4 
+32 4 
+34 14 
+35 6 
+36 26 
+37 12 
+38 5 
+40 9 
+41 19 
+42 5 
+43 17 
+45 21 
+46 17 
+47 13 
+48 22 
+50 2 
+51 6 
+52 23 
+53 5 
+54 18 
+56 1 
+57 7 
+58 23 
+60 1 
+61 4 
+62 2 
+63 19 
+64 11 
+65 5 
+67 34 
+70 1 
+71 2 
+72 2 
+73 4 
+74 5 
+75 8 
+76 28 
+78 35 
+81 5 
+82 1 
+83 1 
+84 13 
+85 24 
+87 22 
   
-63 
- Trigrams 
-# participants 
-146 3 314 1 
-Trigram who drew it 
-147 3 317 2 
-012 27 
-148 1 324 1 
-013 4 
-152 1 325 1 
-014 9 
-154 3 326 1 
-015 2 
-157 2 341 3 
-016 2 
-158 1 342 1 
-032 1 
-163 1 345 8 
-034 7 
-165 1 348 2 
-035 1 
-167 1 352 3 
-036 13 
-176 3 358 3 
-037 4 
-178 1 361 2 
-038 1 
-210 6 362 1 
-041 3 
-213 3 364 5 
-043 2 
-214 3 367 17 
-045 3 
-215 3 374 1 
-046 2 
-217 3 375 2 
-047 2 
-238 3 378 6 
-048 12 
-240 2 381 2 
-051 1 
-243 3 385 1 
-058 1 
-245 1 387 1 
-074 1 
-246 11 401 3 
-087 1 
-247 6 403 5 
-103 7 
-251 1 410 2 
-104 3 
-254 7 412 13 
-108 1 
-257 2 413 2 
-123 2 
-258 9 415 1 
-124 16 
-260 1 417 1 
-125 21 
-263 1 421 2 
-126 1 
-267 2 425 2 
-132 1 
-275 1 430 4 
-134 2 
-301 6 431 1 
-136 3 
-304 1 436 7 
-137 4 
-305 1 437 2 
-143 4 
-308 1 438 1 
-145 4 
-312 1 450 1 
 64 
- 451 2 584 4 751 1 
-452 6 587 10 752 3 
-453 1 608 1 758 2 
-457 2 610 2 761 1 
-458 5 612 1 762 1 
-463 3 621 1 763 10 
-467 10 630 6 765 4 
-475 1 631 2 781 1 
-476 6 632 2 783 1 
-478 6 634 1 784 5 
-481 1 635 5 785 15 
-485 5 641 2 812 2 
-487 9 642 3 814 1 
-507 1 643 1 815 1 
-510 2 645 2 816 1 
-512 1 647 1 830 1 
-513 2 648 2 840 6 
-517 1 650 1 841 3 
-521 7 652 1 843 1 
-523 1 653 1 845 1 
-524 3 658 2 851 1 
-526 5 670 1 852 7 
-530 1 671 1 853 3 
-540 1 672 1 854 6 
-541 3 674 1 856 1 
-543 6 675 4 857 1 
-546 1 678 22 871 1 
-547 1 712 1 872 1 
-548 3 731 1 873 1 
-573 1 734 1 874 1 
-576 4 736 1 876 15 
-581 1 742 1 
-582 1 745 2 
+ 
+Trigrams 
+Trigram 
+# participants 
+who drew it 
+012 27 
+013 4 
+014 9 
+015 2 
+016 2 
+032 1 
+034 7 
+035 1 
+036 13 
+037 4 
+038 1 
+041 3 
+043 2 
+045 3 
+046 2 
+047 2 
+048 12 
+051 1 
+058 1 
+074 1 
+087 1 
+103 7 
+104 3 
+108 1 
+123 2 
+124 16 
+125 21 
+126 1 
+132 1 
+134 2 
+136 3 
+137 4 
+143 4 
+145 4 
+146 3 
+147 3 
+148 1 
+152 1 
+154 3 
+157 2 
+158 1 
+163 1 
+165 1 
+167 1 
+176 3 
+178 1 
+210 6 
+213 3 
+214 3 
+215 3 
+217 3 
+238 3 
+240 2 
+243 3 
+245 1 
+246 11 
+247 6 
+251 1 
+254 7 
+257 2 
+258 9 
+260 1 
+263 1 
+267 2 
+275 1 
+301 6 
+304 1 
+305 1 
+308 1 
+312 1 
+314 1 
+317 2 
+324 1 
+325 1 
+326 1 
+341 3 
+342 1 
+345 8 
+348 2 
+352 3 
+358 3 
+361 2 
+362 1 
+364 5 
+367 17 
+374 1 
+375 2 
+378 6 
+381 2 
+385 1 
+387 1 
+401 3 
+403 5 
+410 2 
+412 13 
+413 2 
+415 1 
+417 1 
+421 2 
+425 2 
+430 4 
+431 1 
+436 7 
+437 2 
+438 1 
+450 1 
+65 
+ 
+451 2 
+452 6 
+453 1 
+457 2 
+458 5 
+463 3 
+467 10 
+475 1 
+476 6 
+478 6 
+481 1 
+485 5 
+487 9 
+507 1 
+510 2 
+512 1 
+513 2 
+517 1 
+521 7 
+523 1 
+524 3 
+526 5 
+530 1 
+540 1 
+541 3 
+543 6 
+546 1 
+547 1 
+548 3 
+573 1 
+576 4 
+581 1 
+582 1 
+584 4 
+587 10 
+608 1 
+610 2 
+612 1 
+621 1 
+630 6 
+631 2 
+632 2 
+634 1 
+635 5 
+641 2 
+642 3 
+643 1 
+645 2 
+647 1 
+648 2 
+650 1 
+652 1 
+653 1 
+658 2 
+670 1 
+671 1 
+672 1 
+674 1 
+675 4 
+678 22 
+712 1 
+731 1 
+734 1 
+736 1 
+742 1 
+745 2 
+751 1 
+752 3 
+758 2 
+761 1 
+762 1 
+763 10 
+765 4 
+781 1 
+783 1 
+784 5 
+785 15 
+812 2 
+814 1 
+815 1 
+816 1 
+830 1 
+840 6 
+841 3 
+843 1 
+845 1 
+851 1 
+852 7 
+853 3 
+854 6 
+856 1 
+857 1 
+871 1 
+872 1 
+873 1 
+874 1 
+876 15 
  
   
-65 
- 4-grams 
-# participants 
-0467 2 1540 1 
-4-gram who drew it 
-0475 1 1546 1 
-0123 1 
-0478 1 1548 1 
-0124 13 
-0485 4 1576 1 
-0125 13 
-0487 7 1587 1 
-0132 1 
-0513 1 1632 1 
-0134 1 
-0581 1 1650 1 
-0136 1 
-0876 1 1672 1 
-0137 1 
-1032 1 1763 1 
-0143 2 
-1035 1 1765 1 
-0145 2 
-1036 2 2103 3 
-0146 1 
-1037 1 2104 2 
-0147 3 
-1047 1 2108 1 
-0148 1 
-1048 2 2136 1 
-0157 2 
-1238 1 2137 1 
-0163 1 
-1243 3 2143 2 
-0167 1 
-1245 1 2145 1 
-0326 1 
-1246 9 2154 2 
-0341 2 
-1247 3 2176 2 
-0345 4 
-1254 7 2381 1 
-0348 1 
-1257 1 2385 1 
-0352 1 
-1258 6 2403 1 
-0361 2 
-1267 1 2430 1 
-0362 1 
-1324 1 2463 2 
-0364 2 
-1345 1 2467 6 
-0367 7 
-1348 1 2476 5 
-0374 1 
-1364 1 2478 1 
-0375 1 
-1367 2 2513 1 
-0378 1 
-1375 1 2543 4 
-0381 1 
-1378 2 2548 2 
-0412 2 
-1436 3 2573 1 
-0415 1 
-1437 1 2584 3 
-0431 1 
-1452 1 2587 4 
-0436 1 
-1458 3 2608 1 
-0452 1 
-1467 2 2631 1 
-0457 2 
-1478 3 2670 1 
 66 
- 2678 1 4012 2 4876 6 
-2758 1 4036 3 5074 1 
-3012 1 4037 2 5103 1 
-3014 2 4103 2 5124 1 
-3015 1 4123 1 5210 1 
-3016 1 4125 5 5213 2 
-3041 1 4137 2 5217 3 
-3058 1 4152 1 5238 1 
-3087 1 4178 1 5240 1 
-3125 1 4210 2 5247 2 
-3176 1 4257 1 5260 1 
-3247 1 4258 1 5263 1 
-3258 1 4301 1 5267 1 
-3412 3 4308 1 5301 1 
-3451 1 4317 1 5403 1 
-3452 3 4367 7 5412 3 
-3458 2 4378 1 5430 2 
-3487 1 4387 1 5436 2 
-3521 1 4510 1 5437 1 
-3587 2 4517 1 5438 1 
-3612 1 4521 3 5463 1 
-3641 1 4526 1 5476 1 
-3642 1 4530 1 5736 1 
-3647 1 4576 2 5812 1 
-3648 2 4587 3 5840 2 
-3671 1 4630 1 5843 1 
-3674 1 4635 2 5873 1 
-3675 1 4675 2 5874 1 
-3678 11 4678 7 5876 6 
-3742 1 4752 1 6103 1 
-3752 1 4761 1 6104 1 
-3758 1 4763 2 6125 1 
-3784 1 4765 1 6215 1 
-3785 2 4785 4 6301 4 
-3814 1 4812 1 6312 1 
-3816 1 4852 5 6317 1 
-3857 1 4871 1 6325 1 
-3876 1 4872 1 6342 1 
-67 
- 6352 2 7425 1 7854 4 
-6358 3 7451 1 7856 1 
-6412 2 7512 1 8124 1 
-6421 2 7521 1 8126 1 
-6425 1 7523 1 8165 1 
-6430 1 7526 1 8304 1 
-6450 1 7584 1 8401 3 
-6452 1 7610 1 8403 3 
-6478 1 7621 1 8410 1 
-6487 1 7630 2 8412 2 
-6507 1 7631 1 8436 1 
-6582 1 7632 1 8453 1 
-6745 1 7635 3 8510 1 
-6751 1 7652 1 8521 2 
-6752 1 7653 1 8524 1 
-6781 1 7658 2 8526 3 
-6783 1 7815 1 8541 3 
-6784 4 7830 1 8547 1 
-6785 9 7840 1 8576 1 
-7125 1 7841 3 8712 1 
-7314 1 7851 1 8762 1 
-7345 1 7852 1 8763 7 
-7364 1 7853 3 8765 2 
  
+4-grams 
+4-gram 
+# participants 
+who drew it 
+0123 1 
+0124 13 
+0125 13 
+0132 1 
+0134 1 
+0136 1 
+0137 1 
+0143 2 
+0145 2 
+0146 1 
+0147 3 
+0148 1 
+0157 2 
+0163 1 
+0167 1 
+0326 1 
+0341 2 
+0345 4 
+0348 1 
+0352 1 
+0361 2 
+0362 1 
+0364 2 
+0367 7 
+0374 1 
+0375 1 
+0378 1 
+0381 1 
+0412 2 
+0415 1 
+0431 1 
+0436 1 
+0452 1 
+0457 2 
+0467 2 
+0475 1 
+0478 1 
+0485 4 
+0487 7 
+0513 1 
+0581 1 
+0876 1 
+1032 1 
+1035 1 
+1036 2 
+1037 1 
+1047 1 
+1048 2 
+1238 1 
+1243 3 
+1245 1 
+1246 9 
+1247 3 
+1254 7 
+1257 1 
+1258 6 
+1267 1 
+1324 1 
+1345 1 
+1348 1 
+1364 1 
+1367 2 
+1375 1 
+1378 2 
+1436 3 
+1437 1 
+1452 1 
+1458 3 
+1467 2 
+1478 3 
+1540 1 
+1546 1 
+1548 1 
+1576 1 
+1587 1 
+1632 1 
+1650 1 
+1672 1 
+1763 1 
+1765 1 
+2103 3 
+2104 2 
+2108 1 
+2136 1 
+2137 1 
+2143 2 
+2145 1 
+2154 2 
+2176 2 
+2381 1 
+2385 1 
+2403 1 
+2430 1 
+2463 2 
+2467 6 
+2476 5 
+2478 1 
+2513 1 
+2543 4 
+2548 2 
+2573 1 
+2584 3 
+2587 4 
+2608 1 
+2631 1 
+2670 1 
+67 
+ 
+2678 1 
+2758 1 
+3012 1 
+3014 2 
+3015 1 
+3016 1 
+3041 1 
+3058 1 
+3087 1 
+3125 1 
+3176 1 
+3247 1 
+3258 1 
+3412 3 
+3451 1 
+3452 3 
+3458 2 
+3487 1 
+3521 1 
+3587 2 
+3612 1 
+3641 1 
+3642 1 
+3647 1 
+3648 2 
+3671 1 
+3674 1 
+3675 1 
+3678 11 
+3742 1 
+3752 1 
+3758 1 
+3784 1 
+3785 2 
+3814 1 
+3816 1 
+3857 1 
+3876 1 
+4012 2 
+4036 3 
+4037 2 
+4103 2 
+4123 1 
+4125 5 
+4137 2 
+4152 1 
+4178 1 
+4210 2 
+4257 1 
+4258 1 
+4301 1 
+4308 1 
+4317 1 
+4367 7 
+4378 1 
+4387 1 
+4510 1 
+4517 1 
+4521 3 
+4526 1 
+4530 1 
+4576 2 
+4587 3 
+4630 1 
+4635 2 
+4675 2 
+4678 7 
+4752 1 
+4761 1 
+4763 2 
+4765 1 
+4785 4 
+4812 1 
+4852 5 
+4871 1 
+4872 1 
+4876 6 
+5074 1 
+5103 1 
+5124 1 
+5210 1 
+5213 2 
+5217 3 
+5238 1 
+5240 1 
+5247 2 
+5260 1 
+5263 1 
+5267 1 
+5301 1 
+5403 1 
+5412 3 
+5430 2 
+5436 2 
+5437 1 
+5438 1 
+5463 1 
+5476 1 
+5736 1 
+5812 1 
+5840 2 
+5843 1 
+5873 1 
+5874 1 
+5876 6 
+6103 1 
+6104 1 
+6125 1 
+6215 1 
+6301 4 
+6312 1 
+6317 1 
+6325 1 
+6342 1 
 68 
+ 
+6352 2 
+6358 3 
+6412 2 
+6421 2 
+6425 1 
+6430 1 
+6450 1 
+6452 1 
+6478 1 
+6487 1 
+6507 1 
+6582 1 
+6745 1 
+6751 1 
+6752 1 
+6781 1 
+6783 1 
+6784 4 
+6785 9 
+7125 1 
+7314 1 
+7345 1 
+7364 1 
+7425 1 
+7451 1 
+7512 1 
+7521 1 
+7523 1 
+7526 1 
+7584 1 
+7610 1 
+7621 1 
+7630 2 
+7631 1 
+7632 1 
+7635 3 
+7652 1 
+7653 1 
+7658 2 
+7815 1 
+7830 1 
+7840 1 
+7841 3 
+7851 1 
+7852 1 
+7853 3 
+7854 4 
+7856 1 
+8124 1 
+8126 1 
+8165 1 
+8304 1 
+8401 3 
+8403 3 
+8410 1 
+8412 2 
+8436 1 
+8453 1 
+8510 1 
+8521 2 
+8524 1 
+8526 3 
+8541 3 
+8547 1 
+8576 1 
+8712 1 
+8762 1 
+8763 7 
+8765 2 
  
