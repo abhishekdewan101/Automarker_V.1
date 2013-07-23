@@ -141,6 +141,54 @@ public class Extract_Summary_Parameters {
 		return foundTables.size();
 	}
 	
+	public double averageWordLength(File inputFile){
+		System.out.println("Finding average word length "+ inputFile.getName());
+		int wordLength = 0;
+		int wordCount = 0;
+		try{
+			FileChannel fileChannel = new FileInputStream(inputFile).getChannel();
+		    ByteBuffer contentsBuffer = ByteBuffer.allocate((int)fileChannel.size()); 
+		    fileChannel.read(contentsBuffer);
+			fileChannel.close();
+			String contents = new String(contentsBuffer.array());
+			StringTokenizer st = new StringTokenizer(contents);
+			while(st.hasMoreTokens()){
+				String tempString = st.nextToken();
+				if(dictionaryWords.contains(tempString)&&!stopWords.contains(tempString)){
+					wordLength += tempString.length();
+					wordCount++;
+				}
+			}
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		return (double) wordLength/wordCount;
+	}
+	
+	public int wordsOverAverage(File inputFile,double averageLength){
+		System.out.println("Finding average word length "+ inputFile.getName());
+		int wordCount = 0;
+		try{
+			FileChannel fileChannel = new FileInputStream(inputFile).getChannel();
+		    ByteBuffer contentsBuffer = ByteBuffer.allocate((int)fileChannel.size()); 
+		    fileChannel.read(contentsBuffer);
+			fileChannel.close();
+			String contents = new String(contentsBuffer.array());
+			StringTokenizer st = new StringTokenizer(contents);
+			while(st.hasMoreTokens()){
+				String tempString = st.nextToken();
+				if(dictionaryWords.contains(tempString)&&!stopWords.contains(tempString)){
+					if(tempString.length()>=averageLength){
+					wordCount++;
+					}
+				}
+			}
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		return wordCount;
+	}
+	
 	public double submissionTimeLeft(File inputFile){
 		System.out.println("Extracting submission time left for "+ inputFile.getName());
 		double submissionTimeLeft = 0;

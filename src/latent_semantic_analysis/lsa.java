@@ -28,6 +28,10 @@ public class lsa {
 	Matrix U;
 	Matrix S;
 	Matrix vTranspose;
+	Matrix reducedWordVector;
+	Matrix reducedSigma;
+	Matrix reducedDocumentVector;
+	Matrix weights;
 	ArrayList<String> stopWords = new ArrayList<String>();
 	ArrayList<String> dictionaryWords = new ArrayList<String>();
 	ArrayList<String> refinedWords;
@@ -79,7 +83,7 @@ public class lsa {
 				}
 				
 				Matrix query = new Matrix(queryVector);
-				Matrix sInverse = S.inverse();
+				Matrix sInverse = reducedWordVector.inverse();
 				Matrix reducedQuery = query.times(U);
 				reducedQuery = reducedQuery.times(sInverse);
 //				System.out.println("U dimensions are "+U.getRowDimension()+" x "+U.getColumnDimension());
@@ -90,7 +94,7 @@ public class lsa {
 //				System.out.println("reducedQuery dimensions are "+reducedQuery.getRowDimension()+" x "+reducedQuery.getColumnDimension());
 //				
 				double[][] queryArray =  reducedQuery.getArray();
-				double[][] documents = vTranspose.getArray();
+				double[][] documents = reducedDocumentVector.getArray();
 				double [] similarity = new double[documents.length];
 				for(int j=0;j<documents.length;j++){
 					double[] documentVector = documents[j];
@@ -102,13 +106,15 @@ public class lsa {
 				}
 				System.out.println("\n\n");
 				
-				HashMap<String,Double> bestResults = returnBestMatches(documentsList,similarity);
+				HashMap<String,Double> bestResults = returnBestMatches(documentsList,similarity,1);  // change the last parameter for k nearest neighbours.
 				
 				double predicted =0.0;
 				for(String key:bestResults.keySet()){
 					String[] tmp = key.split("_");
 					predicted += Integer.parseInt(tmp[1].substring(0,2));
 				}
+				predicted = predicted/bestResults.size();
+				
 				String [] tmp = testingFiles[i].getName().split("_");
 				double actualMark = Integer.parseInt(tmp[1].substring(0,2));
 				
@@ -134,9 +140,9 @@ public class lsa {
 		return (double)(averageDifference/difference.length);
 	}
 	
-	private HashMap<String, Double> returnBestMatches(ArrayList<String> documentsList2, double[] similarity) {
+	private HashMap<String, Double> returnBestMatches(ArrayList<String> documentsList2, double[] similarity,int kFactor) {
 		HashMap<String,Double> temp = new HashMap<String,Double>();
-		while(temp.size()<1){
+		while(temp.size()<=kFactor){
 			double best =0.0;
 			int indexOfBest =0;
 			System.out.println(temp.size());
@@ -262,16 +268,32 @@ public class lsa {
 			}
 		}
 		
-		//calculating the TDIF matrix from count Matrix
 		double[][] tdif = new double[refinedWords.size()][trainingFiles.length];
 		for(int i=0;i<countMatrix.length;i++){
 			for(int j=0;j<countMatrix[i].length;j++){
 				tdif[i][j]= (double) (((double)countMatrix[i][j]*columnAdd(countMatrix,j)))/(((double)countMatrix[i].length * nonZero(countMatrix,i)));
 			}
 		}
-			
+		
+	
+		double[][] termFrequency = new double[refinedWords.size()][trainingFiles.length];
+		for(int i =0;i<countMatrix[0].length;i++){
+			double columnAdd = columnAdd(countMatrix,i);
+			for(int j=0;j<countMatrix.length;j++){
+				termFrequency[j][i] = countMatrix[j][i]/columnAdd;
+				System.out.println(termFrequency[j][i]);
+			}
+		}
+		
+		double[][] idfFrequency = new double[refinedWords.size()][trainingFiles.length];
+		for(int i =0;i<termFrequency[0].length;i++){
+			for(int j=0;j<termFrequency.length;j++){
+				idfFrequency[j][i] = termFrequency[j][i] * (1+Math.log(termFrequency[0].length)-Math.log(nonZero(countMatrix,j)));
+			}
+		}
+		
 		System.out.println("SVD Started");
-		Matrix A = new Matrix(tdif);
+		Matrix A = new Matrix(idfFrequency);
 		SingularValueDecomposition s = A.svd();
 		
 		 U = s.getU();
@@ -279,10 +301,21 @@ public class lsa {
 	     Matrix V = s.getV();
 	      
 	    vTranspose = V.transpose();
-	      
-	    
-	      
-	      
+	    int k = (int) Math.floor(Math.sqrt(idfFrequency[0].length));
+	    reducedWordVector = U.getMatrix( 0, U.getRowDimension() - 1, 0, k - 1);
+	    reducedSigma = S.getMatrix(0, k - 1, 0, k - 1);
+	    reducedDocumentVector = V.getMatrix( 0, V.getRowDimension() - 1, 0, k - 1);
+	    weights = reducedWordVector.times(reducedSigma).times(reducedDocumentVector.transpose()); 
+	    for (int j = 0; j < weights.getColumnDimension(); j++) {
+	        double sum = sum(weights.getMatrix(
+	          0, weights.getRowDimension() - 1, j, j));
+	        for (int i = 0; i < weights.getRowDimension(); i++) {
+	          weights.set(i, j, Math.abs((weights.get(i, j)) / sum));
+	        }
+	      }
+	     
+	    System.out.println("REDUCED VECTOR");
+	    System.out.println(reducedWordVector);
 		/*Matrix a = new Basic2DMatrix(countMatrix);
 		Matrix[] usv = a.decompose(Matrices.SINGULAR_VALUE_DECOMPOSITOR);
 		
@@ -324,10 +357,18 @@ public class lsa {
 //		 
 	}
 
-	private double nonZero(double[][] countMatrix, int i) {
+	private double sum(Matrix colMatrix) {
+	    double sum = 0.0D;
+	    for (int i = 0; i < colMatrix.getRowDimension(); i++) {
+	      sum += colMatrix.get(i, 0);
+	    }
+	    return sum;
+	  }
+	
+	private double nonZero(double[][] countMatrix, int j) {
 		double count =0;
-		for(int j=0;j<countMatrix[i].length;j++){
-			if(countMatrix[i][j]>0){
+		for(int i=0;i<countMatrix[j].length;i++){
+			if(countMatrix[j][i]>0){
 				count++;
 			}
 		}

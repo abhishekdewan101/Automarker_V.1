@@ -33,13 +33,14 @@ public class Ten_Fold_Summary {
 			folds[fold][index[fold]]= textFiles[i];
 			index[fold]++;
 		}
-		double[] correlationFactors = new double[10];
+		
 		double [] predictedMark = new double[textFiles.length];
 		double [] actualMark = new double[textFiles.length];
 		int counter1 =0;
 		// perform regression and calculate average correlation
 		for(int i=9;i>=0;i--){
-			ArrayList<String> bestWords = esp.trainingWords("textFiles", i);
+			ArrayList<String> bestWords = new ArrayList<String>();
+			bestWords = esp.trainingWords("textFiles", i);
 			System.out.println("Entered Fold "+ i);
 			int testingFold = i;
 			double [] marksDataSet = new double[textFiles.length-index[testingFold]+1];
@@ -48,12 +49,16 @@ public class Ten_Fold_Summary {
 			for(int j=0;j<folds.length;j++){
 				for(int k=0;k<index[j];k++){
 					if(j!=testingFold){
-						double[] parameters = new double[bestWords.size()+4];
+						double[] parameters = new double[bestWords.size()];
+						//double[] parameters = new double[6];
+						//double[] parameters = new double[bestWords.size()+6];
 						File tmpFile = folds[j][k];
-						parameters[0] = esp.totalImageCount(tmpFile);
-						parameters[1] = esp.totalTableCount(tmpFile);
-						parameters[2] = esp.totalWordCount(tmpFile);
-						parameters[3] = esp.submissionTimeLeft(tmpFile);
+//						parameters[0] = esp.totalImageCount(tmpFile);
+//						parameters[1] = esp.totalTableCount(tmpFile);
+//						parameters[2] = esp.totalWordCount(tmpFile);
+//						parameters[3] = esp.submissionTimeLeft(tmpFile);
+//						parameters[4] = esp.averageWordLength(tmpFile);
+//						parameters[5] = esp.wordsOverAverage(tmpFile,parameters[4]);
 						HashMap<String,Integer> tmpHash = new HashMap<String,Integer>();
 					try{
 						FileChannel fileChannel;
@@ -85,7 +90,8 @@ public class Ten_Fold_Summary {
 							}else{
 								wordCount = 0;
 							}
-							parameters[l+4] = wordCount;
+//							parameters[l+6] = wordCount;
+							parameters[l] = wordCount;
 						}
 						
 						String tmp[] = tmpFile.getName().split("_");
@@ -98,7 +104,8 @@ public class Ten_Fold_Summary {
 			
 			
 			marksDataSet[counter] =0;
-			double [] tempArray = new double[bestWords.size()+4];
+			//double [] tempArray = new double[bestWords.size()+6];
+			double [] tempArray = new double[bestWords.size()];
 			for(int l=0;l<tempArray.length;l++){
 				tempArray[l] =0;
 			}
@@ -118,11 +125,15 @@ public class Ten_Fold_Summary {
 						String tmp[] = tmpFile.getName().split("_");
 						actualMark[counter1] = Integer.parseInt(tmp[1].substring(0,2));
 				
-				double[] predictingValues = new double[bestWords.size()+4];
-				predictingValues[0] = esp.totalImageCount(tmpFile);
-				predictingValues[1] = esp.totalTableCount(tmpFile);
-				predictingValues[2] = esp.totalWordCount(tmpFile);
-				predictingValues[3] = esp.submissionTimeLeft(tmpFile);
+//				double[] predictingValues = new double[6];
+				double[] predictingValues = new double[bestWords.size()];
+//				predictingValues[0] = esp.totalImageCount(tmpFile);
+//				predictingValues[1] = esp.totalTableCount(tmpFile);
+//				predictingValues[2] = esp.totalWordCount(tmpFile);
+//				predictingValues[3] = esp.submissionTimeLeft(tmpFile);
+//				predictingValues[4] = esp.averageWordLength(tmpFile);
+//				predictingValues[5] = esp.wordsOverAverage(tmpFile,predictingValues[4]);
+				
 				HashMap<String,Integer> tmpHash1 = new HashMap<String,Integer>();	
 				try{
 						FileChannel fileChannel;
@@ -145,9 +156,11 @@ public class Ten_Fold_Summary {
 						System.out.println(tmpHash1);
 						for(int l=0;l<bestWords.size();l++){
 							if(tmpHash1.containsKey(bestWords.get(l).toString())){
-							predictingValues[l+4] = tmpHash1.get(bestWords.get(l).toString());
+//							predictingValues[l+6] = tmpHash1.get(bestWords.get(l).toString());
+							predictingValues[l] = tmpHash1.get(bestWords.get(l).toString());
 							}else{
-								predictingValues[l+4] =0;
+//								predictingValues[l+6] =0;
+								predictingValues[l] =0;
 							}
 						}
 						
